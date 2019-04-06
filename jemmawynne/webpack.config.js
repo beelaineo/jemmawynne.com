@@ -1,16 +1,18 @@
-var webpack = require('webpack')
-var path = require('path')
-var package = require('./package.json')
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const webpack = require('webpack')
+const path = require('path')
+const package = require('./package.json')
+const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
 
 // variables
-var isProduction =
-	process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production'
-var sourcePath = path.join(__dirname, './src')
-var outPath = path.join(__dirname, './build')
+const isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production'
+const sourcePath = path.join(__dirname, './src')
+const outPath = path.join(__dirname, './build')
 
 // plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 
 module.exports = {
 	context: sourcePath,
@@ -19,10 +21,9 @@ module.exports = {
 	},
 	output: {
 		path: outPath,
+		publicPath: '/',
 		filename: isProduction ? '[contenthash].js' : '[hash].js',
-		chunkFilename: isProduction
-			? '[name].[contenthash].js'
-			: '[name].[hash].js',
+		chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
 	},
 	target: 'web',
 	resolve: {
@@ -33,6 +34,7 @@ module.exports = {
 		alias: {
 			app: path.resolve(__dirname, 'src/app/'),
 		},
+		plugins: [new TsConfigPathsPlugin()],
 	},
 	module: {
 		rules: [
@@ -67,9 +69,7 @@ module.exports = {
 				vendors: {
 					test: /[\\/]node_modules[\\/]/,
 					chunks: 'all',
-					filename: isProduction
-						? 'vendor.[contenthash].js'
-						: 'vendor.[hash].js',
+					filename: isProduction ? 'vendor.[contenthash].js' : 'vendor.[hash].js',
 					priority: -10,
 				},
 			},
@@ -85,9 +85,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './index.html',
 			minify: {
-				minifyJS: true,
-				minifyCSS: true,
-				removeComments: true,
+				minifyJS: isProduction,
+				minifyCSS: isProduction,
+				removeComments: !isProduction,
 				useShortDoctype: true,
 				collapseWhitespace: true,
 				collapseInlineTagWhitespace: true,
@@ -98,9 +98,7 @@ module.exports = {
 			meta: {
 				title: package.name,
 				description: package.description,
-				keywords: Array.isArray(package.keywords)
-					? package.keywords.join(',')
-					: undefined,
+				keywords: Array.isArray(package.keywords) ? package.keywords.join(',') : undefined,
 			},
 		}),
 	],

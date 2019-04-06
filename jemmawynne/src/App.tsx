@@ -1,8 +1,19 @@
 import * as React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { GlobalStyles } from './theme/global'
 import { Switch, Route } from 'react-router'
-import { Homepage } from 'Views/Homepage'
+// import { Homepage } from 'Views/Homepage'
+import { Homepage, Navigation, ProductListing, ProductDetail } from './views'
+import { GraphQLClient, ClientContext } from 'graphql-hooks'
+import memCache from 'graphql-hooks-memcache'
+import { GlobalStyles } from './theme/global'
+
+const client = new GraphQLClient({
+	url: 'https://kame-case.myshopify.com/api/graphql',
+	headers: {
+		'X-Shopify-Storefront-Access-Token': '29f169ddd673015f96eb6865593e9369',
+	},
+	cache: memCache(),
+})
 
 /**
  * App
@@ -14,14 +25,19 @@ import { Homepage } from 'Views/Homepage'
 
 export const App = () => {
 	return (
-		<BrowserRouter>
-			<React.Fragment>
-				<GlobalStyles />
-				<Switch>
-					<Route path="/" component={Homepage} />
-				</Switch>
-				<div>hello!</div>
-			</React.Fragment>
-		</BrowserRouter>
+		<ClientContext.Provider value={client}>
+			<BrowserRouter>
+				<React.Fragment>
+					<GlobalStyles />
+					<Navigation />
+					<Switch>
+						<Route exact path="/" component={Homepage} />
+						<Route exact path="/test" component={Homepage} />
+						<Route exact path="/collections/a" component={ProductListing} />
+						<Route exact path="/products/:handle" component={ProductDetail} />
+					</Switch>
+				</React.Fragment>
+			</BrowserRouter>
+		</ClientContext.Provider>
 	)
 }

@@ -2,15 +2,11 @@
 import * as layout from './layout'
 import * as type from './type'
 import * as color from './color'
-import * as mixins from './mixins'
-import * as media from './media'
+// import * as media from './media'
 
-const theme = {
+export const theme = {
 	layout,
 	type,
 	color,
-	mixins,
-	media,
+	// media,
 }
-
-export default theme
