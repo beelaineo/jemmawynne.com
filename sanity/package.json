@@ -1,0 +1,37 @@
+{
+  "name": "jemmawynne-sanity",
+  "version": "0.0.0",
+  "description": "Sanity configuration for jemmawynne.com",
+  "author": "Joseph Thomas <joseph@good-idea.studio>",
+  "private": true,
+  "license": "ISC",
+  "main": "lib/sanity.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "sanity start",
+    "test": "sanity check"
+  },
+  "dependencies": {
+    "@sanity/base": "^0.140.12",
+    "@sanity/cli": "^0.140.12",
+    "@sanity/components": "^0.140.12",
+    "@sanity/core": "^0.140.12",
+    "@sanity/default-layout": "^0.140.12",
+    "@sanity/default-login": "^0.140.3",
+    "@sanity/desk-tool": "^0.140.13",
+    "@sanity/vision": "^0.140.12",
+    "prop-types": "^15.7",
+    "react": "^16.8",
+    "react-dom": "^16.8",
+    "sanity-plugin-shopify-selector": "^0.0.0-development"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^4.8.0"
+  }
+}
