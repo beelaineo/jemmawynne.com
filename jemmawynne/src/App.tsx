@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router'
 import { Homepage, Navigation, ProductListing, ProductDetail } from './views'
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
 import memCache from 'graphql-hooks-memcache'
+import { CheckoutProvider } from './providers/Checkout/Checkout'
 import { GlobalStyles } from './theme/global'
 
 const client = new GraphQLClient({
@@ -27,7 +28,7 @@ export const App = () => {
 	return (
 		<ClientContext.Provider value={client}>
 			<BrowserRouter>
-				<React.Fragment>
+				<CheckoutProvider>
 					<GlobalStyles />
 					<Navigation />
 					<Switch>
@@ -36,7 +37,7 @@ export const App = () => {
 						<Route exact path="/collections/a" component={ProductListing} />
 						<Route exact path="/products/:handle" component={ProductDetail} />
 					</Switch>
-				</React.Fragment>
+				</CheckoutProvider>
 			</BrowserRouter>
 		</ClientContext.Provider>
 	)

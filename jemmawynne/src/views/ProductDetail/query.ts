@@ -1,3 +1,5 @@
+import { Product } from 'Types'
+
 export const productQuery = /* GraphQL */ `
 	query ProductQuery($handle: String!) {
 		shop {
@@ -34,3 +36,9 @@ export const productQuery = /* GraphQL */ `
 		}
 	}
 `
+
+export interface QueryResult {
+	shop: {
+		productByHandle: Product
+	}
+}

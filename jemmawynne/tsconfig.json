@@ -22,12 +22,14 @@
 		"noImplicitAny": true,
 		"strictNullChecks": true
 		*/
+
 		"baseUrl": ".",
 		"paths": {
 			"Components": ["./src/components/*"],
 			"Views/*": ["./src/views/*", "./src/views"],
 			"GraphQL": ["./src/graphql"],
-			"Types": ["./src/types"]
+			"Types": ["./src/types"],
+			"Utils/*": ["./src/utils/*"]
 		}
 	},
 	"include": ["./src"],
