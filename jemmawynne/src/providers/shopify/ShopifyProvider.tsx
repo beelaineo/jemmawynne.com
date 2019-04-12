@@ -1,12 +1,21 @@
 import * as React from 'react'
-import { UseCheckoutProps, useCheckout, defaultCheckoutProps } from './checkout'
+import { UseCheckoutProps, useCheckout, defaultCheckoutProps } from './useCheckout'
+import { useProductVariant } from './useProductVariant'
 
 interface ShopifyContextValue {
 	checkout: UseCheckoutProps
+	hooks: {
+		useProductVariant: typeof useProductVariant
+	}
+	customer: null
 }
 
 const defaults = {
 	checkout: defaultCheckoutProps,
+	hooks: {
+		useProductVariant,
+	},
+	customer: null,
 }
 
 const Context = React.createContext<ShopifyContextValue>(defaults)
@@ -21,8 +30,10 @@ interface Props {
 
 export const ShopifyProvider = ({ children }: Props) => {
 	const checkout = useCheckout()
+	const customer = null
 	const value = {
 		checkout,
+		customer,
 	}
 	return <Context.Provider value={value}>{children}</Context.Provider>
 }

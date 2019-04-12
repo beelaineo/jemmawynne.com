@@ -3,10 +3,12 @@ interface Edge<T> {
 	node: T
 }
 
+export interface PageInfo {
+	hasNextPage: boolean
+	hasPrevPage: boolean
+}
+
 export interface Paginated<T> {
-	pageInfo: {
-		hasNextPage: boolean
-		hasPrevPage: boolean
-	}
+	pageInfo: PageInfo
 	edges: Edge<T>[]
 }

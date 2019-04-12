@@ -14,16 +14,12 @@ interface UserError {
 	message: string
 }
 
-interface Props {
-	children: React.ReactNode
-}
-
 interface AddLineItem {
 	variantId: string
 	quantity: number
 }
 
-interface AddToCartArgs {
+interface AddToCheckoutArgs {
 	lineItems: AddLineItem[]
 	email?: string
 	note?: string
@@ -37,9 +33,9 @@ interface CheckoutState {
 }
 
 export interface UseCheckoutProps extends CheckoutState {
-	openCart: () => void
-	closeCart: () => void
-	addToCart: (args: AddToCartArgs) => Promise<void>
+	openCheckout: () => void
+	closeCheckout: () => void
+	addToCheckout: (args: AddToCheckoutArgs) => Promise<void>
 	updateQuantity: (item: CheckoutLineItem) => (qty: number) => Promise<void>
 	applyDiscount: (code: string) => Promise<void>
 	removeDiscount: () => Promise<void>
@@ -60,9 +56,9 @@ const initialState = {
 
 export const defaultCheckoutProps = {
 	...initialState,
-	openCart: () => {},
-	closeCart: () => {},
-	addToCart: async () => {},
+	openCheckout: () => {},
+	closeCheckout: () => {},
+	addToCheckout: async () => {},
 	updateQuantity: () => async () => {},
 	applyDiscount: async () => {},
 	removeDiscount: async () => {},
@@ -78,16 +74,16 @@ interface Action {
 	userErrors?: UserError[]
 }
 
-const OPEN_CART = 'OPEN_CART'
-const CLOSE_CART = 'CLOSE_CART'
+const OPEN_CHECKOUT = 'OPEN_CHECKOUT'
+const CLOSE_CHECKOUT = 'CLOSE_CHECKOUT'
 const STARTED_REQUEST = 'STARTED_REQUEST'
 const FINISHED_REQUEST = 'FINISHED_REQUEST'
 
 const reducer = (state: CheckoutState, action: Action): CheckoutState => {
 	switch (action.type) {
-		case OPEN_CART:
+		case OPEN_CHECKOUT:
 			return { ...state, isOpen: true }
-		case CLOSE_CART:
+		case CLOSE_CHECKOUT:
 			return { ...state, isOpen: false }
 		case STARTED_REQUEST:
 			return { ...state, loading: true }
@@ -117,10 +113,10 @@ export const useCheckout = (): UseCheckoutProps => {
 	 * Methods
 	 */
 
-	const openCart = () => dispatch({ type: OPEN_CART })
-	const closeCart = () => dispatch({ type: CLOSE_CART })
+	const openCheckout = () => dispatch({ type: OPEN_CHECKOUT })
+	const closeCheckout = () => dispatch({ type: CLOSE_CHECKOUT })
 
-	const addToCart = async (args: AddToCartArgs) => {
+	const addToCheckout = async (args: AddToCheckoutArgs) => {
 		const checkoutExists = Boolean(currentCheckout)
 		const mutate = checkoutExists ? addMutation : createMutation
 		const variables = checkoutExists ? { checkoutId, ...args } : args
@@ -169,9 +165,9 @@ export const useCheckout = (): UseCheckoutProps => {
 
 	const value = {
 		...state,
-		openCart,
-		closeCart,
-		addToCart,
+		openCheckout,
+		closeCheckout,
+		addToCheckout,
 		updateQuantity,
 		applyDiscount,
 		removeDiscount,
