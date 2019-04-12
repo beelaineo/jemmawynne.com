@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Checkout, CheckoutLineItem } from 'Types'
+import { Checkout, CheckoutLineItem } from '../../../types'
 import { useMutation } from 'graphql-hooks'
 import {
 	ADD_MUTATION,
@@ -8,7 +8,6 @@ import {
 	APPLY_DISCOUNT_MUTATION,
 	REMOVE_DISCOUNT_MUTATION,
 } from './mutations'
-const { useReducer } = React
 
 interface UserError {
 	field: string
@@ -17,13 +16,6 @@ interface UserError {
 
 interface Props {
 	children: React.ReactNode
-}
-
-interface CheckoutState {
-	loading: boolean
-	isOpen: boolean
-	userErrors: UserError[]
-	checkout?: Checkout
 }
 
 interface AddLineItem {
@@ -37,7 +29,14 @@ interface AddToCartArgs {
 	note?: string
 }
 
-interface ProviderValue extends CheckoutState {
+interface CheckoutState {
+	loading: boolean
+	isOpen: boolean
+	userErrors: UserError[]
+	currentCheckout: Checkout | void
+}
+
+export interface UseCheckoutProps extends CheckoutState {
 	openCart: () => void
 	closeCart: () => void
 	addToCart: (args: AddToCartArgs) => Promise<void>
@@ -46,13 +45,20 @@ interface ProviderValue extends CheckoutState {
 	removeDiscount: () => Promise<void>
 }
 
+/**
+ * Setup
+ */
+
+const { useReducer } = React
+
 const initialState = {
 	loading: false,
 	isOpen: false,
 	userErrors: [],
+	currentCheckout: undefined,
 }
 
-const initialValue = {
+export const defaultCheckoutProps = {
 	...initialState,
 	openCart: () => {},
 	closeCart: () => {},
@@ -62,15 +68,13 @@ const initialValue = {
 	removeDiscount: async () => {},
 }
 
-const CheckoutContext = React.createContext<ProviderValue>(initialValue)
-
 /**
- * Action Types
+ * State
  */
 
 interface Action {
 	type: string
-	checkout?: Checkout
+	currentCheckout?: Checkout
 	userErrors?: UserError[]
 }
 
@@ -88,14 +92,14 @@ const reducer = (state: CheckoutState, action: Action): CheckoutState => {
 		case STARTED_REQUEST:
 			return { ...state, loading: true }
 		case FINISHED_REQUEST:
-			const { userErrors, checkout } = action
-			return { ...state, userErrors, checkout }
+			const { userErrors, currentCheckout } = action
+			return { ...state, userErrors, currentCheckout }
 		default:
 			return state
 	}
 }
 
-export const CheckoutProvider = ({ children }: Props) => {
+export const useCheckout = (): UseCheckoutProps => {
 	/**
 	 * Hooks setup
 	 */
@@ -106,8 +110,9 @@ export const CheckoutProvider = ({ children }: Props) => {
 	const [applyDiscountMutation] = useMutation(APPLY_DISCOUNT_MUTATION)
 	const [removeDiscountMutation] = useMutation(REMOVE_DISCOUNT_MUTATION)
 
-	const { checkout } = state
-	const checkoutId = checkout ? checkout.id : undefined
+	const { currentCheckout } = state
+	const checkoutId = currentCheckout ? currentCheckout.id : undefined
+
 	/**
 	 * Methods
 	 */
@@ -116,7 +121,7 @@ export const CheckoutProvider = ({ children }: Props) => {
 	const closeCart = () => dispatch({ type: CLOSE_CART })
 
 	const addToCart = async (args: AddToCartArgs) => {
-		const checkoutExists = Boolean(checkout)
+		const checkoutExists = Boolean(currentCheckout)
 		const mutate = checkoutExists ? addMutation : createMutation
 		const variables = checkoutExists ? { checkoutId, ...args } : args
 
@@ -130,7 +135,7 @@ export const CheckoutProvider = ({ children }: Props) => {
 	}
 
 	const updateQuantity = (item: CheckoutLineItem) => async (quantity: number) => {
-		if (!checkout) throw new Error('There is no checkout to update')
+		if (!currentCheckout) throw new Error('There is no checkout to update')
 		dispatch({ type: STARTED_REQUEST })
 		const result = await updateLineItemMutation({
 			variables: {
@@ -171,5 +176,6 @@ export const CheckoutProvider = ({ children }: Props) => {
 		applyDiscount,
 		removeDiscount,
 	}
-	return <CheckoutContext.Provider value={value}>{children}</CheckoutContext.Provider>
+
+	return value
 }

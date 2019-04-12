@@ -1,4 +1,4 @@
-import { checkoutFields } from '../../graphql/fragments'
+import { checkoutFields } from '../../../graphql/fragments'
 
 export const ADD_MUTATION = /* GraphQL */ `
 	mutation CheckoutAddItems($lineItems: [CheckoutLineItemInput!]!, $checkoutId: ID!) {

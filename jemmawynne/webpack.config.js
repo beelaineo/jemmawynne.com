@@ -4,6 +4,9 @@ const webpack = require('webpack')
 const path = require('path')
 const package = require('./package.json')
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
+const env = require('dotenv').config()
+
+const { parsed } = env
 
 // variables
 const isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production'
@@ -81,6 +84,9 @@ module.exports = {
 			NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
 			DEBUG: false,
 		}),
+		new webpack.DefinePlugin({
+			SHOPIFY_STOREFRONT_TOKEN: JSON.stringify(parsed.SHOPIFY_STOREFRONT_TOKEN),
+		}),
 		new WebpackCleanupPlugin(),
 		new HtmlWebpackPlugin({
 			template: './index.html',
@@ -105,6 +111,7 @@ module.exports = {
 	devServer: {
 		contentBase: sourcePath,
 		hot: true,
+		port: 8080,
 		inline: true,
 		historyApiFallback: {
 			disableDotRule: true,

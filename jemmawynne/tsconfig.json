@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		// "module": "es6",
-		"declaration": false,
+		"declaration": true,
 		"noImplicitAny": false,
 		"removeComments": true,
 		"noLib": false,
@@ -29,7 +29,7 @@
 			"Views/*": ["./src/views/*", "./src/views"],
 			"GraphQL": ["./src/graphql"],
 			"Types": ["./src/types"],
-			"Utils/*": ["./src/utils/*"]
+			"Providers/*": ["./src/providers/*"]
 		}
 	},
 	"include": ["./src"],

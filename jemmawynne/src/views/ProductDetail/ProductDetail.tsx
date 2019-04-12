@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { useQuery } from 'Utils/graphql'
+import { useQuery } from 'graphql-hooks'
 import { productQuery, QueryResult } from './query'
 
 interface MatchParams {
@@ -8,13 +8,10 @@ interface MatchParams {
 }
 
 export const ProductDetail = ({ match }: RouteComponentProps<MatchParams>) => {
-	// console.log(props)
 	const { handle } = match.params
-	console.log(productQuery)
-	// console.log(gql.stringify(productQuery))
-	const { loading, error, data } = useQuery<QueryResult>(productQuery, { variables: { handle } })
+	const result = useQuery<QueryResult>(productQuery, { variables: { handle } })
 	// console.log(loading, error, data)
-	console.log(data)
+	console.log(result.data.shop)
 	// if (loading) return <p>Loading...</p>
 	return (
 		<div>

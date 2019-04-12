@@ -2,16 +2,19 @@ import * as React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from 'react-router'
 // import { Homepage } from 'Views/Homepage'
-import { Homepage, Navigation, ProductListing, ProductDetail } from './views'
+import { Homepage, ProductListing, ProductDetail, Navigation, Checkout } from './views'
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
 import memCache from 'graphql-hooks-memcache'
-import { CheckoutProvider } from './providers/Checkout/Checkout'
+import { ShopifyProvider } from './providers/Shopify'
 import { GlobalStyles } from './theme/global'
 
+/* Global var provided by webpack */
+declare var SHOPIFY_STOREFRONT_TOKEN: string
+
 const client = new GraphQLClient({
-	url: 'https://kame-case.myshopify.com/api/graphql',
+	url: 'https://jemmawynne.myshopify.com/api/graphql',
 	headers: {
-		'X-Shopify-Storefront-Access-Token': '29f169ddd673015f96eb6865593e9369',
+		'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
 	},
 	cache: memCache(),
 })
@@ -28,7 +31,7 @@ export const App = () => {
 	return (
 		<ClientContext.Provider value={client}>
 			<BrowserRouter>
-				<CheckoutProvider>
+				<ShopifyProvider>
 					<GlobalStyles />
 					<Navigation />
 					<Switch>
@@ -36,8 +39,9 @@ export const App = () => {
 						<Route exact path="/test" component={Homepage} />
 						<Route exact path="/collections/a" component={ProductListing} />
 						<Route exact path="/products/:handle" component={ProductDetail} />
+						<Route exact path="/checkout" component={Checkout} />
 					</Switch>
-				</CheckoutProvider>
+				</ShopifyProvider>
 			</BrowserRouter>
 		</ClientContext.Provider>
 	)

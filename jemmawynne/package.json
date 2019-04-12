@@ -14,7 +14,7 @@
 		"lib"
 	],
 	"scripts": {
-		"dev": "webpack-dev-server --watch --mode development --hot --progress --color --port 8000",
+		"dev": "webpack-dev-server --watch --mode development --hot --progress",
 		"install-types": "typesync && npm install",
 		"test": "echo \"Error: run tests from root\" && exit 1"
 	},
@@ -59,7 +59,7 @@
 	},
 	"dependencies": {
 		"graphql": "^14.2.1",
-		"graphql-hooks": "^3.4.1",
+		"graphql-hooks": "^3.5.0",
 		"graphql-hooks-memcache": "^1.2.0",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
