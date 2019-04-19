@@ -1,17 +1,13 @@
 const Product = {
 	title: 'Products',
-	name: 'product',
+	name: 'shopifyProduct',
 	type: 'document',
 	fields: [
 		{
-			title: 'Shopify Product',
-			type: 'shopifyItem',
-			name: 'shopifyItem',
-			options: {
-				collections: false,
-			},
-			// TODO Why is this not working?
-			validation: Rule => Rule.required(),
+			title: 'Title',
+			name: 'title',
+			readOnly: true,
+			type: 'string'
 		},
 		{
 			title: 'Banner',
@@ -34,20 +30,7 @@ const Product = {
 				},
 			],
 		},
-		// {
-		// 	title: 'Related',
-		// 	type: 'array',
-		// 	name: 'related',
-		// 	description: 'Link to a Page, Product, Collection, or URL',
-		// 	of: [
-		// 		{
-		// 			type: 'pageLink',
-		// 			options: {
-		// 				collections: false,
-		// 			},
-		// 		},
-		// 	],
-		// },
+
 	],
 	preview: {
 		select: {

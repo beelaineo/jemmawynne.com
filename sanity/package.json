@@ -19,13 +19,13 @@
   },
   "dependencies": {
     "@sanity/base": "^0.140.12",
-    "@sanity/cli": "^0.140.12",
+    "@sanity/cli": "^0.140.14",
     "@sanity/components": "^0.140.12",
     "@sanity/core": "^0.140.12",
-    "@sanity/default-layout": "^0.140.12",
-    "@sanity/default-login": "^0.140.3",
-    "@sanity/desk-tool": "^0.140.13",
-    "@sanity/vision": "^0.140.12",
+    "@sanity/default-layout": "^0.140.14",
+    "@sanity/default-login": "^0.140.15",
+    "@sanity/desk-tool": "^0.140.14",
+    "@sanity/vision": "^0.140.14",
     "prop-types": "^15.7",
     "react": "^16.8",
     "react-dom": "^16.8",
@@ -33,5 +33,8 @@
   },
   "devDependencies": {
     "react-hot-loader": "^4.8.0"
+  },
+  "resolutions": {
+    "@sanity/base": "^0.140.12"
   }
 }
