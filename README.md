@@ -1,6 +1,7 @@
 ## Dev Setup
 
 - `npm run setup`
+- :)
 
 
 ## Commits
