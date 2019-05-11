@@ -3,17 +3,20 @@
 		// "module": "es6",
 		"declaration": true,
 		"noImplicitAny": false,
+		"module": "commonjs",
+		"moduleResolution": "node",
 		"removeComments": true,
 		"noLib": false,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"target": "es5",
+		"target": "es6",
 		"sourceMap": true,
 		"jsx": "react",
-		"rootDir": "src",
+		// "rootDir": ".",
 		"lib": ["es6", "es7", "dom"],
 		"outDir": "./dist",
 		"esModuleInterop": true,
+		"types": ["node", "jest"],
 
 		/*
 		TODO: Tighten these up once development is rolling
@@ -23,15 +26,23 @@
 		"strictNullChecks": true
 		*/
 
-		"baseUrl": ".",
+		// "typeRoots": ["./node_modules/@types"],
+
+		"baseUrl": "src",
 		"paths": {
-			"Components": ["./src/components/*"],
-			"Views/*": ["./src/views/*", "./src/views"],
-			"GraphQL": ["./src/graphql"],
-			"Types": ["./src/types"],
-			"Providers/*": ["./src/providers/*"]
+			"test-utils/*": ["test-utils/*"],
+			"Components/*": ["components/*"],
+			"Views/*": ["views/*"],
+			"Types/*": ["types/*"],
+			"Providers/*": [".providers/*"]
 		}
 	},
-	"include": ["./src"],
-	"exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "dist"]
+	// "include": ["./src"],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts",
+		// "**/*.test.ts",
+		"dist"
+		// "**/__tests__/*"
+	]
 }

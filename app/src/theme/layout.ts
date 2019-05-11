@@ -9,12 +9,14 @@ export const z = {
 }
 
 export const spacing = {
+	small: '10px',
 	quarter: '3px',
 	half: '6px',
 	single: '12px',
 	singleHalf: '18px',
 	double: '24px',
 	triple: '38px',
+	large: '50px',
 }
 
 export const columns = {
@@ -23,10 +25,3 @@ export const columns = {
 	wide: '900px',
 	xWide: '1100px',
 }
-
-export const defaults = {
-	columnWidth: columns.medium,
-}
-
-export const navHeight = '60px'
-export const announcementHeight = '45px'

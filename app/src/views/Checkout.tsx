@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { useShopify } from '../providers/shopify'
+import { useCheckout } from 'use-shopify'
 
 /**
  * Main Checkout view
  */
 
 export const Checkout = () => {
-	const { checkout } = useShopify()
-	const { currentCheckout } = checkout
+	const { currentCheckout } = useCheckout()
 
 	if (!currentCheckout || currentCheckout.lineItems.length < 1) {
 		return <p>Your cart is empty</p>

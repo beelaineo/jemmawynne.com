@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { SanityImage, ShopifyImage } from './media'
+import { ShopifyImage } from 'use-shopify'
 
 /**
  * SEO
@@ -83,5 +83,26 @@ export interface Color {
 		s: number
 		v: number
 		a: number
+	}
+}
+
+/**
+ * Media
+ */
+
+export interface SanityImage {
+	_type: string
+	_ref: string
+	_key: string
+	__typename: 'SanityImage'
+	altText?: string
+	id: string
+	url: string
+	metadata?: {
+		dimensions: {
+			width: number
+			height: number
+			ratio?: number
+		}
 	}
 }

@@ -1,13 +1,24 @@
 import { createGlobalStyle } from 'styled-components'
 import normalized from './normalized'
-import fonts from './fonts'
+import fontFaces from './fontFaces'
+import { semiDark } from './color'
 
 export const GlobalStyles = createGlobalStyle`
+	${(props) => {
+		console.log(props)
+		return ''
+	}}
+
 	${normalized}
-	${fonts}
+	${fontFaces}
 
 	* {
 		box-sizing: border-box;
+	}
+
+	body {
+		font-family: ${({ theme }) => theme.font.family.serif};
+		color: ${semiDark};
 	}
 
 	button, input, select, option, textarea {
@@ -18,6 +29,10 @@ export const GlobalStyles = createGlobalStyle`
 		line-height: normal;
 		padding: 0;
 		border-radius: 0;
+	}
+
+	img {
+		max-width: 100%;
 	}
 
 	button {

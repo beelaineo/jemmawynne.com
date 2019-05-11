@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ProductDetail } from '../ProductDetail'
 
-describe('Product Detail (integration)', () => {
+describe.skip('Product Detail (integration)', () => {
 	it.skip('should add a product to checkout when the buy button is clicked', () => {
 		/* */
 	})
