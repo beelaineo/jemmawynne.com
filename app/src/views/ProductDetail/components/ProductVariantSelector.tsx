@@ -23,6 +23,7 @@ export const ProductVariantSelector = (props: Props) => {
 	const handleSelect = (e) => {
 		selectVariant(e.target.value)
 	}
+	return null
 	return (
 		<div>
 			<NormalizeDiv>

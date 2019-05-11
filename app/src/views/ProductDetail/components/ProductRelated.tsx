@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import { Product, Collection } from 'use-shopify'
 import { unwindEdges } from '../../../utils/graphql'
 import { ProductRelatedWrapper } from '../styled'
@@ -26,11 +27,13 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 					const [images] = unwindEdges(product.images)
 					if (index < 5) {
 						return (
-							<FlexFour>
-								{images[0] && <Image image={images[0]} />}
-								<Header4 align="center" weight="xlight">
-									{title}
-								</Header4>
+							<FlexFour key={product.id}>
+								<Link to={`/products/${product.handle}`}>
+									{images[0] && <Image image={images[0]} />}
+									<Header4 align="center" weight="xlight">
+										{title}
+									</Header4>
+								</Link>
 							</FlexFour>
 						)
 					}

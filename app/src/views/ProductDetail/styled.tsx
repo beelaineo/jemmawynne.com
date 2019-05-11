@@ -63,26 +63,31 @@ export const NormalizeDiv = styled.div`
 	`}
 `
 
+interface ButtonProps {
+	theme: DefaultTheme
+	disabled?: boolean
+}
+
 export const Button = styled.button`
-	${(props: WrapperProps) => `
-	    background-color: ${props.theme.color.semiDark};
-		border: 1px solid #4b4b4b;
-		color: #fff;
-		cursor: pointer;
+	${(props: ButtonProps) => css`
+		background-color: ${props.theme.color.pink};
+		color: black;
+		cursor: ${props.disabled ? 'auto' : 'pointer'};
 		display: inline-block;
-		font-family: serif;
+		font-family: ${props.theme.font.family.sans};
+		font-weight: ${props.theme.font.weight.strong};
 		font-size: ${props.theme.font.size.h5};
-		min-width: 13rem;
-		min-height: 3.5rem;
-		letter-spacing: .035em;
-		padding: .25rem 1rem;
+		min-width: 8rem;
+		min-height: 2.5rem;
+		letter-spacing: 0.035em;
+		padding: 0.25rem 0.5rem;
 		text-align: center;
 		text-transform: uppercase;
-		-webkit-transition: .2s;
-		transition: .2s;
+		transition: 0.2s;
 		padding: ${props.theme.layout.spacing.small};
 		margin: ${props.theme.layout.spacing.small};
-		   
+		opacity: ${props.disabled ? 0.3 : 1};
+		pointer-events: ${props.disabled ? 'none' : 'auto'};
 	`}
 `
 

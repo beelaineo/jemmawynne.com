@@ -22,13 +22,15 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 			<MainImageWrapper data-testid="current-image">
 				<Image image={currentImage} />
 			</MainImageWrapper>
-			<Thumbnails data-testid="thumbnails">
-				{images.map((image) => (
-					<button key={image.id} onClick={changeImage(image.id)}>
-						<Image image={image} />
-					</button>
-				))}
-			</Thumbnails>
+			{images.length > 1 && (
+				<Thumbnails data-testid="thumbnails">
+					{images.map((image) => (
+						<button key={image.id} onClick={changeImage(image.id)}>
+							<Image image={image} />
+						</button>
+					))}
+				</Thumbnails>
+			)}
 		</React.Fragment>
 	)
 }
