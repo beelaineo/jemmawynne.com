@@ -60,7 +60,5 @@ export const PRODUCT_QUERY = /* GraphQL */ `
 `
 
 export interface ProductQueryResult {
-	shop: {
-		productByHandle: Product | void
-	}
+	productByHandle: Product | void
 }

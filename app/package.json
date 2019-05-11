@@ -28,6 +28,7 @@
 		"@babel/preset-env": "^7.4.4",
 		"@hot-loader/react-dom": "^16.8.6",
 		"@types/babel__core": "^7.1.1",
+		"@types/copy-webpack-plugin": "^5.0.0",
 		"@types/eslint": "^4.16.6",
 		"@types/eslint-plugin-prettier": "^2.2.0",
 		"@types/graphql": "^14.2.0",
@@ -45,6 +46,7 @@
 		"@types/webpack": "^4.4.31",
 		"@types/webpack-cleanup-plugin": "^0.5.2",
 		"@types/webpack-dev-server": "^3.1.5",
+		"@types/webpack-merge": "^4.1.5",
 		"@typescript-eslint/eslint-plugin": "^1.8.0",
 		"@typescript-eslint/parser": "^1.8.0",
 		"awesome-typescript-loader": "^5.2.1",
@@ -64,6 +66,7 @@
 		"react-testing-library": "^7.0.0",
 		"ts-jest": "^24.0.2",
 		"ts-loader": "^6.0.0",
+		"tsconfig-paths-webpack-plugin": "^3.2.0",
 		"typescript": "^3.4.5",
 		"typesync": "^0.5.1",
 		"webpack": "^4.31.0",
@@ -80,9 +83,5 @@
 		"react-router-dom": "^5.0.0",
 		"styled-components": "^4.2.0",
 		"use-shopify": "^0.2.0"
-	},
-	"resolutions": {
-		"**/react": "16.8.6",
-		"**/react-dom": "16.8.6"
 	}
 }

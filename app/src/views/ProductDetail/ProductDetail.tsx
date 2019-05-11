@@ -5,7 +5,6 @@ import { PRODUCT_QUERY, ProductQueryResult } from './query'
 import { useProductVariant, useCheckout, Product } from 'use-shopify'
 import { unwindEdges } from '../../utils/graphql'
 import { NotFound } from '../NotFound'
-import { Placeholder } from '../../components/Placeholder'
 import {
 	ProductVariantSelector,
 	BuyButton,
@@ -14,13 +13,16 @@ import {
 	ProductDetailFooter,
 	ProductRelated,
 } from './components'
-import { Wrapper, FlexContainer, FlexHalf, NormalizeDiv } from './styled'
+import { useCounter } from 'Utils/hooks'
+import { Wrapper, NormalizeDiv } from './styled'
+import { FlexContainer, FlexHalf } from 'Components/Layout'
 
 interface Props {
 	product: Product
 }
 
 const ProductDetailMain = ({ product }: Props) => {
+	const { count: quantity, increment, decrement } = useCounter(1, { min: 1 })
 	/* get product variant utils */
 	const { currentVariant, selectVariant } = useProductVariant(product)
 
@@ -37,13 +39,20 @@ const ProductDetailMain = ({ product }: Props) => {
 					</FlexHalf>
 					<FlexHalf>
 						<ProductDetailHeader currentVariant={currentVariant} product={product} />
-						<ProductVariantSelector variants={variants} currentVariant={currentVariant} selectVariant={selectVariant} />
-						<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} />
-						<ProductDetailFooter currentVariant={currentVariant} product={product} />
+						<ProductVariantSelector
+							quantity={quantity}
+							increment={increment}
+							decrement={decrement}
+							variants={variants}
+							currentVariant={currentVariant}
+							selectVariant={selectVariant}
+						/>
+						<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
+						<ProductDetailFooter product={product} />
 					</FlexHalf>
 				</FlexContainer>
 				<NormalizeDiv>
-					<ProductRelated currentVariant={currentVariant} product={product} />
+					<ProductRelated product={product} />
 				</NormalizeDiv>
 			</NormalizeDiv>
 		</Wrapper>

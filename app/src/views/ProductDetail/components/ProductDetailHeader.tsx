@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Product, Variant } from 'use-shopify'
-import { unwindEdges } from '../../../utils/graphql'
-import { Gallery } from '../../../components/Gallery'
-import { FlexHalf, NormalizeDiv, LightHeadingH2, LightHeadingH3 } from '../styled'
+import { NormalizeDiv } from '../styled'
+import { Header2, Header4 } from 'Components/Text'
 
 interface ProductDetailHeaderProps {
 	product: Product
@@ -12,8 +11,12 @@ interface ProductDetailHeaderProps {
 export const ProductDetailHeader = ({ product, currentVariant }: ProductDetailHeaderProps) => {
 	return (
 		<NormalizeDiv>
-			<LightHeadingH2>{product.title}</LightHeadingH2>
-			<LightHeadingH3>${currentVariant.price}</LightHeadingH3>
+			<Header2 weight="xlight" color="semiDark">
+				{product.title}
+			</Header2>
+			<Header4 weight="xlight" color="semiDark">
+				${currentVariant.price}
+			</Header4>
 		</NormalizeDiv>
 	)
 }

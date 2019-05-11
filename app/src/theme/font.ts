@@ -1,12 +1,13 @@
 // @flow
 
 export const size = {
-	h1: '56px',
-	h2: '38px',
-	h3: '25px',
-	h4: '12px',
-	p: '10px',
-	h5: '8px',
+	h1: '50px',
+	h2: '42px',
+	h3: '22px',
+	p: '18px',
+	h4: '16px',
+	h5: '13px',
+	h6: '10px',
 }
 
 export const weight = {

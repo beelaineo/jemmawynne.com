@@ -1,33 +1,40 @@
 import * as React from 'react'
-import { Product, Variant } from 'use-shopify'
+import { Product, Collection } from 'use-shopify'
 import { unwindEdges } from '../../../utils/graphql'
-import { Gallery } from '../../../components/Gallery'
-import { NormalizeDiv, LightHeadingH2Center, FlexContainer, ProductRelatedWrapper, FlexFour } from '../styled'
+import { ProductRelatedWrapper } from '../styled'
+import { FlexContainer, FlexFour } from 'Components/Layout'
+import { Header2, Header4 } from 'Components/Text'
+import { Image } from 'Components/Image'
 
-interface ProductRelated {
+interface ProductRelatedProps {
 	product: Product
-	currentVariant: Variant
 }
 
-export const ProductRelated = ({ product, currentVariant }: ProductRelated) => {
-	let edges = product.collections.edges[0].node.products.edges
+export const ProductRelated = ({ product }: ProductRelatedProps) => {
+	const [collections] = unwindEdges<Collection>(product.collections)
+	if (!collections || !collections.length) return null
+	const [products] = unwindEdges<Product>(collections[0].products)
+	if (!products || !products.length) return null
 	return (
 		<ProductRelatedWrapper>
-			<LightHeadingH2Center>More in this collection</LightHeadingH2Center>
+			<Header2 transform="uppercase" color="lightGrayBody">
+				More in this collection
+			</Header2>
 			<FlexContainer>
-				{edges &&
-					edges.map((product, index) => {
-						let { title, id, images } = product.node
-						let { originalSrc, altText } = images.edges[0].node
-						if (index < 5) {
-							return (
-								<FlexFour className="product__related__item">
-									<img src={originalSrc} alt={altText} />
-									<h4>{title}</h4>
-								</FlexFour>
-							)
-						}
-					})}
+				{products.map((product, index) => {
+					let { title } = product
+					const [images] = unwindEdges(product.images)
+					if (index < 5) {
+						return (
+							<FlexFour>
+								{images[0] && <Image image={images[0]} />}
+								<Header4 align="center" weight="xlight">
+									{title}
+								</Header4>
+							</FlexFour>
+						)
+					}
+				})}
 			</FlexContainer>
 		</ProductRelatedWrapper>
 	)

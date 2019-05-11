@@ -4,10 +4,6 @@ import fontFaces from './fontFaces'
 import { semiDark } from './color'
 
 export const GlobalStyles = createGlobalStyle`
-	${(props) => {
-		console.log(props)
-		return ''
-	}}
 
 	${normalized}
 	${fontFaces}

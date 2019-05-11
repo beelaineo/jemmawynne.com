@@ -1,18 +1,16 @@
 import * as React from 'react'
-import { Product, Variant } from 'use-shopify'
-import { unwindEdges } from '../../../utils/graphql'
-import { Gallery } from '../../../components/Gallery'
-import { FlexHalf, NormalizeDiv, BodyText } from '../styled'
+import { Product } from 'use-shopify'
+import { NormalizeDiv } from '../styled'
+import { P } from 'Components/Text'
 
 interface ProductDetailFooterProps {
 	product: Product
-	currentVariant: Variant
 }
 
-export const ProductDetailFooter = ({ product, currentVariant }: ProductDetailFooterProps) => {
+export const ProductDetailFooter = ({ product }: ProductDetailFooterProps) => {
 	return (
-		<NormalizeDiv className="product__description">
-			<BodyText>{product.description}</BodyText>
+		<NormalizeDiv>
+			<P>{product.description}</P>
 		</NormalizeDiv>
 	)
 }

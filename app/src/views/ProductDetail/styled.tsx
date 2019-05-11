@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 interface WrapperProps {
 	theme: DefaultTheme
@@ -6,66 +6,61 @@ interface WrapperProps {
 }
 
 export const Wrapper = styled.div`
-	width: calc(100% - 4rem);
-	max-width: 1200px;
-	margin: 0 auto;
+	${({ theme }: WrapperProps) => `
+		width: calc(100% - 4rem);
+		max-width: 1200px;
+		margin: 0 auto;
+		font-family: ${theme.font.family.sans};
+	`}
+`
+
+export const Nav = styled.div`
+	${({ theme }) => css`
+		width: calc(100% - 4rem);
+		max-width: 1200px;
+		margin: 0 auto;
+		font-family: ${theme.font.family.sans};
+	`}
 `
 
 export const ProductGalleryWrapper = styled.div`
-	${(props: WrapperProps) => `
-		display: flex;
-		flex-direction: row-reverse;
-		div[data-testid="current-image"] {
-			flex:4;
-		}
-		div[data-testid="thumbnails"] {
-			flex:1;
-			padding-right: ${props.theme.layout.spacing.small};
-			> button {
-				padding: ${props.theme.layout.spacing.small};
-			}
+	display: flex;
+	flex-direction: row-reverse;
+`
+
+export const ProductGalleryImage = styled.div`
+	flex: 4;
+`
+
+export const ProductGalleryThumbnails = styled.div`
+	${(props) => css`
+		flex: 1;
+		padding-right: ${props.theme.layout.spacing.small};
+		> button {
+			padding: ${props.theme.layout.spacing.small};
 		}
 	`}
 `
 
 export const ProductRelatedWrapper = styled.div`
-	${(props: WrapperProps) => `
+	${(props: WrapperProps) => css`
 		margin: ${props.theme.layout.spacing.large};
-		h2 {
-			text-transform: uppercase;
-			color: ${props.theme.color.lightGrayBody};
-			letter-spacing: .035rem;
-		}
-		.product__related__item {
-			h4 {
-				text-align: center;
-				font-size: ${props.theme.font.size.h5};
-				margin: ${props.theme.layout.spacing.small};
-				font-weight: ${props.theme.font.weight.xlight};
-			}
-		}
 	`}
 `
 
+/*
+  NOTE: consider turning this into a "WithMargin" or "Spaced"
+  component that we could use like this:
+
+  <Spaced margin="small">...</Spaced>
+  <Spaced margin="small" top="double">...</Spaced>
+
+  would be nice to have a prop for padding too
+*/
 export const NormalizeDiv = styled.div`
 	${(props: WrapperProps) => `
    		margin: ${props.theme.layout.spacing.small};
 	`}
-`
-
-export const FlexContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-`
-
-export const FlexHalf = styled.div`
-	flex-basis: 48.5%;
-	width: 48.5%;
-`
-
-export const FlexFour = styled.div`
-	flex: 5;
-	margin: 10px;
 `
 
 export const Button = styled.button`
@@ -96,14 +91,6 @@ export const ButtonPrimary = styled(Button)`
 		&:hover {
 			background-color:${props.theme.color.dark};
 		}
-	`}
-`
-
-export const BodyText = styled.p`
-	${(props: WrapperProps) => `
-		color:${props.theme.color.lightGrayBody};
-		font-size: ${props.theme.font.size.h4};
-		letter-spacing: .12px;
 	`}
 `
 
@@ -173,37 +160,5 @@ export const Label = styled.label`
 		border: none;
 		background: none;
 		border-radius: 0;
-	`}
-`
-
-// HEADINGS
-
-export const LightHeadingH1 = styled.h2`
-	${(props: WrapperProps) => `
-		font-weight: 100;
-		color: ${props.theme.color.semiDark};
-	`}
-`
-
-export const LightHeadingH2 = styled.h2`
-	${(props: WrapperProps) => `
-		font-weight: 100;
-		color: ${props.theme.color.semiDark};
-		color: ${(props) => (props.primary ? 'red' : 'blue')};
-	`}
-`
-
-export const LightHeadingH2Center = styled(LightHeadingH2)`
-	${(props: WrapperProps) => `
-		text-align: center;
-		width: 100%;
-	`}
-`
-
-export const LightHeadingH3 = styled.h3`
-	${(props: WrapperProps) => `
-		font-weight: 100;
-		color: ${props.theme.color.semiDark};
-		font-size: ${props.theme.font.size.h4};
 	`}
 `

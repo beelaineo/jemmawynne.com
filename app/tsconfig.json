@@ -34,15 +34,10 @@
 			"Components/*": ["components/*"],
 			"Views/*": ["views/*"],
 			"Types/*": ["types/*"],
+			"Utils/*": ["utils/*"],
 			"Providers/*": [".providers/*"]
 		}
 	},
-	// "include": ["./src"],
-	"exclude": [
-		"node_modules",
-		"**/*.spec.ts",
-		// "**/*.test.ts",
-		"dist"
-		// "**/__tests__/*"
-	]
+	"include": ["./src"],
+	"exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "**/__tests__/*", "dist", "build"]
 }
