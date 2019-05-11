@@ -1,6 +1,6 @@
 {
 	"version": 2,
-	"name": "spinellikilcollin-storefront",
+	"name": "jemmawynne-storefront",
 	"builds": [
 		{
 			"src": "app/package.json",
