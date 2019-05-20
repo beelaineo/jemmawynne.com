@@ -66,24 +66,60 @@ export const NormalizeDiv = styled.div`
 export const BackgroundImage = styled.div`
 	background-image: url(${(props) => props.imageSrc || ''});
 	background-size: cover;
-`
-
-export const OverLay = styled.div`
-	height: 60%;
-	width: 80%;
-	padding: 40% 2rem;
-	text-align: ${(props) => props.align};
-	margin: 0 auto;
+	background-position: center;
 	a {
 		color: transparent;
 	}
-	&:hover {
-		background-color: rgba(0, 0, 0, 0.8);
-		color: white;
+`
+
+export const OverLay = styled.div`
+	${(props: WrapperProps) => `
+   		padding: ${props.theme.layout.spacing.large};
+	`}
+	> div {
+		height: 10vh;
+		width: auto;
+		padding: 12vw 2rem 16vw;
+		text-align: ${(props) => props.align};
+		margin: 0 auto;
+		transition: all 250ms linear;
+		${(props: WrapperProps) =>
+			`${props.theme.mediaQueries.tablet} {
+				padding: 20vw 2rem 50vw;
+  			}
+		`}
+
 		a {
+			color: transparent;
+			transition: all 250ms linear;
+			text-decoration: none;
+		}
+		hr {
+			width: 120px;
+			margin: 24px auto;
+			border: 1px solid transparent;
+		}
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.8);
 			color: white;
+			a {
+				color: white;
+			}
+			hr {
+				border: 1px solid white;
+			}
 		}
 	}
+`
+
+export const Small = styled.small`
+	${(props: WrapperProps) => `
+		font-size: ${props.theme.font.size.h6};
+		font-family: ${props.theme.font.family.sans};
+		font-weight: ${props.theme.font.weight.strong};
+		letter-spacing: 1px;
+    	line-height: 1.2;
+	`}
 `
 
 interface ButtonProps {

@@ -18,9 +18,7 @@ export const FlexHalf = styled.div`
 
 export const FlexThree = styled.div`
 	flex: 3 3 33%;
-
-	${(props: WrapperProps) => `
-	`}
+	margin: ${(props) => props.margin};
 `
 
 export const FlexFour = styled.div`

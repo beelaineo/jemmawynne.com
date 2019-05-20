@@ -52,7 +52,7 @@ export const Header2 = styled.h2`
 			font-size: calc(${props.theme.font.size.h2} * 0.8);
 		}
 		${props.theme.mediaQueries.phone} {
-			font-size: calc(${props.theme.font.size.h2} * 0.7);
+			/* font-size: calc(${props.theme.font.size.h2} * 0.7); */
 		}
 	`};
 `
