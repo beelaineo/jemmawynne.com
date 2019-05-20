@@ -63,6 +63,29 @@ export const NormalizeDiv = styled.div`
 	`}
 `
 
+export const BackgroundImage = styled.div`
+	background-image: url(${(props) => props.imageSrc || ''});
+	background-size: cover;
+`
+
+export const OverLay = styled.div`
+	height: 60%;
+	width: 80%;
+	padding: 40% 2rem;
+	text-align: ${(props) => props.align};
+	margin: 0 auto;
+	a {
+		color: transparent;
+	}
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.8);
+		color: white;
+		a {
+			color: white;
+		}
+	}
+`
+
 interface ButtonProps {
 	theme: DefaultTheme
 	disabled?: boolean
