@@ -82,33 +82,44 @@ export const OverLay = styled.div`
 		padding: 12vw 2rem 16vw;
 		text-align: ${(props) => props.align};
 		margin: 0 auto;
-		transition: all 250ms linear;
-		${(props: WrapperProps) =>
-			`${props.theme.mediaQueries.tablet} {
-				padding: 20vw 2rem 50vw;
-  			}
-		`}
-
-		a {
-			color: transparent;
-			transition: all 250ms linear;
-			text-decoration: none;
-		}
-		hr {
-			width: 120px;
-			margin: 24px auto;
-			border: 1px solid transparent;
-		}
-		&:hover {
-			background-color: rgba(0, 0, 0, 0.8);
-			color: white;
+		${(props: WrapperProps) => `
+			transition: all ${props.theme.layout.transition.slow} linear;
 			a {
-				color: white;
-			}
-			hr {
-				border: 1px solid white;
-			}
-		}
+					color: transparent;
+					transition: all ${props.theme.layout.transition.slow} linear;
+					text-decoration: none;
+				}
+				hr {
+					width: 120px;
+					margin: 24px auto;
+					border: 1px solid transparent;
+					transition: all ${props.theme.layout.transition.slow} linear;
+				}
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.8);
+					color: white;
+					a {
+						color: white;
+					}
+					hr {
+						border: 1px solid white;
+					}
+				}
+			${props.theme.mediaQueries.tablet} {
+				padding: 10vw 2rem 25vw;
+				&:hover {
+					background-color: transparent;
+					color: white;
+					a {
+						color: white;
+					}
+					hr {
+						border: 1px solid white;
+					}
+				}
+			  }
+			  
+		`}
 	}
 `
 

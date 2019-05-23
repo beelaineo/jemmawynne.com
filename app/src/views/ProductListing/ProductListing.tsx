@@ -34,7 +34,7 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 					let imageSrc = product.images.edges[0].node.originalSrc
 					let { minVariantPrice, maxVariantPrice } = product.priceRange
 					return (
-						<FlexThree margin="1px" padding="large">
+						<FlexThree margin="1px" padding="large" mobileWidth="2">
 							<BackgroundImage imageSrc={imageSrc}>
 								<Link key={product.id} to={`/products/${product.handle}`}>
 									<OverLay align="center">

@@ -17,8 +17,14 @@ export const FlexHalf = styled.div`
 `
 
 export const FlexThree = styled.div`
-	flex: 3 3 33%;
+	flex: 1 1 33%;
+	max-width: 33.33%;
 	margin: ${(props) => props.margin};
+	${(props: WrapperProps) => `
+   		${props.theme.mediaQueries.tablet} {
+			max-width: ${props.mobileWidth === '2' ? '49.65%' : '33.33%'};
+	 	}
+	`}
 `
 
 export const FlexFour = styled.div`
