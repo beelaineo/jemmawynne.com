@@ -6,11 +6,13 @@ interface WrapperProps {
 }
 
 export const Wrapper = styled.div`
+	min-height: ${(props) => (props.height === 'full' ? '100vh' : 'auto')};
+	position: ${(props) => (props.height === 'full' ? 'relative' : 'initial')};
+	top: ${(props) => (props.height === 'full' ? '-3.5rem' : 'initial')};
 	${({ theme }: WrapperProps) => `
-		width: calc(100% - 4rem);
-		max-width: 1200px;
 		margin: 0 auto;
 		font-family: ${theme.font.family.sans};
+	
 	`}
 `
 
@@ -26,6 +28,33 @@ export const Nav = styled.div`
 export const ProductGalleryWrapper = styled.div`
 	display: flex;
 	flex-direction: row-reverse;
+	position: relative;
+	div[data-testid='current-image'] {
+		> img {
+			min-height: 100vh;
+			max-width: max-content;
+		}
+	}
+	div[data-testid='thumbnails'] {
+		position: absolute;
+		max-width: 100px;
+		bottom: 30px;
+		display: flex;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		button {
+			height: 8px;
+			z-index: 2;
+			background-color: black;
+			width: 8px;
+			border-radius: 5px;
+			margin: 2px;
+		}
+		img {
+			display: none;
+		}
+	}
 `
 
 export const ProductGalleryImage = styled.div`
@@ -59,7 +88,7 @@ export const ProductRelatedWrapper = styled.div`
 */
 export const NormalizeDiv = styled.div`
 	${(props: WrapperProps) => `
-   		margin: ${props.theme.layout.spacing.small};
+   		margin: ${props.theme.layout.spacing.small} 0;
 	`}
 `
 
@@ -140,8 +169,8 @@ interface ButtonProps {
 
 export const Button = styled.button`
 	${(props: ButtonProps) => css`
-		background-color: ${props.theme.color.pink};
-		color: black;
+		background-color: ${props.theme.color.dark};
+		color: ${props.theme.color.light};
 		cursor: ${props.disabled ? 'auto' : 'pointer'};
 		display: inline-block;
 		font-family: ${props.theme.font.family.sans};
@@ -155,7 +184,7 @@ export const Button = styled.button`
 		text-transform: uppercase;
 		transition: 0.2s;
 		padding: ${props.theme.layout.spacing.small};
-		margin: ${props.theme.layout.spacing.small};
+		margin: ${props.theme.layout.spacing.small} 0;
 		opacity: ${props.disabled ? 0.3 : 1};
 		pointer-events: ${props.disabled ? 'none' : 'auto'};
 	`}

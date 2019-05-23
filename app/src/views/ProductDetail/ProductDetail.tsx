@@ -15,7 +15,7 @@ import {
 } from './components'
 import { useCounter } from 'Utils/hooks'
 import { Wrapper, NormalizeDiv } from './styled'
-import { FlexContainer, FlexHalf } from 'Components/Layout'
+import { FlexContainer, FlexSix, FlexFour } from 'Components/Layout'
 
 interface Props {
 	product: Product
@@ -31,13 +31,13 @@ const ProductDetailMain = ({ product }: Props) => {
 	const [variants] = unwindEdges(product.variants)
 
 	return (
-		<Wrapper>
+		<Wrapper height="full">
 			<NormalizeDiv>
-				<FlexContainer>
-					<FlexHalf>
+				<FlexContainer height="full">
+					<FlexSix>
 						<ProductImages currentVariant={currentVariant} product={product} />
-					</FlexHalf>
-					<FlexHalf>
+					</FlexSix>
+					<FlexFour container="true">
 						<ProductDetailHeader currentVariant={currentVariant} product={product} />
 						<ProductVariantSelector
 							quantity={quantity}
@@ -49,7 +49,7 @@ const ProductDetailMain = ({ product }: Props) => {
 						/>
 						<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
 						<ProductDetailFooter product={product} />
-					</FlexHalf>
+					</FlexFour>
 				</FlexContainer>
 				<NormalizeDiv>
 					<ProductRelated product={product} />

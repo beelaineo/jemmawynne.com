@@ -9,6 +9,7 @@ export const FlexContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: ${(props) => props.wrap};
+	min-height: ${(props) => (props.height === 'full' ? '100vh' : 'auto')};
 `
 
 export const FlexHalf = styled.div`
@@ -28,6 +29,19 @@ export const FlexThree = styled.div`
 `
 
 export const FlexFour = styled.div`
-	flex: 5;
-	margin: 10px;
+	flex: 4;
+	${(props) =>
+		props.container === 'true'
+			? `
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: ${props.theme.layout.spacing.large};
+	`
+			: 'auto'}
+`
+
+export const FlexSix = styled.div`
+	flex: 6;
+	max-width: 70%;
 `

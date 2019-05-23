@@ -11,10 +11,10 @@ interface ProductDetailHeaderProps {
 export const ProductDetailHeader = ({ product, currentVariant }: ProductDetailHeaderProps) => {
 	return (
 		<NormalizeDiv>
-			<Header2 weight="xlight" color="semiDark">
+			<Header2 weight="xlight" color="dark">
 				{product.title}
 			</Header2>
-			<Header4 weight="xlight" color="semiDark">
+			<Header4 weight="xlight" color="dark">
 				${currentVariant.price}
 			</Header4>
 		</NormalizeDiv>

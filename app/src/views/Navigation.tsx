@@ -8,6 +8,8 @@ const Logo = styled.img`
 `
 
 export const Nav = styled.nav`
+	position: relative;
+	z-index: 9999;
 	${({ theme }) => css`
 		padding: ${theme.layout.spacing.single};
 		display: flex;

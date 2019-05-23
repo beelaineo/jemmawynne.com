@@ -19,15 +19,16 @@ interface Props extends UseProductVariant {
 
 export const ProductVariantSelector = (props: Props) => {
 	const { variants, currentVariant, selectVariant, quantity, increment, decrement } = props
-	if (!variants.length) return null
+	// if (!variants.length) return null
 	const handleSelect = (e) => {
 		selectVariant(e.target.value)
 	}
-	return null
+
+	// Need to make the variant selector for the size
 	return (
 		<div>
 			<NormalizeDiv>
-				<Label>Size</Label>
+				<Label>Sixe</Label>
 				<Select onChange={handleSelect} value={currentVariant.id} id="size" name="product-size">
 					{variants.map((variant) => {
 						return (
