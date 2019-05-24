@@ -49,10 +49,29 @@ action "Test: Staging" {
 action "deploy:staging" {
   uses = "actions/zeit-now@master"
   needs = "Test: Staging"
-  secrets = [
-    "ZEIT_TOKEN",
-  ]
   args = "--target staging"
+  secrets = ["ZEIT_TOKEN"]
+
+  # action "Master" {
+  #   uses = "actions/bin/filter@master"
+  #   args = "branch master"
+  # }
+
+  # action "Master" {
+  #   uses = "actions/bin/filter@master"
+  #   args = "branch master"
+  # }
+
+  # action "Master" {
+  #   uses = "actions/bin/filter@master"
+  #   args = "branch master"
+  # }
+
+  # action "Test: Production" {
+  #   needs = "Master"
+  #   uses = "actions/npm@master"
+  #   args = "test"
+  # }
 }
 
 # action "deploy:production" {
