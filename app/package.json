@@ -58,6 +58,7 @@
 		"eslint-plugin-prettier": "^3.0.1",
 		"eslint-plugin-react": "^7.13.0",
 		"graphql-cli": "^3.0.11",
+		"hard-source-webpack-plugin": "^0.13.1",
 		"html-loader": "^0.5.5",
 		"html-webpack-plugin": "^3.2.0",
 		"jest": "^24.8.0",
@@ -69,6 +70,7 @@
 		"tsconfig-paths-webpack-plugin": "^3.2.0",
 		"typescript": "^3.4.5",
 		"typesync": "^0.5.1",
+		"utility-types": "^3.7.0",
 		"webpack": "^4.31.0",
 		"webpack-cleanup-plugin": "^0.5.1",
 		"webpack-cli": "^3.3.2",
@@ -82,6 +84,6 @@
 		"react-router": "^5.0.0",
 		"react-router-dom": "^5.0.0",
 		"styled-components": "^4.2.0",
-		"use-shopify": "^0.2.0"
+		"use-shopify": "^0.3.1"
 	}
 }

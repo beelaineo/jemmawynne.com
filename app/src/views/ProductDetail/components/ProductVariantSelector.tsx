@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { UseProductVariant, Variant } from 'use-shopify'
 import { Select, Label, NormalizeDiv, QuantitySelector } from '../styled'
+import { QuantityInput } from 'Components/QuantityInput'
 
 interface Props extends UseProductVariant {
 	variants: Variant[]
 	quantity: number
 	increment: () => void
 	decrement: () => void
+	setQuantity: (q: number) => void
 }
 
 /**
@@ -18,12 +20,13 @@ interface Props extends UseProductVariant {
  */
 
 export const ProductVariantSelector = (props: Props) => {
-	const { variants, currentVariant, selectVariant, quantity, increment, decrement } = props
+	const { variants, currentVariant, selectVariant, quantity, setQuantity, increment, decrement } = props
 	if (!variants.length) return null
 	const handleSelect = (e) => {
 		selectVariant(e.target.value)
 	}
-	return null
+	const handleQuantityInput = (e) => setQuantity(e.target.value)
+
 	return (
 		<div>
 			<NormalizeDiv>
@@ -44,7 +47,7 @@ export const ProductVariantSelector = (props: Props) => {
 					<button type="button" onClick={decrement}>
 						<span>&#8722;</span>
 					</button>
-					<input type="text" name="quantity" value={quantity} />
+					<QuantityInput quantity={quantity} setQuantity={setQuantity} />
 					<button type="button" onClick={increment}>
 						<span>&#43;</span>
 					</button>
