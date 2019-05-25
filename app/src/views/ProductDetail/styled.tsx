@@ -91,13 +91,7 @@ export const Button = styled.button`
 	`}
 `
 
-export const ButtonPrimary = styled(Button)`
-	${(props: WrapperProps) => `
-		&:hover {
-			background-color:${props.theme.color.dark};
-		}
-	`}
-`
+export const ButtonPrimary = styled(Button)``
 
 export const Select = styled.select`
 	${(props: WrapperProps) => `

@@ -22,7 +22,7 @@ interface Props {
 }
 
 const ProductDetailMain = ({ product }: Props) => {
-	const { count: quantity, increment, decrement } = useCounter(1, { min: 1 })
+	const { count: quantity, increment, decrement, setCount: setQuantity } = useCounter(1, { min: 1 })
 	/* get product variant utils */
 	const { currentVariant, selectVariant } = useProductVariant(product)
 
@@ -40,6 +40,7 @@ const ProductDetailMain = ({ product }: Props) => {
 					<FlexHalf>
 						<ProductDetailHeader currentVariant={currentVariant} product={product} />
 						<ProductVariantSelector
+							setQuantity={setQuantity}
 							quantity={quantity}
 							increment={increment}
 							decrement={decrement}
