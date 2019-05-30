@@ -52,7 +52,7 @@ export const Header2 = styled.h2`
 			font-size: calc(${props.theme.font.size.h2} * 0.8);
 		}
 		${props.theme.mediaQueries.phone} {
-			/* font-size: calc(${props.theme.font.size.h2} * 0.7); */
+			font-size: calc(${props.theme.font.size.h2} * 0.7);
 		}
 	`};
 `
@@ -73,8 +73,9 @@ export const Header3 = styled.h3`
 export const Header4 = styled.h4`
 	${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)};
-		font-size: ${props.theme.font.size.h4};
-
+		font-size: ${props.size !== 'small' ? props.theme.font.size.h4 : props.theme.font.size.h5};
+		font-weight: ${props.theme.font.weight[props.weight]};
+		margin: ${props.theme.layout.spacing.smallHalf};
 		${props.theme.mediaQueries.tablet} {
 			font-size: calc(${props.theme.font.size.h4} * 0.8);
 		}

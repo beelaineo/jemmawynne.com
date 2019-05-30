@@ -18,10 +18,10 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 	if (!products || !products.length) return null
 	return (
 		<ProductRelatedWrapper>
-			<Header2 transform="uppercase" color="lightGrayBody">
-				More in this collection
+			<Header2 transform="uppercase" color="lightGrayBody" align="center">
+				Shop the {collections[0].title} Collection
 			</Header2>
-			<FlexContainer>
+			<FlexContainer wrapmobile="wrap">
 				{products.map((product, index) => {
 					let { title } = product
 					const [images] = unwindEdges(product.images)
@@ -30,7 +30,7 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 							<FlexFour key={product.id}>
 								<Link to={`/products/${product.handle}`}>
 									{images[0] && <Image image={images[0]} />}
-									<Header4 align="center" weight="xlight">
+									<Header4 align="center" weight="xlight" color="dark">
 										{title}
 									</Header4>
 								</Link>

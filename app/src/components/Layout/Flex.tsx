@@ -8,8 +8,13 @@ interface WrapperProps {
 export const FlexContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	flex-wrap: ${(props) => props.wrap};
 	min-height: ${(props) => (props.height === 'full' ? '100vh' : 'auto')};
+	flex-wrap: ${(props) => props.wrap};
+	${(props: WrapperProps) => `
+   		${props.theme.mediaQueries.tablet} {
+			flex-wrap: ${props.wrapmobile ? props.wrapmobile : props.wrap};
+	 	}
+	`}
 `
 
 export const FlexHalf = styled.div`
@@ -23,13 +28,21 @@ export const FlexThree = styled.div`
 	margin: ${(props) => props.margin};
 	${(props: WrapperProps) => `
    		${props.theme.mediaQueries.tablet} {
-			max-width: ${props.mobileWidth === '2' ? '49.65%' : '33.33%'};
-	 	}
+			max-width: ${props.mobileWidth === '2' ? '49.5%' : '33.33%'};
+			text-align: ${props.mobilealign === 'center' ? 'center' : 'initial'};
+		 }
 	`}
 `
 
 export const FlexFour = styled.div`
 	flex: 4;
+	${(props: WrapperProps) => `
+   		${props.theme.mediaQueries.tablet} {
+			flex: 1;
+			width: 100%;
+			flex-basis: 100%;
+	 	}
+	`}
 	${(props) =>
 		props.container === 'true'
 			? `
@@ -44,4 +57,9 @@ export const FlexFour = styled.div`
 export const FlexSix = styled.div`
 	flex: 6;
 	max-width: 70%;
+	${(props: WrapperProps) => `
+   		${props.theme.mediaQueries.tablet} {
+			max-width: 100%;
+	 	}
+	`}
 `

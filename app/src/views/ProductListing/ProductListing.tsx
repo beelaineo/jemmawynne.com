@@ -20,7 +20,6 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 	const { handle } = match.params
 	const variables = { handle }
 	const [response] = useQuery<CollectionResult>({ query: COLLECTION_QUERY, variables })
-	console.log(response)
 	if (response.fetching || !response.data) return <p>Loading..</p>
 	const collection = response.data.collectionByHandle
 	const [products] = unwindEdges<Product>(collection.products)
@@ -29,8 +28,6 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 			<p>{collection.title}</p>
 			<FlexContainer wrap="wrap">
 				{products.map((product) => {
-					console.log(product)
-
 					let imageSrc = product.images.edges[0].node.originalSrc
 					let { minVariantPrice, maxVariantPrice } = product.priceRange
 					return (

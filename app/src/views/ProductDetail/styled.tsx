@@ -8,12 +8,25 @@ interface WrapperProps {
 export const Wrapper = styled.div`
 	min-height: ${(props) => (props.height === 'full' ? '100vh' : 'auto')};
 	position: ${(props) => (props.height === 'full' ? 'relative' : 'initial')};
-	top: ${(props) => (props.height === 'full' ? '-3.5rem' : 'initial')};
+	top: ${(props) => (props.height === 'full' ? '-15vh' : 'initial')};
 	${({ theme }: WrapperProps) => `
 		margin: 0 auto;
 		font-family: ${theme.font.family.sans};
-	
 	`}
+`
+
+export const SmallText = styled.div`
+	> * {
+		${({ theme }: WrapperProps) => `
+			font-size: ${theme.font.size.h6};
+			color: ${theme.color.dark};
+			text-transform: uppercase;
+			text-decoration: none;
+			letter-spacing: 1px;
+			display: block;
+			margin: ${theme.layout.spacing.small} 0;
+		`}
+	}
 `
 
 export const Nav = styled.div`
@@ -26,6 +39,7 @@ export const Nav = styled.div`
 `
 
 export const ProductGalleryWrapper = styled.div`
+	line-height: 0;
 	display: flex;
 	flex-direction: row-reverse;
 	position: relative;
@@ -33,23 +47,29 @@ export const ProductGalleryWrapper = styled.div`
 		> img {
 			min-height: 100vh;
 			max-width: max-content;
+			${(props: WrapperProps) => `
+				${props.theme.mediaQueries.tablet} {
+					min-height: initial;
+					max-width: 100vw;
+				}
+			`}
 		}
 	}
 	div[data-testid='thumbnails'] {
 		position: absolute;
 		max-width: 100px;
-		bottom: 30px;
+		bottom: 60px;
 		display: flex;
 		left: 0;
 		right: 0;
 		margin: 0 auto;
 		button {
-			height: 8px;
+			height: 10px;
 			z-index: 2;
 			background-color: black;
-			width: 8px;
+			width: 10px;
 			border-radius: 5px;
-			margin: 2px;
+			margin: 2px 6px;
 		}
 		img {
 			display: none;
@@ -73,7 +93,25 @@ export const ProductGalleryThumbnails = styled.div`
 
 export const ProductRelatedWrapper = styled.div`
 	${(props: WrapperProps) => css`
-		margin: ${props.theme.layout.spacing.large};
+		background-color: ${props.theme.color.gray};
+		padding: ${props.theme.layout.spacing.large};
+		> div > div {
+			margin: ${props.theme.layout.spacing.small};
+			h4,
+			a {
+				text-decoration: none;
+				font-family: ${props.theme.font.family.serif};
+			}
+		}
+		> h2 {
+			font-size: ${props.theme.font.size.h1};
+			color: black;
+		}
+		${props.theme.mediaQueries.tablet} {
+			> h2 {
+				font-size: ${props.theme.font.size.h2};
+			}
+		}
 	`}
 `
 
@@ -88,7 +126,7 @@ export const ProductRelatedWrapper = styled.div`
 */
 export const NormalizeDiv = styled.div`
 	${(props: WrapperProps) => `
-   		margin: ${props.theme.layout.spacing.small} 0;
+   		 margin: ${props.theme.layout.spacing.small} 0;
 	`}
 `
 
@@ -99,6 +137,43 @@ export const BackgroundImage = styled.div`
 	a {
 		color: transparent;
 	}
+`
+
+export const Accordion = styled.div`
+	max-width: 50%;
+	p {
+		transition: height 250ms linear;
+		font-size: ${(props) => props.theme.font.size.h5};
+		color: ${(props) => props.theme.color.dark};
+		font-weight: ${(props) => props.theme.font.weight.strong};
+	}
+	button {
+		font-size: ${(props) => props.theme.font.size.h6};
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		color: ${(props) => props.theme.color.dark};
+	}
+	${(props) =>
+		props.className === 'open'
+			? `
+		> p{
+			visibility: visible;
+			height: auto;
+			
+		}
+	   
+	`
+			: `
+		> p{
+			visibility: hidden;
+			height: 0;
+			margin: 0;
+		}
+     `}
+	padding: ${(props) => props.theme.layout.spacing.small};
+	margin: ${(props) => props.theme.layout.spacing.singleHalf} 0;
+	border-top: ${(props) => (props.border === 'true' ? `2px solid ${props.theme.color.light}` : '')};
+	border-bottom: ${(props) => (props.border === 'true' ? `2px solid ${props.theme.color.light}` : '')};
 `
 
 export const OverLay = styled.div`
@@ -176,8 +251,6 @@ export const Button = styled.button`
 		font-family: ${props.theme.font.family.sans};
 		font-weight: ${props.theme.font.weight.strong};
 		font-size: ${props.theme.font.size.h5};
-		min-width: 8rem;
-		min-height: 2.5rem;
 		letter-spacing: 0.035em;
 		padding: 0.25rem 0.5rem;
 		text-align: center;
@@ -187,16 +260,12 @@ export const Button = styled.button`
 		margin: ${props.theme.layout.spacing.small} 0;
 		opacity: ${props.disabled ? 0.3 : 1};
 		pointer-events: ${props.disabled ? 'none' : 'auto'};
+		max-width: 200px;
+		border-radius: 2px;
 	`}
 `
 
-export const ButtonPrimary = styled(Button)`
-	${(props: WrapperProps) => `
-		&:hover {
-			background-color:${props.theme.color.dark};
-		}
-	`}
-`
+export const ButtonPrimary = styled(Button)``
 
 export const Select = styled.select`
 	${(props: WrapperProps) => `
@@ -265,4 +334,20 @@ export const Label = styled.label`
 		background: none;
 		border-radius: 0;
 	`}
+`
+
+export const ArrowDown = styled.div`
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+	top: 17vh;
+	font-size: ${(props) => props.theme.font.size.h2};
+	color: ${(props) => props.theme.color.dark};
+	${(props) => props.theme.mediaQueries.tablet} {
+		display: none;
+	}
 `

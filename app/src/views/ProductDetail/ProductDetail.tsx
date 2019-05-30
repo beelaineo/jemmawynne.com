@@ -14,15 +14,16 @@ import {
 	ProductRelated,
 } from './components'
 import { useCounter } from 'Utils/hooks'
-import { Wrapper, NormalizeDiv } from './styled'
+import { Wrapper, NormalizeDiv, SmallText, ArrowDown } from './styled'
 import { FlexContainer, FlexSix, FlexFour } from 'Components/Layout'
+import { Link } from 'react-router-dom'
 
 interface Props {
 	product: Product
 }
 
 const ProductDetailMain = ({ product }: Props) => {
-	const { count: quantity, increment, decrement } = useCounter(1, { min: 1 })
+	const { count: quantity, increment, decrement, setCount: setQuantity } = useCounter(1, { min: 1 })
 	/* get product variant utils */
 	const { currentVariant, selectVariant } = useProductVariant(product)
 
@@ -32,29 +33,33 @@ const ProductDetailMain = ({ product }: Props) => {
 
 	return (
 		<Wrapper height="full">
-			<NormalizeDiv>
-				<FlexContainer height="full">
-					<FlexSix>
-						<ProductImages currentVariant={currentVariant} product={product} />
-					</FlexSix>
-					<FlexFour container="true">
-						<ProductDetailHeader currentVariant={currentVariant} product={product} />
-						<ProductVariantSelector
-							quantity={quantity}
-							increment={increment}
-							decrement={decrement}
-							variants={variants}
-							currentVariant={currentVariant}
-							selectVariant={selectVariant}
-						/>
-						<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
-						<ProductDetailFooter product={product} />
-					</FlexFour>
-				</FlexContainer>
-				<NormalizeDiv>
-					<ProductRelated product={product} />
-				</NormalizeDiv>
-			</NormalizeDiv>
+			<FlexContainer height="full" wrap="nowrap" wrapmobile="wrap">
+				<FlexSix>
+					<ProductImages currentVariant={currentVariant} product={product} />
+				</FlexSix>
+				<FlexFour container="true" mobilealign="center">
+					<ProductDetailHeader currentVariant={currentVariant} product={product} />
+					<ProductDetailFooter product={product} />
+					<ProductVariantSelector
+						setQuantity={setQuantity}
+						quantity={quantity}
+						increment={increment}
+						decrement={decrement}
+						variants={variants}
+						currentVariant={currentVariant}
+						selectVariant={selectVariant}
+					/>
+					<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
+					<NormalizeDiv margin="small">
+						<SmallText>
+							<Link to="#">Shipping & returns</Link>
+							<button>FAQ</button>
+						</SmallText>
+					</NormalizeDiv>
+					<ArrowDown>&darr;</ArrowDown>
+				</FlexFour>
+			</FlexContainer>
+			<ProductRelated product={product} />
 		</Wrapper>
 	)
 }
