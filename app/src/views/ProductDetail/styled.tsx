@@ -58,6 +58,7 @@ export const ProductRelatedWrapper = styled.div`
   would be nice to have a prop for padding too
 */
 export const NormalizeDiv = styled.div`
+	max-width: ${(props) => (props.width === 'half' ? '50%' : '100%')};
 	${(props: WrapperProps) => `
    		margin: ${props.theme.layout.spacing.small};
 	`}

@@ -20,10 +20,9 @@ export const Nav = styled.nav`
 `
 
 export const Navigation = () => {
-	const { checkout } = useCheckout()
+	const { loading, checkout } = useCheckout()
 	const { ready, collections } = useSettings()
 	const lineItems = checkout ? unwindEdges(checkout.lineItems)[0] : []
-	if (!ready) return null
 	return (
 		<Nav>
 			<Logo src="/static/images/Logo_Small.svg" alt="Jemma Wynne Logo" />
@@ -35,7 +34,7 @@ export const Navigation = () => {
 				))}
 			</div>{' '}
 			<Placeholder>
-				<Link to="/checkout">{lineItems.length} items in your cart</Link>
+				{loading ? <Link disabled>loading</Link> : <Link to="/checkout">{lineItems.length} items in your cart</Link>}
 			</Placeholder>
 		</Nav>
 	)
