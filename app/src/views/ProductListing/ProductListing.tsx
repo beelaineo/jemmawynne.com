@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { unwindEdges } from '../../utils/graphql'
+import { FlexContainer, FlexThree } from 'Components/Layout'
+import { BackgroundImage, OverLay } from '../ProductDetail/styled'
 
 interface ProductListingProps {
 	match: {
@@ -22,13 +24,25 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 	const collection = response.data.collectionByHandle
 	const [products] = unwindEdges<Product>(collection.products)
 	return (
-		<div>
+		<React.Fragment>
 			<p>{collection.title}</p>
-			{products.map((product) => (
-				<Link key={product.id} to={`/products/${product.handle}`}>
-					{product.title}
-				</Link>
-			))}
-		</div>
+			<FlexContainer wrap="wrap">
+				{products.map((product) => {
+					let imageSrc = product.images.edges[0].node.originalSrc
+					return (
+						<FlexThree margin="none" padding="large">
+							<BackgroundImage imageSrc={imageSrc}>
+								<OverLay align="center">
+									<Link key={product.id} to={`/products/${product.handle}`}>
+										{product.title}
+									</Link>
+								</OverLay>
+							</BackgroundImage>
+						</FlexThree>
+					)
+				})}
+				;
+			</FlexContainer>
+		</React.Fragment>
 	)
 }
