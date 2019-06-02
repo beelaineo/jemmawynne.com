@@ -5,7 +5,8 @@ import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { unwindEdges } from '../../utils/graphql'
 import { FlexContainer, FlexThree } from 'Components/Layout'
-import { BackgroundImage, OverLay } from '../ProductDetail/styled'
+import { Header2, Header6 } from 'Components/Text'
+import { BackgroundImage, OverLay } from './styled'
 
 interface ProductListingProps {
 	match: {
@@ -28,15 +29,28 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 			<p>{collection.title}</p>
 			<FlexContainer wrap="wrap">
 				{products.map((product) => {
+					console.log(product)
+
 					let imageSrc = product.images.edges[0].node.originalSrc
+					let { minVariantPrice, maxVariantPrice } = product.priceRange
 					return (
-						<FlexThree margin="none" padding="large">
+						<FlexThree margin="1px" padding="large" mobileWidth="2">
 							<BackgroundImage imageSrc={imageSrc}>
-								<OverLay align="center">
-									<Link key={product.id} to={`/products/${product.handle}`}>
-										{product.title}
-									</Link>
-								</OverLay>
+								<Link key={product.id} to={`/products/${product.handle}`}>
+									<OverLay>
+										<div>
+											<Header2>{product.title}</Header2>
+											<hr />
+											{minVariantPrice.amount !== maxVariantPrice.amount ? (
+												<Header6>
+													${minVariantPrice.amount} - ${maxVariantPrice.amount}
+												</Header6>
+											) : (
+												<Header6>${maxVariantPrice.amount}</Header6>
+											)}
+										</div>
+									</OverLay>
+								</Link>
 							</BackgroundImage>
 						</FlexThree>
 					)

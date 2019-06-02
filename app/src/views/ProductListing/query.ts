@@ -22,6 +22,16 @@ export const COLLECTION_QUERY = /* GraphQL */ `
 						id
 						title
 						handle
+						priceRange {
+							minVariantPrice {
+								amount
+								currencyCode
+							}
+							maxVariantPrice {
+								amount
+								currencyCode
+							}
+						}
 						images(first: 2) {
 							edges {
 								cursor

@@ -52,7 +52,7 @@ export const Header2 = styled.h2`
 			font-size: calc(${props.theme.font.size.h2} * 0.8);
 		}
 		${props.theme.mediaQueries.phone} {
-			font-size: calc(${props.theme.font.size.h2} * 0.7);
+			/* font-size: calc(${props.theme.font.size.h2} * 0.7); */
 		}
 	`};
 `
@@ -75,6 +75,7 @@ export const Header4 = styled.h4`
 		${commonHeaderStyles(props)};
 		font-size: ${props.theme.font.size.h4};
 
+		letter-spacing: 0.05em;
 		${props.theme.mediaQueries.tablet} {
 			font-size: calc(${props.theme.font.size.h4} * 0.8);
 		}
@@ -84,6 +85,7 @@ export const Header4 = styled.h4`
 export const Header5 = styled.h5`
 	${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)};
+		letter-spacing: 0.05em;
 		font-size: ${props.theme.font.size.h5};
 	`};
 `
@@ -91,10 +93,10 @@ export const Header5 = styled.h5`
 export const Header6 = styled.h6`
 	${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)};
+		letter-spacing: 0.05em;
 		font-size: ${props.theme.font.size.h6};
 	`};
 `
-
 export const P = styled.p`
 	${({ theme, align }: TextStyleProps) => css`
 		text-align: ${align || 'inherit'};
