@@ -5,8 +5,8 @@ import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { unwindEdges } from '../../utils/graphql'
 import { FlexContainer, FlexThree } from 'Components/Layout'
-import { Header2 } from 'Components/Text'
-import { BackgroundImage, OverLay, Small } from '../ProductDetail/styled'
+import { Header2, Header6 } from 'Components/Text'
+import { BackgroundImage, OverLay } from './styled'
 
 interface ProductListingProps {
 	match: {
@@ -37,16 +37,16 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 						<FlexThree margin="1px" padding="large" mobileWidth="2">
 							<BackgroundImage imageSrc={imageSrc}>
 								<Link key={product.id} to={`/products/${product.handle}`}>
-									<OverLay align="center">
+									<OverLay>
 										<div>
 											<Header2>{product.title}</Header2>
 											<hr />
 											{minVariantPrice.amount !== maxVariantPrice.amount ? (
-												<Small>
+												<Header6>
 													${minVariantPrice.amount} - ${maxVariantPrice.amount}
-												</Small>
+												</Header6>
 											) : (
-												<Small>${maxVariantPrice.amount}</Small>
+												<Header6>${maxVariantPrice.amount}</Header6>
 											)}
 										</div>
 									</OverLay>
