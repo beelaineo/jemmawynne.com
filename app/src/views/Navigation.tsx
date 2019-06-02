@@ -1,7 +1,10 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useCheckout } from 'use-shopify'
 import { useSettings } from '../providers/SettingsProvider'
+import { Placeholder } from 'Components/Placeholder'
+import { unwindEdges } from '../utils/graphql'
 
 const Logo = styled.img`
 	width: 300px;
@@ -17,7 +20,9 @@ export const Nav = styled.nav`
 `
 
 export const Navigation = () => {
+	const { checkout } = useCheckout()
 	const { ready, collections } = useSettings()
+	const lineItems = checkout ? unwindEdges(checkout.lineItems)[0] : []
 	if (!ready) return null
 	return (
 		<Nav>
@@ -28,7 +33,10 @@ export const Navigation = () => {
 						{collection.title}
 					</Link>
 				))}
-			</div>
+			</div>{' '}
+			<Placeholder>
+				<Link to="/checkout">{lineItems.length} items in your cart</Link>
+			</Placeholder>
 		</Nav>
 	)
 }
