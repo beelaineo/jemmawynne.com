@@ -1,7 +1,7 @@
 import React from 'react'
+import { unwindEdges } from '@good-idea/unwind-edges'
 
 const ImagePreview = (props) => {
-	console.log(props)
 	return (
 		<>
 			{props.value.edges.map((imageEdge) => (
@@ -9,10 +9,9 @@ const ImagePreview = (props) => {
 			))}
 		</>
 	)
-	return null
 }
 
-const Product = {
+export const Product = {
 	title: 'Products',
 	name: 'shopifyProduct',
 	type: 'document',
@@ -119,11 +118,35 @@ const Product = {
 		select: {
 			shopifyItem: 'shopifyItem',
 			title: 'title',
+			sourceData: 'sourceData',
 		},
-		prepare: ({ shopifyItem, title }) => ({
-			title: shopifyItem ? title || shopifyItem.title : title,
-		}),
+		prepare: (props) => {
+			const { shopifyItem, title, sourceData } = props
+			const itemTitle = shopifyItem ? title || shopifyItem.title : title
+			const [images] = unwindEdges(sourceData.images)
+			const src = images[0].w100
+			return {
+				title: itemTitle,
+				media: (
+					<div style={imageWrapperStyles}>
+						<img style={imageStyles} src={src} alt={`Image for ${title}`} />
+					</div>
+				),
+			}
+		},
 	},
 }
 
-export default Product
+const imageStyles = {
+	width: '100%',
+	height: '100%',
+	'object-fit': 'cover',
+}
+
+const imageWrapperStyles = {
+	height: 'calc(100% - 4px)',
+	background: '#d0cfcf',
+	overflow: 'hidden',
+	borderRadius: '3px',
+	padding: '2px',
+}
