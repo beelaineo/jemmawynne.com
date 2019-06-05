@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom'
 import { useCheckout } from 'use-shopify'
 import { useSettings } from '../providers/SettingsProvider'
 import { Placeholder } from 'Components/Placeholder'
-import { CartSidebar, CloseButton } from 'Components/Cart'
+import { CartSidebar, CloseButton, CartNav } from 'Components/Cart'
 import { unwindEdges } from '../utils/graphql'
 import { Checkout } from './Cart/Checkout'
+import { Button } from './ProductDetail/styled'
+import { FaShoppingCart, FaTimes } from 'react-icons/fa'
 
 const Logo = styled.img`
 	width: 300px;
@@ -40,21 +42,28 @@ export const Navigation = () => {
 					</Link>
 				))}
 			</div>{' '}
-			<Placeholder>
+			<CartNav>
 				{loading ? (
-					<Link disabled>loading</Link>
+					<Button background="dark" color="light" disabled>
+						loading
+					</Button>
 				) : (
-					<button onClick={() => (flyout === 'closed' ? toggleFlyout('open') : toggleFlyout('closed'))}>
-						{lineItems.length} items in your cart
-					</button>
+					<Button
+						background="dark"
+						color="light"
+						weight="light"
+						onClick={() => (flyout === 'closed' ? toggleFlyout('open') : toggleFlyout('closed'))}
+					>
+						{lineItems.length} <FaShoppingCart />
+					</Button>
 				)}
-			</Placeholder>
-			<Placeholder>
-				<CartSidebar open={`${flyout}`}>
-					<CloseButton onClick={() => (flyout === 'closed' ? toggleFlyout('open') : toggleFlyout('closed'))}>X</CloseButton>
-					<Checkout />
-				</CartSidebar>
-			</Placeholder>
+			</CartNav>
+			<CartSidebar open={`${flyout}`}>
+				<CloseButton onClick={() => (flyout === 'closed' ? toggleFlyout('open') : toggleFlyout('closed'))}>
+					<FaTimes />
+				</CloseButton>
+				<Checkout />
+			</CartSidebar>
 		</Nav>
 	)
 }

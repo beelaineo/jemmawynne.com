@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { useCheckout } from 'use-shopify'
-import { NormalizeDiv } from '../ProductDetail/styled'
-import { FlexContainer, FlexFour, FlexHalf, FlexThree } from '../../components/Layout/Flex'
+import { NormalizeDiv, Button, QuantitySelectorCart, Label } from '../ProductDetail/styled'
+import { QuantityInput } from 'Components/QuantityInput'
+import { FlexContainer, FlexFour, FlexHalf, FlexThree, FlexSix } from '../../components/Layout/Flex'
+import { Header6, Header5, Header3 } from 'Components/Text'
+import { CartBottom } from 'Components/Cart'
 
 /**
  * Main Checkout view
@@ -12,27 +15,62 @@ export const Checkout = () => {
 	if (!checkout || checkout.lineItems.length < 1) {
 		return <NormalizeDiv>Your cart is empty</NormalizeDiv>
 	}
-
 	return (
 		<NormalizeDiv>
 			{/* <p>You have {checkout.lineItems.edges.length} items in your cart</p> */}
-			<p>Your cart</p>
-
+			<Header3 color="dark">Your cart</Header3>
 			{checkout.lineItems.edges.map((element) => {
 				let { title, variant } = element.node
 				return (
-					<FlexContainer>
+					<FlexContainer margin="small">
 						<FlexThree>
 							<img src={variant.image.originalSrc} />
 						</FlexThree>
-						<FlexHalf>
-							<h2>{title}</h2>
-							<h3>{variant.price}</h3>
-						</FlexHalf>
+						<FlexSix>
+							<Header5 weight="light" color="dark">
+								{title}
+							</Header5>
+							<FlexContainer marginVertical="small">
+								<FlexHalf>
+									<QuantitySelectorCart>
+										<button type="button">
+											<span>&#8722;</span>
+										</button>
+										<QuantityInput quantity={1} />
+										<button type="button">
+											<span>&#43;</span>
+										</button>
+									</QuantitySelectorCart>
+								</FlexHalf>
+								<FlexHalf>
+									<Header5 weight="bold" color="dark">
+										${variant.price}
+									</Header5>
+								</FlexHalf>
+							</FlexContainer>
+						</FlexSix>
 					</FlexContainer>
 				)
 			})}
-			<button>Add To Cart</button>
+
+			<CartBottom>
+				<FlexContainer>
+					<FlexHalf>
+						<Header5 transform="uppercase" weight="light" color="lightGrayBody">
+							Subtotal:
+						</Header5>
+					</FlexHalf>
+					<FlexHalf>
+						<Header5 align="right" transform="uppercase" weight="light" color="dark">
+							${checkout.paymentDue}
+						</Header5>
+					</FlexHalf>
+				</FlexContainer>
+				<Header6 align="center">Shipping and discount codes are added at checkout.</Header6>
+				<Button background="dark" color="light" weight="semi">
+					Checkout
+				</Button>
+			</CartBottom>
 		</NormalizeDiv>
 	)
 }

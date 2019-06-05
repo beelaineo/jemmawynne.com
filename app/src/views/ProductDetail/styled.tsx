@@ -67,28 +67,33 @@ export const NormalizeDiv = styled.div`
 interface ButtonProps {
 	theme: DefaultTheme
 	disabled?: boolean
+	weight?: 'xlight' | 'light' | 'book' | 'normal' | 'semi' | 'strong'
+	background?: string
+	color?: string
+	family?: string
+	transform?: string
 }
 
 export const Button = styled.button`
-	${(props: ButtonProps) => css`
-		background-color: ${props.theme.color.pink};
-		color: black;
-		cursor: ${props.disabled ? 'auto' : 'pointer'};
+	${({ theme, disabled, background, transform, weight, color, family }: ButtonProps) => css`
+		background-color: ${theme.color[background] || theme.color.pink};
+		color: ${theme.color[color] || 'inherit'};
+		cursor: ${disabled ? 'auto' : 'pointer'};
 		display: inline-block;
-		font-family: ${props.theme.font.family.sans};
-		font-weight: ${props.theme.font.weight.strong};
-		font-size: ${props.theme.font.size.h5};
+		font-family: ${theme.font.family.sans};
+		font-weight: ${theme.font.weight[weight] || theme.font.weight.strong};
+		font-size: ${theme.font.size.h5};
 		min-width: 8rem;
 		min-height: 2.5rem;
-		letter-spacing: 0.035em;
+		letter-spacing: 0.03em;
 		padding: 0.25rem 0.5rem;
 		text-align: center;
 		text-transform: uppercase;
 		transition: 0.2s;
-		padding: ${props.theme.layout.spacing.small};
-		margin: ${props.theme.layout.spacing.small};
-		opacity: ${props.disabled ? 0.3 : 1};
-		pointer-events: ${props.disabled ? 'none' : 'auto'};
+		padding: ${theme.layout.spacing.small};
+		margin: ${theme.layout.spacing.small};
+		opacity: ${disabled ? 0.3 : 1};
+		pointer-events: ${disabled ? 'none' : 'auto'};
 	`}
 `
 
@@ -144,6 +149,34 @@ export const QuantitySelector = styled.div`
 		input {
 			text-align: center;
 			width: 109px;
+		}
+	`}
+`
+
+export const QuantitySelectorCart = styled(QuantitySelector)`
+	${(props: WrapperProps) => `
+		button {
+			text-align-last: center;
+			height: 2rem;
+			border: 1px solid #f1f1f1;
+			border-radius: 0;
+			-webkit-transition: .2s;
+			transition: .2s;
+			font-size: .85rem;
+			cursor: pointer;
+			-moz-appearance: none;
+			appearance: none;
+			-webkit-appearance: none;
+			border: none;
+			background: none;
+			border-radius: 0;
+			border: 1px solid #f1f1f1;
+			padding: .5rem .5rem;
+			font-family: sans-serif;
+		}
+		input {
+			text-align: center;
+			width: 2px;
 		}
 	`}
 `

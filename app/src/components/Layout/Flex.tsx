@@ -3,12 +3,17 @@ import styled, { css, DefaultTheme } from 'styled-components'
 interface WrapperProps {
 	theme: DefaultTheme
 	active?: boolean
+	marginVertical?: string
 }
 
 export const FlexContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: ${(props) => props.wrap};
+	margin: ${(props) => props.theme.layout.spacing[props.margin]};
+	${({ theme, marginVertical }: WrapperProps) => `
+		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
+	`}
 `
 
 export const FlexHalf = styled.div`
@@ -29,5 +34,10 @@ export const FlexThree = styled.div`
 
 export const FlexFour = styled.div`
 	flex: 5;
+	margin: 10px;
+`
+
+export const FlexSix = styled.div`
+	flex: 6;
 	margin: 10px;
 `
