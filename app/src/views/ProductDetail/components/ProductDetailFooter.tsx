@@ -15,7 +15,7 @@ export const ProductDetailFooter = ({ product }: ProductDetailFooterProps) => {
 
 	return (
 		<NormalizeDiv>
-			<Accordion border="true" className={toggleOpen}>
+			<Accordion border className={toggleOpen}>
 				<button onClick={openAccordion}>+ Details</button>
 				<P>{product.description}</P>
 			</Accordion>

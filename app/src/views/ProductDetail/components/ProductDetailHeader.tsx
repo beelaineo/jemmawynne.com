@@ -14,7 +14,7 @@ export const ProductDetailHeader = ({ product, currentVariant }: ProductDetailHe
 			<Header2 weight="xlight" color="dark">
 				{product.title}
 			</Header2>
-			<Header4 weight="strong" color="dark" size="small">
+			<Header4 weight="strong" color="dark">
 				${currentVariant.price}
 			</Header4>
 		</NormalizeDiv>
