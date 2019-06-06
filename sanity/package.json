@@ -18,23 +18,23 @@
     "test": "sanity check"
   },
   "dependencies": {
-    "@sanity/base": "^0.140.12",
-    "@sanity/cli": "^0.140.14",
-    "@sanity/components": "^0.140.12",
-    "@sanity/core": "^0.140.12",
-    "@sanity/default-layout": "^0.140.14",
+    "@sanity/base": "^0.140.32",
+    "@sanity/cli": "^0.140.32",
+    "@sanity/components": "^0.140.32",
+    "@sanity/core": "^0.140.32",
+    "@sanity/default-layout": "^0.140.32",
     "@sanity/default-login": "^0.140.15",
-    "@sanity/desk-tool": "^0.140.14",
-    "@sanity/vision": "^0.140.14",
+    "@sanity/desk-tool": "^0.140.32",
+    "@sanity/vision": "^0.140.32",
     "prop-types": "^15.7",
     "react": "^16.8",
     "react-dom": "^16.8",
     "sanity-plugin-shopify-selector": "^0.0.0-development"
   },
   "devDependencies": {
-    "react-hot-loader": "^4.8.0"
+    "react-hot-loader": "^4.9.0"
   },
   "resolutions": {
-    "@sanity/base": "^0.140.12"
+    "@sanity/base": "^0.140.32"
   }
 }
