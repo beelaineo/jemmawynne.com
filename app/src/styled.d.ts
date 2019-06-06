@@ -15,5 +15,6 @@ declare module 'styled-components' {
 		}
 		color: { [key: string]: string }
 		mediaQueries: { [key: string]: string }
+		transition: { [key: string]: string }
 	}
 }
