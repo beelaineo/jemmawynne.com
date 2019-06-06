@@ -1,32 +1,48 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-interface WrapperProps {
-	theme: DefaultTheme
-	active?: boolean
-}
-
 export const Wrapper = styled.div`
-	min-height: ${(props) => (props.height === 'full' ? '100vh' : 'auto')};
-	position: ${(props) => (props.height === 'full' ? 'relative' : 'initial')};
-	top: ${(props) => (props.height === 'full' ? '-15vh' : 'initial')};
-	${({ theme }: WrapperProps) => `
+	${({ theme }) => css`
+		position: relative;
+		min-height: 100vh;
 		margin: 0 auto;
 		font-family: ${theme.font.family.sans};
 	`}
 `
 
-export const SmallText = styled.div`
-	> * {
-		${({ theme }: WrapperProps) => `
-			font-size: ${theme.font.size.h6};
-			color: ${theme.color.dark};
-			text-transform: uppercase;
-			text-decoration: none;
-			letter-spacing: 1px;
-			display: block;
-			margin: ${theme.layout.spacing.small} 0;
-		`}
-	}
+export const ProductDetails = styled.div`
+	${({ theme }) => css`
+		justify-content: space-between;
+		display: flex;
+		${theme.mediaQueries.mobile} {
+			flex-wrap: wrap;
+		}
+	`}
+`
+
+export const ProductImagesWrapper = styled.div`
+	${({ theme }) => css`
+		flex: 6;
+		max-width: 70%;
+		${theme.mediaQueries.tablet} {
+			max-width: 100%;
+		}
+	`}
+`
+
+export const ProductInfoWrapper = styled.div`
+	${({ theme }) => css`
+		flex: 4;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: ${theme.layout.spacing.large};
+		${theme.mediaQueries.tablet} {
+			flex: 1;
+			width: 100%;
+			flex-basis: 100%;
+			text-align: center;
+		}
+	`}
 `
 
 export const Nav = styled.div`
@@ -47,7 +63,7 @@ export const ProductGalleryWrapper = styled.div`
 		> img {
 			min-height: 100vh;
 			max-width: max-content;
-			${(props: WrapperProps) => `
+			${(props) => `
 				${props.theme.mediaQueries.tablet} {
 					min-height: initial;
 					max-width: 100vw;
@@ -92,7 +108,7 @@ export const ProductGalleryThumbnails = styled.div`
 `
 
 export const ProductRelatedWrapper = styled.div`
-	${(props: WrapperProps) => css`
+	${(props) => css`
 		background-color: ${props.theme.color.gray};
 		padding: ${props.theme.layout.spacing.large};
 		> div > div {
@@ -115,6 +131,14 @@ export const ProductRelatedWrapper = styled.div`
 	`}
 `
 
+export const ProductRelatedInner = styled.div`
+	${({ theme }) => css`
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-column-gap: ${theme.layout.spacing.single};
+	`}
+`
+
 /*
   NOTE: consider turning this into a "WithMargin" or "Spaced"
   component that we could use like this:
@@ -125,19 +149,28 @@ export const ProductRelatedWrapper = styled.div`
   would be nice to have a prop for padding too
 */
 export const NormalizeDiv = styled.div`
-	${(props: WrapperProps) => `
+	${(props) => `
    		 margin: ${props.theme.layout.spacing.small} 0;
 	`}
 `
 
+interface BackgroundImageProps {
+	imageSrc: string
+}
+
 export const BackgroundImage = styled.div`
-	background-image: url(${(props) => props.imageSrc || ''});
+	background-image: url(${(props: BackgroundImageProps) => props.imageSrc || ''});
 	background-size: cover;
 	background-position: center;
 	a {
 		color: transparent;
 	}
 `
+
+interface AccordionProps {
+	theme: DefaultTheme
+	border: boolean
+}
 
 export const Accordion = styled.div`
 	max-width: 50%;
@@ -172,69 +205,8 @@ export const Accordion = styled.div`
      `}
 	padding: ${(props) => props.theme.layout.spacing.small};
 	margin: ${(props) => props.theme.layout.spacing.singleHalf} 0;
-	border-top: ${(props) => (props.border === 'true' ? `2px solid ${props.theme.color.light}` : '')};
-	border-bottom: ${(props) => (props.border === 'true' ? `2px solid ${props.theme.color.light}` : '')};
-`
-
-export const OverLay = styled.div`
-	${(props: WrapperProps) => `
-   		padding: ${props.theme.layout.spacing.large};
-	`}
-	> div {
-		height: 10vh;
-		width: auto;
-		padding: 12vw 2rem 16vw;
-		text-align: ${(props) => props.align};
-		margin: 0 auto;
-		${(props: WrapperProps) => `
-			transition: all ${props.theme.layout.transition.slow} linear;
-			a {
-					color: transparent;
-					transition: all ${props.theme.layout.transition.slow} linear;
-					text-decoration: none;
-				}
-				hr {
-					width: 120px;
-					margin: 24px auto;
-					border: 1px solid transparent;
-					transition: all ${props.theme.layout.transition.slow} linear;
-				}
-				&:hover {
-					background-color: rgba(0, 0, 0, 0.8);
-					color: white;
-					a {
-						color: white;
-					}
-					hr {
-						border: 1px solid white;
-					}
-				}
-			${props.theme.mediaQueries.tablet} {
-				padding: 10vw 2rem 25vw;
-				&:hover {
-					background-color: transparent;
-					color: white;
-					a {
-						color: white;
-					}
-					hr {
-						border: 1px solid white;
-					}
-				}
-			  }
-			  
-		`}
-	}
-`
-
-export const Small = styled.small`
-	${(props: WrapperProps) => `
-		font-size: ${props.theme.font.size.h6};
-		font-family: ${props.theme.font.family.sans};
-		font-weight: ${props.theme.font.weight.strong};
-		letter-spacing: 1px;
-    	line-height: 1.2;
-	`}
+	border-top: ${(props: AccordionProps) => (props.border === true ? `2px solid ${props.theme.color.light}` : '')};
+	border-bottom: ${(props: AccordionProps) => (props.border === true ? `2px solid ${props.theme.color.light}` : '')};
 `
 
 interface ButtonProps {
@@ -268,14 +240,37 @@ export const Button = styled.button`
 export const ButtonPrimary = styled(Button)``
 
 export const Select = styled.select`
-	${(props: WrapperProps) => `
+	text-align-last: center;
+	height: 50px;
+	border: 1px solid #f1f1f1;
+	border-radius: 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+	font-size: 1rem;
+	cursor: pointer;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-appearance: none;
+	border: none;
+	background: none;
+	border-radius: 0;
+	border: 1px solid #f1f1f1;
+	padding: 1rem 2rem;
+	font-family: sans-serif;
+	option {
+		font-family: sans-serif;
+	}
+`
+
+export const QuantitySelector = styled.div`
+	button {
 		text-align-last: center;
 		height: 50px;
 		border: 1px solid #f1f1f1;
 		border-radius: 0;
-		-webkit-transition: .2s;
-		transition: .2s;
-		font-size: 1rem;
+		-webkit-transition: 0.2s;
+		transition: 0.2s;
+		font-size: 0.85rem;
 		cursor: pointer;
 		-moz-appearance: none;
 		appearance: none;
@@ -284,45 +279,17 @@ export const Select = styled.select`
 		background: none;
 		border-radius: 0;
 		border: 1px solid #f1f1f1;
-		padding: 1rem 2rem;
+		padding: 0.5rem 1.2rem;
 		font-family: sans-serif;
-		option {
-			font-family: sans-serif;
-
-		}
-	`}
-`
-
-export const QuantitySelector = styled.div`
-	${(props: WrapperProps) => `
-		button {
-			text-align-last: center;
-			height: 50px;
-			border: 1px solid #f1f1f1;
-			border-radius: 0;
-			-webkit-transition: .2s;
-			transition: .2s;
-			font-size: .85rem;
-			cursor: pointer;
-			-moz-appearance: none;
-			appearance: none;
-			-webkit-appearance: none;
-			border: none;
-			background: none;
-			border-radius: 0;
-			border: 1px solid #f1f1f1;
-			padding: .5rem 1.2rem;
-			font-family: sans-serif;
-		}
-		input {
-			text-align: center;
-			width: 109px;
-		}
-	`}
+	}
+	input {
+		text-align: center;
+		width: 109px;
+	}
 `
 
 export const Label = styled.label`
-	${(props: WrapperProps) => `
+	${(props) => `
 		color: #777;
 		color:${props.theme.color.lightGrayBody};
 		display: block;

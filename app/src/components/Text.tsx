@@ -73,9 +73,9 @@ export const Header3 = styled.h3`
 export const Header4 = styled.h4`
 	${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)};
-		font-size: ${props.size !== 'small' ? props.theme.font.size.h4 : props.theme.font.size.h5};
-		font-weight: ${props.theme.font.weight[props.weight]};
-		margin: ${props.theme.layout.spacing.smallHalf};
+		font-size: ${props.theme.font.size.h4};
+		letter-spacing: 0.05em;
+
 		${props.theme.mediaQueries.tablet} {
 			font-size: calc(${props.theme.font.size.h4} * 0.8);
 		}
@@ -85,6 +85,7 @@ export const Header4 = styled.h4`
 export const Header5 = styled.h5`
 	${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)};
+		letter-spacing: 0.05em;
 		font-size: ${props.theme.font.size.h5};
 	`};
 `
@@ -92,10 +93,10 @@ export const Header5 = styled.h5`
 export const Header6 = styled.h6`
 	${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)};
+		letter-spacing: 0.05em;
 		font-size: ${props.theme.font.size.h6};
 	`};
 `
-
 export const P = styled.p`
 	${({ theme, align }: TextStyleProps) => css`
 		text-align: ${align || 'inherit'};

@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { unwindEdges } from '../../utils/graphql'
-import { FlexContainer, FlexThree } from 'Components/Layout'
-import { Header2 } from 'Components/Text'
-import { BackgroundImage, OverLay, Small } from '../ProductDetail/styled'
+import { Header2, Header6 } from 'Components/Text'
+import { BackgroundImage, OverLay, ProductGrid } from './styled'
 
 interface ProductListingProps {
 	match: {
@@ -26,34 +25,31 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 	return (
 		<React.Fragment>
 			<p>{collection.title}</p>
-			<FlexContainer wrap="wrap">
+			<ProductGrid>
 				{products.map((product) => {
 					let imageSrc = product.images.edges[0].node.originalSrc
 					let { minVariantPrice, maxVariantPrice } = product.priceRange
 					return (
-						<FlexThree margin="1px" padding="large" mobileWidth="2">
-							<BackgroundImage imageSrc={imageSrc}>
-								<Link key={product.id} to={`/products/${product.handle}`}>
-									<OverLay align="center">
-										<div>
-											<Header2>{product.title}</Header2>
-											<hr />
-											{minVariantPrice.amount !== maxVariantPrice.amount ? (
-												<Small>
-													${minVariantPrice.amount} - ${maxVariantPrice.amount}
-												</Small>
-											) : (
-												<Small>${maxVariantPrice.amount}</Small>
-											)}
-										</div>
-									</OverLay>
-								</Link>
-							</BackgroundImage>
-						</FlexThree>
+						<BackgroundImage key={product.id} imageSrc={imageSrc}>
+							<Link to={`/products/${product.handle}`}>
+								<OverLay>
+									<div>
+										<Header2>{product.title}</Header2>
+										<hr />
+										{minVariantPrice.amount !== maxVariantPrice.amount ? (
+											<Header6>
+												${minVariantPrice.amount} - ${maxVariantPrice.amount}
+											</Header6>
+										) : (
+											<Header6>${maxVariantPrice.amount}</Header6>
+										)}
+									</div>
+								</OverLay>
+							</Link>
+						</BackgroundImage>
 					)
 				})}
-				;
-			</FlexContainer>
+			</ProductGrid>
 		</React.Fragment>
 	)
 }

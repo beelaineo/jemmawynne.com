@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
+import { Link } from 'react-router-dom'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
 import { useProductVariant, useCheckout, Product } from 'use-shopify'
 import { unwindEdges } from '../../utils/graphql'
@@ -14,9 +15,8 @@ import {
 	ProductRelated,
 } from './components'
 import { useCounter } from 'Utils/hooks'
-import { Wrapper, NormalizeDiv, SmallText, ArrowDown } from './styled'
-import { FlexContainer, FlexSix, FlexFour } from 'Components/Layout'
-import { Link } from 'react-router-dom'
+import { Wrapper, ProductDetails, ProductInfoWrapper, ProductImagesWrapper, NormalizeDiv, ArrowDown } from './styled'
+import { Header6 } from 'Components/Text'
 
 interface Props {
 	product: Product
@@ -32,12 +32,12 @@ const ProductDetailMain = ({ product }: Props) => {
 	const [variants] = unwindEdges(product.variants)
 
 	return (
-		<Wrapper height="full">
-			<FlexContainer height="full" wrap="nowrap" wrapmobile="wrap">
-				<FlexSix>
+		<Wrapper>
+			<ProductDetails>
+				<ProductImagesWrapper>
 					<ProductImages currentVariant={currentVariant} product={product} />
-				</FlexSix>
-				<FlexFour container="true" mobilealign="center">
+				</ProductImagesWrapper>
+				<ProductInfoWrapper>
 					<ProductDetailHeader currentVariant={currentVariant} product={product} />
 					<ProductDetailFooter product={product} />
 					<ProductVariantSelector
@@ -50,15 +50,15 @@ const ProductDetailMain = ({ product }: Props) => {
 						selectVariant={selectVariant}
 					/>
 					<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
-					<NormalizeDiv margin="small">
-						<SmallText>
+					<NormalizeDiv>
+						<Header6 color="dark" transform="uppercase">
 							<Link to="#">Shipping & returns</Link>
 							<button>FAQ</button>
-						</SmallText>
+						</Header6>
 					</NormalizeDiv>
 					<ArrowDown>&darr;</ArrowDown>
-				</FlexFour>
-			</FlexContainer>
+				</ProductInfoWrapper>
+			</ProductDetails>
 			<ProductRelated product={product} />
 		</Wrapper>
 	)
