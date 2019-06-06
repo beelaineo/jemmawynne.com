@@ -76,6 +76,7 @@ export const Header4 = styled.h4`
 		font-size: ${props.theme.font.size.h4};
 		letter-spacing: 0.05em;
 
+		letter-spacing: 0.05em;
 		${props.theme.mediaQueries.tablet} {
 			font-size: calc(${props.theme.font.size.h4} * 0.8);
 		}

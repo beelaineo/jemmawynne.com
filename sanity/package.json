@@ -27,14 +27,24 @@
     "@sanity/desk-tool": "^0.140.32",
     "@sanity/vision": "^0.140.32",
     "prop-types": "^15.7",
-    "react": "^16.8",
-    "react-dom": "^16.8",
-    "sanity-plugin-shopify-selector": "^0.0.0-development"
+    "react": "16.8",
+    "react-dom": "16.8",
+    "react-icons": "^3.7.0"
   },
   "devDependencies": {
-    "react-hot-loader": "^4.9.0"
+    "@good-idea/unwind-edges": "^1.0.3",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "ramda": "^0.26.1",
+    "react-hot-loader": "^4.8.8"
   },
   "resolutions": {
-    "@sanity/base": "^0.140.32"
+    "@sanity/base": "^0.140.12",
+    "react-hot-loader": "^4.8.0:"
   }
 }
