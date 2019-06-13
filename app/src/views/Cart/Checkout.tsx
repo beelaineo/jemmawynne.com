@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useCheckout } from 'use-shopify'
-import { NormalizeDiv, Button, QuantitySelectorCart, Label } from '../ProductDetail/styled'
+import { NormalizeDiv, Button, QuantitySelectorCart } from '../ProductDetail/styled'
 import { QuantityInput } from 'Components/QuantityInput'
-import { FlexContainer, FlexFour, FlexHalf, FlexThree, FlexSix } from '../../components/Layout/Flex'
+import { FlexContainer, FlexHalf, FlexThree, FlexSix } from '../../components/Layout/Flex'
 import { Header6, Header5, Header3 } from 'Components/Text'
 import { CartBottom } from 'Components/Cart'
 
@@ -22,7 +22,7 @@ export const Checkout = () => {
 			{checkout.lineItems.edges.map((element) => {
 				let { title, variant } = element.node
 				return (
-					<FlexContainer margin="small">
+					<FlexContainer key={variant.id} margin="small">
 						<FlexThree>
 							<img src={variant.image.originalSrc} />
 						</FlexThree>
@@ -43,7 +43,7 @@ export const Checkout = () => {
 									</QuantitySelectorCart>
 								</FlexHalf>
 								<FlexHalf>
-									<Header5 weight="bold" color="dark">
+									<Header5 weight="strong" color="dark">
 										${variant.price}
 									</Header5>
 								</FlexHalf>

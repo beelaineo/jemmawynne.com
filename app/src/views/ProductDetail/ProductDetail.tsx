@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
+import { Link } from 'react-router-dom'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
 import { useProductVariant, useCheckout, Product } from 'use-shopify'
 import { unwindEdges } from '../../utils/graphql'
@@ -14,8 +15,8 @@ import {
 	ProductRelated,
 } from './components'
 import { useCounter } from 'Utils/hooks'
-import { Wrapper, NormalizeDiv } from './styled'
-import { FlexContainer, FlexHalf } from 'Components/Layout'
+import { Wrapper, ProductDetails, ProductInfoWrapper, ProductImagesWrapper, NormalizeDiv, ArrowDown } from './styled'
+import { Header6 } from 'Components/Text'
 
 interface Props {
 	product: Product
@@ -32,30 +33,33 @@ const ProductDetailMain = ({ product }: Props) => {
 
 	return (
 		<Wrapper>
-			<NormalizeDiv>
-				<FlexContainer>
-					<FlexHalf>
-						<ProductImages currentVariant={currentVariant} product={product} />
-					</FlexHalf>
-					<FlexHalf>
-						<ProductDetailHeader currentVariant={currentVariant} product={product} />
-						<ProductVariantSelector
-							setQuantity={setQuantity}
-							quantity={quantity}
-							increment={increment}
-							decrement={decrement}
-							variants={variants}
-							currentVariant={currentVariant}
-							selectVariant={selectVariant}
-						/>
-						<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
-						<ProductDetailFooter product={product} />
-					</FlexHalf>
-				</FlexContainer>
-				<NormalizeDiv>
-					<ProductRelated product={product} />
-				</NormalizeDiv>
-			</NormalizeDiv>
+			<ProductDetails>
+				<ProductImagesWrapper>
+					<ProductImages currentVariant={currentVariant} product={product} />
+				</ProductImagesWrapper>
+				<ProductInfoWrapper>
+					<ProductDetailHeader currentVariant={currentVariant} product={product} />
+					<ProductDetailFooter product={product} />
+					<ProductVariantSelector
+						setQuantity={setQuantity}
+						quantity={quantity}
+						increment={increment}
+						decrement={decrement}
+						variants={variants}
+						currentVariant={currentVariant}
+						selectVariant={selectVariant}
+					/>
+					<BuyButton addItemToCheckout={addItemToCheckout} currentVariant={currentVariant} quantity={quantity} />
+					<NormalizeDiv>
+						<Header6 color="dark" transform="uppercase">
+							<Link to="#">Shipping & returns</Link>
+							<button>FAQ</button>
+						</Header6>
+					</NormalizeDiv>
+					<ArrowDown>&darr;</ArrowDown>
+				</ProductInfoWrapper>
+			</ProductDetails>
+			<ProductRelated product={product} />
 		</Wrapper>
 	)
 }

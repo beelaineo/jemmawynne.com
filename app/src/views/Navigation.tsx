@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCheckout } from 'use-shopify'
 import { useSettings } from '../providers/SettingsProvider'
-import { Placeholder } from 'Components/Placeholder'
 import { CartSidebar, CloseButton, CartNav } from 'Components/Cart'
 import { unwindEdges } from '../utils/graphql'
 import { Checkout } from './Cart/Checkout'
@@ -16,6 +15,8 @@ const Logo = styled.img`
 `
 
 export const Nav = styled.nav`
+	position: relative;
+	z-index: 9999;
 	${({ theme }) => css`
 		padding: ${theme.layout.spacing.single};
 		display: flex;
@@ -30,7 +31,11 @@ export const Navigation = () => {
 	const lineItems = checkout ? unwindEdges(checkout.lineItems)[0] : []
 
 	// Create a flyout for the cart
-	const [flyout, toggleFlyout] = useState('closed')
+	const [open, setOpen] = useState(false)
+
+	const toggleFlyout = () => {
+		setOpen(!open)
+	}
 
 	return (
 		<Nav>
@@ -48,18 +53,13 @@ export const Navigation = () => {
 						loading
 					</Button>
 				) : (
-					<Button
-						background="dark"
-						color="light"
-						weight="light"
-						onClick={() => (flyout === 'closed' ? toggleFlyout('open') : toggleFlyout('closed'))}
-					>
+					<Button background="dark" color="light" weight="light" onClick={toggleFlyout}>
 						{lineItems.length} <FaShoppingCart />
 					</Button>
 				)}
 			</CartNav>
-			<CartSidebar open={`${flyout}`}>
-				<CloseButton onClick={() => (flyout === 'closed' ? toggleFlyout('open') : toggleFlyout('closed'))}>
+			<CartSidebar open={open}>
+				<CloseButton onClick={toggleFlyout}>
 					<FaTimes />
 				</CloseButton>
 				<Checkout />

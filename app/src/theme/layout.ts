@@ -25,8 +25,3 @@ export const columns = {
 	wide: '900px',
 	xWide: '1100px',
 }
-
-export const transition = {
-	fast: '150ms',
-	slow: '250ms',
-}

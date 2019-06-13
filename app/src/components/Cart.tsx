@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 
 interface CartSidebarProps {
 	theme: DefaultTheme
@@ -8,7 +8,7 @@ interface CartSidebarProps {
 export const CartSidebar = styled.div`
 	${(props: CartSidebarProps) => `
         position: fixed;
-        right:  ${props.open === 'open' ? '0px' : '-360px'};
+        right:  ${props.open ? '0px' : '-360px'};
         top: 0;
         max-width: 340px;
         max-height: 100vh;

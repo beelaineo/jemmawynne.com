@@ -24,7 +24,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 			</MainImageWrapper>
 			{images.length > 1 && (
 				<Thumbnails data-testid="thumbnails">
-					{images.map((image) => (
+					{images.map((image, i) => (
 						<button key={image.id} onClick={changeImage(image.id)}>
 							<Image image={image} />
 						</button>
