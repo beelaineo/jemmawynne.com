@@ -1,5 +1,6 @@
 // @flow
 
+export const white = 'rgb(255, 255, 255)'
 export const dark = 'rgb(0, 0, 0)'
 export const light = 'rgb(240, 240, 240)'
 export const gray = '#ebebeb'

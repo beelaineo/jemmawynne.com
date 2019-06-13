@@ -15,6 +15,7 @@ export const GlobalStyles = createGlobalStyle`
 	body {
 		font-family: ${({ theme }) => theme.font.family.serif};
 		color: ${semiDark};
+		overflow-x: hidden;
 	}
 
 	button, input, select, option, textarea {

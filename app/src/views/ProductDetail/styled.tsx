@@ -148,9 +148,16 @@ export const ProductRelatedInner = styled.div`
 
   would be nice to have a prop for padding too
 */
+
+interface NormalizeDivProps {
+	theme: DefaultTheme
+	width?: string
+}
+
 export const NormalizeDiv = styled.div`
+	max-width: ${(props: NormalizeDivProps) => (props.width === 'half' ? '50%' : '100%')};
 	${(props) => `
-   		 margin: ${props.theme.layout.spacing.small} 0;
+   		margin: ${props.theme.layout.spacing.small};
 	`}
 `
 
@@ -212,6 +219,11 @@ export const Accordion = styled.div`
 interface ButtonProps {
 	theme: DefaultTheme
 	disabled?: boolean
+	weight?: 'xlight' | 'light' | 'book' | 'normal' | 'semi' | 'strong'
+	background?: string
+	color?: string
+	family?: string
+	transform?: string
 }
 
 export const Button = styled.button`
@@ -286,6 +298,34 @@ export const QuantitySelector = styled.div`
 		text-align: center;
 		width: 109px;
 	}
+`
+
+export const QuantitySelectorCart = styled(QuantitySelector)`
+	${() => `
+		button {
+			text-align-last: center;
+			height: 2rem;
+			border: 1px solid #f1f1f1;
+			border-radius: 0;
+			-webkit-transition: .2s;
+			transition: .2s;
+			font-size: .85rem;
+			cursor: pointer;
+			-moz-appearance: none;
+			appearance: none;
+			-webkit-appearance: none;
+			border: none;
+			background: none;
+			border-radius: 0;
+			border: 1px solid #f1f1f1;
+			padding: .5rem .5rem;
+			font-family: sans-serif;
+		}
+		input {
+			text-align: center;
+			width: 2px;
+		}
+	`}
 `
 
 export const Label = styled.label`
