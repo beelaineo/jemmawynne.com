@@ -50,15 +50,36 @@ export const OverLay = styled.div`
 		`}
 	}
 `
+export const ProductInfo = styled.div`
+	${({ theme }) => css`
+		color: black;
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+		padding: ${theme.layout.spacing.single} 0;
+		h6 {
+			text-align: right;
+		}
+	`}
+`
 
 export const ProductGrid = styled.div`
 	${({ theme }) => css`
 		margin: 0 auto;
-		max-width: 900px;
+		max-width: initial;
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 32% 32% 32%;
+		justify-content: space-evenly;
 		grid-column-gap: ${theme.layout.spacing.single};
 		grid-row-gap: ${theme.layout.spacing.single};
+		> a {
+			text-decoration: none;
+		}
+		${theme.mediaQueries.tablet} {
+			grid-template-columns: 1fr 1fr;
+		}
+		${theme.mediaQueries.mobile} {
+			grid-template-columns: 1fr;
+		}
 	`}
 `
 
@@ -71,6 +92,7 @@ export const BackgroundImage = styled.div`
 	background-image: url(${(props: BackgroundImageProps) => props.imageSrc || ''});
 	background-size: cover;
 	background-position: center;
+	padding: 45%;
 	a {
 		color: transparent;
 	}
