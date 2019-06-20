@@ -53,11 +53,11 @@ export default () =>
 			// 	),
 
 			// Pages
-			// S.listItem()
-			// 	.id('pages')
-			// 	.title('Pages')
-			// 	.icon(TiDocument)
-			// 	.child(S.documentTypeList('page')),
+			S.listItem()
+				.id('pages')
+				.title('Pages')
+				.icon(TiDocument)
+				.child(S.documentTypeList('page')),
 
 			// S.listItem()
 			// 	.title('Site Settings')

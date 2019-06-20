@@ -17,4 +17,10 @@ export const Menu = {
 			],
 		},
 	],
+	preview: {
+		select: {},
+		prepare: () => ({
+			title: 'Nav menu',
+		}),
+	},
 }
