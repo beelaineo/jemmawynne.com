@@ -120,41 +120,9 @@ class PageLinkPreview extends React.Component {
 export const pageLink = {
 	title: 'Link Block',
 	name: 'pageLink',
-	type: 'object',
-	fields: [
-		{
-			title: 'Link',
-			name: 'link',
-			type: 'array',
-			description: 'Link to a Page, Product, or Collection',
-			of: [
-				{
-					type: 'reference',
-					name: 'page',
-					title: 'Page',
-					to: [
-						{ type: 'shopifyProduct' },
-						// { type: 'shopifyCollection' }
-					],
-				},
-			],
-			validation: (Rule) => Rule.max(1).required(),
-		},
-		{
-			type: 'string',
-			name: 'label',
-			title: 'Alternate Title',
-			description: '(optional) If empty, the title of the linked collection, product, or page will be used.',
-		},
-		// {
-		// 	type: 'array',
-		// 	of: [{ type: 'imageWithAltText' }],
-		// 	name: 'images',
-		// 	title: 'Alternate Images',
-		// 	description: '(optional) If empty, the image of the linked collection, or product will be used. ',
-		// 	validation: (Rule) => Rule.max(2),
-		// },
-	],
+	description: 'Link to a Page, Product, or Collection',
+	type: 'reference',
+	to: [{ type: 'shopifyProduct' }, { type: 'shopifyCollection' }],
 	preview: {
 		// select: {
 		// 	link: 'link',

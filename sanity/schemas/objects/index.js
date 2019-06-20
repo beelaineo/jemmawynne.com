@@ -1,2 +1,5 @@
 export * from './pageLink'
 export * from './subMenu'
+export * from './imageWithAltText'
+export * from './contentBlocks'
+export * from './colorPicker'
