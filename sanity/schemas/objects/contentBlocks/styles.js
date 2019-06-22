@@ -2,7 +2,7 @@ export const wrapperStyles = {
 	display: 'flex',
 	justifyContent: 'flex-start',
 	alignItems: 'center',
-	maxWidth: '100%',
+	maxWidth: 'calc(100% - 3rem)',
 }
 
 export const imageStyles = {

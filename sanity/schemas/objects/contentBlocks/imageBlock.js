@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { BlockPreview } from './BlockPreview'
+import { link } from '../linkWorkaround'
 import {
 	getImageThumbnail,
 	getReferencedDocument,
@@ -7,6 +8,7 @@ import {
 } from '../../utils'
 
 const noop = () => undefined
+
 const getPreviewValues = async (props) => {
 	const { title, caption, images, link } = props
 	const titles = [title, caption].filter(Boolean)
@@ -37,7 +39,7 @@ const getPreviewValues = async (props) => {
 }
 export const imageBlock = {
 	name: 'imageBlock',
-	label: 'Image Block',
+	title: 'Image Block',
 	type: 'object',
 	fields: [
 		{
@@ -47,7 +49,7 @@ export const imageBlock = {
 			of: [{ type: 'imageWithAltText' }],
 			validation: (Rule) => {
 				// TODO return error when CTA does not link to product or collection
-				return Rule.max(2)
+				return Rule.required().max(2)
 			},
 			description:
 				'Defaults to product or collection image if empty. Add a second image for a hover effect',
@@ -65,9 +67,8 @@ export const imageBlock = {
 			validation: (Rule) => Rule.max(150),
 		},
 		{
+			...link,
 			name: 'link',
-			type: 'pageLink',
-			label: 'Link',
 		},
 	],
 	preview: {

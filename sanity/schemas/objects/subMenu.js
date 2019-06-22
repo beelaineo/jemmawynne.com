@@ -1,4 +1,54 @@
+import * as React from 'react'
+import { groupBy, prop } from 'ramda'
+import { BlockPreview } from './contentBlocks/BlockPreview'
 import { IoIosListBox } from 'react-icons/io'
+import { link } from './linkWorkaround'
+import { getReferencedDocument, getShopifyThumbnail } from '../utils'
+
+const getPreviewValues = async ({ label, link }) => {
+	if (!link.length) return { title: 'Missing Link' }
+	const linkedDoc = await getReferencedDocument(link[0]._ref)
+
+	const shopifyThumbnail =
+		linkedDoc &&
+		(linkedDoc._type === 'shopifyProduct' ||
+			linkedDoc._type === 'shopifyCollection')
+			? getShopifyThumbnail(linkedDoc)
+			: undefined
+
+	return {
+		title: label || linkedDoc.title,
+		subtitles: [linkedDoc ? `🔗${linkedDoc.title}` : null].filter(Boolean),
+		src: shopifyThumbnail,
+	}
+}
+
+export const MenuLink = {
+	name: 'menuLink',
+	type: 'object',
+	title: 'Nav Link',
+	fields: [
+		{
+			title: 'Label',
+			name: 'label',
+			type: 'string',
+		},
+		{
+			...link,
+			name: 'link',
+		},
+	],
+	preview: {
+		select: {
+			link: 'link',
+			label: 'label',
+		},
+		prepare: (val) => val,
+		component: (props) => (
+			<BlockPreview {...props} getPreviewValues={getPreviewValues} />
+		),
+	},
+}
 
 export const linkGroup = {
 	title: 'Link Group',
@@ -15,7 +65,7 @@ export const linkGroup = {
 			name: 'links',
 			type: 'array',
 			validation: (Rule) => Rule.required().max(12),
-			of: [{ type: 'pageLink' }],
+			of: [{ type: 'menuLink' }],
 		},
 	],
 }
@@ -42,9 +92,32 @@ export const subMenu = {
 	preview: {
 		select: {
 			title: 'title',
+			columns: 'columns',
 		},
-		prepare: ({ title }) => ({
-			title: `Menu: ${title}`,
-		}),
+		prepare: ({ title, columns }) => {
+			const { linkGroup: linkGroups, imageBlock: imageBlocks } = groupBy(
+				prop('_type'),
+				columns || {},
+			)
+
+			const subtitle = [
+				linkGroups && linkGroups.length
+					? `${linkGroups.length} Link Group${
+							linkGroups.length === 1 ? '' : 's'
+					  }`
+					: undefined,
+				imageBlocks && imageBlocks.length
+					? `${imageBlocks.length} Image Link${
+							imageBlocks.length === 1 ? '' : 's'
+					  }`
+					: undefined,
+			]
+				.filter(Boolean)
+				.join(' | ')
+			return {
+				title,
+				subtitle,
+			}
+		},
 	},
 }

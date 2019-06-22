@@ -7,14 +7,21 @@
 		"projectId": "caazz4uw",
 		"dataset": "development"
 	},
+	"env": {
+		"development": {
+			"api": {
+				"dataset": "development"
+			}
+		}
+	},
 	"plugins": [
 		"@sanity/base",
 		"@sanity/components",
 		"@sanity/default-layout",
 		"@sanity/default-login",
-		"@sanity/vision",
 		"@sanity/desk-tool",
-		"@sane-shopify/sanity-plugin"
+		"@sane-shopify/sanity-plugin",
+		"@sanity/vision"
 	],
 	"parts": [
 		{

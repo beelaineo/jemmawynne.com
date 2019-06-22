@@ -1,8 +1,22 @@
-import { TextBlockPreview } from './TextBlockPreview'
+import * as React from 'react'
+import { BlockPreview } from './BlockPreview'
+import { blocksToPlainText } from '../../utils'
+
+const getPreviewValues = async (values) => {
+	const { title, body, cta } = values
+
+	const bodyText = blocksToPlainText(body)
+	const titles = [title, bodyText].filter(Boolean)
+
+	return {
+		title: titles.length ? titles[0] : 'Untitled Block',
+		subtitles: [titles.length >= 2 ? titles[1] : undefined].filter(Boolean),
+	}
+}
 
 export const contentItem = {
 	name: 'textBlock',
-	label: 'Text Block',
+	title: 'Text Block',
 	type: 'object',
 	fields: [
 		{
@@ -34,7 +48,7 @@ export const contentItem = {
 		{
 			name: 'cta',
 			title: 'Link / CTA',
-			type: 'pageLink',
+			type: 'cta',
 		},
 	],
 	preview: {
@@ -43,6 +57,8 @@ export const contentItem = {
 			body: 'body',
 			cta: 'cta',
 		},
-		component: TextBlockPreview,
+		component: (props) => (
+			<BlockPreview {...props} getPreviewValues={getPreviewValues} />
+		),
 	},
 }

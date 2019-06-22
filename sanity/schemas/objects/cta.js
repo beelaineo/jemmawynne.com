@@ -1,6 +1,8 @@
+import { link } from './linkWorkaround'
+
 export const cta = {
 	name: 'cta',
-	label: 'CTA Button',
+	title: 'CTA Button',
 	type: 'object',
 	fields: [
 		{
@@ -11,11 +13,8 @@ export const cta = {
 		},
 
 		{
+			...link,
 			name: 'link',
-			type: 'array',
-			label: 'Link',
-			of: [{ type: 'pageLink' }],
-			validation: (Rule) => Rule.required().max(1),
 		},
 	],
 }
