@@ -19,7 +19,7 @@
 	"workspaces": [
 		"app",
 		"sanity",
-		"use-shopify"
+		"proxy"
 	],
 	"husky": {
 		"hooks": {

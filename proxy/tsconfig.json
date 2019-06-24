@@ -1,0 +1,52 @@
+{
+	"compilerOptions": {
+		// "module": "es6",
+		"declaration": true,
+		"noImplicitAny": false,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"removeComments": true,
+		"resolveJsonModule": true,
+		"noLib": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"target": "es6",
+		"sourceMap": true,
+		"jsx": "react",
+		// "rootDir": ".",
+		"lib": ["es6", "es7", "dom"],
+		"outDir": "./dist",
+		"esModuleInterop": true,
+		"types": ["node", "jest"],
+
+		/*
+		TODO: Tighten these up once development is rolling
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true
+		*/
+
+		// "typeRoots": ["./node_modules/@types"],
+
+		"baseUrl": "src",
+		"paths": {
+			"test-utils/*": ["test-utils/*"],
+			"Components/*": ["components/*"],
+			"Views/*": ["views/*"],
+			"Types/*": ["types/*"],
+			"Utils/*": ["utils/*"],
+			"Providers/*": [".providers/*"]
+		}
+	},
+	"include": ["./src"],
+	"exclude": [
+		"node_modules",
+		"../node_modules/",
+		"**/*.spec.ts",
+		"**/*.test.ts",
+		"**/__tests__/*",
+		"dist",
+		"build"
+	]
+}
