@@ -8,7 +8,7 @@
     "build": "rimraf dist && tsc",
     "dev": "tsc -w",
     "start": "node ./dist/server.js",
-    "deploy": "yarn build && now target --production"
+    "deploy": "yarn build && now --target production"
   },
   "dependencies": {
     "apollo-link-http": "^1.5.15",
