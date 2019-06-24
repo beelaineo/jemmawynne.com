@@ -1,9 +1,9 @@
 import * as React from 'react'
+import { unwindEdges } from '@good-idea/unwind-edges'
 import { useQuery } from 'urql'
 import { Link } from 'react-router-dom'
 import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
-import { unwindEdges } from '../../utils/graphql'
 import { Header2, Header6 } from 'Components/Text'
 import { BackgroundImage, OverLay, ProductGrid, ProductInfo } from './styled'
 
@@ -18,7 +18,10 @@ interface ProductListingProps {
 export const ProductListing = ({ match }: ProductListingProps) => {
 	const { handle } = match.params
 	const variables = { handle }
-	const [response] = useQuery<CollectionResult>({ query: COLLECTION_QUERY, variables })
+	const [response] = useQuery<CollectionResult>({
+		query: COLLECTION_QUERY,
+		variables,
+	})
 	if (response.fetching || !response.data) return <p>Loading..</p>
 	const collection = response.data.collectionByHandle
 	const [products] = unwindEdges<Product>(collection.products)
@@ -27,7 +30,8 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 			<p>{collection.title}</p>
 			<ProductGrid>
 				{products.map((product) => {
-					let imageSrc = product.images.edges[0].node.originalSrc
+					const [images] = unwindEdges(product.images)
+					const imageSrc = images.length ? images[0].originalSrc : undefined
 					let { minVariantPrice, maxVariantPrice } = product.priceRange
 					return (
 						<Link to={`/products/${product.handle}`}>

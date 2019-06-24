@@ -991,6 +991,11 @@
   resolved "https://registry.yarnpkg.com/@good-idea/unwind-edges/-/unwind-edges-1.1.1.tgz#99c422a4d9e9a694b3235702fa95470ae7cc6c39"
   integrity sha512-uOu8sZmIvb3u0pCBxn6fXyA0cqGXy9QwaBoZzOzX1iB/l132fca1CZhx3GCc9oOK/CdgraCRPapgWFSXthJ0jg==
 
+"@good-idea/unwind-edges@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@good-idea/unwind-edges/-/unwind-edges-1.1.3.tgz#a2ab0983e058f564f6f3ac8c945c68268108a664"
+  integrity sha512-ByjYtF3KfWZzGtXjKhoeFwWVGFAwxPetAxfhRLOdy2mWeVVOEOOfR61i5KvlRH069HlPie1D3GDnYecquNq7aw==
+
 "@hot-loader/react-dom@^16.8.6":
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/@hot-loader/react-dom/-/react-dom-16.8.6.tgz#7923ba27db1563a7cc48d4e0b2879a140df461ea"
@@ -16044,12 +16049,13 @@ urql@^1.0.5:
     prop-types "^15.6.0"
     wonka "^2.0.1"
 
-use-shopify@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/use-shopify/-/use-shopify-0.3.2.tgz#d2f7586ade6e88e39d03011ec6ee754198f960da"
-  integrity sha512-Wiyutel97vdGjhE7NaPwUeF5g2iVJwBE0YCqM+S9vzU0LKbrwZqrheqap0QHDmPkarzPV2OkETnwxNFPSwSVSQ==
+use-shopify@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/use-shopify/-/use-shopify-0.3.5.tgz#e7ef4e3f6a7a17bd5e5379ab61d2ec14a27cf6e5"
+  integrity sha512-s6Bq+XVSjJobWonD9fsO2I76BZSqgafzKmXClBbiAu6f6nXRsIDbXfToXmr6xYzsBX6RhK/067Gm1TMNkiuZ9Q==
   dependencies:
     "@commitlint/prompt" "^8.0.0"
+    "@good-idea/unwind-edges" "^1.1.3"
     "@testing-library/react" "^8.0.1"
     js-cookie "^2.2.0"
     urql "^1.0.5"
