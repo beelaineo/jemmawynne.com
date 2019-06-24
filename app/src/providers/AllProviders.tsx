@@ -20,12 +20,8 @@ interface Props {
 }
 
 const client = createClient({
-	url: 'https://jemmawynne.myshopify.com/api/graphql',
-	fetchOptions: {
-		headers: {
-			'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
-		},
-	},
+	// url: 'http://localhost:4000',
+	url: 'https://jemmawynne-api.now.sh',
 })
 
 const queries = createUrqlQueries(client)
