@@ -40,5 +40,3 @@ export const config = convict({
 
 const env = config.get('env')
 config.loadFile(path.resolve(__dirname, `${env}.json`))
-
-console.log(config.getProperties())
