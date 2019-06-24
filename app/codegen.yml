@@ -1,0 +1,9 @@
+schema: https://jemmawynne-api.now.sh/graphql
+generates:
+  src/types/generated.ts:
+    plugins:
+      - typescript
+    config:
+      scalars:
+        DateTime: Date
+        JSON: '{ [key: string]: any }'
