@@ -1,0 +1,23 @@
+{
+  "name": "jemmawynne-proxy",
+  "version": "1.0.0",
+  "description": "Shopify + Sanity proxy for JemmaWynne",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "dev": "tsc -w",
+    "start": "node ./dist/server.js"
+  },
+  "dependencies": {
+    "apollo-link-http": "^1.5.15",
+    "apollo-server": "^2.6.4",
+    "convict": "^5.0.0",
+    "dotenv": "^8.0.0",
+    "graphql-tools": "^4.0.5",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.3"
+  }
+}

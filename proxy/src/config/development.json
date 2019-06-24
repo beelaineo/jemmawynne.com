@@ -1,0 +1,10 @@
+{
+	"shopify": {
+		"shopName": "jemmawynne",
+		"accessToken": "329967ff884953b32490bed58d2cd713"
+	},
+	"sanity": {
+		"projectId": "caazz4uw",
+		"dataset": "development"
+	}
+}
