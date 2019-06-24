@@ -5,7 +5,7 @@ import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { unwindEdges } from '../../utils/graphql'
 import { Header2, Header6 } from 'Components/Text'
-import { BackgroundImage, OverLay, ProductGrid } from './styled'
+import { BackgroundImage, OverLay, ProductGrid, ProductInfo } from './styled'
 
 interface ProductListingProps {
 	match: {
@@ -30,23 +30,19 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 					let imageSrc = product.images.edges[0].node.originalSrc
 					let { minVariantPrice, maxVariantPrice } = product.priceRange
 					return (
-						<BackgroundImage key={product.id} imageSrc={imageSrc}>
-							<Link to={`/products/${product.handle}`}>
-								<OverLay>
-									<div>
-										<Header2>{product.title}</Header2>
-										<hr />
-										{minVariantPrice.amount !== maxVariantPrice.amount ? (
-											<Header6>
-												${minVariantPrice.amount} - ${maxVariantPrice.amount}
-											</Header6>
-										) : (
-											<Header6>${maxVariantPrice.amount}</Header6>
-										)}
-									</div>
-								</OverLay>
-							</Link>
-						</BackgroundImage>
+						<Link to={`/products/${product.handle}`}>
+							<BackgroundImage key={product.id} imageSrc={imageSrc} />
+							<ProductInfo>
+								<Header2>{product.title}</Header2>
+								{minVariantPrice.amount !== maxVariantPrice.amount ? (
+									<Header6>
+										${minVariantPrice.amount} - ${maxVariantPrice.amount}
+									</Header6>
+								) : (
+									<Header6>${maxVariantPrice.amount}</Header6>
+								)}
+							</ProductInfo>
+						</Link>
 					)
 				})}
 			</ProductGrid>
