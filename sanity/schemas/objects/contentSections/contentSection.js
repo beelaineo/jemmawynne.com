@@ -34,8 +34,8 @@ const getPreviewValues = async (values) => {
 	}
 }
 
-export const contentBlock = {
-	name: 'contentBlock',
+export const contentSection = {
+	name: 'contentSection',
 	type: 'object',
 	title: 'Content Block',
 	fields: [

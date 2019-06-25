@@ -1,3 +1,3 @@
-export * from './contentBlock'
+export * from './contentSection'
 export * from './textBlock'
 export * from './imageBlock'
