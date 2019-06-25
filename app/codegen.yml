@@ -4,6 +4,9 @@ generates:
     plugins:
       - typescript
     config:
+      nonOptionalTypename: true
       scalars:
         DateTime: Date
         JSON: '{ [key: string]: any }'
+      declarationKind:
+        type: 'interface'

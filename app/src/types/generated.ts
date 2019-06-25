@@ -24,8 +24,8 @@ export type Scalars = {
 }
 
 /** Details about the gift card used on the checkout. */
-export type AppliedGiftCard = Node & {
-	__typename?: 'AppliedGiftCard'
+export interface AppliedGiftCard extends Node {
+	__typename: 'AppliedGiftCard'
 	/** The amount that was taken from the Gift Card by applying it. */
 	amountUsed: Scalars['Money']
 	/** The amount that was taken from the Gift Card by applying it. */
@@ -42,8 +42,8 @@ export type AppliedGiftCard = Node & {
 	presentmentAmountUsed: MoneyV2
 }
 
-export type Article = Node & {
-	__typename?: 'Article'
+export interface Article extends Node {
+	__typename: 'Article'
 	/** The article's author. */
 	author: ArticleAuthor
 	/** The article's author. */
@@ -101,8 +101,8 @@ export type ArticleImageArgs = {
 	scale?: Maybe<Scalars['Int']>
 }
 
-export type ArticleAuthor = {
-	__typename?: 'ArticleAuthor'
+export interface ArticleAuthor {
+	__typename: 'ArticleAuthor'
 	/** The author's bio. */
 	bio?: Maybe<Scalars['String']>
 	/** The author’s email. */
@@ -115,16 +115,16 @@ export type ArticleAuthor = {
 	name: Scalars['String']
 }
 
-export type ArticleConnection = {
-	__typename?: 'ArticleConnection'
+export interface ArticleConnection {
+	__typename: 'ArticleConnection'
 	/** A list of edges. */
 	edges: Array<ArticleEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type ArticleEdge = {
-	__typename?: 'ArticleEdge'
+export interface ArticleEdge {
+	__typename: 'ArticleEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of ArticleEdge. */
@@ -153,8 +153,8 @@ export enum ArticleSortKeys {
 }
 
 /** Represents a generic custom attribute. */
-export type Attribute = {
-	__typename?: 'Attribute'
+export interface Attribute {
+	__typename: 'Attribute'
 	/** Key or name of the attribute. */
 	key: Scalars['String']
 	/** Value of the attribute. */
@@ -170,8 +170,8 @@ export type AttributeInput = {
 }
 
 /** Automatic discount applications capture the intentions of a discount that was automatically applied. */
-export type AutomaticDiscountApplication = DiscountApplication & {
-	__typename?: 'AutomaticDiscountApplication'
+export interface AutomaticDiscountApplication extends DiscountApplication {
+	__typename: 'AutomaticDiscountApplication'
 	/** The method by which the discount's value is allocated to its entitled items. */
 	allocationMethod: DiscountApplicationAllocationMethod
 	/** Which lines of targetType that the discount is allocated over. */
@@ -185,8 +185,8 @@ export type AutomaticDiscountApplication = DiscountApplication & {
 }
 
 /** A collection of available shipping rates for a checkout. */
-export type AvailableShippingRates = {
-	__typename?: 'AvailableShippingRates'
+export interface AvailableShippingRates {
+	__typename: 'AvailableShippingRates'
 	/** Whether or not the shipping rates are ready.
 	 * The `shippingRates` field is `null` when this value is `false`.
 	 * This field should be polled until its value becomes `true`.
@@ -196,8 +196,8 @@ export type AvailableShippingRates = {
 	shippingRates?: Maybe<Array<ShippingRate>>
 }
 
-export type Block = {
-	__typename?: 'Block'
+export interface Block {
+	__typename: 'Block'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	children?: Maybe<Array<Maybe<Span>>>
@@ -205,8 +205,8 @@ export type Block = {
 	list?: Maybe<Scalars['String']>
 }
 
-export type Blog = Node & {
-	__typename?: 'Blog'
+export interface Blog extends Node {
+	__typename: 'Blog'
 	/** Find an article by its handle. */
 	articleByHandle?: Maybe<Article>
 	/** List of the blog's articles. */
@@ -237,16 +237,16 @@ export type BlogArticlesArgs = {
 	query?: Maybe<Scalars['String']>
 }
 
-export type BlogConnection = {
-	__typename?: 'BlogConnection'
+export interface BlogConnection {
+	__typename: 'BlogConnection'
 	/** A list of edges. */
 	edges: Array<BlogEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type BlogEdge = {
-	__typename?: 'BlogEdge'
+export interface BlogEdge {
+	__typename: 'BlogEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of BlogEdge. */
@@ -285,8 +285,8 @@ export enum CardBrand {
 }
 
 /** A container for all the information required to checkout items and pay. */
-export type Checkout = Node & {
-	__typename?: 'Checkout'
+export interface Checkout extends Node {
+	__typename: 'Checkout'
 	appliedGiftCards: Array<AppliedGiftCard>
 	/** The available shipping rates for this Checkout.
 	 * Should only be used when checkout `requiresShipping` is `true` and
@@ -394,8 +394,8 @@ export type CheckoutAttributesUpdateInput = {
 }
 
 /** Return type for `checkoutAttributesUpdate` mutation. */
-export type CheckoutAttributesUpdatePayload = {
-	__typename?: 'CheckoutAttributesUpdatePayload'
+export interface CheckoutAttributesUpdatePayload {
+	__typename: 'CheckoutAttributesUpdatePayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -418,8 +418,8 @@ export type CheckoutAttributesUpdateV2Input = {
 }
 
 /** Return type for `checkoutAttributesUpdateV2` mutation. */
-export type CheckoutAttributesUpdateV2Payload = {
-	__typename?: 'CheckoutAttributesUpdateV2Payload'
+export interface CheckoutAttributesUpdateV2Payload {
+	__typename: 'CheckoutAttributesUpdateV2Payload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -429,8 +429,8 @@ export type CheckoutAttributesUpdateV2Payload = {
 }
 
 /** Return type for `checkoutCompleteFree` mutation. */
-export type CheckoutCompleteFreePayload = {
-	__typename?: 'CheckoutCompleteFreePayload'
+export interface CheckoutCompleteFreePayload {
+	__typename: 'CheckoutCompleteFreePayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -440,8 +440,8 @@ export type CheckoutCompleteFreePayload = {
 }
 
 /** Return type for `checkoutCompleteWithCreditCard` mutation. */
-export type CheckoutCompleteWithCreditCardPayload = {
-	__typename?: 'CheckoutCompleteWithCreditCardPayload'
+export interface CheckoutCompleteWithCreditCardPayload {
+	__typename: 'CheckoutCompleteWithCreditCardPayload'
 	/** The checkout on which the payment was applied. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -453,8 +453,8 @@ export type CheckoutCompleteWithCreditCardPayload = {
 }
 
 /** Return type for `checkoutCompleteWithCreditCardV2` mutation. */
-export type CheckoutCompleteWithCreditCardV2Payload = {
-	__typename?: 'CheckoutCompleteWithCreditCardV2Payload'
+export interface CheckoutCompleteWithCreditCardV2Payload {
+	__typename: 'CheckoutCompleteWithCreditCardV2Payload'
 	/** The checkout on which the payment was applied. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -466,8 +466,8 @@ export type CheckoutCompleteWithCreditCardV2Payload = {
 }
 
 /** Return type for `checkoutCompleteWithTokenizedPayment` mutation. */
-export type CheckoutCompleteWithTokenizedPaymentPayload = {
-	__typename?: 'CheckoutCompleteWithTokenizedPaymentPayload'
+export interface CheckoutCompleteWithTokenizedPaymentPayload {
+	__typename: 'CheckoutCompleteWithTokenizedPaymentPayload'
 	/** The checkout on which the payment was applied. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -479,8 +479,8 @@ export type CheckoutCompleteWithTokenizedPaymentPayload = {
 }
 
 /** Return type for `checkoutCompleteWithTokenizedPaymentV2` mutation. */
-export type CheckoutCompleteWithTokenizedPaymentV2Payload = {
-	__typename?: 'CheckoutCompleteWithTokenizedPaymentV2Payload'
+export interface CheckoutCompleteWithTokenizedPaymentV2Payload {
+	__typename: 'CheckoutCompleteWithTokenizedPaymentV2Payload'
 	/** The checkout on which the payment was applied. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -516,8 +516,8 @@ export type CheckoutCreateInput = {
 }
 
 /** Return type for `checkoutCreate` mutation. */
-export type CheckoutCreatePayload = {
-	__typename?: 'CheckoutCreatePayload'
+export interface CheckoutCreatePayload {
+	__typename: 'CheckoutCreatePayload'
 	/** The new checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -527,8 +527,8 @@ export type CheckoutCreatePayload = {
 }
 
 /** Return type for `checkoutCustomerAssociate` mutation. */
-export type CheckoutCustomerAssociatePayload = {
-	__typename?: 'CheckoutCustomerAssociatePayload'
+export interface CheckoutCustomerAssociatePayload {
+	__typename: 'CheckoutCustomerAssociatePayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** The associated customer object. */
@@ -538,8 +538,8 @@ export type CheckoutCustomerAssociatePayload = {
 }
 
 /** Return type for `checkoutCustomerAssociateV2` mutation. */
-export type CheckoutCustomerAssociateV2Payload = {
-	__typename?: 'CheckoutCustomerAssociateV2Payload'
+export interface CheckoutCustomerAssociateV2Payload {
+	__typename: 'CheckoutCustomerAssociateV2Payload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -551,8 +551,8 @@ export type CheckoutCustomerAssociateV2Payload = {
 }
 
 /** Return type for `checkoutCustomerDisassociate` mutation. */
-export type CheckoutCustomerDisassociatePayload = {
-	__typename?: 'CheckoutCustomerDisassociatePayload'
+export interface CheckoutCustomerDisassociatePayload {
+	__typename: 'CheckoutCustomerDisassociatePayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -562,8 +562,8 @@ export type CheckoutCustomerDisassociatePayload = {
 }
 
 /** Return type for `checkoutCustomerDisassociateV2` mutation. */
-export type CheckoutCustomerDisassociateV2Payload = {
-	__typename?: 'CheckoutCustomerDisassociateV2Payload'
+export interface CheckoutCustomerDisassociateV2Payload {
+	__typename: 'CheckoutCustomerDisassociateV2Payload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -573,8 +573,8 @@ export type CheckoutCustomerDisassociateV2Payload = {
 }
 
 /** Return type for `checkoutDiscountCodeApply` mutation. */
-export type CheckoutDiscountCodeApplyPayload = {
-	__typename?: 'CheckoutDiscountCodeApplyPayload'
+export interface CheckoutDiscountCodeApplyPayload {
+	__typename: 'CheckoutDiscountCodeApplyPayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -584,8 +584,8 @@ export type CheckoutDiscountCodeApplyPayload = {
 }
 
 /** Return type for `checkoutDiscountCodeApplyV2` mutation. */
-export type CheckoutDiscountCodeApplyV2Payload = {
-	__typename?: 'CheckoutDiscountCodeApplyV2Payload'
+export interface CheckoutDiscountCodeApplyV2Payload {
+	__typename: 'CheckoutDiscountCodeApplyV2Payload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -595,8 +595,8 @@ export type CheckoutDiscountCodeApplyV2Payload = {
 }
 
 /** Return type for `checkoutDiscountCodeRemove` mutation. */
-export type CheckoutDiscountCodeRemovePayload = {
-	__typename?: 'CheckoutDiscountCodeRemovePayload'
+export interface CheckoutDiscountCodeRemovePayload {
+	__typename: 'CheckoutDiscountCodeRemovePayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -606,8 +606,8 @@ export type CheckoutDiscountCodeRemovePayload = {
 }
 
 /** Return type for `checkoutEmailUpdate` mutation. */
-export type CheckoutEmailUpdatePayload = {
-	__typename?: 'CheckoutEmailUpdatePayload'
+export interface CheckoutEmailUpdatePayload {
+	__typename: 'CheckoutEmailUpdatePayload'
 	/** The checkout object with the updated email. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -617,8 +617,8 @@ export type CheckoutEmailUpdatePayload = {
 }
 
 /** Return type for `checkoutEmailUpdateV2` mutation. */
-export type CheckoutEmailUpdateV2Payload = {
-	__typename?: 'CheckoutEmailUpdateV2Payload'
+export interface CheckoutEmailUpdateV2Payload {
+	__typename: 'CheckoutEmailUpdateV2Payload'
 	/** The checkout object with the updated email. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -704,8 +704,8 @@ export enum CheckoutErrorCode {
 }
 
 /** Return type for `checkoutGiftCardApply` mutation. */
-export type CheckoutGiftCardApplyPayload = {
-	__typename?: 'CheckoutGiftCardApplyPayload'
+export interface CheckoutGiftCardApplyPayload {
+	__typename: 'CheckoutGiftCardApplyPayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -715,8 +715,8 @@ export type CheckoutGiftCardApplyPayload = {
 }
 
 /** Return type for `checkoutGiftCardRemove` mutation. */
-export type CheckoutGiftCardRemovePayload = {
-	__typename?: 'CheckoutGiftCardRemovePayload'
+export interface CheckoutGiftCardRemovePayload {
+	__typename: 'CheckoutGiftCardRemovePayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -726,8 +726,8 @@ export type CheckoutGiftCardRemovePayload = {
 }
 
 /** Return type for `checkoutGiftCardRemoveV2` mutation. */
-export type CheckoutGiftCardRemoveV2Payload = {
-	__typename?: 'CheckoutGiftCardRemoveV2Payload'
+export interface CheckoutGiftCardRemoveV2Payload {
+	__typename: 'CheckoutGiftCardRemoveV2Payload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -737,8 +737,8 @@ export type CheckoutGiftCardRemoveV2Payload = {
 }
 
 /** Return type for `checkoutGiftCardsAppend` mutation. */
-export type CheckoutGiftCardsAppendPayload = {
-	__typename?: 'CheckoutGiftCardsAppendPayload'
+export interface CheckoutGiftCardsAppendPayload {
+	__typename: 'CheckoutGiftCardsAppendPayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -748,8 +748,8 @@ export type CheckoutGiftCardsAppendPayload = {
 }
 
 /** A single line item in the checkout, grouped by variant and attributes. */
-export type CheckoutLineItem = Node & {
-	__typename?: 'CheckoutLineItem'
+export interface CheckoutLineItem extends Node {
+	__typename: 'CheckoutLineItem'
 	/** Extra information in the form of an array of Key-Value pairs about the line item. */
 	customAttributes: Array<Attribute>
 	/** The discounts that have been allocated onto the checkout line item by discount applications. */
@@ -764,16 +764,16 @@ export type CheckoutLineItem = Node & {
 	variant?: Maybe<ProductVariant>
 }
 
-export type CheckoutLineItemConnection = {
-	__typename?: 'CheckoutLineItemConnection'
+export interface CheckoutLineItemConnection {
+	__typename: 'CheckoutLineItemConnection'
 	/** A list of edges. */
 	edges: Array<CheckoutLineItemEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type CheckoutLineItemEdge = {
-	__typename?: 'CheckoutLineItemEdge'
+export interface CheckoutLineItemEdge {
+	__typename: 'CheckoutLineItemEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of CheckoutLineItemEdge. */
@@ -791,8 +791,8 @@ export type CheckoutLineItemInput = {
 }
 
 /** Return type for `checkoutLineItemsAdd` mutation. */
-export type CheckoutLineItemsAddPayload = {
-	__typename?: 'CheckoutLineItemsAddPayload'
+export interface CheckoutLineItemsAddPayload {
+	__typename: 'CheckoutLineItemsAddPayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -802,8 +802,8 @@ export type CheckoutLineItemsAddPayload = {
 }
 
 /** Return type for `checkoutLineItemsRemove` mutation. */
-export type CheckoutLineItemsRemovePayload = {
-	__typename?: 'CheckoutLineItemsRemovePayload'
+export interface CheckoutLineItemsRemovePayload {
+	__typename: 'CheckoutLineItemsRemovePayload'
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
 	checkoutUserErrors: Array<CheckoutUserError>
@@ -812,8 +812,8 @@ export type CheckoutLineItemsRemovePayload = {
 }
 
 /** Return type for `checkoutLineItemsReplace` mutation. */
-export type CheckoutLineItemsReplacePayload = {
-	__typename?: 'CheckoutLineItemsReplacePayload'
+export interface CheckoutLineItemsReplacePayload {
+	__typename: 'CheckoutLineItemsReplacePayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -821,8 +821,8 @@ export type CheckoutLineItemsReplacePayload = {
 }
 
 /** Return type for `checkoutLineItemsUpdate` mutation. */
-export type CheckoutLineItemsUpdatePayload = {
-	__typename?: 'CheckoutLineItemsUpdatePayload'
+export interface CheckoutLineItemsUpdatePayload {
+	__typename: 'CheckoutLineItemsUpdatePayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -843,8 +843,8 @@ export type CheckoutLineItemUpdateInput = {
 }
 
 /** Return type for `checkoutShippingAddressUpdate` mutation. */
-export type CheckoutShippingAddressUpdatePayload = {
-	__typename?: 'CheckoutShippingAddressUpdatePayload'
+export interface CheckoutShippingAddressUpdatePayload {
+	__typename: 'CheckoutShippingAddressUpdatePayload'
 	/** The updated checkout object. */
 	checkout: Checkout
 	/** List of errors that occurred executing the mutation. */
@@ -854,8 +854,8 @@ export type CheckoutShippingAddressUpdatePayload = {
 }
 
 /** Return type for `checkoutShippingAddressUpdateV2` mutation. */
-export type CheckoutShippingAddressUpdateV2Payload = {
-	__typename?: 'CheckoutShippingAddressUpdateV2Payload'
+export interface CheckoutShippingAddressUpdateV2Payload {
+	__typename: 'CheckoutShippingAddressUpdateV2Payload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -865,8 +865,8 @@ export type CheckoutShippingAddressUpdateV2Payload = {
 }
 
 /** Return type for `checkoutShippingLineUpdate` mutation. */
-export type CheckoutShippingLineUpdatePayload = {
-	__typename?: 'CheckoutShippingLineUpdatePayload'
+export interface CheckoutShippingLineUpdatePayload {
+	__typename: 'CheckoutShippingLineUpdatePayload'
 	/** The updated checkout object. */
 	checkout?: Maybe<Checkout>
 	/** List of errors that occurred executing the mutation. */
@@ -876,8 +876,8 @@ export type CheckoutShippingLineUpdatePayload = {
 }
 
 /** Represents an error that happens during execution of a checkout mutation. */
-export type CheckoutUserError = DisplayableError & {
-	__typename?: 'CheckoutUserError'
+export interface CheckoutUserError extends DisplayableError {
+	__typename: 'CheckoutUserError'
 	/** Error code to uniquely identify the error. */
 	code?: Maybe<CheckoutErrorCode>
 	/** Path to the input field which caused the error. */
@@ -889,8 +889,8 @@ export type CheckoutUserError = DisplayableError & {
 /** A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
  */
-export type Collection = Node & {
-	__typename?: 'Collection'
+export interface Collection extends Node {
+	__typename: 'Collection'
 	/** Stripped description of the collection, single line with HTML tags removed. */
 	description: Scalars['String']
 	/** The description of the collection, complete with HTML formatting. */
@@ -940,16 +940,16 @@ export type CollectionProductsArgs = {
 	sortKey?: Maybe<ProductCollectionSortKeys>
 }
 
-export type CollectionConnection = {
-	__typename?: 'CollectionConnection'
+export interface CollectionConnection {
+	__typename: 'CollectionConnection'
 	/** A list of edges. */
 	edges: Array<CollectionEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type CollectionEdge = {
-	__typename?: 'CollectionEdge'
+export interface CollectionEdge {
+	__typename: 'CollectionEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of CollectionEdge. */
@@ -971,8 +971,8 @@ export enum CollectionSortKeys {
 	Relevance = 'RELEVANCE',
 }
 
-export type Comment = Node & {
-	__typename?: 'Comment'
+export interface Comment extends Node {
+	__typename: 'Comment'
 	/** The comment’s author. */
 	author: CommentAuthor
 	/** Stripped content of the comment, single line with HTML tags removed. */
@@ -987,32 +987,32 @@ export type CommentContentArgs = {
 	truncateAt?: Maybe<Scalars['Int']>
 }
 
-export type CommentAuthor = {
-	__typename?: 'CommentAuthor'
+export interface CommentAuthor {
+	__typename: 'CommentAuthor'
 	/** The author's email. */
 	email: Scalars['String']
 	/** The author’s name. */
 	name: Scalars['String']
 }
 
-export type CommentConnection = {
-	__typename?: 'CommentConnection'
+export interface CommentConnection {
+	__typename: 'CommentConnection'
 	/** A list of edges. */
 	edges: Array<CommentEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type CommentEdge = {
-	__typename?: 'CommentEdge'
+export interface CommentEdge {
+	__typename: 'CommentEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of CommentEdge. */
 	node: Comment
 }
 
-export type ContentBlock = {
-	__typename?: 'ContentBlock'
+export interface ContentSection {
+	__typename: 'ContentSection'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	items?: Maybe<Array<Maybe<ImageBlockOrTextBlock>>>
@@ -1512,8 +1512,8 @@ export enum CountryCode {
 }
 
 /** Credit card information used for a payment. */
-export type CreditCard = {
-	__typename?: 'CreditCard'
+export interface CreditCard {
+	__typename: 'CreditCard'
 	brand?: Maybe<Scalars['String']>
 	expiryMonth?: Maybe<Scalars['Int']>
 	expiryYear?: Maybe<Scalars['Int']>
@@ -1575,8 +1575,8 @@ export enum CropRegion {
 	Right = 'RIGHT',
 }
 
-export type Cta = {
-	__typename?: 'Cta'
+export interface Cta {
+	__typename: 'Cta'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	label?: Maybe<Scalars['String']>
@@ -1875,8 +1875,8 @@ export enum CurrencyCode {
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
  */
-export type Customer = {
-	__typename?: 'Customer'
+export interface Customer {
+	__typename: 'Customer'
 	/** Indicates whether the customer has consented to be sent marketing material via email. */
 	acceptsMarketing: Scalars['Boolean']
 	/** A list of addresses for the customer. */
@@ -1936,8 +1936,8 @@ export type CustomerOrdersArgs = {
 }
 
 /** A CustomerAccessToken represents the unique token required to make modifications to the customer object. */
-export type CustomerAccessToken = {
-	__typename?: 'CustomerAccessToken'
+export interface CustomerAccessToken {
+	__typename: 'CustomerAccessToken'
 	/** The customer’s access token. */
 	accessToken: Scalars['String']
 	/** The date and time when the customer access token expires. */
@@ -1953,8 +1953,8 @@ export type CustomerAccessTokenCreateInput = {
 }
 
 /** Return type for `customerAccessTokenCreate` mutation. */
-export type CustomerAccessTokenCreatePayload = {
-	__typename?: 'CustomerAccessTokenCreatePayload'
+export interface CustomerAccessTokenCreatePayload {
+	__typename: 'CustomerAccessTokenCreatePayload'
 	/** The newly created customer access token object. */
 	customerAccessToken?: Maybe<CustomerAccessToken>
 	/** List of errors that occurred executing the mutation. */
@@ -1964,8 +1964,8 @@ export type CustomerAccessTokenCreatePayload = {
 }
 
 /** Return type for `customerAccessTokenDelete` mutation. */
-export type CustomerAccessTokenDeletePayload = {
-	__typename?: 'CustomerAccessTokenDeletePayload'
+export interface CustomerAccessTokenDeletePayload {
+	__typename: 'CustomerAccessTokenDeletePayload'
 	/** The destroyed access token. */
 	deletedAccessToken?: Maybe<Scalars['String']>
 	/** ID of the destroyed customer access token. */
@@ -1975,8 +1975,8 @@ export type CustomerAccessTokenDeletePayload = {
 }
 
 /** Return type for `customerAccessTokenRenew` mutation. */
-export type CustomerAccessTokenRenewPayload = {
-	__typename?: 'CustomerAccessTokenRenewPayload'
+export interface CustomerAccessTokenRenewPayload {
+	__typename: 'CustomerAccessTokenRenewPayload'
 	/** The renewed customer access token object. */
 	customerAccessToken?: Maybe<CustomerAccessToken>
 	/** List of errors that occurred executing the mutation. */
@@ -1992,8 +1992,8 @@ export type CustomerActivateInput = {
 }
 
 /** Return type for `customerActivate` mutation. */
-export type CustomerActivatePayload = {
-	__typename?: 'CustomerActivatePayload'
+export interface CustomerActivatePayload {
+	__typename: 'CustomerActivatePayload'
 	/** The customer object. */
 	customer?: Maybe<Customer>
 	/** A newly created customer access token object for the customer. */
@@ -2005,8 +2005,8 @@ export type CustomerActivatePayload = {
 }
 
 /** Return type for `customerAddressCreate` mutation. */
-export type CustomerAddressCreatePayload = {
-	__typename?: 'CustomerAddressCreatePayload'
+export interface CustomerAddressCreatePayload {
+	__typename: 'CustomerAddressCreatePayload'
 	/** The new customer address object. */
 	customerAddress?: Maybe<MailingAddress>
 	/** List of errors that occurred executing the mutation. */
@@ -2016,8 +2016,8 @@ export type CustomerAddressCreatePayload = {
 }
 
 /** Return type for `customerAddressDelete` mutation. */
-export type CustomerAddressDeletePayload = {
-	__typename?: 'CustomerAddressDeletePayload'
+export interface CustomerAddressDeletePayload {
+	__typename: 'CustomerAddressDeletePayload'
 	/** List of errors that occurred executing the mutation. */
 	customerUserErrors: Array<CustomerUserError>
 	/** ID of the deleted customer address. */
@@ -2027,8 +2027,8 @@ export type CustomerAddressDeletePayload = {
 }
 
 /** Return type for `customerAddressUpdate` mutation. */
-export type CustomerAddressUpdatePayload = {
-	__typename?: 'CustomerAddressUpdatePayload'
+export interface CustomerAddressUpdatePayload {
+	__typename: 'CustomerAddressUpdatePayload'
 	/** The customer’s updated mailing address. */
 	customerAddress?: Maybe<MailingAddress>
 	/** List of errors that occurred executing the mutation. */
@@ -2054,8 +2054,8 @@ export type CustomerCreateInput = {
 }
 
 /** Return type for `customerCreate` mutation. */
-export type CustomerCreatePayload = {
-	__typename?: 'CustomerCreatePayload'
+export interface CustomerCreatePayload {
+	__typename: 'CustomerCreatePayload'
 	/** The created customer object. */
 	customer?: Maybe<Customer>
 	/** List of errors that occurred executing the mutation. */
@@ -2065,8 +2065,8 @@ export type CustomerCreatePayload = {
 }
 
 /** Return type for `customerDefaultAddressUpdate` mutation. */
-export type CustomerDefaultAddressUpdatePayload = {
-	__typename?: 'CustomerDefaultAddressUpdatePayload'
+export interface CustomerDefaultAddressUpdatePayload {
+	__typename: 'CustomerDefaultAddressUpdatePayload'
 	/** The updated customer object. */
 	customer?: Maybe<Customer>
 	/** List of errors that occurred executing the mutation. */
@@ -2106,8 +2106,8 @@ export enum CustomerErrorCode {
 }
 
 /** Return type for `customerRecover` mutation. */
-export type CustomerRecoverPayload = {
-	__typename?: 'CustomerRecoverPayload'
+export interface CustomerRecoverPayload {
+	__typename: 'CustomerRecoverPayload'
 	/** List of errors that occurred executing the mutation. */
 	customerUserErrors: Array<CustomerUserError>
 	/** List of errors that occurred executing the mutation. */
@@ -2115,8 +2115,8 @@ export type CustomerRecoverPayload = {
 }
 
 /** Return type for `customerResetByUrl` mutation. */
-export type CustomerResetByUrlPayload = {
-	__typename?: 'CustomerResetByUrlPayload'
+export interface CustomerResetByUrlPayload {
+	__typename: 'CustomerResetByUrlPayload'
 	/** The customer object which was reset. */
 	customer?: Maybe<Customer>
 	/** A newly created customer access token object for the customer. */
@@ -2136,8 +2136,8 @@ export type CustomerResetInput = {
 }
 
 /** Return type for `customerReset` mutation. */
-export type CustomerResetPayload = {
-	__typename?: 'CustomerResetPayload'
+export interface CustomerResetPayload {
+	__typename: 'CustomerResetPayload'
 	/** The customer object which was reset. */
 	customer?: Maybe<Customer>
 	/** A newly created customer access token object for the customer. */
@@ -2165,8 +2165,8 @@ export type CustomerUpdateInput = {
 }
 
 /** Return type for `customerUpdate` mutation. */
-export type CustomerUpdatePayload = {
-	__typename?: 'CustomerUpdatePayload'
+export interface CustomerUpdatePayload {
+	__typename: 'CustomerUpdatePayload'
 	/** The updated customer object. */
 	customer?: Maybe<Customer>
 	/** The newly created customer access token. If the customer's password is updated, all previous access tokens
@@ -2180,8 +2180,8 @@ export type CustomerUpdatePayload = {
 }
 
 /** Represents an error that happens during execution of a customer mutation. */
-export type CustomerUserError = DisplayableError & {
-	__typename?: 'CustomerUserError'
+export interface CustomerUserError extends DisplayableError {
+	__typename: 'CustomerUserError'
 	/** Error code to uniquely identify the error. */
 	code?: Maybe<CustomerErrorCode>
 	/** Path to the input field which caused the error. */
@@ -2203,8 +2203,8 @@ export enum DigitalWallet {
 }
 
 /** An amount discounting the line that has been allocated by a discount. */
-export type DiscountAllocation = {
-	__typename?: 'DiscountAllocation'
+export interface DiscountAllocation {
+	__typename: 'DiscountAllocation'
 	/** Amount of discount allocated. */
 	allocatedAmount: MoneyV2
 	/** The discount this allocated amount originated from. */
@@ -2235,16 +2235,16 @@ export enum DiscountApplicationAllocationMethod {
 	One = 'ONE',
 }
 
-export type DiscountApplicationConnection = {
-	__typename?: 'DiscountApplicationConnection'
+export interface DiscountApplicationConnection {
+	__typename: 'DiscountApplicationConnection'
 	/** A list of edges. */
 	edges: Array<DiscountApplicationEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type DiscountApplicationEdge = {
-	__typename?: 'DiscountApplicationEdge'
+export interface DiscountApplicationEdge {
+	__typename: 'DiscountApplicationEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of DiscountApplicationEdge. */
@@ -2274,8 +2274,8 @@ export enum DiscountApplicationTargetType {
 /** Discount code applications capture the intentions of a discount code at
  * the time that it is applied.
  */
-export type DiscountCodeApplication = DiscountApplication & {
-	__typename?: 'DiscountCodeApplication'
+export interface DiscountCodeApplication extends DiscountApplication {
+	__typename: 'DiscountCodeApplication'
 	/** The method by which the discount's value is allocated to its entitled items. */
 	allocationMethod: DiscountApplicationAllocationMethod
 	/** Specifies whether the discount code was applied successfully. */
@@ -2313,8 +2313,8 @@ export type Document = {
 }
 
 /** Represents a web address. */
-export type Domain = {
-	__typename?: 'Domain'
+export interface Domain {
+	__typename: 'Domain'
 	/** The host name of the domain (eg: `example.com`). */
 	host: Scalars['String']
 	/** Whether SSL is enabled or not. */
@@ -2323,16 +2323,16 @@ export type Domain = {
 	url: Scalars['URL']
 }
 
-export type File = {
-	__typename?: 'File'
+export interface File {
+	__typename: 'File'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	asset?: Maybe<SanityFileAsset>
 }
 
 /** Represents a single fulfillment in an order. */
-export type Fulfillment = {
-	__typename?: 'Fulfillment'
+export interface Fulfillment {
+	__typename: 'Fulfillment'
 	/** List of the fulfillment's line items. */
 	fulfillmentLineItems: FulfillmentLineItemConnection
 	/** The name of the tracking company. */
@@ -2358,24 +2358,24 @@ export type FulfillmentTrackingInfoArgs = {
 }
 
 /** Represents a single line item in a fulfillment. There is at most one fulfillment line item for each order line item. */
-export type FulfillmentLineItem = {
-	__typename?: 'FulfillmentLineItem'
+export interface FulfillmentLineItem {
+	__typename: 'FulfillmentLineItem'
 	/** The associated order's line item. */
 	lineItem: OrderLineItem
 	/** The amount fulfilled in this fulfillment. */
 	quantity: Scalars['Int']
 }
 
-export type FulfillmentLineItemConnection = {
-	__typename?: 'FulfillmentLineItemConnection'
+export interface FulfillmentLineItemConnection {
+	__typename: 'FulfillmentLineItemConnection'
 	/** A list of edges. */
 	edges: Array<FulfillmentLineItemEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type FulfillmentLineItemEdge = {
-	__typename?: 'FulfillmentLineItemEdge'
+export interface FulfillmentLineItemEdge {
+	__typename: 'FulfillmentLineItemEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of FulfillmentLineItemEdge. */
@@ -2383,16 +2383,16 @@ export type FulfillmentLineItemEdge = {
 }
 
 /** Tracking information associated with the fulfillment. */
-export type FulfillmentTrackingInfo = {
-	__typename?: 'FulfillmentTrackingInfo'
+export interface FulfillmentTrackingInfo {
+	__typename: 'FulfillmentTrackingInfo'
 	/** The tracking number of the fulfillment. */
 	number?: Maybe<Scalars['String']>
 	/** The URL to track the fulfillment. */
 	url?: Maybe<Scalars['URL']>
 }
 
-export type Geopoint = {
-	__typename?: 'Geopoint'
+export interface Geopoint {
+	__typename: 'Geopoint'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	lat?: Maybe<Scalars['Float']>
@@ -2424,8 +2424,8 @@ export type HasMetafieldsMetafieldsArgs = {
 	reverse?: Maybe<Scalars['Boolean']>
 }
 
-export type Homepage = Document & {
-	__typename?: 'Homepage'
+export interface Homepage extends Document {
+	__typename: 'Homepage'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -2437,7 +2437,7 @@ export type Homepage = Document & {
 	/** Current document revision */
 	_rev: Scalars['String']
 	_key?: Maybe<Scalars['String']>
-	contentBlocks?: Maybe<Array<Maybe<ContentBlock>>>
+	contentSections?: Maybe<Array<Maybe<ContentSection>>>
 }
 
 export type HomepageFilter = {
@@ -2502,8 +2502,8 @@ export type HomepageFilter = {
 }
 
 /** Represents an image resource. */
-export type Image = {
-	__typename?: 'Image'
+export interface Image {
+	__typename: 'Image'
 	/** A word or phrase to share the nature or contents of an image. */
 	altText?: Maybe<Scalars['String']>
 	/** A unique identifier for the image. */
@@ -2532,8 +2532,8 @@ export type ImageTransformedSrcArgs = {
 	preferredContentType?: Maybe<ImageContentType>
 }
 
-export type ImageBlock = {
-	__typename?: 'ImageBlock'
+export interface ImageBlock {
+	__typename: 'ImageBlock'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	images?: Maybe<Array<Maybe<ImageWithAltText>>>
@@ -2547,8 +2547,8 @@ export type ImageBlockOrLinkGroup = ImageBlock | LinkGroup
 
 export type ImageBlockOrTextBlock = ImageBlock | TextBlock
 
-export type ImageConnection = {
-	__typename?: 'ImageConnection'
+export interface ImageConnection {
+	__typename: 'ImageConnection'
 	/** A list of edges. */
 	edges: Array<ImageEdge>
 	/** Information to aid in pagination. */
@@ -2562,16 +2562,16 @@ export enum ImageContentType {
 	Webp = 'WEBP',
 }
 
-export type ImageEdge = {
-	__typename?: 'ImageEdge'
+export interface ImageEdge {
+	__typename: 'ImageEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of ImageEdge. */
 	node: Image
 }
 
-export type ImageWithAltText = {
-	__typename?: 'ImageWithAltText'
+export interface ImageWithAltText {
+	__typename: 'ImageWithAltText'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	/** A short description of the image. Helps with accessibility and SEO */
@@ -2581,8 +2581,8 @@ export type ImageWithAltText = {
 	crop?: Maybe<SanityImageCrop>
 }
 
-export type LinkGroup = {
-	__typename?: 'LinkGroup'
+export interface LinkGroup {
+	__typename: 'LinkGroup'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
@@ -2590,8 +2590,8 @@ export type LinkGroup = {
 }
 
 /** Represents a mailing address for customers and shipping. */
-export type MailingAddress = Node & {
-	__typename?: 'MailingAddress'
+export interface MailingAddress extends Node {
+	__typename: 'MailingAddress'
 	/** The first line of the address. Typically the street address or PO Box number. */
 	address1?: Maybe<Scalars['String']>
 	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
@@ -2650,16 +2650,16 @@ export type MailingAddressFormattedArgs = {
 	withCompany?: Maybe<Scalars['Boolean']>
 }
 
-export type MailingAddressConnection = {
-	__typename?: 'MailingAddressConnection'
+export interface MailingAddressConnection {
+	__typename: 'MailingAddressConnection'
 	/** A list of edges. */
 	edges: Array<MailingAddressEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type MailingAddressEdge = {
-	__typename?: 'MailingAddressEdge'
+export interface MailingAddressEdge {
+	__typename: 'MailingAddressEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of MailingAddressEdge. */
@@ -2681,8 +2681,8 @@ export type MailingAddressInput = {
 }
 
 /** Manual discount applications capture the intentions of a discount that was manually created. */
-export type ManualDiscountApplication = DiscountApplication & {
-	__typename?: 'ManualDiscountApplication'
+export interface ManualDiscountApplication extends DiscountApplication {
+	__typename: 'ManualDiscountApplication'
 	/** The method by which the discount's value is allocated to its entitled items. */
 	allocationMethod: DiscountApplicationAllocationMethod
 	/** The description of the application. */
@@ -2697,8 +2697,8 @@ export type ManualDiscountApplication = DiscountApplication & {
 	value: PricingValue
 }
 
-export type Menu = Document & {
-	__typename?: 'Menu'
+export interface Menu extends Document {
+	__typename: 'Menu'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -2774,8 +2774,8 @@ export type MenuFilter = {
 	is_draft?: Maybe<Scalars['Boolean']>
 }
 
-export type MenuLink = {
-	__typename?: 'MenuLink'
+export interface MenuLink {
+	__typename: 'MenuLink'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	label?: Maybe<Scalars['String']>
@@ -2787,8 +2787,8 @@ export type MenuLinkOrSubMenu = MenuLink | SubMenu
 /** Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
  * comprised of keys, values, and value types.
  */
-export type Metafield = Node & {
-	__typename?: 'Metafield'
+export interface Metafield extends Node {
+	__typename: 'Metafield'
 	/** The description of a metafield. */
 	description?: Maybe<Scalars['String']>
 	/** Globally unique identifier. */
@@ -2805,16 +2805,16 @@ export type Metafield = Node & {
 	valueType: MetafieldValueType
 }
 
-export type MetafieldConnection = {
-	__typename?: 'MetafieldConnection'
+export interface MetafieldConnection {
+	__typename: 'MetafieldConnection'
 	/** A list of edges. */
 	edges: Array<MetafieldEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type MetafieldEdge = {
-	__typename?: 'MetafieldEdge'
+export interface MetafieldEdge {
+	__typename: 'MetafieldEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of MetafieldEdge. */
@@ -2864,16 +2864,16 @@ export type MoneyInput = {
  * For a more general solution, the [Unicode CLDR number formatting database] is available with many implementations
  * (such as [TwitterCldr](https://github.com/twitter/twitter-cldr-rb)).
  */
-export type MoneyV2 = {
-	__typename?: 'MoneyV2'
+export interface MoneyV2 {
+	__typename: 'MoneyV2'
 	/** Decimal money amount. */
 	amount: Scalars['Decimal']
 	/** Currency of the money. */
 	currencyCode: CurrencyCode
 }
 
-export type Mutation = {
-	__typename?: 'Mutation'
+export interface Mutation {
+	__typename: 'Mutation'
 	/** Updates the attributes of a checkout. */
 	checkoutAttributesUpdate?: Maybe<CheckoutAttributesUpdatePayload>
 	/** Updates the attributes of a checkout. */
@@ -3177,8 +3177,8 @@ export type Node = {
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
  */
-export type Order = Node & {
-	__typename?: 'Order'
+export interface Order extends Node {
+	__typename: 'Order'
 	/** The code of the currency used for the payment. */
 	currencyCode: CurrencyCode
 	/** The locale code in which this specific order happened. */
@@ -3268,16 +3268,16 @@ export type OrderSuccessfulFulfillmentsArgs = {
 	first?: Maybe<Scalars['Int']>
 }
 
-export type OrderConnection = {
-	__typename?: 'OrderConnection'
+export interface OrderConnection {
+	__typename: 'OrderConnection'
 	/** A list of edges. */
 	edges: Array<OrderEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type OrderEdge = {
-	__typename?: 'OrderEdge'
+export interface OrderEdge {
+	__typename: 'OrderEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of OrderEdge. */
@@ -3285,8 +3285,8 @@ export type OrderEdge = {
 }
 
 /** Represents a single line in an order. There is one line item for each distinct product variant. */
-export type OrderLineItem = {
-	__typename?: 'OrderLineItem'
+export interface OrderLineItem {
+	__typename: 'OrderLineItem'
 	/** List of custom attributes associated to the line item. */
 	customAttributes: Array<Attribute>
 	/** The discounts that have been allocated onto the order line item by discount applications. */
@@ -3299,16 +3299,16 @@ export type OrderLineItem = {
 	variant?: Maybe<ProductVariant>
 }
 
-export type OrderLineItemConnection = {
-	__typename?: 'OrderLineItemConnection'
+export interface OrderLineItemConnection {
+	__typename: 'OrderLineItemConnection'
 	/** A list of edges. */
 	edges: Array<OrderLineItemEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type OrderLineItemEdge = {
-	__typename?: 'OrderLineItemEdge'
+export interface OrderLineItemEdge {
+	__typename: 'OrderLineItemEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of OrderLineItemEdge. */
@@ -3330,8 +3330,8 @@ export enum OrderSortKeys {
 	Relevance = 'RELEVANCE',
 }
 
-export type Page = Document & {
-	__typename?: 'Page'
+export interface Page extends Document {
+	__typename: 'Page'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -3346,16 +3346,16 @@ export type Page = Document & {
 	title?: Maybe<Scalars['String']>
 }
 
-export type PageConnection = {
-	__typename?: 'PageConnection'
+export interface PageConnection {
+	__typename: 'PageConnection'
 	/** A list of edges. */
 	edges: Array<PageEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type PageEdge = {
-	__typename?: 'PageEdge'
+export interface PageEdge {
+	__typename: 'PageEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of PageEdge. */
@@ -3432,16 +3432,16 @@ export type PageFilter = {
 }
 
 /** Information about pagination in a connection. */
-export type PageInfo = {
-	__typename?: 'PageInfo'
+export interface PageInfo {
+	__typename: 'PageInfo'
 	/** Indicates if there are more pages to fetch. */
 	hasNextPage: Scalars['Boolean']
 	/** Indicates if there are any pages prior to the current page. */
 	hasPreviousPage: Scalars['Boolean']
 }
 
-export type PageLink = {
-	__typename?: 'PageLink'
+export interface PageLink {
+	__typename: 'PageLink'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
@@ -3470,8 +3470,8 @@ export enum PageSortKeys {
 }
 
 /** A payment applied to a checkout. */
-export type Payment = Node & {
-	__typename?: 'Payment'
+export interface Payment extends Node {
+	__typename: 'Payment'
 	/** The amount of the payment. */
 	amount: Scalars['Money']
 	/** The amount of the payment. */
@@ -3497,8 +3497,8 @@ export type Payment = Node & {
 }
 
 /** Settings related to payments. */
-export type PaymentSettings = {
-	__typename?: 'PaymentSettings'
+export interface PaymentSettings {
+	__typename: 'PaymentSettings'
 	/** List of the card brands which the shop accepts. */
 	acceptedCardBrands: Array<CardBrand>
 	/** The url pointing to the endpoint to vault credit cards. */
@@ -3518,8 +3518,8 @@ export type PaymentSettings = {
 }
 
 /** The value of the percentage pricing object. */
-export type PricingPercentageValue = {
-	__typename?: 'PricingPercentageValue'
+export interface PricingPercentageValue {
+	__typename: 'PricingPercentageValue'
 	/** The percentage value of the object. */
 	percentage: Scalars['Float']
 }
@@ -3532,63 +3532,62 @@ export type PricingValue = PricingPercentageValue | MoneyV2
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
  */
-export type Product = Node &
-	HasMetafields & {
-		__typename?: 'Product'
-		/** Whether the product is available on the Online Store channel and in stock. */
-		availableForSale: Scalars['Boolean']
-		/** List of collections a product belongs to. */
-		collections: CollectionConnection
-		/** The date and time when the product was created. */
-		createdAt: Scalars['DateTime']
-		/** Stripped description of the product, single line with HTML tags removed. */
-		description: Scalars['String']
-		/** The description of the product, complete with HTML formatting. */
-		descriptionHtml: Scalars['HTML']
-		/** A human-friendly unique string for the Product automatically generated from its title.
-		 * They are used by the Liquid templating language to refer to objects.
-		 */
-		handle: Scalars['String']
-		/** Globally unique identifier. */
-		id: Scalars['ID']
-		/** List of images associated with the product. */
-		images: ImageConnection
-		/** The metafield associated with the resource. */
-		metafield?: Maybe<Metafield>
-		/** A paginated list of metafields associated with the resource. */
-		metafields: MetafieldConnection
-		/** The online store URL for the product.
-		 * A value of `null` indicates that the product is not published to the Online Store sales channel.
-		 */
-		onlineStoreUrl?: Maybe<Scalars['URL']>
-		/** List of custom product options (maximum of 3 per product). */
-		options: Array<ProductOption>
-		/** List of price ranges in the presentment currencies for this shop. */
-		presentmentPriceRanges: ProductPriceRangeConnection
-		/** The price range. */
-		priceRange: ProductPriceRange
-		/** A categorization that a product can be tagged with, commonly used for filtering and searching. */
-		productType: Scalars['String']
-		/** The date and time when the product was published to the channel. */
-		publishedAt: Scalars['DateTime']
-		/** A categorization that a product can be tagged with, commonly used for filtering and searching.
-		 * Additional access scope required for private apps: unauthenticated_read_product_tags.
-		 */
-		tags: Array<Scalars['String']>
-		/** The product’s title. */
-		title: Scalars['String']
-		/** The date and time when the product was last modified. */
-		updatedAt: Scalars['DateTime']
-		/** Find a product’s variant based on its selected options.
-		 * This is useful for converting a user’s selection of product options into a single matching variant.
-		 * If there is not a variant for the selected options, `null` will be returned.
-		 */
-		variantBySelectedOptions?: Maybe<ProductVariant>
-		/** List of the product’s variants. */
-		variants: ProductVariantConnection
-		/** The product’s vendor name. */
-		vendor: Scalars['String']
-	}
+export interface Product extends Node, HasMetafields {
+	__typename: 'Product'
+	/** Whether the product is available on the Online Store channel and in stock. */
+	availableForSale: Scalars['Boolean']
+	/** List of collections a product belongs to. */
+	collections: CollectionConnection
+	/** The date and time when the product was created. */
+	createdAt: Scalars['DateTime']
+	/** Stripped description of the product, single line with HTML tags removed. */
+	description: Scalars['String']
+	/** The description of the product, complete with HTML formatting. */
+	descriptionHtml: Scalars['HTML']
+	/** A human-friendly unique string for the Product automatically generated from its title.
+	 * They are used by the Liquid templating language to refer to objects.
+	 */
+	handle: Scalars['String']
+	/** Globally unique identifier. */
+	id: Scalars['ID']
+	/** List of images associated with the product. */
+	images: ImageConnection
+	/** The metafield associated with the resource. */
+	metafield?: Maybe<Metafield>
+	/** A paginated list of metafields associated with the resource. */
+	metafields: MetafieldConnection
+	/** The online store URL for the product.
+	 * A value of `null` indicates that the product is not published to the Online Store sales channel.
+	 */
+	onlineStoreUrl?: Maybe<Scalars['URL']>
+	/** List of custom product options (maximum of 3 per product). */
+	options: Array<ProductOption>
+	/** List of price ranges in the presentment currencies for this shop. */
+	presentmentPriceRanges: ProductPriceRangeConnection
+	/** The price range. */
+	priceRange: ProductPriceRange
+	/** A categorization that a product can be tagged with, commonly used for filtering and searching. */
+	productType: Scalars['String']
+	/** The date and time when the product was published to the channel. */
+	publishedAt: Scalars['DateTime']
+	/** A categorization that a product can be tagged with, commonly used for filtering and searching.
+	 * Additional access scope required for private apps: unauthenticated_read_product_tags.
+	 */
+	tags: Array<Scalars['String']>
+	/** The product’s title. */
+	title: Scalars['String']
+	/** The date and time when the product was last modified. */
+	updatedAt: Scalars['DateTime']
+	/** Find a product’s variant based on its selected options.
+	 * This is useful for converting a user’s selection of product options into a single matching variant.
+	 * If there is not a variant for the selected options, `null` will be returned.
+	 */
+	variantBySelectedOptions?: Maybe<ProductVariant>
+	/** List of the product’s variants. */
+	variants: ProductVariantConnection
+	/** The product’s vendor name. */
+	vendor: Scalars['String']
+}
 
 /** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
@@ -3723,16 +3722,16 @@ export enum ProductCollectionSortKeys {
 	Relevance = 'RELEVANCE',
 }
 
-export type ProductConnection = {
-	__typename?: 'ProductConnection'
+export interface ProductConnection {
+	__typename: 'ProductConnection'
 	/** A list of edges. */
 	edges: Array<ProductEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type ProductEdge = {
-	__typename?: 'ProductEdge'
+export interface ProductEdge {
+	__typename: 'ProductEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of ProductEdge. */
@@ -3759,8 +3758,8 @@ export enum ProductImageSortKeys {
  * A product may have a maximum of 3 options.
  * 255 characters limit each.
  */
-export type ProductOption = Node & {
-	__typename?: 'ProductOption'
+export interface ProductOption extends Node {
+	__typename: 'ProductOption'
 	/** Globally unique identifier. */
 	id: Scalars['ID']
 	/** The product option’s name. */
@@ -3770,24 +3769,24 @@ export type ProductOption = Node & {
 }
 
 /** The price range of the product. */
-export type ProductPriceRange = {
-	__typename?: 'ProductPriceRange'
+export interface ProductPriceRange {
+	__typename: 'ProductPriceRange'
 	/** The highest variant's price. */
 	maxVariantPrice: MoneyV2
 	/** The lowest variant's price. */
 	minVariantPrice: MoneyV2
 }
 
-export type ProductPriceRangeConnection = {
-	__typename?: 'ProductPriceRangeConnection'
+export interface ProductPriceRangeConnection {
+	__typename: 'ProductPriceRangeConnection'
 	/** A list of edges. */
 	edges: Array<ProductPriceRangeEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type ProductPriceRangeEdge = {
-	__typename?: 'ProductPriceRangeEdge'
+export interface ProductPriceRangeEdge {
+	__typename: 'ProductPriceRangeEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of ProductPriceRangeEdge. */
@@ -3820,50 +3819,49 @@ export enum ProductSortKeys {
 }
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
-export type ProductVariant = Node &
-	HasMetafields & {
-		__typename?: 'ProductVariant'
-		/** Indicates if the product variant is in stock. */
-		available?: Maybe<Scalars['Boolean']>
-		/** Indicates if the product variant is available for sale. */
-		availableForSale: Scalars['Boolean']
-		/** The compare at price of the variant. This can be used to mark a variant as on
-		 * sale, when `compareAtPrice` is higher than `price`.
-		 */
-		compareAtPrice?: Maybe<Scalars['Money']>
-		/** The compare at price of the variant. This can be used to mark a variant as on
-		 * sale, when `compareAtPriceV2` is higher than `priceV2`.
-		 */
-		compareAtPriceV2?: Maybe<MoneyV2>
-		/** Globally unique identifier. */
-		id: Scalars['ID']
-		/** Image associated with the product variant. This field falls back to the product image if no image is available. */
-		image?: Maybe<Image>
-		/** The metafield associated with the resource. */
-		metafield?: Maybe<Metafield>
-		/** A paginated list of metafields associated with the resource. */
-		metafields: MetafieldConnection
-		/** List of prices and compare-at prices in the presentment currencies for this shop. */
-		presentmentPrices: ProductVariantPricePairConnection
-		/** The product variant’s price. */
-		price: Scalars['Money']
-		/** The product variant’s price. */
-		priceV2: MoneyV2
-		/** The product object that the product variant belongs to. */
-		product: Product
-		/** Whether a customer needs to provide a shipping address when placing an order for the product variant. */
-		requiresShipping: Scalars['Boolean']
-		/** List of product options applied to the variant. */
-		selectedOptions: Array<SelectedOption>
-		/** The SKU (stock keeping unit) associated with the variant. */
-		sku?: Maybe<Scalars['String']>
-		/** The product variant’s title. */
-		title: Scalars['String']
-		/** The weight of the product variant in the unit system specified with `weight_unit`. */
-		weight?: Maybe<Scalars['Float']>
-		/** Unit of measurement for weight. */
-		weightUnit: WeightUnit
-	}
+export interface ProductVariant extends Node, HasMetafields {
+	__typename: 'ProductVariant'
+	/** Indicates if the product variant is in stock. */
+	available?: Maybe<Scalars['Boolean']>
+	/** Indicates if the product variant is available for sale. */
+	availableForSale: Scalars['Boolean']
+	/** The compare at price of the variant. This can be used to mark a variant as on
+	 * sale, when `compareAtPrice` is higher than `price`.
+	 */
+	compareAtPrice?: Maybe<Scalars['Money']>
+	/** The compare at price of the variant. This can be used to mark a variant as on
+	 * sale, when `compareAtPriceV2` is higher than `priceV2`.
+	 */
+	compareAtPriceV2?: Maybe<MoneyV2>
+	/** Globally unique identifier. */
+	id: Scalars['ID']
+	/** Image associated with the product variant. This field falls back to the product image if no image is available. */
+	image?: Maybe<Image>
+	/** The metafield associated with the resource. */
+	metafield?: Maybe<Metafield>
+	/** A paginated list of metafields associated with the resource. */
+	metafields: MetafieldConnection
+	/** List of prices and compare-at prices in the presentment currencies for this shop. */
+	presentmentPrices: ProductVariantPricePairConnection
+	/** The product variant’s price. */
+	price: Scalars['Money']
+	/** The product variant’s price. */
+	priceV2: MoneyV2
+	/** The product object that the product variant belongs to. */
+	product: Product
+	/** Whether a customer needs to provide a shipping address when placing an order for the product variant. */
+	requiresShipping: Scalars['Boolean']
+	/** List of product options applied to the variant. */
+	selectedOptions: Array<SelectedOption>
+	/** The SKU (stock keeping unit) associated with the variant. */
+	sku?: Maybe<Scalars['String']>
+	/** The product variant’s title. */
+	title: Scalars['String']
+	/** The weight of the product variant in the unit system specified with `weight_unit`. */
+	weight?: Maybe<Scalars['Float']>
+	/** Unit of measurement for weight. */
+	weightUnit: WeightUnit
+}
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
 export type ProductVariantImageArgs = {
@@ -3899,16 +3897,16 @@ export type ProductVariantPresentmentPricesArgs = {
 	reverse?: Maybe<Scalars['Boolean']>
 }
 
-export type ProductVariantConnection = {
-	__typename?: 'ProductVariantConnection'
+export interface ProductVariantConnection {
+	__typename: 'ProductVariantConnection'
 	/** A list of edges. */
 	edges: Array<ProductVariantEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type ProductVariantEdge = {
-	__typename?: 'ProductVariantEdge'
+export interface ProductVariantEdge {
+	__typename: 'ProductVariantEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of ProductVariantEdge. */
@@ -3916,24 +3914,24 @@ export type ProductVariantEdge = {
 }
 
 /** The compare-at price and price of a variant sharing a currency. */
-export type ProductVariantPricePair = {
-	__typename?: 'ProductVariantPricePair'
+export interface ProductVariantPricePair {
+	__typename: 'ProductVariantPricePair'
 	/** The compare-at price of the variant with associated currency. */
 	compareAtPrice?: Maybe<MoneyV2>
 	/** The price of the variant with associated currency. */
 	price: MoneyV2
 }
 
-export type ProductVariantPricePairConnection = {
-	__typename?: 'ProductVariantPricePairConnection'
+export interface ProductVariantPricePairConnection {
+	__typename: 'ProductVariantPricePairConnection'
 	/** A list of edges. */
 	edges: Array<ProductVariantPricePairEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type ProductVariantPricePairEdge = {
-	__typename?: 'ProductVariantPricePairEdge'
+export interface ProductVariantPricePairEdge {
+	__typename: 'ProductVariantPricePairEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of ProductVariantPricePairEdge. */
@@ -3957,8 +3955,8 @@ export enum ProductVariantSortKeys {
 	Relevance = 'RELEVANCE',
 }
 
-export type Query = {
-	__typename?: 'Query'
+export interface Query {
+	__typename: 'Query'
 	/** List of the shop's articles. */
 	articles: ArticleConnection
 	/** Find a blog by its handle. */
@@ -4168,8 +4166,8 @@ export type QueryAllSanityFileAssetsArgs = {
 	offset?: Maybe<Scalars['Int']>
 }
 
-export type SanityFileAsset = Document & {
-	__typename?: 'SanityFileAsset'
+export interface SanityFileAsset extends Document {
+	__typename: 'SanityFileAsset'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -4329,8 +4327,8 @@ export type SanityFileAssetFilter = {
 	is_draft?: Maybe<Scalars['Boolean']>
 }
 
-export type SanityImage = {
-	__typename?: 'SanityImage'
+export interface SanityImage {
+	__typename: 'SanityImage'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	asset?: Maybe<SanityImageAsset>
@@ -4338,8 +4336,8 @@ export type SanityImage = {
 	crop?: Maybe<SanityImageCrop>
 }
 
-export type SanityImageAsset = Document & {
-	__typename?: 'SanityImageAsset'
+export interface SanityImageAsset extends Document {
+	__typename: 'SanityImageAsset'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -4500,8 +4498,8 @@ export type SanityImageAssetFilter = {
 	is_draft?: Maybe<Scalars['Boolean']>
 }
 
-export type SanityImageCrop = {
-	__typename?: 'SanityImageCrop'
+export interface SanityImageCrop {
+	__typename: 'SanityImageCrop'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	top?: Maybe<Scalars['Float']>
@@ -4510,8 +4508,8 @@ export type SanityImageCrop = {
 	right?: Maybe<Scalars['Float']>
 }
 
-export type SanityImageDimensions = {
-	__typename?: 'SanityImageDimensions'
+export interface SanityImageDimensions {
+	__typename: 'SanityImageDimensions'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	height?: Maybe<Scalars['Float']>
@@ -4519,8 +4517,8 @@ export type SanityImageDimensions = {
 	aspectRatio?: Maybe<Scalars['Float']>
 }
 
-export type SanityImageHotspot = {
-	__typename?: 'SanityImageHotspot'
+export interface SanityImageHotspot {
+	__typename: 'SanityImageHotspot'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	x?: Maybe<Scalars['Float']>
@@ -4529,8 +4527,8 @@ export type SanityImageHotspot = {
 	width?: Maybe<Scalars['Float']>
 }
 
-export type SanityImageMetadata = {
-	__typename?: 'SanityImageMetadata'
+export interface SanityImageMetadata {
+	__typename: 'SanityImageMetadata'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	location?: Maybe<Geopoint>
@@ -4541,8 +4539,8 @@ export type SanityImageMetadata = {
 	isOpaque?: Maybe<Scalars['Boolean']>
 }
 
-export type SanityImagePalette = {
-	__typename?: 'SanityImagePalette'
+export interface SanityImagePalette {
+	__typename: 'SanityImagePalette'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	darkMuted?: Maybe<SanityImagePaletteSwatch>
@@ -4554,8 +4552,8 @@ export type SanityImagePalette = {
 	muted?: Maybe<SanityImagePaletteSwatch>
 }
 
-export type SanityImagePaletteSwatch = {
-	__typename?: 'SanityImagePaletteSwatch'
+export interface SanityImagePaletteSwatch {
+	__typename: 'SanityImagePaletteSwatch'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	background?: Maybe<Scalars['String']>
@@ -4567,8 +4565,8 @@ export type SanityImagePaletteSwatch = {
 /** Script discount applications capture the intentions of a discount that
  * was created by a Shopify Script.
  */
-export type ScriptDiscountApplication = DiscountApplication & {
-	__typename?: 'ScriptDiscountApplication'
+export interface ScriptDiscountApplication extends DiscountApplication {
+	__typename: 'ScriptDiscountApplication'
 	/** The method by which the discount's value is allocated to its entitled items. */
 	allocationMethod: DiscountApplicationAllocationMethod
 	/** The description of the application as defined by the Script. */
@@ -4586,8 +4584,8 @@ export type ScriptDiscountApplication = DiscountApplication & {
 /** Custom properties that a shop owner can use to define product variants.
  * Multiple options can exist. Options are represented as: option1, option2, option3, etc.
  */
-export type SelectedOption = {
-	__typename?: 'SelectedOption'
+export interface SelectedOption {
+	__typename: 'SelectedOption'
 	/** The product option’s name. */
 	name: Scalars['String']
 	/** The product option’s value. */
@@ -4603,8 +4601,8 @@ export type SelectedOptionInput = {
 }
 
 /** SEO information. */
-export type Seo = {
-	__typename?: 'SEO'
+export interface Seo {
+	__typename: 'SEO'
 	/** The meta description. */
 	description?: Maybe<Scalars['String']>
 	/** The SEO title. */
@@ -4612,8 +4610,8 @@ export type Seo = {
 }
 
 /** A shipping rate to be applied to a checkout. */
-export type ShippingRate = {
-	__typename?: 'ShippingRate'
+export interface ShippingRate {
+	__typename: 'ShippingRate'
 	/** Human-readable unique identifier for this shipping rate. */
 	handle: Scalars['String']
 	/** Price of this shipping rate. */
@@ -4625,8 +4623,8 @@ export type ShippingRate = {
 }
 
 /** Shop represents a collection of the general settings and information about the shop. */
-export type Shop = {
-	__typename?: 'Shop'
+export interface Shop {
+	__typename: 'Shop'
 	/** List of the shop' articles. */
 	articles: ArticleConnection
 	/** List of the shop' blogs. */
@@ -4733,8 +4731,8 @@ export type ShopProductsArgs = {
 	query?: Maybe<Scalars['String']>
 }
 
-export type ShopifyCollection = Document & {
-	__typename?: 'ShopifyCollection'
+export interface ShopifyCollection extends Document {
+	__typename: 'ShopifyCollection'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -4837,8 +4835,8 @@ export type ShopifyCollectionFilter = {
 	is_draft?: Maybe<Scalars['Boolean']>
 }
 
-export type ShopifyCollectionSource = {
-	__typename?: 'ShopifyCollectionSource'
+export interface ShopifyCollectionSource {
+	__typename: 'ShopifyCollectionSource'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
@@ -4848,8 +4846,8 @@ export type ShopifyCollectionSource = {
 	image?: Maybe<ShopifySourceImage>
 }
 
-export type ShopifyImageEdge = {
-	__typename?: 'ShopifyImageEdge'
+export interface ShopifyImageEdge {
+	__typename: 'ShopifyImageEdge'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	key?: Maybe<Scalars['String']>
@@ -4857,8 +4855,8 @@ export type ShopifyImageEdge = {
 	node?: Maybe<ShopifySourceImage>
 }
 
-export type ShopifyItem = {
-	__typename?: 'ShopifyItem'
+export interface ShopifyItem {
+	__typename: 'ShopifyItem'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	itemId?: Maybe<Scalars['String']>
@@ -4870,8 +4868,8 @@ export type ShopifyItem = {
 	previewImage?: Maybe<Scalars['String']>
 }
 
-export type ShopifyProduct = Document & {
-	__typename?: 'ShopifyProduct'
+export interface ShopifyProduct extends Document {
+	__typename: 'ShopifyProduct'
 	/** Document ID */
 	_id: Scalars['ID']
 	/** Document type */
@@ -4974,8 +4972,8 @@ export type ShopifyProductFilter = {
 	is_draft?: Maybe<Scalars['Boolean']>
 }
 
-export type ShopifyProductSource = {
-	__typename?: 'ShopifyProductSource'
+export interface ShopifyProductSource {
+	__typename: 'ShopifyProductSource'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
@@ -4985,8 +4983,8 @@ export type ShopifyProductSource = {
 	images?: Maybe<ShopifySourceImages>
 }
 
-export type ShopifySourceImage = {
-	__typename?: 'ShopifySourceImage'
+export interface ShopifySourceImage {
+	__typename: 'ShopifySourceImage'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	altText?: Maybe<Scalars['String']>
@@ -4997,16 +4995,16 @@ export type ShopifySourceImage = {
 	w800?: Maybe<Scalars['String']>
 }
 
-export type ShopifySourceImages = {
-	__typename?: 'ShopifySourceImages'
+export interface ShopifySourceImages {
+	__typename: 'ShopifySourceImages'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	edges?: Maybe<Array<Maybe<ShopifyImageEdge>>>
 }
 
 /** Policy that a merchant has configured for their store, such as their refund or privacy policy. */
-export type ShopPolicy = Node & {
-	__typename?: 'ShopPolicy'
+export interface ShopPolicy extends Node {
+	__typename: 'ShopPolicy'
 	/** Policy text, maximum size of 64kb. */
 	body: Scalars['String']
 	/** Policy’s handle. */
@@ -5019,47 +5017,47 @@ export type ShopPolicy = Node & {
 	url: Scalars['URL']
 }
 
-export type Slug = {
-	__typename?: 'Slug'
+export interface Slug {
+	__typename: 'Slug'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	current?: Maybe<Scalars['String']>
 }
 
-export type Span = {
-	__typename?: 'Span'
+export interface Span {
+	__typename: 'Span'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	marks?: Maybe<Array<Maybe<Scalars['String']>>>
 	text?: Maybe<Scalars['String']>
 }
 
-export type StringConnection = {
-	__typename?: 'StringConnection'
+export interface StringConnection {
+	__typename: 'StringConnection'
 	/** A list of edges. */
 	edges: Array<StringEdge>
 	/** Information to aid in pagination. */
 	pageInfo: PageInfo
 }
 
-export type StringEdge = {
-	__typename?: 'StringEdge'
+export interface StringEdge {
+	__typename: 'StringEdge'
 	/** A cursor for use in pagination. */
 	cursor: Scalars['String']
 	/** The item at the end of StringEdge. */
 	node: Scalars['String']
 }
 
-export type SubMenu = {
-	__typename?: 'SubMenu'
+export interface SubMenu {
+	__typename: 'SubMenu'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
 	columns?: Maybe<Array<Maybe<ImageBlockOrLinkGroup>>>
 }
 
-export type TextBlock = {
-	__typename?: 'TextBlock'
+export interface TextBlock {
+	__typename: 'TextBlock'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
@@ -5112,8 +5110,8 @@ export type TokenizedPaymentInputV2 = {
 }
 
 /** An object representing exchange of money for a product or service. */
-export type Transaction = {
-	__typename?: 'Transaction'
+export interface Transaction {
+	__typename: 'Transaction'
 	/** The amount of money that the transaction was for. */
 	amount: Scalars['Money']
 	/** The amount of money that the transaction was for. */
@@ -5143,8 +5141,8 @@ export enum TransactionStatus {
 	Error = 'ERROR',
 }
 
-export type UrlLink = {
-	__typename?: 'UrlLink'
+export interface UrlLink {
+	__typename: 'UrlLink'
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	url?: Maybe<Scalars['String']>
@@ -5152,8 +5150,8 @@ export type UrlLink = {
 }
 
 /** Represents an error in the input of a mutation. */
-export type UserError = DisplayableError & {
-	__typename?: 'UserError'
+export interface UserError extends DisplayableError {
+	__typename: 'UserError'
 	/** Path to the input field which caused the error. */
 	field?: Maybe<Array<Scalars['String']>>
 	/** The error message. */
