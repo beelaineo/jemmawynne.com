@@ -86,7 +86,20 @@ export const contentSection = {
 			options: {
 				list: [
 					{ title: 'Left', value: 'left' },
-					{ title: 'Center', value: 'center' },
+					{ title: 'Center (default)', value: 'center' },
+					{ title: 'Right', value: 'right' },
+				],
+				layout: 'radio',
+			},
+		},
+		{
+			name: 'alignItems',
+			type: 'string',
+			label: 'Item Alignment',
+			options: {
+				list: [
+					{ title: 'Left', value: 'left' },
+					{ title: 'Center (default)', value: 'center' },
 					{ title: 'Right', value: 'right' },
 				],
 				layout: 'radio',
