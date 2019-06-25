@@ -15,6 +15,9 @@ export const cta = {
 		{
 			...link,
 			name: 'link',
+			options: {
+				required: true,
+			},
 		},
 	],
 }

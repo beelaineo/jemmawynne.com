@@ -3,29 +3,33 @@ import { BlockPreview } from './BlockPreview'
 import { getImageThumbnail } from '../../utils'
 import { getBlockValues } from './getValues'
 
+const noop = () => {}
+
 const getPreviewValues = async (values) => {
 	const { items, layout, backgroundImage } = values
 
 	const [blockValues, bgImageUrl] = await Promise.all([
-		getBlockValues(items[0]),
+		items && items.length ? getBlockValues(items[0]) : noop,
 		getImageThumbnail(backgroundImage),
 	])
 
-	const links = items.map((item) => item.link).filter(Boolean)
-
 	const info = [
 		layout === 'carousel' ? '🎠Carousel' : null,
-		links && links.length
-			? `🔗${links.length} linked item${links.length === 1 ? '' : 's'}`
+		items && items.length
+			? `📝${items.length} item${items.length === 1 ? '' : 's'}`
 			: null,
 	].filter(Boolean)
 
+	const titles = [blockValues.title, blockValues.subtitle, null, null].filter(
+		(i) => i !== undefined,
+	)
+
+	const [title, subtitle] = titles
 	return {
-		title: blockValues.title,
-		subtitles: [
-			blockValues.subtitle,
-			info.length ? info.join('  ') : undefined,
-		].filter(Boolean),
+		title,
+		subtitles: [subtitle, info.length ? info.join('  ') : undefined].filter(
+			Boolean,
+		),
 		src: bgImageUrl || blockValues.src,
 	}
 }

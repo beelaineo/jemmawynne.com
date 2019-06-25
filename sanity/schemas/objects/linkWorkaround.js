@@ -10,7 +10,7 @@ export const link = {
 	of: [{ type: 'pageLink' }, { name: 'urlLink', type: 'urlLink' }],
 	validation: (Rule) => {
 		const { options } = Rule._typeDef
-		if (options && options.required) return Rule.required()
-		return Rule.custom(() => true)
+		if (options && options.required) return Rule.required().max(1)
+		return Rule.max(1)
 	},
 }

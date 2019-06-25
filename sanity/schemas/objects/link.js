@@ -5,6 +5,9 @@ import { getReferencedDocument, getShopifyThumbnail } from '../utils'
 const getPreviewValues = async (values) => {
 	const { document } = values
 
+	if (!document || !document._ref) {
+		return { title: '(empty)' }
+	}
 	const doc = await getReferencedDocument(document._ref)
 	const src =
 		doc && (doc._type === 'shopifyProduct' || doc._type === 'shopifyCollection')
