@@ -1,23 +1,55 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ContentSection } from '../../types'
 
-interface WithBlock {
+export const ImageBlockWrapper = styled.div`
+	${({ theme }) => css`
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		justify-content: center;
+	`}
+`
+
+export const TextBlockWrapper = styled.div`
+	${({ theme }) => css`
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		justify-content: center;
+	`}
+`
+
+interface WithSection {
 	theme: DefaultTheme
-	block: ContentSection
+	section: ContentSection
 }
 
 export const Wrapper = styled.div`
-	${({ theme, block }: WithBlock) => css`
+	${({ theme, section }: WithSection) => css`
 		position: relative;
-		height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: ${() => {
+			switch (section.alignItems) {
+				case 'left':
+					return 'flex-start'
+				case 'right':
+					return 'flex-end'
+				default:
+					return 'center'
+			}
+		}};
+		min-height: 400px;
 		padding: ${theme.layout.spacing.double};
-		${block.backgroundColor
-			? `background-color: ${theme.color[block.backgroundColor]};`
-			: ''}
+		${
+			section.backgroundColor
+				? `background-color: ${theme.color[section.backgroundColor]};`
+				: ''
+		}
 
-		${block.textColor
-			? `color: ${theme.color[block.textColor]};`
-			: ''}
+		${section.textColor ? `color: ${theme.color[section.textColor]};` : ''}
+
+		text-align: ${section.textAlign};
 
     & > * {
 			z-index: 1;
@@ -33,5 +65,15 @@ export const Wrapper = styled.div`
 			object-fit: cover;
 			z-index: 0;
 		}
+
+    ${TextBlockWrapper},
+    ${ImageBlockWrapper} {
+      ${
+				section.alignItems === 'center' || section.alignItems === undefined
+					? `max-width: 800px`
+					: `max-width: 400px`
+			}
+    }
+
 	`}
 `

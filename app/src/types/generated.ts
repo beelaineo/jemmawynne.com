@@ -1021,6 +1021,7 @@ export interface ContentSection {
 	backgroundColor?: Maybe<Scalars['String']>
 	textColor?: Maybe<Scalars['String']>
 	textAlign?: Maybe<Scalars['String']>
+	alignItems?: Maybe<Scalars['String']>
 }
 
 /** ISO 3166-1 alpha-2 country codes with some differences. */

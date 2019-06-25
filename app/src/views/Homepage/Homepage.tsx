@@ -18,8 +18,8 @@ export const Homepage = () => {
 	const { contentSections } = data.Homepage
 	return (
 		<React.Fragment>
-			{contentSections.map((block) => (
-				<ContentSection key={block._key} block={block} />
+			{contentSections.map((section) => (
+				<ContentSection key={section._key} section={section} />
 			))}
 		</React.Fragment>
 	)

@@ -6,17 +6,20 @@ import { Wrapper } from './styled'
 import { Image } from '../Image'
 
 interface ContentSectionProps {
-	block: ContentSectionType
+	section: ContentSectionType
 }
 
 export const ContentSection = (props: ContentSectionProps) => {
-	const { block } = props
+	const { section } = props
 	const BlockForType =
-		block.layout === 'carousel' ? CarouselSection : NormalSection
+		section.layout === 'carousel' ? CarouselSection : NormalSection
+	console.log(section)
 	return (
-		<Wrapper block={block}>
-			{block.backgroundImage ? <Image image={block.backgroundImage} /> : null}
-			<BlockForType block={block} />
+		<Wrapper section={section}>
+			{section.backgroundImage ? (
+				<Image image={section.backgroundImage} />
+			) : null}
+			<BlockForType section={section} />
 		</Wrapper>
 	)
 }

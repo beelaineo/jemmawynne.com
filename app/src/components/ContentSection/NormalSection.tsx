@@ -3,16 +3,17 @@ import { ContentSection } from '../../types'
 import { Wrapper } from './styled'
 import { ImageBlock } from './ImageBlock'
 import { TextBlock } from './TextBlock'
+import { renderContentBlock } from './renderContentBlock'
 
 interface NormalSectionProps {
-	block: ContentSection
+	section: ContentSection
 }
 
-export const NormalSection = ({ block }: NormalSectionProps) => {
-	console.log(block.items)
-	const { items } = block
-
-	console.log(items)
-	return null
-	// return <React.Fragment>{items ? items.map((item) => item.)}</React.Fragment>
+export const NormalSection = ({ section }: NormalSectionProps) => {
+	const { items } = section
+	return (
+		<React.Fragment>
+			{items ? items.map(renderContentBlock) : null}
+		</React.Fragment>
+	)
 }

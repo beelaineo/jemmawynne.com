@@ -22,6 +22,8 @@ export const linkFragment = /* GraphQL */ `
 
 export const textBlockFragment = /* GraphQL */ `
 	fragment TextBlockFragment on TextBlock {
+		_key
+		_type
 		title
 		bodyRaw
 		cta {
@@ -59,6 +61,7 @@ export const contentSectionFragment = /* GraphQL */ `
 		backgroundColor
 		textColor
 		textAlign
+		alignItems
 		items {
 			... on ImageBlock {
 				...ImageBlockFragment
