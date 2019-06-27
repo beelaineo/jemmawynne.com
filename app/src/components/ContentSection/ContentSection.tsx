@@ -13,7 +13,6 @@ export const ContentSection = (props: ContentSectionProps) => {
 	const { section } = props
 	const BlockForType =
 		section.layout === 'carousel' ? CarouselSection : NormalSection
-	console.log(section)
 	return (
 		<Wrapper section={section}>
 			{section.backgroundImage ? (

@@ -1,6 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-interface TextStyleProps {
+export interface TextStyleProps {
 	theme: DefaultTheme
 	align?: 'left' | 'center' | 'right'
 	weight?: 'xlight' | 'light' | 'book' | 'normal' | 'semi' | 'strong'
@@ -9,8 +9,17 @@ interface TextStyleProps {
 	transform?: string
 }
 
-const commonHeaderStyles = ({ theme, align, transform, weight, color, family }: TextStyleProps) => css`
-	font-weight: ${theme.font.weight[weight] || family === 'serif' ? theme.font.weight.normal : theme.font.weight.semi};
+const commonHeaderStyles = ({
+	theme,
+	align,
+	transform,
+	weight,
+	color,
+	family,
+}: TextStyleProps) => css`
+	font-weight: ${theme.font.weight[weight] || family === 'serif'
+		? theme.font.weight.normal
+		: theme.font.weight.semi};
 	font-family: ${theme.font.family[family] || theme.font.family.sans};
 	color: ${theme.color[color] || 'inherit'};
 	text-align: ${align || 'inherit'};

@@ -10,8 +10,6 @@ export interface TextBlockProps {
 }
 
 export const TextBlock = ({ block }: TextBlockProps) => {
-	console.log('text block')
-	console.log(block)
 	const { title, bodyRaw, cta } = block
 	return (
 		<TextBlockWrapper>

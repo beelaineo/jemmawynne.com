@@ -3345,6 +3345,7 @@ export interface Page extends Document {
 	_rev: Scalars['String']
 	_key?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
+	slug?: Maybe<Slug>
 }
 
 export interface PageConnection {

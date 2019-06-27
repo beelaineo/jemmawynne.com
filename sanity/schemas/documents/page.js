@@ -9,5 +9,12 @@ export const page = {
 			type: 'string',
 			validation: (Rule) => Rule.required(),
 		},
+		{
+			name: 'slug',
+			label: 'Page URL',
+			type: 'slug',
+			source: 'title',
+			validation: (Rule) => Rule.required(),
+		},
 	],
 }
