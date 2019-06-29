@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ContentSection as ContentSectionType } from '../../types'
 import { CarouselSection } from './CarouselSection'
 import { NormalSection } from './NormalSection'
-import { Wrapper } from './styled'
+import { Wrapper, Inner } from './styled'
 import { Image } from '../Image'
 
 interface ContentSectionProps {
@@ -18,7 +18,9 @@ export const ContentSection = (props: ContentSectionProps) => {
 			{section.backgroundImage ? (
 				<Image image={section.backgroundImage} />
 			) : null}
-			<BlockForType section={section} />
+			<Inner section={section}>
+				<BlockForType section={section} />
+			</Inner>
 		</Wrapper>
 	)
 }

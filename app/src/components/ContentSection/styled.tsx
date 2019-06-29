@@ -24,32 +24,64 @@ interface WithSection {
 	section: ContentSection
 }
 
+const MIN_HEIGHT = '400px'
+
+export const Inner = styled.div`
+	${({ theme, section }: WithSection) => css`
+		margin: 0 auto;
+		width: 100%;
+		flex-grow: 1;
+		max-width: ${theme.layout.columns.xWide};
+		padding: 0 ${theme.layout.spacing.double};
+		grid-template-rows: calc(
+			${MIN_HEIGHT} - (${theme.layout.spacing.double} * 2)
+		);
+		display: grid;
+		grid-gap: ${theme.layout.spacing.double};
+		grid-template-columns: repeat(2, 1fr);
+		align-items: center;
+		${() => {
+			switch (section.alignItems) {
+				case 'right':
+					return css`
+						> *:last-child {
+							grid-column-start: 2;
+						}
+					`
+				case 'center':
+					return `
+            > *:last-child {
+							grid-column-span: 2;
+						}
+        `
+				default:
+					return ''
+			}
+		}};
+
+		text-align: ${section.textAlign};
+
+		display: ${section.alignItems};
+	`}
+`
+
 export const Wrapper = styled.div`
 	${({ theme, section }: WithSection) => css`
 		position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: ${() => {
-			switch (section.alignItems) {
-				case 'left':
-					return 'flex-start'
-				case 'right':
-					return 'flex-end'
-				default:
-					return 'center'
-			}
-		}};
-		min-height: 400px;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+
+		min-height: ${MIN_HEIGHT};
 		padding: ${theme.layout.spacing.double};
-		${
-			section.backgroundColor
-				? `background-color: ${theme.color[section.backgroundColor]};`
-				: ''
-		}
+		${section.backgroundColor
+			? `background-color: ${theme.color[section.backgroundColor]};`
+			: ''}
 
-		${section.textColor ? `color: ${theme.color[section.textColor]};` : ''}
+		${section.textColor
+			? `color: ${theme.color[section.textColor]};`
+			: ''}
 
-		text-align: ${section.textAlign};
 
     & > * {
 			z-index: 1;
@@ -65,15 +97,5 @@ export const Wrapper = styled.div`
 			object-fit: cover;
 			z-index: 0;
 		}
-
-    ${TextBlockWrapper},
-    ${ImageBlockWrapper} {
-      ${
-				section.alignItems === 'center' || section.alignItems === undefined
-					? `max-width: 800px`
-					: `max-width: 400px`
-			}
-    }
-
 	`}
 `
