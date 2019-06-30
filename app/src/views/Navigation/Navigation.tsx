@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCheckout } from 'use-shopify'
-import { FaShoppingCart, FaTimes } from 'react-icons/fa'
 import { useSettings } from '../../providers/SettingsProvider'
 import { CartSidebar, CloseButton, CartNav } from 'Components/Cart'
 import { unwindEdges } from '../../utils/graphql'
@@ -67,20 +66,9 @@ export const Navigation = () => {
 				</NavSection>
 			</Inner>
 			<CartSidebar open={open}>
-				<CloseButton onClick={toggleFlyout}>
-					<FaTimes />
-				</CloseButton>
+				<CloseButton onClick={toggleFlyout}>close</CloseButton>
 				<Checkout />
 			</CartSidebar>
 		</Wrapper>
 	)
 }
-
-// {subMenus.map((subMenu) => (
-// 	<SubMenuPane
-// 		key={subMenu._key}
-// 		{...activeMenuProps}
-// 		// @ts-ignore
-// 		subMenu={subMenu}
-// 	/>
-// ))}

@@ -5,9 +5,20 @@ export const ImageBlockWrapper = styled.div`
 	${({ theme }) => css`
 		display: flex;
 		width: 100%;
+		height: 100%;
 		flex-direction: column;
 		justify-content: center;
 	`}
+`
+
+export const ImageWrapper = styled.div`
+	display: flex;
+
+	& > img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 `
 
 export const TextBlockWrapper = styled.div`
@@ -24,7 +35,7 @@ interface WithSection {
 	section: ContentSection
 }
 
-const MIN_HEIGHT = '400px'
+const ROW_HEIGHT = '620px'
 
 export const Inner = styled.div`
 	${({ theme, section }: WithSection) => css`
@@ -34,7 +45,7 @@ export const Inner = styled.div`
 		max-width: ${theme.layout.columns.xWide};
 		padding: 0 ${theme.layout.spacing.double};
 		grid-template-rows: calc(
-			${MIN_HEIGHT} - (${theme.layout.spacing.double} * 2)
+			${ROW_HEIGHT} - (${theme.layout.spacing.double} * 2)
 		);
 		display: grid;
 		grid-gap: ${theme.layout.spacing.double};
@@ -72,7 +83,7 @@ export const Wrapper = styled.div`
 		flex-direction: column;
 		align-items: stretch;
 
-		min-height: ${MIN_HEIGHT};
+		min-height: ${ROW_HEIGHT};
 		padding: ${theme.layout.spacing.double};
 		${section.backgroundColor
 			? `background-color: ${theme.color[section.backgroundColor]};`
