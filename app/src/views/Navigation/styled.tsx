@@ -66,6 +66,7 @@ export const NavHeader = styled(Header5)`
 export const NavHeaderWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	cursor: pointer;
 	justify-content: center;
 	align-items: center;
 	margin: 0 1em;
@@ -77,7 +78,7 @@ export const NavHeaderWrapper = styled.div`
 		margin-right: 0;
 	}
 
-	&:hover > ${NavHeader} {
+	&:focus ${NavHeader}, &:hover > ${NavHeader} {
 		border-bottom-color: black;
 	}
 `

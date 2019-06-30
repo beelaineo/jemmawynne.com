@@ -10,7 +10,14 @@ import { unwindEdges } from '../../utils/graphql'
 import { Checkout } from '../Cart/Checkout'
 import { Button } from '../ProductDetail/styled'
 import { MenuLinkOrSubMenu } from '../../types/generated'
-import { Wrapper, Inner, NavSection, Logo } from './styled'
+import {
+	Wrapper,
+	Inner,
+	NavSection,
+	NavHeader,
+	NavHeaderWrapper,
+	Logo,
+} from './styled'
 import { MenuLink } from './MenuLink'
 import { SubMenu } from './SubMenu'
 import { SubMenuPane } from './SubMenuPane'
@@ -45,13 +52,26 @@ export const Navigation = () => {
 	const subMenus = menuItems.filter((mi) => mi.__typename === 'SubMenu')
 
 	console.log(menuItems)
+	const cartCount = loading ? null : lineItems.length || null
 	return (
 		<Wrapper>
 			<Inner>
 				<NavSection ready={ready}>{menuItems.map(renderMenuItem)}</NavSection>
 				<Logo src="/static/images/Logo_Large_Black.svg" />
-				<NavSection ready={ready}>a</NavSection>
+				<NavSection ready={ready}>
+					<NavHeaderWrapper>
+						<NavHeader as="button" onClick={toggleFlyout}>
+							Cart {cartCount}
+						</NavHeader>
+					</NavHeaderWrapper>
+				</NavSection>
 			</Inner>
+			<CartSidebar open={open}>
+				<CloseButton onClick={toggleFlyout}>
+					<FaTimes />
+				</CloseButton>
+				<Checkout />
+			</CartSidebar>
 		</Wrapper>
 	)
 }
