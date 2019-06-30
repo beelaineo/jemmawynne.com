@@ -23,7 +23,8 @@ import {
 	NormalizeDiv,
 	ArrowDown,
 } from './styled'
-import { Header6 } from 'Components/Text'
+import { Accordion } from '../../components/Accordion'
+import { Header5, Header6 } from 'Components/Text'
 
 interface Props {
 	product: Product
@@ -70,10 +71,12 @@ const ProductDetailMain = ({ product }: Props) => {
 						quantity={quantity}
 					/>
 					<NormalizeDiv>
-						<Header6 color="dark" transform="uppercase">
-							<Link to="#">Shipping & returns</Link>
-							<button>FAQ</button>
-						</Header6>
+						<Accordion label="Shipping & Returns">
+							<Header5>Shipping & Returns Info</Header5>
+						</Accordion>
+						<Accordion label="FAQ">
+							<Header5>FAQ Info</Header5>
+						</Accordion>
 					</NormalizeDiv>
 					<ArrowDown>&darr;</ArrowDown>
 				</ProductInfoWrapper>

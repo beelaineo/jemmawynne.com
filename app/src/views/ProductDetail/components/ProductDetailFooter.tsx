@@ -12,9 +12,7 @@ interface ProductDetailFooterProps {
 export const ProductDetailFooter = ({ product }: ProductDetailFooterProps) => {
 	return (
 		<NormalizeDiv>
-			<Accordion label="Details">
-				<P>{product.description}</P>
-			</Accordion>
+			<P>{product.description}</P>
 		</NormalizeDiv>
 	)
 }
