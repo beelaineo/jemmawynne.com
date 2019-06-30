@@ -20,6 +20,7 @@
   "dependencies": {
     "@sane-shopify/sanity-plugin": "^0.2.2",
     "@sanity/base": "^0.140.36",
+    "@sanity/block-content-to-react": "^2.0.6",
     "@sanity/cli": "^0.140.36",
     "@sanity/components": "^0.140.36",
     "@sanity/core": "^0.140.36",

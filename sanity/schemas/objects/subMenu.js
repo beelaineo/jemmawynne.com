@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { groupBy, prop } from 'ramda'
-import { BlockPreview } from './contentBlocks/BlockPreview'
 import { IoIosListBox } from 'react-icons/io'
+import { BlockPreview } from './contentSections/BlockPreview'
 import { link } from './linkWorkaround'
 import { getReferencedDocument, getShopifyThumbnail } from '../utils'
 
-const getPreviewValues = async ({ label, link }) => {
-	if (!link.length) return { title: 'Missing Link' }
-	const linkedDoc = await getReferencedDocument(link[0]._ref)
+const getPreviewValues = async ({ label, link: previewLink }) => {
+	if (!previewLink.length || !previewLink[0].document)
+		return { title: 'Missing Link' }
+	const linkedDoc = await getReferencedDocument(previewLink[0].document._ref)
 
 	const shopifyThumbnail =
 		linkedDoc &&

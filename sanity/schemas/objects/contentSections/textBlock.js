@@ -1,16 +1,28 @@
 import * as React from 'react'
 import { BlockPreview } from './BlockPreview'
-import { blocksToPlainText } from '../../utils'
+import { blocksToPlainText, getReferencedDocument } from '../../utils'
 
 const getPreviewValues = async (values) => {
 	const { title, body, cta } = values
 
 	const bodyText = blocksToPlainText(body)
 	const titles = [title, bodyText].filter(Boolean)
+	const linkedDoc =
+		cta && cta.link.length && cta.link[0].document
+			? await getReferencedDocument(cta.link[0].document._ref)
+			: undefined
+	const urlLink = cta && cta.link.length && cta.link[0].url
+
+	const info = [
+		linkedDoc ? `🔗${linkedDoc.title}` : null,
+		urlLink ? `🔗${urlLink}` : null,
+	].filter(Boolean)
 
 	return {
 		title: titles.length ? titles[0] : 'Untitled Block',
-		subtitles: [titles.length >= 2 ? titles[1] : undefined].filter(Boolean),
+		subtitles: [titles.length >= 2 ? titles[1] : undefined, ...info].filter(
+			Boolean,
+		),
 	}
 }
 

@@ -1,5 +1,3 @@
-// @flow
-
 export const z = {
 	main: 0,
 	navigation: 100,
@@ -25,3 +23,5 @@ export const columns = {
 	wide: '900px',
 	xWide: '1100px',
 }
+
+export const navHeight = '50px'

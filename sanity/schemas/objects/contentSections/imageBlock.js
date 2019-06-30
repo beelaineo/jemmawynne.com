@@ -15,8 +15,11 @@ const getPreviewValues = async (props) => {
 
 	const [imageUrl, linkedDoc] = await Promise.all([
 		images && images.length ? getImageThumbnail(images[0]) : noop(),
-		link && link._ref ? getReferencedDocument(link._ref) : noop(),
+		link && link.length > 0 && link[0].document && link[0].document._ref
+			? getReferencedDocument(link[0].document._ref)
+			: noop(),
 	])
+	const urlLink = link && link.length && link[0].url
 
 	const shopifyThumbnail =
 		linkedDoc &&
@@ -26,7 +29,10 @@ const getPreviewValues = async (props) => {
 			: undefined
 	const subtitle = titles.length >= 2 ? titles[1] : undefined
 
-	const info = [linkedDoc ? `🔗${linkedDoc.title}` : null].filter(Boolean)
+	const info = [
+		linkedDoc ? `🔗${linkedDoc.title}` : null,
+		urlLink ? `🔗${urlLink}` : null,
+	].filter(Boolean)
 
 	return {
 		title: titles[0],

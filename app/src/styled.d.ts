@@ -6,7 +6,7 @@ declare module 'styled-components' {
 			z: { [key: string]: number }
 			spacing: { [key: string]: string }
 			columns: { [key: string]: string }
-			transition: { [key: string]: string }
+			navHeight: string
 		}
 		font: {
 			size: { [key: string]: string }

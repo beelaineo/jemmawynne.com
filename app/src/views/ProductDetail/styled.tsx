@@ -155,7 +155,8 @@ interface NormalizeDivProps {
 }
 
 export const NormalizeDiv = styled.div`
-	max-width: ${(props: NormalizeDivProps) => (props.width === 'half' ? '50%' : '100%')};
+	max-width: ${(props: NormalizeDivProps) =>
+		props.width === 'half' ? '50%' : '100%'};
 	${(props) => `
    		margin: ${props.theme.layout.spacing.small};
 	`}
@@ -166,54 +167,13 @@ interface BackgroundImageProps {
 }
 
 export const BackgroundImage = styled.div`
-	background-image: url(${(props: BackgroundImageProps) => props.imageSrc || ''});
+	background-image: url(${(props: BackgroundImageProps) =>
+		props.imageSrc || ''});
 	background-size: cover;
 	background-position: center;
 	a {
 		color: transparent;
 	}
-`
-
-interface AccordionProps {
-	theme: DefaultTheme
-	border: boolean
-}
-
-export const Accordion = styled.div`
-	max-width: 50%;
-	p {
-		transition: height 250ms linear;
-		font-size: ${(props) => props.theme.font.size.h5};
-		color: ${(props) => props.theme.color.dark};
-		font-weight: ${(props) => props.theme.font.weight.strong};
-	}
-	button {
-		font-size: ${(props) => props.theme.font.size.h6};
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		color: ${(props) => props.theme.color.dark};
-	}
-	${(props) =>
-		props.className === 'open'
-			? `
-		> p{
-			visibility: visible;
-			height: auto;
-			
-		}
-	   
-	`
-			: `
-		> p{
-			visibility: hidden;
-			height: 0;
-			margin: 0;
-		}
-     `}
-	padding: ${(props) => props.theme.layout.spacing.small};
-	margin: ${(props) => props.theme.layout.spacing.singleHalf} 0;
-	border-top: ${(props: AccordionProps) => (props.border === true ? `2px solid ${props.theme.color.light}` : '')};
-	border-bottom: ${(props: AccordionProps) => (props.border === true ? `2px solid ${props.theme.color.light}` : '')};
 `
 
 interface ButtonProps {
@@ -224,6 +184,7 @@ interface ButtonProps {
 	color?: string
 	family?: string
 	transform?: string
+	href?: string
 }
 
 export const Button = styled.button`

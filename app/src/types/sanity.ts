@@ -1,18 +1,9 @@
 import * as React from 'react'
 import { ShopifyImage } from 'use-shopify'
-
-/**
- * SEO
- */
-
-export interface SEO {
-	description?: string
-	name?: string
-	image?: SanityImage | ShopifyImage | null
-	contentType?: string
-	currency?: string | null
-	price?: string | null
-}
+import {
+	ContentSection as ContentSectionGen,
+	ImageWithAltText,
+} from './generated'
 
 /**
  * Sanity Rich Text
@@ -55,16 +46,28 @@ interface VideoEmbed {
 
 export type RichTextBlock = TextNode | SanityImage | VideoEmbed
 
-export interface TextBlock {
+/**
+ * Main Blocks
+ */
+
+interface Block {
 	_type: string
 	_key: string
-	blocks?: RichTextBlock[]
-	fullWidth?: boolean
 }
 
-export type ContentBlock = TextBlock
+export interface TextBlock extends Block {
+	_type: string
+	_key: string
+}
 
-export type ContentBlocks = ContentBlock[]
+export interface ImageBlock extends Block {
+	_type: string
+	_key: string
+}
+
+type ContentBlock = TextBlock | ImageBlock
+
+export interface ContentSection extends ContentSectionGen {}
 
 /**
  * Colors
@@ -90,19 +93,17 @@ export interface Color {
  * Media
  */
 
-export interface SanityImage {
-	_type: string
-	_ref: string
-	_key: string
-	__typename: 'SanityImage'
-	altText?: string
-	id: string
-	url: string
-	metadata?: {
-		dimensions: {
-			width: number
-			height: number
-			ratio?: number
-		}
-	}
+export interface SanityImage extends ImageWithAltText {}
+
+/**
+ * SEO
+ */
+
+export interface SEO {
+	description?: string
+	name?: string
+	image?: SanityImage | ShopifyImage | null
+	contentType?: string
+	currency?: string | null
+	price?: string | null
 }

@@ -6,10 +6,12 @@ import {
 
 const getTextBlockValues = async (item) => {
 	const doc =
-		item.cta && item.cta.link
-			? getReferencedDocument(item.cta.link[0]._ref)
+		item.cta &&
+		item.cta.link &&
+		item.cta.link.length >= 1 &&
+		item.cta.link[0].document
+			? await getReferencedDocument(item.cta.link[0].document._ref)
 			: {}
-
 	const subtitle =
 		item.body && item.body.length ? blocksToPlainText(item.body) : undefined
 	return {
