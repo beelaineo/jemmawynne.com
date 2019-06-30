@@ -31,6 +31,7 @@ const DEV_SERVER = {
 module.exports = (env) => {
 	const isDev = env !== 'production'
 	return {
+		mode: isDev ? 'development' : 'production',
 		cache: true,
 		devtool: isDev ? 'eval-source-map' : 'source-map',
 		devServer: isDev ? DEV_SERVER : {},
@@ -38,7 +39,9 @@ module.exports = (env) => {
 		entry: isDev ? ['./src/index.tsx'] : './src/index.tsx',
 		output: {
 			path: PATHS.dist,
-			filename: isDev ? `${PATHS.js}/[name].js` : `${PATHS.js}/[name].[hash].js`,
+			filename: isDev
+				? `${PATHS.js}/[name].js`
+				: `${PATHS.js}/[name].[hash].js`,
 			publicPath: '/',
 		},
 		resolve: {
@@ -74,8 +77,12 @@ module.exports = (env) => {
 			new CheckerPlugin(),
 			new HardSourceWebpackPlugin(),
 			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production'),
-				SHOPIFY_STOREFRONT_TOKEN: JSON.stringify(process.env.SHOPIFY_STOREFRONT_TOKEN),
+				'process.env.NODE_ENV': JSON.stringify(
+					isDev ? 'development' : 'production',
+				),
+				SHOPIFY_STOREFRONT_TOKEN: JSON.stringify(
+					process.env.SHOPIFY_STOREFRONT_TOKEN,
+				),
 			}),
 			new HtmlWebpackPlugin({
 				template: './public/index.html',
@@ -101,7 +108,9 @@ module.exports = (env) => {
 					vendors: {
 						test: /[\\/]node_modules[\\/]/,
 						chunks: 'all',
-						filename: isDev ? `${PATHS.js}/vendor.[hash].js` : `${PATHS.js}/vendor.[contentHash].js`,
+						filename: isDev
+							? `${PATHS.js}/vendor.[hash].js`
+							: `${PATHS.js}/vendor.[contentHash].js`,
 						priority: -10,
 					},
 				},

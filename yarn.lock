@@ -2091,7 +2091,7 @@
   resolved "https://registry.yarnpkg.com/@sane-shopify/types/-/types-0.2.0.tgz#2fe966af41e4138b9d8e738e34287ffa384fe0a2"
   integrity sha512-rOUKE96VZHWFb+NqTdcz63M8xs0W62U+uwFUN0yOonsJOO662ZV0iH05X0T9J/ERvCwYru6NFvUr3apC1wsstA==
 
-"@sanity/base@^0.140.12", "@sanity/base@^0.140.36":
+"@sanity/base@^0.140.36":
   version "0.140.36"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-0.140.36.tgz#e9b1dd3e38fd0eb575df709cd3faa4d0858004d9"
   integrity sha512-MdKALkJtNWbQT7K0avYOJI1hSwC+8W+Kypy02eQumoUe7r4S2fdep5O8uwgNcwzgN7QXJHo5zAqu0LPaHhp83Q==
