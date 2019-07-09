@@ -1,0 +1,48 @@
+{
+  "document": {
+    "nodes": [
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {
+          "src": "void.png"
+        }
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "text": "Focus a void node and hit enter."
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {
+          "src": "void.png"
+        }
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {
+          "src": "void.png"
+        }
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {
+          "src": "void.png"
+        }
+      }
+    ]
+  }
+}
