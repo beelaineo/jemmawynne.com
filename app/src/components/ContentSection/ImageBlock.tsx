@@ -8,12 +8,14 @@ export interface ImageBlockProps {
 }
 
 export const ImageBlock = ({ block }: ImageBlockProps) => {
+	console.log(block)
+	if (!block.images || !block.images.length) return null
 	return (
 		<ImageBlockWrapper>
 			<ImageWrapper>
 				<Image image={block.images[0]} />
 			</ImageWrapper>
-			<p>caption</p>
+			<p>(caption)</p>
 		</ImageBlockWrapper>
 	)
 }

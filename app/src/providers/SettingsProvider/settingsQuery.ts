@@ -1,11 +1,7 @@
 import { Collection } from 'use-shopify'
-import { Paginated } from '../../types'
+import { Paginated } from '@good-idea/unwind-edges'
 import { Menu } from '../../types/generated'
-import {
-	linkFragment,
-	linkFragmentInline,
-	imageBlockFragment,
-} from '../../graphql/fragments'
+import { linkFragment, imageBlockFragment } from '../../graphql/fragments'
 
 export const SETTINGS_QUERY = /* GraphQL */ `
 	{
@@ -13,13 +9,14 @@ export const SETTINGS_QUERY = /* GraphQL */ `
 			_id
 			_type
 			_key
+			_createdAt
 			menuItems {
 				... on MenuLink {
 					_key
 					_type
 					label
 					link {
-            ${linkFragmentInline}
+						...LinkFragment
 					}
 				}
 				... on SubMenu {
@@ -35,12 +32,7 @@ export const SETTINGS_QUERY = /* GraphQL */ `
 							_type
 							title
 							links {
-								_key
-								_type
-								label
-								link {
-                  ${linkFragmentInline}
-								}
+								...LinkFragment
 							}
 						}
 					}
@@ -48,6 +40,7 @@ export const SETTINGS_QUERY = /* GraphQL */ `
 			}
 		}
 	}
+	${linkFragment}
 	${imageBlockFragment}
 `
 
