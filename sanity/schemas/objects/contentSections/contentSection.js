@@ -41,14 +41,14 @@ export const contentSection = {
 	fields: [
 		{
 			name: 'items',
-			label: 'Content',
+			title: 'Content',
 			type: 'array',
 			of: [{ type: 'textBlock' }, { type: 'imageBlock' }],
 			validation: (Rule) => Rule.required().min(1),
 		},
 		{
 			name: 'layout',
-			label: 'Block Type',
+			title: 'Layout',
 			type: 'string',
 			options: {
 				list: [
@@ -63,7 +63,7 @@ export const contentSection = {
 		{
 			name: 'backgroundImage',
 			type: 'imageWithAltText',
-			label: 'Background Image',
+			title: 'Background Image',
 			options: {
 				required: false,
 				hotspot: true,
@@ -72,17 +72,17 @@ export const contentSection = {
 		{
 			name: 'backgroundColor',
 			type: 'colorPicker',
-			label: 'Background Color',
+			title: 'Background Color',
 		},
 		{
 			name: 'textColor',
 			type: 'colorPicker',
-			label: 'Text Color',
+			title: 'Text Color',
 		},
 		{
 			name: 'textAlign',
 			type: 'string',
-			label: 'Text Alignment',
+			title: 'Text Alignment',
 			options: {
 				list: [
 					{ title: 'Left', value: 'left' },
@@ -95,7 +95,7 @@ export const contentSection = {
 		{
 			name: 'alignItems',
 			type: 'string',
-			label: 'Item Alignment',
+			title: 'Block Alignment',
 			options: {
 				list: [
 					{ title: 'Left', value: 'left' },
