@@ -14,9 +14,9 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
 			<Header5>{title}</Header5>
 			{links && links.length
 				? links.map((menuLink) =>
-						menuLink.link && menuLink.link.length ? (
+						menuLink.document ? (
 							<Header5 weight="normal" key={menuLink._key}>
-								<Link link={menuLink.link[0]} />
+								<Link link={menuLink} />
 							</Header5>
 						) : null,
 				  )

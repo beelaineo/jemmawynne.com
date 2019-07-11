@@ -23,6 +23,17 @@ export type Scalars = {
 	JSON: { [key: string]: any }
 }
 
+/** A version of the API. */
+export interface ApiVersion {
+	__typename: 'ApiVersion'
+	/** The human-readable name of the version. */
+	displayName: Scalars['String']
+	/** The unique identifier of an ApiVersion. All supported API versions have a date-based (YYYY-MM) or `unstable` handle. */
+	handle: Scalars['String']
+	/** Whether the version is supported by Shopify. */
+	supported: Scalars['Boolean']
+}
+
 /** Details about the gift card used on the checkout. */
 export interface AppliedGiftCard extends Node {
 	__typename: 'AppliedGiftCard'
@@ -3619,16 +3630,16 @@ export type ProductDescriptionArgs = {
  * customization of another product or an extended warranty).
  */
 export type ProductImagesArgs = {
+	maxWidth?: Maybe<Scalars['Int']>
+	maxHeight?: Maybe<Scalars['Int']>
+	crop?: Maybe<CropRegion>
+	scale?: Maybe<Scalars['Int']>
 	first?: Maybe<Scalars['Int']>
 	after?: Maybe<Scalars['String']>
 	last?: Maybe<Scalars['Int']>
 	before?: Maybe<Scalars['String']>
 	reverse?: Maybe<Scalars['Boolean']>
 	sortKey?: Maybe<ProductImageSortKeys>
-	maxWidth?: Maybe<Scalars['Int']>
-	maxHeight?: Maybe<Scalars['Int']>
-	crop?: Maybe<CropRegion>
-	scale?: Maybe<Scalars['Int']>
 }
 
 /** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
@@ -3987,10 +3998,12 @@ export interface Query {
 	 * Additional access scope required: unauthenticated_read_product_tags.
 	 */
 	productTags: StringConnection
-	/** List of the shop’s product types. */
+	/** List of product types for the shop's products that are published to your app. */
 	productTypes: StringConnection
 	/** List of the shop’s products. */
 	products: ProductConnection
+	/** The list of public Storefront API versions, including supported, release candidate and unstable versions. */
+	publicApiVersions: Array<ApiVersion>
 	shop: Shop
 	ShopifyProduct?: Maybe<ShopifyProduct>
 	ShopifyCollection?: Maybe<ShopifyCollection>

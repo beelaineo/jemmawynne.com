@@ -1,6 +1,8 @@
 import { PageLink } from '../types/generated'
+import { path } from 'ramda'
 
-export const getPageLinkLabel = (link: PageLink): string => link.document.title
+export const getPageLinkLabel = (link: PageLink): string | void =>
+	path(['document', 'title'], link)
 
 export const getPageLinkUrl = (link: PageLink): string => {
 	const { document } = link

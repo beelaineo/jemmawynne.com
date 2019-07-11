@@ -50,7 +50,6 @@ export const Navigation = () => {
 	const menuItems = menu ? menu.menuItems : []
 	const subMenus = menuItems.filter((mi) => mi.__typename === 'SubMenu')
 
-	console.log(menuItems)
 	const cartCount = loading ? null : lineItems.length || null
 	return (
 		<Wrapper>
