@@ -6,23 +6,25 @@ const getPreviewValues = async (values) => {
 	const { title, body, cta } = values
 
 	const bodyText = blocksToPlainText(body)
-	const titles = [title, bodyText].filter(Boolean)
 	const linkedDoc =
-		cta && cta.link.length && cta.link[0].document
-			? await getReferencedDocument(cta.link[0].document._ref)
+		cta && cta.link && cta.link.document
+			? await getReferencedDocument(cta.link.document._ref)
 			: undefined
-	const urlLink = cta && cta.link.length && cta.link[0].url
+	const urlLink = cta && cta.link.length && cta.link.url
+	console.log(cta)
 
 	const info = [
+		title,
+		bodyText,
 		linkedDoc ? `🔗${linkedDoc.title}` : null,
 		urlLink ? `🔗${urlLink}` : null,
 	].filter(Boolean)
 
+	const [previewTitle, ...subtitles] = info
+
 	return {
-		title: titles.length ? titles[0] : 'Untitled Block',
-		subtitles: [titles.length >= 2 ? titles[1] : undefined, ...info].filter(
-			Boolean,
-		),
+		title: previewTitle || 'Untitled Block',
+		subtitles: [subtitles.length ? subtitles.join(' ') : undefined],
 	}
 }
 

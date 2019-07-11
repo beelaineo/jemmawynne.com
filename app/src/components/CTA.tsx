@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { Cta, PageLinkOrUrlLink, PageLink } from '../types/generated'
+import { getPageLinkUrl } from '../utils/links'
 
 interface CTAProps {
 	cta: Cta
@@ -47,32 +48,13 @@ const getPageLinkTo = (link: PageLink): string => {
 }
 
 export const CTA = ({ cta }: CTAProps) => {
-	const { label, link: linkArray } = cta
-	if (!linkArray.length) return null
-	const link = linkArray[0]
-	switch (link.__typename) {
-		case 'PageLink':
-			return (
-				<Outer>
-					<Wrapper as={Link} to={getPageLinkTo(link)}>
-						{label}
-					</Wrapper>
-				</Outer>
-			)
-		case 'UrlLink':
-			return (
-				<Outer>
-					<Wrapper
-						as="a"
-						href={link.url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{label}
-					</Wrapper>
-				</Outer>
-			)
-		default:
-			return null
-	}
+	const { label, link } = cta
+	if (!link) return null
+	return (
+		<Outer>
+			<Wrapper as={Link} to={getPageLinkUrl(link)}>
+				{label}
+			</Wrapper>
+		</Outer>
+	)
 }

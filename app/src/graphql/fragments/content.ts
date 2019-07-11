@@ -1,42 +1,30 @@
 import { sanityImageFragment } from './media'
 
-export const linkFragmentInline = /* GraphQL */ `
-		... on PageLink {
-			_key
-			_type
-			document {
-				... on Page {
-					_type
-					_key
-          slug {
-            current
-          }
-				}
-				... on ShopifyProduct {
-					_key
-					_type
-					title
-					handle
-				}
-				... on ShopifyCollection {
-					_key
-					_type
-					title
-					handle
+export const linkFragment = /* GraphQL */ `
+	fragment LinkFragment on PageLink {
+		_key
+		_type
+		document {
+			... on Page {
+				_type
+				_key
+				slug {
+					current
 				}
 			}
+			... on ShopifyProduct {
+				_key
+				_type
+				title
+				handle
+			}
+			... on ShopifyCollection {
+				_key
+				_type
+				title
+				handle
+			}
 		}
-		... on UrlLink {
-			_key
-			_type
-			url
-			newTab
-		}
-`
-
-export const linkFragment = /* GraphQL */ `
-	fragment LinkFragment on PageLinkOrUrlLink {
-    ${linkFragmentInline}
 	}
 `
 
@@ -49,10 +37,11 @@ export const textBlockFragment = /* GraphQL */ `
 		cta {
 			label
 			link {
-        ${linkFragmentInline}
+				...LinkFragment
 			}
 		}
 	}
+	${linkFragment}
 `
 
 export const imageBlockFragment = /* GraphQL */ `
@@ -62,12 +51,13 @@ export const imageBlockFragment = /* GraphQL */ `
 		title
 		caption
 		link {
-      ${linkFragmentInline}
+			...LinkFragment
 		}
 		images {
 			...SanityImageFragment
 		}
 	}
+	${linkFragment}
 	${sanityImageFragment}
 `
 

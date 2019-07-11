@@ -32,6 +32,7 @@ const parseImage = (image: ShopifyImage | SanityImage): null | ImageDetails => {
 }
 
 export const Image = ({ image }: ImageProps) => {
+	if (!image) return null
 	const parsed = parseImage(image)
 	if (!parsed) return null
 	const { src, altText } = parsed

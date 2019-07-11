@@ -2,13 +2,12 @@ import * as React from 'react'
 import { groupBy, prop } from 'ramda'
 import { IoIosListBox } from 'react-icons/io'
 import { BlockPreview } from './contentSections/BlockPreview'
-import { link } from './linkWorkaround'
 import { getReferencedDocument, getShopifyThumbnail } from '../utils'
 
 const getPreviewValues = async ({ label, link: previewLink }) => {
-	if (!previewLink.length || !previewLink[0].document)
+	if (!previewLink || !previewLink.document || !previewLink.document._ref)
 		return { title: 'Missing Link' }
-	const linkedDoc = await getReferencedDocument(previewLink[0].document._ref)
+	const linkedDoc = await getReferencedDocument(previewLink.document._ref)
 
 	const shopifyThumbnail =
 		linkedDoc &&
@@ -35,7 +34,7 @@ export const MenuLink = {
 			type: 'string',
 		},
 		{
-			...link,
+			type: 'pageLink',
 			name: 'link',
 		},
 	],
@@ -66,7 +65,7 @@ export const linkGroup = {
 			name: 'links',
 			type: 'array',
 			validation: (Rule) => Rule.required().max(12),
-			of: [{ type: 'menuLink' }],
+			of: [{ type: 'pageLink' }],
 		},
 	],
 }
@@ -84,7 +83,7 @@ export const subMenu = {
 			validation: (Rule) => Rule.required(),
 		},
 		{
-			title: 'Columns',
+			title: 'Submenu Sections',
 			name: 'columns',
 			type: 'array',
 			of: [{ type: 'linkGroup' }, { type: 'imageBlock' }],

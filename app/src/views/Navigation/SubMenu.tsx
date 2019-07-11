@@ -17,7 +17,6 @@ interface SubMenuProps {
 
 export const SubMenu = ({ subMenu }: SubMenuProps) => {
 	const { title, columns } = subMenu
-	console.log(subMenu)
 	return (
 		<React.Fragment>
 			<NavHeaderWrapper>
@@ -28,7 +27,6 @@ export const SubMenu = ({ subMenu }: SubMenuProps) => {
 					{columns.map((col) => {
 						switch (col.__typename) {
 							case 'ImageBlock':
-								console.log(col)
 								return <ImageBlock key={col._key} block={col} />
 							case 'LinkGroup':
 								return <LinkGroup key={col._key} linkGroup={col} />
