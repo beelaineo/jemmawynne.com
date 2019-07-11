@@ -1,10 +1,10 @@
 {
 	"shopify": {
-		"shopName": "jemmawynne",
-		"accessToken": "329967ff884953b32490bed58d2cd713"
+		"shopName": "jemmawynne-development",
+		"accessToken": "f50903d30045eaffacf14aa2dc37f167"
 	},
 	"sanity": {
 		"projectId": "caazz4uw",
-		"dataset": "development"
+		"dataset": "production"
 	}
 }
