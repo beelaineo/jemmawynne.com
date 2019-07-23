@@ -4,7 +4,7 @@ import { useQuery } from 'urql'
 import { Link } from 'react-router-dom'
 import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
-import { Header2, Header6 } from 'Components/Text'
+import { Header3, Header6 } from 'Components/Text'
 import { BackgroundImage, OverLay, ProductGrid, ProductInfo } from './styled'
 
 interface ProductListingProps {
@@ -37,7 +37,7 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 						<Link to={`/products/${product.handle}`}>
 							<BackgroundImage key={product.id} imageSrc={imageSrc} />
 							<ProductInfo>
-								<Header2>{product.title}</Header2>
+								<Header3>{product.title}</Header3>
 								{minVariantPrice.amount !== maxVariantPrice.amount ? (
 									<Header6>
 										${minVariantPrice.amount} - ${maxVariantPrice.amount}

@@ -65,20 +65,23 @@ export const ProductInfo = styled.div`
 export const ProductGrid = styled.div`
 	${({ theme }) => css`
 		margin: 0 auto;
-		max-width: initial;
+		max-width: ${theme.layout.columns.wide};
 		display: grid;
 		grid-template-columns: 32% 32% 32%;
 		justify-content: space-evenly;
-		grid-column-gap: ${theme.layout.spacing.single};
-		grid-row-gap: ${theme.layout.spacing.single};
+		grid-column-gap: ${theme.layout.spacing.triple};
+		grid-row-gap: ${theme.layout.spacing.triple};
+		padding: ${theme.layout.spacing.triple};
 		> a {
 			text-decoration: none;
 		}
 		${theme.mediaQueries.tablet} {
 			grid-template-columns: 1fr 1fr;
+			padding: ${theme.layout.spacing.double};
 		}
 		${theme.mediaQueries.mobile} {
 			grid-template-columns: 1fr;
+			padding: ${theme.layout.spacing.single};
 		}
 	`}
 `
@@ -89,7 +92,8 @@ interface BackgroundImageProps {
 }
 
 export const BackgroundImage = styled.div`
-	background-image: url(${(props: BackgroundImageProps) => props.imageSrc || ''});
+	background-image: url(${(props: BackgroundImageProps) =>
+		props.imageSrc || ''});
 	background-size: cover;
 	background-position: center;
 	padding: 45%;
