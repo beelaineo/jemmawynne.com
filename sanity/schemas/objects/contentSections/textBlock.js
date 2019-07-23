@@ -10,14 +10,11 @@ const getPreviewValues = async (values) => {
 		cta && cta.link && cta.link.document
 			? await getReferencedDocument(cta.link.document._ref)
 			: undefined
-	const urlLink = cta && cta.link.length && cta.link.url
-	console.log(cta)
 
 	const info = [
 		title,
 		bodyText,
 		linkedDoc ? `🔗${linkedDoc.title}` : null,
-		urlLink ? `🔗${urlLink}` : null,
 	].filter(Boolean)
 
 	const [previewTitle, ...subtitles] = info
