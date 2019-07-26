@@ -11,22 +11,26 @@ interface GalleryProps {
 }
 
 export const Gallery = ({ images, currentImageId }: GalleryProps) => {
-	const getImageById = (id: string): ImageType | undefined => images.find((i) => i.id === id)
+	const getImageById = (id: string): ImageType | undefined =>
+		images.find((i) => i.id === id)
 
-	const [currentImage, setCurrentImage] = useState(getImageById(currentImageId) || images[0])
+	const [currentImage, setCurrentImage] = useState(
+		getImageById(currentImageId) || images[0],
+	)
 
-	const changeImage = (imageId: string) => () => setCurrentImage(getImageById(imageId))
+	const changeImage = (imageId: string) => () =>
+		setCurrentImage(getImageById(imageId))
 
 	return (
 		<React.Fragment>
 			<MainImageWrapper data-testid="current-image">
-				<Image image={currentImage} />
+				<Image ratio={1} image={currentImage} />
 			</MainImageWrapper>
 			{images.length > 1 && (
 				<Thumbnails data-testid="thumbnails">
 					{images.map((image, i) => (
 						<button key={image.id} onClick={changeImage(image.id)}>
-							<Image image={image} />
+							<Image ratio={1} image={image} />
 						</button>
 					))}
 				</Thumbnails>

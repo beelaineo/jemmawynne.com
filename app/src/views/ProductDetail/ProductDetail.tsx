@@ -6,6 +6,7 @@ import { PRODUCT_QUERY, ProductQueryResult } from './query'
 import { useProductVariant, useCheckout, Variant, Product } from 'use-shopify'
 import { unwindEdges } from '../../utils/graphql'
 import { NotFound } from '../NotFound'
+import { Column } from '../../components/Layout'
 import {
 	ProductVariantSelector,
 	BuyButton,
@@ -46,41 +47,43 @@ const ProductDetailMain = ({ product }: Props) => {
 
 	return (
 		<Wrapper>
-			<ProductDetails>
-				<ProductImagesWrapper>
-					<ProductImages currentVariant={currentVariant} product={product} />
-				</ProductImagesWrapper>
-				<ProductInfoWrapper>
-					<ProductDetailHeader
-						currentVariant={currentVariant}
-						product={product}
-					/>
-					<ProductDetailFooter product={product} />
-					<ProductVariantSelector
-						setQuantity={setQuantity}
-						quantity={quantity}
-						increment={increment}
-						decrement={decrement}
-						variants={variants}
-						currentVariant={currentVariant}
-						selectVariant={selectVariant}
-					/>
-					<BuyButton
-						addItemToCheckout={addItemToCheckout}
-						currentVariant={currentVariant}
-						quantity={quantity}
-					/>
-					<NormalizeDiv>
-						<Accordion label="Shipping & Returns">
-							<Header5>Shipping & Returns Info</Header5>
-						</Accordion>
-						<Accordion label="FAQ">
-							<Header5>FAQ Info</Header5>
-						</Accordion>
-					</NormalizeDiv>
-					<ArrowDown>&darr;</ArrowDown>
-				</ProductInfoWrapper>
-			</ProductDetails>
+			<Column>
+				<ProductDetails>
+					<ProductImagesWrapper>
+						<ProductImages currentVariant={currentVariant} product={product} />
+					</ProductImagesWrapper>
+					<ProductInfoWrapper>
+						<ProductDetailHeader
+							currentVariant={currentVariant}
+							product={product}
+						/>
+						<ProductDetailFooter product={product} />
+						<ProductVariantSelector
+							setQuantity={setQuantity}
+							quantity={quantity}
+							increment={increment}
+							decrement={decrement}
+							variants={variants}
+							currentVariant={currentVariant}
+							selectVariant={selectVariant}
+						/>
+						<BuyButton
+							addItemToCheckout={addItemToCheckout}
+							currentVariant={currentVariant}
+							quantity={quantity}
+						/>
+						<NormalizeDiv>
+							<Accordion label="Shipping & Returns">
+								<Header5>Shipping & Returns Info</Header5>
+							</Accordion>
+							<Accordion label="FAQ">
+								<Header5>FAQ Info</Header5>
+							</Accordion>
+						</NormalizeDiv>
+						<ArrowDown>&darr;</ArrowDown>
+					</ProductInfoWrapper>
+				</ProductDetails>
+			</Column>
 			<ProductRelated product={product} />
 		</Wrapper>
 	)

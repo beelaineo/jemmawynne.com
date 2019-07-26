@@ -3,6 +3,7 @@ import { ShopifyImage, SanityImage } from '../../types'
 
 interface ImageProps {
 	image: ShopifyImage | SanityImage
+	ratio?: number
 	// TODO sizes
 }
 

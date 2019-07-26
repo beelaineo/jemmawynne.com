@@ -35,7 +35,7 @@ export const ProductInfoWrapper = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding: ${theme.layout.spacing.large};
+		padding: ${theme.layout.spacing.quadruple};
 		${theme.mediaQueries.tablet} {
 			flex: 1;
 			width: 100%;
@@ -110,7 +110,7 @@ export const ProductGalleryThumbnails = styled.div`
 export const ProductRelatedWrapper = styled.div`
 	${(props) => css`
 		background-color: ${props.theme.color.gray};
-		padding: ${props.theme.layout.spacing.large};
+		padding: ${props.theme.layout.spacing.quadruple};
 		> div > div {
 			margin: ${props.theme.layout.spacing.small};
 			h4,
