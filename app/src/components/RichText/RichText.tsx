@@ -1,5 +1,5 @@
 import * as React from 'react'
-import BlockContent from '@sanity/block-content-to-react'
+import * as BlockContent from '@sanity/block-content-to-react'
 import * as Text from '../Text'
 
 const serializers = {
@@ -55,6 +55,6 @@ interface RichTextProps {
 	body: { [key: string]: any }
 }
 
-export const RichText = ({ body }: RichTextProps) => {
-	return <BlockContent blocks={body} serializers={serializers} />
-}
+export const RichText = ({ body }: RichTextProps) => (
+	<BlockContent blocks={body} serializers={serializers} />
+)

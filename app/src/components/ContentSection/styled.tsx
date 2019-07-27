@@ -1,13 +1,23 @@
 import styled, { css, DefaultTheme } from 'styled-components'
+import { Link } from 'react-router-dom'
+import { Header5 } from '../Text'
 import { ContentSection } from '../../types'
 
+interface WithAsAndTo {
+	theme: DefaultTheme
+	as?: string | typeof Link
+	to?: string
+}
+
 export const ImageBlockWrapper = styled.div`
-	${({ theme }) => css`
+	${({ theme }: WithAsAndTo) => css`
 		display: flex;
 		width: 100%;
 		height: 100%;
 		flex-direction: column;
 		justify-content: center;
+		color: inherit;
+		text-decoration: none;
 	`}
 `
 
@@ -19,6 +29,15 @@ export const ImageWrapper = styled.div`
 		height: 100%;
 		object-fit: cover;
 	}
+`
+
+export const Caption = styled(Header5)`
+	${({ theme }) => css`
+		margin-top: ${theme.layout.spacing.half};
+		min-height: 2.35em;
+		color: inherit;
+		text-decoration: none;
+	`}
 `
 
 export const TextBlockWrapper = styled.div`
@@ -36,6 +55,7 @@ interface WithSection {
 }
 
 const ROW_HEIGHT = '620px'
+const ROW_HEIGHT_SMALL = '450px'
 
 export const Inner = styled.div`
 	${({ theme, section }: WithSection) => css`
@@ -47,7 +67,8 @@ export const Inner = styled.div`
 		grid-template-rows: calc(
 			${ROW_HEIGHT} - (${theme.layout.spacing.double} * 2)
 		);
-		display: grid;
+		display: ${section.layout === 'carousel' ? 'flex' : 'grid'};
+		flex-direction: column;
 		grid-gap: ${theme.layout.spacing.double};
 		grid-template-columns: repeat(2, 1fr);
 		align-items: center;
@@ -83,7 +104,9 @@ export const Wrapper = styled.div`
 		flex-direction: column;
 		align-items: stretch;
 
-		min-height: ${ROW_HEIGHT};
+		min-height: ${section.layout === 'carousel'
+			? ROW_HEIGHT_SMALL
+			: ROW_HEIGHT};
 		padding: ${theme.layout.spacing.double};
 		${section.backgroundColor
 			? `background-color: ${theme.color[section.backgroundColor]};`

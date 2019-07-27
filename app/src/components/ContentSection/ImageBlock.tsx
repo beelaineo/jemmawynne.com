@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { ImageBlock as ImageBlockType } from '../../types/generated'
-import { ImageBlockWrapper, ImageWrapper } from './styled'
+import { ImageBlockWrapper, ImageWrapper, Caption } from './styled'
 import { Image } from '../Image'
 import { getPageLinkUrl, getPageLinkLabel } from '../../utils/links'
 
@@ -20,7 +20,11 @@ export const ImageBlock = ({ block }: ImageBlockProps) => {
 			<ImageWrapper>
 				<Image image={block.images[0]} />
 			</ImageWrapper>
-			<p>{caption}</p>
+			{caption ? (
+				<Caption family="sans" weight="semi">
+					{caption}
+				</Caption>
+			) : null}
 		</ImageBlockWrapper>
 	)
 }

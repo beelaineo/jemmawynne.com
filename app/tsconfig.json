@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		// "module": "es6",
 		"declaration": true,
 		"noImplicitAny": false,
 		"module": "commonjs",
@@ -15,7 +14,6 @@
 		// "rootDir": ".",
 		"lib": ["es6", "es7", "dom"],
 		"outDir": "./dist",
-		"esModuleInterop": true,
 		"types": ["node", "jest"],
 
 		/*
@@ -39,5 +37,13 @@
 		}
 	},
 	"include": ["./src"],
-	"exclude": ["node_modules", "../node_modules/", "**/*.spec.ts", "**/*.test.ts", "**/__tests__/*", "dist", "build"]
+	"exclude": [
+		"node_modules",
+		"../node_modules/",
+		"**/*.spec.ts",
+		"**/*.test.ts",
+		"**/__tests__/*",
+		"dist",
+		"build"
+	]
 }

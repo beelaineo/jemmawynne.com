@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 interface CartSidebarProps {
 	theme: DefaultTheme
@@ -6,36 +6,37 @@ interface CartSidebarProps {
 }
 
 export const CartSidebar = styled.div`
-	${(props: CartSidebarProps) => `
-        position: fixed;
-        right:  ${props.open ? '0px' : '-360px'};
-        top: 0;
-        max-width: 340px;
-        max-height: 100vh;
-        min-height: 100vh;
-        overflow: scroll;
-        background-color: ${props.theme.color.white};
-        box-shadow: -5px 0 5px rgba(0, 0, 0, .1);
-        transition:  250ms linear;
-        ::-webkit-scrollbar {
-            width: 0px; 
-            background: transparent; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: transparent;
-        }
-        > * {
-            padding: ${props.theme.layout.spacing.small};
-            margin: 0;
-        }
-        h3 {
-            margin: ${props.theme.layout.spacing.small};
-            margin-top: ${props.theme.layout.spacing.small} !important;
-        }
-    `}
+	${(props: CartSidebarProps) => css`
+		position: fixed;
+		right: ${props.open ? '0px' : '-360px'};
+		top: 1;
+		max-width: 340px;
+		max-height: 100vh;
+		min-height: 100vh;
+		overflow: scroll;
+		background-color: ${props.theme.color.white};
+		box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
+		transition: 250ms linear;
+		::-webkit-scrollbar {
+			width: 0px;
+			background: transparent;
+		}
+		::-webkit-scrollbar-thumb {
+			background: transparent;
+		}
+		> * {
+			padding: ${props.theme.layout.spacing.small};
+			margin: 0;
+		}
+		h3 {
+			margin: ${props.theme.layout.spacing.small};
+			margin-top: ${props.theme.layout.spacing.small} !important;
+		}
+	`}
 `
 
 export const CloseButton = styled.button`
+	color: blue;
 	position: absolute;
 	right: 10px;
 	top: 10px;
