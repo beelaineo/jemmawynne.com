@@ -24,7 +24,6 @@ export const Checkout = () => {
 	if (!checkout || checkout.lineItems.length < 1) {
 		return <NormalizeDiv>Your cart is empty</NormalizeDiv>
 	}
-	console.log(checkout)
 	return (
 		<NormalizeDiv>
 			<Header3 color="dark">Your cart</Header3>

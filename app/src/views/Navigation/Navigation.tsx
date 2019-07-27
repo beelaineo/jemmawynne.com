@@ -19,7 +19,6 @@ import {
 } from './styled'
 import { MenuLink } from './MenuLink'
 import { SubMenu } from './SubMenu'
-import { SubMenuPane } from './SubMenuPane'
 
 const renderMenuItem = (item: MenuLinkOrSubMenu) => {
 	switch (item.__typename) {
