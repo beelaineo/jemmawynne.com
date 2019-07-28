@@ -6,18 +6,21 @@ export type Scalars = {
 	Boolean: boolean
 	Int: number
 	Float: number
-	/** An RFC 3986 and RFC 3987 compliant URI string. */
+	/** An RFC 3986 and RFC 3987 compliant URI string.
+	 *
+	 * Example value: `"https://johns-apparel.myshopify.com"`.
+	 */
 	URL: any
-	/** A string containing HTML code. */
+	/** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
 	HTML: any
 	/** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
 	 * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
 	 * 8601 standard for representation of dates and times using the Gregorian calendar.
 	 */
 	DateTime: Date
-	/** A monetary value string. */
+	/** A monetary value string. Example value: `"100.57"`. */
 	Money: any
-	/** A signed decimal number, which supports arbitrary precision and is serialized as a string. */
+	/** A signed decimal number, which supports arbitrary precision and is serialized as a string. Example value: `"29.99"`. */
 	Decimal: any
 	/** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
 	JSON: { [key: string]: any }
@@ -2890,10 +2893,16 @@ export interface Mutation {
 	checkoutAttributesUpdate?: Maybe<CheckoutAttributesUpdatePayload>
 	/** Updates the attributes of a checkout. */
 	checkoutAttributesUpdateV2?: Maybe<CheckoutAttributesUpdateV2Payload>
+	/** Completes a checkout without providing payment information. You can use this
+	 * mutation for free items or items whose purchase price is covered by a gift card.
+	 */
 	checkoutCompleteFree?: Maybe<CheckoutCompleteFreePayload>
 	/** Completes a checkout using a credit card token from Shopify's Vault. */
 	checkoutCompleteWithCreditCard?: Maybe<CheckoutCompleteWithCreditCardPayload>
-	/** Completes a checkout using a credit card token from Shopify's Vault. */
+	/** Completes a checkout using a credit card token from Shopify's card vault.
+	 * Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you
+	 * need to  [_request payment processing_](https://help.shopify.com/api/guides/sales-channel-sdk/getting-started#request-payment-processing).
+	 */
 	checkoutCompleteWithCreditCardV2?: Maybe<
 		CheckoutCompleteWithCreditCardV2Payload
 	>
