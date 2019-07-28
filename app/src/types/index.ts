@@ -1,3 +1,3 @@
 export * from './sanity'
-export * from './graphql'
 export * from './media'
+export * from './generated'

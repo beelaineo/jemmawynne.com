@@ -89,7 +89,7 @@ interface WithOpen {
 }
 export const SubMenuWrapper = styled.div`
 	${({ theme, open }: WithOpen) => css`
-		display: ${open ? 'initial' : 'none'};
+		display: ${open ? 'block' : 'none'};
 		position: absolute;
 		z-index: calc(${theme.layout.z.navigation} - 1);
 		top: 100%;
@@ -97,11 +97,6 @@ export const SubMenuWrapper = styled.div`
 		width: 100%;
 		min-height: 200px;
 		background-color: white;
-
-		&:hover,
-		${NavHeaderWrapper}:hover + & {
-			display: block;
-		}
 	`}
 `
 

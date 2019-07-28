@@ -111,18 +111,7 @@ export const ProductRelatedWrapper = styled.div`
 	${(props) => css`
 		background-color: ${props.theme.color.gray};
 		padding: ${props.theme.layout.spacing.quadruple};
-		> div > div {
-			margin: ${props.theme.layout.spacing.small};
-			h4,
-			a {
-				text-decoration: none;
-				font-family: ${props.theme.font.family.serif};
-			}
-		}
-		> h2 {
-			font-size: ${props.theme.font.size.h1};
-			color: black;
-		}
+
 		${props.theme.mediaQueries.tablet} {
 			> h2 {
 				font-size: ${props.theme.font.size.h2};
@@ -133,9 +122,7 @@ export const ProductRelatedWrapper = styled.div`
 
 export const ProductRelatedInner = styled.div`
 	${({ theme }) => css`
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-column-gap: ${theme.layout.spacing.single};
+		height: 500px;
 	`}
 `
 
