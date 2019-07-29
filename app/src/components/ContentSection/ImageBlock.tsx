@@ -9,6 +9,7 @@ export interface ImageBlockProps {
 
 export const ImageBlock = ({ block }: ImageBlockProps) => {
 	if (!block.images || !block.images.length) return null
+
 	const caption = block.caption || getPageLinkLabel(block.link)
 	const linkTo = block.link ? getPageLinkUrl(block.link) : undefined
 

@@ -8,7 +8,7 @@ interface FigureProps {
 	image: ImageType
 	imageRatio?: number
 	linkTo?: string
-	caption?: string
+	caption: string | void
 	/* */
 }
 

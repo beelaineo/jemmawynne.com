@@ -57,11 +57,6 @@ export const SlideContainer = styled.div`
 		vertical-align: top;
 		align-items: center;
 
-		picture,
-		img {
-			height: 100%;
-		}
-
 		&:last-of-type {
 			margin-right: 0;
 		}
