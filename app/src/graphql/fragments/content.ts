@@ -8,6 +8,7 @@ export const linkFragment = /* GraphQL */ `
 			... on Page {
 				_type
 				_key
+				title
 				slug {
 					current
 				}

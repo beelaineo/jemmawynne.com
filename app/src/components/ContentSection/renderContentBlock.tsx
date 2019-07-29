@@ -4,7 +4,6 @@ import { TextBlock } from './TextBlock'
 import { ImageBlockOrTextBlock } from '../../types/generated'
 
 export const renderContentBlock = (block?: ImageBlockOrTextBlock) => {
-	console.log(block)
 	if (!block) return null
 	switch (block.__typename) {
 		case 'TextBlock':

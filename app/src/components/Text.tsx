@@ -7,6 +7,7 @@ export interface TextStyleProps {
 	color?: string
 	family?: string
 	transform?: string
+	children: any
 }
 
 const commonHeaderStyles = ({
@@ -16,8 +17,11 @@ const commonHeaderStyles = ({
 	weight,
 	color,
 	family,
+	children,
 }: TextStyleProps) => css`
-	font-weight: ${theme.font.weight[weight] || family === 'serif'
+	font-weight: ${theme.font.weight[weight]
+		? theme.font.weight[weight]
+		: family === 'serif'
 		? theme.font.weight.normal
 		: theme.font.weight.semi};
 	font-family: ${theme.font.family[family] || theme.font.family.sans};

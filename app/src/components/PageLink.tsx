@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Link as RrLink } from 'react-router-dom'
-import { PageLink } from '../types/generated'
+import { PageLink as PageLinkType } from '../types/generated'
 import { getPageLinkUrl, getPageLinkLabel } from '../utils/links'
 
 interface LinkProps {
-	link: PageLink
+	link: PageLinkType
 	children?: React.ReactNode
 	label?: string
 }
@@ -14,7 +14,7 @@ const linkStyles = {
 	color: 'inherit',
 }
 
-export const Link = ({ link, children, label }: LinkProps) => {
+export const PageLink = ({ link, children, label }: LinkProps) => {
 	if (!link) return null
 	switch (link.__typename) {
 		case 'PageLink':
@@ -23,7 +23,7 @@ export const Link = ({ link, children, label }: LinkProps) => {
 			}
 			return (
 				<RrLink style={linkStyles} to={getPageLinkUrl(link)}>
-					{children || label || getPageLinkLabel(link)}
+					{children || label || getPageLinkLabel(link) || null}
 				</RrLink>
 			)
 		default:
