@@ -45,6 +45,5 @@ export const SETTINGS_QUERY = /* GraphQL */ `
 `
 
 export interface SettingsResponse {
-	collections: Paginated<Collection>
 	Menu: Menu
 }

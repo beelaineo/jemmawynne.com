@@ -16,24 +16,24 @@ export const Inner = styled.nav`
 		display: grid;
 		grid-template-columns: 1fr 220px 1fr;
 		align-items: center;
-		padding: 0 ${theme.layout.spacing.double};
+		padding: 0 ${theme.layout.spacing.triple};
 		width: 100%;
 		margin: 0 auto;
-		max-width: ${theme.layout.columns.xWide};
 	`}
 `
 
 interface WithReady {
 	theme: DefaultTheme
 	ready: boolean
+	align?: string
 }
 
 export const NavSection = styled.div`
-	${({ theme, ready }: WithReady) => css`
+	${({ theme, ready, align }: WithReady) => css`
 		transition: 0.3s;
 		flex-grow: 1;
 		display: flex;
-		justify-content: flex-start;
+		justify-content: ${align === 'right' ? 'flex-end' : 'flex-start'};
 		align-items: stretch;
 		height: 100%;
 		opacity: ${ready ? '1' : '0'};
@@ -85,11 +85,13 @@ export const NavHeaderWrapper = styled.div`
 
 interface WithOpen {
 	theme: DefaultTheme
-	open?: boolean
+	open: boolean
 }
-export const SubMenuWrapper = styled.div`
+
+export const SubmenuPane = styled.div`
 	${({ theme, open }: WithOpen) => css`
-		display: ${open ? 'block' : 'none'};
+		opacity: ${open ? 1 : 0};
+		pointer-events: ${open ? 'initial' : 'none'};
 		position: absolute;
 		z-index: calc(${theme.layout.z.navigation} - 1);
 		top: 100%;
@@ -97,14 +99,20 @@ export const SubMenuWrapper = styled.div`
 		width: 100%;
 		min-height: 200px;
 		background-color: white;
+		transition: 0.2s;
 	`}
 `
 
+interface WithVisible {
+	theme: DefaultTheme
+	active: Boolean
+}
+
 export const SubMenuColumns = styled.div`
-	${({ theme }) => css`
+	${({ theme, active }: WithVisible) => css`
+		display: ${active ? 'grid' : 'none'};
 		margin: 0 auto;
 		max-width: ${theme.layout.columns.xWide};
-		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		padding: ${theme.layout.spacing.single} ${theme.layout.spacing.double};
 		grid-column-gap: ${theme.layout.spacing.single};

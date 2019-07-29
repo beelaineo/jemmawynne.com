@@ -1595,7 +1595,7 @@ export interface Cta {
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	label?: Maybe<Scalars['String']>
-	link?: Maybe<Array<Maybe<PageLinkOrUrlLink>>>
+	link?: Maybe<PageLink>
 }
 
 /** Currency codes */
@@ -2552,10 +2552,10 @@ export interface ImageBlock {
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	images?: Maybe<Array<Maybe<ImageWithAltText>>>
-	/** Defaults to product or collection title if empty */
+	/** If emtpy, and if this content links to a page, product, or collection, that item's title will be used. */
 	title?: Maybe<Scalars['String']>
 	caption?: Maybe<Scalars['String']>
-	link?: Maybe<Array<Maybe<PageLinkOrUrlLink>>>
+	link?: Maybe<PageLink>
 }
 
 export type ImageBlockOrLinkGroup = ImageBlock | LinkGroup
@@ -2601,7 +2601,7 @@ export interface LinkGroup {
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	title?: Maybe<Scalars['String']>
-	links?: Maybe<Array<Maybe<MenuLink>>>
+	links?: Maybe<Array<Maybe<PageLink>>>
 }
 
 /** Represents a mailing address for customers and shipping. */
@@ -2794,7 +2794,7 @@ export interface MenuLink {
 	_key?: Maybe<Scalars['String']>
 	_type?: Maybe<Scalars['String']>
 	label?: Maybe<Scalars['String']>
-	link?: Maybe<Array<Maybe<PageLinkOrUrlLink>>>
+	link?: Maybe<PageLink>
 }
 
 export type MenuLinkOrSubMenu = MenuLink | SubMenu
@@ -3468,8 +3468,6 @@ export interface PageLink {
 	_type?: Maybe<Scalars['String']>
 	document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
 }
-
-export type PageLinkOrUrlLink = PageLink | UrlLink
 
 export type PageOrShopifyCollectionOrShopifyProduct =
 	| Page
@@ -5163,14 +5161,6 @@ export enum TransactionStatus {
 	Success = 'SUCCESS',
 	Failure = 'FAILURE',
 	Error = 'ERROR',
-}
-
-export interface UrlLink {
-	__typename: 'UrlLink'
-	_key?: Maybe<Scalars['String']>
-	_type?: Maybe<Scalars['String']>
-	url?: Maybe<Scalars['String']>
-	newTab?: Maybe<Scalars['Boolean']>
 }
 
 /** Represents an error in the input of a mutation. */
