@@ -8,9 +8,6 @@ const CopyPlugin = require('copy-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const { CheckerPlugin } = require('awesome-typescript-loader')
-const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
-	.default
-const styledComponentsTransformer = createStyledComponentsTransformer()
 
 const PATHS = {
 	root: path.resolve(__dirname),
