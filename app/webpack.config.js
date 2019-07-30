@@ -23,9 +23,12 @@ const DEV_SERVER = {
 	historyApiFallback: true,
 	overlay: true,
 	contentBase: path.resolve(__dirname, 'public'),
-	// proxy: {
-	//   '/api': 'http://localhost:3000'
-	// },
+	proxy: {
+		'/.netlify': {
+			target: 'http://[::1]:9000',
+			pathRewrite: { '^/.netlify/functions': '' },
+		},
+	},
 }
 
 module.exports = (env) => {
