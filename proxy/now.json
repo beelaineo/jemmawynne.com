@@ -1,7 +1,0 @@
-{
-	"version": 2,
-	"name": "jemmawynne-api",
-	"alias": "jemmawynne-api",
-	"builds": [{ "src": "./dist/server.js", "use": "@now/node-server" }],
-	"routes": [{ "src": "/.*", "dest": "dist/server.js" }]
-}
