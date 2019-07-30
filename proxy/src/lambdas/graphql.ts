@@ -17,6 +17,7 @@ const run = async (event: APIGatewayEvent, context: Context) => {
 	const schema = await createSchema()
 
 	const server = new ApolloServer({
+		// @ts-ignore // GraphQL Schema versions aren't type-compatible. Graphql-tools uses a different version of graphql
 		schema,
 		introspection: true,
 		playground: true,

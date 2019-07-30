@@ -1,4 +1,1 @@
-[build]
-  command = "yarn build"
-  functions = "lambda-build"
-  publish = "build"
+../netlify.toml

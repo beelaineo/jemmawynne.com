@@ -4,7 +4,7 @@
 	"scripts": {
 		"setup": "yarn install",
 		"test": "yarn workspace jemmawynne-app test",
-    "build": "yarn workspace jemmawynne-app build && yarn workspace jemmawynne-proxy build"
+		"build": "yarn workspace jemmawynne-app build && yarn workspace jemmawynne-proxy build"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.0.0",
@@ -13,6 +13,7 @@
 		"eslint": "^5.16.0",
 		"husky": "^2.4.1",
 		"lerna": "^3.15.0",
+		"netlify-cli": "^2.11.31",
 		"prettier": "^1.18.2",
 		"pretty-quick": "^1.11.1",
 		"yarnhook": "^0.4.1"
