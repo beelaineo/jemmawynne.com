@@ -14,10 +14,10 @@
 		"lib"
 	],
 	"scripts": {
-		"dev": "webpack-dev-server --mode development",
+		"dev": "echo 'Deprecated: use `yarn start` instead'",
+		"start": "webpack-dev-server --mode development",
 		"build": "rimraf build && NODE_ENV=production webpack --env production --mode production",
 		"stats": "NODE_ENV=production webpack --env production --mode production --json > stats.json",
-		"now-build": "yarn build",
 		"install-types": "typesync && yarn install",
 		"generate-types": "graphql-codegen",
 		"test": "jest",
