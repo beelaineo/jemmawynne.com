@@ -3,7 +3,8 @@
 	"private": true,
 	"scripts": {
 		"setup": "yarn install",
-		"test": "yarn workspace jemmawynne-app test"
+		"test": "yarn workspace jemmawynne-app test",
+    "build": "yarn workspace jemmawynne-app build && yarn workspace jemmawynne-proxy build"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.0.0",

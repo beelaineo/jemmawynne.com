@@ -5,13 +5,15 @@ import {
 	transformSchema,
 	RenameTypes,
 } from 'graphql-tools'
+import { GraphQLSchema } from 'graphql'
+import { ApolloLink } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import fetch from 'node-fetch'
-import { config } from './config'
+import { config } from '../config'
 
 type Fetch = GlobalFetch['fetch']
 
-const createRemoteExecutableSchema = async (link) => {
+const createRemoteExecutableSchema = async (link: ApolloLink) => {
 	const remoteSchema = await introspectSchema(link)
 	const remoteExecutableSchema = makeRemoteExecutableSchema({
 		schema: remoteSchema,
@@ -56,7 +58,14 @@ const createSanitySchema = async () => {
 	return transformedSchema
 }
 
+interface Stuff {
+	schema: GraphQLSchema
+}
+
+let merged: GraphQLSchema | void = undefined
+
 export const createSchema = async () => {
+	if (merged) return merged
 	const [shopify, sanity] = await Promise.all([
 		createShopifySchema(),
 		createSanitySchema(),
@@ -66,7 +75,8 @@ export const createSchema = async () => {
 		schemas: [shopify, sanity],
 	})
 
-	return {
-		schema,
-	}
+	// @ts-ignore
+	merged = schema
+
+	return schema
 }

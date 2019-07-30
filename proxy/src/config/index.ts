@@ -1,7 +1,5 @@
 import convict from 'convict'
 import path from 'path'
-import './development.json'
-import './production.json'
 
 require('dotenv').config()
 
@@ -38,5 +36,28 @@ export const config = convict({
 	},
 })
 
+const development = {
+	shopify: {
+		shopName: 'jemmawynne-development',
+		accessToken: 'f50903d30045eaffacf14aa2dc37f167',
+	},
+	sanity: {
+		projectId: 'caazz4uw',
+		dataset: 'production',
+	},
+}
+
+const production = {
+	shopify: {
+		shopName: 'jemmawynne-development',
+		accessToken: 'f50903d30045eaffacf14aa2dc37f167',
+	},
+	sanity: {
+		projectId: 'caazz4uw',
+		dataset: 'production',
+	},
+}
+
 const env = config.get('env')
-config.loadFile(path.resolve(__dirname, `${env}.json`))
+const filePath = path.resolve(__dirname, `${env}.jzon`)
+config.load(env === 'production' ? production : development)
