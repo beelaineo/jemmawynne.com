@@ -11,14 +11,14 @@ interface SubMenuProps {
 	active: boolean
 }
 
-export const SubMenu = ({ submenu, active }: SubMenuProps) => {
+export const SubMenu = ({ submenu, active, justify }: SubMenuProps) => {
 	const { title, columns } = submenu
 	return (
 		<SubMenuColumns active={active}>
 			{columns.map((col) => {
 				switch (col.__typename) {
 					case 'ImageBlock':
-						return <ImageBlock key={col._key} block={col} />
+						return <ImageBlock justify={justify} key={col._key} block={col} />
 					case 'LinkGroup':
 						return <LinkGroup key={col._key} linkGroup={col} />
 					default:

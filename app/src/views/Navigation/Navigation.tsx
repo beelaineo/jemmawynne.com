@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { useState, useReducer } from 'react'
 import { PageLink } from 'Components/PageLink'
@@ -141,6 +142,7 @@ export const Navigation = () => {
 								key={submenu._key}
 								submenu={submenu}
 								active={currentSubmenuKey === submenu._key}
+								justify="start"
 							/>
 						) : null,
 					)}
