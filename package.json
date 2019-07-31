@@ -9,16 +9,16 @@
     "start:proxy": "yarn workspace jemmawynne-proxy start"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^8.0.0",
-		"@commitlint/config-conventional": "^8.0.0",
+		"@commitlint/cli": "^8.1.0",
+		"@commitlint/config-conventional": "^8.1.0",
 		"dotenv": "^8.0.0",
-		"eslint": "^5.16.0",
-		"husky": "^2.4.1",
-		"lerna": "^3.15.0",
-		"netlify-cli": "^2.11.31",
+		"eslint": "^6.1.0",
+		"husky": "^3.0.2",
+		"lerna": "^3.16.4",
+		"netlify-cli": "^2.12.0",
 		"prettier": "^1.18.2",
 		"pretty-quick": "^1.11.1",
-		"yarnhook": "^0.4.1"
+		"yarnhook": "^0.4.2"
 	},
 	"workspaces": [
 		"app",
