@@ -1,0 +1,12 @@
+schema: http://localhost:34567/graphql
+generates:
+  src/types/generated.ts:
+    plugins:
+      - typescript
+    config:
+      nonOptionalTypename: true
+      scalars:
+        DateTime: Date
+        JSON: '{ [key: string]: any }'
+      declarationKind:
+        type: 'interface'

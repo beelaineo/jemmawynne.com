@@ -1,16 +1,47 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-interface WrapperProps {
-	theme: DefaultTheme
-	active?: boolean
-}
-
 export const Wrapper = styled.div`
-	${({ theme }: WrapperProps) => `
-		width: calc(100% - 4rem);
-		max-width: 1200px;
+	${({ theme }) => css`
+		position: relative;
+		min-height: 100vh;
 		margin: 0 auto;
 		font-family: ${theme.font.family.sans};
+	`}
+`
+
+export const ProductDetails = styled.div`
+	${({ theme }) => css`
+		justify-content: space-between;
+		display: flex;
+		${theme.mediaQueries.mobile} {
+			flex-wrap: wrap;
+		}
+	`}
+`
+
+export const ProductImagesWrapper = styled.div`
+	${({ theme }) => css`
+		flex: 6;
+		max-width: 70%;
+		${theme.mediaQueries.tablet} {
+			max-width: 100%;
+		}
+	`}
+`
+
+export const ProductInfoWrapper = styled.div`
+	${({ theme }) => css`
+		flex: 4;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: ${theme.layout.spacing.quadruple};
+		${theme.mediaQueries.tablet} {
+			flex: 1;
+			width: 100%;
+			flex-basis: 100%;
+			text-align: center;
+		}
 	`}
 `
 
@@ -24,8 +55,42 @@ export const Nav = styled.div`
 `
 
 export const ProductGalleryWrapper = styled.div`
+	line-height: 0;
 	display: flex;
 	flex-direction: row-reverse;
+	position: relative;
+	div[data-testid='current-image'] {
+		> img {
+			min-height: 100vh;
+			max-width: max-content;
+			${(props) => `
+				${props.theme.mediaQueries.tablet} {
+					min-height: initial;
+					max-width: 100vw;
+				}
+			`}
+		}
+	}
+	div[data-testid='thumbnails'] {
+		position: absolute;
+		max-width: 100px;
+		bottom: 60px;
+		display: flex;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		button {
+			height: 10px;
+			z-index: 2;
+			background-color: black;
+			width: 10px;
+			border-radius: 5px;
+			margin: 2px 6px;
+		}
+		img {
+			display: none;
+		}
+	}
 `
 
 export const ProductGalleryImage = styled.div`
@@ -43,8 +108,21 @@ export const ProductGalleryThumbnails = styled.div`
 `
 
 export const ProductRelatedWrapper = styled.div`
-	${(props: WrapperProps) => css`
-		margin: ${props.theme.layout.spacing.large};
+	${(props) => css`
+		background-color: ${props.theme.color.gray};
+		padding: ${props.theme.layout.spacing.quadruple};
+
+		${props.theme.mediaQueries.tablet} {
+			> h2 {
+				font-size: ${props.theme.font.size.h2};
+			}
+		}
+	`}
+`
+
+export const ProductRelatedInner = styled.div`
+	${({ theme }) => css`
+		height: 500px;
 	`}
 `
 
@@ -57,11 +135,32 @@ export const ProductRelatedWrapper = styled.div`
 
   would be nice to have a prop for padding too
 */
+
+interface NormalizeDivProps {
+	theme: DefaultTheme
+	width?: string
+}
+
 export const NormalizeDiv = styled.div`
-	max-width: ${(props) => (props.width === 'half' ? '50%' : '100%')};
-	${(props: WrapperProps) => `
+	max-width: ${(props: NormalizeDivProps) =>
+		props.width === 'half' ? '50%' : '100%'};
+	${(props) => `
    		margin: ${props.theme.layout.spacing.small};
 	`}
+`
+
+interface BackgroundImageProps {
+	imageSrc: string
+}
+
+export const BackgroundImage = styled.div`
+	background-image: url(${(props: BackgroundImageProps) =>
+		props.imageSrc || ''});
+	background-size: cover;
+	background-position: center;
+	a {
+		color: transparent;
+	}
 `
 
 interface ButtonProps {
@@ -72,42 +171,66 @@ interface ButtonProps {
 	color?: string
 	family?: string
 	transform?: string
+	href?: string
 }
 
 export const Button = styled.button`
-	${({ theme, disabled, background, transform, weight, color, family }: ButtonProps) => css`
-		background-color: ${theme.color[background] || theme.color.pink};
-		color: ${theme.color[color] || 'inherit'};
-		cursor: ${disabled ? 'auto' : 'pointer'};
+	${(props: ButtonProps) => css`
+		background-color: ${props.theme.color.dark};
+		color: ${props.theme.color.light};
+		cursor: ${props.disabled ? 'auto' : 'pointer'};
 		display: inline-block;
-		font-family: ${theme.font.family.sans};
-		font-weight: ${theme.font.weight[weight] || theme.font.weight.strong};
-		font-size: ${theme.font.size.h5};
-		min-width: 8rem;
-		min-height: 2.5rem;
-		letter-spacing: 0.03em;
+		font-family: ${props.theme.font.family.sans};
+		font-weight: ${props.theme.font.weight.strong};
+		font-size: ${props.theme.font.size.h5};
+		letter-spacing: 0.035em;
 		padding: 0.25rem 0.5rem;
 		text-align: center;
 		text-transform: uppercase;
 		transition: 0.2s;
-		padding: ${theme.layout.spacing.small};
-		margin: ${theme.layout.spacing.small};
-		opacity: ${disabled ? 0.3 : 1};
-		pointer-events: ${disabled ? 'none' : 'auto'};
+		padding: ${props.theme.layout.spacing.small};
+		margin: ${props.theme.layout.spacing.small} 0;
+		opacity: ${props.disabled ? 0.3 : 1};
+		pointer-events: ${props.disabled ? 'none' : 'auto'};
+		max-width: 200px;
+		border-radius: 2px;
 	`}
 `
 
 export const ButtonPrimary = styled(Button)``
 
 export const Select = styled.select`
-	${(props: WrapperProps) => `
+	text-align-last: center;
+	height: 50px;
+	border: 1px solid #f1f1f1;
+	border-radius: 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+	font-size: 1rem;
+	cursor: pointer;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-appearance: none;
+	border: none;
+	background: none;
+	border-radius: 0;
+	border: 1px solid #f1f1f1;
+	padding: 1rem 2rem;
+	font-family: sans-serif;
+	option {
+		font-family: sans-serif;
+	}
+`
+
+export const QuantitySelector = styled.div`
+	button {
 		text-align-last: center;
 		height: 50px;
 		border: 1px solid #f1f1f1;
 		border-radius: 0;
-		-webkit-transition: .2s;
-		transition: .2s;
-		font-size: 1rem;
+		-webkit-transition: 0.2s;
+		transition: 0.2s;
+		font-size: 0.85rem;
 		cursor: pointer;
 		-moz-appearance: none;
 		appearance: none;
@@ -116,45 +239,17 @@ export const Select = styled.select`
 		background: none;
 		border-radius: 0;
 		border: 1px solid #f1f1f1;
-		padding: 1rem 2rem;
+		padding: 0.5rem 1.2rem;
 		font-family: sans-serif;
-		option {
-			font-family: sans-serif;
-
-		}
-	`}
-`
-
-export const QuantitySelector = styled.div`
-	${(props: WrapperProps) => `
-		button {
-			text-align-last: center;
-			height: 50px;
-			border: 1px solid #f1f1f1;
-			border-radius: 0;
-			-webkit-transition: .2s;
-			transition: .2s;
-			font-size: .85rem;
-			cursor: pointer;
-			-moz-appearance: none;
-			appearance: none;
-			-webkit-appearance: none;
-			border: none;
-			background: none;
-			border-radius: 0;
-			border: 1px solid #f1f1f1;
-			padding: .5rem 1.2rem;
-			font-family: sans-serif;
-		}
-		input {
-			text-align: center;
-			width: 109px;
-		}
-	`}
+	}
+	input {
+		text-align: center;
+		width: 109px;
+	}
 `
 
 export const QuantitySelectorCart = styled(QuantitySelector)`
-	${(props: WrapperProps) => `
+	${() => `
 		button {
 			text-align-last: center;
 			height: 2rem;
@@ -182,7 +277,7 @@ export const QuantitySelectorCart = styled(QuantitySelector)`
 `
 
 export const Label = styled.label`
-	${(props: WrapperProps) => `
+	${(props) => `
 		color: #777;
 		color:${props.theme.color.lightGrayBody};
 		display: block;
@@ -194,4 +289,20 @@ export const Label = styled.label`
 		background: none;
 		border-radius: 0;
 	`}
+`
+
+export const ArrowDown = styled.div`
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+	top: 17vh;
+	font-size: ${(props) => props.theme.font.size.h2};
+	color: ${(props) => props.theme.color.dark};
+	${(props) => props.theme.mediaQueries.tablet} {
+		display: none;
+	}
 `

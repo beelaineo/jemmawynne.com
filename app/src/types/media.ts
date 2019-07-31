@@ -1,3 +1,6 @@
 import { ShopifyImage } from 'use-shopify'
+import { ImageWithAltText } from './generated'
 
-export type Image = ShopifyImage
+export type ShopifyImage = ShopifyImage
+
+export type Image = ShopifyImage | ImageWithAltText

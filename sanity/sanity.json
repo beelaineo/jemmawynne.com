@@ -5,16 +5,23 @@
 	},
 	"api": {
 		"projectId": "caazz4uw",
-		"dataset": "development"
+		"dataset": "production"
+	},
+	"env": {
+		"development": {
+			"api": {
+				"dataset": "production"
+			}
+		}
 	},
 	"plugins": [
 		"@sanity/base",
 		"@sanity/components",
 		"@sanity/default-layout",
 		"@sanity/default-login",
-		"@sanity/vision",
 		"@sanity/desk-tool",
-		"@sane-shopify/sanity-plugin"
+		"@sane-shopify/sanity-plugin",
+		"@sanity/vision"
 	],
 	"parts": [
 		{

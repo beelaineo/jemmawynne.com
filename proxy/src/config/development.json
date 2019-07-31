@@ -1,0 +1,10 @@
+{
+	"shopify": {
+		"shopName": "jemmawynne-development",
+		"accessToken": "f50903d30045eaffacf14aa2dc37f167"
+	},
+	"sanity": {
+		"projectId": "caazz4uw",
+		"dataset": "production"
+	}
+}

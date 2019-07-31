@@ -1,5 +1,3 @@
-// @flow
-
 export const z = {
 	main: 0,
 	navigation: 100,
@@ -16,7 +14,7 @@ export const spacing = {
 	singleHalf: '18px',
 	double: '24px',
 	triple: '38px',
-	large: '50px',
+	quadruple: '48px',
 }
 
 export const columns = {
@@ -26,7 +24,4 @@ export const columns = {
 	xWide: '1100px',
 }
 
-export const transition = {
-	fast: '150ms',
-	slow: '250ms',
-}
+export const navHeight = '50px'

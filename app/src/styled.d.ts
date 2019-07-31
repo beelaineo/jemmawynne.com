@@ -6,7 +6,7 @@ declare module 'styled-components' {
 			z: { [key: string]: number }
 			spacing: { [key: string]: string }
 			columns: { [key: string]: string }
-			transtition: { [key: string]: string }
+			navHeight: string
 		}
 		font: {
 			size: { [key: string]: string }
@@ -15,5 +15,6 @@ declare module 'styled-components' {
 		}
 		color: { [key: string]: string }
 		mediaQueries: { [key: string]: string }
+		transition: { [key: string]: string }
 	}
 }

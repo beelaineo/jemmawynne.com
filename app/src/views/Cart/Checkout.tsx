@@ -1,8 +1,17 @@
 import * as React from 'react'
 import { useCheckout } from 'use-shopify'
-import { NormalizeDiv, Button, QuantitySelectorCart, Label } from '../ProductDetail/styled'
+import {
+	NormalizeDiv,
+	Button,
+	QuantitySelectorCart,
+} from '../ProductDetail/styled'
 import { QuantityInput } from 'Components/QuantityInput'
-import { FlexContainer, FlexFour, FlexHalf, FlexThree, FlexSix } from '../../components/Layout/Flex'
+import {
+	FlexContainer,
+	FlexHalf,
+	FlexThree,
+	FlexSix,
+} from '../../components/Layout/Flex'
 import { Header6, Header5, Header3 } from 'Components/Text'
 import { CartBottom } from 'Components/Cart'
 
@@ -17,12 +26,11 @@ export const Checkout = () => {
 	}
 	return (
 		<NormalizeDiv>
-			{/* <p>You have {checkout.lineItems.edges.length} items in your cart</p> */}
 			<Header3 color="dark">Your cart</Header3>
 			{checkout.lineItems.edges.map((element) => {
 				let { title, variant } = element.node
 				return (
-					<FlexContainer margin="small">
+					<FlexContainer key={variant.id} margin="small">
 						<FlexThree>
 							<img src={variant.image.originalSrc} />
 						</FlexThree>
@@ -43,7 +51,7 @@ export const Checkout = () => {
 									</QuantitySelectorCart>
 								</FlexHalf>
 								<FlexHalf>
-									<Header5 weight="bold" color="dark">
+									<Header5 weight="strong" color="dark">
 										${variant.price}
 									</Header5>
 								</FlexHalf>
@@ -61,13 +69,26 @@ export const Checkout = () => {
 						</Header5>
 					</FlexHalf>
 					<FlexHalf>
-						<Header5 align="right" transform="uppercase" weight="light" color="dark">
+						<Header5
+							align="right"
+							transform="uppercase"
+							weight="light"
+							color="dark"
+						>
 							${checkout.paymentDue}
 						</Header5>
 					</FlexHalf>
 				</FlexContainer>
-				<Header6 align="center">Shipping and discount codes are added at checkout.</Header6>
-				<Button background="dark" color="light" weight="semi">
+				<Header6 align="center">
+					Shipping and discount codes are added at checkout.
+				</Header6>
+				<Button
+					as="a"
+					href={checkout.webUrl}
+					background="dark"
+					color="light"
+					weight="semi"
+				>
 					Checkout
 				</Button>
 			</CartBottom>

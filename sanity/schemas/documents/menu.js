@@ -4,17 +4,24 @@ export const Menu = {
 	type: 'document',
 	fields: [
 		{
+			name: 'menuItems',
 			title: 'Menu Items',
-			name: 'items',
 			type: 'array',
 			of: [
 				{
-					type: 'pageLink',
+					type: 'menuLink',
 				},
 				{
 					type: 'subMenu',
+					name: 'subMenu',
 				},
 			],
 		},
 	],
+	preview: {
+		select: {},
+		prepare: () => ({
+			title: 'Nav menu',
+		}),
+	},
 }

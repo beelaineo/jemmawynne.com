@@ -8,15 +8,15 @@ export default () =>
 	S.list()
 		.title('Site')
 		.items([
-			// S.listItem()
-			// 	.title('Homepage')
-			// 	.icon(MdHome)
-			// 	.child(
-			// 		S.editor()
-			// 			.id('homepage')
-			// 			.schemaType('homepage')
-			// 			.documentId('homepage'),
-			// 	),
+			S.listItem()
+				.title('Homepage')
+				.icon(MdHome)
+				.child(
+					S.editor()
+						.id('homepage')
+						.schemaType('homepage')
+						.documentId('homepage'),
+				),
 			S.listItem()
 				.title('Nav Menu')
 				.icon(FiCompass)
@@ -35,11 +35,11 @@ export default () =>
 				.child(S.documentTypeList('shopifyProduct')),
 
 			// Collections
-			// S.listItem()
-			// 	.id('collections')
-			// 	.title('Collections')
-			// 	.icon(TiThSmallOutline)
-			// 	.child(S.documentTypeList('shopifyCollection')),
+			S.listItem()
+				.id('collections')
+				.title('Collections')
+				.icon(TiThSmallOutline)
+				.child(S.documentTypeList('shopifyCollection')),
 
 			// Shop Page
 			// S.listItem()
@@ -53,11 +53,11 @@ export default () =>
 			// 	),
 
 			// Pages
-			// S.listItem()
-			// 	.id('pages')
-			// 	.title('Pages')
-			// 	.icon(TiDocument)
-			// 	.child(S.documentTypeList('page')),
+			S.listItem()
+				.id('pages')
+				.title('Pages')
+				.icon(TiDocument)
+				.child(S.documentTypeList('page')),
 
 			// S.listItem()
 			// 	.title('Site Settings')
