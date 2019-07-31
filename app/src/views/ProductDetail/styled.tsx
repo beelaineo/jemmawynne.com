@@ -35,7 +35,7 @@ export const ProductInfoWrapper = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding: ${theme.layout.spacing.large};
+		padding: ${theme.layout.spacing.quadruple};
 		${theme.mediaQueries.tablet} {
 			flex: 1;
 			width: 100%;
@@ -110,19 +110,8 @@ export const ProductGalleryThumbnails = styled.div`
 export const ProductRelatedWrapper = styled.div`
 	${(props) => css`
 		background-color: ${props.theme.color.gray};
-		padding: ${props.theme.layout.spacing.large};
-		> div > div {
-			margin: ${props.theme.layout.spacing.small};
-			h4,
-			a {
-				text-decoration: none;
-				font-family: ${props.theme.font.family.serif};
-			}
-		}
-		> h2 {
-			font-size: ${props.theme.font.size.h1};
-			color: black;
-		}
+		padding: ${props.theme.layout.spacing.quadruple};
+
 		${props.theme.mediaQueries.tablet} {
 			> h2 {
 				font-size: ${props.theme.font.size.h2};
@@ -133,9 +122,7 @@ export const ProductRelatedWrapper = styled.div`
 
 export const ProductRelatedInner = styled.div`
 	${({ theme }) => css`
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-column-gap: ${theme.layout.spacing.single};
+		height: 500px;
 	`}
 `
 

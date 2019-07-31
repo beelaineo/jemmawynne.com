@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 export const OverLay = styled.div`
 	${(props) => `
-   		padding: ${props.theme.layout.spacing.large};
+   		padding: ${props.theme.layout.spacing.quadruple};
 	`}
 	> div {
 		height: 10vh;

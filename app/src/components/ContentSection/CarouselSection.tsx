@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Carousel } from '../Carousel'
 import { ContentSection } from '../../types'
 import { Wrapper } from './styled'
 import { renderContentBlock } from './renderContentBlock'
@@ -9,9 +10,5 @@ interface CarouselSectionProps {
 
 export const CarouselSection = ({ section }: CarouselSectionProps) => {
 	const { items } = section
-	return (
-		<React.Fragment>
-			{items ? items.map(renderContentBlock) : null}
-		</React.Fragment>
-	)
+	return <Carousel>{items ? items.map(renderContentBlock) : null}</Carousel>
 }

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import { Product, Collection } from 'use-shopify'
 import { unwindEdges } from '../../../utils/graphql'
 import { ProductRelatedWrapper, ProductRelatedInner } from '../styled'
+import { Carousel } from 'Components/Carousel'
 import { Header2, Header4 } from 'Components/Text'
 import { Image } from 'Components/Image'
+import { Figure } from 'Components/Figure'
 
 interface ProductRelatedProps {
 	product: Product
@@ -21,18 +23,23 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 				Shop the {collections[0].title} Collection
 			</Header2>
 			<ProductRelatedInner>
-				{products.slice(0, 5).map((product) => {
-					let { title } = product
-					const [images] = unwindEdges(product.images)
-					return (
-						<Link key={product.id} to={`/products/${product.handle}`}>
-							{images[0] && <Image image={images[0]} />}
-							<Header4 align="center" weight="xlight" color="dark">
-								{title}
-							</Header4>
-						</Link>
-					)
-				})}
+				<Carousel>
+					{products.slice(0, 10).map((product) => {
+						let { title } = product
+						const [images] = unwindEdges(product.images)
+						const productLink = `/products/${product.handle}`
+
+						return (
+							<Figure
+								key={product.id}
+								linkTo={productLink}
+								image={images[0]}
+								imageRatio={1}
+								caption={title}
+							/>
+						)
+					})}
+				</Carousel>
 			</ProductRelatedInner>
 		</ProductRelatedWrapper>
 	)

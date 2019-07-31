@@ -3,6 +3,7 @@ import { ShopifyImage, SanityImage } from '../../types'
 
 interface ImageProps {
 	image: ShopifyImage | SanityImage
+	ratio?: number
 	// TODO sizes
 }
 
@@ -32,6 +33,7 @@ const parseImage = (image: ShopifyImage | SanityImage): null | ImageDetails => {
 }
 
 export const Image = ({ image }: ImageProps) => {
+	if (!image) return null
 	const parsed = parseImage(image)
 	if (!parsed) return null
 	const { src, altText } = parsed

@@ -19,41 +19,41 @@ const getPreviewValues = async (values) => {
 	}
 }
 
-export const urlLink = {
-	title: 'External Link',
-	type: 'object',
-	name: 'urlLink',
-	icon: () => (
-		<span role="img" aria-label="Link" style={{ fontSize: '3em' }}>
-			🔗
-		</span>
-	),
-	fields: [
-		{
-			name: 'url',
-			type: 'url',
-			title: 'URL',
-			validation: (Rule) => Rule.required(),
-		},
-		{
-			name: 'newTab',
-			type: 'boolean',
-			title: 'Open in New Tab',
-		},
-	],
-	preview: {
-		select: {
-			url: 'url',
-			newTab: 'newTab',
-		},
-		prepare: ({ url, newTab }) => {
-			return {
-				title: url,
-				subtitle: newTab ? '⧉ Opens in new tab' : undefined,
-			}
-		},
-	},
-}
+// export const urlLink = {
+// 	title: 'External Link',
+// 	type: 'object',
+// 	name: 'urlLink',
+// 	icon: () => (
+// 		<span role="img" aria-label="Link" style={{ fontSize: '3em' }}>
+// 			🔗
+// 		</span>
+// 	),
+// 	fields: [
+// 		{
+// 			name: 'url',
+// 			type: 'url',
+// 			title: 'URL',
+// 			validation: (Rule) => Rule.required(),
+// 		},
+// 		{
+// 			name: 'newTab',
+// 			type: 'boolean',
+// 			title: 'Open in New Tab',
+// 		},
+// 	],
+// 	preview: {
+// 		select: {
+// 			url: 'url',
+// 			newTab: 'newTab',
+// 		},
+// 		prepare: ({ url, newTab }) => {
+// 			return {
+// 				title: url,
+// 				subtitle: newTab ? '⧉ Opens in new tab' : undefined,
+// 			}
+// 		},
+// 	},
+// }
 
 export const pageLink = {
 	title: 'Link',

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { LinkGroup as LinkGroupType } from '../../types/generated'
-import { Link } from '../../components/Link'
+import { PageLink } from '../../components/PageLink'
 import { Header5, Header6 } from '../../components/Text'
 
 interface LinkGroupProps {
@@ -14,9 +14,9 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
 			<Header5>{title}</Header5>
 			{links && links.length
 				? links.map((menuLink) =>
-						menuLink.link && menuLink.link.length ? (
+						menuLink.document ? (
 							<Header5 weight="normal" key={menuLink._key}>
-								<Link link={menuLink.link[0]} />
+								<PageLink link={menuLink} />
 							</Header5>
 						) : null,
 				  )

@@ -20,8 +20,7 @@ interface Props {
 }
 
 const client = createClient({
-	// url: 'http://localhost:4000',
-	url: 'https://jemmawynne-api.now.sh',
+	url: '/.netlify/functions/graphql',
 })
 
 const queries = createUrqlQueries(client)

@@ -5,12 +5,12 @@
 	},
 	"api": {
 		"projectId": "caazz4uw",
-		"dataset": "development"
+		"dataset": "production"
 	},
 	"env": {
 		"development": {
 			"api": {
-				"dataset": "development"
+				"dataset": "production"
 			}
 		}
 	},

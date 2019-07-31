@@ -15,7 +15,10 @@
   ],
   "scripts": {
     "start": "sanity start",
-    "test": "sanity check"
+    "test": "sanity check",
+    "deploy": "yarn deploy:cms && yarn deploy:graphql",
+    "deploy:cms": "yarn sanity deploy",
+    "deploy:graphql": "yarn sanity graphql deploy --playground"
   },
   "dependencies": {
     "@sane-shopify/sanity-plugin": "^0.2.2",

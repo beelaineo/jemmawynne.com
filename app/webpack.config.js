@@ -23,9 +23,12 @@ const DEV_SERVER = {
 	historyApiFallback: true,
 	overlay: true,
 	contentBase: path.resolve(__dirname, 'public'),
-	// proxy: {
-	//   '/api': 'http://localhost:3000'
-	// },
+	proxy: {
+		'/.netlify': {
+			target: 'http://[::1]:9000',
+			pathRewrite: { '^/.netlify/functions': '' },
+		},
+	},
 }
 
 module.exports = (env) => {
@@ -60,13 +63,27 @@ module.exports = (env) => {
 					include: PATHS.src,
 					use: [
 						// isDev ? { loader: 'react-hot-loader/webpack' } : null,
-						{ loader: 'babel-loader' },
+						// { loader: 'babel-loader' },
 						{
 							loader: 'awesome-typescript-loader',
 							options: {
+								useBabel: true,
+								// babelOptions: {
+								// 	babelrc: false /* Important line */,
+								// 	presets: [
+								// 		[
+								// 			'@babel/preset-env',
+								// 			{ targets: 'last 2 versions, ie 11', modules: false },
+								// 		],
+								// 	],
+								// },
+								babelCore: '@babel/core', // needed for Babel v7
 								transpileOnly: !isDev,
 								useTranspileModule: false,
 								sourceMap: true,
+								// getCustomTransformers: () => ({
+								// 	before: [styledComponentsTransformer],
+								// }),
 							},
 						},
 					].filter(Boolean),

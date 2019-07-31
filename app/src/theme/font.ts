@@ -6,7 +6,7 @@ export const size = {
 	h3: '22px',
 	p: '18px',
 	h4: '16px',
-	h5: '13px',
+	h5: '14px',
 	h6: '10px',
 }
 

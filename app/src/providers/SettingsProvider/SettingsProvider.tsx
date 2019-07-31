@@ -35,7 +35,6 @@ export const SettingsProvider = ({ children }: Props) => {
 	const ready = response.data && !response.fetching
 	const menu = ready ? response.data.Menu : undefined
 
-	console.log(response)
 	const value = {
 		ready,
 		menu,

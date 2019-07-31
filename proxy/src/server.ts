@@ -1,18 +1,12 @@
-import { ApolloServer } from 'apollo-server'
-import { createSchema } from './schema'
 import { config } from './config'
+import { createServer } from './graphql/apollo'
 
 const PORT = config.get('port')
 
 const runServer = async () => {
-	const { schema } = await createSchema()
-	const server = new ApolloServer({
-		schema,
-		playground: true,
-		introspection: true,
-	})
+	const server = await createServer()
 
-	server.listen().then(({ url }) => {
+	server.listen(PORT).then(({ url }) => {
 		console.log(`Server ready at ${url}`)
 	})
 }

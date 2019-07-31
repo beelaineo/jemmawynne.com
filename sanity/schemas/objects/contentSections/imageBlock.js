@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { BlockPreview } from './BlockPreview'
-import { link } from '../linkWorkaround'
 import {
 	getImageThumbnail,
 	getReferencedDocument,
@@ -15,11 +14,10 @@ const getPreviewValues = async (props) => {
 
 	const [imageUrl, linkedDoc] = await Promise.all([
 		images && images.length ? getImageThumbnail(images[0]) : noop(),
-		link && link.length > 0 && link[0].document && link[0].document._ref
-			? getReferencedDocument(link[0].document._ref)
+		link && link.document && link.document._ref
+			? getReferencedDocument(link.document._ref)
 			: noop(),
 	])
-	const urlLink = link && link.length && link[0].url
 
 	const shopifyThumbnail =
 		linkedDoc &&
@@ -30,13 +28,15 @@ const getPreviewValues = async (props) => {
 	const subtitle = titles.length >= 2 ? titles[1] : undefined
 
 	const info = [
+		title,
 		linkedDoc ? `🔗${linkedDoc.title}` : null,
-		urlLink ? `🔗${urlLink}` : null,
+		caption,
 	].filter(Boolean)
+	const [previewTitle, ...subtitles] = info
 
 	return {
-		title: titles[0],
-		subtitles: [subtitle, info.length ? info.join(' ') : undefined].filter(
+		title: previewTitle,
+		subtitles: [subtitles.length ? subtitles.join(' ') : undefined].filter(
 			Boolean,
 		),
 		src: imageUrl || shopifyThumbnail,
@@ -45,7 +45,7 @@ const getPreviewValues = async (props) => {
 }
 export const imageBlock = {
 	name: 'imageBlock',
-	title: 'Image Block',
+	title: 'Image/Link',
 	type: 'object',
 	fields: [
 		{
@@ -55,16 +55,17 @@ export const imageBlock = {
 			of: [{ type: 'imageWithAltText' }],
 			validation: (Rule) => {
 				// TODO return error when CTA does not link to product or collection
-				return Rule.required().max(2)
+				return Rule.max(2)
 			},
 			description:
-				'Defaults to product or collection image if empty. Add a second image for a hover effect',
+				"If no images are added, and if this content links to a product or collection, that item's first image will be used. Add a second image for a hover effect.",
 		},
 		{
 			name: 'title',
 			type: 'string',
 			label: 'Title',
-			description: 'Defaults to product or collection title if empty',
+			description:
+				"If emtpy, and if this content links to a page, product, or collection, that item's title will be used.",
 		},
 		{
 			name: 'caption',
@@ -73,8 +74,8 @@ export const imageBlock = {
 			validation: (Rule) => Rule.max(150),
 		},
 		{
-			...link,
 			name: 'link',
+			type: 'pageLink',
 		},
 	],
 	preview: {

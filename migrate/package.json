@@ -1,0 +1,33 @@
+{
+  "name": "jemmawynne-wp-shopify-migration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@good-idea/unwind-edges": "^1.1.3",
+    "@shopify/javascript-utilities": "^2.4.0",
+    "dotenv": "^8.0.0",
+    "graphql-tag": "^2.10.1",
+    "markdown": "^0.5.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
+    "node-fetch": "^2.6.0",
+    "php-unserialize": "0.0.1",
+    "promise-parallel-throttle": "^3.3.0",
+    "sequelize": "^5.9.0",
+    "shopify-api-node": "^2.20.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/mysql": "^2.15.6",
+    "sequelize-auto": "^0.4.29",
+    "shopify-api-node-interface": "^2.0.0"
+  }
+}
