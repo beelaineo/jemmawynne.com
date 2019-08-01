@@ -1,5 +1,5 @@
 import S from '@sanity/desk-tool/structure-builder'
-import { MdSettings, MdHome } from 'react-icons/md'
+import { MdSettings, MdHome, MdInfoOutline } from 'react-icons/md'
 import { TiDevicePhone, TiThSmallOutline, TiDocument } from 'react-icons/ti'
 import { FaShoppingBag } from 'react-icons/fa'
 import { FiCompass } from 'react-icons/fi'
@@ -33,6 +33,17 @@ export default () =>
 				.title('Products')
 				.icon(TiDevicePhone)
 				.child(S.documentTypeList('shopifyProduct')),
+
+			S.listItem()
+				.id('productInfo')
+				.title('Product Info')
+				.icon(MdInfoOutline)
+				.child(
+					S.editor()
+						.id('productInfo')
+						.schemaType('productInfo')
+						.documentId('productInfo'),
+				),
 
 			// Collections
 			S.listItem()

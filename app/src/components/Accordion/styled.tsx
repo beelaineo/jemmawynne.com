@@ -7,7 +7,8 @@ interface WithOpen {
 
 export const ToggleButton = styled.button`
 	${({ theme }) => css`
-		font-size: ${(props) => props.theme.font.size.h6};
+		font-size: ${theme.font.size.h6};
+		font-weight: ${theme.font.weight.semi};
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		color: ${(props) => props.theme.color.dark};
@@ -16,15 +17,8 @@ export const ToggleButton = styled.button`
 
 export const Inner = styled.div`
 	${({ theme, open }: WithOpen) => css`
-		${open
-			? css`
-					visibility: visible;
-					height: auto;
-			  `
-			: css`
-					visibility: hidden;
-					height: 0;
-			  `}
+		display: ${open ? 'block' : 'none'};
+		padding: ${theme.layout.spacing.single} 0;
 	`}
 `
 

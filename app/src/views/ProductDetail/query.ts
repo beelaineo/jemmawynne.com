@@ -1,4 +1,4 @@
-import { Product } from 'use-shopify'
+import { Product } from '../../types/generated'
 import { imageFragment } from '../../graphql/fragments'
 
 export const PRODUCT_QUERY = /* GraphQL */ `
@@ -8,6 +8,8 @@ export const PRODUCT_QUERY = /* GraphQL */ `
 			title
 			handle
 			description
+			tags
+			productType
 			collections(first: 5) {
 				edges {
 					node {
