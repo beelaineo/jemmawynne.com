@@ -3,7 +3,7 @@ import { Paginated } from '@good-idea/unwind-edges'
 import { Menu } from '../../types/generated'
 import { linkFragment, imageBlockFragment } from '../../graphql/fragments'
 
-export const SETTINGS_QUERY = /* GraphQL */ `
+export const SHOP_DATA_QUERY = /* GraphQL */ `
 	{
 		Menu(id: "menu-settings") {
 			_id
@@ -44,6 +44,6 @@ export const SETTINGS_QUERY = /* GraphQL */ `
 	${imageBlockFragment}
 `
 
-export interface SettingsResponse {
+export interface ShopDataResponse {
 	Menu: Menu
 }

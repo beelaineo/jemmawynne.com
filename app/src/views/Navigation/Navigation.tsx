@@ -4,7 +4,7 @@ import { useState, useReducer } from 'react'
 import { PageLink } from 'Components/PageLink'
 import { path } from 'ramda'
 import { useCheckout } from 'use-shopify'
-import { useSettings } from '../../providers/SettingsProvider'
+import { useShopData } from '../../providers/ShopDataProvider'
 import { CartSidebar, CloseButton, CartNav } from '../../components/Cart'
 import { unwindEdges } from '../../utils/graphql'
 import { Checkout } from '../Cart/Checkout'
@@ -79,7 +79,7 @@ function navReducer(currentState: NavState, action: Action): NavState {
 export const Navigation = () => {
 	/* State from Providers */
 	const { loading, checkout } = useCheckout()
-	const { ready, menu } = useSettings()
+	const { ready, menu } = useShopData()
 
 	/* State */
 	const [{ cartOpen, menuOpen, currentSubmenuKey }, dispatch] = useReducer(
