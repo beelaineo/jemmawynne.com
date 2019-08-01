@@ -5,7 +5,7 @@ import { ShopifyProvider, createUrqlQueries } from 'use-shopify'
 import { createClient, Provider as UrqlProvider } from 'urql'
 import { SHOPIFY_STOREFRONT_TOKEN } from '../config'
 import { theme, GlobalStyles } from '../theme'
-import { SettingsProvider } from './SettingsProvider'
+import { ShopDataProvider } from './ShopDataProvider'
 
 /**
  * App
@@ -29,14 +29,14 @@ export const Providers = ({ children }: Props) => {
 	return (
 		<UrqlProvider value={client}>
 			<ShopifyProvider queries={queries}>
-				<SettingsProvider>
+				<ShopDataProvider>
 					<ThemeProvider theme={theme}>
 						<BrowserRouter>
 							<GlobalStyles />
 							{children}
 						</BrowserRouter>
 					</ThemeProvider>
-				</SettingsProvider>
+				</ShopDataProvider>
 			</ShopifyProvider>
 		</UrqlProvider>
 	)
