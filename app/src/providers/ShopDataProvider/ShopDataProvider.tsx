@@ -3,13 +3,14 @@ import { Collection } from 'use-shopify'
 import { useQuery } from 'urql'
 import { SHOP_DATA_QUERY, ShopDataResponse } from './shopDataQuery'
 import { unwindEdges } from '../../utils/graphql'
-import { Menu } from '../../types/generated'
+import { Menu, ProductInfo } from '../../types/generated'
 
 const { useContext } = React
 
 interface ShopDataContextValue {
 	ready: boolean
 	menu?: Menu
+	productInfoBlocks?: ProductInfo
 }
 
 const ShopDataContext = React.createContext<ShopDataContextValue | undefined>(
@@ -34,10 +35,14 @@ export const ShopDataProvider = ({ children }: Props) => {
 
 	const ready = response.data && !response.fetching
 	const menu = ready ? response.data.Menu : undefined
+	const productInfoBlocks = ready ? response.data.ProductInfo : undefined
+
+	console.log(response)
 
 	const value = {
 		ready,
 		menu,
+		productInfoBlocks,
 	}
 
 	return (

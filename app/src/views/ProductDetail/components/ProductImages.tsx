@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Product, Variant } from 'use-shopify'
+import { Variant } from 'use-shopify'
+import { Product } from '../../../types/generated'
 import { unwindEdges } from '../../../utils/graphql'
 import { Gallery } from '../../../components/Gallery'
 import { ProductGalleryWrapper } from '../styled'
@@ -9,8 +10,12 @@ interface ProductImagesProps {
 	currentVariant: Variant
 }
 
-export const ProductImages = ({ product, currentVariant }: ProductImagesProps) => {
-	if (!product.images || !product.images.edges || !product.images.edges.length) return null
+export const ProductImages = ({
+	product,
+	currentVariant,
+}: ProductImagesProps) => {
+	if (!product.images || !product.images.edges || !product.images.edges.length)
+		return null
 	const [images] = unwindEdges(product.images)
 	return (
 		<ProductGalleryWrapper>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Product, Collection } from 'use-shopify'
+import { Product, Collection } from '../../../types/generated'
 import { unwindEdges } from '../../../utils/graphql'
 import { ProductRelatedWrapper, ProductRelatedInner } from '../styled'
 import { Carousel } from 'Components/Carousel'

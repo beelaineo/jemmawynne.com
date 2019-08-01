@@ -2,13 +2,22 @@ import * as React from 'react'
 import * as BlockContent from '@sanity/block-content-to-react'
 import * as Text from '../Text'
 
-const serializers = {
+interface CustomSerializerConfig {
+	blockWrapper: React.ComponentType
+}
+
+const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
 	list: (props) => {
 		if (props.type === 'number') return <Text.Ol {...props} />
 		return <Text.Ul {...props} />
 	},
 	listItem: (props) => <Text.Li {...props} />,
 	block: (props): React.ReactNode => {
+		/* If a custom block wrapper was passed in, use it instead.
+		 * This allows us to change a default P tag into a different size/style */
+
+		if (Wrapper) return <Wrapper {...props} />
+
 		const style = props.node.style || 'normal'
 		// if (props.node._type === 'image') return <SanityImage image={props.node} />
 		// if (props.node._type === 'videoEmbed') return <VideoEmbed video={props.node} />
@@ -49,12 +58,13 @@ const serializers = {
 	// 		return <Link to={`${parsed.pathname}${parsed.search}`}>{children}</Link>
 	// 	},
 	// },
-}
+})
 
 interface RichTextProps {
 	body: { [key: string]: any }
+	blockWrapper?: React.ComponentType
 }
 
-export const RichText = ({ body }: RichTextProps) => (
-	<BlockContent blocks={body} serializers={serializers} />
+export const RichText = ({ body, blockWrapper }: RichTextProps) => (
+	<BlockContent blocks={body} serializers={serializers({ blockWrapper })} />
 )

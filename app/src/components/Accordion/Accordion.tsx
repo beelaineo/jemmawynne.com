@@ -1,19 +1,27 @@
 import * as React from 'react'
+import { RichText } from '../RichText'
+import { Header5 } from '../Text'
 import { Wrapper, ToggleButton, Inner } from './styled'
 
 interface AccordionProps {
 	label: string
-	children: React.ReactNode
+	content: { [key: string]: string }
 }
 
-export const Accordion = ({ label, children }: AccordionProps) => {
+const AccordionTextWrapper = (props: any) => (
+	<Header5 {...props} weight="normal" />
+)
+
+export const Accordion = ({ label, content }: AccordionProps) => {
 	const [open, setOpen] = React.useState(false)
 	const toggleOpen = () => setOpen(!open)
 
 	return (
 		<Wrapper>
 			<ToggleButton onClick={toggleOpen}>{label}</ToggleButton>
-			<Inner open={open}>{children}</Inner>
+			<Inner open={open}>
+				<RichText blockWrapper={AccordionTextWrapper} body={content} />
+			</Inner>
 		</Wrapper>
 	)
 }

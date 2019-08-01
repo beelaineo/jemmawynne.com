@@ -3,7 +3,8 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { Link } from 'react-router-dom'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
-import { useProductVariant, useCheckout, Variant, Product } from 'use-shopify'
+import { Product, ProductInfo, ProductInfoBlock } from '../../types/generated'
+import { useProductVariant, useCheckout, Variant } from 'use-shopify'
 import { unwindEdges } from '../../utils/graphql'
 import { NotFound } from '../NotFound'
 import { Column } from '../../components/Layout'
@@ -15,6 +16,7 @@ import {
 	ProductDetailFooter,
 	ProductRelated,
 } from './components'
+import { useShopData } from '../../providers/ShopDataProvider'
 import { useCounter } from 'Utils/hooks'
 import {
 	Wrapper,
@@ -24,6 +26,7 @@ import {
 	NormalizeDiv,
 	ArrowDown,
 } from './styled'
+import { RichText } from '../../components/RichText'
 import { Accordion } from '../../components/Accordion'
 import { Header5, Header6 } from 'Components/Text'
 
@@ -31,7 +34,61 @@ interface Props {
 	product: Product
 }
 
+function getInfoBlocksByType(
+	type: string,
+	productInfoBlocks: ProductInfo,
+): ProductInfoBlock[] {
+	const {
+		globalBlocks,
+		ringBlocks,
+		earringBlocks,
+		braceletBlocks,
+		necklaceBlocks,
+	} = productInfoBlocks
+	const byType =
+		type === 'Rings'
+			? ringBlocks
+			: type === 'Earrings'
+			? earringBlocks
+			: type === 'Bracelets'
+			? braceletBlocks
+			: type === 'Necklaces'
+			? necklaceBlocks
+			: []
+	console.log(type, byType)
+
+	const global = globalBlocks || []
+	return [...global, ...byType]
+}
+
+function getInfoBlocksByTag(
+	productTags: string[],
+	productInfoBlocks: ProductInfo,
+): ProductInfoBlock[] {
+	if (!productTags) return []
+	const { blocksByTag } = productInfoBlocks
+	return blocksByTag
+		.filter(({ tag, infoBlocks }) => {
+			/* Get matching tags */
+			if (!tag || !infoBlocks) return false
+			return productTags.includes(tag)
+		})
+		.map(({ infoBlocks }) => infoBlocks)
+		.reduce((acc, current) => [...acc, ...current], [])
+}
+
 const ProductDetailMain = ({ product }: Props) => {
+	/* get additional info blocks from Sanity */
+	const { ready, productInfoBlocks } = useShopData()
+	const accordions = productInfoBlocks
+		? [
+				...getInfoBlocksByType(product.productType, productInfoBlocks),
+				...getInfoBlocksByTag(product.tags, productInfoBlocks),
+		  ]
+		: []
+
+	console.log(accordions)
+	/* hook to manage quantity input */
 	const {
 		count: quantity,
 		increment,
@@ -73,14 +130,12 @@ const ProductDetailMain = ({ product }: Props) => {
 							quantity={quantity}
 						/>
 						<NormalizeDiv>
-							<Accordion label="Shipping & Returns">
-								<Header5>Shipping & Returns Info</Header5>
-							</Accordion>
-							<Accordion label="FAQ">
-								<Header5>FAQ Info</Header5>
-							</Accordion>
+							{accordions
+								? accordions.map(({ _key, title, bodyRaw }) => (
+										<Accordion key={_key} label={title} content={bodyRaw} />
+								  ))
+								: null}
 						</NormalizeDiv>
-						<ArrowDown>&darr;</ArrowDown>
 					</ProductInfoWrapper>
 				</ProductDetails>
 			</Column>

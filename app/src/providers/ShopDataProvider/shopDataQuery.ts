@@ -1,7 +1,11 @@
 import { Collection } from 'use-shopify'
 import { Paginated } from '@good-idea/unwind-edges'
-import { Menu } from '../../types/generated'
-import { linkFragment, imageBlockFragment } from '../../graphql/fragments'
+import { Menu, ProductInfo } from '../../types/generated'
+import {
+	linkFragment,
+	imageBlockFragment,
+	productInfoFragment,
+} from '../../graphql/fragments'
 
 export const SHOP_DATA_QUERY = /* GraphQL */ `
 	{
@@ -39,11 +43,42 @@ export const SHOP_DATA_QUERY = /* GraphQL */ `
 				}
 			}
 		}
+		ProductInfo(id: "productInfo") {
+			_id
+			_type
+			_key
+			_createdAt
+			globalBlocks {
+				...ProductInfoFragment
+			}
+			ringBlocks {
+				...ProductInfoFragment
+			}
+			earringBlocks {
+				...ProductInfoFragment
+			}
+			braceletBlocks {
+				...ProductInfoFragment
+			}
+			necklaceBlocks {
+				...ProductInfoFragment
+			}
+			blocksByTag {
+				_key
+				_type
+				tag
+				infoBlocks {
+					...ProductInfoFragment
+				}
+			}
+		}
 	}
+	${productInfoFragment}
 	${linkFragment}
 	${imageBlockFragment}
 `
 
 export interface ShopDataResponse {
 	Menu: Menu
+	ProductInfo: ProductInfo
 }
