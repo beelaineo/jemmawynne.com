@@ -9,7 +9,7 @@ export const CartSidebar = styled.div`
 	${(props: CartSidebarProps) => css`
 		position: fixed;
 		right: ${props.open ? '0px' : '-500px'};
-		top: 1;
+		top: 0;
 		max-width: 500px;
 		max-height: 100vh;
 		min-height: 100vh;
@@ -40,10 +40,12 @@ export const CartSidebar = styled.div`
 `
 
 export const CloseButton = styled.button`
-	color: blue;
+	color: white;
 	position: absolute;
 	right: 10px;
-	top: 10px;
+	bottom: 0;
+	background-color: black;
+	padding: 2rem;
 	padding: ${(props) => props.theme.layout.spacing.small};
 `
 
@@ -58,6 +60,7 @@ export const CartBottom = styled.div`
 	justify-content: space-between;
 	flex-direction: column;
 	height: 15vh;
+
 	> div,
 	> h6 {
 		margin: ${(props) => props.theme.layout.spacing.small};

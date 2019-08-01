@@ -148,8 +148,8 @@ export const Navigation = () => {
 				</SubmenuPane>
 			</Inner>
 			<CartSidebar open={cartOpen}>
-				<CloseButton onClick={closeCart}>close</CloseButton>
 				<Checkout />
+				<CloseButton onClick={closeCart}>close</CloseButton>
 			</CartSidebar>
 		</Wrapper>
 	)

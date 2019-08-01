@@ -34,10 +34,12 @@ export const FlexThree = styled.div`
 
 export const FlexFour = styled.div`
 	flex: 5;
-	margin: 10px;
 `
 
 export const FlexSix = styled.div`
 	flex: 6;
 	margin: 10px;
+	${({ theme, marginVertical }: WrapperProps) => `
+		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
+	`}
 `
