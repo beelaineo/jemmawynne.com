@@ -20,6 +20,7 @@ import {
 	SubmenuPane,
 	Logo,
 } from './styled'
+import { IoIosCart } from 'react-icons/io'
 
 interface MenuProps {
 	activeMenu: null | string
@@ -130,7 +131,7 @@ export const Navigation = () => {
 				<NavSection ready={ready} align="right">
 					<NavHeaderWrapper>
 						<NavHeader as="button" onClick={openCart}>
-							Cart {cartCount}
+							<IoIosCart /> {cartCount}
 						</NavHeader>
 					</NavHeaderWrapper>
 				</NavSection>
