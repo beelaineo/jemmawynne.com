@@ -87,3 +87,12 @@ export const contentSectionFragment = /* GraphQL */ `
 	${imageBlockFragment}
 	${textBlockFragment}
 `
+
+export const productInfoFragment = /* GraphQL */ `
+	fragment ProductInfoFragment on ProductInfoBlock {
+		_key
+		_type
+		title
+		bodyRaw
+	}
+`

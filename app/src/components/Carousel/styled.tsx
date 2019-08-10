@@ -54,7 +54,8 @@ export const SlideContainer = styled.div`
 		);
 		margin-right: ${theme.layout.spacing.double};
 		display: inline-flex;
-		vertical-align: top;
+		/* NOTE => Had to remove this to get the related products to sit together vertically when I changed them! */
+		/* vertical-align: top; */
 		align-items: center;
 
 		&:last-of-type {

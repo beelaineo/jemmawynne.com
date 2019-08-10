@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Product, Variant } from 'use-shopify'
+import { Variant } from 'use-shopify'
+import { Product } from '../../../types/generated'
 import { NormalizeDiv } from '../styled'
 import { Header2, Header4 } from 'Components/Text'
 

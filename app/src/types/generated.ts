@@ -3773,6 +3773,132 @@ export enum ProductImageSortKeys {
 	Relevance = 'RELEVANCE',
 }
 
+export interface ProductInfo extends Document {
+	__typename: 'ProductInfo'
+	/** Document ID */
+	_id: Scalars['ID']
+	/** Document type */
+	_type: Scalars['String']
+	/** Date the document was created */
+	_createdAt: Scalars['DateTime']
+	/** Date the document was last modified */
+	_updatedAt: Scalars['DateTime']
+	/** Current document revision */
+	_rev: Scalars['String']
+	_key?: Maybe<Scalars['String']>
+	/** Use these fields to add snippets of descriptions to all or some projects. For
+	 * instance, you could add a 'Shipping and Returns' block on all items, and a
+	 * 'Ring Sizing Guide' block to all Rings. These blocks will be displayed in
+	 * accordion-dropdowns below the main product information. You can also add info
+	 * blocks to individual items on their page here in the CMS.
+	 */
+	helpText?: Maybe<Scalars['String']>
+	globalBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+	ringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+	earringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+	braceletBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+	necklaceBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+	/** Use these fields to add blocks to items with particular tags in Shopify. For
+	 * instance, a "Customization" block for anything tagged with "Custom" in Shopify.
+	 */
+	byTagHelpText?: Maybe<Scalars['String']>
+	blocksByTag?: Maybe<Array<Maybe<ProductInfoBlocksByTag>>>
+}
+
+export interface ProductInfoBlock {
+	__typename: 'ProductInfoBlock'
+	_key?: Maybe<Scalars['String']>
+	_type?: Maybe<Scalars['String']>
+	title?: Maybe<Scalars['String']>
+	bodyRaw?: Maybe<Scalars['JSON']>
+}
+
+export interface ProductInfoBlocksByTag {
+	__typename: 'ProductInfoBlocksByTag'
+	_key?: Maybe<Scalars['String']>
+	_type?: Maybe<Scalars['String']>
+	/** Tag to match from Shopify. */
+	tag?: Maybe<Scalars['String']>
+	infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+}
+
+export type ProductInfoFilter = {
+	/** All documents that are equal to given value */
+	_id?: Maybe<Scalars['ID']>
+	/** All documents that are not equal to given value */
+	_id_not?: Maybe<Scalars['ID']>
+	/** All documents contain (match) the given word/words */
+	_id_matches?: Maybe<Scalars['String']>
+	_id_in?: Maybe<Array<Scalars['String']>>
+	_id_not_in?: Maybe<Array<Scalars['String']>>
+	/** All documents that are equal to given value */
+	_type?: Maybe<Scalars['String']>
+	/** All documents that are not equal to given value */
+	_type_not?: Maybe<Scalars['String']>
+	/** All documents contain (match) the given word/words */
+	_type_matches?: Maybe<Scalars['String']>
+	_type_in?: Maybe<Array<Scalars['String']>>
+	_type_not_in?: Maybe<Array<Scalars['String']>>
+	/** All documents that are equal to given value */
+	_createdAt?: Maybe<Scalars['DateTime']>
+	/** All documents that are not equal to given value */
+	_createdAt_not?: Maybe<Scalars['DateTime']>
+	/** All documents are less than given value */
+	_createdAt_lt?: Maybe<Scalars['DateTime']>
+	/** All documents are less than or equal to given value */
+	_createdAt_lte?: Maybe<Scalars['DateTime']>
+	/** All documents are greater than given value */
+	_createdAt_gt?: Maybe<Scalars['DateTime']>
+	/** All documents are greater than or equal to given value */
+	_createdAt_gte?: Maybe<Scalars['DateTime']>
+	/** All documents that are equal to given value */
+	_updatedAt?: Maybe<Scalars['DateTime']>
+	/** All documents that are not equal to given value */
+	_updatedAt_not?: Maybe<Scalars['DateTime']>
+	/** All documents are less than given value */
+	_updatedAt_lt?: Maybe<Scalars['DateTime']>
+	/** All documents are less than or equal to given value */
+	_updatedAt_lte?: Maybe<Scalars['DateTime']>
+	/** All documents are greater than given value */
+	_updatedAt_gt?: Maybe<Scalars['DateTime']>
+	/** All documents are greater than or equal to given value */
+	_updatedAt_gte?: Maybe<Scalars['DateTime']>
+	/** All documents that are equal to given value */
+	_rev?: Maybe<Scalars['String']>
+	/** All documents that are not equal to given value */
+	_rev_not?: Maybe<Scalars['String']>
+	/** All documents contain (match) the given word/words */
+	_rev_matches?: Maybe<Scalars['String']>
+	_rev_in?: Maybe<Array<Scalars['String']>>
+	_rev_not_in?: Maybe<Array<Scalars['String']>>
+	/** All documents that are equal to given value */
+	_key?: Maybe<Scalars['String']>
+	/** All documents that are not equal to given value */
+	_key_not?: Maybe<Scalars['String']>
+	/** All documents contain (match) the given word/words */
+	_key_matches?: Maybe<Scalars['String']>
+	_key_in?: Maybe<Array<Scalars['String']>>
+	_key_not_in?: Maybe<Array<Scalars['String']>>
+	/** All documents that are equal to given value */
+	helpText?: Maybe<Scalars['String']>
+	/** All documents that are not equal to given value */
+	helpText_not?: Maybe<Scalars['String']>
+	/** All documents contain (match) the given word/words */
+	helpText_matches?: Maybe<Scalars['String']>
+	helpText_in?: Maybe<Array<Scalars['String']>>
+	helpText_not_in?: Maybe<Array<Scalars['String']>>
+	/** All documents that are equal to given value */
+	byTagHelpText?: Maybe<Scalars['String']>
+	/** All documents that are not equal to given value */
+	byTagHelpText_not?: Maybe<Scalars['String']>
+	/** All documents contain (match) the given word/words */
+	byTagHelpText_matches?: Maybe<Scalars['String']>
+	byTagHelpText_in?: Maybe<Array<Scalars['String']>>
+	byTagHelpText_not_in?: Maybe<Array<Scalars['String']>>
+	/** All documents that are drafts */
+	is_draft?: Maybe<Scalars['Boolean']>
+}
+
 /** Custom product property names like "Size", "Color", and "Material".
  * Products are based on permutations of these options.
  * A product may have a maximum of 3 options.
@@ -4017,6 +4143,7 @@ export interface Query {
 	Menu?: Maybe<Menu>
 	Homepage?: Maybe<Homepage>
 	Page?: Maybe<Page>
+	ProductInfo?: Maybe<ProductInfo>
 	SanityImageAsset?: Maybe<SanityImageAsset>
 	SanityFileAsset?: Maybe<SanityFileAsset>
 	allShopifyProducts: Array<ShopifyProduct>
@@ -4024,6 +4151,7 @@ export interface Query {
 	allMenus: Array<Menu>
 	allHomepages: Array<Homepage>
 	allPages: Array<Page>
+	allProductInfos: Array<ProductInfo>
 	allSanityImageAssets: Array<SanityImageAsset>
 	allSanityFileAssets: Array<SanityFileAsset>
 }
@@ -4138,6 +4266,10 @@ export type QueryPageArgs = {
 	id: Scalars['ID']
 }
 
+export type QueryProductInfoArgs = {
+	id: Scalars['ID']
+}
+
 export type QuerySanityImageAssetArgs = {
 	id: Scalars['ID']
 }
@@ -4172,6 +4304,12 @@ export type QueryAllHomepagesArgs = {
 
 export type QueryAllPagesArgs = {
 	where?: Maybe<PageFilter>
+	limit?: Maybe<Scalars['Int']>
+	offset?: Maybe<Scalars['Int']>
+}
+
+export type QueryAllProductInfosArgs = {
+	where?: Maybe<ProductInfoFilter>
 	limit?: Maybe<Scalars['Int']>
 	offset?: Maybe<Scalars['Int']>
 }
@@ -4907,6 +5045,7 @@ export interface ShopifyProduct extends Document {
 	handle?: Maybe<Scalars['String']>
 	shopifyId?: Maybe<Scalars['String']>
 	sourceData?: Maybe<ShopifyProductSource>
+	infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
 }
 
 export type ShopifyProductFilter = {
