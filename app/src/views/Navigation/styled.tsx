@@ -118,3 +118,5 @@ export const SubMenuColumns = styled.div`
 		grid-column-gap: ${theme.layout.spacing.single};
 	`}
 `
+
+export const ModalBackground = styled.div``

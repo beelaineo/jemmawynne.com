@@ -19,6 +19,7 @@ import {
 	NavHeaderWrapper,
 	SubmenuPane,
 	Logo,
+	ModalBackground,
 } from './styled'
 import { IoIosCart } from 'react-icons/io'
 
@@ -147,6 +148,9 @@ export const Navigation = () => {
 					)}
 				</SubmenuPane>
 			</Inner>
+			{/* <ModalBackground open={cartOpen}>
+					Flyout
+			</ModalBackground> */}
 			<CartSidebar open={cartOpen}>
 				<Checkout />
 				<CloseButton onClick={closeCart}>close</CloseButton>
