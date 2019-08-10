@@ -62,6 +62,20 @@ export const ProductInfo = styled.div`
 	`}
 `
 
+export const ProductThumb = styled.div`
+	${({ theme }) => css`
+		text-align: left;
+		width: 100%;
+		a {
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+				color: ${theme.color.dark};
+			}
+		}
+	`}
+`
+
 export const ProductGrid = styled.div`
 	${({ theme }) => css`
 		margin: 0 auto;

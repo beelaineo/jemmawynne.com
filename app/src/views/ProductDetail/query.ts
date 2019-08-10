@@ -29,6 +29,16 @@ export const PRODUCT_QUERY = /* GraphQL */ `
 											}
 										}
 									}
+									priceRange {
+										minVariantPrice {
+											amount
+											currencyCode
+										}
+										maxVariantPrice {
+											amount
+											currencyCode
+										}
+									}
 								}
 							}
 						}

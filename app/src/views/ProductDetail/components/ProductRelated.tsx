@@ -7,6 +7,7 @@ import { Carousel } from 'Components/Carousel'
 import { Header2, Header4 } from 'Components/Text'
 import { Image } from 'Components/Image'
 import { Figure } from 'Components/Figure'
+import { ProductThumbnail } from '../../ProductListing/ProductThumbnail'
 
 interface ProductRelatedProps {
 	product: Product
@@ -29,15 +30,7 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 						const [images] = unwindEdges(product.images)
 						const productLink = `/products/${product.handle}`
 
-						return (
-							<Figure
-								key={product.id}
-								linkTo={productLink}
-								image={images[0]}
-								imageRatio={1}
-								caption={title}
-							/>
-						)
+						return <ProductThumbnail product={product} />
 					})}
 				</Carousel>
 			</ProductRelatedInner>
