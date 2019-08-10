@@ -22,11 +22,13 @@ import { CartBottom } from 'Components/Cart'
 export const Checkout = () => {
 	const { checkout } = useCheckout()
 	if (!checkout || checkout.lineItems.length < 1) {
-		return <NormalizeDiv>Your cart is empty</NormalizeDiv>
+		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
 	}
 	return (
-		<NormalizeDiv>
-			<Header3 color="dark">Your cart</Header3>
+		<NormalizeDiv top="0">
+			<Header3 color="dark" align="center">
+				Your cart
+			</Header3>
 			{checkout.lineItems.edges.map((element) => {
 				let { title, variant } = element.node
 				return (
@@ -34,7 +36,7 @@ export const Checkout = () => {
 						<FlexThree>
 							<img src={variant.image.originalSrc} />
 						</FlexThree>
-						<FlexSix>
+						<FlexSix marginVertical="0">
 							<Header5 weight="light" color="dark">
 								{title}
 							</Header5>
@@ -79,18 +81,22 @@ export const Checkout = () => {
 						</Header5>
 					</FlexHalf>
 				</FlexContainer>
-				<Header6 align="center">
-					Shipping and discount codes are added at checkout.
-				</Header6>
-				<Button
-					as="a"
-					href={checkout.webUrl}
-					background="dark"
-					color="light"
-					weight="semi"
-				>
-					Checkout
-				</Button>
+				<NormalizeDiv align="center">
+					<Button
+						as="a"
+						href={checkout.webUrl}
+						background="dark"
+						color="light"
+						weight="semi"
+						width="100%"
+					>
+						Checkout
+					</Button>
+
+					<Header6 align="center">
+						Shipping and discount codes are added at checkout.
+					</Header6>
+				</NormalizeDiv>
 			</CartBottom>
 		</NormalizeDiv>
 	)
