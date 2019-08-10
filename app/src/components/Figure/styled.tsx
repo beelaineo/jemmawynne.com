@@ -4,17 +4,18 @@ import { Header5 } from '../Text'
 
 interface WithAsAndTo {
 	theme: DefaultTheme
+	justify?: string
 	as?: string | typeof Link
 	to?: string
 }
 
 export const FigureWrapper = styled.div`
-	${({ theme }: WithAsAndTo) => css`
+	${({ theme, justify }: WithAsAndTo) => css`
 		display: flex;
 		width: 100%;
 		height: 100%;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: ${justify || 'center'};
 		color: inherit;
 		text-decoration: none;
 	`}

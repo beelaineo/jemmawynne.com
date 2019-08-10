@@ -12,11 +12,17 @@ interface FigureProps {
 	/* */
 }
 
-export const Figure = ({ image, imageRatio, linkTo, caption }: FigureProps) => {
+export const Figure = ({
+	image,
+	imageRatio,
+	linkTo,
+	caption,
+	justify,
+}: FigureProps) => {
 	const wrapperAs = linkTo ? Link : undefined
 
 	return (
-		<FigureWrapper as={wrapperAs} to={linkTo}>
+		<FigureWrapper as={wrapperAs} to={linkTo} justify={justify}>
 			<ImageWrapper>
 				<Image image={image} ratio={imageRatio} />
 			</ImageWrapper>
