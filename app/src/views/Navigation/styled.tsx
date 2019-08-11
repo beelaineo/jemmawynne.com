@@ -119,4 +119,12 @@ export const SubMenuColumns = styled.div`
 	`}
 `
 
-export const ModalBackground = styled.div``
+export const ModalBackground = styled.div`
+	height: 100vh;
+	position: fixed;
+	background: #0000004d;
+	width: 100vw;
+	top: 0;
+	cursor: pointer;
+	display: ${(props) => (props.open ? 'block' : 'none')};
+`

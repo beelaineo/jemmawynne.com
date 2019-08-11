@@ -14,25 +14,44 @@ import {
 } from '../../components/Layout/Flex'
 import { Header6, Header5, Header3 } from 'Components/Text'
 import { CartBottom } from 'Components/Cart'
+import { IoMdClose } from 'react-icons/io'
+
+const { useState } = React
 
 /**
  * Main Checkout view
  */
 
 export const Checkout = () => {
-	const { checkout } = useCheckout()
+	const { checkout, updateQuantity } = useCheckout()
 	if (!checkout || checkout.lineItems.length < 1) {
 		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
 	}
+
+	const [hovered, setHover] = useState('invisible')
+
+	const updateHover = () => {
+		setHover('visible')
+	}
+	const removeHover = () => {
+		setHover('invisible')
+	}
+
 	return (
 		<NormalizeDiv top="0">
 			<Header3 color="dark" align="center">
 				Your cart
 			</Header3>
 			{checkout.lineItems.edges.map((element) => {
-				let { title, variant } = element.node
+				let { title, variant, quantity } = element.node
+				console.log({ updateQuantity })
 				return (
-					<FlexContainer key={variant.id} margin="small">
+					<FlexContainer
+						key={variant.id}
+						margin="small"
+						onMouseOver={updateHover}
+						onMouseOut={removeHover}
+					>
 						<FlexThree>
 							<img src={variant.image.originalSrc} />
 						</FlexThree>
@@ -40,25 +59,27 @@ export const Checkout = () => {
 							<Header5 weight="light" color="dark">
 								{title}
 							</Header5>
-							<FlexContainer marginVertical="small">
-								<FlexHalf>
-									<QuantitySelectorCart>
+							<div>
+								<FlexSix>
+									<Header5 weight="strong" color="dark">
+										${variant.priceV2.amount}
+									</Header5>
+								</FlexSix>
+								<FlexSix>
+									<QuantitySelectorCart className={hovered}>
+										Quantity: {quantity}
 										<button type="button">
 											<span>&#8722;</span>
 										</button>
-										<QuantityInput quantity={1} />
+										<QuantityInput quantity={quantity} />
 										<button type="button">
 											<span>&#43;</span>
 										</button>
 									</QuantitySelectorCart>
-								</FlexHalf>
-								<FlexHalf>
-									<Header5 weight="strong" color="dark">
-										${variant.price}
-									</Header5>
-								</FlexHalf>
-							</FlexContainer>
+								</FlexSix>
+							</div>
 						</FlexSix>
+						<IoMdClose className={hovered} />
 					</FlexContainer>
 				)
 			})}

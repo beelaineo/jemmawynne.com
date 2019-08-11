@@ -134,6 +134,7 @@ export const Navigation = () => {
 					<NavHeaderWrapper>
 						<NavHeader as="button" onClick={openCart}>
 							<IoIosCart /> {cartCount}
+							{cartCount === 1 ? ' item' : cartCount >= 2 ? ' items' : ''}
 						</NavHeader>
 					</NavHeaderWrapper>
 				</NavSection>
@@ -150,9 +151,7 @@ export const Navigation = () => {
 					)}
 				</SubmenuPane>
 			</Inner>
-			{/* <ModalBackground open={cartOpen}>
-					Flyout
-			</ModalBackground> */}
+			<ModalBackground open={cartOpen} onClick={closeCart} />
 			<CartSidebar open={cartOpen}>
 				<Checkout />
 				<CloseButton onClick={closeCart}>close</CloseButton>
