@@ -129,7 +129,10 @@ export const Navigation = () => {
 						),
 					)}
 				</NavSection>
-				<Logo src="/static/images/Logo_Large_Black.svg" />
+
+				<Link to="/">
+					<Logo src="/static/images/Logo_Large_Black.svg" />
+				</Link>
 				<NavSection ready={ready} align="right">
 					<NavHeaderWrapper>
 						<NavHeader as="button" onClick={openCart}>
