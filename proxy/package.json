@@ -12,10 +12,10 @@
     "@babel/runtime": "^7.5.5",
     "apollo-link": "^1.2.12",
     "apollo-link-http": "^1.5.15",
-    "apollo-server": "^2.8.0",
-    "apollo-server-lambda": "^2.8.0",
+    "apollo-server": "^2.8.1",
+    "apollo-server-lambda": "^2.8.1",
     "aws-lambda": "^0.1.2",
-    "convict": "^5.0.0",
+    "convict": "^5.1.0",
     "dotenv": "^8.0.0",
     "graphql": "^14.4.2",
     "graphql-tools": "^4.0.5",
@@ -32,13 +32,13 @@
     "@types/convict": "^4.2.1",
     "@types/dotenv": "^6.1.1",
     "@types/graphql": "^14.2.3",
-    "@types/jest": "^24.0.15",
-    "@types/node-fetch": "^2.3.7",
+    "@types/jest": "^24.0.16",
+    "@types/node-fetch": "^2.5.0",
     "@types/rimraf": "^2.0.2",
     "jest": "^24.8.0",
     "netlify-lambda": "^1.5.1",
-    "now": "^15.6.0",
+    "now": "^15.8.7",
     "rimraf": "^2.6.3",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   }
 }

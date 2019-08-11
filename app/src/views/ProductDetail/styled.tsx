@@ -139,11 +139,15 @@ export const ProductRelatedInner = styled.div`
 interface NormalizeDivProps {
 	theme: DefaultTheme
 	width?: string
+	top?: string
+	align?: string
 }
 
 export const NormalizeDiv = styled.div`
 	max-width: ${(props: NormalizeDivProps) =>
 		props.width === 'half' ? '50%' : '100%'};
+	text-align: ${(props: NormalizeDivProps) => props.align || 'inherit'};
+
 	${(props) => `
    		margin: ${props.theme.layout.spacing.small};
 	`}
@@ -172,6 +176,7 @@ interface ButtonProps {
 	family?: string
 	transform?: string
 	href?: string
+	width?: string
 }
 
 export const Button = styled.button`
@@ -194,6 +199,7 @@ export const Button = styled.button`
 		pointer-events: ${props.disabled ? 'none' : 'auto'};
 		max-width: 200px;
 		border-radius: 2px;
+		width: ${props.width || 'initial'};
 	`}
 `
 

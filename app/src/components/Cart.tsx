@@ -8,15 +8,16 @@ interface CartSidebarProps {
 export const CartSidebar = styled.div`
 	${(props: CartSidebarProps) => css`
 		position: fixed;
-		right: ${props.open ? '0px' : '-360px'};
-		top: 1;
-		max-width: 340px;
+		right: ${props.open ? '0px' : '-500px'};
+		top: 0;
+		max-width: 500px;
 		max-height: 100vh;
 		min-height: 100vh;
 		overflow: scroll;
 		background-color: ${props.theme.color.white};
 		box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
 		transition: 250ms linear;
+		width: 500px;
 		::-webkit-scrollbar {
 			width: 0px;
 			background: transparent;
@@ -32,14 +33,19 @@ export const CartSidebar = styled.div`
 			margin: ${props.theme.layout.spacing.small};
 			margin-top: ${props.theme.layout.spacing.small} !important;
 		}
+		${props.theme.mediaQueries.mobile} {
+			max-width: 340px;
+		}
 	`}
 `
 
 export const CloseButton = styled.button`
-	color: blue;
+	color: white;
 	position: absolute;
 	right: 10px;
-	top: 10px;
+	bottom: 0;
+	background-color: black;
+	padding: 2rem;
 	padding: ${(props) => props.theme.layout.spacing.small};
 `
 
@@ -54,6 +60,7 @@ export const CartBottom = styled.div`
 	justify-content: space-between;
 	flex-direction: column;
 	height: 15vh;
+
 	> div,
 	> h6 {
 		margin: ${(props) => props.theme.layout.spacing.small};

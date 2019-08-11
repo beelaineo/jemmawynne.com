@@ -8,6 +8,7 @@ export interface TextStyleProps {
 	family?: string
 	transform?: string
 	children: any
+	margin?: string
 }
 
 const commonHeaderStyles = ({
@@ -17,6 +18,7 @@ const commonHeaderStyles = ({
 	weight,
 	color,
 	family,
+	margin,
 	children,
 }: TextStyleProps) => css`
 	font-weight: ${theme.font.weight[weight]
@@ -28,7 +30,7 @@ const commonHeaderStyles = ({
 	color: ${theme.color[color] || 'inherit'};
 	text-align: ${align || 'inherit'};
 	text-transform: ${transform || 'auto'};
-	margin: 0.3em 0;
+	margin: ${margin || '0.3em 0'};
 	letter-spacing: 0.03em;
 
 	&:first-child {
