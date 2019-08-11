@@ -14,6 +14,14 @@ export const FlexContainer = styled.div`
 	${({ theme, marginVertical }: WrapperProps) => `
 		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
 	`}
+	.visible {
+		opacity: 1;
+		transition: 250ms ease-in;
+	}
+	.invisible {
+		opacity: 0;
+		transition: 250ms ease-in;
+	}
 `
 
 export const FlexHalf = styled.div`

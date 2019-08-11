@@ -16,7 +16,7 @@ export const CartSidebar = styled.div`
 		overflow: scroll;
 		background-color: ${props.theme.color.white};
 		box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
-		transition: 250ms linear;
+		transition: 350ms ease-in-out;
 		width: 500px;
 		::-webkit-scrollbar {
 			width: 0px;
