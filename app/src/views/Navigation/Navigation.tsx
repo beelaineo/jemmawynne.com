@@ -127,11 +127,19 @@ export const Navigation = () => {
 						),
 					)}
 				</NavSection>
-				<Logo src="/static/images/Logo_Large_Black.svg" />
+
+				<Link to="/">
+					<Logo src="/static/images/Logo_Large_Black.svg" />
+				</Link>
 				<NavSection ready={ready} align="right">
 					<NavHeaderWrapper>
 						<NavHeader as="button" onClick={openCart}>
-							Cart {cartCount}
+							Cart {cartCount}{' '}
+							{cartCount >= 0 && cartCount <= 1
+								? 'item'
+								: cartCount > 1
+								? 'items'
+								: ''}
 						</NavHeader>
 					</NavHeaderWrapper>
 				</NavSection>
