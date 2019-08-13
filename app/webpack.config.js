@@ -36,7 +36,7 @@ module.exports = (env) => {
 	return {
 		mode: isDev ? 'development' : 'production',
 		cache: true,
-		devtool: isDev ? 'eval-source-map' : 'source-map',
+		devtool: isDev ? 'source-map' : 'source-map',
 		devServer: isDev ? DEV_SERVER : {},
 		context: PATHS.root,
 		entry: isDev ? ['./src/index.tsx'] : './src/index.tsx',
@@ -67,7 +67,7 @@ module.exports = (env) => {
 						{
 							loader: 'awesome-typescript-loader',
 							options: {
-								useBabel: true,
+								// useBabel: true,
 								// babelOptions: {
 								// 	babelrc: false /* Important line */,
 								// 	presets: [
@@ -77,10 +77,10 @@ module.exports = (env) => {
 								// 		],
 								// 	],
 								// },
-								babelCore: '@babel/core', // needed for Babel v7
-								transpileOnly: !isDev,
-								useTranspileModule: false,
-								sourceMap: true,
+								// babelCore: '@babel/core', // needed for Babel v7
+								// transpileOnly: !isDev,
+								// useTranspileModule: false,
+								// sourceMap: true,
 								// getCustomTransformers: () => ({
 								// 	before: [styledComponentsTransformer],
 								// }),
