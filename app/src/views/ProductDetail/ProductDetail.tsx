@@ -47,15 +47,14 @@ function getInfoBlocksByType(
 	} = productInfoBlocks
 	const byType =
 		type === 'Rings'
-			? ringBlocks
+			? ringBlocks || []
 			: type === 'Earrings'
-			? earringBlocks
+			? earringBlocks || []
 			: type === 'Bracelets'
-			? braceletBlocks
+			? braceletBlocks || []
 			: type === 'Necklaces'
-			? necklaceBlocks
+			? necklaceBlocks || []
 			: []
-	console.log(type, byType)
 
 	const global = globalBlocks || []
 	return [...global, ...byType]
