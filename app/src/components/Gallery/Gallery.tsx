@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Image as ImageType } from '../../types'
 import { Image } from '../Image'
-import { MainImageWrapper, Thumbnails } from './styled'
+import { GalleryWrapper, MainImageWrapper, Thumbnails } from './styled'
 
 const { useState } = React
 
@@ -22,7 +22,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 		setCurrentImage(getImageById(imageId))
 
 	return (
-		<React.Fragment>
+		<GalleryWrapper>
 			<MainImageWrapper data-testid="current-image">
 				<Image ratio={1} image={currentImage} />
 			</MainImageWrapper>
@@ -35,6 +35,6 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 					))}
 				</Thumbnails>
 			)}
-		</React.Fragment>
+		</GalleryWrapper>
 	)
 }
