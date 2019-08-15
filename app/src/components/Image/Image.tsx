@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { ShopifyImage, SanityImage } from '../../types'
 
-const ImageWrapper = styled.img`
+export const ImageWrapper = styled.img`
 	${({ theme }) => css`
 		display: block;
 	`}
