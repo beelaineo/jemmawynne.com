@@ -54,7 +54,6 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 		const { clientX, clientY } = e
 		const xAmount = (clientX - left) / width
 		const yAmount = (clientY - top) / height
-		console.log(xAmount)
 		const imageLeft = `-${100 * (ZOOM_AMOUNT - 1) * xAmount}%`
 		const imageTop = `-${100 * (ZOOM_AMOUNT - 1) * yAmount}%`
 
@@ -62,8 +61,6 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 			left: imageLeft,
 			top: imageTop,
 		})
-
-		console.log(width)
 	}
 
 	return (

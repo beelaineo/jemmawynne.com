@@ -45,7 +45,6 @@ const ProductDetailMain = ({ product }: Props) => {
 		  ]
 		: []
 
-	console.log(accordions)
 	/* hook to manage quantity input */
 	const {
 		count: quantity,
