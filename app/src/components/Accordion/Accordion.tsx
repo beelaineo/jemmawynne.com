@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RichText } from '../RichText'
 import { Header5 } from '../Text'
-import { Wrapper, ToggleButton, Inner } from './styled'
+import { Wrapper, ToggleButton, Inner, Span } from './styled'
 
 interface AccordionProps {
 	label: string
@@ -18,7 +18,10 @@ export const Accordion = ({ label, content }: AccordionProps) => {
 
 	return (
 		<Wrapper>
-			<ToggleButton onClick={toggleOpen}>{label}</ToggleButton>
+			<ToggleButton onClick={toggleOpen}>
+				{label}
+				<Span>{open === true ? ' −' : ' +'}</Span>
+			</ToggleButton>
 			<Inner open={open}>
 				<RichText blockWrapper={AccordionTextWrapper} body={content} />
 			</Inner>
