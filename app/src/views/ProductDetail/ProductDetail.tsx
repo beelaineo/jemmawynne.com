@@ -81,12 +81,12 @@ const ProductDetailMain = ({ product }: Props) => {
 							currentVariant={currentVariant}
 							selectVariant={selectVariant}
 						/>
-						<BuyButton
-							addItemToCheckout={addItemToCheckout}
-							currentVariant={currentVariant}
-							quantity={quantity}
-						/>
 						<NormalizeDiv>
+							<BuyButton
+								addItemToCheckout={addItemToCheckout}
+								currentVariant={currentVariant}
+								quantity={quantity}
+							/>
 							{accordions
 								? accordions.map(({ _key, title, bodyRaw }) => (
 										<Accordion key={_key} label={title} content={bodyRaw} />
