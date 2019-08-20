@@ -20,7 +20,15 @@ interface Props extends UseProductVariant {
  */
 
 export const ProductVariantSelector = (props: Props) => {
-	const { variants, currentVariant, selectVariant, quantity, setQuantity, increment, decrement } = props
+	const {
+		variants,
+		currentVariant,
+		selectVariant,
+		quantity,
+		setQuantity,
+		increment,
+		decrement,
+	} = props
 	if (!variants.length) return null
 	const handleSelect = (e) => {
 		selectVariant(e.target.value)
@@ -31,7 +39,12 @@ export const ProductVariantSelector = (props: Props) => {
 		<div>
 			<NormalizeDiv>
 				<Label>Size</Label>
-				<Select onChange={handleSelect} value={currentVariant.id} id="size" name="product-size">
+				<Select
+					onChange={handleSelect}
+					value={currentVariant.id}
+					id="size"
+					name="product-size"
+				>
 					{variants.map((variant) => {
 						return (
 							<option key={variant.id} value={variant.id}>
@@ -43,7 +56,7 @@ export const ProductVariantSelector = (props: Props) => {
 			</NormalizeDiv>
 			<NormalizeDiv>
 				<Label>Quantity</Label>
-				<QuantitySelector>
+				<QuantitySelector width={'52px'}>
 					<button type="button" onClick={decrement}>
 						<span>&#8722;</span>
 					</button>

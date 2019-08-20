@@ -175,8 +175,17 @@ export const Select = styled.select`
 		font-family: sans-serif;
 	}
 `
+interface QuantitySelector {
+	theme: DefaultTheme
+	width?: string
+}
 
 export const QuantitySelector = styled.div`
+	${(props: QuantitySelector) => css`
+		input[type='text'] {
+			max-width: ${props.width ? props.width : 'initial'};
+		}
+	`}
 	button {
 		text-align-last: center;
 		height: 50px;
