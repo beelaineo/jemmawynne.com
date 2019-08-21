@@ -4,15 +4,16 @@ interface WrapperProps {
 	theme: DefaultTheme
 	active?: boolean
 	marginVertical?: string
+	center?: center
 }
 
 export const FlexContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
 	flex-wrap: ${(props) => props.wrap};
 	margin: ${(props) => props.theme.layout.spacing[props.margin]};
-	${({ theme, marginVertical }: WrapperProps) => `
-		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
+	${({ theme, marginVertical, center }: WrapperProps) => `
+		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'};
+		justify-content: ${center ? 'center' : 'space-between'} ;
 	`}
 	.visible {
 		opacity: 1;
