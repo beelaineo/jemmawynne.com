@@ -1,5 +1,12 @@
 import * as React from 'react'
+import styled, { css } from 'styled-components'
 import { ShopifyImage, SanityImage } from '../../types'
+
+export const ImageWrapper = styled.img`
+	${({ theme }) => css`
+		display: block;
+	`}
+`
 
 interface ImageProps {
 	image: ShopifyImage | SanityImage
@@ -37,5 +44,5 @@ export const Image = ({ image }: ImageProps) => {
 	const parsed = parseImage(image)
 	if (!parsed) return null
 	const { src, altText } = parsed
-	return <img src={src} alt={altText} />
+	return <ImageWrapper src={src} alt={altText} />
 }

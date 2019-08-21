@@ -28,53 +28,11 @@ import {
 } from './styled'
 import { RichText } from '../../components/RichText'
 import { Accordion } from '../../components/Accordion'
+import { getInfoBlocksByType, getInfoBlocksByTag } from './utils'
 import { Header5, Header6 } from 'Components/Text'
 
 interface Props {
 	product: Product
-}
-
-function getInfoBlocksByType(
-	type: string,
-	productInfoBlocks: ProductInfo,
-): ProductInfoBlock[] {
-	const {
-		globalBlocks,
-		ringBlocks,
-		earringBlocks,
-		braceletBlocks,
-		necklaceBlocks,
-	} = productInfoBlocks
-	const byType =
-		type === 'Rings'
-			? ringBlocks
-			: type === 'Earrings'
-			? earringBlocks
-			: type === 'Bracelets'
-			? braceletBlocks
-			: type === 'Necklaces'
-			? necklaceBlocks
-			: []
-	console.log(type, byType)
-
-	const global = globalBlocks || []
-	return [...global, ...byType]
-}
-
-function getInfoBlocksByTag(
-	productTags: string[],
-	productInfoBlocks: ProductInfo,
-): ProductInfoBlock[] {
-	if (!productTags) return []
-	const { blocksByTag } = productInfoBlocks
-	return blocksByTag
-		.filter(({ tag, infoBlocks }) => {
-			/* Get matching tags */
-			if (!tag || !infoBlocks) return false
-			return productTags.includes(tag)
-		})
-		.map(({ infoBlocks }) => infoBlocks)
-		.reduce((acc, current) => [...acc, ...current], [])
 }
 
 const ProductDetailMain = ({ product }: Props) => {
@@ -87,7 +45,6 @@ const ProductDetailMain = ({ product }: Props) => {
 		  ]
 		: []
 
-	console.log(accordions)
 	/* hook to manage quantity input */
 	const {
 		count: quantity,
@@ -124,12 +81,12 @@ const ProductDetailMain = ({ product }: Props) => {
 							currentVariant={currentVariant}
 							selectVariant={selectVariant}
 						/>
-						<BuyButton
-							addItemToCheckout={addItemToCheckout}
-							currentVariant={currentVariant}
-							quantity={quantity}
-						/>
 						<NormalizeDiv>
+							<BuyButton
+								addItemToCheckout={addItemToCheckout}
+								currentVariant={currentVariant}
+								quantity={quantity}
+							/>
 							{accordions
 								? accordions.map(({ _key, title, bodyRaw }) => (
 										<Accordion key={_key} label={title} content={bodyRaw} />

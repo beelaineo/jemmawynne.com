@@ -6,42 +6,29 @@ export const Wrapper = styled.div`
 		min-height: 100vh;
 		margin: 0 auto;
 		font-family: ${theme.font.family.sans};
+		padding: ${theme.layout.spacing.triple} 0;
 	`}
 `
 
 export const ProductDetails = styled.div`
 	${({ theme }) => css`
-		justify-content: space-between;
-		display: flex;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: ${theme.layout.spacing.double};
+
 		${theme.mediaQueries.mobile} {
-			flex-wrap: wrap;
+			grid-template-columns: 1fr;
 		}
 	`}
 `
 
 export const ProductImagesWrapper = styled.div`
-	${({ theme }) => css`
-		flex: 6;
-		max-width: 70%;
-		${theme.mediaQueries.tablet} {
-			max-width: 100%;
-		}
-	`}
+	${({ theme }) => css``}
 `
 
 export const ProductInfoWrapper = styled.div`
 	${({ theme }) => css`
-		flex: 4;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		padding: ${theme.layout.spacing.quadruple};
-		${theme.mediaQueries.tablet} {
-			flex: 1;
-			width: 100%;
-			flex-basis: 100%;
-			text-align: center;
-		}
+		padding-top: ${theme.layout.spacing.quadruple};
 	`}
 `
 
@@ -54,48 +41,9 @@ export const Nav = styled.div`
 	`}
 `
 
-export const ProductGalleryWrapper = styled.div`
-	line-height: 0;
-	display: flex;
-	flex-direction: row-reverse;
-	position: relative;
-	div[data-testid='current-image'] {
-		> img {
-			min-height: 100vh;
-			max-width: max-content;
-			${(props) => `
-				${props.theme.mediaQueries.tablet} {
-					min-height: initial;
-					max-width: 100vw;
-				}
-			`}
-		}
-	}
-	div[data-testid='thumbnails'] {
-		position: absolute;
-		max-width: 100px;
-		bottom: 60px;
-		display: flex;
-		left: 0;
-		right: 0;
-		margin: 0 auto;
-		button {
-			height: 10px;
-			z-index: 2;
-			background-color: black;
-			width: 10px;
-			border-radius: 5px;
-			margin: 2px 6px;
-		}
-		img {
-			display: none;
-		}
-	}
-`
+export const ProductGalleryWrapper = styled.div``
 
-export const ProductGalleryImage = styled.div`
-	flex: 4;
-`
+export const ProductGalleryImage = styled.div``
 
 export const ProductGalleryThumbnails = styled.div`
 	${(props) => css`
@@ -227,8 +175,17 @@ export const Select = styled.select`
 		font-family: sans-serif;
 	}
 `
+interface QuantitySelector {
+	theme: DefaultTheme
+	width?: string
+}
 
 export const QuantitySelector = styled.div`
+	${(props: QuantitySelector) => css`
+		input[type='text'] {
+			max-width: ${props.width ? props.width : 'initial'};
+		}
+	`}
 	button {
 		text-align-last: center;
 		height: 50px;

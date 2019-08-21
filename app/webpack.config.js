@@ -35,8 +35,8 @@ module.exports = (env) => {
 	const isDev = env !== 'production'
 	return {
 		mode: isDev ? 'development' : 'production',
-		cache: true,
-		devtool: isDev ? 'eval-source-map' : 'source-map',
+		cache: isDev,
+		devtool: 'source-map',
 		devServer: isDev ? DEV_SERVER : {},
 		context: PATHS.root,
 		entry: isDev ? ['./src/index.tsx'] : './src/index.tsx',
@@ -79,8 +79,8 @@ module.exports = (env) => {
 								// },
 								babelCore: '@babel/core', // needed for Babel v7
 								transpileOnly: !isDev,
-								useTranspileModule: false,
-								sourceMap: true,
+								// useTranspileModule: false,
+								// sourceMap: true,
 								// getCustomTransformers: () => ({
 								// 	before: [styledComponentsTransformer],
 								// }),
@@ -92,7 +92,7 @@ module.exports = (env) => {
 		},
 		plugins: [
 			new CheckerPlugin(),
-			new HardSourceWebpackPlugin(),
+			isDev ? new HardSourceWebpackPlugin() : null,
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(
 					isDev ? 'development' : 'production',

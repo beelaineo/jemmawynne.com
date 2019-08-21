@@ -37,8 +37,6 @@ export const ShopDataProvider = ({ children }: Props) => {
 	const menu = ready ? response.data.Menu : undefined
 	const productInfoBlocks = ready ? response.data.ProductInfo : undefined
 
-	console.log(response)
-
 	const value = {
 		ready,
 		menu,

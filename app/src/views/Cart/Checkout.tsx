@@ -50,7 +50,6 @@ export const Checkout = () => {
 			</Header3>
 			{checkout.lineItems.edges.map((element) => {
 				let { title, variant, quantity } = element.node
-
 				return (
 					<FlexContainer
 						key={variant.id}
