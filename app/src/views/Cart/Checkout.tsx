@@ -15,6 +15,7 @@ import {
 import { Header6, Header5, Header3 } from 'Components/Text'
 import { CartBottom } from 'Components/Cart'
 import { IoMdClose } from 'react-icons/io'
+import { increment } from '../../../../migrate/src/put/limit'
 
 const { useState } = React
 
@@ -37,6 +38,11 @@ export const Checkout = () => {
 		setHover('invisible')
 	}
 
+	const increment = (variant, quantity) => {
+		console.log('add')
+		updateQuantity(variant, quantity)
+	}
+
 	return (
 		<NormalizeDiv top="0">
 			<Header3 color="dark" align="center">
@@ -44,7 +50,7 @@ export const Checkout = () => {
 			</Header3>
 			{checkout.lineItems.edges.map((element) => {
 				let { title, variant, quantity } = element.node
-				console.log({ updateQuantity })
+
 				return (
 					<FlexContainer
 						key={variant.id}
@@ -68,11 +74,15 @@ export const Checkout = () => {
 								<FlexSix>
 									<QuantitySelectorCart className={hovered}>
 										Quantity: {quantity}
+										<span> </span>
 										<button type="button">
 											<span>&#8722;</span>
 										</button>
 										<QuantityInput quantity={quantity} />
-										<button type="button">
+										<button
+											type="button"
+											onClick={(e) => increment(variant.id, 1)}
+										>
 											<span>&#43;</span>
 										</button>
 									</QuantitySelectorCart>
