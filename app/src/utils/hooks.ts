@@ -12,16 +12,20 @@ const defaultOptions = {
 
 export interface UseCounterValues {
 	count: number
-	increment: () => void
-	decrement: () => void
-	setCount: (c: number) => void
+	increment: () => void | Promise<void>
+	decrement: () => void | Promise<void>
+	setCount: (c: number) => void | Promise<void>
 	isMin: boolean
 	isMax: boolean
 }
 
-const minMax = (min: number, max: number) => (input: number): number => Math.min(Math.max(input, min), max)
+const minMax = (min: number, max: number) => (input: number): number =>
+	Math.min(Math.max(input, min), max)
 
-export const useCounter = (initialCount: number = 0, options: Options): UseCounterValues => {
+export const useCounter = (
+	initialCount: number = 0,
+	options: Options,
+): UseCounterValues => {
 	const { min, max } = {
 		...defaultOptions,
 		...options,

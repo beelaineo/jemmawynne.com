@@ -24,13 +24,11 @@ const { useState } = React
  */
 
 export const Checkout = () => {
+	/* State */
 	const { checkout, updateQuantity } = useCheckout()
-	if (!checkout || checkout.lineItems.length < 1) {
-		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
-	}
-
 	const [hovered, setHover] = useState('invisible')
 
+	/* Handlers */
 	const updateHover = () => {
 		setHover('visible')
 	}
@@ -38,9 +36,12 @@ export const Checkout = () => {
 		setHover('invisible')
 	}
 
-	const increment = (variant, quantity) => {
-		console.log('add')
-		updateQuantity(variant, quantity)
+	const createUpdateLineItemHandler = (lineItemId: string) => (quantity) => {
+		updateQuantity({ id: lineItemId, quantity: Math.max(quantity, 0) })
+	}
+
+	if (!checkout || checkout.lineItems.length < 1) {
+		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
 	}
 
 	return (
@@ -48,8 +49,9 @@ export const Checkout = () => {
 			<Header3 color="dark" align="center">
 				Your cart
 			</Header3>
-			{checkout.lineItems.edges.map((element) => {
-				let { title, variant, quantity } = element.node
+			{checkout.lineItems.edges.map((lineItem) => {
+				const { id, title, variant, quantity } = lineItem.node
+				const updateLineItemQuantity = createUpdateLineItemHandler(id)
 				return (
 					<FlexContainer
 						key={variant.id}
@@ -74,13 +76,19 @@ export const Checkout = () => {
 									<QuantitySelectorCart className={hovered}>
 										Quantity: {quantity}
 										<span> </span>
-										<button type="button">
-											<span>&#8722;</span>
-										</button>
-										<QuantityInput quantity={quantity} />
 										<button
 											type="button"
-											onClick={(e) => increment(variant.id, 1)}
+											onClick={() => updateLineItemQuantity(quantity - 1)}
+										>
+											<span>&#8722;</span>
+										</button>
+										<QuantityInput
+											quantity={quantity}
+											setQuantity={updateLineItemQuantity}
+										/>
+										<button
+											type="button"
+											onClick={() => updateLineItemQuantity(quantity + 1)}
 										>
 											<span>&#43;</span>
 										</button>
