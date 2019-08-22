@@ -139,6 +139,9 @@ export const Loading = styled.div`
 	display: flex;
 	${({ theme, loading }: Loading) => css`
 		opacity: ${(props) => (props.loading ? '0.5' : '1')};
+		> * {
+			opacity: ${(props) => (props.loading ? '0.5' : '1')};
+		}
 		div:nth-child(1) {
 			margin-right: ${theme.layout.spacing.half};
 			padding-top: 1px;

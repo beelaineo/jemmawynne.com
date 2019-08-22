@@ -12,6 +12,7 @@ import {
 	FlexThree,
 	FlexSix,
 } from '../../components/Layout/Flex'
+import { Loading } from '../Navigation/styled'
 import { Header6, Header5, Header3 } from 'Components/Text'
 import { CartBottom } from 'Components/Cart'
 import { IoMdClose } from 'react-icons/io'
@@ -25,7 +26,7 @@ const { useState } = React
 
 export const Checkout = () => {
 	/* State */
-	const { checkout, updateQuantity } = useCheckout()
+	const { checkout, updateQuantity, loading } = useCheckout()
 	const [hovered, setHover] = useState('invisible')
 
 	/* Handlers */
@@ -43,6 +44,8 @@ export const Checkout = () => {
 	if (!checkout || checkout.lineItems.length < 1) {
 		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
 	}
+
+	console.log(checkout)
 
 	return (
 		<NormalizeDiv top="0">
@@ -102,23 +105,29 @@ export const Checkout = () => {
 			})}
 
 			<CartBottom>
-				<FlexContainer>
-					<FlexHalf>
-						<Header5 transform="uppercase" weight="light" color="lightGrayBody">
-							Subtotal:
-						</Header5>
-					</FlexHalf>
-					<FlexHalf>
-						<Header5
-							align="right"
-							transform="uppercase"
-							weight="light"
-							color="dark"
-						>
-							${checkout.paymentDue}
-						</Header5>
-					</FlexHalf>
-				</FlexContainer>
+				<Loading loading={loading}>
+					<FlexContainer width="100%">
+						<FlexHalf>
+							<Header5
+								transform="uppercase"
+								weight="light"
+								color="lightGrayBody"
+							>
+								Subtotal:
+							</Header5>
+						</FlexHalf>
+						<FlexHalf>
+							<Header5
+								align="right"
+								transform="uppercase"
+								weight="light"
+								color="dark"
+							>
+								${checkout.paymentDueV2.amount}
+							</Header5>
+						</FlexHalf>
+					</FlexContainer>
+				</Loading>
 				<NormalizeDiv align="center">
 					<Button
 						as="a"
@@ -127,6 +136,7 @@ export const Checkout = () => {
 						color="light"
 						weight="semi"
 						width="100%"
+						disabled={loading ? 'disabled' : ''}
 					>
 						Checkout
 					</Button>
