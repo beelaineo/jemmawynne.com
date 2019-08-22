@@ -27,7 +27,7 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 	const [products] = unwindEdges<Product>(collection.products)
 	return (
 		<React.Fragment>
-			<ProductListingHeader collection={collection.title} />
+			<ProductListingHeader collection={collection} />
 			<ProductGrid>
 				{products.map((product) => {
 					return <ProductThumbnail product={product} />
