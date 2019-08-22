@@ -142,8 +142,7 @@ export const Navigation = () => {
 									<IoIosCart />
 								</div>
 								<div>
-									{' '}
-									{cartCount}{' '}
+									{cartCount}
 									{cartCount === 1 ? ' item' : cartCount >= 2 ? ' items' : ''}
 								</div>
 							</Loading>
