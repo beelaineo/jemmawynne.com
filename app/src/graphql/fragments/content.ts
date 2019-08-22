@@ -83,7 +83,6 @@ export const contentSectionFragment = /* GraphQL */ `
 			...SanityImageFragment
 		}
 	}
-	${sanityImageFragment}
 	${imageBlockFragment}
 	${textBlockFragment}
 `
