@@ -1,4 +1,5 @@
 import { contentSectionFragment } from '../../graphql/fragments'
+import gql from 'graphql-tag'
 import { ContentSection } from '../../types'
 
 export interface HomepageResponse {
@@ -8,14 +9,14 @@ export interface HomepageResponse {
 	}
 }
 
-export const homepageQuery = /*  GraphQL */ `
-query HomepageQuery {
-  Homepage(id: "homepage") {
-    _id
-    contentSections {
-      ...ContentSectionFragment
-    }
-  }
-}
-${contentSectionFragment}
+export const homepageQuery = /*  GraphQL */ gql`
+	query HomepageQuery {
+		Homepage(id: "homepage") {
+			_id
+			contentSections {
+				...ContentSectionFragment
+			}
+		}
+	}
+	${contentSectionFragment}
 `

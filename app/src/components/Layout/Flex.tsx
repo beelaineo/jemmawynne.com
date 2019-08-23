@@ -43,6 +43,11 @@ export const FlexContainer = styled.div`
 		opacity: 1;
 		transition: 250ms ease-in;
 	}
+	.close-icon {
+		&:hover {
+			cursor: pointer;
+		}
+	}
 	.invisible {
 		opacity: 0;
 		transition: 250ms ease-in;
@@ -78,7 +83,8 @@ export const FlexFour = styled.div`
 export const FlexSix = styled.div`
 	flex: 6;
 	margin: 10px;
-	${({ theme, marginVertical }: WrapperProps) => `
+	${({ theme, marginVertical, margin }: WrapperProps) => `
 		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
+		margin: ${theme.layout.spacing[margin]} 0;
 	`}
 `

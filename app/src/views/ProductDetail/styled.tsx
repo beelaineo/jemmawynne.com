@@ -183,6 +183,7 @@ interface QuantitySelector {
 export const QuantitySelector = styled.div`
 	${(props: QuantitySelector) => css`
 		input[type='text'] {
+			min-width: ${props.width ? props.width : 'initial'};
 			max-width: ${props.width ? props.width : 'initial'};
 		}
 	`}

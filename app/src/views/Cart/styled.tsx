@@ -28,3 +28,9 @@ export const CheckoutPrice = styled.div`
 		flex-basis: 50%;
 	}
 `
+
+export const RemoveCart = styled.div`
+	&:hover {
+		cursor: pointer;
+	}
+`

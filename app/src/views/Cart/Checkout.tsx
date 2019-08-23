@@ -12,9 +12,11 @@ import {
 	FlexThree,
 	FlexSix,
 } from '../../components/Layout/Flex'
+import { Loading } from '../Navigation/styled'
 import { Header6, Header5, Header3 } from 'Components/Text'
-import { CartBottom } from 'Components/Cart'
-import { IoMdClose } from 'react-icons/io'
+import { CartBottom, CartInner } from 'Components/Cart'
+import { increment } from '../../../../migrate/src/put/limit'
+import { CheckoutProduct } from './CheckoutProduct'
 
 const { useState } = React
 
@@ -23,18 +25,15 @@ const { useState } = React
  */
 
 export const Checkout = () => {
-	const { checkout, updateQuantity } = useCheckout()
+	/* State */
+	const { checkout, updateQuantity, loading } = useCheckout()
+
+	const createUpdateLineItemHandler = (lineItemId: string) => (quantity) => {
+		updateQuantity({ id: lineItemId, quantity: Math.max(quantity, 0) })
+	}
+
 	if (!checkout || checkout.lineItems.length < 1) {
 		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
-	}
-
-	const [hovered, setHover] = useState('invisible')
-
-	const updateHover = () => {
-		setHover('visible')
-	}
-	const removeHover = () => {
-		setHover('invisible')
 	}
 
 	return (
@@ -42,65 +41,43 @@ export const Checkout = () => {
 			<Header3 color="dark" align="center">
 				Your cart
 			</Header3>
-			{checkout.lineItems.edges.map((element) => {
-				let { title, variant, quantity } = element.node
-				return (
-					<FlexContainer
-						key={variant.id}
-						margin="small"
-						onMouseOver={updateHover}
-						onMouseOut={removeHover}
-					>
-						<FlexThree>
-							<img src={variant.image.originalSrc} />
-						</FlexThree>
-						<FlexSix marginVertical="0">
-							<Header5 weight="light" color="dark">
-								{title}
-							</Header5>
-							<div>
-								<FlexSix>
-									<Header5 weight="strong" color="dark">
-										${variant.priceV2.amount}
-									</Header5>
-								</FlexSix>
-								<FlexSix>
-									<QuantitySelectorCart className={hovered}>
-										Quantity: {quantity}
-										<button type="button">
-											<span>&#8722;</span>
-										</button>
-										<QuantityInput quantity={quantity} />
-										<button type="button">
-											<span>&#43;</span>
-										</button>
-									</QuantitySelectorCart>
-								</FlexSix>
-							</div>
-						</FlexSix>
-						<IoMdClose className={hovered} />
-					</FlexContainer>
-				)
-			})}
+			<CartInner>
+				{checkout.lineItems.edges.map((lineItem) => {
+					const { id, title, variant, quantity } = lineItem.node
+					const updateLineItemQuantity = createUpdateLineItemHandler(id)
+					return (
+						<CheckoutProduct
+							lineItem={lineItem}
+							updateLineItemQuantity={updateLineItemQuantity}
+						/>
+					)
+				})}
+			</CartInner>
 
 			<CartBottom>
-				<FlexContainer>
-					<FlexHalf>
-						<Header5 transform="uppercase" weight="light" color="lightGrayBody">
-							Subtotal:
-						</Header5>
-					</FlexHalf>
-					<FlexHalf>
-						<Header5
-							align="right"
-							transform="uppercase"
-							weight="light"
-							color="dark"
-						>
-							${checkout.paymentDue}
-						</Header5>
-					</FlexHalf>
-				</FlexContainer>
+				<Loading loading={loading}>
+					<FlexContainer width="100%">
+						<FlexHalf>
+							<Header5
+								transform="uppercase"
+								weight="light"
+								color="lightGrayBody"
+							>
+								Subtotal:
+							</Header5>
+						</FlexHalf>
+						<FlexHalf>
+							<Header5
+								align="right"
+								transform="uppercase"
+								weight="light"
+								color="dark"
+							>
+								${checkout.paymentDueV2.amount}
+							</Header5>
+						</FlexHalf>
+					</FlexContainer>
+				</Loading>
 				<NormalizeDiv align="center">
 					<Button
 						as="a"
@@ -109,6 +86,7 @@ export const Checkout = () => {
 						color="light"
 						weight="semi"
 						width="100%"
+						disabled={loading ? 'disabled' : ''}
 					>
 						Checkout
 					</Button>

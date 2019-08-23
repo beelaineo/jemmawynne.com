@@ -1,4 +1,5 @@
 import { Collection } from 'use-shopify'
+import gql from 'graphql-tag'
 import { Paginated } from '@good-idea/unwind-edges'
 import { Menu, ProductInfo } from '../../types/generated'
 import {
@@ -7,7 +8,7 @@ import {
 	productInfoFragment,
 } from '../../graphql/fragments'
 
-export const SHOP_DATA_QUERY = /* GraphQL */ `
+export const SHOP_DATA_QUERY = /* GraphQL */ gql`
 	{
 		Menu(id: "menu-settings") {
 			_id
