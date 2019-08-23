@@ -7,3 +7,6 @@ yarn-error.log
 dist
 built
 package-lock.json
+.yalc
+yalc.lock
+

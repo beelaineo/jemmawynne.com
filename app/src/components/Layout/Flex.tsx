@@ -4,6 +4,8 @@ interface WrapperProps {
 	theme: DefaultTheme
 	active?: boolean
 	marginVertical?: string
+	width?: string
+	margin?: string
 }
 
 export const FlexContainer = styled.div`
@@ -11,12 +13,18 @@ export const FlexContainer = styled.div`
 	justify-content: space-between;
 	flex-wrap: ${(props) => props.wrap};
 	margin: ${(props) => props.theme.layout.spacing[props.margin]};
-	${({ theme, marginVertical }: WrapperProps) => `
-		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
+	${({ theme, marginVertical, width }: WrapperProps) => `
+		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'};
+		width: ${width ? width : 'initial'}
 	`}
 	.visible {
 		opacity: 1;
 		transition: 250ms ease-in;
+	}
+	.close-icon {
+		&:hover {
+			cursor: pointer;
+		}
 	}
 	.invisible {
 		opacity: 0;
@@ -47,7 +55,8 @@ export const FlexFour = styled.div`
 export const FlexSix = styled.div`
 	flex: 6;
 	margin: 10px;
-	${({ theme, marginVertical }: WrapperProps) => `
+	${({ theme, marginVertical, margin }: WrapperProps) => `
 		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
+		margin: ${theme.layout.spacing[margin]} 0;
 	`}
 `
