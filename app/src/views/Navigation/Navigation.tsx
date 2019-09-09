@@ -12,6 +12,7 @@ import { Checkout } from '../Cart/Checkout'
 import { Button } from '../ProductDetail/styled'
 import { MenuLinkOrSubMenu } from '../../types/generated'
 import { SubMenu } from './SubMenu'
+import { SearchInput } from './SearchInput'
 import {
 	Wrapper,
 	Inner,
@@ -135,6 +136,7 @@ export const Navigation = () => {
 					<Logo src="/static/images/Logo_Large_Black.svg" />
 				</Link>
 				<NavSection ready={ready} align="right">
+					<SearchInput />
 					<NavHeaderWrapper>
 						<NavHeader as="button" onClick={openCart}>
 							<Loading loading={loading}>

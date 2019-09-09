@@ -7,6 +7,8 @@ yarn-error.log
 dist
 built
 package-lock.json
+watchfiles.js
+
+
 .yalc
 yalc.lock
-

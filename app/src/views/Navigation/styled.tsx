@@ -34,7 +34,7 @@ export const NavSection = styled.div`
 		flex-grow: 1;
 		display: flex;
 		justify-content: ${align === 'right' ? 'flex-end' : 'flex-start'};
-		align-items: stretch;
+		align-items: center;
 		height: 100%;
 		opacity: ${ready ? '1' : '0'};
 
