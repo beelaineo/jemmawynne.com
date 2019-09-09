@@ -4,8 +4,8 @@ import { useQuery } from 'urql'
 import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { ProductGrid } from './styled'
-import { ProductThumbnail } from './ProductThumbnail'
 import { ProductListingHeader } from './ProductListingHeader'
+import { ItemGrid } from '../../components/ItemGrid'
 
 interface ProductListingProps {
 	match: {
@@ -28,11 +28,7 @@ export const ProductListing = ({ match }: ProductListingProps) => {
 	return (
 		<React.Fragment>
 			<ProductListingHeader collection={collection} />
-			<ProductGrid>
-				{products.map((product) => {
-					return <ProductThumbnail product={product} />
-				})}
-			</ProductGrid>
+			<ItemGrid items={products} />
 		</React.Fragment>
 	)
 }

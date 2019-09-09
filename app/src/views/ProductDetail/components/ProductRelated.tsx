@@ -7,7 +7,7 @@ import { Carousel } from 'Components/Carousel'
 import { Header2, Header4 } from 'Components/Text'
 import { Image } from 'Components/Image'
 import { Figure } from 'Components/Figure'
-import { ProductThumbnail } from '../../ProductListing/ProductThumbnail'
+import { ProductThumbnail } from 'Components/Product'
 
 interface ProductRelatedProps {
 	product: Product

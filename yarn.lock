@@ -19821,10 +19821,10 @@ urql@^1.4.0:
     fast-json-stable-stringify "^2.0.0"
     wonka "^3.2.0"
 
-use-shopify@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/use-shopify/-/use-shopify-0.5.0.tgz#8d7c30be991ef82fbb418242336f3fdf4fcca645"
-  integrity sha512-JvzsqE9DJLSFJI1R8XBAsrzhw1gRQigaPYDlC8SywbA4UuJnxC+tpNvUrrMbG33e2bpFLiLi1gRnBZEcBy0sUQ==
+use-shopify@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/use-shopify/-/use-shopify-0.5.1.tgz#b903387fc6be22e1aa3ef40294a9e02d057073a8"
+  integrity sha512-4QgTaFGT3efVlQXFWCYJ3jp38uVVce2D2/nWVhkkxscgQXyCX4dmpi2Trs1Z9WqA/IVy6o9nRU21BgsPk3qkgA==
   dependencies:
     "@good-idea/unwind-edges" "^1.1.3"
     graphql-tag "^2.10.1"
