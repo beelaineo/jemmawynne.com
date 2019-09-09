@@ -1,6 +1,12 @@
 import * as React from 'react'
 import { Switch, Route } from 'react-router'
-import { Homepage, ProductListing, ProductDetail, Navigation } from './views'
+import {
+	Homepage,
+	SearchResults,
+	ProductListing,
+	ProductDetail,
+	Navigation,
+} from './views'
 import { Providers } from './providers/AllProviders'
 
 /**
@@ -14,6 +20,7 @@ export const App = () => {
 	return (
 		<Providers>
 			<Navigation />
+			<SearchResults />
 			<Switch>
 				<Route exact path="/" component={Homepage} />
 				<Route exact path="/collections/:handle" component={ProductListing} />

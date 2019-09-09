@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { useState, useReducer } from 'react'
 import { PageLink } from 'Components/PageLink'
 import { path } from 'ramda'
-import { useCheckout } from 'use-shopify'
+import { useCheckout, useSearch } from 'use-shopify'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { CartSidebar, CloseButton, CartNav } from '../../components/Cart'
 import { unwindEdges } from '../../utils/graphql'
@@ -12,6 +12,7 @@ import { Checkout } from '../Cart/Checkout'
 import { Button } from '../ProductDetail/styled'
 import { MenuLinkOrSubMenu } from '../../types/generated'
 import { SubMenu } from './SubMenu'
+import { SearchInput } from './SearchInput'
 import {
 	Wrapper,
 	Inner,
@@ -84,6 +85,8 @@ export const Navigation = () => {
 	/* State from Providers */
 	const { loading, checkout } = useCheckout()
 	const { ready, menu } = useShopData()
+	const searchy = useSearch()
+	console.log(searchy)
 
 	/* State */
 	const [{ cartOpen, menuOpen, currentSubmenuKey }, dispatch] = useReducer(
@@ -136,6 +139,7 @@ export const Navigation = () => {
 				</Link>
 				<NavSection ready={ready} align="right">
 					<NavHeaderWrapper>
+						<SearchInput />
 						<NavHeader as="button" onClick={openCart}>
 							<Loading loading={loading}>
 								<div>
