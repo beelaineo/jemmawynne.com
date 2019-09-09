@@ -59,8 +59,8 @@ export const CartBottom = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	height: 15vh;
-
+	/* height: 15vh; */
+	background-color: white;
 	> div,
 	> h6 {
 		margin: ${(props) => props.theme.layout.spacing.small};
@@ -76,4 +76,21 @@ export const CartNav = styled.div`
 		border-radius: 3px;
 		font-size: ${(props) => props.theme.font.size.h3};
 	}
+`
+
+export const CartInner = styled.div`
+	${(props: CartSidebarProps) => css`
+		height: calc( 100vh - 150px);
+		overflow: scroll;
+		padding-bottom: 90px;
+		margin-top: ${props.theme.layout.spacing.singleHalf}
+		::-webkit-scrollbar {
+			width: 0px;  /* Remove scrollbar space */
+			background: transparent;  /* Optional: just make scrollbar invisible */
+		}
+		/* Optional: show position indicator in red */
+		::-webkit-scrollbar-thumb {
+			background: #FF0000;
+		}
+	`}
 `
