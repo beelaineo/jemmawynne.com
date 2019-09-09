@@ -1,5 +1,12 @@
 import * as React from 'react'
+import styled, { css } from 'styled-components'
 import { useSearch } from 'use-shopify'
+
+const Input = styled.input`
+	${({ theme }) => css`
+		border: 1px solid ${theme.color.gray};
+	`}
+`
 
 export const SearchInput = () => {
 	const { search, searchTerm, setSearchTerm } = useSearch()
@@ -16,7 +23,12 @@ export const SearchInput = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<input type="text" onChange={handleChange} value={searchTerm} />
+			<Input
+				placeholder="Search"
+				type="text"
+				onChange={handleChange}
+				value={searchTerm}
+			/>
 		</form>
 	)
 }

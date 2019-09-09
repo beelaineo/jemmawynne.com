@@ -136,8 +136,8 @@ export const Navigation = () => {
 					<Logo src="/static/images/Logo_Large_Black.svg" />
 				</Link>
 				<NavSection ready={ready} align="right">
+					<SearchInput />
 					<NavHeaderWrapper>
-						<SearchInput />
 						<NavHeader as="button" onClick={openCart}>
 							<Loading loading={loading}>
 								<div>

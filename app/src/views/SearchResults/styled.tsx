@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 		position: fixed;
 		z-index: calc(${theme.layout.z.navigation} - 1);
 		top: ${theme.layout.navHeight};
+		padding-top: ${theme.layout.spacing.triple};
 		left: 0;
 		width: 100%;
 		height: calc(100vh - ${theme.layout.navHeight});

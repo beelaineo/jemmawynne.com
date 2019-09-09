@@ -1,5 +1,9 @@
-export const formatMoney = (variantPrice, country) => {
-	// let price = new Intl.NumberFormat('en-IN', { style: 'currency', currency: country }).format(variantPrice));
-	let price = variantPrice
-	return price
-}
+import { MoneyV2 } from '../types'
+
+export const formatMoney = ({ amount, currencyCode }: MoneyV2): string =>
+	new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: currencyCode,
+	})
+		.format(amount)
+		.replace(/\.00$/, '')

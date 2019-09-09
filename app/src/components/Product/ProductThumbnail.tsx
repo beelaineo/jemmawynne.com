@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Header3, Header6 } from '../Text'
 import { Image } from '../Image'
+import { formatMoney } from '../../utils'
 
 import { ProductInfo, ProductThumb } from './styled'
 
@@ -25,10 +26,10 @@ export const ProductThumbnail = ({ product }: ProductThumbnail) => {
 					{minVariantPrice !== undefined &&
 					minVariantPrice.amount !== maxVariantPrice.amount ? (
 						<Header6>
-							${minVariantPrice.amount} - ${maxVariantPrice.amount}
+							{formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
 						</Header6>
 					) : (
-						<Header6>${maxVariantPrice.amount}</Header6>
+						<Header6>{formatMoney(maxVariantPrice)}</Header6>
 					)}
 				</ProductInfo>
 			</Link>
