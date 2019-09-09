@@ -13,7 +13,7 @@ const Grid = styled.div`
 		margin: 0 auto;
 		max-width: ${theme.layout.columns.wide};
 		display: grid;
-		grid-template-columns: 32% 32% 32%;
+		grid-template-columns: repeat(3, 1fr);
 		justify-content: space-evenly;
 		grid-column-gap: ${theme.layout.spacing.triple};
 		grid-row-gap: ${theme.layout.spacing.triple};
@@ -21,13 +21,14 @@ const Grid = styled.div`
 		> a {
 			text-decoration: none;
 		}
-		${theme.mediaQueries.tablet} {
+
+		@media screen and (max-width: 850px) {
 			grid-template-columns: 1fr 1fr;
-			padding: ${theme.layout.spacing.double};
 		}
-		${theme.mediaQueries.mobile} {
+
+		@media screen and (max-width: 560px) {
+			padding: ${theme.layout.spacing.double};
 			grid-template-columns: 1fr;
-			padding: ${theme.layout.spacing.single};
 		}
 	`}
 `
