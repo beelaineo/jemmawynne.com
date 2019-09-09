@@ -22,6 +22,15 @@ export const Inner = styled.div`
 	`}
 `
 
+export const Span = styled.div`
+	${({ theme }) => css`
+		display: inline-block;
+		position: relative;
+		top: -1.5px;
+		margin-left: ${theme.layout.spacing.half};
+	`}
+`
+
 export const Wrapper = styled.div`
 	${({ theme }) => css`
 		padding: ${theme.layout.spacing.small};

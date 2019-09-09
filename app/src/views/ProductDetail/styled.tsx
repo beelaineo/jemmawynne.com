@@ -171,6 +171,7 @@ export const Select = styled.select`
 	border: 1px solid #f1f1f1;
 	padding: 1rem 2rem;
 	font-family: sans-serif;
+	width: 150px;
 	option {
 		font-family: sans-serif;
 	}
