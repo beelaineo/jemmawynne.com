@@ -6,17 +6,19 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  /** An RFC 3986 and RFC 3987 compliant URI string.
+  /**
+   * An RFC 3986 and RFC 3987 compliant URI string.
    *
    * Example value: `"https://johns-apparel.myshopify.com"`.
-   */
+   **/
   URL: any
   /** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
   HTML: any
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+  /**
+   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
    * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
    * 8601 standard for representation of dates and times using the Gregorian calendar.
-   */
+   **/
   DateTime: Date
   /** A monetary value string. Example value: `"100.57"`. */
   Money: any
@@ -159,10 +161,11 @@ export enum ArticleSortKeys {
   PublishedAt = 'PUBLISHED_AT',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -201,13 +204,23 @@ export interface AutomaticDiscountApplication extends DiscountApplication {
 /** A collection of available shipping rates for a checkout. */
 export interface AvailableShippingRates {
   __typename: 'AvailableShippingRates'
-  /** Whether or not the shipping rates are ready.
+  /**
+   * Whether or not the shipping rates are ready.
    * The `shippingRates` field is `null` when this value is `false`.
    * This field should be polled until its value becomes `true`.
-   */
+   **/
   ready: Scalars['Boolean']
   /** The fetched shipping rates. `null` until the `ready` field is `true`. */
   shippingRates?: Maybe<Array<ShippingRate>>
+}
+
+export interface BackgroundImage {
+  __typename: 'BackgroundImage'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  asset?: Maybe<SanityImageAsset>
+  hotspot?: Maybe<SanityImageHotspot>
+  crop?: Maybe<SanityImageCrop>
 }
 
 export interface Block {
@@ -275,10 +288,11 @@ export enum BlogSortKeys {
   Title = 'TITLE',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -298,14 +312,30 @@ export enum CardBrand {
   Jcb = 'JCB',
 }
 
+export interface Carousel {
+  __typename: 'Carousel'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  subtitleRaw?: Maybe<Scalars['JSON']>
+  collection?: Maybe<PageLink>
+  items?: Maybe<Array<Maybe<PageLink>>>
+}
+
+export type CarouselOrHeroOrImageTextSection =
+  | Carousel
+  | Hero
+  | ImageTextSection
+
 /** A container for all the information required to checkout items and pay. */
 export interface Checkout extends Node {
   __typename: 'Checkout'
   appliedGiftCards: Array<AppliedGiftCard>
-  /** The available shipping rates for this Checkout.
+  /**
+   * The available shipping rates for this Checkout.
    * Should only be used when checkout `requiresShipping` is `true` and
    * the shipping address is valid.
-   */
+   **/
   availableShippingRates?: Maybe<AvailableShippingRates>
   /** The date and time when the checkout was completed. */
   completedAt?: Maybe<Scalars['DateTime']>
@@ -332,19 +362,22 @@ export interface Checkout extends Node {
   order?: Maybe<Order>
   /** The Order Status Page for this Checkout, null when checkout is not completed. */
   orderStatusUrl?: Maybe<Scalars['URL']>
-  /** The amount left to be paid. This is equal to the cost of the line items, taxes
+  /**
+   * The amount left to be paid. This is equal to the cost of the line items, taxes
    * and shipping minus discounts and gift cards.
-   */
+   **/
   paymentDue: Scalars['Money']
-  /** The amount left to be paid. This is equal to the cost of the line items, taxes
+  /**
+   * The amount left to be paid. This is equal to the cost of the line items, taxes
    * and shipping minus discounts and gift cards.
-   */
+   **/
   paymentDueV2: MoneyV2
-  /** Whether or not the Checkout is ready and can be completed. Checkouts may have
+  /**
+   * Whether or not the Checkout is ready and can be completed. Checkouts may have
    * asynchronous operations that can take time to finish. If you want to complete
    * a checkout or ensure all the fields are populated and up to date, polling is
    * required until the value is true.
-   */
+   **/
   ready: Scalars['Boolean']
   /** States whether or not the fulfillment requires shipping. */
   requiresShipping: Scalars['Boolean']
@@ -400,10 +433,11 @@ export type CheckoutAttributesUpdateInput = {
   note?: Maybe<Scalars['String']>
   /** A list of extra information that is added to the checkout. */
   customAttributes?: Maybe<Array<AttributeInput>>
-  /** Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
+  /**
+   * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
    * Full validation of the addresses is still done at complete time.
-   */
+   **/
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
 }
 
@@ -424,10 +458,11 @@ export type CheckoutAttributesUpdateV2Input = {
   note?: Maybe<Scalars['String']>
   /** A list of extra information that is added to the checkout. */
   customAttributes?: Maybe<Array<AttributeInput>>
-  /** Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
+  /**
+   * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
    * Full validation of the addresses is still done at complete time.
-   */
+   **/
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
 }
 
@@ -517,15 +552,17 @@ export type CheckoutCreateInput = {
   note?: Maybe<Scalars['String']>
   /** A list of extra information that is added to the checkout. */
   customAttributes?: Maybe<Array<AttributeInput>>
-  /** Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
+  /**
+   * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
    * Full validation of addresses is still done at complete time.
-   */
+   **/
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
-  /** The three-letter currency code of one of the shop's enabled presentment currencies.
+  /**
+   * The three-letter currency code of one of the shop's enabled presentment currencies.
    * Including this field creates a checkout in the specified currency. By default, new
    * checkouts are created in the shop's primary currency.
-   */
+   **/
   presentmentCurrencyCode?: Maybe<CurrencyCode>
 }
 
@@ -900,18 +937,20 @@ export interface CheckoutUserError extends DisplayableError {
   message: Scalars['String']
 }
 
-/** A collection represents a grouping of products that a shop owner can create to
+/**
+ * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- */
+ **/
 export interface Collection extends Node {
   __typename: 'Collection'
   /** Stripped description of the collection, single line with HTML tags removed. */
   description: Scalars['String']
   /** The description of the collection, complete with HTML formatting. */
   descriptionHtml: Scalars['HTML']
-  /** A human-friendly unique string for the collection automatically generated from its title.
+  /**
+   * A human-friendly unique string for the collection automatically generated from its title.
    * Limit of 255 characters.
-   */
+   **/
   handle: Scalars['String']
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -925,16 +964,18 @@ export interface Collection extends Node {
   updatedAt: Scalars['DateTime']
 }
 
-/** A collection represents a grouping of products that a shop owner can create to
+/**
+ * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- */
+ **/
 export type CollectionDescriptionArgs = {
   truncateAt?: Maybe<Scalars['Int']>
 }
 
-/** A collection represents a grouping of products that a shop owner can create to
+/**
+ * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- */
+ **/
 export type CollectionImageArgs = {
   maxWidth?: Maybe<Scalars['Int']>
   maxHeight?: Maybe<Scalars['Int']>
@@ -942,9 +983,10 @@ export type CollectionImageArgs = {
   scale?: Maybe<Scalars['Int']>
 }
 
-/** A collection represents a grouping of products that a shop owner can create to
+/**
+ * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- */
+ **/
 export type CollectionProductsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -978,10 +1020,11 @@ export enum CollectionSortKeys {
   UpdatedAt = 'UPDATED_AT',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -1540,15 +1583,17 @@ export interface CreditCard {
   maskedNumber?: Maybe<Scalars['String']>
 }
 
-/** Specifies the fields required to complete a checkout with
+/**
+ * Specifies the fields required to complete a checkout with
  * a Shopify vaulted credit card payment.
- */
+ **/
 export type CreditCardPaymentInput = {
   /** The amount of the payment. */
   amount: Scalars['Money']
-  /** A unique client generated key used to avoid duplicate charges. When a
+  /**
+   * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   */
+   **/
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: MailingAddressInput
@@ -1558,15 +1603,17 @@ export type CreditCardPaymentInput = {
   test?: Maybe<Scalars['Boolean']>
 }
 
-/** Specifies the fields required to complete a checkout with
+/**
+ * Specifies the fields required to complete a checkout with
  * a Shopify vaulted credit card payment.
- */
+ **/
 export type CreditCardPaymentInputV2 = {
   /** The amount and currency of the payment. */
   paymentAmount: MoneyInput
-  /** A unique client generated key used to avoid duplicate charges. When a
+  /**
+   * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   */
+   **/
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: MailingAddressInput
@@ -1886,10 +1933,11 @@ export enum CurrencyCode {
   Zmw = 'ZMW',
 }
 
-/** A customer represents a customer account with the shop. Customer accounts store
+/**
+ * A customer represents a customer account with the shop. Customer accounts store
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
- */
+ **/
 export interface Customer {
   __typename: 'Customer'
   /** Indicates whether the customer has consented to be sent marketing material via email. */
@@ -1916,18 +1964,20 @@ export interface Customer {
   orders: OrderConnection
   /** The customer’s phone number. */
   phone?: Maybe<Scalars['String']>
-  /** A list of tags assigned to the customer.
+  /**
+   * A list of tags assigned to the customer.
    * Additional access scope required: unauthenticated_read_customer_tags.
-   */
+   **/
   tags: Array<Scalars['String']>
   /** The date and time when the customer information was updated. */
   updatedAt: Scalars['DateTime']
 }
 
-/** A customer represents a customer account with the shop. Customer accounts store
+/**
+ * A customer represents a customer account with the shop. Customer accounts store
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
- */
+ **/
 export type CustomerAddressesArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -1936,10 +1986,11 @@ export type CustomerAddressesArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
-/** A customer represents a customer account with the shop. Customer accounts store
+/**
+ * A customer represents a customer account with the shop. Customer accounts store
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
- */
+ **/
 export type CustomerOrdersArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -2184,9 +2235,10 @@ export interface CustomerUpdatePayload {
   __typename: 'CustomerUpdatePayload'
   /** The updated customer object. */
   customer?: Maybe<Customer>
-  /** The newly created customer access token. If the customer's password is updated, all previous access tokens
+  /**
+   * The newly created customer access token. If the customer's password is updated, all previous access tokens
    * (including the one used to perform this mutation) become invalid, and a new token is generated.
-   */
+   **/
   customerAccessToken?: Maybe<CustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<CustomerUserError>
@@ -2226,9 +2278,10 @@ export interface DiscountAllocation {
   discountApplication: DiscountApplication
 }
 
-/** Discount applications capture the intentions of a discount source at
+/**
+ * Discount applications capture the intentions of a discount source at
  * the time of application.
- */
+ **/
 export type DiscountApplication = {
   /** The method by which the discount's value is allocated to its entitled items. */
   allocationMethod: DiscountApplicationAllocationMethod
@@ -2266,9 +2319,10 @@ export interface DiscountApplicationEdge {
   node: DiscountApplication
 }
 
-/** Which lines on the order that the discount is allocated over, of the type
+/**
+ * Which lines on the order that the discount is allocated over, of the type
  * defined by the Discount Application's target_type.
- */
+ **/
 export enum DiscountApplicationTargetSelection {
   /** The discount is allocated onto all the lines. */
   All = 'ALL',
@@ -2286,9 +2340,10 @@ export enum DiscountApplicationTargetType {
   ShippingLine = 'SHIPPING_LINE',
 }
 
-/** Discount code applications capture the intentions of a discount code at
+/**
+ * Discount code applications capture the intentions of a discount code at
  * the time that it is applied.
- */
+ **/
 export interface DiscountCodeApplication extends DiscountApplication {
   __typename: 'DiscountCodeApplication'
   /** The method by which the discount's value is allocated to its entitled items. */
@@ -2338,6 +2393,16 @@ export interface Domain {
   url: Scalars['URL']
 }
 
+export interface ExternalLink {
+  __typename: 'ExternalLink'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  url?: Maybe<Scalars['String']>
+  newTab?: Maybe<Scalars['Boolean']>
+}
+
+export type ExternalLinkOrPageLink = ExternalLink | PageLink
+
 export interface File {
   __typename: 'File'
   _key?: Maybe<Scalars['String']>
@@ -2352,9 +2417,10 @@ export interface Fulfillment {
   fulfillmentLineItems: FulfillmentLineItemConnection
   /** The name of the tracking company. */
   trackingCompany?: Maybe<Scalars['String']>
-  /** Tracking information associated with the fulfillment,
+  /**
+   * Tracking information associated with the fulfillment,
    * such as the tracking number and tracking URL.
-   */
+   **/
   trackingInfo: Array<FulfillmentTrackingInfo>
 }
 
@@ -2439,6 +2505,17 @@ export type HasMetafieldsMetafieldsArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
+export interface Hero {
+  __typename: 'Hero'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  bodyRaw?: Maybe<Scalars['JSON']>
+  textPosition?: Maybe<Scalars['String']>
+  image?: Maybe<BackgroundImage>
+  mobileImage?: Maybe<BackgroundImage>
+  textPositionMobile?: Maybe<Scalars['String']>
+}
+
 export interface Homepage extends Document {
   __typename: 'Homepage'
   /** Document ID */
@@ -2452,6 +2529,7 @@ export interface Homepage extends Document {
   /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
+  content?: Maybe<Array<Maybe<CarouselOrHeroOrImageTextSection>>>
   contentSections?: Maybe<Array<Maybe<ContentSection>>>
 }
 
@@ -2523,18 +2601,20 @@ export interface Image {
   altText?: Maybe<Scalars['String']>
   /** A unique identifier for the image. */
   id?: Maybe<Scalars['ID']>
-  /** The location of the original image as a URL.
+  /**
+   * The location of the original image as a URL.
    *
    * If there are any existing transformations in the original source URL, they will remain and not be stripped.
-   */
+   **/
   originalSrc: Scalars['URL']
   /** The location of the image as a URL. */
   src: Scalars['URL']
-  /** The location of the transformed image as a URL.
+  /**
+   * The location of the transformed image as a URL.
    *
    * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
    * Otherwise any transformations which an image type does not support will be ignored.
-   */
+   **/
   transformedSrc: Scalars['URL']
 }
 
@@ -2585,6 +2665,26 @@ export interface ImageEdge {
   node: Image
 }
 
+export interface ImageTextBlock {
+  __typename: 'ImageTextBlock'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  bodyRaw?: Maybe<Scalars['JSON']>
+  ctaText?: Maybe<Scalars['String']>
+  link?: Maybe<Array<Maybe<ExternalLinkOrPageLink>>>
+  backgroundImage?: Maybe<BackgroundImage>
+  hoverImage?: Maybe<BackgroundImage>
+}
+
+export interface ImageTextSection {
+  __typename: 'ImageTextSection'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  subtitleRaw?: Maybe<Scalars['JSON']>
+  blocks?: Maybe<Array<Maybe<ImageTextBlock>>>
+}
+
 export interface ImageWithAltText {
   __typename: 'ImageWithAltText'
   _key?: Maybe<Scalars['String']>
@@ -2617,15 +2717,17 @@ export interface MailingAddress extends Node {
   company?: Maybe<Scalars['String']>
   /** The name of the country. */
   country?: Maybe<Scalars['String']>
-  /** The two-letter code for the country of the address.
+  /**
+   * The two-letter code for the country of the address.
    *
    * For example, US.
-   */
+   **/
   countryCode?: Maybe<Scalars['String']>
-  /** The two-letter code for the country of the address.
+  /**
+   * The two-letter code for the country of the address.
    *
    * For example, US.
-   */
+   **/
   countryCodeV2?: Maybe<CountryCode>
   /** The first name of the customer. */
   firstName?: Maybe<Scalars['String']>
@@ -2643,17 +2745,19 @@ export interface MailingAddress extends Node {
   longitude?: Maybe<Scalars['Float']>
   /** The full name of the customer, based on firstName and lastName. */
   name?: Maybe<Scalars['String']>
-  /** A unique phone number for the customer.
+  /**
+   * A unique phone number for the customer.
    *
    * Formatted using E.164 standard. For example, _+16135551111_.
-   */
+   **/
   phone?: Maybe<Scalars['String']>
   /** The region of the address, such as the province, state, or district. */
   province?: Maybe<Scalars['String']>
-  /** The two-letter code for the region.
+  /**
+   * The two-letter code for the region.
    *
    * For example, ON.
-   */
+   **/
   provinceCode?: Maybe<Scalars['String']>
   /** The zip or postal code of the address. */
   zip?: Maybe<Scalars['String']>
@@ -2799,9 +2903,10 @@ export interface MenuLink {
 
 export type MenuLinkOrSubMenu = MenuLink | SubMenu
 
-/** Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
+/**
+ * Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
  * comprised of keys, values, and value types.
- */
+ **/
 export interface Metafield extends Node {
   __typename: 'Metafield'
   /** The description of a metafield. */
@@ -2857,7 +2962,8 @@ export type MoneyInput = {
   currencyCode: CurrencyCode
 }
 
-/** A monetary value with currency.
+/**
+ * A monetary value with currency.
  *
  * To format currencies, combine this type's amount and currencyCode fields with your client's locale.
  *
@@ -2878,7 +2984,7 @@ export type MoneyInput = {
  *
  * For a more general solution, the [Unicode CLDR number formatting database] is available with many implementations
  * (such as [TwitterCldr](https://github.com/twitter/twitter-cldr-rb)).
- */
+ **/
 export interface MoneyV2 {
   __typename: 'MoneyV2'
   /** Decimal money amount. */
@@ -2893,16 +2999,18 @@ export interface Mutation {
   checkoutAttributesUpdate?: Maybe<CheckoutAttributesUpdatePayload>
   /** Updates the attributes of a checkout. */
   checkoutAttributesUpdateV2?: Maybe<CheckoutAttributesUpdateV2Payload>
-  /** Completes a checkout without providing payment information. You can use this
+  /**
+   * Completes a checkout without providing payment information. You can use this
    * mutation for free items or items whose purchase price is covered by a gift card.
-   */
+   **/
   checkoutCompleteFree?: Maybe<CheckoutCompleteFreePayload>
   /** Completes a checkout using a credit card token from Shopify's Vault. */
   checkoutCompleteWithCreditCard?: Maybe<CheckoutCompleteWithCreditCardPayload>
-  /** Completes a checkout using a credit card token from Shopify's card vault.
+  /**
+   * Completes a checkout using a credit card token from Shopify's card vault.
    * Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you
    * need to  [_request payment processing_](https://help.shopify.com/api/guides/sales-channel-sdk/getting-started#request-payment-processing).
-   */
+   **/
   checkoutCompleteWithCreditCardV2?: Maybe<
     CheckoutCompleteWithCreditCardV2Payload
   >
@@ -2958,17 +3066,19 @@ export interface Mutation {
   >
   /** Updates the shipping lines on an existing checkout. */
   checkoutShippingLineUpdate?: Maybe<CheckoutShippingLineUpdatePayload>
-  /** Creates a customer access token.
+  /**
+   * Creates a customer access token.
    * The customer access token is required to modify the customer object in any way.
-   */
+   **/
   customerAccessTokenCreate?: Maybe<CustomerAccessTokenCreatePayload>
   /** Permanently destroys a customer access token. */
   customerAccessTokenDelete?: Maybe<CustomerAccessTokenDeletePayload>
-  /** Renews a customer access token.
+  /**
+   * Renews a customer access token.
    *
    * Access token renewal must happen *before* a token expires.
    * If a token has already expired, a new one should be created instead via `customerAccessTokenCreate`.
-   */
+   **/
   customerAccessTokenRenew?: Maybe<CustomerAccessTokenRenewPayload>
   /** Activates a customer. */
   customerActivate?: Maybe<CustomerActivatePayload>
@@ -3194,10 +3304,11 @@ export type Node = {
   id: Scalars['ID']
 }
 
-/** An order is a customer’s completed request to purchase one or more products from
+/**
+ * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- */
+ **/
 export interface Order extends Node {
   __typename: 'Order'
   /** The code of the currency used for the payment. */
@@ -3214,18 +3325,20 @@ export interface Order extends Node {
   id: Scalars['ID']
   /** List of the order’s line items. */
   lineItems: OrderLineItemConnection
-  /** Unique identifier for the order that appears on the order.
+  /**
+   * Unique identifier for the order that appears on the order.
    * For example, _#1000_ or _Store1001.
-   */
+   **/
   name: Scalars['String']
   /** A unique numeric identifier for the order for use by shop owner and customer. */
   orderNumber: Scalars['Int']
   /** The customer's phone number for receiving SMS notifications. */
   phone?: Maybe<Scalars['String']>
-  /** The date and time when the order was imported.
+  /**
+   * The date and time when the order was imported.
    * This value can be set to dates in the past when importing from other systems.
    * If no value is provided, it will be auto-generated based on current date and time.
-   */
+   **/
   processedAt: Scalars['DateTime']
   /** The address to where the order will be shipped. */
   shippingAddress?: Maybe<MailingAddress>
@@ -3257,10 +3370,11 @@ export interface Order extends Node {
   totalTaxV2?: Maybe<MoneyV2>
 }
 
-/** An order is a customer’s completed request to purchase one or more products from
+/**
+ * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- */
+ **/
 export type OrderDiscountApplicationsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3269,10 +3383,11 @@ export type OrderDiscountApplicationsArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
-/** An order is a customer’s completed request to purchase one or more products from
+/**
+ * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- */
+ **/
 export type OrderLineItemsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3281,10 +3396,11 @@ export type OrderLineItemsArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
-/** An order is a customer’s completed request to purchase one or more products from
+/**
+ * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- */
+ **/
 export type OrderSuccessfulFulfillmentsArgs = {
   first?: Maybe<Scalars['Int']>
 }
@@ -3344,10 +3460,11 @@ export enum OrderSortKeys {
   TotalPrice = 'TOTAL_PRICE',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -3482,10 +3599,11 @@ export enum PageSortKeys {
   UpdatedAt = 'UPDATED_AT',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -3502,7 +3620,7 @@ export interface Payment extends Node {
   checkout: Checkout
   /** The credit card used for the payment in the case of direct payments. */
   creditCard?: Maybe<CreditCard>
-  /** An message describing a processing error during asynchronous processing. */
+  /** A message describing a processing error during asynchronous processing. */
   errorMessage?: Maybe<Scalars['String']>
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -3527,9 +3645,10 @@ export interface PaymentSettings {
   countryCode: CountryCode
   /** The three-letter code for the shop's primary currency. */
   currencyCode: CurrencyCode
-  /** A list of enabled currencies (ISO 4217 format) that the shop accepts.
+  /**
+   * A list of enabled currencies (ISO 4217 format) that the shop accepts.
    * Merchants can enable currencies from their Shopify Payments settings in the Shopify admin.
-   */
+   **/
   enabledPresentmentCurrencies: Array<CurrencyCode>
   /** The shop’s Shopify Payments account id. */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>
@@ -3547,14 +3666,15 @@ export interface PricingPercentageValue {
 /** The price value (fixed or percentage) for a discount application. */
 export type PricingValue = PricingPercentageValue | MoneyV2
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export interface Product extends Node, HasMetafields {
   __typename: 'Product'
-  /** Whether the product is available on the Online Store channel and in stock. */
+  /** Indicates if at least one product variant is available for sale. */
   availableForSale: Scalars['Boolean']
   /** List of collections a product belongs to. */
   collections: CollectionConnection
@@ -3564,9 +3684,10 @@ export interface Product extends Node, HasMetafields {
   description: Scalars['String']
   /** The description of the product, complete with HTML formatting. */
   descriptionHtml: Scalars['HTML']
-  /** A human-friendly unique string for the Product automatically generated from its title.
+  /**
+   * A human-friendly unique string for the Product automatically generated from its title.
    * They are used by the Liquid templating language to refer to objects.
-   */
+   **/
   handle: Scalars['String']
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -3576,9 +3697,10 @@ export interface Product extends Node, HasMetafields {
   metafield?: Maybe<Metafield>
   /** A paginated list of metafields associated with the resource. */
   metafields: MetafieldConnection
-  /** The online store URL for the product.
+  /**
+   * The online store URL for the product.
    * A value of `null` indicates that the product is not published to the Online Store sales channel.
-   */
+   **/
   onlineStoreUrl?: Maybe<Scalars['URL']>
   /** List of custom product options (maximum of 3 per product). */
   options: Array<ProductOption>
@@ -3590,18 +3712,20 @@ export interface Product extends Node, HasMetafields {
   productType: Scalars['String']
   /** The date and time when the product was published to the channel. */
   publishedAt: Scalars['DateTime']
-  /** A categorization that a product can be tagged with, commonly used for filtering and searching.
+  /**
+   * A categorization that a product can be tagged with, commonly used for filtering and searching.
    * Additional access scope required for private apps: unauthenticated_read_product_tags.
-   */
+   **/
   tags: Array<Scalars['String']>
   /** The product’s title. */
   title: Scalars['String']
   /** The date and time when the product was last modified. */
   updatedAt: Scalars['DateTime']
-  /** Find a product’s variant based on its selected options.
+  /**
+   * Find a product’s variant based on its selected options.
    * This is useful for converting a user’s selection of product options into a single matching variant.
    * If there is not a variant for the selected options, `null` will be returned.
-   */
+   **/
   variantBySelectedOptions?: Maybe<ProductVariant>
   /** List of the product’s variants. */
   variants: ProductVariantConnection
@@ -3609,11 +3733,12 @@ export interface Product extends Node, HasMetafields {
   vendor: Scalars['String']
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductCollectionsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3622,48 +3747,52 @@ export type ProductCollectionsArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductDescriptionArgs = {
   truncateAt?: Maybe<Scalars['Int']>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductImagesArgs = {
-  maxWidth?: Maybe<Scalars['Int']>
-  maxHeight?: Maybe<Scalars['Int']>
-  crop?: Maybe<CropRegion>
-  scale?: Maybe<Scalars['Int']>
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
   last?: Maybe<Scalars['Int']>
   before?: Maybe<Scalars['String']>
   reverse?: Maybe<Scalars['Boolean']>
   sortKey?: Maybe<ProductImageSortKeys>
+  maxWidth?: Maybe<Scalars['Int']>
+  maxHeight?: Maybe<Scalars['Int']>
+  crop?: Maybe<CropRegion>
+  scale?: Maybe<Scalars['Int']>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductMetafieldArgs = {
   namespace: Scalars['String']
   key: Scalars['String']
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductMetafieldsArgs = {
   namespace?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
@@ -3673,20 +3802,22 @@ export type ProductMetafieldsArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductOptionsArgs = {
   first?: Maybe<Scalars['Int']>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductPresentmentPriceRangesArgs = {
   presentmentCurrencies?: Maybe<Array<CurrencyCode>>
   first?: Maybe<Scalars['Int']>
@@ -3696,20 +3827,22 @@ export type ProductPresentmentPriceRangesArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductVariantBySelectedOptionsArgs = {
   selectedOptions: Array<SelectedOptionInput>
 }
 
-/** A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- */
+ **/
 export type ProductVariantsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3735,10 +3868,11 @@ export enum ProductCollectionSortKeys {
   Manual = 'MANUAL',
   /** Sort by the `collection-default` value. */
   CollectionDefault = 'COLLECTION_DEFAULT',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -3766,10 +3900,11 @@ export enum ProductImageSortKeys {
   Position = 'POSITION',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -3786,21 +3921,23 @@ export interface ProductInfo extends Document {
   /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
-  /** Use these fields to add snippets of descriptions to all or some projects. For
+  /**
+   * Use these fields to add snippets of descriptions to all or some projects. For
    * instance, you could add a 'Shipping and Returns' block on all items, and a
    * 'Ring Sizing Guide' block to all Rings. These blocks will be displayed in
    * accordion-dropdowns below the main product information. You can also add info
    * blocks to individual items on their page here in the CMS.
-   */
+   **/
   helpText?: Maybe<Scalars['String']>
   globalBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   ringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   earringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   braceletBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   necklaceBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
-  /** Use these fields to add blocks to items with particular tags in Shopify. For
+  /**
+   * Use these fields to add blocks to items with particular tags in Shopify. For
    * instance, a "Customization" block for anything tagged with "Custom" in Shopify.
-   */
+   **/
   byTagHelpText?: Maybe<Scalars['String']>
   blocksByTag?: Maybe<Array<Maybe<ProductInfoBlocksByTag>>>
 }
@@ -3899,11 +4036,12 @@ export type ProductInfoFilter = {
   is_draft?: Maybe<Scalars['Boolean']>
 }
 
-/** Custom product property names like "Size", "Color", and "Material".
+/**
+ * Custom product property names like "Size", "Color", and "Material".
  * Products are based on permutations of these options.
  * A product may have a maximum of 3 options.
  * 255 characters limit each.
- */
+ **/
 export interface ProductOption extends Node {
   __typename: 'ProductOption'
   /** Globally unique identifier. */
@@ -3957,10 +4095,11 @@ export enum ProductSortKeys {
   Price = 'PRICE',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -3971,13 +4110,15 @@ export interface ProductVariant extends Node, HasMetafields {
   available?: Maybe<Scalars['Boolean']>
   /** Indicates if the product variant is available for sale. */
   availableForSale: Scalars['Boolean']
-  /** The compare at price of the variant. This can be used to mark a variant as on
+  /**
+   * The compare at price of the variant. This can be used to mark a variant as on
    * sale, when `compareAtPrice` is higher than `price`.
-   */
+   **/
   compareAtPrice?: Maybe<Scalars['Money']>
-  /** The compare at price of the variant. This can be used to mark a variant as on
+  /**
+   * The compare at price of the variant. This can be used to mark a variant as on
    * sale, when `compareAtPriceV2` is higher than `priceV2`.
-   */
+   **/
   compareAtPriceV2?: Maybe<MoneyV2>
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -4094,10 +4235,11 @@ export enum ProductVariantSortKeys {
   Position = 'POSITION',
   /** Sort by the `id` value. */
   Id = 'ID',
-  /** During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   */
+   **/
   Relevance = 'RELEVANCE',
 }
 
@@ -4122,14 +4264,16 @@ export interface Query {
   pages: PageConnection
   /** Find a product by its handle. */
   productByHandle?: Maybe<Product>
-  /** Find recommended products related to a given `product_id`.
+  /**
+   * Find recommended products related to a given `product_id`.
    * To learn more about how recommendations are generated, see
    * [*Showing product recommendations on product pages*](https://help.shopify.com/themes/development/recommended-products).
-   */
+   **/
   productRecommendations?: Maybe<Array<Product>>
-  /** Tags added to products.
+  /**
+   * Tags added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
-   */
+   **/
   productTags: StringConnection
   /** List of product types for the shop's products that are published to your app. */
   productTypes: StringConnection
@@ -4722,9 +4866,10 @@ export interface SanityImagePaletteSwatch {
   title?: Maybe<Scalars['String']>
 }
 
-/** Script discount applications capture the intentions of a discount that
+/**
+ * Script discount applications capture the intentions of a discount that
  * was created by a Shopify Script.
- */
+ **/
 export interface ScriptDiscountApplication extends DiscountApplication {
   __typename: 'ScriptDiscountApplication'
   /** The method by which the discount's value is allocated to its entitled items. */
@@ -4741,9 +4886,10 @@ export interface ScriptDiscountApplication extends DiscountApplication {
   value: PricingValue
 }
 
-/** Custom properties that a shop owner can use to define product variants.
+/**
+ * Custom properties that a shop owner can use to define product variants.
  * Multiple options can exist. Options are represented as: option1, option2, option3, etc.
- */
+ **/
 export interface SelectedOption {
   __typename: 'SelectedOption'
   /** The product option’s name. */
@@ -4809,9 +4955,10 @@ export interface Shop {
   privacyPolicy?: Maybe<ShopPolicy>
   /** Find a product by its handle. */
   productByHandle?: Maybe<Product>
-  /** Tags added to products.
+  /**
+   * Tags added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
-   */
+   **/
   productTags: StringConnection
   /** List of the shop’s product types. */
   productTypes: StringConnection
@@ -5045,7 +5192,9 @@ export interface ShopifyProduct extends Document {
   handle?: Maybe<Scalars['String']>
   shopifyId?: Maybe<Scalars['String']>
   sourceData?: Maybe<ShopifyProductSource>
+  contentBlocksBefore?: Maybe<Array<Maybe<ContentSection>>>
   infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+  related?: Maybe<Carousel>
 }
 
 export type ShopifyProductFilter = {
@@ -5226,15 +5375,17 @@ export interface TextBlock {
   cta?: Maybe<Cta>
 }
 
-/** Specifies the fields required to complete a checkout with
+/**
+ * Specifies the fields required to complete a checkout with
  * a tokenized payment.
- */
+ **/
 export type TokenizedPaymentInput = {
   /** The amount of the payment. */
   amount: Scalars['Money']
-  /** A unique client generated key used to avoid duplicate charges. When a
+  /**
+   * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   */
+   **/
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: MailingAddressInput
@@ -5248,15 +5399,17 @@ export type TokenizedPaymentInput = {
   identifier?: Maybe<Scalars['String']>
 }
 
-/** Specifies the fields required to complete a checkout with
+/**
+ * Specifies the fields required to complete a checkout with
  * a tokenized payment.
- */
+ **/
 export type TokenizedPaymentInputV2 = {
   /** The amount and currency of the payment. */
   paymentAmount: MoneyInput
-  /** A unique client generated key used to avoid duplicate charges. When a
+  /**
+   * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   */
+   **/
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: MailingAddressInput
