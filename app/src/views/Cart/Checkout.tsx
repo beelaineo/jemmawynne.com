@@ -37,7 +37,7 @@ export const Checkout = () => {
 
 	return (
 		<NormalizeDiv top="0">
-			<Header3 color="dark" align="center">
+			<Header3 color="grays.0" align="center">
 				Your cart
 			</Header3>
 			<CartInner>
@@ -50,11 +50,7 @@ export const Checkout = () => {
 				<Loading isLoading={loading}>
 					<FlexContainer width="100%">
 						<FlexHalf>
-							<Header5
-								transform="uppercase"
-								weight="light"
-								color="lightGrayBody"
-							>
+							<Header5 transform="uppercase" weight="light" color="grays.3">
 								Subtotal:
 							</Header5>
 						</FlexHalf>
@@ -63,7 +59,7 @@ export const Checkout = () => {
 								align="right"
 								transform="uppercase"
 								weight="light"
-								color="dark"
+								color="grays.0"
 							>
 								${checkout.paymentDueV2.amount}
 							</Header5>
@@ -74,8 +70,8 @@ export const Checkout = () => {
 					<Button
 						as="a"
 						href={checkout.webUrl}
-						background="dark"
-						color="light"
+						background="grays.0"
+						color="grays.9"
 						weight="semi"
 						width="100%"
 						disabled={loading}

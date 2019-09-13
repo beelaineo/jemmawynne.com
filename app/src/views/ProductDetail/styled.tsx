@@ -57,7 +57,7 @@ export const ProductGalleryThumbnails = styled.div`
 
 export const ProductRelatedWrapper = styled.div`
 	${(props) => css`
-		background-color: ${props.theme.color.gray};
+		background-color: ${props.theme.color.grays[0]};
 		padding: ${props.theme.layout.spacing.quadruple};
 
 		${props.theme.mediaQueries.tablet} {
@@ -129,8 +129,8 @@ interface ButtonProps {
 
 export const Button = styled.button`
 	${(props: ButtonProps) => css`
-		background-color: ${props.theme.color.dark};
-		color: ${props.theme.color.light};
+		background-color: ${props.theme.color.grays[0]};
+		color: ${props.theme.color.grays[9]};
 		cursor: ${props.disabled ? 'auto' : 'pointer'};
 		display: inline-block;
 		font-family: ${props.theme.font.family.sans};
@@ -244,7 +244,7 @@ export const QuantitySelectorCart = styled(QuantitySelector)`
 export const Label = styled.label`
 	${(props) => `
 		color: #777;
-		color:${props.theme.color.lightGrayBody};
+		color:${props.theme.color.grays[3]};
 		display: block;
 		margin-bottom: ${props.theme.layout.spacing.small};
 		-moz-appearance: none;
@@ -266,7 +266,7 @@ export const ArrowDown = styled.div`
 	position: relative;
 	top: 17vh;
 	font-size: ${(props) => props.theme.font.size.h2};
-	color: ${(props) => props.theme.color.dark};
+	color: ${(props) => props.theme.color.grays[0]};
 	${(props) => props.theme.mediaQueries.tablet} {
 		display: none;
 	}

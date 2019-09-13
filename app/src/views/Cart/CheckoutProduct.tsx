@@ -45,15 +45,15 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
 		>
 			<FlexThree>{image ? <img src={image.originalSrc} /> : null}</FlexThree>
 			<FlexSix marginVertical="0">
-				<Header5 weight="light" color="dark">
+				<Header5 weight="light" color="grays.0">
 					{title}
 				</Header5>
-				<Header5 weight="light" color="darkGray">
+				<Header5 weight="light" color="grays.1">
 					{variant.title}
 				</Header5>
 				<div>
 					<FlexSix margin="small">
-						<Header5 weight="strong" color="dark">
+						<Header5 weight="strong" color="grays.0">
 							{formatMoney(variant.priceV2)}
 						</Header5>
 					</FlexSix>

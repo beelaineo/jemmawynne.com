@@ -134,15 +134,16 @@ export const P = styled.p`
 `
 
 export const TextAnchor = styled.a`
-	${({ theme }) => `
-		color: ${theme.color.pink};
+	${({ theme }) => css`
+		color: ${theme.color.grays[2]};
+		text-decoration: underline;
 	`};
 `
 
 export const BlockQuote = styled.blockquote``
 
 const listStyles = css`
-	${({ theme }) => `
+	${({ theme }) => css`
 		margin: ${theme.layout.spacing.single} 0;
 		padding-left: 2em;
 	`};

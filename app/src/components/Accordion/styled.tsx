@@ -11,7 +11,7 @@ export const ToggleButton = styled.button`
 		font-weight: ${theme.font.weight.semi};
 		text-transform: uppercase;
 		letter-spacing: 1px;
-		color: ${(props) => props.theme.color.dark};
+		color: ${(props) => props.theme.color.grays[0]};
 	`}
 `
 

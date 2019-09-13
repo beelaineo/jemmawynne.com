@@ -17,6 +17,6 @@ export const Wrapper = styled.div`
 
 export const CurrentSearchTerm = styled.span`
 	${({ theme }) => css`
-		color: ${theme.color.semiDark};
+		color: ${theme.color.grays[1]};
 	`}
 `

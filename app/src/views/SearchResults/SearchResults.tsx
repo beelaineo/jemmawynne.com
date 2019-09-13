@@ -16,7 +16,7 @@ export const SearchResults = (props: SearchResultsProps) => {
 
 	return (
 		<Wrapper>
-			<Header2 color="lightGrayBody">
+			<Header2 color="grays.3">
 				Search Results for:{' '}
 				<CurrentSearchTerm>"{searchTerm}"</CurrentSearchTerm>
 			</Header2>

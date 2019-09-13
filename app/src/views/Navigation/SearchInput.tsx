@@ -4,7 +4,7 @@ import { useSearch } from 'use-shopify'
 
 const Input = styled.input`
 	${({ theme }) => css`
-		border: 1px solid ${theme.color.gray};
+		border: 1px solid ${theme.color.grays[9]};
 	`}
 `
 

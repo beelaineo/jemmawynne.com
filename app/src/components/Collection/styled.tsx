@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 export const ImageWrapper = styled.div`
 	${({ theme }) => css`
-		color: ${theme.color.semiDark};
+		color: ${theme.color.grays[1]};
 		border: 1px solid;
 		padding: ${theme.layout.spacing.single};
 	`}

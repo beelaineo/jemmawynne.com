@@ -13,7 +13,13 @@ declare module 'styled-components' {
 			weight: { [key: string]: number }
 			family: { [key: string]: string }
 		}
-		color: { [key: string]: string }
+		color: {
+			grays: string[]
+			white: string
+			black: string
+			roseGold: string
+			yellowGold: string
+		}
 		mediaQueries: { [key: string]: string }
 		transition: { [key: string]: string }
 	}
