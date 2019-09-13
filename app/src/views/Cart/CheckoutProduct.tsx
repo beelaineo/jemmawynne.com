@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { CheckoutLineItem, useCheckout } from 'use-shopify'
+import { formatMoney, getVariantImage } from '../../utils'
 import { FlexContainer, FlexThree, FlexSix } from '../../components/Layout/Flex'
 import { QuantitySelectorCart } from '../ProductDetail/styled'
 import { QuantityInput } from 'Components/QuantityInput'
@@ -8,12 +10,20 @@ import { RemoveCart } from './styled'
 
 const { useState } = React
 
-export const CheckoutProduct = (props) => {
-	console.log(props.lineItem.node)
-	const { title, variant, quantity } = props.lineItem.node
-	const updateLineItemQuantity = props.updateLineItemQuantity
+interface CheckoutProductProps {
+	lineItem: CheckoutLineItem
+}
+
+export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
+	const { updateLineItem } = useCheckout()
+	const { title, variant, quantity } = lineItem
+
+	const image = getVariantImage(variant)
 
 	const [hovered, setHover] = useState('invisible')
+
+	const setQuantity = (newQuantity: number) =>
+		updateLineItem({ id: lineItem.id, quantity: newQuantity })
 
 	/* Handlers */
 	const updateHover = () => {
@@ -30,9 +40,7 @@ export const CheckoutProduct = (props) => {
 			onMouseOver={updateHover}
 			onMouseOut={removeHover}
 		>
-			<FlexThree>
-				<img src={variant.image.originalSrc} />
-			</FlexThree>
+			<FlexThree>{image ? <img src={image.originalSrc} /> : null}</FlexThree>
 			<FlexSix marginVertical="0">
 				<Header5 weight="light" color="dark">
 					{title}
@@ -40,33 +48,24 @@ export const CheckoutProduct = (props) => {
 				<div>
 					<FlexSix margin="small">
 						<Header5 weight="strong" color="dark">
-							${variant.priceV2.amount}
+							{formatMoney(variant.priceV2)}
 						</Header5>
 					</FlexSix>
 					<FlexSix margin="small">
 						<QuantitySelectorCart className={hovered} width="40px">
 							Quantity: {'     '}
-							<button
-								type="button"
-								onClick={() => updateLineItemQuantity(quantity - 1)}
-							>
+							<button type="button" onClick={() => setQuantity(quantity - 1)}>
 								<span>&#8722;</span>
 							</button>
-							<QuantityInput
-								quantity={quantity}
-								setQuantity={updateLineItemQuantity}
-							/>
-							<button
-								type="button"
-								onClick={() => updateLineItemQuantity(quantity + 1)}
-							>
+							<QuantityInput quantity={quantity} setQuantity={setQuantity} />
+							<button type="button" onClick={() => setQuantity(quantity + 1)}>
 								<span>&#43;</span>
 							</button>
 						</QuantitySelectorCart>
 					</FlexSix>
 				</div>
 			</FlexSix>
-			<RemoveCart onClick={() => updateLineItemQuantity(0)}>
+			<RemoveCart onClick={() => setQuantity(0)}>
 				<IoMdClose className={hovered} />
 			</RemoveCart>
 		</FlexContainer>

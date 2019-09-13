@@ -1,6 +1,5 @@
-import { Collection } from 'use-shopify'
+import { Paginated, Collection } from 'use-shopify'
 import { imageFragment } from '../../graphql/fragments'
-import { Paginated } from '../../types'
 
 export const COLLECTION_QUERY = /* GraphQL */ `
 	query CollectionQuery($handle: String!) {

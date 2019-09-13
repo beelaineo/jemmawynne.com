@@ -120,25 +120,27 @@ export const SubMenuColumns = styled.div`
 `
 
 export const ModalBackground = styled.div`
-	height: 100vh;
-	position: fixed;
-	background: #0000004d;
-	width: 100vw;
-	top: 0;
-	cursor: pointer;
-	display: ${(props) => (props.open ? 'block' : 'none')};
+	${({ open }: WithOpen) => css`
+		height: 100vh;
+		position: fixed;
+		background: #0000004d;
+		width: 100vw;
+		top: 0;
+		cursor: pointer;
+		display: ${open ? 'block' : 'none'};
+	`}
 `
 
 interface Loading {
 	theme: DefaultTheme
-	loading?: boolean
+	isLoading: boolean
 }
 
 export const Loading = styled.div`
 	transition: 250ms ease;
 	display: flex;
-	${({ theme, loading }: Loading) => css`
-		opacity: ${loading ? '0.5' : '1'};
+	${({ theme, isLoading }: Loading) => css`
+		opacity: ${isLoading ? '0.5' : '1'};
 
 		div:nth-child(1) {
 			margin-right: ${theme.layout.spacing.half};

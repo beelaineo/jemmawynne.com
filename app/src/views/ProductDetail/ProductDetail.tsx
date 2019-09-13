@@ -17,7 +17,7 @@ import {
 	ProductRelated,
 } from './components'
 import { useShopData } from '../../providers/ShopDataProvider'
-import { useCounter } from 'Utils/hooks'
+import { useCounter } from '../../utils/hooks'
 import {
 	Wrapper,
 	ProductDetails,
@@ -56,8 +56,9 @@ const ProductDetailMain = ({ product }: Props) => {
 	const { currentVariant, selectVariant } = useProductVariant(product)
 
 	/* get checkout utils */
-	const { addItemToCheckout } = useCheckout()
+	const { addLineItem } = useCheckout()
 	const [variants] = unwindEdges<Variant>(product.variants)
+	console
 
 	return (
 		<Wrapper>
@@ -83,7 +84,7 @@ const ProductDetailMain = ({ product }: Props) => {
 						/>
 						<NormalizeDiv>
 							<BuyButton
-								addItemToCheckout={addItemToCheckout}
+								addLineItem={addLineItem}
 								currentVariant={currentVariant}
 								quantity={quantity}
 							/>

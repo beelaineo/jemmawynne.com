@@ -139,7 +139,7 @@ export const Navigation = () => {
 					<SearchInput />
 					<NavHeaderWrapper>
 						<NavHeader as="button" onClick={openCart}>
-							<Loading loading={loading}>
+							<Loading isLoading={loading}>
 								<div>
 									<IoIosCart />
 								</div>

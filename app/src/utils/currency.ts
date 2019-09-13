@@ -1,4 +1,4 @@
-import { MoneyV2 } from '../types'
+import { MoneyV2 } from 'use-shopify'
 
 export const formatMoney = ({ amount, currencyCode }: MoneyV2): string =>
 	new Intl.NumberFormat('en-US', {

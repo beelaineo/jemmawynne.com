@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { unwindEdges } from '@good-idea/unwind-edges'
 import { useCheckout } from 'use-shopify'
 import {
 	NormalizeDiv,
@@ -26,15 +27,13 @@ const { useState } = React
 
 export const Checkout = () => {
 	/* State */
-	const { checkout, updateQuantity, loading } = useCheckout()
+	const { checkout, loading } = useCheckout()
 
-	const createUpdateLineItemHandler = (lineItemId: string) => (quantity) => {
-		updateQuantity({ id: lineItemId, quantity: Math.max(quantity, 0) })
-	}
-
-	if (!checkout || checkout.lineItems.length < 1) {
+	if (!checkout || checkout.lineItems.edges.length < 1) {
 		return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
 	}
+
+	const [lineItems] = unwindEdges(checkout.lineItems)
 
 	return (
 		<NormalizeDiv top="0">
@@ -42,20 +41,13 @@ export const Checkout = () => {
 				Your cart
 			</Header3>
 			<CartInner>
-				{checkout.lineItems.edges.map((lineItem) => {
-					const { id, title, variant, quantity } = lineItem.node
-					const updateLineItemQuantity = createUpdateLineItemHandler(id)
-					return (
-						<CheckoutProduct
-							lineItem={lineItem}
-							updateLineItemQuantity={updateLineItemQuantity}
-						/>
-					)
+				{lineItems.map((lineItem) => {
+					return <CheckoutProduct lineItem={lineItem} />
 				})}
 			</CartInner>
 
 			<CartBottom>
-				<Loading loading={loading}>
+				<Loading isLoading={loading}>
 					<FlexContainer width="100%">
 						<FlexHalf>
 							<Header5
@@ -86,7 +78,7 @@ export const Checkout = () => {
 						color="light"
 						weight="semi"
 						width="100%"
-						disabled={loading ? 'disabled' : ''}
+						disabled={loading}
 					>
 						Checkout
 					</Button>

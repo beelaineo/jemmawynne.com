@@ -4,19 +4,20 @@ interface WrapperProps {
 	theme: DefaultTheme
 	active?: boolean
 	marginVertical?: string
+	mobileWidth?: string
 	center?: boolean
 	height?: string
 	vertical?: boolean
 	padding?: string
+	width?: string
 	maxwidth?: string
 	text?: string
 	align?: string
+	margin?: string
+	wrap?: string
 }
 
 export const FlexContainer = styled.div`
-	display: flex;
-	flex-wrap: ${(props) => props.wrap};
-	margin: ${(props) => props.theme.layout.spacing[props.margin]};
 	${({
 		theme,
 		padding,
@@ -27,7 +28,12 @@ export const FlexContainer = styled.div`
 		maxwidth,
 		text,
 		align,
-	}: WrapperProps) => `
+		wrap,
+		margin,
+	}: WrapperProps) => css`
+    display: flex;
+    flex-wrap: ${wrap};
+    margin: ${theme.layout.spacing[margin]};
 		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'};
 		justify-content: ${center ? 'center' : 'space-between'};
 		height: ${height || 'initial'}; 

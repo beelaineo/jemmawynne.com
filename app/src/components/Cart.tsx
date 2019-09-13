@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 interface CartSidebarProps {
 	theme: DefaultTheme
-	open: boolean
+	open?: boolean
 }
 
 export const CartSidebar = styled.div`
