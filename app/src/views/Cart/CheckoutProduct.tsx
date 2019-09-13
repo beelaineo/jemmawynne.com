@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { CheckoutLineItem, useCheckout } from 'use-shopify'
+import { useCheckout } from 'use-shopify'
+import { CheckoutLineItem } from '../../types'
 import { formatMoney, getVariantImage } from '../../utils'
 import { FlexContainer, FlexThree, FlexSix } from '../../components/Layout/Flex'
 import { QuantitySelectorCart } from '../ProductDetail/styled'
@@ -33,6 +34,8 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
 		setHover('invisible')
 	}
 
+	console.log(variant)
+
 	return (
 		<FlexContainer
 			key={variant.id}
@@ -44,6 +47,9 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
 			<FlexSix marginVertical="0">
 				<Header5 weight="light" color="dark">
 					{title}
+				</Header5>
+				<Header5 weight="light" color="darkGray">
+					{variant.title}
 				</Header5>
 				<div>
 					<FlexSix margin="small">

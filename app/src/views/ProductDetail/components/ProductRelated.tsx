@@ -30,7 +30,7 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 						const [images] = unwindEdges(product.images)
 						const productLink = `/products/${product.handle}`
 
-						return <ProductThumbnail product={product} />
+						return <ProductThumbnail key={product.id} product={product} />
 					})}
 				</Carousel>
 			</ProductRelatedInner>

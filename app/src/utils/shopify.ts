@@ -1,7 +1,8 @@
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { Variant, ShopifyImage } from 'use-shopify'
+import { Image, ProductVariant } from '../types'
 
-export const getVariantImage = (variant: Variant): ShopifyImage | void => {
+export const getVariantImage = (variant: ProductVariant): Image | void => {
+	console.log(variant)
 	if (variant.image) return variant.image
 	if (
 		variant.product &&

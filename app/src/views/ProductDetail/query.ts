@@ -52,6 +52,10 @@ export const PRODUCT_QUERY = /* GraphQL */ `
 					}
 				}
 			}
+			options {
+				name
+				values
+			}
 			variants(first: 50) {
 				edges {
 					node {
@@ -60,6 +64,10 @@ export const PRODUCT_QUERY = /* GraphQL */ `
 						price
 						sku
 						title
+						selectedOptions {
+							name
+							value
+						}
 						image {
 							...ImageFragment
 						}

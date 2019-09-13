@@ -58,7 +58,6 @@ const ProductDetailMain = ({ product }: Props) => {
 	/* get checkout utils */
 	const { addLineItem } = useCheckout()
 	const [variants] = unwindEdges<Variant>(product.variants)
-	console
 
 	return (
 		<Wrapper>
@@ -78,7 +77,7 @@ const ProductDetailMain = ({ product }: Props) => {
 							quantity={quantity}
 							increment={increment}
 							decrement={decrement}
-							variants={variants}
+							product={product}
 							currentVariant={currentVariant}
 							selectVariant={selectVariant}
 						/>

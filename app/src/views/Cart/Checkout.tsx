@@ -41,9 +41,9 @@ export const Checkout = () => {
 				Your cart
 			</Header3>
 			<CartInner>
-				{lineItems.map((lineItem) => {
-					return <CheckoutProduct lineItem={lineItem} />
-				})}
+				{lineItems.map((lineItem) => (
+					<CheckoutProduct key={lineItem.id} lineItem={lineItem} />
+				))}
 			</CartInner>
 
 			<CartBottom>
