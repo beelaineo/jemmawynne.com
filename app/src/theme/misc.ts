@@ -1,4 +1,4 @@
 export const transition = {
-	fast: '150ms',
-	slow: '250ms',
+  fast: '150ms',
+  slow: '250ms',
 }

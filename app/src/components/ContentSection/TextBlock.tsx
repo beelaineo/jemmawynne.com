@@ -6,16 +6,16 @@ import { RichText } from '../RichText'
 import { CTA } from '../CTA'
 
 export interface TextBlockProps {
-	block: TextBlockType
+  block: TextBlockType
 }
 
 export const TextBlock = ({ block }: TextBlockProps) => {
-	const { title, bodyRaw, cta } = block
-	return (
-		<TextBlockWrapper>
-			<Header2>{title}</Header2>
-			{bodyRaw ? <RichText body={bodyRaw} /> : null}
-			{cta ? <CTA cta={cta} /> : null}
-		</TextBlockWrapper>
-	)
+  const { title, bodyRaw, cta } = block
+  return (
+    <TextBlockWrapper>
+      <Header2>{title}</Header2>
+      {bodyRaw ? <RichText body={bodyRaw} /> : null}
+      {cta ? <CTA cta={cta} /> : null}
+    </TextBlockWrapper>
+  )
 }

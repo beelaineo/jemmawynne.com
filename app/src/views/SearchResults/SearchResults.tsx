@@ -5,22 +5,22 @@ import { Header2 } from '../../components/Text'
 import { ItemGrid } from '../../components/ItemGrid'
 
 interface SearchResultsProps {
-	/* */
+  /* */
 }
 
 export const SearchResults = (props: SearchResultsProps) => {
-	const { searchTerm, loading, results, products, collections } = useSearch()
-	if (searchTerm.length < 3) return null
+  const { searchTerm, loading, results, products, collections } = useSearch()
+  if (searchTerm.length < 3) return null
 
-	const items = [...collections, ...products]
+  const items = [...collections, ...products]
 
-	return (
-		<Wrapper>
-			<Header2 color="grays.3">
-				Search Results for:{' '}
-				<CurrentSearchTerm>"{searchTerm}"</CurrentSearchTerm>
-			</Header2>
-			{loading ? <p>Loading...</p> : <ItemGrid items={items} />}
-		</Wrapper>
-	)
+  return (
+    <Wrapper>
+      <Header2 color="grays.3">
+        Search Results for:{' '}
+        <CurrentSearchTerm>"{searchTerm}"</CurrentSearchTerm>
+      </Header2>
+      {loading ? <p>Loading...</p> : <ItemGrid items={items} />}
+    </Wrapper>
+  )
 }

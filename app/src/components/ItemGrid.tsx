@@ -9,28 +9,28 @@ import { CollectionThumbnail } from './Collection'
  */
 
 const Grid = styled.div`
-	${({ theme }) => css`
-		margin: 0 auto;
-		max-width: ${theme.layout.columns.wide};
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		justify-content: space-evenly;
-		grid-column-gap: ${theme.layout.spacing.triple};
-		grid-row-gap: ${theme.layout.spacing.triple};
-		padding: ${theme.layout.spacing.triple};
-		> a {
-			text-decoration: none;
-		}
+  ${({ theme }) => css`
+    margin: 0 auto;
+    max-width: ${theme.layout.columns.wide};
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-evenly;
+    grid-column-gap: ${theme.layout.spacing.triple};
+    grid-row-gap: ${theme.layout.spacing.triple};
+    padding: ${theme.layout.spacing.triple};
+    > a {
+      text-decoration: none;
+    }
 
-		@media screen and (max-width: 850px) {
-			grid-template-columns: 1fr 1fr;
-		}
+    @media screen and (max-width: 850px) {
+      grid-template-columns: 1fr 1fr;
+    }
 
-		@media screen and (max-width: 560px) {
-			padding: ${theme.layout.spacing.double};
-			grid-template-columns: 1fr;
-		}
-	`}
+    @media screen and (max-width: 560px) {
+      padding: ${theme.layout.spacing.double};
+      grid-template-columns: 1fr;
+    }
+  `}
 `
 
 /**
@@ -40,30 +40,30 @@ const Grid = styled.div`
 type ProductOrCollection = Product | Collection
 
 interface ItemGridProps {
-	items: ProductOrCollection[]
+  items: ProductOrCollection[]
 }
 
 export const ItemGrid = ({ items }: ItemGridProps) => {
-	return (
-		<Grid>
-			{items.map((item) => {
-				if (item.__typename === 'Product')
-					return (
-						//
-						<ProductThumbnail key={item.id} product={item} />
-					)
-				if (item.__typename === 'Collection')
-					return (
-						//
-						<CollectionThumbnail key={item.id} collection={item} />
-					)
+  return (
+    <Grid>
+      {items.map((item) => {
+        if (item.__typename === 'Product')
+          return (
+            //
+            <ProductThumbnail key={item.id} product={item} />
+          )
+        if (item.__typename === 'Collection')
+          return (
+            //
+            <CollectionThumbnail key={item.id} collection={item} />
+          )
 
-				console.warn(
-					// @ts-ignore
-					`There is no thumbnail for item of type "${item.__typename}"`,
-				)
-				return null
-			})}
-		</Grid>
-	)
+        console.warn(
+          // @ts-ignore
+          `There is no thumbnail for item of type "${item.__typename}"`,
+        )
+        return null
+      })}
+    </Grid>
+  )
 }

@@ -19,44 +19,44 @@ import { ShopDataProvider } from './ShopDataProvider'
  */
 
 interface Props {
-	children: React.ReactNode
+  children: React.ReactNode
 }
 
 const client = createClient({
-	url: '/.netlify/functions/graphql',
+  url: '/.netlify/functions/graphql',
 })
 
 function urqlQuery<Response>(
-	query: string | DocumentNode,
-	variables: object,
+  query: string | DocumentNode,
+  variables: object,
 ): Promise<Response> {
-	return new Promise((resolve) => {
-		const request = createRequest(query, variables)
+  return new Promise((resolve) => {
+    const request = createRequest(query, variables)
 
-		pipe(
-			client.executeQuery(request),
-			// @ts-ignore TODO What's up with that? Well, soon urql will have an actual API for this
-			subscribe(resolve),
-		)
-	})
+    pipe(
+      client.executeQuery(request),
+      // @ts-ignore TODO What's up with that? Well, soon urql will have an actual API for this
+      subscribe(resolve),
+    )
+  })
 }
 
 export const Providers = ({ children }: Props) => {
-	return (
-		<UrqlProvider value={client}>
-			<ShopifyProvider
-				// @ts-ignore
-				query={urqlQuery}
-			>
-				<ShopDataProvider>
-					<ThemeProvider theme={theme}>
-						<BrowserRouter>
-							<GlobalStyles />
-							{children}
-						</BrowserRouter>
-					</ThemeProvider>
-				</ShopDataProvider>
-			</ShopifyProvider>
-		</UrqlProvider>
-	)
+  return (
+    <UrqlProvider value={client}>
+      <ShopifyProvider
+        // @ts-ignore
+        query={urqlQuery}
+      >
+        <ShopDataProvider>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <GlobalStyles />
+              {children}
+            </BrowserRouter>
+          </ThemeProvider>
+        </ShopDataProvider>
+      </ShopifyProvider>
+    </UrqlProvider>
+  )
 }

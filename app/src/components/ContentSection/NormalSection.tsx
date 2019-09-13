@@ -6,14 +6,14 @@ import { TextBlock } from './TextBlock'
 import { renderContentBlock } from './renderContentBlock'
 
 interface NormalSectionProps {
-	section: ContentSection
+  section: ContentSection
 }
 
 export const NormalSection = ({ section }: NormalSectionProps) => {
-	const { items } = section
-	return (
-		<React.Fragment>
-			{items ? items.map(renderContentBlock) : null}
-		</React.Fragment>
-	)
+  const { items } = section
+  return (
+    <React.Fragment>
+      {items ? items.map(renderContentBlock) : null}
+    </React.Fragment>
+  )
 }

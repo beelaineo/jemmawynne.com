@@ -1,7 +1,7 @@
 import { Paginated, PageInfo } from '../types'
 
 type EdgeWithCursor<Edge> = Edge & {
-	__cursor: string | number
+  __cursor: string | number
 }
 
 type UnwoundEdges<EdgeType> = [EdgeWithCursor<EdgeType>[], PageInfo]
@@ -37,7 +37,10 @@ type UnwoundEdges<EdgeType> = [EdgeWithCursor<EdgeType>[], PageInfo]
  * @returns {UnwoundEdges<EdgeType>}
  */
 
-export const unwindEdges = <EdgeType>({ edges, pageInfo }: Paginated<EdgeType>): UnwoundEdges<EdgeType> => [
-	edges.map((edge) => ({ ...edge.node, __cursor: edge.cursor })),
-	pageInfo,
+export const unwindEdges = <EdgeType>({
+  edges,
+  pageInfo,
+}: Paginated<EdgeType>): UnwoundEdges<EdgeType> => [
+  edges.map((edge) => ({ ...edge.node, __cursor: edge.cursor })),
+  pageInfo,
 ]

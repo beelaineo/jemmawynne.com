@@ -34,29 +34,32 @@ import { css } from 'styled-components'
 
 // @import url('//hello.myfonts.net/count/2c2cd5');
 export default css`
-	@font-face {
-		font-family: 'DidotLTPro-Roman';
-		src: url('/static/fonts/2C2CD5_0_0.eot');
-		src: url('/static/fonts/2C2CD5_0_0.eot?#iefix') format('embedded-opentype'),
-			url('/static/fonts/2C2CD5_0_0.woff2') format('woff2'), url('/static/fonts/2C2CD5_0_0.woff') format('woff'),
-			url('/static/fonts/2C2CD5_0_0.ttf') format('truetype');
-	}
+  @font-face {
+    font-family: 'DidotLTPro-Roman';
+    src: url('/static/fonts/2C2CD5_0_0.eot');
+    src: url('/static/fonts/2C2CD5_0_0.eot?#iefix') format('embedded-opentype'),
+      url('/static/fonts/2C2CD5_0_0.woff2') format('woff2'),
+      url('/static/fonts/2C2CD5_0_0.woff') format('woff'),
+      url('/static/fonts/2C2CD5_0_0.ttf') format('truetype');
+  }
 
-	@font-face {
-		font-family: 'AvenirLTStd';
-		font-weight: 700;
-		src: url('/static/fonts/2C2CD5_1_0.eot');
-		src: url('/static/fonts/2C2CD5_1_0.eot?#iefix') format('embedded-opentype'),
-			url('/static/fonts/2C2CD5_1_0.woff2') format('woff2'), url('/static/fonts/2C2CD5_1_0.woff') format('woff'),
-			url('/static/fonts/2C2CD5_1_0.ttf') format('truetype');
-	}
+  @font-face {
+    font-family: 'AvenirLTStd';
+    font-weight: 700;
+    src: url('/static/fonts/2C2CD5_1_0.eot');
+    src: url('/static/fonts/2C2CD5_1_0.eot?#iefix') format('embedded-opentype'),
+      url('/static/fonts/2C2CD5_1_0.woff2') format('woff2'),
+      url('/static/fonts/2C2CD5_1_0.woff') format('woff'),
+      url('/static/fonts/2C2CD5_1_0.ttf') format('truetype');
+  }
 
-	@font-face {
-		font-family: 'AvenirLTStd';
-		font-weight: 400;
-		src: url('/static/fonts/2C2CD5_2_0.eot');
-		src: url('/static/fonts/2C2CD5_2_0.eot?#iefix') format('embedded-opentype'),
-			url('/static/fonts/2C2CD5_2_0.woff2') format('woff2'), url('/static/fonts/2C2CD5_2_0.woff') format('woff'),
-			url('/static/fonts/2C2CD5_2_0.ttf') format('truetype');
-	}
+  @font-face {
+    font-family: 'AvenirLTStd';
+    font-weight: 400;
+    src: url('/static/fonts/2C2CD5_2_0.eot');
+    src: url('/static/fonts/2C2CD5_2_0.eot?#iefix') format('embedded-opentype'),
+      url('/static/fonts/2C2CD5_2_0.woff2') format('woff2'),
+      url('/static/fonts/2C2CD5_2_0.woff') format('woff'),
+      url('/static/fonts/2C2CD5_2_0.ttf') format('truetype');
+  }
 `

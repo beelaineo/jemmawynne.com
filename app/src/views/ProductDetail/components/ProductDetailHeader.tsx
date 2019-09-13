@@ -6,22 +6,22 @@ import { formatMoney } from '../../../utils'
 import { Header2, Header4 } from 'Components/Text'
 
 interface ProductDetailHeaderProps {
-	product: Product
-	currentVariant: ProductVariant
+  product: Product
+  currentVariant: ProductVariant
 }
 
 export const ProductDetailHeader = ({
-	product,
-	currentVariant,
+  product,
+  currentVariant,
 }: ProductDetailHeaderProps) => {
-	return (
-		<NormalizeDiv>
-			<Header2 weight="xlight" color="grays.0">
-				{product.title}
-			</Header2>
-			<Header4 weight="strong" color="grays.0">
-				{formatMoney(currentVariant.price)}
-			</Header4>
-		</NormalizeDiv>
-	)
+  return (
+    <NormalizeDiv>
+      <Header2 weight="xlight" color="grays.0">
+        {product.title}
+      </Header2>
+      <Header4 weight="strong" color="grays.0">
+        {formatMoney(currentVariant.price)}
+      </Header4>
+    </NormalizeDiv>
+  )
 }

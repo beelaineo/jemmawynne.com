@@ -5,16 +5,17 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from '../theme'
 
 interface Props {
-	children: React.ReactNode
+  children: React.ReactNode
 }
 
 const Providers = ({ children }: Props) => (
-	<ThemeProvider theme={theme}>
-		<BrowserRouter>{children}</BrowserRouter>
-	</ThemeProvider>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>{children}</BrowserRouter>
+  </ThemeProvider>
 )
 
-const customRender = (ui: React.ReactElement, options = {}) => render(ui, { wrapper: Providers, ...options })
+const customRender = (ui: React.ReactElement, options = {}) =>
+  render(ui, { wrapper: Providers, ...options })
 
 // re-export everything
 export * from 'react-testing-library'

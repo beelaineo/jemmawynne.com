@@ -7,11 +7,11 @@ import * as mediaQueries from './mediaQueries'
 import { transition } from './misc'
 
 export const theme: DefaultTheme = {
-	layout,
-	font,
-	color,
-	mediaQueries,
-	transition,
+  layout,
+  font,
+  color,
+  mediaQueries,
+  transition,
 }
 
 export * from './global'
