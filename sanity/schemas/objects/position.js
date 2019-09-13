@@ -1,6 +1,6 @@
 export const position = {
 	name: 'position',
-	label: 'Position',
+	title: 'Position',
 	type: 'string',
 	options: {
 		list: [

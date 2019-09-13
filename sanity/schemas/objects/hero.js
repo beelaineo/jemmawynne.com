@@ -37,7 +37,7 @@ export const hero = {
 			type: 'backgroundImage',
 		},
 		{
-			name: 'image',
+			name: 'mobileImage',
 			title: 'Background Image (mobile)',
 			type: 'backgroundImage',
 		},
