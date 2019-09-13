@@ -1,3 +1,12 @@
+export const backgroundImage = {
+	name: 'backgroundImage',
+	title: 'Background Image',
+	type: 'image',
+	options: {
+		hotspot: true,
+	},
+}
+
 export const imageWithAltText = {
 	name: 'imageWithAltText',
 	type: 'image',

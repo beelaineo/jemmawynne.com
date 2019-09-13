@@ -4,6 +4,16 @@ export const homepage = {
 	name: 'homepage',
 	fields: [
 		{
+			name: 'content',
+			label: 'Content',
+			type: 'array',
+			of: [
+				{ type: 'hero' },
+				{ type: 'carousel' },
+				{ type: 'imageTextSection' },
+			],
+		},
+		{
 			name: 'contentSections',
 			label: 'Content Blocks',
 			type: 'array',
