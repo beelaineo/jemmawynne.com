@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { useState, useReducer } from 'react'
 import { PageLink } from 'Components/PageLink'
 import { path } from 'ramda'
 import { useCheckout } from 'use-shopify'
 import { useShopData } from '../../providers/ShopDataProvider'
+import { useLocation } from '../../providers/LocationProvider'
 import { CartSidebar, CloseButton, CartNav } from '../../components/Cart'
 import { unwindEdges } from '../../utils/graphql'
 import { Checkout } from '../Cart/Checkout'
@@ -26,6 +26,8 @@ import {
 } from './styled'
 import { IoIosCart } from 'react-icons/io'
 
+const { useState, useEffect, useReducer } = React
+
 interface MenuProps {
   activeMenu: null | string
   openMenu: (menuKey: null | string) => () => void
@@ -42,6 +44,7 @@ const OPEN_SUBMENU = 'OPEN_SUBMENU'
 const OPEN_CART = 'OPEN_CART'
 const CLOSE_CART = 'CLOSE_CART'
 const CLOSE_MENU = 'CLOSE_MENU'
+const CLOSE_ALL = 'CLOSE_ALL'
 
 interface Action {
   type:
@@ -49,6 +52,7 @@ interface Action {
     | typeof OPEN_CART
     | typeof CLOSE_MENU
     | typeof CLOSE_CART
+    | typeof CLOSE_ALL
   [key: string]: any
 }
 
@@ -76,6 +80,12 @@ function navReducer(currentState: NavState, action: Action): NavState {
         ...currentState,
         cartOpen: false,
       }
+    case CLOSE_ALL:
+      return {
+        ...currentState,
+        cartOpen: false,
+        menuOpen: false,
+      }
     default:
       throw new Error(`"${action.type}" is not a valid action type`)
   }
@@ -85,6 +95,7 @@ export const Navigation = () => {
   /* State from Providers */
   const { loading, checkout } = useCheckout()
   const { ready, menu } = useShopData()
+  const { location } = useLocation()
 
   /* State */
   const [{ cartOpen, menuOpen, currentSubmenuKey }, dispatch] = useReducer(
@@ -95,6 +106,13 @@ export const Navigation = () => {
       currentSubmenuKey: undefined,
     },
   )
+
+  /* Effects */
+
+  useEffect(() => {
+    /* Close the menu & cart after a path change */
+    dispatch({ type: CLOSE_ALL })
+  }, [location.pathname])
 
   /* Handlers */
   const openCart = () => dispatch({ type: OPEN_CART })

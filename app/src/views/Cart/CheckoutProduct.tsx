@@ -34,8 +34,6 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
     setHover('invisible')
   }
 
-  console.log(variant)
-
   return (
     <FlexContainer
       key={variant.id}

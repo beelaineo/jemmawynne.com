@@ -9,6 +9,7 @@ import { createClient, Provider as UrqlProvider } from 'urql'
 import { SHOPIFY_STOREFRONT_TOKEN } from '../config'
 import { theme, GlobalStyles } from '../theme'
 import { ShopDataProvider } from './ShopDataProvider'
+import { LocationProvider } from './LocationProvider'
 
 /**
  * App
@@ -51,8 +52,10 @@ export const Providers = ({ children }: Props) => {
         <ShopDataProvider>
           <ThemeProvider theme={theme}>
             <BrowserRouter>
-              <GlobalStyles />
-              {children}
+              <LocationProvider>
+                <GlobalStyles />
+                {children}
+              </LocationProvider>
             </BrowserRouter>
           </ThemeProvider>
         </ShopDataProvider>
