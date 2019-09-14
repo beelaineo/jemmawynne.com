@@ -1,7 +1,8 @@
-import { Product } from '../../types/generated'
-import { imageFragment } from '../../graphql/fragments'
+import gql from 'graphql-tag'
+import { Product, ShopifyProduct } from '../../types/generated'
+import { imageFragment, productInfoFragment } from '../../graphql/fragments'
 
-export const PRODUCT_QUERY = /* GraphQL */ `
+export const PRODUCT_QUERY = gql`
   query ProductQuery($handle: String!) {
     productByHandle(handle: $handle) {
       id
@@ -61,7 +62,10 @@ export const PRODUCT_QUERY = /* GraphQL */ `
           node {
             id
             availableForSale
-            price
+            priceV2 {
+              amount
+              currencyCode
+            }
             sku
             title
             selectedOptions {
@@ -75,10 +79,20 @@ export const PRODUCT_QUERY = /* GraphQL */ `
         }
       }
     }
+
+    allShopifyProducts(where: { handle: $handle }) {
+      _id
+      title
+      infoBlocks {
+        ...ProductInfoFragment
+      }
+    }
   }
+  ${productInfoFragment}
   ${imageFragment}
 `
 
 export interface ProductQueryResult {
   productByHandle: Product | void
+  allShopifyProducts: [ShopifyProduct]
 }

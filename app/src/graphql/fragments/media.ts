@@ -1,4 +1,6 @@
-export const imageFragment = /* GraphQL */ `
+import gql from 'graphql-tag'
+
+export const imageFragment = gql`
   fragment ImageFragment on Image {
     id
     altText
@@ -6,7 +8,7 @@ export const imageFragment = /* GraphQL */ `
   }
 `
 
-export const sanityImageFragment = /* GraphQL */ `
+export const sanityImageFragment = gql`
   fragment SanityImageFragment on ImageWithAltText {
     _key
     altText

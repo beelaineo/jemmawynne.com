@@ -14,13 +14,14 @@ export const ProductDetailHeader = ({
   product,
   currentVariant,
 }: ProductDetailHeaderProps) => {
+  console.log(currentVariant)
   return (
     <NormalizeDiv>
       <Header2 weight="xlight" color="grays.0">
         {product.title}
       </Header2>
       <Header4 weight="strong" color="grays.0">
-        {formatMoney(currentVariant.price)}
+        {formatMoney(currentVariant.priceV2)}
       </Header4>
     </NormalizeDiv>
   )

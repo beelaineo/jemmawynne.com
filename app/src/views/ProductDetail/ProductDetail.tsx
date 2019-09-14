@@ -3,8 +3,14 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { Link } from 'react-router-dom'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
-import { Product, ProductInfo, ProductInfoBlock } from '../../types/generated'
-import { useProductVariant, useCheckout, Variant } from 'use-shopify'
+import {
+  Product,
+  ProductInfo,
+  ProductInfoBlock,
+  ProductVariant,
+  ShopifyProduct,
+} from '../../types/generated'
+import { useProductVariant, useCheckout } from 'use-shopify'
 import { unwindEdges } from '../../utils/graphql'
 import { NotFound } from '../NotFound'
 import { Column } from '../../components/Layout'
@@ -33,17 +39,21 @@ import { Header5, Header6 } from 'Components/Text'
 
 interface Props {
   product: Product
+  productExtra: ShopifyProduct
 }
 
-const ProductDetailMain = ({ product }: Props) => {
+const ProductDetailMain = ({ product, productExtra }: Props) => {
   /* get additional info blocks from Sanity */
   const { ready, productInfoBlocks } = useShopData()
-  const accordions = productInfoBlocks
+  const globalAccordions = productInfoBlocks
     ? [
         ...getInfoBlocksByType(product.productType, productInfoBlocks),
         ...getInfoBlocksByTag(product.tags, productInfoBlocks),
       ]
     : []
+
+  const extraAccordions = productExtra.infoBlocks || []
+  const accordions = [...extraAccordions, ...globalAccordions]
 
   /* hook to manage quantity input */
   const {
@@ -57,8 +67,9 @@ const ProductDetailMain = ({ product }: Props) => {
 
   /* get checkout utils */
   const { addLineItem } = useCheckout()
-  const [variants] = unwindEdges<Variant>(product.variants)
+  const [variants] = unwindEdges<ProductVariant>(product.variants)
 
+  console.log(accordions)
   return (
     <Wrapper>
       <Column>
@@ -119,7 +130,10 @@ export const ProductDetail = ({ match }: RouteComponentProps<MatchParams>) => {
   })
   const product =
     (response && response.data && response.data.productByHandle) || undefined
+  const productExtra =
+    (response && response.data && response.data.allShopifyProducts[0]) ||
+    undefined
   if (response.fetching) return <p>Loading..</p>
   if (!product) return <NotFound />
-  return <ProductDetailMain product={product} />
+  return <ProductDetailMain product={product} productExtra={productExtra} />
 }

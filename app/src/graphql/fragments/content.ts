@@ -1,6 +1,7 @@
+import gql from 'graphql-tag'
 import { sanityImageFragment } from './media'
 
-export const linkFragment = /* GraphQL */ `
+export const linkFragment = gql`
   fragment LinkFragment on PageLink {
     _key
     _type
@@ -29,7 +30,7 @@ export const linkFragment = /* GraphQL */ `
   }
 `
 
-export const textBlockFragment = /* GraphQL */ `
+export const textBlockFragment = gql`
   fragment TextBlockFragment on TextBlock {
     _key
     _type
@@ -45,7 +46,7 @@ export const textBlockFragment = /* GraphQL */ `
   ${linkFragment}
 `
 
-export const imageBlockFragment = /* GraphQL */ `
+export const imageBlockFragment = gql`
   fragment ImageBlockFragment on ImageBlock {
     _key
     _type
@@ -62,7 +63,7 @@ export const imageBlockFragment = /* GraphQL */ `
   ${sanityImageFragment}
 `
 
-export const contentSectionFragment = /* GraphQL */ `
+export const contentSectionFragment = gql`
   fragment ContentSectionFragment on ContentSection {
     _key
     _type
@@ -87,7 +88,7 @@ export const contentSectionFragment = /* GraphQL */ `
   ${textBlockFragment}
 `
 
-export const productInfoFragment = /* GraphQL */ `
+export const productInfoFragment = gql`
   fragment ProductInfoFragment on ProductInfoBlock {
     _key
     _type
