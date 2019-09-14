@@ -9,6 +9,7 @@ export const PRODUCT_QUERY = gql`
       title
       handle
       description
+      descriptionHtml
       tags
       productType
       collections(first: 5) {

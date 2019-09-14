@@ -145,7 +145,7 @@ export const BlockQuote = styled.blockquote``
 const listStyles = css`
   ${({ theme }) => css`
     margin: ${theme.layout.spacing.single} 0;
-    padding-left: 2em;
+    padding-left: 1em;
   `};
 `
 
@@ -158,7 +158,11 @@ export const Ul = styled.ul`
 `
 
 export const Li = styled.li`
-  & > ${Ol}, & > ${Ul} {
-    margin: 0;
-  }
+  ${({ theme }) => css`
+    font-size: ${theme.font.size.p};
+
+    & > ${Ol}, & > ${Ul} {
+      margin: 0;
+    }
+  `}
 `

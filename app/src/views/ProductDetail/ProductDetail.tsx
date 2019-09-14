@@ -18,8 +18,7 @@ import {
   ProductVariantSelector,
   BuyButton,
   ProductImages,
-  ProductDetailHeader,
-  ProductDetailFooter,
+  ProductDescription,
   ProductRelated,
 } from './components'
 import { useShopData } from '../../providers/ShopDataProvider'
@@ -69,7 +68,8 @@ const ProductDetailMain = ({ product, productExtra }: Props) => {
   const { addLineItem } = useCheckout()
   const [variants] = unwindEdges<ProductVariant>(product.variants)
 
-  console.log(accordions)
+  console.log(product)
+
   return (
     <Wrapper>
       <Column>
@@ -78,11 +78,10 @@ const ProductDetailMain = ({ product, productExtra }: Props) => {
             <ProductImages currentVariant={currentVariant} product={product} />
           </ProductImagesWrapper>
           <ProductInfoWrapper>
-            <ProductDetailHeader
+            <ProductDescription
               currentVariant={currentVariant}
               product={product}
             />
-            <ProductDetailFooter product={product} />
             <ProductVariantSelector
               setQuantity={setQuantity}
               quantity={quantity}
