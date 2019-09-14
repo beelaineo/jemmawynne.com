@@ -6,21 +6,21 @@ import { Gallery } from '../../../components/Gallery'
 import { ProductGalleryWrapper } from '../styled'
 
 interface ProductImagesProps {
-	product: Product
-	currentVariant: Variant
+  product: Product
+  currentVariant: Variant
 }
 
 export const ProductImages = ({
-	product,
-	currentVariant,
+  product,
+  currentVariant,
 }: ProductImagesProps) => {
-	if (!product.images || !product.images.edges || !product.images.edges.length)
-		return null
-	const [images] = unwindEdges<Image>(product.images)
+  if (!product.images || !product.images.edges || !product.images.edges.length)
+    return null
+  const [images] = unwindEdges<Image>(product.images)
 
-	return (
-		<ProductGalleryWrapper>
-			<Gallery images={images} currentImageId={currentVariant.image.id} />
-		</ProductGalleryWrapper>
-	)
+  return (
+    <ProductGalleryWrapper>
+      <Gallery images={images} currentImageId={currentVariant.image.id} />
+    </ProductGalleryWrapper>
+  )
 }

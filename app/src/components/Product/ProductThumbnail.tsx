@@ -9,30 +9,30 @@ import { formatMoney } from '../../utils'
 import { ProductInfo, ProductThumb } from './styled'
 
 interface ProductThumbnail {
-	product: Product
+  product: Product
 }
 
 export const ProductThumbnail = ({ product }: ProductThumbnail) => {
-	const [images] = unwindEdges(product.images)
-	const productImage = images.length ? images[0] : undefined
-	let { minVariantPrice, maxVariantPrice } = product.priceRange
-	const to = `/products/${product.handle}`
-	return (
-		<ProductThumb>
-			<Link to={to}>
-				<Image key={product.id} image={productImage} />
-				<ProductInfo>
-					<Header3>{product.title}</Header3>
-					{minVariantPrice !== undefined &&
-					minVariantPrice.amount !== maxVariantPrice.amount ? (
-						<Header6>
-							{formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
-						</Header6>
-					) : (
-						<Header6>{formatMoney(maxVariantPrice)}</Header6>
-					)}
-				</ProductInfo>
-			</Link>
-		</ProductThumb>
-	)
+  const [images] = unwindEdges(product.images)
+  const productImage = images.length ? images[0] : undefined
+  let { minVariantPrice, maxVariantPrice } = product.priceRange
+  const to = `/products/${product.handle}`
+  return (
+    <ProductThumb>
+      <Link to={to}>
+        <Image key={product.id} image={productImage} />
+        <ProductInfo>
+          <Header3>{product.title}</Header3>
+          {minVariantPrice !== undefined &&
+          minVariantPrice.amount !== maxVariantPrice.amount ? (
+            <Header6>
+              {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
+            </Header6>
+          ) : (
+            <Header6>{formatMoney(maxVariantPrice)}</Header6>
+          )}
+        </ProductInfo>
+      </Link>
+    </ProductThumb>
+  )
 }

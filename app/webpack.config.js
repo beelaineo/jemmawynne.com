@@ -48,6 +48,7 @@ module.exports = (env) => {
 			publicPath: '/',
 		},
 		resolve: {
+			symlinks: true,
 			plugins: [new TsconfigPathsPlugin()],
 			extensions: ['.mjs', '.ts', '.tsx', '.js'],
 			alias: isDev
@@ -60,39 +61,21 @@ module.exports = (env) => {
 			rules: [
 				{
 					test: /\.tsx?$/,
-					include: PATHS.src,
 					use: [
-						// isDev ? { loader: 'react-hot-loader/webpack' } : null,
-						// { loader: 'babel-loader' },
 						{
-							loader: 'awesome-typescript-loader',
+							loader: 'ts-loader',
 							options: {
-								useBabel: true,
-								// babelOptions: {
-								// 	babelrc: false /* Important line */,
-								// 	presets: [
-								// 		[
-								// 			'@babel/preset-env',
-								// 			{ targets: 'last 2 versions, ie 11', modules: false },
-								// 		],
-								// 	],
-								// },
-								babelCore: '@babel/core', // needed for Babel v7
-								transpileOnly: !isDev,
-								// useTranspileModule: false,
-								// sourceMap: true,
-								// getCustomTransformers: () => ({
-								// 	before: [styledComponentsTransformer],
-								// }),
+								transpileOnly: true,
 							},
 						},
-					].filter(Boolean),
+					],
+					include: PATHS.src,
 				},
 			],
 		},
 		plugins: [
 			new CheckerPlugin(),
-			isDev ? new HardSourceWebpackPlugin() : null,
+			// isDev ? new HardSourceWebpackPlugin() : null,
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(
 					isDev ? 'development' : 'production',

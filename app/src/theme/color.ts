@@ -1,8 +1,15 @@
-export const white = 'rgb(255, 255, 255)'
-export const dark = 'rgb(0, 0, 0)'
-export const light = 'rgb(240, 240, 240)'
-export const gray = '#ebebeb'
-export const semiDark = 'rgb(75, 75, 75)'
-export const lightGrayBody = 'rgb(119, 119, 119)'
-export const pink = 'rgb(253, 218, 224)'
-export const lightPink = 'rgb(253, 218, 224)'
+export const grays = [
+  'rgb(50,50,50)',
+  'rgb(71,71,71)',
+  'rgb(92,92,92)',
+  'rgb(113,113,113)',
+  'rgb(134,134,134)',
+  'rgb(156,156,156)',
+  'rgb(177,177,177)',
+  'rgb(198,198,198)',
+  'rgb(219,219,219)',
+  'rgb(240,240,240)',
+]
+
+const roseGold = 'rgb(255, 214, 209)'
+const yellowGold = 'rgb(215, 183, 64)'

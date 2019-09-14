@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import normalized from './normalized'
 import fontFaces from './fontFaces'
-import { semiDark } from './color'
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -14,7 +13,6 @@ export const GlobalStyles = createGlobalStyle`
 
 	body {
 		font-family: ${({ theme }) => theme.font.family.serif};
-		color: ${semiDark};
 		overflow-x: hidden;
 	}
 

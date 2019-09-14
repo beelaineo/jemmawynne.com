@@ -10,30 +10,30 @@ import { Figure } from 'Components/Figure'
 import { ProductThumbnail } from 'Components/Product'
 
 interface ProductRelatedProps {
-	product: Product
+  product: Product
 }
 
 export const ProductRelated = ({ product }: ProductRelatedProps) => {
-	const [collections] = unwindEdges<Collection>(product.collections)
-	if (!collections || !collections.length) return null
-	const [products] = unwindEdges<Product>(collections[0].products)
-	if (!products || !products.length) return null
-	return (
-		<ProductRelatedWrapper>
-			<Header2 transform="uppercase" color="lightGrayBody" align="center">
-				Shop the {collections[0].title} Collection
-			</Header2>
-			<ProductRelatedInner>
-				<Carousel>
-					{products.slice(0, 10).map((product) => {
-						let { title } = product
-						const [images] = unwindEdges(product.images)
-						const productLink = `/products/${product.handle}`
+  const [collections] = unwindEdges<Collection>(product.collections)
+  if (!collections || !collections.length) return null
+  const [products] = unwindEdges<Product>(collections[0].products)
+  if (!products || !products.length) return null
+  return (
+    <ProductRelatedWrapper>
+      <Header2 transform="uppercase" color="grays.3" align="center">
+        Shop the {collections[0].title} Collection
+      </Header2>
+      <ProductRelatedInner>
+        <Carousel>
+          {products.slice(0, 10).map((product) => {
+            let { title } = product
+            const [images] = unwindEdges(product.images)
+            const productLink = `/products/${product.handle}`
 
-						return <ProductThumbnail product={product} />
-					})}
-				</Carousel>
-			</ProductRelatedInner>
-		</ProductRelatedWrapper>
-	)
+            return <ProductThumbnail key={product.id} product={product} />
+          })}
+        </Carousel>
+      </ProductRelatedInner>
+    </ProductRelatedWrapper>
+  )
 }

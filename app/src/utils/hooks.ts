@@ -1,44 +1,44 @@
 import { useState } from 'react'
 
 interface Options {
-	min?: number
-	max?: number
+  min?: number
+  max?: number
 }
 
 const defaultOptions = {
-	min: -Infinity,
-	max: Infinity,
+  min: -Infinity,
+  max: Infinity,
 }
 
 export interface UseCounterValues {
-	count: number
-	increment: () => void | Promise<void>
-	decrement: () => void | Promise<void>
-	setCount: (c: number) => void | Promise<void>
-	isMin: boolean
-	isMax: boolean
+  count: number
+  increment: () => void | Promise<void>
+  decrement: () => void | Promise<void>
+  setCount: (c: number) => void | Promise<void>
+  isMin: boolean
+  isMax: boolean
 }
 
 const minMax = (min: number, max: number) => (input: number): number =>
-	Math.min(Math.max(input, min), max)
+  Math.min(Math.max(input, min), max)
 
 export const useCounter = (
-	initialCount: number = 0,
-	options: Options,
+  initialCount: number = 0,
+  options: Options,
 ): UseCounterValues => {
-	const { min, max } = {
-		...defaultOptions,
-		...options,
-	}
-	const within = minMax(min, max)
-	const [count, setCountState] = useState<number>(initialCount)
+  const { min, max } = {
+    ...defaultOptions,
+    ...options,
+  }
+  const within = minMax(min, max)
+  const [count, setCountState] = useState<number>(initialCount)
 
-	const increment = () => setCountState(within(count + 1))
-	const decrement = () => setCountState(within(count - 1))
+  const increment = () => setCountState(within(count + 1))
+  const decrement = () => setCountState(within(count - 1))
 
-	const setCount = (num) => setCountState(within(num))
+  const setCount = (num) => setCountState(within(num))
 
-	const isMin = count === min
-	const isMax = count === max
-	return { count, increment, decrement, setCount, isMin, isMax }
+  const isMin = count === min
+  const isMax = count === max
+  return { count, increment, decrement, setCount, isMin, isMax }
 }

@@ -13,7 +13,9 @@ export const page = {
 			name: 'slug',
 			label: 'Page URL',
 			type: 'slug',
-			source: 'title',
+			options: {
+				source: 'title',
+			},
 			validation: (Rule) => Rule.required(),
 		},
 	],
