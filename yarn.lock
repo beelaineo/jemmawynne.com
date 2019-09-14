@@ -18818,10 +18818,10 @@ urql@^1.4.0:
     fast-json-stable-stringify "^2.0.0"
     wonka "^3.2.1"
 
-use-shopify@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/use-shopify/-/use-shopify-0.6.0.tgz#4b21e0d4f92536a7f00bd66c4a0e7f80480868ad"
-  integrity sha512-PFQ/N4pOStLK27BjGwMd3qu2jMmGgnuGCzG8HA6JKmeUl+SEtb5pOxC1vGVGb+ZGqz5TEAroBJ2iW5tiPzcY8Q==
+use-shopify@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/use-shopify/-/use-shopify-0.7.0.tgz#4ffdd2cebbcb06aaeb127cbbddb7be1c29f7491d"
+  integrity sha512-eEsTMpdxDMjE4g0c7/TpEVrVbBYyVP5BmnpNZm5R32KGCMvNckHBhdikyXeYhAEB2VCT1SuW5bzzPhcZ1+y/fg==
   dependencies:
     "@good-idea/unwind-edges" "^1.1.3"
     "@thi.ng/memoize" "^1.1.3"

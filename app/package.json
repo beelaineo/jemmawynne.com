@@ -94,7 +94,7 @@
 		"react-swipeable": "^5.4.0",
 		"styled-components": "^4.3.2",
 		"urql": "^1.4.0",
-		"use-shopify": "^0.6.0",
+		"use-shopify": "^0.7.0",
 		"utf-8-validate": "^5.0.2"
 	},
 	"resolutions": {
