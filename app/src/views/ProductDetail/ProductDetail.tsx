@@ -68,8 +68,6 @@ const ProductDetailMain = ({ product, productExtra }: Props) => {
   const { addLineItem } = useCheckout()
   const [variants] = unwindEdges<ProductVariant>(product.variants)
 
-  console.log(product)
-
   return (
     <Wrapper>
       <Column>

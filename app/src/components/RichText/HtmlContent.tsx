@@ -19,7 +19,6 @@ const defaultOptions = {
   replace: (node) => {
     if (node.type !== 'tag') return undefined
     const { name, children } = node
-    console.log(name)
     switch (name) {
       case 'ul':
         return <Text.Ul>{domToReact(children, defaultOptions)}</Text.Ul>

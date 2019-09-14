@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
+import { path } from 'ramda'
 
 export interface TextStyleProps {
   theme: DefaultTheme
@@ -10,6 +11,9 @@ export interface TextStyleProps {
   children: any
   margin?: string
 }
+
+const getColor = (theme: DefaultTheme, color: string): string | void =>
+  color ? path(color.split('.'), theme.color) : undefined
 
 const commonHeaderStyles = ({
   theme,
@@ -27,7 +31,7 @@ const commonHeaderStyles = ({
     ? theme.font.weight.normal
     : theme.font.weight.semi};
   font-family: ${theme.font.family[family] || theme.font.family.sans};
-  color: ${theme.color[color] || 'inherit'};
+  color: ${getColor(theme, color) || 'inherit'};
   text-align: ${align || 'inherit'};
   text-transform: ${transform || 'auto'};
   margin: ${margin || '0.3em 0'};

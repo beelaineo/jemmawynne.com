@@ -2,6 +2,8 @@ import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { useSearch } from 'use-shopify'
 
+const { useEffect, useState } = React
+
 const Input = styled.input`
   ${({ theme }) => css`
     border: 1px solid ${theme.color.grays[9]};
@@ -9,16 +11,23 @@ const Input = styled.input`
 `
 
 export const SearchInput = () => {
-  const { search, searchTerm, setSearchTerm } = useSearch()
+  const { search, searchTerm } = useSearch()
+  const [localSearchTerm, setLocalSearchTerm] = useState<string>('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTerm = e.target.value
-    setSearchTerm(newTerm)
+    setLocalSearchTerm(newTerm)
   }
+
+  /* Effects */
+
+  useEffect(() => {
+    if (searchTerm === '') setLocalSearchTerm(searchTerm)
+  }, [searchTerm])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    search()
+    search(localSearchTerm)
   }
 
   return (
@@ -27,7 +36,7 @@ export const SearchInput = () => {
         placeholder="Search"
         type="text"
         onChange={handleChange}
-        value={searchTerm}
+        value={localSearchTerm}
       />
     </form>
   )
