@@ -144,14 +144,14 @@ export const pageLink = {
       title: 'Image',
       description:
         'If left empty, the image of the linked product or document will be used.',
-      type: 'backgroundImage',
+      type: 'imageWithAltText',
     },
     {
       name: 'hoverImage',
       title: 'Hover Image',
       description:
         'If left empty, the second image of the linked product will be used.',
-      type: 'backgroundImage',
+      type: 'imageWithAltText',
     },
   ],
   preview: {

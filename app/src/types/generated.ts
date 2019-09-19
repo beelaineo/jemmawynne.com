@@ -318,8 +318,9 @@ export interface Carousel {
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
-  collection?: Maybe<PageLink>
-  items?: Maybe<Array<Maybe<PageLink>>>
+  /** Create a carousel from a collection. If a collection is used, items linked to below be ignored. */
+  collection?: Maybe<ShopifyCollection>
+  items?: Maybe<Array<Maybe<RichPageLink>>>
 }
 
 export type CarouselOrHeroOrImageTextSection =
@@ -1068,19 +1069,6 @@ export interface CommentEdge {
   node: Comment
 }
 
-export interface ContentSection {
-  __typename: 'ContentSection'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  items?: Maybe<Array<Maybe<ImageBlockOrTextBlock>>>
-  layout?: Maybe<Scalars['String']>
-  backgroundImage?: Maybe<ImageWithAltText>
-  backgroundColor?: Maybe<Scalars['String']>
-  textColor?: Maybe<Scalars['String']>
-  textAlign?: Maybe<Scalars['String']>
-  alignItems?: Maybe<Scalars['String']>
-}
-
 /** ISO 3166-1 alpha-2 country codes with some differences. */
 export enum CountryCode {
   /** Afghanistan. */
@@ -1642,8 +1630,10 @@ export interface Cta {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   label?: Maybe<Scalars['String']>
-  link?: Maybe<PageLink>
+  link?: Maybe<InternalLink>
 }
+
+export type CtaOrSubMenu = Cta | SubMenu
 
 /** Currency codes */
 export enum CurrencyCode {
@@ -2401,8 +2391,6 @@ export interface ExternalLink {
   newTab?: Maybe<Scalars['Boolean']>
 }
 
-export type ExternalLinkOrPageLink = ExternalLink | PageLink
-
 export interface File {
   __typename: 'File'
   _key?: Maybe<Scalars['String']>
@@ -2530,7 +2518,6 @@ export interface Homepage extends Document {
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   content?: Maybe<Array<Maybe<CarouselOrHeroOrImageTextSection>>>
-  contentSections?: Maybe<Array<Maybe<ContentSection>>>
 }
 
 export type HomepageFilter = {
@@ -2631,14 +2618,11 @@ export interface ImageBlock {
   __typename: 'ImageBlock'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  images?: Maybe<Array<Maybe<ImageWithAltText>>>
-  /** If emtpy, and if this content links to a page, product, or collection, that item's title will be used. */
-  title?: Maybe<Scalars['String']>
-  caption?: Maybe<Scalars['String']>
-  link?: Maybe<PageLink>
+  backgroundImage?: Maybe<BackgroundImage>
+  hoverImage?: Maybe<BackgroundImage>
+  captionRaw?: Maybe<Scalars['JSON']>
+  cta?: Maybe<Cta>
 }
-
-export type ImageBlockOrLinkGroup = ImageBlock | LinkGroup
 
 export type ImageBlockOrTextBlock = ImageBlock | TextBlock
 
@@ -2665,24 +2649,13 @@ export interface ImageEdge {
   node: Image
 }
 
-export interface ImageTextBlock {
-  __typename: 'ImageTextBlock'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  bodyRaw?: Maybe<Scalars['JSON']>
-  ctaText?: Maybe<Scalars['String']>
-  link?: Maybe<Array<Maybe<ExternalLinkOrPageLink>>>
-  backgroundImage?: Maybe<BackgroundImage>
-  hoverImage?: Maybe<BackgroundImage>
-}
-
 export interface ImageTextSection {
   __typename: 'ImageTextSection'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
-  blocks?: Maybe<Array<Maybe<ImageTextBlock>>>
+  blocks?: Maybe<Array<Maybe<ImageBlockOrTextBlock>>>
 }
 
 export interface ImageWithAltText {
@@ -2696,13 +2669,22 @@ export interface ImageWithAltText {
   crop?: Maybe<SanityImageCrop>
 }
 
+export interface InternalLink {
+  __typename: 'InternalLink'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
+}
+
 export interface LinkGroup {
   __typename: 'LinkGroup'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
-  links?: Maybe<Array<Maybe<PageLink>>>
+  links?: Maybe<Array<Maybe<RichPageLink>>>
 }
+
+export type LinkGroupOrRichPageLink = LinkGroup | RichPageLink
 
 /** Represents a mailing address for customers and shipping. */
 export interface MailingAddress extends Node {
@@ -2829,7 +2811,7 @@ export interface Menu extends Document {
   /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
-  menuItems?: Maybe<Array<Maybe<MenuLinkOrSubMenu>>>
+  menuItems?: Maybe<Array<Maybe<CtaOrSubMenu>>>
 }
 
 export type MenuFilter = {
@@ -2897,11 +2879,8 @@ export interface MenuLink {
   __typename: 'MenuLink'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  label?: Maybe<Scalars['String']>
-  link?: Maybe<PageLink>
+  link?: Maybe<Cta>
 }
-
-export type MenuLinkOrSubMenu = MenuLink | SubMenu
 
 /**
  * Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
@@ -3577,13 +3556,6 @@ export interface PageInfo {
   hasNextPage: Scalars['Boolean']
   /** Indicates if there are any pages prior to the current page. */
   hasPreviousPage: Scalars['Boolean']
-}
-
-export interface PageLink {
-  __typename: 'PageLink'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
 }
 
 export type PageOrShopifyCollectionOrShopifyProduct =
@@ -4470,6 +4442,18 @@ export type QueryAllSanityFileAssetsArgs = {
   offset?: Maybe<Scalars['Int']>
 }
 
+export interface RichPageLink {
+  __typename: 'RichPageLink'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
+  /** If left empty, the title of the linked page, product, or collection will be used. */
+  title?: Maybe<Scalars['String']>
+  captionRaw?: Maybe<Scalars['JSON']>
+  image?: Maybe<BackgroundImage>
+  hoverImage?: Maybe<BackgroundImage>
+}
+
 export interface SanityFileAsset extends Document {
   __typename: 'SanityFileAsset'
   /** Document ID */
@@ -5192,7 +5176,6 @@ export interface ShopifyProduct extends Document {
   handle?: Maybe<Scalars['String']>
   shopifyId?: Maybe<Scalars['String']>
   sourceData?: Maybe<ShopifyProductSource>
-  contentBlocksBefore?: Maybe<Array<Maybe<ContentSection>>>
   infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   related?: Maybe<Carousel>
 }
@@ -5363,14 +5346,14 @@ export interface SubMenu {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
-  columns?: Maybe<Array<Maybe<ImageBlockOrLinkGroup>>>
+  columns?: Maybe<Array<Maybe<LinkGroupOrRichPageLink>>>
 }
 
 export interface TextBlock {
   __typename: 'TextBlock'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  title?: Maybe<Scalars['String']>
+  header?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
   cta?: Maybe<Cta>
 }
