@@ -1,14 +1,16 @@
-import { Collection } from 'use-shopify'
 import gql from 'graphql-tag'
 import { Paginated } from '@good-idea/unwind-edges'
-import { Menu, ProductInfo } from '../../types/generated'
+import { Menu, Collection, ProductInfo } from '../../types/generated'
 import {
-  linkFragment,
+  ctaFragment,
+  internalLinkFragment,
+  pageLinkFragment,
   imageBlockFragment,
+  textBlockFragment,
   productInfoFragment,
 } from '../../graphql/fragments'
 
-export const SHOP_DATA_QUERY = /* GraphQL */ gql`
+export const SHOP_DATA_QUERY = gql`
   {
     Menu(id: "menu-settings") {
       _id
@@ -16,28 +18,23 @@ export const SHOP_DATA_QUERY = /* GraphQL */ gql`
       _key
       _createdAt
       menuItems {
-        ... on MenuLink {
-          _key
-          _type
-          label
-          link {
-            ...LinkFragment
-          }
+        ... on Cta {
+          ...CTAFragment
         }
         ... on SubMenu {
           _key
           _type
           title
           columns {
-            ... on ImageBlock {
-              ...ImageBlockFragment
+            ... on PageLink {
+              ...PageLinkFragment
             }
             ... on LinkGroup {
               _key
               _type
               title
               links {
-                ...LinkFragment
+                ...PageLinkFragment
               }
             }
           }
@@ -74,9 +71,10 @@ export const SHOP_DATA_QUERY = /* GraphQL */ gql`
       }
     }
   }
+  ${ctaFragment}
+  ${internalLinkFragment}
   ${productInfoFragment}
-  ${linkFragment}
-  ${imageBlockFragment}
+  ${pageLinkFragment}
 `
 
 export interface ShopDataResponse {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQuery } from 'urql'
 import { homepageQuery, HomepageResponse } from './homepageQuery'
-import { ContentSection } from '../../components/ContentSection'
+import { ContentBlock } from '../../components/ContentBlock'
 
 export const Homepage = () => {
   const [response] = useQuery<HomepageResponse>({ query: homepageQuery })
@@ -15,11 +15,11 @@ export const Homepage = () => {
     )
 
   if (fetching || !data || !data.Homepage.contentSections) return null
-  const { contentSections } = data.Homepage
+  const { content } = data.Homepage
   return (
     <React.Fragment>
-      {contentSections.map((section) => (
-        <ContentSection key={section._key} section={section} />
+      {content.map((content) => (
+        <ContentBlock key={content._key} content={content} />
       ))}
     </React.Fragment>
   )

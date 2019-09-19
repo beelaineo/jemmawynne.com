@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
-import { sanityImageFragment } from './media'
+import { saneShopifyCollectionFragment } from './saneShopify'
+import { backgroundImageFragment } from './media'
 
-export const linkFragment = gql`
-  fragment LinkFragment on PageLink {
+export const internalLinkFragment = gql`
+  fragment InternalLinkFragment on InternalLink {
     _key
     _type
     document {
@@ -30,62 +31,112 @@ export const linkFragment = gql`
   }
 `
 
-export const textBlockFragment = gql`
-  fragment TextBlockFragment on TextBlock {
+export const ctaFragment = gql`
+  fragment CTAFragment on Cta {
+    _key
+    _type
+    label
+    link {
+      ...InternalLinkFragment
+    }
+  }
+  ${internalLinkFragment}
+`
+
+export const pageLinkFragment = gql`
+  fragment PageLinkFragment on PageLink {
     _key
     _type
     title
-    bodyRaw
-    cta {
-      label
-      link {
-        ...LinkFragment
+    captionRaw
+    image {
+      ...BackgroundImageFragment
+    }
+    hoverImage {
+      ...BackgroundImageFragment
+    }
+    document {
+      ... on Page {
+        _type
+        _key
+        title
+        slug {
+          current
+        }
+      }
+      ... on ShopifyProduct {
+        _key
+        _type
+        title
+        handle
+      }
+      ... on ShopifyCollection {
+        _key
+        _type
+        title
+        handle
       }
     }
   }
-  ${linkFragment}
+  ${backgroundImageFragment}
+`
+
+export const externalLinkFragment = gql`
+  fragment ExternalLinkFragment on ExternalLink {
+    _key
+    _type
+    url
+    newTab
+  }
 `
 
 export const imageBlockFragment = gql`
   fragment ImageBlockFragment on ImageBlock {
     _key
     _type
-    title
-    caption
-    link {
-      ...LinkFragment
+    backgroundImage {
+      ...BackgroundImageFragment
     }
-    images {
-      ...SanityImageFragment
+    hoverImage {
+      ...BackgroundImageFragment
+    }
+    captionRaw
+    cta {
+      ...CTAFragment
     }
   }
-  ${linkFragment}
-  ${sanityImageFragment}
+  ${backgroundImageFragment}
+  ${ctaFragment}
 `
 
-export const contentSectionFragment = gql`
-  fragment ContentSectionFragment on ContentSection {
+export const textBlockFragment = gql`
+  fragment TextBlockFragment on TextBlock {
     _key
     _type
-    layout
-    backgroundColor
-    textColor
-    textAlign
-    alignItems
-    items {
-      ... on ImageBlock {
-        ...ImageBlockFragment
-      }
-      ... on TextBlock {
-        ...TextBlockFragment
-      }
-    }
-    backgroundImage {
-      ...SanityImageFragment
+    header
+    bodyRaw
+    cta {
+      ...CTAFragment
     }
   }
-  ${imageBlockFragment}
-  ${textBlockFragment}
+  ${ctaFragment}
+`
+
+export const heroFragment = gql`
+  fragment HeroFragment on Hero {
+    _key
+    _type
+    bodyRaw
+    textPosition
+    textPositionMobile
+    mobileImage {
+      ...BackgroundImageFragment
+    }
+    image {
+      ...BackgroundImageFragment
+    }
+  }
+  ${backgroundImageFragment}
 `
 
 export const productInfoFragment = gql`
@@ -95,4 +146,20 @@ export const productInfoFragment = gql`
     title
     bodyRaw
   }
+`
+
+export const carouselFragment = gql`
+  fragment CarouselFragment on Carousel {
+    _key
+    _type
+    title
+    collection {
+      ...SaneShopifyCollectionFragment
+    }
+    items {
+      ...PageLinkFragment
+    }
+  }
+  ${saneShopifyCollectionFragment}
+  ${pageLinkFragment}
 `

@@ -8,25 +8,31 @@ export const imageFragment = gql`
   }
 `
 
+export const sanityImageAssetFragment = gql`
+  fragment SanityImageAssetFragment on SanityImageAsset {
+    _id
+    _type
+    _key
+    label
+    extension
+    path
+    url
+    metadata {
+      dimensions {
+        height
+        width
+        aspectRatio
+      }
+    }
+  }
+`
+
 export const sanityImageFragment = gql`
   fragment SanityImageFragment on ImageWithAltText {
     _key
     altText
     asset {
-      _id
-      _type
-      _key
-      label
-      extension
-      path
-      url
-      metadata {
-        dimensions {
-          height
-          width
-          aspectRatio
-        }
-      }
+      ...SanityImageAssetFragment
     }
     hotspot {
       x
@@ -35,4 +41,30 @@ export const sanityImageFragment = gql`
       width
     }
   }
+  ${sanityImageAssetFragment}
+`
+
+export const backgroundImageFragment = gql`
+  fragment BackgroundImageFragment on BackgroundImage {
+    asset {
+      ...SanityImageAssetFragment
+    }
+    hotspot {
+      _key
+      _type
+      x
+      y
+      height
+      width
+    }
+    crop {
+      _key
+      _type
+      top
+      bottom
+      left
+      right
+    }
+  }
+  ${sanityImageAssetFragment}
 `

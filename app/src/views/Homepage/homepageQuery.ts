@@ -1,22 +1,46 @@
-import { contentSectionFragment } from '../../graphql/fragments'
+import {
+  imageBlockFragment,
+  textBlockFragment,
+  carouselFragment,
+  heroFragment,
+} from '../../graphql/fragments'
 import gql from 'graphql-tag'
-import { ContentSection } from '../../types'
+import { Homepage } from '../../types'
 
 export interface HomepageResponse {
-  Homepage: {
-    _id: string
-    contentSections: ContentSection[]
-  }
+  Homepage: Homepage
 }
 
 export const homepageQuery = /*  GraphQL */ gql`
   query HomepageQuery {
     Homepage(id: "homepage") {
       _id
-      contentSections {
-        ...ContentSectionFragment
+      content {
+        ... on ImageTextSection {
+          _key
+          _type
+          title
+          subtitleRaw
+          blocks {
+            ... on TextBlock {
+              ...TextBlockFragment
+            }
+            ... on ImageBlock {
+              ...ImageBlockFragment
+            }
+          }
+        }
+        ... on Hero {
+          ...HeroFragment
+        }
+        ... on Carousel {
+          ...CarouselFragment
+        }
       }
     }
   }
-  ${contentSectionFragment}
+  ${imageBlockFragment}
+  ${textBlockFragment}
+  ${carouselFragment}
+  ${heroFragment}
 `
