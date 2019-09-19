@@ -55,6 +55,7 @@ interface WithActive {
 
 export const NavHeader = styled(Header5)`
   ${({ theme, active }: WithActive) => css`
+    text-transform: uppercase;
     border-top: 2px solid transparent;
     border-bottom: 2px solid ${active ? 'black' : 'transparent'};
     color: inherit;

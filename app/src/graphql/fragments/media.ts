@@ -43,28 +43,3 @@ export const sanityImageFragment = gql`
   }
   ${sanityImageAssetFragment}
 `
-
-export const backgroundImageFragment = gql`
-  fragment BackgroundImageFragment on BackgroundImage {
-    asset {
-      ...SanityImageAssetFragment
-    }
-    hotspot {
-      _key
-      _type
-      x
-      y
-      height
-      width
-    }
-    crop {
-      _key
-      _type
-      top
-      bottom
-      left
-      right
-    }
-  }
-  ${sanityImageAssetFragment}
-`

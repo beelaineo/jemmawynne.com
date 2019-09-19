@@ -7,22 +7,20 @@ import { Image } from '../Image'
 interface FigureProps {
   image: ImageType
   imageRatio?: number
-  linkTo?: string
   caption: string | void
+  justify?: string
   /* */
 }
 
 export const Figure = ({
   image,
   imageRatio,
-  linkTo,
   caption,
   justify,
 }: FigureProps) => {
-  const wrapperAs = linkTo ? Link : undefined
-
+  console.warn('<Figure> is deprecated')
   return (
-    <FigureWrapper as={wrapperAs} to={linkTo} justify={justify}>
+    <FigureWrapper justify={justify}>
       <ImageWrapper>
         <Image image={image} ratio={imageRatio} />
       </ImageWrapper>

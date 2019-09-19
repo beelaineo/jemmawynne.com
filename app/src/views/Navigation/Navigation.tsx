@@ -1,8 +1,12 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { PageLink } from 'Components/PageLink'
-import { Header4 } from '../components/Text'
+import { RichPageLink } from '../../components/RichPageLink'
+import {
+  getDocumentLinkLabel,
+  DocumentLink,
+} from '../../components/DocumentLink'
+import { Header4 } from '../../components/Text'
 import { path } from 'ramda'
 import { useCheckout } from 'use-shopify'
 import { useShopData } from '../../providers/ShopDataProvider'
@@ -11,7 +15,6 @@ import { CartSidebar, CloseButton, CartNav } from '../../components/Cart'
 import { unwindEdges } from '../../utils/graphql'
 import { Checkout } from '../Cart/Checkout'
 import { Button } from '../ProductDetail/styled'
-import { MenuLinkOrSubMenu } from '../../types/generated'
 import { SubMenu } from './SubMenu'
 import { SearchInput } from './SearchInput'
 import {
@@ -133,22 +136,35 @@ export const Navigation = () => {
     <Wrapper>
       <Inner>
         <NavSection ready={ready}>
-          {menuItems.map((menuItem) =>
-            menuItem.__typename === 'SubMenu' ? (
-              <NavHeaderWrapper
-                key={menuItem._key}
-                onMouseEnter={openMenu(menuItem._key)}
-              >
-                <NavHeader transform="uppercase">{menuItem.title}</NavHeader>
-              </NavHeaderWrapper>
-            ) : (
-              <NavHeaderWrapper key={menuItem._key} onMouseEnter={closeMenu}>
-                <NavHeader transform="uppercase">
-                  <PageLink link={menuItem.link} />
-                </NavHeader>
-              </NavHeaderWrapper>
-            ),
-          )}
+          {menuItems.map((menuItem) => {
+            switch (menuItem.__typename) {
+              case 'SubMenu':
+                return (
+                  <NavHeaderWrapper
+                    key={menuItem._key}
+                    onMouseEnter={openMenu(menuItem._key)}
+                  >
+                    <NavHeader>{menuItem.title}</NavHeader>
+                  </NavHeaderWrapper>
+                )
+              case 'Cta':
+                return (
+                  <NavHeaderWrapper key={menuItem._key}>
+                    <DocumentLink document={menuItem.link.document}>
+                      <NavHeader>
+                        {getDocumentLinkLabel(menuItem.link.document)}
+                      </NavHeader>
+                    </DocumentLink>
+                  </NavHeaderWrapper>
+                )
+                return 'CTA'
+              default:
+                throw new Error(
+                  // @ts-ignore
+                  `There is no component for menu item of type "${menuItem.__typename}"`,
+                )
+            }
+          })}
         </NavSection>
 
         <Link to="/">
@@ -177,7 +193,6 @@ export const Navigation = () => {
                 key={submenu._key}
                 submenu={submenu}
                 active={currentSubmenuKey === submenu._key}
-                justify="start"
               />
             ) : null,
           )}

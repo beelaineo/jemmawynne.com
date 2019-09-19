@@ -1,20 +1,11 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import styled, { css, DefaultTheme } from 'styled-components'
-import { Cta, PageLinkOrUrlLink, PageLink } from '../types/generated'
-import { getPageLinkUrl } from '../utils/links'
+import { DocumentLink } from './DocumentLink'
+import { Cta } from '../types/generated'
 
 interface CTAProps {
   cta: Cta
-}
-
-interface WrapperProps {
-  theme: DefaultTheme
-  as: typeof Link | 'a'
-  to?: string
-  href?: string
-  target?: string
-  rel?: string
 }
 
 const Outer = styled.div`
@@ -24,7 +15,7 @@ const Outer = styled.div`
 `
 
 const Wrapper = styled.div`
-  ${({ theme }: WrapperProps) => css`
+  ${({ theme }) => css`
     padding: ${theme.layout.spacing.single};
     border: 1px solid;
     color: inherit;
@@ -33,28 +24,14 @@ const Wrapper = styled.div`
   `}
 `
 
-const getPageLinkTo = (link: PageLink): string => {
-  const { document } = link
-  if (!document) return '/'
-
-  switch (document.__typename) {
-    case 'ShopifyCollection':
-      return `/collections/${document.handle}`
-    case 'ShopifyProduct':
-      return `/products/${document.handle}`
-    default:
-      return `/${document.slug.current}`
-  }
-}
-
 export const CTA = ({ cta }: CTAProps) => {
   const { label, link } = cta
-  if (!link) return null
+  if (!link || !link.document) return null
   return (
     <Outer>
-      <Wrapper as={Link} to={getPageLinkUrl(link)}>
-        {label}
-      </Wrapper>
+      <DocumentLink document={link.document}>
+        <Wrapper>{label}</Wrapper>
+      </DocumentLink>
     </Outer>
   )
 }

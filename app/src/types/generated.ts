@@ -214,15 +214,6 @@ export interface AvailableShippingRates {
   shippingRates?: Maybe<Array<ShippingRate>>
 }
 
-export interface BackgroundImage {
-  __typename: 'BackgroundImage'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  asset?: Maybe<SanityImageAsset>
-  hotspot?: Maybe<SanityImageHotspot>
-  crop?: Maybe<SanityImageCrop>
-}
-
 export interface Block {
   __typename: 'Block'
   _key?: Maybe<Scalars['String']>
@@ -2499,8 +2490,8 @@ export interface Hero {
   _type?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
   textPosition?: Maybe<Scalars['String']>
-  image?: Maybe<BackgroundImage>
-  mobileImage?: Maybe<BackgroundImage>
+  image?: Maybe<ImageWithAltText>
+  mobileImage?: Maybe<ImageWithAltText>
   textPositionMobile?: Maybe<Scalars['String']>
 }
 
@@ -2618,8 +2609,8 @@ export interface ImageBlock {
   __typename: 'ImageBlock'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  backgroundImage?: Maybe<BackgroundImage>
-  hoverImage?: Maybe<BackgroundImage>
+  backgroundImage?: Maybe<ImageWithAltText>
+  hoverImage?: Maybe<ImageWithAltText>
   captionRaw?: Maybe<Scalars['JSON']>
   cta?: Maybe<Cta>
 }
@@ -2681,7 +2672,7 @@ export interface LinkGroup {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
-  links?: Maybe<Array<Maybe<RichPageLink>>>
+  links?: Maybe<Array<Maybe<InternalLink>>>
 }
 
 export type LinkGroupOrRichPageLink = LinkGroup | RichPageLink
@@ -4450,8 +4441,8 @@ export interface RichPageLink {
   /** If left empty, the title of the linked page, product, or collection will be used. */
   title?: Maybe<Scalars['String']>
   captionRaw?: Maybe<Scalars['JSON']>
-  image?: Maybe<BackgroundImage>
-  hoverImage?: Maybe<BackgroundImage>
+  image?: Maybe<ImageWithAltText>
+  hoverImage?: Maybe<ImageWithAltText>
 }
 
 export interface SanityFileAsset extends Document {

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { saneShopifyCollectionFragment } from './saneShopify'
-import { backgroundImageFragment } from './media'
+import { sanityImageFragment } from './media'
 
 export const internalLinkFragment = gql`
   fragment InternalLinkFragment on InternalLink {
@@ -43,17 +43,17 @@ export const ctaFragment = gql`
   ${internalLinkFragment}
 `
 
-export const pageLinkFragment = gql`
-  fragment PageLinkFragment on PageLink {
+export const richPageLinkFragment = gql`
+  fragment RichPageLinkFragment on RichPageLink {
     _key
     _type
     title
     captionRaw
     image {
-      ...BackgroundImageFragment
+      ...SanityImageFragment
     }
     hoverImage {
-      ...BackgroundImageFragment
+      ...SanityImageFragment
     }
     document {
       ... on Page {
@@ -78,7 +78,7 @@ export const pageLinkFragment = gql`
       }
     }
   }
-  ${backgroundImageFragment}
+  ${sanityImageFragment}
 `
 
 export const externalLinkFragment = gql`
@@ -95,17 +95,17 @@ export const imageBlockFragment = gql`
     _key
     _type
     backgroundImage {
-      ...BackgroundImageFragment
+      ...SanityImageFragment
     }
     hoverImage {
-      ...BackgroundImageFragment
+      ...SanityImageFragment
     }
     captionRaw
     cta {
       ...CTAFragment
     }
   }
-  ${backgroundImageFragment}
+  ${sanityImageFragment}
   ${ctaFragment}
 `
 
@@ -130,13 +130,13 @@ export const heroFragment = gql`
     textPosition
     textPositionMobile
     mobileImage {
-      ...BackgroundImageFragment
+      ...SanityImageFragment
     }
     image {
-      ...BackgroundImageFragment
+      ...SanityImageFragment
     }
   }
-  ${backgroundImageFragment}
+  ${sanityImageFragment}
 `
 
 export const productInfoFragment = gql`
@@ -157,9 +157,9 @@ export const carouselFragment = gql`
       ...SaneShopifyCollectionFragment
     }
     items {
-      ...PageLinkFragment
+      ...RichPageLinkFragment
     }
   }
   ${saneShopifyCollectionFragment}
-  ${pageLinkFragment}
+  ${richPageLinkFragment}
 `

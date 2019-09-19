@@ -4,7 +4,7 @@ import { Menu, Collection, ProductInfo } from '../../types/generated'
 import {
   ctaFragment,
   internalLinkFragment,
-  pageLinkFragment,
+  richPageLinkFragment,
   imageBlockFragment,
   textBlockFragment,
   productInfoFragment,
@@ -26,15 +26,15 @@ export const SHOP_DATA_QUERY = gql`
           _type
           title
           columns {
-            ... on PageLink {
-              ...PageLinkFragment
+            ... on RichPageLink {
+              ...RichPageLinkFragment
             }
             ... on LinkGroup {
               _key
               _type
               title
               links {
-                ...PageLinkFragment
+                ...InternalLinkFragment
               }
             }
           }
@@ -74,7 +74,7 @@ export const SHOP_DATA_QUERY = gql`
   ${ctaFragment}
   ${internalLinkFragment}
   ${productInfoFragment}
-  ${pageLinkFragment}
+  ${richPageLinkFragment}
 `
 
 export interface ShopDataResponse {
