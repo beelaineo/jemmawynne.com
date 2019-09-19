@@ -97,7 +97,7 @@ export const internalLink = {
   },
 }
 
-export const pageLink = {
+export const richPageLink = {
   title: 'Page, Product, or Collection',
   description: 'Link to a Page, Product, or Collection',
   name: 'richPageLink',

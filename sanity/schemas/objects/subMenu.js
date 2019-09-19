@@ -70,7 +70,7 @@ export const linkGroup = {
       name: 'links',
       type: 'array',
       validation: (Rule) => Rule.required().max(12),
-      of: [{ type: 'richPageLink' }],
+      of: [{ type: 'internalLink' }],
     },
   ],
   preview: {
