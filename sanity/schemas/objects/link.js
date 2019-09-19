@@ -13,16 +13,6 @@ const getTypeText = (doc) => {
   if (doc._type === 'page') return 'Page'
 }
 
-const getInternalLinkPreviewValues = async (values) => {
-  const { document } = values
-
-  const doc = await getReferencedDocument(document._ref)
-  console.log(doc)
-
-  return {
-    title: 'abc',
-  }
-}
 const getPreviewValues = async (values) => {
   const { document, title, image } = values
 
@@ -106,10 +96,11 @@ export const internalLink = {
     ),
   },
 }
+
 export const pageLink = {
   title: 'Page, Product, or Collection',
   description: 'Link to a Page, Product, or Collection',
-  name: 'pageLink',
+  name: 'richPageLink',
   type: 'object',
   fields: [
     {

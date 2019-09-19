@@ -39,7 +39,7 @@ export const MenuLink = {
     //   type: 'string',
     // },
     // {
-    //   type: 'pageLink',
+    //   type: 'richPageLink',
     //   name: 'link',
     // },
   ],
@@ -70,7 +70,7 @@ export const linkGroup = {
       name: 'links',
       type: 'array',
       validation: (Rule) => Rule.required().max(12),
-      of: [{ type: 'pageLink' }],
+      of: [{ type: 'richPageLink' }],
     },
   ],
   preview: {
@@ -105,7 +105,7 @@ export const subMenu = {
       title: 'Submenu Sections',
       name: 'columns',
       type: 'array',
-      of: [{ type: 'linkGroup' }, { type: 'pageLink' }],
+      of: [{ type: 'linkGroup' }, { type: 'richPageLink' }],
     },
   ],
   preview: {
@@ -116,11 +116,13 @@ export const subMenu = {
     prepare: ({ title, columns }) => {
       const byType = groupBy(prop('_type'), columns || {})
 
-      const { pageLink: pageLinks, linkGroup: linkGroups } = byType
+      const { richPageLink: richPageLinks, linkGroup: linkGroups } = byType
 
       const subtitle = [
-        pageLinks && pageLinks.length
-          ? `${pageLinks.length} Page Link${pageLinks.length === 1 ? '' : 's'}`
+        richPageLinks && richPageLinks.length
+          ? `${richPageLinks.length} Page Link${
+              richPageLinks.length === 1 ? '' : 's'
+            }`
           : undefined,
         linkGroups && linkGroups.length
           ? `${linkGroups.length} Link Group${

@@ -72,7 +72,7 @@ export const carousel = {
       name: 'items',
       label: 'Carousel Items',
       type: 'array',
-      of: [{ type: 'pageLink' }],
+      of: [{ type: 'richPageLink' }],
     },
   ],
   preview: {
