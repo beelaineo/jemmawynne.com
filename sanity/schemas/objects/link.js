@@ -144,14 +144,14 @@ export const richPageLink = {
       title: 'Image',
       description:
         'If left empty, the image of the linked product or document will be used.',
-      type: 'imageWithAltText',
+      type: 'richImage',
     },
     {
       name: 'hoverImage',
       title: 'Hover Image',
       description:
         'If left empty, the second image of the linked product will be used.',
-      type: 'imageWithAltText',
+      type: 'richImage',
     },
   ],
   preview: {

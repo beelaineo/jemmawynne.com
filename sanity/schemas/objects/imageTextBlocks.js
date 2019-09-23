@@ -40,12 +40,12 @@ export const imageBlock = {
     {
       name: 'backgroundImage',
       title: 'Background Image',
-      type: 'imageWithAltText',
+      type: 'richImage',
     },
     {
       name: 'hoverImage',
       title: 'Hover Image',
-      type: 'imageWithAltText',
+      type: 'richImage',
     },
     {
       name: 'caption',

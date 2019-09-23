@@ -1,5 +1,5 @@
-export const imageWithAltText = {
-  name: 'imageWithAltText',
+export const richImage = {
+  name: 'richImage',
   type: 'image',
   title: 'Image',
   options: {

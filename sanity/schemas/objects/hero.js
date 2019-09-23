@@ -34,12 +34,12 @@ export const hero = {
     {
       name: 'image',
       title: 'Background Image',
-      type: 'imageWithAltText',
+      type: 'richImage',
     },
     {
       name: 'mobileImage',
       title: 'Background Image (mobile)',
-      type: 'imageWithAltText',
+      type: 'richImage',
     },
     {
       name: 'textPositionMobile',
