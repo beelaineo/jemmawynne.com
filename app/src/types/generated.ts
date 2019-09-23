@@ -2490,8 +2490,8 @@ export interface Hero {
   _type?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
   textPosition?: Maybe<Scalars['String']>
-  image?: Maybe<ImageWithAltText>
-  mobileImage?: Maybe<ImageWithAltText>
+  image?: Maybe<RichImage>
+  mobileImage?: Maybe<RichImage>
   textPositionMobile?: Maybe<Scalars['String']>
 }
 
@@ -2609,8 +2609,8 @@ export interface ImageBlock {
   __typename: 'ImageBlock'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  backgroundImage?: Maybe<ImageWithAltText>
-  hoverImage?: Maybe<ImageWithAltText>
+  backgroundImage?: Maybe<RichImage>
+  hoverImage?: Maybe<RichImage>
   captionRaw?: Maybe<Scalars['JSON']>
   cta?: Maybe<Cta>
 }
@@ -2647,17 +2647,6 @@ export interface ImageTextSection {
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
   blocks?: Maybe<Array<Maybe<ImageBlockOrTextBlock>>>
-}
-
-export interface ImageWithAltText {
-  __typename: 'ImageWithAltText'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  /** A short description of the image. Helps with accessibility and SEO */
-  altText?: Maybe<Scalars['String']>
-  asset?: Maybe<SanityImageAsset>
-  hotspot?: Maybe<SanityImageHotspot>
-  crop?: Maybe<SanityImageCrop>
 }
 
 export interface InternalLink {
@@ -4433,6 +4422,17 @@ export type QueryAllSanityFileAssetsArgs = {
   offset?: Maybe<Scalars['Int']>
 }
 
+export interface RichImage {
+  __typename: 'RichImage'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  /** A short description of the image. Helps with accessibility and SEO */
+  altText?: Maybe<Scalars['String']>
+  asset?: Maybe<SanityImageAsset>
+  hotspot?: Maybe<SanityImageHotspot>
+  crop?: Maybe<SanityImageCrop>
+}
+
 export interface RichPageLink {
   __typename: 'RichPageLink'
   _key?: Maybe<Scalars['String']>
@@ -4441,8 +4441,8 @@ export interface RichPageLink {
   /** If left empty, the title of the linked page, product, or collection will be used. */
   title?: Maybe<Scalars['String']>
   captionRaw?: Maybe<Scalars['JSON']>
-  image?: Maybe<ImageWithAltText>
-  hoverImage?: Maybe<ImageWithAltText>
+  image?: Maybe<RichImage>
+  hoverImage?: Maybe<RichImage>
 }
 
 export interface SanityFileAsset extends Document {
