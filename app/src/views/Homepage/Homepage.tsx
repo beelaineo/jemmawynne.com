@@ -10,17 +10,22 @@ export const Homepage = () => {
     return (
       <React.Fragment>
         <p>error!</p>
-        <pre>JSON.stringify(error, null, 2)</pre>
+        <pre>{JSON.stringify(error, null, 2)}</pre>
       </React.Fragment>
     )
 
-  if (fetching || !data || !data.Homepage.contentSections) return null
+  if (fetching || !data || !data.Homepage.content) return null
   const { content } = data.Homepage
   return (
     <React.Fragment>
-      {content.map((content) => (
-        <ContentBlock key={content._key} content={content} />
-      ))}
+      {content.map((content, index) =>
+        content ? (
+          <ContentBlock
+            key={content._key || `no-key-${index}`}
+            content={content}
+          />
+        ) : null,
+      )}
     </React.Fragment>
   )
 }

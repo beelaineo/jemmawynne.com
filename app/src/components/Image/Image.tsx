@@ -1,10 +1,6 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
-import {
-  Image as ShopifyImage,
-  SanityImage,
-  ImageWithAltText,
-} from '../../types'
+import { Image as ShopifyImage, SanityImage, RichImage } from '../../types'
 import { Wrapper, Picture, RatioImageFill } from './styled'
 
 export const ImageWrapper = styled.img`
@@ -14,7 +10,7 @@ export const ImageWrapper = styled.img`
 `
 
 interface ImageDetails {
-  src: string
+  src?: string
   altText?: string
   // fileType: string
   // TODO srcSet
@@ -25,14 +21,14 @@ interface ImageDetails {
 
 /* Based on the image type, return a src, srcset, altText, etc */
 const getImageDetails = (
-  image: ShopifyImage | SanityImage | ImageWithAltText,
+  image: ShopifyImage | SanityImage | RichImage,
 ): null | ImageDetails => {
   switch (image.__typename) {
     case 'Image':
       return { src: image.originalSrc, altText: image.altText }
-    case 'ImageWithAltText':
+    case 'RichImage':
       return {
-        src: image.asset.url,
+        src: image.asset && image.asset.url ? image.asset.url : undefined,
         // TODO get alt text if present
       }
     default:
@@ -75,7 +71,7 @@ const RatioPadding = ({ ratio }: RatioPaddingProps) => {
 }
 
 interface ImageProps {
-  image: ShopifyImage | SanityImage | ImageWithAltText
+  image: ShopifyImage | SanityImage | RichImage
   ratio?: number
   // TODO make this required
   sizes?: string

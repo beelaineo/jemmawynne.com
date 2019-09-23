@@ -28,7 +28,7 @@ export const sanityImageAssetFragment = gql`
 `
 
 export const sanityImageFragment = gql`
-  fragment SanityImageFragment on ImageWithAltText {
+  fragment SanityImageFragment on RichImage {
     _key
     altText
     asset {
