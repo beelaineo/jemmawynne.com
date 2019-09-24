@@ -1,9 +1,49 @@
+import { MdTextFields, MdCropOriginal } from 'react-icons/md'
 import { blocksToPlainText } from '../utils'
+
+export const imageTextSection = {
+  name: 'imageTextSection',
+  title: 'Text & Images',
+  type: 'object',
+  icon: MdCropOriginal,
+  fields: [
+    {
+      name: 'title',
+      label: 'Title',
+      type: 'string',
+    },
+    {
+      name: 'subtitle',
+      label: 'Subtitle',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+          },
+        },
+      ],
+    },
+    {
+      name: 'blocks',
+      title: 'Content Blocks',
+      type: 'array',
+      of: [{ type: 'imageBlock' }, { type: 'textBlock' }],
+      validation: (Rule) => Rule.max(3),
+    },
+  ],
+}
 
 export const textBlock = {
   name: 'textBlock',
   type: 'object',
   title: 'Text Block',
+  icon: MdTextFields,
   fields: [
     {
       name: 'header',
@@ -28,7 +68,7 @@ export const textBlock = {
         },
       ],
     },
-    { name: 'cta', type: 'cta' },
+    { name: 'cta', title: 'Link Button', type: 'cta' },
   ],
 }
 
@@ -43,9 +83,8 @@ export const imageBlock = {
       type: 'richImage',
     },
     {
-      name: 'hoverImage',
-      title: 'Hover Image',
-      type: 'richImage',
+      name: 'link',
+      type: 'internalLink',
     },
     {
       name: 'caption',
@@ -65,18 +104,11 @@ export const imageBlock = {
         },
       ],
     },
-
-    { name: 'cta', type: 'cta' },
-    // {
-    //   name: 'ctaText',
-    //   title: 'CTA Text',
-    //   type: 'string',
-    // },
-    // {
-    //   name: 'link',
-    //   type: 'array',
-    //   of: [{ type: 'internalLink' }, { type: 'externalLink' }],
-    // },
+    {
+      name: 'hoverImage',
+      title: 'Hover Image',
+      type: 'richImage',
+    },
   ],
   // validation: (Rule) => {
   //   console.log(Rule)
