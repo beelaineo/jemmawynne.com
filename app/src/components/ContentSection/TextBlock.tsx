@@ -10,7 +10,7 @@ export interface TextBlockProps {
 }
 
 export const TextBlock = ({ block }: TextBlockProps) => {
-  const { title, bodyRaw, cta } = block
+  const { header, bodyRaw, cta } = block
   return (
     <TextBlockWrapper>
       <Header2>{title}</Header2>

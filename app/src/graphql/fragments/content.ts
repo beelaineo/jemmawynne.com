@@ -101,12 +101,12 @@ export const imageBlockFragment = gql`
       ...SanityImageFragment
     }
     captionRaw
-    cta {
-      ...CTAFragment
+    link {
+      ...InternalLinkFragment
     }
   }
   ${sanityImageFragment}
-  ${ctaFragment}
+  ${internalLinkFragment}
 `
 
 export const textBlockFragment = gql`

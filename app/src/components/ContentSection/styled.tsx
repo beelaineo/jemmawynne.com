@@ -3,15 +3,6 @@ import { Link } from 'react-router-dom'
 import { Header5 } from '../Text'
 import { ContentSection } from '../../types'
 
-export const TextBlockWrapper = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-  `}
-`
-
 interface WithSection {
   theme: DefaultTheme
   section: ContentSection

@@ -34,7 +34,6 @@ const Subtitle = styled(Header5)`
 export const RichPageLink = ({ link, label }: LinkProps) => {
   const { image, hoverImage, captionRaw } = link
   const title = label || link.title || link.document.title
-  console.log(link)
   return (
     <DocumentLink document={link.document}>
       <Image image={image} ratio={1} />

@@ -2610,9 +2610,9 @@ export interface ImageBlock {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   backgroundImage?: Maybe<RichImage>
-  hoverImage?: Maybe<RichImage>
+  link?: Maybe<InternalLink>
   captionRaw?: Maybe<Scalars['JSON']>
-  cta?: Maybe<Cta>
+  hoverImage?: Maybe<RichImage>
 }
 
 export type ImageBlockOrTextBlock = ImageBlock | TextBlock

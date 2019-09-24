@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as BlockContent from '@sanity/block-content-to-react'
 import * as Text from '../Text'
+import { SanityRichText } from '../../types'
 
 interface CustomSerializerConfig {
   blockWrapper: React.ComponentType
@@ -21,6 +22,12 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
     const style = props.node.style || 'normal'
     // if (props.node._type === 'image') return <SanityImage image={props.node} />
     // if (props.node._type === 'videoEmbed') return <VideoEmbed video={props.node} />
+    console.log(props)
+    if (
+      !props.children.length ||
+      (props.children.length === 1 && props.children[0] === '')
+    )
+      return null
 
     switch (style) {
       case 'h1':
@@ -61,10 +68,11 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
 })
 
 interface RichTextProps {
-  body: { [key: string]: any }
+  body?: SanityRichText | null
   blockWrapper?: React.ComponentType
 }
 
-export const RichText = ({ body, blockWrapper }: RichTextProps) => (
-  <BlockContent blocks={body} serializers={serializers({ blockWrapper })} />
-)
+export const RichText = ({ body, blockWrapper }: RichTextProps) =>
+  body ? (
+    <BlockContent blocks={body} serializers={serializers({ blockWrapper })} />
+  ) : null

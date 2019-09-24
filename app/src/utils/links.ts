@@ -1,12 +1,12 @@
 import { ShopifyProduct, ShopifyCollection, Page } from '../types/generated'
-import { path } from 'ramda'
 
 type Document = ShopifyProduct | ShopifyCollection | Page
 
-export const getDocumentLinkLabel = (document: Document): string | void =>
-  document.title
+export const getDocumentLinkLabel = (
+  document: Document,
+): string | void | null => document.title
 
-export const getDocumentLinkUrl = (document: Document): string => {
+export const getDocumentLinkUrl = (document?: Document): string => {
   if (!document) throw new Error('This link is missing a document')
   switch (document.__typename) {
     case 'ShopifyCollection':

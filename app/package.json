@@ -19,7 +19,7 @@
 		"build": "rimraf build && NODE_ENV=production webpack --env production --mode production",
 		"stats": "NODE_ENV=production webpack --env production --mode production --json > stats.json",
 		"install-types": "typesync && yarn install",
-		"generate-types": "graphql-codegen",
+		"generate-types": "graphql-codegen && prettier ./src/types/generated.ts --write",
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"playground": "graphql playground"
