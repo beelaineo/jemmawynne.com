@@ -32,6 +32,11 @@ export const hero = {
       type: 'position',
     },
     {
+      name: 'textColor',
+      title: 'Text Color',
+      type: 'colorPicker',
+    },
+    {
       name: 'image',
       title: 'Background Image',
       type: 'richImage',
@@ -45,6 +50,12 @@ export const hero = {
       name: 'textPositionMobile',
       title: 'Text Position (Mobile)',
       type: 'position',
+    },
+
+    {
+      name: 'textColorMobile',
+      title: 'Text Color (Mobile)',
+      type: 'colorPicker',
     },
   ],
   preview: {
