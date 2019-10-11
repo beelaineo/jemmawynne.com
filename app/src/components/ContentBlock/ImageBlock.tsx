@@ -18,7 +18,6 @@ interface ImageBlockProps {
 export const ImageBlock = ({ content }: ImageBlockProps) => {
   const { link, backgroundImage, captionRaw } = content
   if (!backgroundImage) return null
-  console.log(content)
   const linkTo =
     link && link.document ? getDocumentLinkUrl(link.document) : undefined
   return (

@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
 export const Picture = styled.picture`
   ${({ loaded, theme }: PictureProps) => css`
     max-height: 100%;
-    max-width: calc(100vw - (${theme.layout.spacing.three} * 2));
     width: auto;
     background-color: transparent;
     display: block;
@@ -24,10 +23,6 @@ export const Picture = styled.picture`
       transition-delay: 0.3s;
       max-width: 100%;
       object-fit: cover;
-    }
-
-    ${theme.mediaQueries.tablet} {
-      max-width: calc(100vw - ${theme.layout.spacing.two});
     }
   `}
 `

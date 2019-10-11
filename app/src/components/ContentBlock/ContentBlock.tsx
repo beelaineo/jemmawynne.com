@@ -17,7 +17,6 @@ interface ContentBlockProps {
  */
 
 export const ContentBlock = ({ content }: ContentBlockProps) => {
-  console.log(content.__typename)
   switch (content.__typename) {
     case 'ImageTextSection':
       return (
@@ -25,7 +24,6 @@ export const ContentBlock = ({ content }: ContentBlockProps) => {
         <ImageTextSection content={content} />
       )
     case 'Hero':
-      return null
       return (
         //
         <HeroBlock hero={content} />

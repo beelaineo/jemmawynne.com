@@ -22,7 +22,6 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
     const style = props.node.style || 'normal'
     // if (props.node._type === 'image') return <SanityImage image={props.node} />
     // if (props.node._type === 'videoEmbed') return <VideoEmbed video={props.node} />
-    console.log(props)
     if (
       !props.children.length ||
       (props.children.length === 1 && props.children[0] === '')

@@ -36,17 +36,18 @@ export const ImageTextSection = ({ content }: ImageTextSectionProps) => {
         <BlocksWrapper>
           {content.blocks.map((block, index) => {
             if (!block) return null
+            const key = block._key || index
             switch (block.__typename) {
               case 'ImageBlock':
                 return (
-                  <BlockWrapper key={block._key || index}>
+                  <BlockWrapper key={key}>
                     <ImageBlock content={block} />
                   </BlockWrapper>
                 )
               case 'TextBlock':
                 return (
-                  <BlockWrapper>
-                    <TextBlock key={block._key || index} content={block} />
+                  <BlockWrapper key={key}>
+                    <TextBlock content={block} />
                   </BlockWrapper>
                 )
               default:
