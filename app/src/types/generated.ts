@@ -365,10 +365,10 @@ export interface Checkout extends Node {
    **/
   paymentDueV2: MoneyV2
   /**
-   * Whether or not the Checkout is ready and can be completed. Checkouts may have
-   * asynchronous operations that can take time to finish. If you want to complete
-   * a checkout or ensure all the fields are populated and up to date, polling is
-   * required until the value is true.
+   * Whether or not the Checkout is ready and can be completed. Checkouts may
+   * have asynchronous operations that can take time to finish. If you want
+   * to complete a checkout or ensure all the fields are populated and up to
+   * date, polling is required until the value is true.
    **/
   ready: Scalars['Boolean']
   /** States whether or not the fulfillment requires shipping. */
@@ -1196,6 +1196,8 @@ export enum CountryCode {
   Er = 'ER',
   /** Estonia. */
   Ee = 'EE',
+  /** Eswatini. */
+  Sz = 'SZ',
   /** Ethiopia. */
   Et = 'ET',
   /** Falkland Islands (Malvinas). */
@@ -1316,8 +1318,6 @@ export enum CountryCode {
   Lu = 'LU',
   /** Macao. */
   Mo = 'MO',
-  /** Macedonia, Republic Of. */
-  Mk = 'MK',
   /** Madagascar. */
   Mg = 'MG',
   /** Malawi. */
@@ -1380,6 +1380,8 @@ export enum CountryCode {
   Nu = 'NU',
   /** Norfolk Island. */
   Nf = 'NF',
+  /** North Macedonia. */
+  Mk = 'MK',
   /** Norway. */
   No = 'NO',
   /** Oman. */
@@ -1476,8 +1478,6 @@ export enum CountryCode {
   Sr = 'SR',
   /** Svalbard And Jan Mayen. */
   Sj = 'SJ',
-  /** Swaziland. */
-  Sz = 'SZ',
   /** Sweden. */
   Se = 'SE',
   /** Switzerland. */
@@ -2490,9 +2490,11 @@ export interface Hero {
   _type?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
   textPosition?: Maybe<Scalars['String']>
+  textColor?: Maybe<Scalars['String']>
   image?: Maybe<RichImage>
   mobileImage?: Maybe<RichImage>
   textPositionMobile?: Maybe<Scalars['String']>
+  textColorMobile?: Maybe<Scalars['String']>
 }
 
 export interface Homepage extends Document {
