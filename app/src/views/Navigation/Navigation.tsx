@@ -1,20 +1,13 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import styled, { css } from 'styled-components'
-import { RichPageLink } from '../../components/RichPageLink'
-import {
-  getDocumentLinkLabel,
-  DocumentLink,
-} from '../../components/DocumentLink'
-import { Header4 } from '../../components/Text'
-import { path } from 'ramda'
+import { DocumentLink } from '../../components/DocumentLink'
+import { getDocumentLinkLabel } from '../../utils/links'
 import { useCheckout } from 'use-shopify'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { useLocation } from '../../providers/LocationProvider'
-import { CartSidebar, CloseButton, CartNav } from '../../components/Cart'
+import { CartSidebar, CloseButton } from '../../components/Cart'
 import { unwindEdges } from '../../utils/graphql'
 import { Checkout } from '../Cart/Checkout'
-import { Button } from '../ProductDetail/styled'
 import { SubMenu } from './SubMenu'
 import { SearchInput } from './SearchInput'
 import {
@@ -30,13 +23,7 @@ import {
 } from './styled'
 import { IoIosCart } from 'react-icons/io'
 
-const { useState, useEffect, useReducer } = React
-
-interface MenuProps {
-  activeMenu: null | string
-  openMenu: (menuKey: null | string) => () => void
-  closeMenu: () => void
-}
+const { useEffect, useReducer } = React
 
 interface NavState {
   cartOpen: boolean
@@ -50,15 +37,20 @@ const CLOSE_CART = 'CLOSE_CART'
 const CLOSE_MENU = 'CLOSE_MENU'
 const CLOSE_ALL = 'CLOSE_ALL'
 
-interface Action {
+interface GenericAction {
   type:
-    | typeof OPEN_SUBMENU
     | typeof OPEN_CART
     | typeof CLOSE_MENU
     | typeof CLOSE_CART
     | typeof CLOSE_ALL
-  [key: string]: any
 }
+
+interface OpenMenuAction {
+  type: typeof OPEN_SUBMENU
+  menuKey: string
+}
+
+type Action = GenericAction | OpenMenuAction
 
 function navReducer(currentState: NavState, action: Action): NavState {
   switch (action.type) {
@@ -91,6 +83,7 @@ function navReducer(currentState: NavState, action: Action): NavState {
         menuOpen: false,
       }
     default:
+      // @ts-ignore
       throw new Error(`"${action.type}" is not a valid action type`)
   }
 }
@@ -127,8 +120,10 @@ export const Navigation = () => {
   const closeMenu = () => dispatch({ type: CLOSE_MENU })
 
   /* Parsing */
-  const menuItems = menu ? menu.menuItems : []
-  const submenus = menuItems.filter((mi) => mi.__typename === 'SubMenu')
+  const allMenuItems = menu?.menuItems ?? []
+  const submenus = allMenuItems.filter(
+    (mi) => mi && mi.__typename === 'SubMenu',
+  )
   const lineItems = checkout ? unwindEdges(checkout.lineItems)[0] : []
   const cartCount = loading ? null : lineItems.length || null
 
@@ -136,12 +131,15 @@ export const Navigation = () => {
     <Wrapper>
       <Inner>
         <NavSection ready={ready}>
-          {menuItems.map((menuItem) => {
+          {allMenuItems.map((menuItem) => {
+            if (!menuItem || !menuItem._key) return null
             switch (menuItem.__typename) {
               case 'SubMenu':
                 return (
                   <NavHeaderWrapper
+                    // @ts-ignore - type guard above ensures a key
                     key={menuItem._key}
+                    // @ts-ignore - type guard above ensures a key
                     onMouseEnter={openMenu(menuItem._key)}
                   >
                     <NavHeader>{menuItem.title}</NavHeader>
@@ -149,10 +147,11 @@ export const Navigation = () => {
                 )
               case 'Cta':
                 return (
+                  // @ts-ignore - type guard above ensures a key
                   <NavHeaderWrapper key={menuItem._key}>
-                    <DocumentLink document={menuItem.link.document}>
+                    <DocumentLink document={menuItem?.link?.document}>
                       <NavHeader>
-                        {getDocumentLinkLabel(menuItem.link.document)}
+                        {getDocumentLinkLabel(menuItem?.link?.document)}
                       </NavHeader>
                     </DocumentLink>
                   </NavHeaderWrapper>
@@ -166,7 +165,6 @@ export const Navigation = () => {
             }
           })}
         </NavSection>
-
         <Link to="/">
           <Logo src="/static/images/Logo_Large_Black.svg" />
         </Link>
@@ -178,18 +176,21 @@ export const Navigation = () => {
                 <div>
                   <IoIosCart />
                 </div>
-                <div>
-                  {cartCount}
-                  {cartCount === 1 ? ' item' : cartCount >= 2 ? ' items' : ''}
-                </div>
+                {cartCount ? (
+                  <div>
+                    {cartCount}
+                    {cartCount === 1 ? ' item' : cartCount >= 2 ? ' items' : ''}
+                  </div>
+                ) : null}
               </Loading>
             </NavHeader>
           </NavHeaderWrapper>
         </NavSection>
         <SubmenuPane open={menuOpen} onMouseLeave={closeMenu}>
           {submenus.map((submenu) =>
-            submenu.__typename === 'SubMenu' ? (
+            submenu && submenu.__typename === 'SubMenu' ? (
               <SubMenu
+                // @ts-ignore
                 key={submenu._key}
                 submenu={submenu}
                 active={currentSubmenuKey === submenu._key}

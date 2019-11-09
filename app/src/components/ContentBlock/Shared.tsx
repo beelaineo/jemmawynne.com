@@ -1,8 +1,19 @@
 import * as React from 'react'
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { SanityRichText } from '../../types'
 import { Header2, Header4 } from '../Text'
 import { RichText } from '../RichText'
+
+export const SectionWrapper = styled.div`
+  ${({ theme }) => css`
+    padding: calc(${theme.layout.spacing.triple} * 2)
+      ${theme.layout.spacing.triple};
+
+    &:nth-of-type(2) {
+      background-color: ${theme.color.grays[9]};
+    }
+  `}
+`
 
 const SectionHeaderWrapper = styled.div`
   text-align: center;

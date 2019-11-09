@@ -50,8 +50,6 @@
 		"@types/webpack-cleanup-plugin": "^0.5.2",
 		"@types/webpack-dev-server": "^3.4.0",
 		"@types/webpack-merge": "^4.1.5",
-		"@typescript-eslint/eslint-plugin": "^2.6.1",
-		"@typescript-eslint/parser": "^2.6.1",
 		"awesome-typescript-loader": "^5.2.1",
 		"babel-loader": "^8.0.6",
 		"babel-plugin-styled-components": "^1.10.6",

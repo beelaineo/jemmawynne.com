@@ -1,17 +1,22 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
-import { Image as ShopifyImage, SanityImage, RichImage } from '../../types'
+import styled, { css, DefaultTheme } from 'styled-components'
+import {
+  ShopifySourceImage,
+  Image as ShopifyImage,
+  SanityImage,
+  RichImage,
+} from '../../types'
 import { Wrapper, Picture, RatioImageFill } from './styled'
 
 export const ImageWrapper = styled.img`
-  ${({ theme }) => css`
-    display: block;
-  `}
+  display: block;
 `
 
+type ImageType = ShopifySourceImage | ShopifyImage | SanityImage | RichImage
+
 interface ImageDetails {
-  src?: string
-  altText?: string
+  src?: string | null
+  altText?: string | null
   // fileType: string
   // TODO srcSet
   // TODO srcSetWebP
@@ -20,12 +25,14 @@ interface ImageDetails {
 }
 
 /* Based on the image type, return a src, srcset, altText, etc */
-const getImageDetails = (
-  image: ShopifyImage | SanityImage | RichImage,
-): null | ImageDetails => {
+const getImageDetails = (image: ImageType): null | ImageDetails => {
+  if (!image) return {}
   switch (image.__typename) {
-    case 'Image':
+    case 'ShopifySourceImage':
       return { src: image.originalSrc, altText: image.altText }
+    case 'Image':
+      return { src: image.src, altText: image.altText }
+    case 'SanityImage':
     case 'RichImage':
       return {
         src: image.asset && image.asset.url ? image.asset.url : undefined,
@@ -71,7 +78,7 @@ const RatioPadding = ({ ratio }: RatioPaddingProps) => {
 }
 
 interface ImageProps {
-  image: ShopifyImage | SanityImage | RichImage
+  image?: ImageType | null | void
   ratio?: number
   // TODO make this required
   sizes?: string
@@ -84,7 +91,9 @@ export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
   const [loaded, setLoaded] = React.useState(false)
   const imageRef = React.useRef<HTMLImageElement>(null)
 
-  const { src, altText } = React.useMemo(() => getImageDetails(image), [image])
+  const imageDetails = React.useMemo(() => getImageDetails(image), [image])
+  if (!imageDetails) return null
+  const { src, altText } = imageDetails
 
   React.useEffect(() => {
     if (imageRef.current === null) return
@@ -111,7 +120,12 @@ export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
       <Picture loaded={loaded}>
         {/* <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} /> */}
         {/* <source type={imageType} srcSet={srcSet} sizes={sizes} /> */}
-        <img src={src} alt={altText} ref={imageRef} onLoad={handleOnLoad} />
+        <img
+          src={src}
+          alt={altText || ''}
+          ref={imageRef}
+          onLoad={handleOnLoad}
+        />
       </Picture>
     </Wrapper>
   )

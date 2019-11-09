@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { ImageTextSection as ImageTextSectionType } from '../../types/generated'
-import { SectionHeader } from './SectionHeader'
+import { SectionHeader, SectionWrapper } from './Shared'
 import { ImageBlock } from './ImageBlock'
 import { TextBlock } from './TextBlock'
 
@@ -30,7 +30,7 @@ interface ImageTextSectionProps {
 export const ImageTextSection = ({ content }: ImageTextSectionProps) => {
   const { title, subtitleRaw } = content
   return (
-    <>
+    <SectionWrapper>
       <SectionHeader title={title} subtitle={subtitleRaw} />
       {content.blocks ? (
         <BlocksWrapper>
@@ -59,6 +59,6 @@ export const ImageTextSection = ({ content }: ImageTextSectionProps) => {
           })}
         </BlocksWrapper>
       ) : null}
-    </>
+    </SectionWrapper>
   )
 }

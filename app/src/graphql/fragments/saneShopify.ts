@@ -12,6 +12,41 @@ export const saneShopifySourceImageFragment = gql`
     w800
   }
 `
+
+export const saneShopifySourceImagesFragment = gql`
+  fragment SaneShopifySourceImagesFragment on ShopifySourceImages {
+    _key
+    _type
+    edges {
+      _key
+      cursor
+      node {
+        ...SaneShopifySourceImageFragment
+      }
+    }
+  }
+  ${saneShopifySourceImageFragment}
+`
+
+export const saneShopifyProductFragment = gql`
+  fragment SaneShopifyProductFragment on ShopifyProduct {
+    _id
+    _type
+    _key
+    title
+    handle
+    shopifyId
+    sourceData {
+      description
+      id
+      images {
+        ...SaneShopifySourceImagesFragment
+      }
+    }
+  }
+  ${saneShopifySourceImagesFragment}
+`
+
 export const saneShopifyCollectionFragment = gql`
   fragment SaneShopifyCollectionFragment on ShopifyCollection {
     _id

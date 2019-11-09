@@ -1,5 +1,8 @@
 import gql from 'graphql-tag'
-import { saneShopifyCollectionFragment } from './saneShopify'
+import {
+  saneShopifyCollectionFragment,
+  saneShopifyProductFragment,
+} from './saneShopify'
 import { sanityImageFragment } from './media'
 
 export const internalLinkFragment = gql`
@@ -65,20 +68,16 @@ export const richPageLinkFragment = gql`
         }
       }
       ... on ShopifyProduct {
-        _key
-        _type
-        title
-        handle
+        ...SaneShopifyProductFragment
       }
       ... on ShopifyCollection {
-        _key
-        _type
-        title
-        handle
+        ...SaneShopifyCollectionFragment
       }
     }
   }
   ${sanityImageFragment}
+  ${saneShopifyCollectionFragment}
+  ${saneShopifyProductFragment}
 `
 
 export const externalLinkFragment = gql`

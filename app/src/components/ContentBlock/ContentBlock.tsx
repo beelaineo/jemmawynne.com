@@ -29,7 +29,6 @@ export const ContentBlock = ({ content }: ContentBlockProps) => {
         <HeroBlock hero={content} />
       )
     case 'Carousel':
-      return null
       return (
         //
         <CarouselBlock carousel={content} />

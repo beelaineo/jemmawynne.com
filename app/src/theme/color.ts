@@ -8,7 +8,7 @@ export const grays = [
   'rgb(177,177,177)',
   'rgb(198,198,198)',
   'rgb(219,219,219)',
-  'rgb(240,240,240)',
+  'rgb(245,245,245)',
 ]
 
 export const white = 'white'
