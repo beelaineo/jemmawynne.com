@@ -2980,14 +2980,14 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@sane-shopify/sanity-plugin@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/sanity-plugin/-/sanity-plugin-0.5.1.tgz#be3dbfd8fc9e0312b21913ba92c0d8994b3ec247"
-  integrity sha512-ZztJgxGhlBIAT38PV/kSILIzbSvBgUtcYcHL2aNL2P3znhTBzvGM+/QObsoIhLJpu+4NCwXcA2BX326UwjoeDQ==
+"@sane-shopify/sanity-plugin@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/sanity-plugin/-/sanity-plugin-0.5.2.tgz#801eaffdacee73e9a961e47f53e292f75d820fd8"
+  integrity sha512-Y2+h5Zl0h7qBGkhiDL2LzZhjgBb4m3HwnuRrGJdzbXLHjo8uBURBY7DDRGAopbMS6qkEYh/3sGzibxES24qfnA==
   dependencies:
     "@good-idea/unwind-edges" "^1.2.0"
-    "@sane-shopify/sync-utils" "^0.5.1"
-    "@sane-shopify/types" "^0.5.1"
+    "@sane-shopify/sync-utils" "^0.5.2"
+    "@sane-shopify/types" "^0.5.2"
     "@sanity/base" "^0.144.1"
     "@sanity/components" "^0.144.2"
     "@sanity/form-builder" "^0.144.2"
@@ -2996,23 +2996,23 @@
     ramda "^0.26.1"
     react-icons "^3.8.0"
 
-"@sane-shopify/sync-utils@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/sync-utils/-/sync-utils-0.5.1.tgz#a6cfed34145f1a2378a4d32d93ae5a01d24735d9"
-  integrity sha512-raHT6nU+72DaHjrIBQSziJ545Pr7TDf8WP5E78hY/yBsctyN/BvITo8aSwHQ5S4wkoNnSxjSfCNCcwfRQm3/Zw==
+"@sane-shopify/sync-utils@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/sync-utils/-/sync-utils-0.5.2.tgz#b4d66ebf3f076a9fc46d4e07ddbebb145cd78261"
+  integrity sha512-genl2AS6wFduojTxy2nJBHCqK1ZoMhMHXONVCV19I0lGXINsQ7J2k39Ke2Ygqiky9VM9bHiVDPh5sA9FNWcnpQ==
   dependencies:
     "@good-idea/unwind-edges" "^1.2.0"
-    "@sane-shopify/types" "^0.5.1"
+    "@sane-shopify/types" "^0.5.2"
     "@sanity/client" "^0.144.0"
     es6-promise "^4.2.8"
     isomorphic-fetch "^2.2.1"
     lodash-es "^4.17.15"
     rxjs "^6.5.3"
 
-"@sane-shopify/types@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/types/-/types-0.5.1.tgz#7aada29fbf8f839787029694ee7dfb371845c3fa"
-  integrity sha512-KI7dkHQ1ANfhhPgVPxKdED/n77O6FGwvWYPGiyFUDT3vXDxm6AFQgHeZgQyigw6axNBjT4oYgs//srabHbWb6A==
+"@sane-shopify/types@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/types/-/types-0.5.2.tgz#d023d495079c4d34de12d171ebf1be919de2fcea"
+  integrity sha512-cNZ90cT4p6F80xy+8onyI3Zxgv2jg5vEcbOfyPTEn02oXDk1E8xcFMQ+mKUt14LhGx9v0FltRWwwHIItAJ7eKw==
 
 "@sanity/base@^0.144.1":
   version "0.144.1"

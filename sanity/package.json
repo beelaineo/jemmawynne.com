@@ -21,7 +21,7 @@
     "deploy:graphql": "yarn sanity graphql deploy --playground"
   },
   "dependencies": {
-    "@sane-shopify/sanity-plugin": "^0.5.1",
+    "@sane-shopify/sanity-plugin": "^0.5.2",
     "@sanity/base": "^0.144.1",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/cli": "^0.144.0",
