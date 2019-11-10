@@ -21,7 +21,7 @@
     "deploy:graphql": "yarn sanity graphql deploy --playground"
   },
   "dependencies": {
-    "@sane-shopify/sanity-plugin": "^0.4.0",
+    "@sane-shopify/sanity-plugin": "^0.5.1",
     "@sanity/base": "^0.144.1",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/cli": "^0.144.0",
@@ -37,7 +37,7 @@
     "react-icons": "^3.8.0"
   },
   "devDependencies": {
-    "@good-idea/unwind-edges": "^1.2.0",
+    "@good-idea/unwind-edges": "^1.3.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
