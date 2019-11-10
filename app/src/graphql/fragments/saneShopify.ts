@@ -46,22 +46,3 @@ export const saneShopifyProductFragment = gql`
   }
   ${saneShopifySourceImagesFragment}
 `
-
-export const saneShopifyCollectionFragment = gql`
-  fragment SaneShopifyCollectionFragment on ShopifyCollection {
-    _id
-    _type
-    _key
-    title
-    handle
-    shopifyId
-    sourceData {
-      description
-      id
-      image {
-        ...SaneShopifySourceImageFragment
-      }
-    }
-  }
-  ${saneShopifySourceImageFragment}
-`

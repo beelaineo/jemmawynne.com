@@ -1,13 +1,26 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { SanityRichText } from '../../types'
 import { Header2, Header4 } from '../Text'
 import { RichText } from '../RichText'
 
+interface SectionWrapperProps {
+  type: string
+  theme: DefaultTheme
+}
+
 export const SectionWrapper = styled.div`
-  ${({ theme }) => css`
+  ${({ theme, type }: SectionWrapperProps) => css`
     padding: calc(${theme.layout.spacing.triple} * 2)
       ${theme.layout.spacing.triple};
+
+    ${type === 'carousel'
+      ? css`
+          display: flex;
+          flex-direction: column;
+          min-height: 520px;
+        `
+      : ''}
 
     &:nth-of-type(2) {
       background-color: ${theme.color.grays[9]};
@@ -16,7 +29,10 @@ export const SectionWrapper = styled.div`
 `
 
 const SectionHeaderWrapper = styled.div`
-  text-align: center;
+  ${({ theme }) => css`
+    text-align: center;
+    margin-bottom: ${theme.layout.spacing.single};
+  `}
 `
 const SubtitleWrapper = styled.div`
   margin: 0 auto;

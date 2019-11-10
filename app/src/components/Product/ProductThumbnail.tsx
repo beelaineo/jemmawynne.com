@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Product } from '../../types'
+import { Product, ShopifyProduct } from '../../types'
 import { Link } from 'react-router-dom'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Header3, Header6 } from '../Text'
@@ -9,22 +9,29 @@ import { formatMoney } from '../../utils'
 import { ProductInfo, ProductThumb } from './styled'
 
 interface ProductThumbnail {
-  product: Product
+  product: Product | ShopifyProduct['sourceData']
+  hidePrice?: boolean
 }
 
-export const ProductThumbnail = ({ product }: ProductThumbnail) => {
-  const [images] = unwindEdges(product.images)
-  const productImage = images.length ? images[0] : undefined
-  let { minVariantPrice, maxVariantPrice } = product.priceRange
+export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
+  if (!product) return null
+  // @ts-ignore
+  const productImages = product.images ? unwindEdges(product.images)[0] : []
+
+  const productImage = productImages.length ? productImages[0] : undefined
+  const { minVariantPrice, maxVariantPrice } = product.priceRange || {}
   const to = `/products/${product.handle}`
   return (
-    <ProductThumb>
-      <Link to={to}>
-        <Image key={product.id} image={productImage} />
-        <ProductInfo>
+    <Link to={to}>
+      <ProductThumb>
+        <Image image={productImage} />
+        <ProductInfo hidePrice={hidePrice}>
           <Header3>{product.title}</Header3>
-          {minVariantPrice !== undefined &&
-          minVariantPrice.amount !== maxVariantPrice.amount ? (
+          {hidePrice ? null : minVariantPrice &&
+            minVariantPrice.amount &&
+            maxVariantPrice &&
+            maxVariantPrice.amount &&
+            minVariantPrice.amount !== maxVariantPrice.amount ? (
             <Header6>
               {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
             </Header6>
@@ -32,7 +39,7 @@ export const ProductThumbnail = ({ product }: ProductThumbnail) => {
             <Header6>{formatMoney(maxVariantPrice)}</Header6>
           )}
         </ProductInfo>
-      </Link>
-    </ProductThumb>
+      </ProductThumb>
+    </Link>
   )
 }

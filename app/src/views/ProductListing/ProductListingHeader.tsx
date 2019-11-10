@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-import { Header2, Header6 } from 'Components/Text'
+import { Header2 } from 'Components/Text'
 import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
 
 export const ProductListingHeader = (props) => {

@@ -54,8 +54,7 @@ export const SlideContainer = styled.div`
     );
     margin-right: ${theme.layout.spacing.double};
     display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
+    align-items: top;
 
     &:last-of-type {
       margin-right: 0;

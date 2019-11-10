@@ -22,9 +22,7 @@ export const ProductDetails = styled.div`
   `}
 `
 
-export const ProductImagesWrapper = styled.div`
-  ${({ theme }) => css``}
-`
+export const ProductImagesWrapper = styled.div``
 
 export const ProductInfoWrapper = styled.div`
   ${({ theme }) => css`
@@ -57,7 +55,7 @@ export const ProductGalleryThumbnails = styled.div`
 
 export const ProductRelatedWrapper = styled.div`
   ${(props) => css`
-    background-color: ${props.theme.color.grays[0]};
+    background-color: ${props.theme.color.grays[7]};
     padding: ${props.theme.layout.spacing.quadruple};
 
     ${props.theme.mediaQueries.tablet} {

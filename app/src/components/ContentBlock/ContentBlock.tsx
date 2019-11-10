@@ -31,7 +31,7 @@ export const ContentBlock = ({ content }: ContentBlockProps) => {
     case 'Carousel':
       return (
         //
-        <CarouselBlock carousel={content} />
+        <CarouselBlock title={content.title} collection={content.collection} />
       )
     default:
       // @ts-ignore

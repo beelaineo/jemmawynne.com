@@ -1,17 +1,13 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
-import { Link } from 'react-router-dom'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
 import {
   Product,
-  ProductInfo,
   ProductInfoBlock,
-  ProductVariant,
   ShopifyProduct,
 } from '../../types/generated'
 import { useProductVariant, useCheckout } from 'use-shopify'
-import { unwindEdges } from '../../utils/graphql'
 import { NotFound } from '../NotFound'
 import { Column } from '../../components/Layout'
 import {
@@ -29,21 +25,18 @@ import {
   ProductInfoWrapper,
   ProductImagesWrapper,
   NormalizeDiv,
-  ArrowDown,
 } from './styled'
-import { RichText } from '../../components/RichText'
 import { Accordion } from '../../components/Accordion'
 import { getInfoBlocksByType, getInfoBlocksByTag } from './utils'
-import { Header5, Header6 } from 'Components/Text'
 
 interface Props {
   product: Product
-  productExtra: ShopifyProduct
+  saneProduct?: ShopifyProduct
 }
 
-const ProductDetailMain = ({ product, productExtra }: Props) => {
+const ProductDetailMain = ({ product, saneProduct }: Props) => {
   /* get additional info blocks from Sanity */
-  const { ready, productInfoBlocks } = useShopData()
+  const { productInfoBlocks } = useShopData()
   const globalAccordions = productInfoBlocks
     ? [
         ...getInfoBlocksByType(product.productType, productInfoBlocks),
@@ -51,7 +44,7 @@ const ProductDetailMain = ({ product, productExtra }: Props) => {
       ]
     : []
 
-  const extraAccordions = productExtra.infoBlocks || []
+  const extraAccordions = (saneProduct && saneProduct.infoBlocks) || []
   const accordions = [...extraAccordions, ...globalAccordions]
 
   /* hook to manage quantity input */
@@ -66,7 +59,6 @@ const ProductDetailMain = ({ product, productExtra }: Props) => {
 
   /* get checkout utils */
   const { addLineItem } = useCheckout()
-  const [variants] = unwindEdges<ProductVariant>(product.variants)
 
   return (
     <Wrapper>
@@ -96,15 +88,22 @@ const ProductDetailMain = ({ product, productExtra }: Props) => {
                 quantity={quantity}
               />
               {accordions
-                ? accordions.map(({ _key, title, bodyRaw }) => (
-                    <Accordion key={_key} label={title} content={bodyRaw} />
-                  ))
+                ? accordions
+                    .reduce<ProductInfoBlock[]>(
+                      (acc, current) =>
+                        current !== null ? [...acc, current] : acc,
+                      [],
+                    )
+                    .map(({ _key, title, bodyRaw }) => (
+                      // @ts-ignore
+                      <Accordion key={_key} label={title} content={bodyRaw} />
+                    ))
                 : null}
             </NormalizeDiv>
           </ProductInfoWrapper>
         </ProductDetails>
       </Column>
-      <ProductRelated product={product} />
+      <ProductRelated product={product} saneProduct={saneProduct} />
     </Wrapper>
   )
 }
@@ -127,10 +126,10 @@ export const ProductDetail = ({ match }: RouteComponentProps<MatchParams>) => {
   })
   const product =
     (response && response.data && response.data.productByHandle) || undefined
-  const productExtra =
+  const saneProduct =
     (response && response.data && response.data.allShopifyProducts[0]) ||
     undefined
   if (response.fetching) return <p>Loading..</p>
   if (!product) return <NotFound />
-  return <ProductDetailMain product={product} productExtra={productExtra} />
+  return <ProductDetailMain product={product} saneProduct={saneProduct} />
 }

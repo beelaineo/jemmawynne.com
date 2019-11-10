@@ -31,7 +31,7 @@ const getImageDetails = (image: ImageType): null | ImageDetails => {
     case 'ShopifySourceImage':
       return { src: image.originalSrc, altText: image.altText }
     case 'Image':
-      return { src: image.src, altText: image.altText }
+      return { src: image.originalSrc, altText: image.altText }
     case 'SanityImage':
     case 'RichImage':
       return {
@@ -84,6 +84,8 @@ interface ImageProps {
   sizes?: string
   onLoad?: () => void
   // TODO sizes
+  // TODO hoverimage
+  hoverImage?: ImageType | null | void
 }
 
 export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
@@ -94,6 +96,7 @@ export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
   const imageDetails = React.useMemo(() => getImageDetails(image), [image])
   if (!imageDetails) return null
   const { src, altText } = imageDetails
+  if (!src) console.log(image)
 
   React.useEffect(() => {
     if (imageRef.current === null) return
@@ -120,7 +123,7 @@ export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
       <Picture loaded={loaded}>
         {/* <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} /> */}
         {/* <source type={imageType} srcSet={srcSet} sizes={sizes} /> */}
-        <img
+        <ImageWrapper
           src={src}
           alt={altText || ''}
           ref={imageRef}

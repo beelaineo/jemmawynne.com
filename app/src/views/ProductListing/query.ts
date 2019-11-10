@@ -1,7 +1,7 @@
-import { Paginated, Collection } from 'use-shopify'
+import gql from 'graphql-tag'
 import { imageFragment } from '../../graphql/fragments'
 
-export const COLLECTION_QUERY = /* GraphQL */ `
+export const COLLECTION_QUERY = gql`
   query CollectionQuery($handle: String!) {
     collectionByHandle(handle: $handle) {
       id

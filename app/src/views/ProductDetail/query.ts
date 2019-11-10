@@ -1,6 +1,10 @@
 import gql from 'graphql-tag'
 import { Product, ShopifyProduct } from '../../types/generated'
-import { imageFragment, productInfoFragment } from '../../graphql/fragments'
+import {
+  imageFragment,
+  moneyV2Fragment,
+  saneShopifyProductFragment,
+} from '../../graphql/fragments'
 
 export const PRODUCT_QUERY = gql`
   query ProductQuery($handle: String!) {
@@ -33,12 +37,10 @@ export const PRODUCT_QUERY = gql`
                   }
                   priceRange {
                     minVariantPrice {
-                      amount
-                      currencyCode
+                      ...MoneyV2Fragment
                     }
                     maxVariantPrice {
-                      amount
-                      currencyCode
+                      ...MoneyV2Fragment
                     }
                   }
                 }
@@ -82,15 +84,12 @@ export const PRODUCT_QUERY = gql`
     }
 
     allShopifyProducts(where: { handle: $handle }) {
-      _id
-      title
-      infoBlocks {
-        ...ProductInfoFragment
-      }
+      ...SaneShopifyProductFragment
     }
   }
-  ${productInfoFragment}
+  ${saneShopifyProductFragment}
   ${imageFragment}
+  ${moneyV2Fragment}
 `
 
 export interface ProductQueryResult {

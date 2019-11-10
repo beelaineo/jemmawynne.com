@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
+import { Product } from '../../types'
 import { useQuery } from 'urql'
-import { Product } from 'use-shopify'
 import { COLLECTION_QUERY, CollectionResult } from './query'
-import { ProductGrid } from './styled'
 import { ProductListingHeader } from './ProductListingHeader'
 import { ItemGrid } from '../../components/ItemGrid'
 

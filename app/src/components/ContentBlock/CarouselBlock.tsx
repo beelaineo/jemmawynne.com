@@ -1,14 +1,16 @@
 import * as React from 'react'
-import { Carousel as CarouselType } from '../../types'
+import {
+  Collection,
+  ShopifyCollection,
+  Carousel as CarouselType,
+} from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
-import { Carousel } from '../Carousel'
-import { Placeholder } from '../Placeholder'
-import { CarouselBlockStyled, Square } from '../Layout/Containers'
-import { Header2, Header5 } from '../Text'
-import { FlexContainer, FlexSix } from '../Layout/Flex'
+import { CollectionCarousel, Carousel } from '../Carousel'
 
 interface CarouselBlockProps {
-  carousel: CarouselType
+  title?: string | null
+  collection?: Collection | ShopifyCollection | null
+  items?: CarouselType['items'] | null
 }
 
 /**
@@ -20,24 +22,17 @@ interface CarouselBlockProps {
  * Otherwise, uses props.items for the carousel
  */
 
-export const CarouselBlock = (props: CarouselBlockProps) => {
-  console.log(props)
-  const { title, collection, items } = props.carousel
-  console.log
-
+export const CarouselBlock = ({ title, collection }: CarouselBlockProps) => {
   return (
-    <SectionWrapper>
+    <SectionWrapper type="carousel">
       <SectionHeader title={title} />
-      <Carousel>
-        {collection ? (
-          <p>Collection carousel</p>
-        ) : items ? (
+      {collection ? (
+        <CollectionCarousel collection={collection} />
+      ) : (
+        <Carousel>
           <p>Items</p>
-        ) : // items.map((item) => {
-        //   return null
-        // })
-        null}
-      </Carousel>
+        </Carousel>
+      )}
     </SectionWrapper>
   )
 

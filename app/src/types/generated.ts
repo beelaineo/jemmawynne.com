@@ -1112,8 +1112,6 @@ export enum CountryCode {
   Bt = 'BT',
   /** Bolivia. */
   Bo = 'BO',
-  /** Bonaire, Sint Eustatius and Saba. */
-  Bq = 'BQ',
   /** Bosnia And Herzegovina. */
   Ba = 'BA',
   /** Botswana. */
@@ -1138,6 +1136,8 @@ export enum CountryCode {
   Ca = 'CA',
   /** Cape Verde. */
   Cv = 'CV',
+  /** Caribbean Netherlands. */
+  Bq = 'BQ',
   /** Cayman Islands. */
   Ky = 'KY',
   /** Central African Republic. */
@@ -2092,7 +2092,11 @@ export type CustomerCreateInput = {
   lastName?: Maybe<Scalars['String']>
   /** The customer’s email. */
   email: Scalars['String']
-  /** The customer’s phone number. */
+  /**
+   * A unique phone number for the customer.
+   *
+   * Formatted using E.164 standard. For example, _+16135551111_.
+   **/
   phone?: Maybe<Scalars['String']>
   /** The login password used by the customer. */
   password: Scalars['String']
@@ -2203,7 +2207,11 @@ export type CustomerUpdateInput = {
   lastName?: Maybe<Scalars['String']>
   /** The customer’s email. */
   email?: Maybe<Scalars['String']>
-  /** The customer’s phone number. */
+  /**
+   * A unique phone number for the customer.
+   *
+   * Formatted using E.164 standard. For example, _+16135551111_.
+   **/
   phone?: Maybe<Scalars['String']>
   /** The login password used by the customer. */
   password?: Maybe<Scalars['String']>
@@ -2751,15 +2759,29 @@ export interface MailingAddressEdge {
 
 /** Specifies the fields accepted to create or update a mailing address. */
 export type MailingAddressInput = {
+  /** The first line of the address. Typically the street address or PO Box number. */
   address1?: Maybe<Scalars['String']>
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
   address2?: Maybe<Scalars['String']>
+  /** The name of the city, district, village, or town. */
   city?: Maybe<Scalars['String']>
+  /** The name of the customer's company or organization. */
   company?: Maybe<Scalars['String']>
+  /** The name of the country. */
   country?: Maybe<Scalars['String']>
+  /** The first name of the customer. */
   firstName?: Maybe<Scalars['String']>
+  /** The last name of the customer. */
   lastName?: Maybe<Scalars['String']>
+  /**
+   * A unique phone number for the customer.
+   *
+   * Formatted using E.164 standard. For example, _+16135551111_.
+   **/
   phone?: Maybe<Scalars['String']>
+  /** The region of the address, such as the province, state, or district. */
   province?: Maybe<Scalars['String']>
+  /** The zip or postal code of the address. */
   zip?: Maybe<Scalars['String']>
 }
 
@@ -4031,6 +4053,13 @@ export interface ProductPriceRangeEdge {
   node: ProductPriceRange
 }
 
+export interface Products {
+  __typename: 'Products'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  products?: Maybe<Array<Maybe<ShopifyProduct>>>
+}
+
 /** The set of valid sort keys for the products query. */
 export enum ProductSortKeys {
   /** Sort by the `title` value. */
@@ -4445,6 +4474,30 @@ export interface RichPageLink {
   captionRaw?: Maybe<Scalars['JSON']>
   image?: Maybe<RichImage>
   hoverImage?: Maybe<RichImage>
+}
+
+export interface SaneMoney {
+  __typename: 'SaneMoney'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  amount?: Maybe<Scalars['String']>
+  currencyCode?: Maybe<Scalars['String']>
+}
+
+export interface SaneProductOption {
+  __typename: 'SaneProductOption'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  values?: Maybe<Array<Maybe<Scalars['String']>>>
+}
+
+export interface SaneProductPriceRange {
+  __typename: 'SaneProductPriceRange'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  minVariantPrice?: Maybe<SaneMoney>
+  maxVariantPrice?: Maybe<SaneMoney>
 }
 
 export interface SanityFileAsset extends Document {
@@ -5032,6 +5085,7 @@ export interface ShopifyCollection extends Document {
   handle?: Maybe<Scalars['String']>
   shopifyId?: Maybe<Scalars['String']>
   sourceData?: Maybe<ShopifyCollectionSource>
+  products?: Maybe<Products>
 }
 
 export type ShopifyCollectionFilter = {
@@ -5263,6 +5317,11 @@ export interface ShopifyProductSource {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
+  availableForSale?: Maybe<Scalars['Boolean']>
+  options?: Maybe<Array<Maybe<SaneProductOption>>>
+  priceRange?: Maybe<SaneProductPriceRange>
+  productType?: Maybe<Scalars['String']>
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>
   handle?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>

@@ -27,13 +27,12 @@ const Subtitle = styled(Header5)`
 
 export const RichPageLink = ({ link, label }: LinkProps) => {
   const { image: customImage, hoverImage, captionRaw } = link
-  console.log(link)
   const image = customImage ?? getDocumentLinkImage(link.document)
   const linkTitle = label || link.title || link?.document?.title
 
   return (
     <DocumentLink document={link.document}>
-      <Image image={image} ratio={1} />
+      <Image hoverImage={hoverImage} image={image} ratio={1} />
       <TextWrapper>
         <Header5>{linkTitle}</Header5>
         {captionRaw && captionRaw.length ? (
