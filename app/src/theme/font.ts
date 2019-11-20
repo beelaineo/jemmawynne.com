@@ -15,7 +15,7 @@ export const weight = {
   light: 200,
   book: 300,
   normal: 400,
-  semi: 600,
+  semi: 500,
   strong: 700,
 }
 

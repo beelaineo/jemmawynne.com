@@ -39,7 +39,11 @@ export const Nav = styled.div`
   `}
 `
 
-export const ProductGalleryWrapper = styled.div``
+export const ProductGalleryWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-bottom: ${theme.layout.spacing.double};
+  `}
+`
 
 export const ProductGalleryImage = styled.div``
 
@@ -97,6 +101,12 @@ export const NormalizeDiv = styled.div`
   ${(props) => `
    		margin: ${props.theme.layout.spacing.small};
 	`}
+`
+
+export const ProductOptionWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.layout.spacing.single};
+  `}
 `
 
 interface BackgroundImageProps {

@@ -94,6 +94,7 @@ function navReducer(currentState: NavState, action: Action): NavState {
 export const Navigation = () => {
   /* State from Providers */
   const { loading, checkout } = useCheckout()
+  console.log(checkout)
   const { ready, menu } = useShopData()
   const { location } = useLocation()
 

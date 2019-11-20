@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { Variant } from 'use-shopify'
-import { Product, Image } from '../../../types'
+import { ProductVariant, Product, Image } from '../../../types'
 import { unwindEdges } from '../../../utils/graphql'
 import { Gallery } from '../../../components/Gallery'
 import { ProductGalleryWrapper } from '../styled'
 
 interface ProductImagesProps {
   product: Product
-  currentVariant: Variant
+  currentVariant: ProductVariant
 }
 
 export const ProductImages = ({

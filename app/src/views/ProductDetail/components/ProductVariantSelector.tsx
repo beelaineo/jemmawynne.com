@@ -2,8 +2,7 @@ import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { UseProductVariant } from 'use-shopify'
 import { Product, ProductVariant, ProductOption } from '../../../types'
-import { Select, Label, NormalizeDiv, QuantitySelector } from '../styled'
-import { QuantityInput } from 'Components/QuantityInput'
+import { Select, Label, NormalizeDiv, ProductOptionWrapper } from '../styled'
 
 const { useState } = React
 
@@ -12,7 +11,6 @@ interface Props extends UseProductVariant {
   quantity: number
   increment: () => void
   decrement: () => void
-  setQuantity: (q: number) => void
 }
 
 /**
@@ -50,7 +48,7 @@ const getNewOptions = (
 const getVariantBySelectedOptions = (
   variants: ProductVariant[],
   currentOptions: SelectedProductOption[],
-): ProductVariant =>
+): ProductVariant | void =>
   variants.find((variant) => {
     const { selectedOptions: optionsForVariant } = variant
     return optionsForVariant.reduce<boolean>((acc, variantOption) => {
@@ -58,20 +56,13 @@ const getVariantBySelectedOptions = (
       const matchingOption = currentOptions.find(
         (o) => o.name === variantOption.name,
       )
-      return matchingOption.currentValue === variantOption.value
+      if (matchingOption)
+        return matchingOption.currentValue === variantOption.value
     }, true)
   })
 
 export const ProductVariantSelector = (props: Props) => {
-  const {
-    product,
-    currentVariant,
-    selectVariant,
-    quantity,
-    setQuantity,
-    increment,
-    decrement,
-  } = props
+  const { product, selectVariant } = props
   const [variants] = unwindEdges(product.variants)
   const { options } = product
 
@@ -81,8 +72,6 @@ export const ProductVariantSelector = (props: Props) => {
     SelectedProductOption[]
   >(getInitialOptions(options))
 
-  const handleQuantityInput = (e) => setQuantity(e.target.value)
-
   const handleSelectForOption = (name: string) => (
     e: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -90,7 +79,11 @@ export const ProductVariantSelector = (props: Props) => {
     const newOptions = getNewOptions(selectedOptions, name, value)
     setSelectedOptions(newOptions)
     const newVariant = getVariantBySelectedOptions(variants, newOptions)
-    selectVariant(newVariant.id)
+    if (newVariant) {
+      selectVariant(newVariant.id)
+    } else {
+      // TODO report to sentry
+    }
   }
 
   const getCurrentOptionValue = (name: string): string =>
@@ -100,7 +93,7 @@ export const ProductVariantSelector = (props: Props) => {
     <div>
       <NormalizeDiv>
         {options.map(({ name, values }) => (
-          <React.Fragment key={name}>
+          <ProductOptionWrapper key={name}>
             <Label htmlFor={name} key={name}>
               {name}
             </Label>
@@ -115,22 +108,9 @@ export const ProductVariantSelector = (props: Props) => {
                   {value}
                 </option>
               ))}
-              >
             </Select>
-          </React.Fragment>
+          </ProductOptionWrapper>
         ))}
-      </NormalizeDiv>
-      <NormalizeDiv>
-        <Label>Quantity</Label>
-        <QuantitySelector width={'52px'}>
-          <button type="button" onClick={decrement}>
-            <span>&#8722;</span>
-          </button>
-          <QuantityInput quantity={quantity} setQuantity={setQuantity} />
-          <button type="button" onClick={increment}>
-            <span>&#43;</span>
-          </button>
-        </QuantitySelector>
       </NormalizeDiv>
     </div>
   )

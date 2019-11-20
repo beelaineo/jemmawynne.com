@@ -23,7 +23,6 @@ const commonHeaderStyles = ({
   color,
   family,
   margin,
-  children,
 }: TextStyleProps) => css`
   font-weight: ${theme.font.weight[weight]
     ? theme.font.weight[weight]
@@ -31,7 +30,7 @@ const commonHeaderStyles = ({
     ? theme.font.weight.normal
     : theme.font.weight.semi};
   font-family: ${theme.font.family[family] || theme.font.family.sans};
-  color: ${getColor(theme, color) || 'inherit'};
+  color: ${(color && getColor(theme, color)) || 'inherit'};
   text-align: ${align || 'inherit'};
   text-transform: ${transform || 'auto'};
   margin: ${margin || '0.3em 0'};

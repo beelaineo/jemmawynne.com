@@ -48,12 +48,7 @@ const ProductDetailMain = ({ product, saneProduct }: Props) => {
   const accordions = [...extraAccordions, ...globalAccordions]
 
   /* hook to manage quantity input */
-  const {
-    count: quantity,
-    increment,
-    decrement,
-    setCount: setQuantity,
-  } = useCounter(1, { min: 1 })
+  const { count: quantity, increment, decrement } = useCounter(1, { min: 1 })
   /* get product variant utils */
   const { currentVariant, selectVariant } = useProductVariant(product)
 
@@ -73,7 +68,6 @@ const ProductDetailMain = ({ product, saneProduct }: Props) => {
               product={product}
             />
             <ProductVariantSelector
-              setQuantity={setQuantity}
               quantity={quantity}
               increment={increment}
               decrement={decrement}
