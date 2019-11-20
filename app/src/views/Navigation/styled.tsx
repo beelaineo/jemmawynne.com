@@ -1,7 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { Header5 } from '../../components/Text'
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.header`
   ${({ theme }) => css`
     display: block;
     position: relative;
@@ -10,13 +10,24 @@ export const Wrapper = styled.nav`
   `}
 `
 
+export const NavTop = styled.div`
+  ${({ theme }) => css`
+    padding-top: ${theme.layout.spacing.double};
+    margin-bottom: ${theme.layout.spacing.single};
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  `}
+`
+
 export const Inner = styled.nav`
   ${({ theme }) => css`
-    height: ${theme.layout.navHeight};
-    display: grid;
-    grid-template-columns: 1fr 220px 1fr;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     align-items: center;
-    padding: 0 ${theme.layout.spacing.triple};
+    padding: 0 ${theme.layout.spacing.triple} ${theme.layout.spacing.single};
     width: 100%;
     margin: 0 auto;
   `}
@@ -29,11 +40,11 @@ interface WithReady {
 }
 
 export const NavSection = styled.div`
-  ${({ theme, ready, align }: WithReady) => css`
+  ${({ ready }: WithReady) => css`
     transition: 0.3s;
     flex-grow: 1;
     display: flex;
-    justify-content: ${align === 'right' ? 'flex-end' : 'flex-start'};
+    justify-content: center;
     align-items: center;
     height: 100%;
     opacity: ${ready ? '1' : '0'};
@@ -44,8 +55,20 @@ export const NavSection = styled.div`
   `}
 `
 
+export const NavTools = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    position: absolute;
+    top: ${theme.layout.spacing.double};
+    right: ${theme.layout.spacing.double};
+  `}
+`
+
 export const Logo = styled.img`
-  width: 220px;
+  width: 260px;
 `
 
 interface WithActive {
@@ -70,14 +93,7 @@ export const NavHeaderWrapper = styled.div`
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  margin: 0 1em;
-
-  &:first-child {
-    margin-left: 0;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
+  margin: 0 2em;
 
   &:focus ${NavHeader}, &:hover > ${NavHeader} {
     border-bottom-color: black;

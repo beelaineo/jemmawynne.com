@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { Link } from 'react-router-dom'
 import { DocumentLink } from '../../components/DocumentLink'
 import { getDocumentLinkLabel } from '../../utils/links'
@@ -18,6 +19,8 @@ import {
   NavHeaderWrapper,
   SubmenuPane,
   Logo,
+  NavTools,
+  NavTop,
   ModalBackground,
   Loading,
 } from './styled'
@@ -129,6 +132,30 @@ export const Navigation = () => {
 
   return (
     <Wrapper>
+      <NavTop>
+        <span />
+        <Link to="/">
+          <Logo src="/static/images/Logo_Large_Black.svg" />
+        </Link>
+      </NavTop>
+
+      <NavTools>
+        <SearchInput />
+        <NavHeader as="button" onClick={openCart}>
+          <Loading isLoading={loading}>
+            <div>
+              <IoIosCart />
+            </div>
+            {cartCount ? (
+              <div>
+                {cartCount}
+                {cartCount === 1 ? ' item' : cartCount >= 2 ? ' items' : ''}
+              </div>
+            ) : null}
+          </Loading>
+        </NavHeader>
+      </NavTools>
+
       <Inner>
         <NavSection ready={ready}>
           {allMenuItems.map((menuItem) => {
@@ -164,27 +191,6 @@ export const Navigation = () => {
                 )
             }
           })}
-        </NavSection>
-        <Link to="/">
-          <Logo src="/static/images/Logo_Large_Black.svg" />
-        </Link>
-        <NavSection ready={ready} align="right">
-          <SearchInput />
-          <NavHeaderWrapper>
-            <NavHeader as="button" onClick={openCart}>
-              <Loading isLoading={loading}>
-                <div>
-                  <IoIosCart />
-                </div>
-                {cartCount ? (
-                  <div>
-                    {cartCount}
-                    {cartCount === 1 ? ' item' : cartCount >= 2 ? ' items' : ''}
-                  </div>
-                ) : null}
-              </Loading>
-            </NavHeader>
-          </NavHeaderWrapper>
         </NavSection>
         <SubmenuPane open={menuOpen} onMouseLeave={closeMenu}>
           {submenus.map((submenu) =>
