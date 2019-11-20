@@ -21,7 +21,7 @@ export const weight = {
 
 export const family = {
   sans:
-    '"AvenirLTStd", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;',
+    '"Gotham", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;',
   serif:
-    '"DidotLTPro-Roman", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;',
+    '"Freight", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;',
 }

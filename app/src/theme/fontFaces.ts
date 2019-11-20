@@ -32,34 +32,86 @@ import { css } from 'styled-components'
 
 /* @import must be at top of file, otherwise CSS will not work */
 
-// @import url('//hello.myfonts.net/count/2c2cd5');
+// @import url('/static/fonts///hello.myfonts.net/count/2c2cd5');
 export default css`
   @font-face {
-    font-family: 'DidotLTPro-Roman';
-    src: url('/static/fonts/2C2CD5_0_0.eot');
-    src: url('/static/fonts/2C2CD5_0_0.eot?#iefix') format('embedded-opentype'),
-      url('/static/fonts/2C2CD5_0_0.woff2') format('woff2'),
-      url('/static/fonts/2C2CD5_0_0.woff') format('woff'),
-      url('/static/fonts/2C2CD5_0_0.ttf') format('truetype');
+    font-family: 'Freight';
+    src: url('/static/fonts/FreightBigProBook-Regular.woff2') format('woff2'),
+      url('/static/fonts/FreightBigProBook-Regular.woff') format('woff'),
+      url('/static/fonts/FreightBigProBook-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
   }
 
   @font-face {
-    font-family: 'AvenirLTStd';
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-MediumItalic.woff2') format('woff2'),
+      url('/static/fonts/Gotham-MediumItalic.woff') format('woff'),
+      url('/static/fonts/Gotham-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-Medium.woff2') format('woff2'),
+      url('/static/fonts/Gotham-Medium.woff') format('woff'),
+      url('/static/fonts/Gotham-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-BoldItalic.woff2') format('woff2'),
+      url('/static/fonts/Gotham-BoldItalic.woff') format('woff'),
+      url('/static/fonts/Gotham-BoldItalic.ttf') format('truetype');
     font-weight: 700;
-    src: url('/static/fonts/2C2CD5_1_0.eot');
-    src: url('/static/fonts/2C2CD5_1_0.eot?#iefix') format('embedded-opentype'),
-      url('/static/fonts/2C2CD5_1_0.woff2') format('woff2'),
-      url('/static/fonts/2C2CD5_1_0.woff') format('woff'),
-      url('/static/fonts/2C2CD5_1_0.ttf') format('truetype');
+    font-style: italic;
   }
 
   @font-face {
-    font-family: 'AvenirLTStd';
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-Bold.woff2') format('woff2'),
+      url('/static/fonts/Gotham-Bold.woff') format('woff'),
+      url('/static/fonts/Gotham-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-Book.woff2') format('woff2'),
+      url('/static/fonts/Gotham-Book.woff') format('woff'),
+      url('/static/fonts/Gotham-Book.ttf') format('truetype');
     font-weight: 400;
-    src: url('/static/fonts/2C2CD5_2_0.eot');
-    src: url('/static/fonts/2C2CD5_2_0.eot?#iefix') format('embedded-opentype'),
-      url('/static/fonts/2C2CD5_2_0.woff2') format('woff2'),
-      url('/static/fonts/2C2CD5_2_0.woff') format('woff'),
-      url('/static/fonts/2C2CD5_2_0.ttf') format('truetype');
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-BookItalic.woff2') format('woff2'),
+      url('/static/fonts/Gotham-BookItalic.woff') format('woff'),
+      url('/static/fonts/Gotham-BookItalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-LightItalic.woff2') format('woff2'),
+      url('/static/fonts/Gotham-LightItalic.woff') format('woff'),
+      url('/static/fonts/Gotham-LightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    src: url('/static/fonts/Gotham-Light.woff2') format('woff2'),
+      url('/static/fonts/Gotham-Light.woff') format('woff'),
+      url('/static/fonts/Gotham-Light.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
   }
 `
