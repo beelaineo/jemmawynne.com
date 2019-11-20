@@ -21,10 +21,11 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
   const productImage = productImages.length ? productImages[0] : undefined
   const { minVariantPrice, maxVariantPrice } = product.priceRange || {}
   const to = `/products/${product.handle}`
+  const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   return (
     <Link to={to}>
       <ProductThumb>
-        <Image image={productImage} />
+        <Image image={productImage} hoverImage={hoverImage} />
         <ProductInfo hidePrice={hidePrice}>
           <Header3>{product.title}</Header3>
           {hidePrice ? null : minVariantPrice &&

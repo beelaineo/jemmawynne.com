@@ -10,12 +10,28 @@ export const Wrapper = styled.div`
   position: relative;
 `
 
+export const HoverImageWrapper = styled.div`
+  position: absolute;
+
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.3s;
+`
+
 export const Picture = styled.picture`
   ${({ loaded, theme }: PictureProps) => css`
     max-height: 100%;
     width: auto;
     background-color: transparent;
     display: block;
+
+    &:hover ${HoverImageWrapper} {
+      opacity: 1;
+    }
 
     & > img {
       opacity: ${loaded ? '1' : '0'};

@@ -6,7 +6,7 @@ import {
   SanityImage,
   RichImage,
 } from '../../types'
-import { Wrapper, Picture, RatioImageFill } from './styled'
+import { HoverImageWrapper, Wrapper, Picture, RatioImageFill } from './styled'
 
 export const ImageWrapper = styled.img`
   display: block;
@@ -77,30 +77,27 @@ const RatioPadding = ({ ratio }: RatioPaddingProps) => {
   ) : null
 }
 
-interface ImageProps {
+interface ImageElementProps {
+  setLoaded?: (l: boolean) => void
+  loaded?: boolean
   image?: ImageType | null | void
-  ratio?: number
-  // TODO make this required
+  // TODO implement sizes
   sizes?: string
   onLoad?: () => void
-  // TODO sizes
-  // TODO hoverimage
-  hoverImage?: ImageType | null | void
 }
 
-export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
-  if (!image) return null
-  const [loaded, setLoaded] = React.useState(false)
+const ImageElement = ({
+  setLoaded,
+  loaded,
+  image,
+  onLoad,
+  sizes,
+}: ImageElementProps) => {
   const imageRef = React.useRef<HTMLImageElement>(null)
-
-  const imageDetails = React.useMemo(() => getImageDetails(image), [image])
-  if (!imageDetails) return null
-  const { src, altText } = imageDetails
-  if (!src) console.log(image)
 
   React.useEffect(() => {
     if (imageRef.current === null) return
-    if (imageRef.current.complete) {
+    if (setLoaded && imageRef.current.complete) {
       setLoaded(true)
     }
   }, [imageRef.current])
@@ -112,10 +109,42 @@ export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
   }, [loaded])
 
   const handleOnLoad = () => {
+    if (!setLoaded) return
     setLoaded(true)
   }
 
+  if (!image) return null
+  const imageDetails = React.useMemo(() => getImageDetails(image), [image])
+
+  if (!imageDetails) return null
+  const { src, altText } = imageDetails
   if (!src) return null
+
+  return (
+    <ImageWrapper
+      src={src}
+      alt={altText || ''}
+      ref={imageRef}
+      onLoad={handleOnLoad}
+    />
+  )
+}
+
+interface ImageProps extends Omit<ImageElementProps, 'loaded' | 'setLoaded'> {
+  ratio?: number
+  // TODO hoverimage
+  hoverImage?: ImageType | null | void
+}
+
+export const Image = ({
+  image,
+  onLoad,
+  sizes,
+  hoverImage,
+  ratio,
+}: ImageProps) => {
+  const [loaded, setLoaded] = React.useState(false)
+  if (!image) return null
 
   return (
     <Wrapper>
@@ -123,12 +152,18 @@ export const Image = ({ image, onLoad, sizes, ratio }: ImageProps) => {
       <Picture loaded={loaded}>
         {/* <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} /> */}
         {/* <source type={imageType} srcSet={srcSet} sizes={sizes} /> */}
-        <ImageWrapper
-          src={src}
-          alt={altText || ''}
-          ref={imageRef}
-          onLoad={handleOnLoad}
+        <ImageElement
+          image={image}
+          onLoad={onLoad}
+          loaded={loaded}
+          sizes={sizes}
+          setLoaded={setLoaded}
         />
+        {hoverImage ? (
+          <HoverImageWrapper>
+            <ImageElement image={hoverImage} sizes={sizes} />
+          </HoverImageWrapper>
+        ) : null}
       </Picture>
     </Wrapper>
   )
