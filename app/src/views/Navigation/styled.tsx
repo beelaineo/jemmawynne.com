@@ -7,6 +7,8 @@ export const Wrapper = styled.header`
     position: relative;
     z-index: ${theme.layout.z.navigation};
     font-family: ${theme.font.family.sans};
+
+    box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.2);
   `}
 `
 

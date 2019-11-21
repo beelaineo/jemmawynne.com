@@ -1,45 +1,31 @@
 import * as React from 'react'
-import { Header2 } from 'Components/Text'
-import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
+import { Collection } from '../../types'
+import { Header2, Header4 } from 'Components/Text'
+import { Image } from 'Components/Image'
+import { PLPHeader, PLPHeaderInner, PLPText, PLPImage } from './styled'
 
-export const ProductListingHeader = (props) => {
-  let { image, title, description } = props.collection
-  if (image) {
-    return (
-      <FlexContainer
-        marginVertical="triple"
-        height="400px"
-        padding="small"
-        margin="small"
-        center
-      >
-        <FlexHalf vertical="center" padding="0 60px">
+interface ProductListingHeaderProps {
+  collection: Collection
+}
+
+export const ProductListingHeader = ({
+  collection,
+}: ProductListingHeaderProps) => {
+  const { image, title, description } = collection
+  const textAlign = image ? 'left' : 'center'
+  return (
+    <PLPHeader>
+      <PLPHeaderInner>
+        <PLPText align={textAlign}>
           <Header2>{title}</Header2>
-          <p>{description}</p>
-        </FlexHalf>
-        <FlexHalf
-          style={{
-            backgroundImage: `url(${image.originalSrc})`,
-            backgroundSize: 'cover',
-          }}
-        ></FlexHalf>
-      </FlexContainer>
-    )
-  } else {
-    return (
-      <FlexContainer
-        center
-        text="center"
-        align="center"
-        padding="small"
-        vertical="center"
-        maxwidth="600px"
-        marginVertical="triple"
-        margin="triple"
-      >
-        <Header2>{title}</Header2>
-        <p>{description}</p>
-      </FlexContainer>
-    )
-  }
+          <Header4 family="serif">{description}</Header4>
+        </PLPText>
+        {image ? (
+          <PLPImage>
+            <Image image={image} ratio={1} />
+          </PLPImage>
+        ) : null}
+      </PLPHeaderInner>
+    </PLPHeader>
+  )
 }

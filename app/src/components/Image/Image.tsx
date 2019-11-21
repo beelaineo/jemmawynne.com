@@ -65,7 +65,7 @@ const RatioPadding = ({ ratio }: RatioPaddingProps) => {
     if (!ctx) return
     ctx.beginPath()
     ctx.rect(0, 0, 1600, 1600 * ratio)
-    ctx.fillStyle = 'rgba(220, 220, 220, 50)'
+    ctx.fillStyle = '#d7dae2'
     ctx.fill()
     const srcData = canvas.toDataURL('image/png')
     setSrc(srcData)
