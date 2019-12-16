@@ -30,17 +30,17 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
 
     switch (style) {
       case 'h1':
-        return <Text.Header1 {...props} />
+        return <Text.Header1 family="serif" {...props} />
       case 'h2':
-        return <Text.Header2 {...props} />
+        return <Text.Header2 family="serif" {...props} />
       case 'h3':
-        return <Text.Header3 {...props} />
+        return <Text.Header3 family="serif" {...props} />
       case 'h4':
-        return <Text.Header4 {...props} />
+        return <Text.Header4 family="serif" {...props} />
       case 'h5':
-        return <Text.Header5 {...props} />
+        return <Text.Header5 family="serif" {...props} />
       case 'h6':
-        return <Text.Header6 {...props} />
+        return <Text.Header6 family="serif" {...props} />
       case 'blockquote':
         return <Text.BlockQuote {...props} />
       case 'normal':

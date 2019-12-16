@@ -34,7 +34,7 @@ const commonHeaderStyles = ({
   text-align: ${align || 'inherit'};
   text-transform: ${transform || 'auto'};
   margin: ${margin || '0.3em 0'};
-  letter-spacing: 0.03em;
+  letter-spacing: ${family && family === 'sans' ? '0.2em' : '0.025em'};
 
   &:first-child {
     margin-top: 0;
@@ -49,8 +49,11 @@ export const Header1 = styled.h2`
   ${(props: TextStyleProps) => css`
 		${commonHeaderStyles(props)}
 		font-size: ${props.theme.font.size.h2};
-		font-family: ${props.theme.font.family.serif};
-		font-weight: ${props.theme.font.weight.normal};
+    font-weight: ${
+      props.weight
+        ? props.theme.font.weight[props.weight]
+        : props.theme.font.weight.normal
+    };
 		${props.theme.mediaQueries.tablet} {
 			font-size: calc(${props.theme.font.size.h2} * 0.8);
 		}
@@ -64,8 +67,10 @@ export const Header2 = styled.h2`
   ${(props: TextStyleProps) => css`
     ${commonHeaderStyles(props)};
     font-size: ${props.theme.font.size.h2};
-    font-family: ${props.theme.font.family.serif};
-    font-weight: ${props.theme.font.weight.normal};
+    font-weight: ${props.weight
+      ? props.theme.font.weight[props.weight]
+      : props.theme.font.weight.normal};
+
     ${props.theme.mediaQueries.tablet} {
       font-size: calc(${props.theme.font.size.h2} * 0.8);
     }
@@ -79,6 +84,8 @@ export const Header3 = styled.h3`
   ${(props: TextStyleProps) => css`
     ${commonHeaderStyles(props)};
     font-size: ${props.theme.font.size.h3};
+    font-weight: ${props.theme.font.weight[props.weight] ||
+      props.theme.font.weight.normal};
     ${props.theme.mediaQueries.tablet} {
       font-size: calc(${props.theme.font.size.h3} * 0.8);
     }
@@ -92,9 +99,6 @@ export const Header4 = styled.h4`
   ${(props: TextStyleProps) => css`
     ${commonHeaderStyles(props)};
     font-size: ${props.theme.font.size.h4};
-    letter-spacing: 0.05em;
-
-    letter-spacing: 0.05em;
     ${props.theme.mediaQueries.tablet} {
       font-size: calc(${props.theme.font.size.h4} * 0.8);
     }
@@ -104,7 +108,6 @@ export const Header4 = styled.h4`
 export const Header5 = styled.h5`
   ${(props: TextStyleProps) => css`
     ${commonHeaderStyles(props)};
-    letter-spacing: 0.05em;
     font-size: ${props.theme.font.size.h5};
   `};
 `
@@ -112,7 +115,6 @@ export const Header5 = styled.h5`
 export const Header6 = styled.h6`
   ${(props: TextStyleProps) => css`
     ${commonHeaderStyles(props)};
-    letter-spacing: 0.05em;
     font-size: ${props.theme.font.size.h6};
   `};
 `

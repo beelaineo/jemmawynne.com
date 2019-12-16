@@ -1,3 +1,4 @@
+import * as React from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { Header5 } from '../../components/Text'
 
@@ -15,7 +16,7 @@ export const Wrapper = styled.header`
 export const NavTop = styled.div`
   ${({ theme }) => css`
     padding-top: ${theme.layout.spacing.double};
-    margin-bottom: ${theme.layout.spacing.single};
+    margin-bottom: ${theme.layout.spacing.double};
     display: flex;
     width: 100%;
     justify-content: center;
@@ -62,7 +63,6 @@ export const NavTools = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
     position: absolute;
     top: ${theme.layout.spacing.double};
     right: ${theme.layout.spacing.double};
@@ -70,16 +70,18 @@ export const NavTools = styled.div`
 `
 
 export const Logo = styled.img`
-  width: 260px;
+  width: 100%;
+  max-width: 310px;
 `
 
 interface WithActive {
   theme: DefaultTheme
   active?: boolean
+  children: React.ReactNode
 }
 
-export const NavHeader = styled(Header5)`
-  ${({ theme, active }: WithActive) => css`
+const NavHeaderElement = styled(Header5)`
+  ${({ active }: WithActive) => css`
     text-transform: uppercase;
     border-top: 2px solid transparent;
     border-bottom: 2px solid ${active ? 'black' : 'transparent'};
@@ -89,6 +91,10 @@ export const NavHeader = styled(Header5)`
   `}
 `
 
+export const NavHeader = (props: WithActive) => (
+  <NavHeaderElement {...props} family="sans" />
+)
+
 export const NavHeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,7 +103,7 @@ export const NavHeaderWrapper = styled.div`
   align-items: center;
   margin: 0 2em;
 
-  &:focus ${NavHeader}, &:hover > ${NavHeader} {
+  &:focus ${NavHeaderElement}, &:hover > ${NavHeaderElement} {
     border-bottom-color: black;
   }
 `
