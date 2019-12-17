@@ -309,6 +309,7 @@ export const textBlockFragment = gql`
     _type
     header
     bodyRaw
+    textAlign
     cta {
       ...CTAFragment
     }
@@ -323,6 +324,10 @@ export const heroFragment = gql`
     bodyRaw
     textPosition
     textPositionMobile
+    textAlign
+    cta {
+      ...CTAFragment
+    }
     mobileImage {
       ...SanityImageFragment
     }
@@ -331,6 +336,7 @@ export const heroFragment = gql`
     }
   }
   ${sanityImageFragment}
+  ${ctaFragment}
 `
 
 export const carouselFragment = gql`

@@ -2497,7 +2497,9 @@ export interface Hero {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
+  textAlign?: Maybe<Scalars['String']>
   textPosition?: Maybe<Scalars['String']>
+  cta?: Maybe<Cta>
   textColor?: Maybe<Scalars['String']>
   image?: Maybe<RichImage>
   mobileImage?: Maybe<RichImage>
@@ -5407,6 +5409,7 @@ export interface TextBlock {
   _type?: Maybe<Scalars['String']>
   header?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
+  textAlign?: Maybe<Scalars['String']>
   cta?: Maybe<Cta>
 }
 
@@ -5448,14 +5451,14 @@ export type TokenizedPaymentInputV2 = {
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: MailingAddressInput
-  /** The type of payment token. */
-  type: Scalars['String']
   /** A simple string or JSON containing the required payment data for the tokenized payment. */
   paymentData: Scalars['String']
   /** Executes the payment in test mode if possible. Defaults to `false`. */
   test?: Maybe<Scalars['Boolean']>
   /** Public Hash Key used for AndroidPay payments only. */
   identifier?: Maybe<Scalars['String']>
+  /** The type of payment token. */
+  type: Scalars['String']
 }
 
 /** An object representing exchange of money for a product or service. */

@@ -1,16 +1,10 @@
 import * as React from 'react'
-import {
-  Collection,
-  ShopifyCollection,
-  Carousel as CarouselType,
-} from '../../types'
+import { Carousel as CarouselType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
 import { CollectionCarousel, Carousel } from '../Carousel'
 
 interface CarouselBlockProps {
-  title?: string | null
-  collection?: Collection | ShopifyCollection | null
-  items?: CarouselType['items'] | null
+  content: CarouselType
 }
 
 /**
@@ -22,7 +16,9 @@ interface CarouselBlockProps {
  * Otherwise, uses props.items for the carousel
  */
 
-export const CarouselBlock = ({ title, collection }: CarouselBlockProps) => {
+export const CarouselBlock = ({ content }: CarouselBlockProps) => {
+  console.log(content)
+  const { title, collection, items } = content
   return (
     <SectionWrapper type="carousel">
       <SectionHeader title={title} />

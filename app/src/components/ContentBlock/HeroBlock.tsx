@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { Image, ImageWrapper } from '../Image'
 import { Hero } from '../../types'
+import { CTA } from '../CTA'
 import { RichText } from '../RichText'
 
 interface HeroBackground {
@@ -18,6 +19,7 @@ const HeroWrapper = styled.div`
 interface HeroTextProps {
   theme: DefaultTheme
   textPosition?: string | null
+  textAlign?: string | null
   textColor?: string | null
   textPositionMobile?: string | null
   textColorMobile?: string | null
@@ -27,6 +29,7 @@ const HeroText = styled.div`
   ${({
     theme,
     textPosition,
+    textAlign,
     textColor,
     textPositionMobile,
     textColorMobile,
@@ -40,11 +43,13 @@ const HeroText = styled.div`
     display: flex;
     justify-content: ${theme.utils.getFlexJustification(textPosition)};
     align-items: ${theme.utils.getFlexAlignment(textPosition)};
-    text-align: ${theme.utils.getTextAlignment(textPosition)};
+    text-align: ${textAlign || theme.utils.getTextAlignment(textPosition)};
     color: ${theme.utils.getColor(textColor, theme)};
 
     .text-container {
       max-width: 400px;
+      display: flex;
+      flex-direction: column;
     }
 
     ${theme.mediaQueries.mobile} {
@@ -85,7 +90,9 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
     image,
     textPositionMobile,
     textColorMobile,
+    textAlign,
     mobileImage,
+    cta,
   } = hero
 
   return (
@@ -97,6 +104,7 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
         ) : null}
       </HeroImageWrapper>
       <HeroText
+        textAlign={textAlign}
         textPosition={textPosition}
         textColor={textColor}
         textPositionMobile={textPositionMobile}
@@ -104,6 +112,8 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
       >
         <div className="text-container">
           <RichText body={bodyRaw} />
+
+          {cta ? <CTA cta={cta} /> : null}
         </div>
       </HeroText>
     </HeroWrapper>
