@@ -68,6 +68,10 @@ export const textBlock = {
         },
       ],
     },
+    {
+      name: 'textAlign',
+      type: 'textAlign',
+    },
     { name: 'cta', title: 'Link Button', type: 'cta' },
   ],
 }

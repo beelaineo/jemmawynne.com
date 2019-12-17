@@ -27,9 +27,18 @@ export const hero = {
       ],
     },
     {
+      name: 'textAlign',
+      type: 'textAlign',
+    },
+    {
       name: 'textPosition',
       title: 'Text Position',
       type: 'position',
+    },
+    {
+      name: 'cta',
+      title: 'CTA',
+      type: 'cta',
     },
     {
       name: 'textColor',
