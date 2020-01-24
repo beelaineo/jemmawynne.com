@@ -50,9 +50,9 @@ export const ProductGalleryImage = styled.div``
 export const ProductGalleryThumbnails = styled.div`
   ${(props) => css`
     flex: 1;
-    padding-right: ${props.theme.layout.spacing.small};
+    padding-right: ${props.theme.layout.spacing.single};
     > button {
-      padding: ${props.theme.layout.spacing.small};
+      padding: ${props.theme.layout.spacing.single};
     }
   `}
 `
@@ -99,7 +99,7 @@ export const NormalizeDiv = styled.div`
   text-align: ${(props: NormalizeDivProps) => props.align || 'inherit'};
 
   ${(props) => `
-   		margin: ${props.theme.layout.spacing.small};
+   		margin: ${props.theme.layout.spacing.single};
 	`}
 `
 
@@ -149,8 +149,8 @@ export const Button = styled.button`
     text-align: center;
     text-transform: uppercase;
     transition: 0.2s;
-    padding: ${props.theme.layout.spacing.small};
-    margin: ${props.theme.layout.spacing.small} 0;
+    padding: ${props.theme.layout.spacing.single};
+    margin: ${props.theme.layout.spacing.single} 0;
     opacity: ${props.disabled ? 0.3 : 1};
     pointer-events: ${props.disabled ? 'none' : 'auto'};
     max-width: 200px;
@@ -254,7 +254,7 @@ export const Label = styled.label`
 		color: #777;
 		color:${props.theme.color.grays[3]};
 		display: block;
-		margin-bottom: ${props.theme.layout.spacing.small};
+		margin-bottom: ${props.theme.layout.spacing.single};
 		-moz-appearance: none;
 		appearance: none;
 		-webkit-appearance: none;

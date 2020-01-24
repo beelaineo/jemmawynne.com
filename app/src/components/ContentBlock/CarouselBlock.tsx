@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Carousel as CarouselType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
-import { CollectionCarousel, Carousel } from '../Carousel'
+import { CollectionCarousel, ItemsCarousel } from '../Carousel'
 
 interface CarouselBlockProps {
-  content: CarouselType
+  content: Omit<CarouselType, '__typename'>
 }
 
 /**
@@ -17,18 +17,15 @@ interface CarouselBlockProps {
  */
 
 export const CarouselBlock = ({ content }: CarouselBlockProps) => {
-  console.log(content)
   const { title, collection, items } = content
   return (
     <SectionWrapper type="carousel">
       <SectionHeader title={title} />
       {collection ? (
         <CollectionCarousel collection={collection} />
-      ) : (
-        <Carousel>
-          <p>Items</p>
-        </Carousel>
-      )}
+      ) : items ? (
+        <ItemsCarousel items={items} />
+      ) : null}
     </SectionWrapper>
   )
 

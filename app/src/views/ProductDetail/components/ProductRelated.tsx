@@ -14,18 +14,19 @@ export const ProductRelated = (props: ProductRelatedProps) => {
   /* Return a custom carousel */
   if (customRelated && customRelated.collection) {
     const customTitle = customRelated.title || customRelated?.collection?.title
-    return (
-      <CarouselBlock
-        title={customTitle}
-        collection={customRelated.collection}
-      />
-    )
+    const content = {
+      title: customTitle,
+      collection: customRelated.collection,
+    }
+    return <CarouselBlock content={content} />
   }
 
   if (customRelated && customRelated.items && customRelated.items.length > 0) {
-    return (
-      <CarouselBlock title={customRelated.title} items={customRelated.items} />
-    )
+    const content = {
+      title: customRelated.title,
+      items: customRelated.items,
+    }
+    return <CarouselBlock content={content} />
   }
 
   /* Otherwise, find the first collection form the product */
@@ -33,5 +34,10 @@ export const ProductRelated = (props: ProductRelatedProps) => {
   if (!collections || !collections.length) return null
 
   const defaultTitle = `Shop the ${collections[0].title} Collection`
-  return <CarouselBlock title={defaultTitle} collection={collections[0]} />
+  const collectionContent = {
+    title: defaultTitle,
+    collection: collections[0],
+  }
+  // @ts-ignore TODO update after graphql migration
+  return <CarouselBlock content={collectionContent} />
 }

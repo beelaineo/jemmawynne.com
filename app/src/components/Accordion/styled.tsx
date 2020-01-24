@@ -33,7 +33,7 @@ export const Span = styled.div`
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    padding: ${theme.layout.spacing.small};
+    padding: ${theme.layout.spacing.single};
     margin: ${theme.layout.spacing.singleHalf} 0;
     border-top: 2px solid ${theme.color.light};
     border-bottom: 2px solid ${theme.color.light};

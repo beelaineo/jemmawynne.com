@@ -26,12 +26,12 @@ export const CartSidebar = styled.div`
       background: transparent;
     }
     > * {
-      padding: ${props.theme.layout.spacing.small};
+      padding: ${props.theme.layout.spacing.single};
       margin: 0;
     }
     h3 {
-      margin: ${props.theme.layout.spacing.small};
-      margin-top: ${props.theme.layout.spacing.small} !important;
+      margin: ${props.theme.layout.spacing.single};
+      margin-top: ${props.theme.layout.spacing.single} !important;
     }
     ${props.theme.mediaQueries.mobile} {
       max-width: 340px;
@@ -46,7 +46,7 @@ export const CloseButton = styled.button`
   bottom: 0;
   background-color: black;
   padding: 2rem;
-  padding: ${(props) => props.theme.layout.spacing.small};
+  padding: ${(props) => props.theme.layout.spacing.single};
 `
 
 export const CartBottom = styled.div`
@@ -54,7 +54,7 @@ export const CartBottom = styled.div`
   position: absolute;
   bottom: 0px;
   left: 0;
-  padding: ${(props) => props.theme.layout.spacing.small};
+  padding: ${(props) => props.theme.layout.spacing.single};
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -63,7 +63,7 @@ export const CartBottom = styled.div`
   background-color: white;
   > div,
   > h6 {
-    margin: ${(props) => props.theme.layout.spacing.small};
+    margin: ${(props) => props.theme.layout.spacing.single};
   }
 `
 
