@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Collection } from '../../types'
-import { Header2, Header4 } from 'Components/Text'
-import { Image } from 'Components/Image'
+import { Header2, Header4 } from '../../components/Text'
+import { Image } from '../../components/Image'
 import { PLPHeader, PLPHeaderInner, PLPText, PLPImage } from './styled'
 
 interface ProductListingHeaderProps {

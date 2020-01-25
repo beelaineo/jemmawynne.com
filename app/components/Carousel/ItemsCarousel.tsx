@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Carousel } from './Carousel'
-import { Collection, Product } from '../../types'
+import { ShopifyCollection, ShopifyProduct, RichPageLink } from '../../types'
 import { ProductThumbnail } from '../Product'
 import { CollectionThumbnail } from '../Collection'
 
 interface ItemsCarouselProps {
-  items: Array<Collection | Product>
+  items: Array<ShopifyCollection | ShopifyProduct | RichPageLink>
 }
 
 export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
@@ -13,10 +13,10 @@ export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
   return (
     <Carousel>
       {items.map((item) =>
-        item.__typename === 'Product' ? (
-          <ProductThumbnail key={item.id} product={item} />
-        ) : item.__typename === 'Collection' ? (
-          <CollectionThumbnail key={item.id} collection={item} />
+        item.__typename === 'ShopifyProduct' ? (
+          <ProductThumbnail key={item._id} product={item} />
+        ) : item.__typename === 'ShopifyCollection' ? (
+          <CollectionThumbnail key={item._id} collection={item} />
         ) : null,
       )}
     </Carousel>

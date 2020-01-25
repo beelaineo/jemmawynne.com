@@ -5,7 +5,6 @@ import { useSwipeable } from 'react-swipeable'
 import {
   CarouselContainer,
   SlidesContainer,
-  SlideSpacer,
   CarouselButton,
   CarouselMask,
 } from './styled'

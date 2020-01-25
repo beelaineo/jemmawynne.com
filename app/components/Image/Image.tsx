@@ -2,8 +2,7 @@ import * as React from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
   ShopifySourceImage,
-  Image as ShopifyImage,
-  SanityImage,
+  Image as SanityImage,
   RichImage,
 } from '../../types'
 import { HoverImageWrapper, Wrapper, Picture, RatioImageFill } from './styled'
@@ -12,7 +11,7 @@ export const ImageWrapper = styled.img`
   display: block;
 `
 
-type ImageType = ShopifySourceImage | ShopifyImage | SanityImage | RichImage
+type ImageType = ShopifySourceImage | SanityImage | RichImage
 
 interface ImageDetails {
   src?: string | null
@@ -31,12 +30,11 @@ const getImageDetails = (image: ImageType): null | ImageDetails => {
     case 'ShopifySourceImage':
       return { src: image.originalSrc, altText: image.altText }
     case 'Image':
-      return { src: image.originalSrc, altText: image.altText }
-    case 'SanityImage':
+      return { src: image.asset?.url }
     case 'RichImage':
       return {
-        src: image.asset && image.asset.url ? image.asset.url : undefined,
-        // TODO get alt text if present
+        src: image.asset?.url,
+        altText: image?.altText,
       }
     default:
       console.log(image)

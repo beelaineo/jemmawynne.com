@@ -20,8 +20,8 @@ const ZOOM_AMOUNT = 2
 
 export const Gallery = ({ images, currentImageId }: GalleryProps) => {
   /* Utils */
-  const getImageById = (id: string): ImageType | undefined =>
-    images.find((i) => i.id === id)
+  const getImageById = (key: string): ImageType | undefined =>
+    images.find((i) => i._key === key)
 
   /* State */
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -43,7 +43,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
   const changeImage = (imageId: string) => () =>
     setCurrentImage(getImageById(imageId))
 
-  const watchZoom = (e) => {
+  const watchZoom = (e: MouseEvent) => {
     if (!wrapperRef.current) return
     const {
       top,
@@ -76,7 +76,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
       {images.length > 1 && (
         <Thumbnails data-testid="thumbnails">
           {images.map((image, i) => (
-            <button key={image.id} onClick={changeImage(image.id)}>
+            <button key={image._key} onClick={changeImage(image._key)}>
               <Image ratio={1} image={image} />
             </button>
           ))}

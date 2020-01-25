@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Collection } from 'use-shopify'
 import { useQuery } from 'urql'
 import { SHOP_DATA_QUERY, ShopDataResponse } from './shopDataQuery'
 import { unwindEdges } from '../../utils/graphql'
 import { Menu, ProductInfo } from '../../types/generated'
+import { Collection } from '../../types'
 
 const { useContext } = React
 

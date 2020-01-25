@@ -3,38 +3,25 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 import { Carousel } from './Carousel'
 import {
   ShopifyCollection,
-  Collection,
-  Product,
+  ShopifyProduct,
   ShopifyProductSource,
 } from '../../types'
 import { ProductThumbnail } from '../Product'
 
 interface CollectionCarouselProps {
-  collection: ShopifyCollection | Collection
+  collection: ShopifyCollection
 }
 
-const getProducts = (
-  collection: ShopifyCollection | Collection,
-): Product[] | ShopifyProductSource[] => {
-  switch (collection.__typename) {
-    case 'ShopifyCollection':
-      const productNodes = collection?.products?.products
-      if (!productNodes) return []
-      return productNodes
-        .map((pNode) => pNode?.sourceData)
-        .reduce(
-          (acc, current) =>
-            current !== undefined && current !== null ? [...acc, current] : acc,
-          [],
-        )
-
-    case 'Collection':
-      const [collectionProducts] = unwindEdges(collection.products)
-      return collectionProducts
-    default:
-      // @ts-ignore
-      throw new Error(`Cannot get products for type "${collection.__typename}"`)
-  }
+const getProducts = (collection: ShopifyCollection): ShopifyProduct[] => {
+  const productNodes = collection?.products
+  if (!productNodes) return []
+  return productNodes
+    .map((pNode) => pNode?.sourceData)
+    .reduce(
+      (acc, current) =>
+        current !== undefined && current !== null ? [...acc, current] : acc,
+      [],
+    )
 }
 
 export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {

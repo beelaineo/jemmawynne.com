@@ -4,3 +4,4 @@ dist
 node_modules
 .DS_STORE
 stats.json
+.next
