@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/Link'
 import { Image as ImageType } from '../../Types'
 import { FigureWrapper, ImageWrapper, Caption } from './styled'
 import { Image } from '../Image'

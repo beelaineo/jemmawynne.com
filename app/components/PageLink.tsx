@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link as RrLink } from 'react-router-dom'
+import NextLink from 'next/Link'
 import { PageLink as PageLinkType } from '../types'
 import { getPageLinkUrl, getPageLinkLabel } from '../utils/links'
 
@@ -22,9 +22,11 @@ export const PageLink = ({ link, children, label }: LinkProps) => {
         throw new Error('This PageLink does not have a document')
       }
       return (
-        <RrLink style={linkStyles} to={getPageLinkUrl(link)}>
-          {children || label || getPageLinkLabel(link) || null}
-        </RrLink>
+        <NextLink href={getPageLinkUrl(link)}>
+          <span style={linkStyles}>
+            {children || label || getPageLinkLabel(link) || null}
+          </span>
+        </NextLink>
       )
     default:
       // @ts-ignore

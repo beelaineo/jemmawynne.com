@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/Link'
 import { ShopifyCollection } from '../../types'
 import { ImageWrapper, TextWrapper } from './styled'
 import { Image } from '../Image'
@@ -14,7 +14,7 @@ export const CollectionThumbnail = ({
 }: CollectionThumbnailProps) => {
   const to = `/collections/${collection.handle}`
   return (
-    <Link to={to}>
+    <Link href={to}>
       <ImageWrapper>
         <Image image={collection.sourceData.image} ratio={1} />
       </ImageWrapper>

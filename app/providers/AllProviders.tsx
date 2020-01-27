@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Client, createRequest } from 'urql'
 import { DocumentNode } from 'graphql'
 import { pipe, subscribe } from 'wonka'
-import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { ShopifyProvider } from 'use-shopify'
 import { createClient, Provider as UrqlProvider } from 'urql'
@@ -51,12 +50,10 @@ export const Providers = ({ children }: Props) => {
       >
         <ShopDataProvider>
           <ThemeProvider theme={theme}>
-            <BrowserRouter>
-              <LocationProvider>
-                <GlobalStyles />
-                {children}
-              </LocationProvider>
-            </BrowserRouter>
+            <LocationProvider>
+              <GlobalStyles />
+              {children}
+            </LocationProvider>
           </ThemeProvider>
         </ShopDataProvider>
       </ShopifyProvider>

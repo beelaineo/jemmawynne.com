@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
 import { ProductInfoBlock, ShopifyProduct } from '../../types'
@@ -105,10 +104,14 @@ const ProductDetailMain = ({ product }: Props) => {
  */
 
 interface MatchParams {
-  handle: string
+  match: {
+    params: {
+      handle: string
+    }
+  }
 }
 
-export const ProductDetail = ({ match }: RouteComponentProps<MatchParams>) => {
+export const ProductDetail = ({ match }: MatchParams) => {
   /* fetch the product data */
   const { handle } = match.params
   const variables = { handle }

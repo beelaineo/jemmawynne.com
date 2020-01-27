@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { Link } from 'react-router-dom'
+import Link from 'next/Link'
 import { DocumentLink } from '../../components/DocumentLink'
 import { getDocumentLinkLabel } from '../../utils/links'
 import { useCheckout } from 'use-shopify'
@@ -134,7 +134,7 @@ export const Navigation = () => {
     <Wrapper>
       <NavTop>
         <span />
-        <Link to="/">
+        <Link href="/">
           <Logo src="/static/images/Logo_Large_Black.svg" />
         </Link>
       </NavTop>

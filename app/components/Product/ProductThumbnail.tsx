@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ShopifyProduct } from '../../types'
-import { Link } from 'react-router-dom'
+import Link from 'next/Link'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Header3, Header6 } from '../Text'
 import { Image } from '../Image'
@@ -24,7 +24,7 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
   const to = `/products/${product.handle}`
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   return (
-    <Link to={to}>
+    <Link href={to}>
       <ProductThumb>
         <Image image={productImage} hoverImage={hoverImage} />
         <ProductInfo hidePrice={hidePrice}>

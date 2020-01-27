@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/Link'
 import { Header5 } from '../Text'
 
 interface WithAsAndTo {

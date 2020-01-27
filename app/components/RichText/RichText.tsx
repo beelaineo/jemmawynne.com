@@ -49,21 +49,6 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
         return <Text.P {...props} />
     }
   },
-  // marks: {
-  // 	link: ({ mark, children }: Mark) => {
-  // 		const hostname = typeof window !== 'undefined' ? window.location.hostname : 'hikawa.studio'
-  // 		const parsed = parseUrl(mark.href)
-  // 		const isExternal = parsed && parsed.origin && parsed.origin.match(hostname) === null
-  // 		if (isExternal || !parsed) {
-  // 			return (
-  // 				<TextAnchor href={mark.href} target={isExternal ? '_blank' : ''} rel="noopener noreferrer">
-  // 					{children}
-  // 				</TextAnchor>
-  // 			)
-  // 		}
-  // 		return <Link to={`${parsed.pathname}${parsed.search}`}>{children}</Link>
-  // 	},
-  // },
 })
 
 interface RichTextProps {

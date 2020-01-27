@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Location } from 'history'
-import { Route } from 'react-router-dom'
 
 interface LocationContextValue {
   location: Location
@@ -22,12 +21,11 @@ interface LocationProviderProps {
   children: React.ReactNode
 }
 
+const location = { location: 'dummy' }
+
 export const LocationProvider = ({ children }: LocationProviderProps) => (
-  <Route
-    render={({ location }) => (
-      <LocationContext.Provider value={{ location }}>
-        {children}
-      </LocationContext.Provider>
-    )}
-  />
+  // @ts-ignore
+  <LocationContext.Provider value={{ location }}>
+    {children}
+  </LocationContext.Provider>
 )

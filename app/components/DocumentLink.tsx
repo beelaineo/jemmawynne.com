@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link as RrLink } from 'react-router-dom'
+import NextLink from 'next/Link'
 import { ShopifyProduct, ShopifyCollection, Page } from '../types'
 import { getDocumentLinkUrl, getDocumentLinkLabel } from '../utils/links'
 
@@ -17,8 +17,10 @@ const linkStyles = {
 export const DocumentLink = ({ document, children, label }: LinkProps) => {
   if (!document) return null
   return (
-    <RrLink style={linkStyles} to={getDocumentLinkUrl(document)}>
-      {children || label || getDocumentLinkLabel(document) || null}
-    </RrLink>
+    <NextLink href={getDocumentLinkUrl(document)}>
+      <span style={linkStyles}>
+        {children || label || getDocumentLinkLabel(document) || null}
+      </span>
+    </NextLink>
   )
 }
