@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
-import { TextBlock as TextBlockType } from '../../types/generated'
+import { TextBlock as TextBlockType } from '../../types'
 import { Header2 } from '../Text'
 import { RichText } from '../RichText'
 import { CTA } from '../CTA'

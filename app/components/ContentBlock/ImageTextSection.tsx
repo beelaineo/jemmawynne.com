@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
-import { ImageTextSection as ImageTextSectionType } from '../../types/generated'
+import { ImageTextSection as ImageTextSectionType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
 import { ImageBlock } from './ImageBlock'
 import { TextBlock } from './TextBlock'

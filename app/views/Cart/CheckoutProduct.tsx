@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useCheckout } from 'use-shopify'
-import { CheckoutLineItem } from '../../types'
+import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney, getVariantImage } from '../../utils'
 import { FlexContainer, FlexThree, FlexSix } from '../../components/Layout/Flex'
 import { QuantitySelectorCart } from '../ProductDetail/styled'
@@ -12,7 +12,7 @@ import { RemoveCart } from './styled'
 const { useState } = React
 
 interface CheckoutProductProps {
-  lineItem: CheckoutLineItem
+  lineItem: StorefrontApiCheckoutLineItem
 }
 
 export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
@@ -41,7 +41,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
       onMouseOver={updateHover}
       onMouseOut={removeHover}
     >
-      <FlexThree>{image ? <img src={image.originalSrc} /> : null}</FlexThree>
+      <FlexThree>{image ? <img src={image} /> : null}</FlexThree>
       <FlexSix marginVertical="0">
         <Header5 weight="light" color="grays.0">
           {title}

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import styled, { css, DefaultTheme } from 'styled-components'
-import { Product, Collection } from '../types'
+import styled, { css } from 'styled-components'
+import { ShopifyProduct, ShopifyCollection } from '../types'
 import { ProductThumbnail } from './Product'
 import { CollectionThumbnail } from './Collection'
 
@@ -37,7 +37,7 @@ const Grid = styled.div`
  * ItemGrid
  */
 
-type ProductOrCollection = Product | Collection
+type ProductOrCollection = ShopifyProduct | ShopifyCollection
 
 interface ItemGridProps {
   items: ProductOrCollection[]
@@ -47,15 +47,15 @@ export const ItemGrid = ({ items }: ItemGridProps) => {
   return (
     <Grid>
       {items.map((item) => {
-        if (item.__typename === 'Product')
+        if (item.__typename === 'ShopifyProduct')
           return (
             //
-            <ProductThumbnail key={item.id} product={item} />
+            <ProductThumbnail key={item._id} product={item} />
           )
-        if (item.__typename === 'Collection')
+        if (item.__typename === 'ShopifyCollection')
           return (
             //
-            <CollectionThumbnail key={item.id} collection={item} />
+            <CollectionThumbnail key={item._id} collection={item} />
           )
 
         console.warn(

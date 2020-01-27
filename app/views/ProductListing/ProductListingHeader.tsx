@@ -1,17 +1,17 @@
 import * as React from 'react'
-import { Collection } from '../../types'
+import { ShopifyCollection } from '../../types'
 import { Header2, Header4 } from '../../components/Text'
 import { Image } from '../../components/Image'
 import { PLPHeader, PLPHeaderInner, PLPText, PLPImage } from './styled'
 
 interface ProductListingHeaderProps {
-  collection: Collection
+  collection: ShopifyCollection
 }
 
 export const ProductListingHeader = ({
   collection,
 }: ProductListingHeaderProps) => {
-  const { image, title, description } = collection
+  const { image, title, description } = collection.sourceData
   const textAlign = image ? 'left' : 'center'
   return (
     <PLPHeader>

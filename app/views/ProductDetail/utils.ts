@@ -1,4 +1,4 @@
-import { ProductInfo, ProductInfoBlock } from '../../types/generated'
+import { ProductInfo, ProductInfoBlock } from '../../types'
 
 export function getInfoBlocksByType(
   type: string,

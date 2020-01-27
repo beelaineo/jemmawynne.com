@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Product, ShopifyProduct } from '../../types'
+import { ShopifyProduct } from '../../types'
 import { Link } from 'react-router-dom'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Header3, Header6 } from '../Text'
@@ -9,7 +9,7 @@ import { formatMoney } from '../../utils'
 import { ProductInfo, ProductThumb } from './styled'
 
 interface ProductThumbnail {
-  product: Product | ShopifyProduct['sourceData']
+  product: ShopifyProduct
   hidePrice?: boolean
 }
 
@@ -19,7 +19,8 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
   const productImages = product.images ? unwindEdges(product.images)[0] : []
 
   const productImage = productImages.length ? productImages[0] : undefined
-  const { minVariantPrice, maxVariantPrice } = product.priceRange || {}
+  const { minVariantPrice, maxVariantPrice } =
+    product.sourceData.priceRange || {}
   const to = `/products/${product.handle}`
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   return (

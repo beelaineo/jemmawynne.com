@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { ShopifyCollection } from '../../types'
 import { imageFragment } from '../../graphql/fragments'
 
 export const COLLECTION_QUERY = gql`
@@ -49,5 +50,5 @@ export const COLLECTION_QUERY = gql`
 `
 
 export interface CollectionResult {
-  collectionByHandle: Collection
+  collectionByHandle: ShopifyCollection
 }

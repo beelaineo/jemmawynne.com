@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Header4 } from './Text'
 import styled, { css } from 'styled-components'
 import { DocumentLink } from './DocumentLink'
-import { Cta } from '../types/generated'
+import { Cta } from '../types'
 
 interface CTAProps {
   cta: Cta

@@ -1,10 +1,22 @@
-schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
 generates:
-  types/generated.ts:
+  types/generated-sanity.ts:
+    schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
     plugins:
       - typescript
     config:
       nonOptionalTypename: true
+      scalars:
+        DateTime: Date
+        JSON: '{ [key: string]: any }'
+      declarationKind:
+        type: 'interface'
+  types/generated-shopify.ts:
+    schema: ./schema-shopify.graphql
+    plugins:
+      - typescript
+    config:
+      nonOptionalTypename: true
+      typesPrefix: 'StorefrontApi'
       scalars:
         DateTime: Date
         JSON: '{ [key: string]: any }'

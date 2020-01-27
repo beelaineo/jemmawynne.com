@@ -43,7 +43,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
   const changeImage = (imageId: string) => () =>
     setCurrentImage(getImageById(imageId))
 
-  const watchZoom = (e: MouseEvent) => {
+  const watchZoom = (e: any) => {
     if (!wrapperRef.current) return
     const {
       top,

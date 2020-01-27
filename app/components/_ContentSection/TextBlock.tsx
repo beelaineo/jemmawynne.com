@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { TextBlock as TextBlockType } from '../../types/generated'
+import { TextBlock as TextBlockType } from '../../types'
 import { Header2, Header4 } from '../Text'
 import { TextBlockWrapper } from './styled'
 import { RichText } from '../RichText'

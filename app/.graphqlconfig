@@ -1,13 +1,13 @@
 {
 	"projects": {
 		"app": {
-			"schemaPath": "./src/schema.graphql",
+			"schemaPath": "./schema-shopify.graphql",
 			"extensions": {
 				"endpoints": {
 					"default": {
-						"url": "https://jemmawynne-api.good-idea.now.sh",
+						"url": "https://jemmawynne-development.myshopify.com/api/graphql",
 						"headers": {
-							"X-Shopify-Storefront-Access-Token": "${env:SHOPIFY_STOREFRONT_TOKEN}"
+							"X-Shopify-Storefront-Access-Token": "f50903d30045eaffacf14aa2dc37f167"
 						}
 					}
 				}

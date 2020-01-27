@@ -1,11 +1,8 @@
 import * as React from 'react'
-import { SubMenu as SubMenuType } from '../../types/generated'
+import { SubMenu as SubMenuType } from '../../types'
 import { SubMenuColumns } from './styled'
 import { RichPageLink } from '../../components/RichPageLink'
-import { ImageBlock } from '../../components/ContentSection/ImageBlock'
 import { LinkGroup } from './LinkGroup'
-
-const { useEffect, useRef } = React
 
 interface SubMenuProps {
   submenu: SubMenuType
@@ -13,7 +10,7 @@ interface SubMenuProps {
 }
 
 export const SubMenu = ({ submenu, active }: SubMenuProps) => {
-  const { title, columns } = submenu
+  const { columns } = submenu
   return (
     <SubMenuColumns active={active}>
       {columns.map((col) => {

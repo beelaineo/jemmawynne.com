@@ -5,6 +5,21 @@ export const GalleryWrapper = styled.div`
   position: relative;
 `
 
+interface ZoomImageWrapperProps {
+  onMouseMove?: any
+}
+
+export const ZoomImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.2s;
+`
+
 export const MainImageWrapper = styled.div`
   ${({ theme }) => css`
     margin-bottom: ${theme.layout.spacing.single};
@@ -22,17 +37,6 @@ export const Thumbnails = styled.div`
     grid-template-columns: repeat(5, 1fr);
     grid-gap: ${theme.layout.spacing.single};
   `}
-`
-
-export const ZoomImageWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  opacity: 0;
-  transition: 0.2s;
 `
 
 interface ZoomInnerProps {

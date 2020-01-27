@@ -78,6 +78,8 @@ interface WithActive {
   theme: DefaultTheme
   active?: boolean
   children: React.ReactNode
+  as?: string
+  onClick?: () => void
 }
 
 const NavHeaderElement = styled(Header5)`
@@ -91,7 +93,8 @@ const NavHeaderElement = styled(Header5)`
   `}
 `
 
-export const NavHeader = (props: WithActive) => (
+export const NavHeader = (props: Omit<WithActive, 'theme'>) => (
+  // @ts-ignore
   <NavHeaderElement {...props} family="sans" />
 )
 

@@ -572,6 +572,22 @@ export interface ProductVariant {
   sourceData?: Maybe<ShopifyProductVariantSource>
 }
 
+export interface ProductVariantEdge {
+  __typename: 'ProductVariantEdge'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  cursor?: Maybe<Scalars['String']>
+  node?: Maybe<ShopifyProductVariantSource>
+}
+
+export interface ProductVariantsConnection {
+  __typename: 'ProductVariantsConnection'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  pageInfo?: Maybe<PageInfo>
+  edges?: Maybe<Array<Maybe<Edge>>>
+}
+
 export interface RichImage {
   __typename: 'RichImage'
   _key?: Maybe<Scalars['String']>
@@ -1156,6 +1172,14 @@ export interface SanityImagePaletteSwatch {
   title?: Maybe<Scalars['String']>
 }
 
+export interface SelectedOption {
+  __typename: 'SelectedOption'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['String']>
+}
+
 export interface ShopifyCollection extends Document {
   __typename: 'ShopifyCollection'
   /** Document ID */
@@ -1268,6 +1292,7 @@ export interface ShopifyCollectionSource {
   title?: Maybe<Scalars['String']>
   handle?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
+  descriptionHtml?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
   image?: Maybe<ShopifySourceImage>
   products?: Maybe<ProductsConnection>
@@ -1410,8 +1435,10 @@ export interface ShopifyProductSource {
   tags?: Maybe<Array<Maybe<Scalars['String']>>>
   handle?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
+  descriptionHtml?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
   images?: Maybe<ShopifySourceImages>
+  variants?: Maybe<ProductVariantsConnection>
   collections?: Maybe<CollectionsConnection>
 }
 
@@ -1421,9 +1448,9 @@ export interface ShopifyProductVariantSource {
   _type?: Maybe<Scalars['String']>
   availableForSale?: Maybe<Scalars['Boolean']>
   id?: Maybe<Scalars['String']>
-  compareAtPriceV2?: Maybe<SaneMoney>
   image?: Maybe<ShopifySourceImage>
   priceV2?: Maybe<SaneMoney>
+  selectedOptions?: Maybe<Array<Maybe<SelectedOption>>>
   requiresShipping?: Maybe<Scalars['Boolean']>
   sku?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>

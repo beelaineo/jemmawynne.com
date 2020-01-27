@@ -1,9 +1,12 @@
-import { MoneyV2 } from '../types'
+import { SaneMoney, StorefrontApiMoneyV2 } from '../types'
 
-export const formatMoney = ({ amount, currencyCode }: MoneyV2): string =>
+export const formatMoney = ({
+  amount,
+  currencyCode,
+}: SaneMoney | StorefrontApiMoneyV2): string =>
   new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currencyCode,
   })
-    .format(amount)
+    .format(parseFloat(amount))
     .replace(/\.00$/, '')

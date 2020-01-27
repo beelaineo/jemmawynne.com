@@ -1,9 +1,9 @@
 import {
-  createProductVariantFields,
+  createProductVariant,
   createProductDocument,
 } from '@sane-shopify/sanity-plugin'
 
-export const productVariant = createProductVariantFields({})
+export const productVariant = createProductVariant({})
 
 export const Product = createProductDocument({
   fields: [

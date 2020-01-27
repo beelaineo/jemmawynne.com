@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link as RrLink } from 'react-router-dom'
-import { PageLink as PageLinkType } from '../types/generated'
+import { PageLink as PageLinkType } from '../types'
 import { getPageLinkUrl, getPageLinkLabel } from '../utils/links'
 
 interface LinkProps {

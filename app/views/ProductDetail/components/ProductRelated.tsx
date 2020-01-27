@@ -1,16 +1,14 @@
 import * as React from 'react'
-import { ShopifyProduct, Product, Collection } from '../../../types/generated'
+import { ShopifyProduct } from '../../../types'
 import { CarouselBlock } from '../../../components/ContentBlock/CarouselBlock'
-import { unwindEdges } from '../../../utils/graphql'
 
 interface ProductRelatedProps {
-  product: Product
-  saneProduct?: ShopifyProduct
+  product: ShopifyProduct
 }
 
 export const ProductRelated = (props: ProductRelatedProps) => {
   const { product } = props
-  const customRelated = props?.saneProduct?.related
+  const customRelated = product?.related
   /* Return a custom carousel */
   if (customRelated && customRelated.collection) {
     const customTitle = customRelated.title || customRelated?.collection?.title
@@ -30,7 +28,7 @@ export const ProductRelated = (props: ProductRelatedProps) => {
   }
 
   /* Otherwise, find the first collection form the product */
-  const [collections] = unwindEdges<Collection>(product.collections)
+  const { collections } = product
   if (!collections || !collections.length) return null
 
   const defaultTitle = `Shop the ${collections[0].title} Collection`

@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import { unwindEdges } from '@good-idea/unwind-edges'
 import { Link } from 'react-router-dom'
 import { DocumentLink } from '../../components/DocumentLink'
 import { getDocumentLinkLabel } from '../../utils/links'
@@ -7,7 +7,6 @@ import { useCheckout } from 'use-shopify'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { useLocation } from '../../providers/LocationProvider'
 import { CartSidebar, CloseButton } from '../../components/Cart'
-import { unwindEdges } from '../../utils/graphql'
 import { Checkout } from '../Cart/Checkout'
 import { SubMenu } from './SubMenu'
 import { SearchInput } from './SearchInput'
@@ -179,7 +178,7 @@ export const Navigation = () => {
                   <NavHeaderWrapper key={menuItem._key}>
                     <DocumentLink document={menuItem?.link?.document}>
                       <NavHeader>
-                        {getDocumentLinkLabel(menuItem?.link?.document)}
+                        {getDocumentLinkLabel(menuItem?.link?.document) || null}
                       </NavHeader>
                     </DocumentLink>
                   </NavHeaderWrapper>

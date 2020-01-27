@@ -16,7 +16,7 @@
 	"scripts": {
 		"dev": "next",
 		"install-types": "typesync && yarn install",
-		"generate-types": "graphql-codegen && prettier ./types/generated.ts --write",
+		"generate-types": "graphql get-schema && graphql-codegen && prettier ./types/**/* --write",
 		"test": "jest",
 		"test:watch": "jest --watch"
 	},
@@ -24,6 +24,10 @@
 		"@graphql-codegen/cli": "^1.8.3",
 		"@graphql-codegen/typescript": "^1.8.3",
 		"@types/react": "^16.9.19",
+		"@types/react-dom": "^16.9.5",
+		"@types/react-router": "^5.1.4",
+		"@types/react-router-dom": "^5.1.3",
+		"@types/styled-components": "^4.4.2",
 		"graphql": "^14.5.8",
 		"graphql-cli": "^3.0.14",
 		"jest": "^24.9.0",
@@ -47,6 +51,6 @@
 		"use-shopify": "^0.7.0"
 	},
 	"resolutions": {
-		"graphql": "14.4.2"
+		"graphql": "14.5.8"
 	}
 }

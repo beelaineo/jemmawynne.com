@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ImageBlock as ImageBlockType } from '../../types/generated'
+import { ImageBlock as ImageBlockType } from '../../types'
 import { Figure } from '../Figure'
 import { getPageLinkUrl, getPageLinkLabel } from '../../utils/links'
 

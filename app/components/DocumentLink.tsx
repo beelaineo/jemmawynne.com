@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link as RrLink } from 'react-router-dom'
-import { ShopifyProduct, ShopifyCollection, Page } from '../types/generated'
+import { ShopifyProduct, ShopifyCollection, Page } from '../types'
 import { getDocumentLinkUrl, getDocumentLinkLabel } from '../utils/links'
 
 interface LinkProps {

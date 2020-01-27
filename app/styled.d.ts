@@ -20,6 +20,7 @@ declare module 'styled-components' {
       family: { [key: string]: string }
     }
     color: {
+      light: string
       grays: string[]
       white: string
       black: string

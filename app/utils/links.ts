@@ -3,7 +3,7 @@ import {
   ShopifyCollection,
   ShopifySourceImage,
   Page,
-} from '../types/generated'
+} from '../types'
 
 type Document = ShopifyProduct | ShopifyCollection | Page
 

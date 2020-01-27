@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ImageBlock } from './ImageBlock'
 import { TextBlock } from './TextBlock'
-import { ImageBlockOrTextBlock } from '../../types/generated'
+import { ImageBlockOrTextBlock } from '../../types'
 
 export const renderContentBlock = (block?: ImageBlockOrTextBlock) => {
   if (!block) return null

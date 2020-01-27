@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { unwindEdges } from '@good-idea/unwind-edges'
-import { Product } from '../../types'
 import { useQuery } from 'urql'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { ProductListingHeader } from './ProductListingHeader'
@@ -23,11 +21,10 @@ export const ProductListing = ({ match }: ProductListingProps) => {
   })
   if (response.fetching || !response.data) return <p>Loading..</p>
   const collection = response.data.collectionByHandle
-  const [products] = unwindEdges<Product>(collection.products)
   return (
     <React.Fragment>
       <ProductListingHeader collection={collection} />
-      <ItemGrid items={products} />
+      <ItemGrid items={collection.products} />
     </React.Fragment>
   )
 }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { LinkGroup as LinkGroupType } from '../../types/generated'
+import { LinkGroup as LinkGroupType } from '../../types'
 import { DocumentLink } from '../../components/DocumentLink'
 import { Header5, Header6 } from '../../components/Text'
 

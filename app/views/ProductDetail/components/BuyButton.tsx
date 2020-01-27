@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { UseCheckoutValues } from 'use-shopify'
-import { ProductVariant } from '../../../types'
+import { StorefrontApiProductVariant } from '../../../types'
 import { ButtonPrimary } from '../styled'
 import { Placeholder } from '../../../components/Placeholder'
 
 interface Props extends Pick<UseCheckoutValues, 'addLineItem'> {
-  currentVariant?: Pick<ProductVariant, 'id' | 'availableForSale'>
+  currentVariant?: StorefrontApiProductVariant
   quantity?: number
 }
 

@@ -15,6 +15,6 @@ export const grays = [
 
 export const white = 'white'
 export const black = 'black'
-
+export const light = grays[5]
 export const roseGold = 'rgb(255, 214, 209)'
 export const yellowGold = 'rgb(215, 183, 64)'

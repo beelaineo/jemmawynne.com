@@ -1,14 +1,12 @@
 import * as React from 'react'
 import { NormalizeDiv } from '../styled'
-import { Product, ProductVariant } from '../../../types/generated'
+import { ShopifyProduct, ProductVariant } from '../../../types'
 import { Header2, Header4 } from '../../../components/Text'
-import { Accordion } from '../../../components/Accordion'
 import { HtmlContent } from '../../../components/RichText'
 import { formatMoney } from '../../../utils'
-const { useState } = React
 
 interface ProductDescriptionProps {
-  product: Product
+  product: ShopifyProduct
   currentVariant: ProductVariant
 }
 
@@ -23,11 +21,11 @@ export const ProductDescription = ({
           {product.title}
         </Header2>
         <Header4 weight="strong" color="grays.0">
-          {formatMoney(currentVariant.priceV2)}
+          {formatMoney(currentVariant.sourceData.priceV2)}
         </Header4>
       </NormalizeDiv>
       <NormalizeDiv>
-        <HtmlContent content={product.descriptionHtml} />
+        <HtmlContent content={product.sourceData.descriptionHtml} />
       </NormalizeDiv>
     </>
   )

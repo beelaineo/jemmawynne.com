@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { ProductVariant, Product, Image } from '../../../types'
-import { unwindEdges } from '../../../utils/graphql'
+import { unwindEdges } from '@good-idea/unwind-edges'
+import { ProductVariant, ShopifyProduct, Image } from '../../../types'
 import { Gallery } from '../../../components/Gallery'
 import { ProductGalleryWrapper } from '../styled'
 
 interface ProductImagesProps {
-  product: Product
+  product: ShopifyProduct
   currentVariant: ProductVariant
 }
 
@@ -13,13 +13,21 @@ export const ProductImages = ({
   product,
   currentVariant,
 }: ProductImagesProps) => {
-  if (!product.images || !product.images.edges || !product.images.edges.length)
+  if (
+    !product.sourceData.images ||
+    !product.sourceData.images.edges ||
+    !product.sourceData.images.edges.length
+  )
     return null
-  const [images] = unwindEdges<Image>(product.images)
+  // @ts-ignore
+  const [images] = unwindEdges<Image>(product.sourceData.images)
 
   return (
     <ProductGalleryWrapper>
-      <Gallery images={images} currentImageId={currentVariant.image.id} />
+      <Gallery
+        images={images}
+        currentImageId={currentVariant.sourceData.image.id}
+      />
     </ProductGalleryWrapper>
   )
 }

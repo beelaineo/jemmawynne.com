@@ -1,4 +1,4 @@
-import { Scalars } from './generated'
+import { Scalars } from './generated-sanity'
 
 export type SanityRichText = Scalars['JSON']
 
@@ -13,4 +13,5 @@ export type Position =
   | 'bottom-center'
   | 'bottom-right'
 
-export * from './generated'
+export * from './generated-shopify'
+export * from './generated-sanity'

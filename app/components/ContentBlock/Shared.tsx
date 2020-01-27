@@ -5,7 +5,7 @@ import { Header2, Header4 } from '../Text'
 import { RichText } from '../RichText'
 
 interface SectionWrapperProps {
-  type: string
+  type?: string
   theme: DefaultTheme
 }
 

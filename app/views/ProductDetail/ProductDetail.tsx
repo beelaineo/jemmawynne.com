@@ -2,11 +2,7 @@ import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { PRODUCT_QUERY, ProductQueryResult } from './query'
-import {
-  Product,
-  ProductInfoBlock,
-  ShopifyProduct,
-} from '../../types/generated'
+import { ProductInfoBlock, ShopifyProduct } from '../../types'
 import { useProductVariant, useCheckout } from 'use-shopify'
 import { NotFound } from '../NotFound'
 import { Column } from '../../components/Layout'
@@ -30,21 +26,23 @@ import { Accordion } from '../../components/Accordion'
 import { getInfoBlocksByType, getInfoBlocksByTag } from './utils'
 
 interface Props {
-  product: Product
-  saneProduct?: ShopifyProduct
+  product: ShopifyProduct
 }
 
-const ProductDetailMain = ({ product, saneProduct }: Props) => {
+const ProductDetailMain = ({ product }: Props) => {
   /* get additional info blocks from Sanity */
   const { productInfoBlocks } = useShopData()
   const globalAccordions = productInfoBlocks
     ? [
-        ...getInfoBlocksByType(product.productType, productInfoBlocks),
-        ...getInfoBlocksByTag(product.tags, productInfoBlocks),
+        ...getInfoBlocksByType(
+          product.sourceData.productType,
+          productInfoBlocks,
+        ),
+        ...getInfoBlocksByTag(product.sourceData.tags, productInfoBlocks),
       ]
     : []
 
-  const extraAccordions = (saneProduct && saneProduct.infoBlocks) || []
+  const extraAccordions = (product && product.infoBlocks) || []
   const accordions = [...extraAccordions, ...globalAccordions]
 
   /* hook to manage quantity input */
@@ -97,7 +95,7 @@ const ProductDetailMain = ({ product, saneProduct }: Props) => {
           </ProductInfoWrapper>
         </ProductDetails>
       </Column>
-      <ProductRelated product={product} saneProduct={saneProduct} />
+      <ProductRelated product={product} />
     </Wrapper>
   )
 }
@@ -120,10 +118,7 @@ export const ProductDetail = ({ match }: RouteComponentProps<MatchParams>) => {
   })
   const product =
     (response && response.data && response.data.productByHandle) || undefined
-  const saneProduct =
-    (response && response.data && response.data.allShopifyProducts[0]) ||
-    undefined
   if (response.fetching) return <p>Loading..</p>
   if (!product) return <NotFound />
-  return <ProductDetailMain product={product} saneProduct={saneProduct} />
+  return <ProductDetailMain product={product} />
 }

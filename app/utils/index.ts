@@ -1,6 +1,5 @@
 export * from './currency'
 export * from './data'
-export * from './graphql'
 export * from './hooks'
 export * from './links'
 export * from './shopify'
