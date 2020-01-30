@@ -26,7 +26,7 @@ export interface TextBlockProps {
 
 export const TextBlock = ({ content }: TextBlockProps) => {
   const { header, bodyRaw, cta, textAlign } = content
-  console.log(content)
+
   return (
     <TextBlockWrapper textAlign={textAlign}>
       <Header2 family="serif">{header}</Header2>

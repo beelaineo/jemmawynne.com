@@ -20,7 +20,7 @@ export const CollectionThumbnail = ({
       </ImageWrapper>
       <TextWrapper>
         <Header3>{collection.title}</Header3>
-        <Header6>35 items</Header6>
+        <Header6>{collection.products.length} items</Header6>
       </TextWrapper>
     </Link>
   )

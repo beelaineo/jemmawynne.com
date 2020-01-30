@@ -26,6 +26,7 @@ const getProducts = (collection: ShopifyCollection): ShopifyProduct[] => {
 
 export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
   const products = getProducts(collection)
+  console.log('HERE', collection)
   if (!products || !products.length) return null
 
   return (

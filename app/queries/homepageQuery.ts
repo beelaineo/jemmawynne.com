@@ -3,9 +3,9 @@ import {
   textBlockFragment,
   carouselFragment,
   heroFragment,
-} from '../../graphql/fragments'
+} from './fragments'
 import gql from 'graphql-tag'
-import { Homepage } from '../../types'
+import { Homepage } from '../types'
 
 export interface HomepageResponse {
   Homepage: Homepage

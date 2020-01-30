@@ -45,7 +45,7 @@ export const SearchResults = (props: SearchResultsProps) => {
   const clearSearch = () => reset()
   const doSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('doSearch')
+
     search(localSearchTerm)
   }
 

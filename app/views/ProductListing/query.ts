@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { ShopifyCollection } from '../../types'
-import { imageFragment } from '../../graphql/fragments'
+import { imageFragment } from '../../queries/fragments'
 
 export const COLLECTION_QUERY = gql`
   query CollectionQuery($handle: String!) {

@@ -5,7 +5,7 @@ import {
   moneyV2Fragment,
   saneShopifyProductFragment,
   saneShopifyCollectionFragmentWithoutProducts,
-} from '../../graphql/fragments'
+} from '../../queries/fragments'
 
 export const PRODUCT_QUERY = gql`
   query ProductQuery($handle: String!) {

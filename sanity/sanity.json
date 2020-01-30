@@ -10,7 +10,7 @@
   "env": {
     "development": {
       "api": {
-        "dataset": "development"
+        "dataset": "production"
       }
     }
   },

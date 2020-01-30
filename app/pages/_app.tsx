@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-  Homepage,
-  SearchResults,
-  ProductListing,
-  ProductDetail,
-  Navigation,
-} from '../views'
+import { SearchResults, Navigation } from '../views'
 import { Providers } from '../providers/AllProviders'
 
 interface AppProps {
@@ -15,7 +9,6 @@ interface AppProps {
 }
 
 const App = (props: AppProps) => {
-  console.log(props)
   const { Component, pageProps } = props
 
   return (

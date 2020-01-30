@@ -161,10 +161,9 @@ export const saneShopifyProductFragment = gql`
         handle
         shopifyId
         products {
-          products {
-            ...SaneShopifyProductFragmentWithoutRelated
-          }
+          ...SaneShopifyProductFragmentWithoutRelated
         }
+
         sourceData {
           description
           id
@@ -218,9 +217,7 @@ export const saneShopifyCollectionFragment = gql`
     handle
     shopifyId
     products {
-      products {
-        ...SaneShopifyProductFragment
-      }
+      ...SaneShopifyProductFragment
     }
     sourceData {
       description

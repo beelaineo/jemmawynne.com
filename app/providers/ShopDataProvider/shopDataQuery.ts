@@ -5,7 +5,7 @@ import {
   internalLinkFragment,
   richPageLinkFragment,
   productInfoFragment,
-} from '../../graphql/fragments'
+} from '../../queries/fragments'
 
 export const SHOP_DATA_QUERY = gql`
   {

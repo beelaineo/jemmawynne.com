@@ -9,7 +9,6 @@ interface ItemsCarouselProps {
 }
 
 export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
-  console.log(items)
   return (
     <Carousel>
       {items.map((item) =>

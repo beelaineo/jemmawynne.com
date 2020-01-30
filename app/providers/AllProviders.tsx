@@ -1,14 +1,21 @@
 import * as React from 'react'
-import { Client, createRequest } from 'urql'
+import fetch from 'isomorphic-unfetch'
+import {
+  createRequest,
+  ssrExchange,
+  dedupExchange,
+  cacheExchange,
+  fetchExchange,
+} from 'urql'
 import { DocumentNode } from 'graphql'
 import { pipe, subscribe } from 'wonka'
 import { ThemeProvider } from 'styled-components'
 import { ShopifyProvider } from 'use-shopify'
 import { createClient, Provider as UrqlProvider } from 'urql'
-import { SHOPIFY_STOREFRONT_TOKEN } from '../config'
 import { theme, GlobalStyles } from '../theme'
 import { ShopDataProvider } from './ShopDataProvider'
 import { LocationProvider } from './LocationProvider'
+import { SANITY_GRAPHQL_URL } from '../config'
 
 /**
  * App
@@ -22,8 +29,14 @@ interface Props {
   children: React.ReactNode
 }
 
-const client = createClient({
-  url: '/.netlify/functions/graphql',
+const isServer = typeof window !== 'object' || process.browser
+
+const ssrCache = ssrExchange({ isClient: !isServer })
+
+export const client = createClient({
+  url: SANITY_GRAPHQL_URL,
+  exchanges: [dedupExchange, cacheExchange, ssrCache, fetchExchange],
+  fetch,
 })
 
 function urqlQuery<Response>(

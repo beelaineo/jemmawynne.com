@@ -93,7 +93,6 @@ function navReducer(currentState: NavState, action: Action): NavState {
 export const Navigation = () => {
   /* State from Providers */
   const { loading, checkout } = useCheckout()
-  console.log(checkout)
   const { ready, menu } = useShopData()
   const { location } = useLocation()
 
@@ -133,7 +132,6 @@ export const Navigation = () => {
   return (
     <Wrapper>
       <NavTop>
-        <span />
         <Link href="/">
           <Logo src="/static/images/Logo_Large_Black.svg" />
         </Link>

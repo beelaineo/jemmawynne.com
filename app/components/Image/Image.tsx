@@ -37,7 +37,6 @@ const getImageDetails = (image: ImageType): null | ImageDetails => {
         altText: image?.altText,
       }
     default:
-      console.log(image)
       // @ts-ignore
       throw new Error(`Image type "${image.__typename}" is not supported`)
   }

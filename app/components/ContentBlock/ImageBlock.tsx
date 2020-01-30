@@ -20,11 +20,12 @@ export const ImageBlock = ({ content }: ImageBlockProps) => {
   if (!backgroundImage) return null
   const linkTo =
     link && link.document ? getDocumentLinkUrl(link.document) : undefined
-  return (
-    // @ts-ignore
-    <ImageBlockWrapper as={linkTo ? Link : undefined} to={linkTo}>
+
+  const renderInner = () => (
+    <ImageBlockWrapper>
       <Image image={backgroundImage} ratio={1} />
       <RichText body={captionRaw} />
     </ImageBlockWrapper>
   )
+  return linkTo ? <Link href={linkTo}>{renderInner()}</Link> : renderInner()
 }

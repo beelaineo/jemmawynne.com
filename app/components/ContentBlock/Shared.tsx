@@ -46,7 +46,7 @@ interface SectionHeaderProps {
 
 export const SectionHeader = ({ title, subtitle }: SectionHeaderProps) => {
   if (!title && !subtitle) return null
-  console.log(title)
+
   return (
     <SectionHeaderWrapper>
       {title ? (
