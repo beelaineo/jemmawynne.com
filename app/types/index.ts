@@ -14,4 +14,5 @@ export type Position =
   | 'bottom-right'
 
 export * from './generated-shopify'
+// @ts-ignore
 export * from './generated-sanity'

@@ -1,6 +1,5 @@
 import * as React from 'react'
-import Link from 'next/Link'
-import { Image as ImageType } from '../../Types'
+import { Image as ImageType } from '../../types'
 import { FigureWrapper, ImageWrapper, Caption } from './styled'
 import { Image } from '../Image'
 

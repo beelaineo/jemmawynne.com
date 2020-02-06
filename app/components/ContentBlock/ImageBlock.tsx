@@ -27,5 +27,11 @@ export const ImageBlock = ({ content }: ImageBlockProps) => {
       <RichText body={captionRaw} />
     </ImageBlockWrapper>
   )
-  return linkTo ? <Link href={linkTo}>{renderInner()}</Link> : renderInner()
+  return linkTo ? (
+    <Link href={linkTo}>
+      <a>{renderInner()}</a>
+    </Link>
+  ) : (
+    renderInner()
+  )
 }

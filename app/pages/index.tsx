@@ -1,13 +1,56 @@
 import * as React from 'react'
+import gql from 'graphql-tag'
 import fetch from 'isomorphic-unfetch'
-import { useQuery } from 'urql'
-import { homepageQuery, HomepageResponse } from '../queries/homepageQuery'
-import { graphqlQuery } from '../queries/utils'
+import { useQuery } from '@apollo/react-hooks'
 import { ContentBlock } from '../components/ContentBlock'
+import {
+  imageBlockFragment,
+  textBlockFragment,
+  carouselFragment,
+  heroFragment,
+} from '../graphql'
+import { Homepage as HomepageType } from '../types'
+
+interface HomepageResponse {
+  Homepage: HomepageType
+}
+
+const homepageQuery = /*  GraphQL */ gql`
+  query HomepageQuery {
+    Homepage(id: "homepage") {
+      _id
+      content {
+        ... on ImageTextSection {
+          _key
+          _type
+          title
+          subtitleRaw
+          blocks {
+            ... on TextBlock {
+              ...TextBlockFragment
+            }
+            ... on ImageBlock {
+              ...ImageBlockFragment
+            }
+          }
+        }
+        ... on Hero {
+          ...HeroFragment
+        }
+        ... on Carousel {
+          ...CarouselFragment
+        }
+      }
+    }
+  }
+  ${textBlockFragment}
+  ${imageBlockFragment}
+  ${carouselFragment}
+  ${heroFragment}
+`
 
 export const Homepage = () => {
-  const [response] = useQuery<HomepageResponse>({ query: homepageQuery })
-  const { fetching, data, error } = response
+  const { loading, error, data } = useQuery<HomepageResponse>(homepageQuery)
   if (error)
     return (
       <React.Fragment>
@@ -16,8 +59,10 @@ export const Homepage = () => {
       </React.Fragment>
     )
 
-  if (fetching || !data || !data.Homepage.content) return null
+  if (loading || !data || !data.Homepage.content) return null
+
   const { content } = data.Homepage
+
   return (
     <React.Fragment>
       {content.map((content, index) =>

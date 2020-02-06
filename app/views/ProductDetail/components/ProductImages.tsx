@@ -1,12 +1,16 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { ProductVariant, ShopifyProduct, Image } from '../../../types'
+import {
+  ShopifyProduct,
+  ShopifyProductVariantSource,
+  Image,
+} from '../../../types'
 import { Gallery } from '../../../components/Gallery'
 import { ProductGalleryWrapper } from '../styled'
 
 interface ProductImagesProps {
   product: ShopifyProduct
-  currentVariant: ProductVariant
+  currentVariant: ShopifyProductVariantSource
 }
 
 export const ProductImages = ({
@@ -24,10 +28,7 @@ export const ProductImages = ({
 
   return (
     <ProductGalleryWrapper>
-      <Gallery
-        images={images}
-        currentImageId={currentVariant.sourceData.image.id}
-      />
+      <Gallery images={images} currentImageId={currentVariant.image.id} />
     </ProductGalleryWrapper>
   )
 }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Image as ImageType } from '../../types'
+import { ShopifySourceImage, Image as ImageType } from '../../types'
 import { Image } from '../Image'
 import {
   GalleryWrapper,
@@ -11,17 +11,29 @@ import {
 
 const { useState, useEffect, useRef } = React
 
+type GalleryImage = ImageType | ShopifySourceImage
+
 interface GalleryProps {
-  images: ImageType[]
+  images: GalleryImage[]
   currentImageId?: string
 }
 
 const ZOOM_AMOUNT = 2
 
+type ImageWithId = GalleryImage & { imageId: string }
+
+// TODO: Move ImageZoom to its own component to avoid rerenders of the entire thing
+//
 export const Gallery = ({ images, currentImageId }: GalleryProps) => {
+  const parsedImages: ImageWithId[] = images.map((image) => ({
+    // @ts-ignore
+    imageId: image.id || image._key,
+    ...image,
+  }))
+
   /* Utils */
-  const getImageById = (key: string): ImageType | undefined =>
-    images.find((i) => i._key === key)
+  const getImageById = (imageId: string): GalleryImage | undefined =>
+    parsedImages.find((i) => i.imageId === imageId)
 
   /* State */
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -75,8 +87,8 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
       </MainImageWrapper>
       {images.length > 1 && (
         <Thumbnails data-testid="thumbnails">
-          {images.map((image, i) => (
-            <button key={image._key} onClick={changeImage(image._key)}>
+          {parsedImages.map((image, i) => (
+            <button key={image.imageId} onClick={changeImage(image.imageId)}>
               <Image ratio={1} image={image} />
             </button>
           ))}

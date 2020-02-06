@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import Link from 'next/Link'
+import { IoIosCart } from 'react-icons/io'
+import { Menu } from '../../types'
 import { DocumentLink } from '../../components/DocumentLink'
 import { getDocumentLinkLabel } from '../../utils/links'
 import { useCheckout } from 'use-shopify'
@@ -23,7 +25,6 @@ import {
   ModalBackground,
   Loading,
 } from './styled'
-import { IoIosCart } from 'react-icons/io'
 
 const { useEffect, useReducer } = React
 
@@ -92,9 +93,10 @@ function navReducer(currentState: NavState, action: Action): NavState {
 
 export const Navigation = () => {
   /* State from Providers */
-  const { loading, checkout } = useCheckout()
   const { ready, menu } = useShopData()
+  const { loading, checkout } = useCheckout()
   const { location } = useLocation()
+  const shopData = useShopData()
 
   /* State */
   const [{ cartOpen, menuOpen, currentSubmenuKey }, dispatch] = useReducer(
@@ -133,7 +135,9 @@ export const Navigation = () => {
     <Wrapper>
       <NavTop>
         <Link href="/">
-          <Logo src="/static/images/Logo_Large_Black.svg" />
+          <a>
+            <Logo src="/static/images/Logo_Large_Black.svg" />
+          </a>
         </Link>
       </NavTop>
 

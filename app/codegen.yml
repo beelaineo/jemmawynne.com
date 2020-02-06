@@ -1,4 +1,8 @@
 generates:
+  fragmentTypes-sanity.json:
+    schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
+    plugins:
+      - fragment-matcher
   types/generated-sanity.ts:
     schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
     plugins:

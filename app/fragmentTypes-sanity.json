@@ -1,0 +1,102 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "INTERFACE",
+        "name": "Document",
+        "possibleTypes": [
+          {
+            "name": "ShopifyProduct"
+          },
+          {
+            "name": "ShopifyCollection"
+          },
+          {
+            "name": "Page"
+          },
+          {
+            "name": "SanityImageAsset"
+          },
+          {
+            "name": "Menu"
+          },
+          {
+            "name": "Homepage"
+          },
+          {
+            "name": "ProductInfo"
+          },
+          {
+            "name": "SanityFileAsset"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "PageOrShopifyCollectionOrShopifyProduct",
+        "possibleTypes": [
+          {
+            "name": "Page"
+          },
+          {
+            "name": "ShopifyCollection"
+          },
+          {
+            "name": "ShopifyProduct"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "CtaOrSubMenu",
+        "possibleTypes": [
+          {
+            "name": "Cta"
+          },
+          {
+            "name": "SubMenu"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "LinkGroupOrRichPageLink",
+        "possibleTypes": [
+          {
+            "name": "LinkGroup"
+          },
+          {
+            "name": "RichPageLink"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "CarouselOrHeroOrImageTextSection",
+        "possibleTypes": [
+          {
+            "name": "Carousel"
+          },
+          {
+            "name": "Hero"
+          },
+          {
+            "name": "ImageTextSection"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ImageBlockOrTextBlock",
+        "possibleTypes": [
+          {
+            "name": "ImageBlock"
+          },
+          {
+            "name": "TextBlock"
+          }
+        ]
+      }
+    ]
+  }
+}

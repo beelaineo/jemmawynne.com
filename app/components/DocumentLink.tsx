@@ -18,9 +18,11 @@ export const DocumentLink = ({ document, children, label }: LinkProps) => {
   if (!document) return null
   return (
     <NextLink href={getDocumentLinkUrl(document)}>
-      <span style={linkStyles}>
-        {children || label || getDocumentLinkLabel(document) || null}
-      </span>
+      <a>
+        <span style={linkStyles}>
+          {children || label || getDocumentLinkLabel(document) || null}
+        </span>
+      </a>
     </NextLink>
   )
 }

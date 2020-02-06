@@ -15,13 +15,15 @@ export const CollectionThumbnail = ({
   const to = `/collections/${collection.handle}`
   return (
     <Link href={to}>
-      <ImageWrapper>
-        <Image image={collection.sourceData.image} ratio={1} />
-      </ImageWrapper>
-      <TextWrapper>
-        <Header3>{collection.title}</Header3>
-        <Header6>{collection.products.length} items</Header6>
-      </TextWrapper>
+      <a>
+        <ImageWrapper>
+          <Image image={collection.sourceData.image} ratio={1} />
+        </ImageWrapper>
+        <TextWrapper>
+          <Header3>{collection.title}</Header3>
+          <Header6>{collection.products.length} items</Header6>
+        </TextWrapper>
+      </a>
     </Link>
   )
 }
