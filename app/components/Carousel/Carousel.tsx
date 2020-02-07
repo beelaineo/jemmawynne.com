@@ -10,14 +10,7 @@ import {
 } from './styled'
 import { Slide, SlideInfo } from './Slide'
 
-const {
-  useContext,
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-} = React
+const { useState, useEffect, useMemo, useRef } = React
 
 interface CarouselContextProps {
   currentSlide: number | null
