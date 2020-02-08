@@ -25,7 +25,8 @@ interface ImageDetails {
 
 /* Based on the image type, return a src, srcset, altText, etc */
 const getImageDetails = (image: ImageType): null | ImageDetails => {
-  if (!image) return {}
+  // @ts-ignore
+  if (!image || image === {}) return {}
   // TODO: when the GraphQL types are fixed, remove this to use the switch below
   // @ts-ignore
   if (image.originalSrc) {
@@ -49,6 +50,8 @@ const getImageDetails = (image: ImageType): null | ImageDetails => {
         altText: image?.altText,
       }
     default:
+      // TODO: no images should be empty objects wtf
+      return {}
       // @ts-ignore
       throw new Error(`Image type "${image.__typename}" is not supported`)
   }
