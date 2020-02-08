@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 import styled from 'styled-components'
 import { ImageBlock as ImageBlockType } from '../../types'
 import { Image } from '../Image'

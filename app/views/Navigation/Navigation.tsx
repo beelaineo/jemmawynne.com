@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import Link from 'next/Link'
+import Link from 'next/link'
 import { IoIosCart } from 'react-icons/io'
 import { Menu } from '../../types'
 import { DocumentLink } from '../../components/DocumentLink'

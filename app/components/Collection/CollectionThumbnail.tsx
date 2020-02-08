@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 import { ShopifyCollection } from '../../types'
 import { ImageWrapper, TextWrapper } from './styled'
 import { Image } from '../Image'

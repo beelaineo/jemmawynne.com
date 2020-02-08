@@ -1,5 +1,5 @@
 import * as React from 'react'
-import NextLink from 'next/Link'
+import NextLink from 'next/link'
 import { ShopifyProduct, ShopifyCollection, Page } from '../types'
 import { getDocumentLinkUrl, getDocumentLinkLabel } from '../utils/links'
 
