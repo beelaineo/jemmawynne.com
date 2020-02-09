@@ -6,19 +6,19 @@
         "name": "Document",
         "possibleTypes": [
           {
-            "name": "ShopifyProduct"
-          },
-          {
-            "name": "ShopifyCollection"
+            "name": "Menu"
           },
           {
             "name": "Page"
           },
           {
-            "name": "SanityImageAsset"
+            "name": "ShopifyCollection"
           },
           {
-            "name": "Menu"
+            "name": "ShopifyProduct"
+          },
+          {
+            "name": "SanityImageAsset"
           },
           {
             "name": "Homepage"
@@ -27,7 +27,25 @@
             "name": "ProductInfo"
           },
           {
+            "name": "SiteSettings"
+          },
+          {
+            "name": "Stockists"
+          },
+          {
             "name": "SanityFileAsset"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "CtaOrSubMenu",
+        "possibleTypes": [
+          {
+            "name": "Cta"
+          },
+          {
+            "name": "SubMenu"
           }
         ]
       },
@@ -43,18 +61,6 @@
           },
           {
             "name": "ShopifyProduct"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "CtaOrSubMenu",
-        "possibleTypes": [
-          {
-            "name": "Cta"
-          },
-          {
-            "name": "SubMenu"
           }
         ]
       },

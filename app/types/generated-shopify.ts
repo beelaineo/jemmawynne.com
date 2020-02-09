@@ -2483,8 +2483,11 @@ export interface StorefrontApiImageConnection {
 
 /** List of supported image content types. */
 export enum StorefrontApiImageContentType {
+  /** A PNG image. */
   Png = 'PNG',
+  /** A JPG image. */
   Jpg = 'JPG',
+  /** A WEBP image. */
   Webp = 'WEBP',
 }
 

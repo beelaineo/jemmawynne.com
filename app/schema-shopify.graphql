@@ -1,5 +1,5 @@
 # source: https://jemmawynne-development.myshopify.com/api/graphql
-# timestamp: Thu Jan 30 2020 14:22:47 GMT-0500 (Eastern Standard Time)
+# timestamp: Sun Feb 09 2020 16:13:05 GMT-0500 (Eastern Standard Time)
 
 schema {
   query: QueryRoot
@@ -5208,8 +5208,19 @@ type ImageConnection {
 List of supported image content types.
 """
 enum ImageContentType {
+  """
+  A PNG image.
+  """
   PNG
+
+  """
+  A JPG image.
+  """
   JPG
+
+  """
+  A WEBP image.
+  """
   WEBP
 }
 
