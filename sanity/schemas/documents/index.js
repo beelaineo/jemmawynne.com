@@ -1,5 +1,3 @@
-export * from './Product'
-export * from './Collection'
 export * from './menu'
 export * from './homepage'
 export * from './page'

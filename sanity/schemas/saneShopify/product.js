@@ -1,11 +1,4 @@
-import {
-  createProductVariant,
-  createProductDocument,
-} from '@sane-shopify/sanity-plugin'
-
-export const productVariant = createProductVariant({})
-
-export const Product = createProductDocument({
+export const productConfig = {
   fields: [
     {
       title: 'Info Blocks',
@@ -29,4 +22,4 @@ export const Product = createProductDocument({
       type: 'carousel',
     },
   ],
-})
+}
