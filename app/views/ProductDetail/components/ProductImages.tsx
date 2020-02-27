@@ -2,7 +2,7 @@ import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import {
   ShopifyProduct,
-  ShopifyProductVariantSource,
+  ShopifySourceProductVariant,
   Image,
 } from '../../../types'
 import { Gallery } from '../../../components/Gallery'
@@ -10,7 +10,7 @@ import { ProductGalleryWrapper } from '../styled'
 
 interface ProductImagesProps {
   product: ShopifyProduct
-  currentVariant: ShopifyProductVariantSource
+  currentVariant: ShopifySourceProductVariant
 }
 
 export const ProductImages = ({

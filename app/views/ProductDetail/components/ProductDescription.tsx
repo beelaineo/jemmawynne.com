@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { NormalizeDiv } from '../styled'
-import { ShopifyProduct, ShopifyProductVariantSource } from '../../../types'
+import { ShopifyProduct, ShopifySourceProductVariant } from '../../../types'
 import { Header2, Header4 } from '../../../components/Text'
 import { HtmlContent } from '../../../components/RichText'
 import { formatMoney } from '../../../utils'
 
 interface ProductDescriptionProps {
   product: ShopifyProduct
-  currentVariant: ShopifyProductVariantSource
+  currentVariant: ShopifySourceProductVariant
 }
 
 export const ProductDescription = ({

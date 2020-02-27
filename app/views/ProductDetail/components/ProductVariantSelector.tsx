@@ -3,19 +3,12 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 import { UseProductVariant } from 'use-shopify'
 import {
   ShopifyProduct,
-  ProductVariant,
-  SaneProductOption,
+  ShopifySourceProductVariant,
+  ShopifySourceProductOption,
 } from '../../../types'
 import { Select, Label, NormalizeDiv, ProductOptionWrapper } from '../styled'
 
 const { useState } = React
-
-interface Props extends UseProductVariant {
-  product: ShopifyProduct
-  quantity: number
-  increment: () => void
-  decrement: () => void
-}
 
 /**
  * ProductVariantSelector
@@ -31,7 +24,7 @@ interface SelectedProductOption {
 }
 
 const getInitialOptions = (
-  options: SaneProductOption[],
+  options: ShopifySourceProductOption[],
 ): SelectedProductOption[] =>
   options.map(({ name, values }) => ({
     name,
@@ -52,11 +45,11 @@ const getNewOptions = (
   })
 
 const getVariantBySelectedOptions = (
-  variants: ProductVariant[],
+  variants: ShopifySourceProductVariant[],
   currentOptions: SelectedProductOption[],
-): ProductVariant | void =>
+): ShopifySourceProductVariant | void =>
   variants.find((variant) => {
-    const { selectedOptions: optionsForVariant } = variant.sourceData
+    const { selectedOptions: optionsForVariant } = variant
     return optionsForVariant.reduce<boolean>((acc, variantOption) => {
       if (acc === false) return false
       const matchingOption = currentOptions.find(
@@ -67,11 +60,19 @@ const getVariantBySelectedOptions = (
     }, true)
   })
 
+interface Props extends UseProductVariant {
+  product: ShopifyProduct
+  quantity: number
+  increment: () => void
+  decrement: () => void
+}
+
 export const ProductVariantSelector = (props: Props) => {
   const { product, selectVariant } = props
 
-  const { variants } = product
-  const { options } = product.sourceData
+  const { options, variants: variantsConnection } = product.sourceData
+  // @ts-ignore
+  const [variants] = unwindEdges(variantsConnection)
 
   if (!options.length) return null
 

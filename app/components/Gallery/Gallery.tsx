@@ -85,7 +85,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
           </ZoomInner>
         </ZoomImageWrapper>
       </MainImageWrapper>
-      {images.length > 1 && (
+      {parsedImages.length > 1 && (
         <Thumbnails data-testid="thumbnails">
           {parsedImages.map((image, i) => (
             <button key={image.imageId} onClick={changeImage(image.imageId)}>

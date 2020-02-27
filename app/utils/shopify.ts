@@ -1,6 +1,11 @@
-import { Image, ShopifySourceImage, ProductVariant } from '../types'
+import {
+  ShopifySourceProductVariant,
+  StorefrontApiProductVariant,
+} from '../types'
 
-export const getVariantImage = (variant: ProductVariant): string | void => {
-  if (variant.sourceData.image) return variant.sourceData.image.originalSrc
+export const getVariantImage = (
+  variant: ShopifySourceProductVariant | StorefrontApiProductVariant,
+): string | void => {
+  if (variant.image) return variant.image.originalSrc
   return undefined
 }

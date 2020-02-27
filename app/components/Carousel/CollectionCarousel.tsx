@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { unwindEdges } from '@good-idea/unwind-edges'
 import { Carousel } from './Carousel'
 import {
   ShopifyCollection,
   ShopifyProduct,
-  ShopifyProductSource,
+  ShopifySourceProduct,
 } from '../../types'
 import { ProductThumbnail } from '../Product'
 
@@ -33,7 +32,7 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
     <Carousel>
       {//
       // @ts-ignore no clue here
-      products.map((product: Product | ShopifyProductSource) => {
+      products.map((product: Product | ShopifySourceProduct) => {
         const key =
           product.__typename === 'Product'
             ? product.id
