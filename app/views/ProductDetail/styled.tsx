@@ -163,7 +163,6 @@ export const ButtonPrimary = styled(Button)``
 
 export const Select = styled.select`
   text-align-last: center;
-  height: 50px;
   border: 1px solid #f1f1f1;
   border-radius: 0;
   -webkit-transition: 0.2s;
@@ -177,7 +176,7 @@ export const Select = styled.select`
   background: none;
   border-radius: 0;
   border: 1px solid #f1f1f1;
-  padding: 1rem 2rem;
+  padding: 12px;
   font-family: sans-serif;
   width: 150px;
   option {

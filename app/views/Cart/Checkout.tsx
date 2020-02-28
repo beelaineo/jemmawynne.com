@@ -1,24 +1,12 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { useCheckout } from 'use-shopify'
-import {
-  NormalizeDiv,
-  Button,
-  QuantitySelectorCart,
-} from '../ProductDetail/styled'
-import { QuantityInput } from '../../components/QuantityInput'
-import {
-  FlexContainer,
-  FlexHalf,
-  FlexThree,
-  FlexSix,
-} from '../../components/Layout/Flex'
+import { NormalizeDiv, Button } from '../ProductDetail/styled'
+import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
 import { Loading } from '../Navigation/styled'
 import { Header6, Header5, Header3 } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
 import { CheckoutProduct } from './CheckoutProduct'
-
-const { useState } = React
 
 /**
  * Main Checkout view
@@ -41,6 +29,7 @@ export const Checkout = () => {
       </Header3>
       <CartInner>
         {lineItems.map((lineItem) => (
+          // @ts-ignore
           <CheckoutProduct key={lineItem.id} lineItem={lineItem} />
         ))}
       </CartInner>

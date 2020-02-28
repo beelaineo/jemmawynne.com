@@ -14,11 +14,7 @@ import { useLocation } from '../../providers/LocationProvider'
 
 const { useState, useEffect } = React
 
-interface SearchResultsProps {
-  /* */
-}
-
-export const SearchResults = (props: SearchResultsProps) => {
+export const SearchResults = () => {
   const {
     searchTerm,
     reset,
@@ -85,6 +81,8 @@ export const SearchResults = (props: SearchResultsProps) => {
               <ClearSearchButton onClick={clearSearch} />
             </CurrentSearchTerm>
           </Header2>
+          {/*
+          // @ts-ignore */}
           {loading ? <p>Loading...</p> : <ItemGrid items={allResults} />}
         </>
       )}

@@ -47,6 +47,7 @@ export const ProductDetail = ({ product }: Props) => {
   const { count: quantity, increment, decrement } = useCounter(1, { min: 1 })
   /* get product variant utils */
   const { currentVariant, selectVariant } = useProductVariant(
+    // @ts-ignore
     product.sourceData,
   )
 
@@ -60,10 +61,13 @@ export const ProductDetail = ({ product }: Props) => {
       <Column>
         <ProductDetails>
           <ProductImagesWrapper>
+            {/*
+          //  @ts-ignore */}
             <ProductImages currentVariant={currentVariant} product={product} />
           </ProductImagesWrapper>
           <ProductInfoWrapper>
             <ProductDescription
+              // @ts-ignore
               currentVariant={currentVariant}
               product={product}
             />
@@ -78,6 +82,7 @@ export const ProductDetail = ({ product }: Props) => {
             <NormalizeDiv>
               <BuyButton
                 addLineItem={addLineItem}
+                // @ts-ignore
                 currentVariant={currentVariant}
                 quantity={quantity}
               />
