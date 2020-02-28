@@ -141,7 +141,7 @@ export const imageBlockFragment = gql`
 `
 
 export const saneMoneyV2Fragment = gql`
-  fragment SaneMoneyV2Fragment on SaneMoney {
+  fragment ShopifyMoneyV2Fragment on ShopifyMoneyV2 {
     currencyCode
     amount
   }
@@ -215,17 +215,16 @@ export const saneShopifyProductFragment = gql`
           node {
             _key
             _type
-            handle
             id
           }
         }
       }
       priceRange {
         minVariantPrice {
-          ...SaneMoneyV2Fragment
+          ...ShopifyMoneyV2Fragment
         }
         maxVariantPrice {
-          ...SaneMoneyV2Fragment
+          ...ShopifyMoneyV2Fragment
         }
       }
       description

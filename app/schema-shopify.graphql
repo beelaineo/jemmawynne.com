@@ -1,5 +1,5 @@
 # source: https://jemmawynne-development.myshopify.com/api/graphql
-# timestamp: Sun Feb 09 2020 16:13:05 GMT-0500 (Eastern Standard Time)
+# timestamp: Thu Feb 27 2020 19:22:03 GMT-0800 (Pacific Standard Time)
 
 schema {
   query: QueryRoot
@@ -3347,27 +3347,27 @@ The part of the image that should remain after cropping.
 """
 enum CropRegion {
   """
-  Keep the center of the image
+  Keep the center of the image.
   """
   CENTER
 
   """
-  Keep the top of the image
+  Keep the top of the image.
   """
   TOP
 
   """
-  Keep the bottom of the image
+  Keep the bottom of the image.
   """
   BOTTOM
 
   """
-  Keep the left of the image
+  Keep the left of the image.
   """
   LEFT
 
   """
-  Keep the right of the image
+  Keep the right of the image.
   """
   RIGHT
 }

@@ -1,6 +1,5 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import fetch from 'isomorphic-unfetch'
 import { useQuery } from '@apollo/react-hooks'
 import { ContentBlock } from '../components/ContentBlock'
 import {

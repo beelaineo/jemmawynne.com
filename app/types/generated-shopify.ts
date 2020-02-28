@@ -1598,15 +1598,15 @@ export type StorefrontApiCreditCardPaymentInputV2 = {
 
 /** The part of the image that should remain after cropping. */
 export enum StorefrontApiCropRegion {
-  /** Keep the center of the image */
+  /** Keep the center of the image. */
   Center = 'CENTER',
-  /** Keep the top of the image */
+  /** Keep the top of the image. */
   Top = 'TOP',
-  /** Keep the bottom of the image */
+  /** Keep the bottom of the image. */
   Bottom = 'BOTTOM',
-  /** Keep the left of the image */
+  /** Keep the left of the image. */
   Left = 'LEFT',
-  /** Keep the right of the image */
+  /** Keep the right of the image. */
   Right = 'RIGHT',
 }
 
