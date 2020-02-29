@@ -9,6 +9,7 @@ import {
   heroFragment,
 } from '../src/graphql'
 import { Homepage as HomepageType } from '../src/types'
+import { Homepage as HomepageView } from '../src/views/Homepage'
 
 interface HomepageResponse {
   Homepage: HomepageType
@@ -60,19 +61,7 @@ export const Homepage = () => {
 
   if (loading || !data || !data.Homepage.content) return null
 
-  const { content } = data.Homepage
-
-  return (
-    <React.Fragment>
-      {content.map((content, index) =>
-        content ? <ContentBlock key={content._key} content={content} /> : null,
-      )}
-    </React.Fragment>
-  )
-}
-
-Homepage.getInitialProps = async () => {
-  return {}
+  return <HomepageView homepage={data.Homepage} />
 }
 
 export default Homepage

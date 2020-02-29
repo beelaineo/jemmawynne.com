@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Header4 } from './Text'
+import { Heading } from './Text'
 import styled, { css } from 'styled-components'
 import { DocumentLink } from './DocumentLink'
 import { Cta } from '../types'
@@ -26,7 +26,9 @@ export const CTA = ({ cta }: CTAProps) => {
   return (
     <DocumentLink document={link.document}>
       <Wrapper>
-        <Header4 family="serif">{label}</Header4>
+        <Heading level={4} family="serif">
+          {label}
+        </Heading>
       </Wrapper>
     </DocumentLink>
   )

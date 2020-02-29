@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ShopifyCollection } from '../../types'
-import { Header2, Header4 } from '../../components/Text'
+import { Heading } from '../../components/Text'
 import { Image } from '../../components/Image'
 import { PLPHeader, PLPHeaderInner, PLPText, PLPImage } from './styled'
 
@@ -16,9 +16,11 @@ export const ProductListingHeader = ({
   return (
     <PLPHeader>
       <PLPHeaderInner>
-        <PLPText align={textAlign}>
-          <Header2>{title}</Header2>
-          <Header4 family="serif">{description}</Header4>
+        <PLPText>
+          <Heading level={2}>{title}</Heading>
+          <Heading level={4} family="serif">
+            {description}
+          </Heading>
         </PLPText>
         {image ? (
           <PLPImage>

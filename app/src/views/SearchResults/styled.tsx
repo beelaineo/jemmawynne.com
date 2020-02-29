@@ -2,14 +2,14 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.color.grays[9]};
+    background-color: body.9;
     position: fixed;
-    z-index: calc(${theme.layout.z.navigation} - 1);
-    top: ${theme.layout.navHeight};
-    padding-top: ${theme.layout.spacing.triple};
+    z-index: calc(${theme.zIndices.nav} - 1);
+    top: 50px;
+    padding-top: 6;
     left: 0;
     width: 100%;
-    height: calc(100vh - ${theme.layout.navHeight});
+    height: calc(100vh - 50px);
     overflow: scroll;
     text-align: center;
   `}
@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 export const CurrentSearchTerm = styled.span`
   ${({ theme }) => css`
     position: relative;
-    color: ${theme.color.grays[1]};
+    color: body.1;
   `}
 `
 
@@ -34,17 +34,13 @@ export const ClearSearchButton = styled.button`
 
 export const SearchInputWrapper = styled.form`
   ${({ theme }) => css`
-    font-size: ${theme.font.size.h3};
+    font-size: 3;
     position: relative;
-    border-bottom: ${theme.color.grays[3]};
+    border-bottom: body.3;
 
     input {
       background-color: none;
       font-size: inherit;
     }
   `}
-`
-
-export const SearchButton = styled.button`
-  pointer: cursor;
 `

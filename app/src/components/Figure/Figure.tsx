@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Image as ImageType } from '../../types'
+import { Heading } from '../Text'
 import { FigureWrapper, ImageWrapper, Caption } from './styled'
 import { Image } from '../Image'
 
@@ -24,9 +25,9 @@ export const Figure = ({
         <Image image={image} ratio={imageRatio} />
       </ImageWrapper>
       {caption ? (
-        <Caption family="sans" weight="semi">
+        <Heading level={5} family="sans" weight={4}>
           {caption}
-        </Caption>
+        </Heading>
       ) : null}
     </FigureWrapper>
   )

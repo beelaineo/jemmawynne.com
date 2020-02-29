@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { SanityRichText } from '../../types'
-import { Header2, Header4 } from '../Text'
+import { Heading } from '../Text'
 import { RichText } from '../RichText'
 
 interface SectionWrapperProps {
@@ -11,8 +11,7 @@ interface SectionWrapperProps {
 
 export const SectionWrapper = styled.div`
   ${({ theme, type }: SectionWrapperProps) => css`
-    padding: calc(${theme.layout.spacing.triple} * 2)
-      ${theme.layout.spacing.triple};
+    padding: calc(${theme.space[6]}px * 2) 6;
 
     ${type === 'carousel'
       ? css`
@@ -23,7 +22,7 @@ export const SectionWrapper = styled.div`
       : ''}
 
     &:nth-of-type(2) {
-      background-color: ${theme.color.grays[9]};
+      background-color: body.9;
     }
   `}
 `
@@ -31,7 +30,7 @@ export const SectionWrapper = styled.div`
 const SectionHeaderWrapper = styled.div`
   ${({ theme }) => css`
     text-align: center;
-    margin-bottom: ${theme.layout.spacing.single};
+    margin-bottom: 3;
   `}
 `
 const SubtitleWrapper = styled.div`
@@ -50,14 +49,14 @@ export const SectionHeader = ({ title, subtitle }: SectionHeaderProps) => {
   return (
     <SectionHeaderWrapper>
       {title ? (
-        <Header2 family="sans" weight="semi" transform="uppercase">
+        <Heading level={2} family="sans" weight={3} textTransform="uppercase">
           {title}
-        </Header2>
+        </Heading>
       ) : null}
       {subtitle ? (
         <SubtitleWrapper>
           {typeof subtitle === 'string' ? (
-            <Header4>{subtitle}</Header4>
+            <Heading level={4}>{subtitle}</Heading>
           ) : (
             <RichText body={subtitle} />
           )}

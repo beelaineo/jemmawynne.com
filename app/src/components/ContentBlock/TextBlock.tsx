@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { TextBlock as TextBlockType } from '../../types'
-import { Header2 } from '../Text'
+import { Heading } from '../Text'
 import { RichText } from '../RichText'
 import { CTA } from '../CTA'
 
@@ -29,7 +29,9 @@ export const TextBlock = ({ content }: TextBlockProps) => {
 
   return (
     <TextBlockWrapper textAlign={textAlign}>
-      <Header2 family="serif">{header}</Header2>
+      <Heading level={2} family="serif">
+        {header}
+      </Heading>
       {bodyRaw ? <RichText body={bodyRaw} /> : null}
       {cta ? <CTA cta={cta} /> : null}
     </TextBlockWrapper>

@@ -1,7 +1,5 @@
 import * as React from 'react'
-// @ts-ignore
-import { init, last } from 'ramda'
-import { useSwipeable } from 'react-swipeable'
+import { Swipeable, EventData } from 'react-swipeable'
 import {
   CarouselContainer,
   SlidesContainer,
@@ -14,7 +12,7 @@ const { useState, useEffect, useMemo, useRef } = React
 
 interface CarouselContextProps {
   currentSlide: number | null
-  addSlide: (slide: SlideInfo) => void
+  setCurrentSlide: (num: number) => void
 }
 
 const CarouselContext = React.createContext<CarouselContextProps | void>(
@@ -33,24 +31,32 @@ interface CarouselProps {
   columnCount?: number
 }
 
-export const Carousel = ({
+export const CarouselInner = ({
   children,
   columnCount: customColumnCount,
 }: CarouselProps) => {
   const columnCount = customColumnCount || 4
-  const [currentSlide, setCurrentSlide] = useState<number | null>(null)
+  const { currentSlide, setCurrentSlide } = useCarousel()
   const [hideButtons, setHideButtons] = useState(false)
-  const [slides, setSlides] = useState<SlideInfo[]>([])
-  const [attempts, setAttempts] = useState(0)
   const [hasOverflow, setHasOverflow] = useState(false)
+  const [attempts, setAttempts] = useState(0)
+  const [slides, setSlides] = useState<SlideInfo[]>([])
   const innerRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
 
-  const addSlide = useMemo(
-    () => (newSlide: SlideInfo) => {
-      setSlides((prevSlides) => [...prevSlides, newSlide])
-    },
-    [],
+  const goNext = () => {
+    if (currentSlide === null || currentSlide === slides.length - 1) return
+    setCurrentSlide(currentSlide + 1)
+  }
+
+  const goPrevious = () => {
+    if (currentSlide === null || currentSlide === 0) return
+    setCurrentSlide(currentSlide - 1)
+  }
+
+  const isAtFirst = currentSlide === 0
+  const isAtLast = Boolean(
+    currentSlide && currentSlide + columnCount >= slides.length,
   )
 
   useEffect(() => {
@@ -77,68 +83,102 @@ export const Carousel = ({
     }
   }, [outerRef.current, attempts])
 
-  const handleImageLoad = () => {
-    if (!innerRef.current) return
-    const el = innerRef.current
-    if (el.scrollWidth <= el.offsetWidth) setHideButtons(true)
+  const addSlide = useMemo(
+    () => (newSlide: SlideInfo) => {
+      setSlides((prevSlides) => [...prevSlides, newSlide])
+    },
+    [],
+  )
+
+  const handleSwipe = (e: EventData) => {
+    const { dir } = e
+    if (dir === 'Right') {
+      goPrevious()
+    } else if (dir === 'Left') {
+      goNext()
+    }
   }
 
-  const goNext = () => {
-    if (currentSlide === null || currentSlide === slides.length - 1) return
-    setCurrentSlide(currentSlide + 1)
+  return (
+    <CarouselContainer ref={outerRef}>
+      {children ? (
+        <CarouselButton
+          aria-label="previous slide"
+          direction="previous"
+          onClick={goPrevious}
+          visible={!isAtFirst}
+        />
+      ) : null}
+      {/* 
+           // @ts-ignore */}
+      <CarouselMask>
+        <Swipeable onSwiped={handleSwipe}>
+          <SlidesContainer
+            ref={innerRef}
+            left={currentSlide ? -slides[currentSlide].ref.offsetLeft : 0}
+          >
+            {React.Children.map(children, (child, index) => (
+              <Slide
+                addSlide={addSlide}
+                columnCount={columnCount}
+                index={index}
+                key={index}
+              >
+                {child}
+              </Slide>
+            ))}
+          </SlidesContainer>
+        </Swipeable>
+      </CarouselMask>
+      {children ? (
+        <CarouselButton
+          visible={!isAtLast}
+          direction="next"
+          aria-label="next slide"
+          onClick={goNext}
+        />
+      ) : null}
+    </CarouselContainer>
+  )
+}
+
+interface CarouselProviderProps {
+  children: React.ReactNode
+  onSlideChange?: (slideNumber: number | null) => void
+  currentSlide?: number
+}
+
+export const CarouselProvider = ({
+  children,
+  onSlideChange,
+}: CarouselProviderProps) => {
+  const [currentSlide, setCurrentSlideState] = useState<number | null>(null)
+
+  const setCurrentSlide = (num: number) => {
+    setCurrentSlideState(num)
   }
 
-  const goPrevious = () => {
-    if (currentSlide === null || currentSlide === 0) return
-    setCurrentSlide(currentSlide - 1)
-  }
+  useEffect(() => {
+    if (onSlideChange) onSlideChange(currentSlide)
+  }, [currentSlide])
 
-  const handlers = useSwipeable({
-    onSwipedLeft: goNext,
-    onSwipedRight: goPrevious,
-  })
-
-  const isAtFirst = currentSlide === 0
-  const isAtLast = currentSlide + columnCount >= slides.length
   const value = {
-    addSlide,
+    setCurrentSlide,
     currentSlide,
   }
 
   return (
     <CarouselContext.Provider value={value}>
-      <CarouselContainer ref={outerRef}>
-        {children ? (
-          <CarouselButton
-            aria-label="previous slide"
-            direction="previous"
-            onClick={goPrevious}
-            visible={!isAtFirst}
-          />
-        ) : null}
-        <CarouselMask>
-          <SlidesContainer
-            {...handlers}
-            ref={innerRef}
-            left={currentSlide ? -slides[currentSlide].ref.offsetLeft : 0}
-          >
-            {React.Children.map(children, (child, index) => (
-              <Slide columnCount={columnCount} index={index} key={index}>
-                {child}
-              </Slide>
-            ))}
-          </SlidesContainer>
-        </CarouselMask>
-        {children ? (
-          <CarouselButton
-            visible={!isAtLast}
-            direction="next"
-            aria-label="next slide"
-            onClick={goNext}
-          />
-        ) : null}
-      </CarouselContainer>
+      {children}
     </CarouselContext.Provider>
+  )
+}
+
+export const Carousel = ({ children, columnCount }: CarouselProps) => {
+  return (
+    <CarouselProvider>
+      <CarouselInner columnCount={columnCount}>{children}</CarouselInner>
+    </CarouselProvider>
   )
 }
 

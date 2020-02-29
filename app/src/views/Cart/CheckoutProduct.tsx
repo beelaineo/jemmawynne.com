@@ -5,7 +5,7 @@ import { formatMoney, getVariantImage } from '../../utils'
 import { FlexContainer, FlexThree, FlexSix } from '../../components/Layout/Flex'
 import { QuantitySelectorCart } from '../ProductDetail/styled'
 import { QuantityInput } from '../../components/QuantityInput'
-import { Header5 } from '../../components/Text'
+import { Heading } from '../../components/Text'
 import { IoMdClose } from 'react-icons/io'
 import { RemoveCart } from './styled'
 
@@ -43,17 +43,17 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
     >
       <FlexThree>{image ? <img src={image} /> : null}</FlexThree>
       <FlexSix marginVertical="0">
-        <Header5 weight="light" color="grays.0">
+        <Heading level={5} weight={2} color="grays.0">
           {title}
-        </Header5>
-        <Header5 weight="light" color="grays.1">
+        </Heading>
+        <Heading level={5} weight={2} color="grays.1">
           {variant.title}
-        </Header5>
+        </Heading>
         <div>
           <FlexSix margin="small">
-            <Header5 weight="strong" color="grays.0">
+            <Heading level={5} weight={5} color="grays.0">
               {formatMoney(variant.priceV2)}
-            </Header5>
+            </Heading>
           </FlexSix>
           <FlexSix margin="small">
             <QuantitySelectorCart className={hovered} width="40px">

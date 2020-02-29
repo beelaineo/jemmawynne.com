@@ -4,7 +4,7 @@ import { RichPageLink as RichPageLinkType } from '../types'
 import { DocumentLink } from './DocumentLink'
 import { RichText } from './RichText'
 import { Image } from './Image'
-import { Header5 } from './Text'
+import { Heading } from './Text'
 import { getDocumentLinkImage } from '../utils/links'
 
 interface LinkProps {
@@ -14,16 +14,15 @@ interface LinkProps {
 
 const TextWrapper = styled.div`
   ${({ theme }) => css`
-    margin-top: ${theme.layout.spacing.half};
+    margin-top: 3;
     text-align: center;
   `}
 `
 
-const Subtitle = styled(Header5)`
-  ${({ theme }) => css`
-    font-weight: ${theme.font.weight.light};
-  `}
-`
+interface SubtitleProps {
+  children: React.ReactNode
+}
+const Subtitle = (props: any) => <Heading level={5} fontWeight={2} {...props} />
 
 export const RichPageLink = ({ link, label }: LinkProps) => {
   const { image: customImage, hoverImage, captionRaw } = link
@@ -34,7 +33,7 @@ export const RichPageLink = ({ link, label }: LinkProps) => {
     <DocumentLink document={link.document}>
       <Image hoverImage={hoverImage} image={image} ratio={1} />
       <TextWrapper>
-        <Header5>{linkTitle}</Header5>
+        <Heading level={5}>{linkTitle}</Heading>
         {captionRaw && captionRaw.length ? (
           <RichText body={captionRaw} blockWrapper={Subtitle} />
         ) : null}

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ShopifyProduct } from '../../types'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { Header3, Header6 } from '../Text'
+import { Heading } from '../Text'
 import { Image } from '../Image'
 import { formatMoney } from '../../utils'
 
@@ -33,17 +33,17 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
         <ProductThumb>
           <Image image={productImage} hoverImage={hoverImage} />
           <ProductInfo hidePrice={hidePrice}>
-            <Header3>{product.title}</Header3>
+            <Heading level={3}>{product.title}</Heading>
             {hidePrice ? null : minVariantPrice &&
               minVariantPrice.amount &&
               maxVariantPrice &&
               maxVariantPrice.amount &&
               minVariantPrice.amount !== maxVariantPrice.amount ? (
-              <Header6>
+              <Heading level={6}>
                 {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
-              </Header6>
+              </Heading>
             ) : (
-              <Header6>{formatMoney(maxVariantPrice)}</Header6>
+              <Heading level={6}>{formatMoney(maxVariantPrice)}</Heading>
             )}
           </ProductInfo>
         </ProductThumb>

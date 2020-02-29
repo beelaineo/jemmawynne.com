@@ -9,13 +9,17 @@ import {
 } from 'urql'
 import { DocumentNode } from 'graphql'
 import { pipe, subscribe } from 'wonka'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from '@xstyled/styled-components'
 import { ShopifyProvider } from 'use-shopify'
 import { createClient, Provider as UrqlProvider } from 'urql'
-import { theme, GlobalStyles } from '../theme'
+import { defaultTheme, GlobalStyles } from '../theme'
 import { ShopDataProvider } from './ShopDataProvider'
 import { LocationProvider } from './LocationProvider'
-import { SANITY_GRAPHQL_URL } from '../config'
+import {
+  SHOPIFY_STOREFRONT_URL,
+  SHOPIFY_STOREFRONT_TOKEN,
+  SANITY_GRAPHQL_URL,
+} from '../config'
 
 /**
  * App
@@ -29,7 +33,8 @@ interface Props {
   children: React.ReactNode
 }
 
-const isServer = typeof window !== 'object' || process.browser
+// @ts-ignore
+const isServer = typeof window !== 'object' || Boolean(process?.browser)
 
 const ssrCache = ssrExchange({ isClient: !isServer })
 
@@ -39,30 +44,33 @@ export const client = createClient({
   fetch,
 })
 
-function urqlQuery<Response>(
+async function shopifyQuery<Response>(
   query: string | DocumentNode,
   variables: object,
 ): Promise<Response> {
-  return new Promise((resolve) => {
-    const request = createRequest(query, variables)
-
-    pipe(
-      client.executeQuery(request),
-      // @ts-ignore TODO What's up with that? Well, soon urql will have an actual API for this
-      subscribe(resolve),
-    )
-  })
+  const queryString =
+    typeof query === 'string'
+      ? query
+      : //
+        // @ts-ignore
+        deduplicateFragments(query.loc.source.body)
+  const result = await fetch(SHOPIFY_STOREFRONT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
+    },
+    body: JSON.stringify({ query: queryString, variables }),
+  }).then((r) => r.json())
+  return result
 }
 
 export const Providers = ({ children }: Props) => {
   return (
     <UrqlProvider value={client}>
-      <ShopifyProvider
-        // @ts-ignore
-        query={urqlQuery}
-      >
+      <ShopifyProvider query={shopifyQuery}>
         <ShopDataProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={defaultTheme}>
             <LocationProvider>
               <GlobalStyles />
               {children}

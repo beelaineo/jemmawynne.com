@@ -6,7 +6,8 @@ const { useEffect, useState } = React
 
 const Input = styled.input`
   ${({ theme }) => css`
-    border: 1px solid ${theme.color.grays[9]};
+    border: 1px solid;
+    border-color: body.9;
   `}
 `
 

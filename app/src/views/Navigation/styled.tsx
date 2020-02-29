@@ -1,22 +1,20 @@
 import * as React from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
-import { Header5 } from '../../components/Text'
 
 export const Wrapper = styled.header`
   ${({ theme }) => css`
     display: block;
     position: relative;
-    z-index: ${theme.layout.z.navigation};
-    font-family: ${theme.font.family.sans};
-
+    z-index: nav;
+    font-family: sans;
     box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.2);
   `}
 `
 
 export const NavTop = styled.div`
   ${({ theme }) => css`
-    padding-top: ${theme.layout.spacing.double};
-    margin-bottom: ${theme.layout.spacing.double};
+    padding-top: 5;
+    margin-bottom: 5;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -30,7 +28,7 @@ export const Inner = styled.nav`
     justify-content: center;
     width: 100%;
     align-items: center;
-    padding: 0 ${theme.layout.spacing.triple} ${theme.layout.spacing.single};
+    padding: 0 6 3;
     width: 100%;
     margin: 0 auto;
   `}
@@ -64,8 +62,8 @@ export const NavTools = styled.div`
     justify-content: flex-end;
     align-items: center;
     position: absolute;
-    top: ${theme.layout.spacing.double};
-    right: ${theme.layout.spacing.double};
+    top: 5;
+    right: 5;
   `}
 `
 
@@ -82,7 +80,7 @@ interface WithActive {
   onClick?: () => void
 }
 
-const NavHeaderElement = styled(Header5)`
+const NavHeaderElement = styled.span`
   ${({ active }: WithActive) => css`
     text-transform: uppercase;
     border-top: 2px solid transparent;
@@ -121,7 +119,7 @@ export const SubmenuPane = styled.div`
     opacity: ${open ? 1 : 0};
     pointer-events: ${open ? 'initial' : 'none'};
     position: absolute;
-    z-index: calc(${theme.layout.z.navigation} - 1);
+    z-index: calc(${theme.z.nav} - 1);
     top: 100%;
     left: 0;
     width: 100%;
@@ -142,8 +140,8 @@ export const SubMenuColumns = styled.div`
     margin: 0 auto;
     max-width: ${theme.layout.columns.xWide};
     grid-template-columns: repeat(5, 1fr);
-    padding: ${theme.layout.spacing.single} ${theme.layout.spacing.double};
-    grid-column-gap: ${theme.layout.spacing.single};
+    padding: 3 5;
+    grid-column-gap: 3;
   `}
 `
 
@@ -171,7 +169,7 @@ export const Loading = styled.div`
     opacity: ${isLoading ? '0.5' : '1'};
 
     div:nth-child(1) {
-      margin-right: ${theme.layout.spacing.half};
+      margin-right: 3;
       padding-top: 1px;
     }
   `}

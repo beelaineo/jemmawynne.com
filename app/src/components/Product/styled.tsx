@@ -23,7 +23,7 @@ interface ProductInfoProps {
 export const ProductInfo = styled.div`
   ${({ theme, hidePrice }: ProductInfoProps) => css`
     color: black;
-    margin-top: ${theme.layout.spacing.half};
+    margin-top: 3;
     ${hidePrice
       ? css`
           text-align: center;
@@ -31,7 +31,7 @@ export const ProductInfo = styled.div`
       : css`
           display: grid;
           grid-template-columns: 3fr 1fr;
-          padding: ${theme.layout.spacing.single} 0;
+          padding: 3 0;
           h6 {
             text-align: right;
           }

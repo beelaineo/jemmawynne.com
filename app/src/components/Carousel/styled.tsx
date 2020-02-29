@@ -1,12 +1,10 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 
 export const CarouselContainer = styled.div`
-  ${({ theme }) => css`
-    position: relative;
-    height: 100%;
-    width: 100%;
-    flex-grow: 1;
-  `}
+  position: relative;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
 `
 
 export const CarouselMask = styled.div`
@@ -24,7 +22,7 @@ interface SlidesContainerProps {
 }
 
 export const SlidesContainer = styled.div`
-  ${({ theme, left }: SlidesContainerProps) => css`
+  ${({ left }: SlidesContainerProps) => css`
     position: absolute;
     height: 100%;
     width: 100%;
@@ -49,19 +47,14 @@ export const SlideContainer = styled.div`
     height: 100%;
     text-align: center;
     width: calc(
-      (100% - (${theme.layout.spacing.double} * ${columnCount - 1})) /
-        ${columnCount}
+      (100% - (${theme.space[5]}px * ${columnCount - 1})) / ${columnCount}
     );
-    margin-right: ${theme.layout.spacing.double};
+    margin: 0 3;
     display: inline-flex;
-    align-items: top;
+    align-items: center;
 
     &:last-of-type {
       margin-right: 0;
-    }
-
-    ${theme.mediaQueries.tablet} {
-      width: 50%;
     }
   `}
 `
@@ -89,11 +82,11 @@ export const CarouselButton = styled.button`
 
     ${direction === 'previous'
       ? css`
-          left: -${theme.layout.spacing.double};
+          left: -5;
         `
       : css`
           left: auto;
-          right: -${theme.layout.spacing.double};
+          right: -5;
         `}
     background: transparent;
 

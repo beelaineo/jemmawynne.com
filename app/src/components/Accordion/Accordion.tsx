@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { RichText } from '../RichText'
-import { Header5 } from '../Text'
+import { Heading } from '../Text'
 import { Wrapper, ToggleButton, Inner, Span } from './styled'
 
 interface AccordionProps {
@@ -8,9 +8,7 @@ interface AccordionProps {
   content: { [key: string]: string }
 }
 
-const AccordionTextWrapper = (props: any) => (
-  <Header5 {...props} weight="normal" />
-)
+const AccordionTextWrapper = (props: any) => <Heading level={5} {...props} />
 
 export const Accordion = ({ label, content }: AccordionProps) => {
   const [open, setOpen] = React.useState(false)

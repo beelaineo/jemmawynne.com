@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as baseParse from 'html-react-parser'
-import * as Text from '../Text'
 import { domToReact, HTMLReactParserOptions } from 'html-react-parser'
+import { Ul, Ol, Li, Heading, P, BlockQuote } from '../Text'
 
 type ParseFn = (
   html: string,
@@ -21,43 +21,39 @@ const defaultOptions = {
     const { name, children } = node
     switch (name) {
       case 'ul':
-        return <Text.Ul>{domToReact(children, defaultOptions)}</Text.Ul>
+        return <Ul>{domToReact(children, defaultOptions)}</Ul>
       case 'ol':
-        return <Text.Ol>{domToReact(children, defaultOptions)}</Text.Ol>
+        return <Ol>{domToReact(children, defaultOptions)}</Ol>
       case 'li':
-        return <Text.Li>{domToReact(children, defaultOptions)}</Text.Li>
+        return <Li>{domToReact(children, defaultOptions)}</Li>
       case 'h1':
         return (
-          <Text.Header1>{domToReact(children, defaultOptions)}</Text.Header1>
+          <Heading level={1}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'h2':
         return (
-          <Text.Header2>{domToReact(children, defaultOptions)}</Text.Header2>
+          <Heading level={2}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'h3':
         return (
-          <Text.Header3>{domToReact(children, defaultOptions)}</Text.Header3>
+          <Heading level={3}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'h4':
         return (
-          <Text.Header4>{domToReact(children, defaultOptions)}</Text.Header4>
+          <Heading level={4}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'h5':
         return (
-          <Text.Header5>{domToReact(children, defaultOptions)}</Text.Header5>
+          <Heading level={5}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'h6':
         return (
-          <Text.Header6>{domToReact(children, defaultOptions)}</Text.Header6>
+          <Heading level={6}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'p':
-        return <Text.P>{domToReact(children, defaultOptions)}</Text.P>
+        return <P>{domToReact(children, defaultOptions)}</P>
       case 'blockquote':
-        return (
-          <Text.BlockQuote>
-            {domToReact(children, defaultOptions)}
-          </Text.BlockQuote>
-        )
+        return <BlockQuote>{domToReact(children, defaultOptions)}</BlockQuote>
       default:
         return undefined
     }

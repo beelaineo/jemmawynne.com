@@ -12,10 +12,6 @@ interface CollectionProps {
   collectionData: ShopifyCollection
 }
 
-function head<T>(arr: T[]): T {
-  return arr ? arr[0] : undefined
-}
-
 const Collection = ({ collectionData }: CollectionProps) => {
   if (!collectionData) return <NotFound />
   return <ProductListing collection={collectionData} />

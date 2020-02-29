@@ -18,7 +18,7 @@ export const ToggleButton = styled.button`
 export const Inner = styled.div`
   ${({ theme, open }: WithOpen) => css`
     display: ${open ? 'block' : 'none'};
-    padding: ${theme.layout.spacing.single} 0;
+    padding: 3 0;
   `}
 `
 
@@ -27,14 +27,14 @@ export const Span = styled.div`
     display: inline-block;
     position: relative;
     top: -1.5px;
-    margin-left: ${theme.layout.spacing.half};
+    margin-left: 3;
   `}
 `
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    padding: ${theme.layout.spacing.single};
-    margin: ${theme.layout.spacing.singleHalf} 0;
+    padding: 3;
+    margin: 4 0;
     border-top: 2px solid ${theme.color.light};
     border-bottom: 2px solid ${theme.color.light};
   `}

@@ -33,7 +33,7 @@ export const ImageWrapper = styled.div`
 
 export const Caption = styled(Header5)`
   ${({ theme }) => css`
-    margin-top: ${theme.layout.spacing.half};
+    margin-top: 3;
     min-height: 2.35em;
     color: inherit;
     text-decoration: none;

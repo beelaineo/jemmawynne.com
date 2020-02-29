@@ -4,7 +4,7 @@ import { useCheckout } from 'use-shopify'
 import { NormalizeDiv, Button } from '../ProductDetail/styled'
 import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
 import { Loading } from '../Navigation/styled'
-import { Header6, Header5, Header3 } from '../../components/Text'
+import { Heading } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
 import { CheckoutProduct } from './CheckoutProduct'
 
@@ -24,9 +24,9 @@ export const Checkout = () => {
 
   return (
     <NormalizeDiv top="0">
-      <Header3 color="grays.0" align="center">
+      <Heading level={3} color="grays.0" textAlign="center">
         Your cart
-      </Header3>
+      </Heading>
       <CartInner>
         {lineItems.map((lineItem) => (
           // @ts-ignore
@@ -38,19 +38,25 @@ export const Checkout = () => {
         <Loading isLoading={loading}>
           <FlexContainer width="100%">
             <FlexHalf>
-              <Header5 transform="uppercase" weight="light" color="grays.3">
+              <Heading
+                level={5}
+                textTransform="uppercase"
+                weight={2}
+                color="grays.3"
+              >
                 Subtotal:
-              </Header5>
+              </Heading>
             </FlexHalf>
             <FlexHalf>
-              <Header5
-                align="right"
-                transform="uppercase"
-                weight="light"
+              <Heading
+                level={5}
+                textAlign="right"
+                textTransform="uppercase"
+                weight={2}
                 color="grays.0"
               >
                 ${checkout.paymentDueV2.amount}
-              </Header5>
+              </Heading>
             </FlexHalf>
           </FlexContainer>
         </Loading>
@@ -67,9 +73,9 @@ export const Checkout = () => {
             Checkout
           </Button>
 
-          <Header6 align="center">
+          <Heading level={6} textAlign="center">
             Shipping and discount codes are added at checkout.
-          </Header6>
+          </Heading>
         </NormalizeDiv>
       </CartBottom>
     </NormalizeDiv>

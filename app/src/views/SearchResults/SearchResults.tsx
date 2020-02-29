@@ -4,10 +4,9 @@ import {
   ClearSearchButton,
   CurrentSearchTerm,
   SearchInputWrapper,
-  SearchButton,
   Wrapper,
 } from './styled'
-import { Header2 } from '../../components/Text'
+import { Heading } from '../../components/Text'
 import { ItemGrid } from '../../components/ItemGrid'
 import { Icon } from '../../components/Icon'
 import { useLocation } from '../../providers/LocationProvider'
@@ -68,19 +67,19 @@ export const SearchResults = () => {
             value={localSearchTerm}
             type="text"
           />
-          <SearchButton type="submit">
+          <button type="submit">
             <Icon icon="search" />
-          </SearchButton>
+          </button>
         </SearchInputWrapper>
       ) : (
         <>
-          <Header2 color="grays.6">
+          <Heading level={2} color="grays.6">
             Search Results for:{' '}
             <CurrentSearchTerm>
               {searchTerm}
               <ClearSearchButton onClick={clearSearch} />
             </CurrentSearchTerm>
-          </Header2>
+          </Heading>
           {/*
           // @ts-ignore */}
           {loading ? <p>Loading...</p> : <ItemGrid items={allResults} />}

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { NormalizeDiv } from '../styled'
 import { ShopifyProduct, ShopifySourceProductVariant } from '../../../types'
-import { Header2, Header4 } from '../../../components/Text'
+import { Heading } from '../../../components/Text'
 import { HtmlContent } from '../../../components/RichText'
 import { formatMoney } from '../../../utils'
 
@@ -17,12 +17,12 @@ export const ProductDescription = ({
   return (
     <>
       <NormalizeDiv>
-        <Header2 weight="xlight" color="grays.0">
+        <Heading level={2} weight={1} color="grays.0">
           {product.title}
-        </Header2>
-        <Header4 weight="strong" color="grays.0">
+        </Heading>
+        <Heading level={4} weight={4} color="grays.0">
           {formatMoney(currentVariant.priceV2)}
-        </Header4>
+        </Heading>
       </NormalizeDiv>
       <NormalizeDiv>
         <HtmlContent content={product.sourceData.descriptionHtml} />

@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { SlideContainer } from './styled'
-import { useCarousel } from './Carousel'
 
 const { useRef, useEffect } = React
 
@@ -9,14 +8,14 @@ export interface SlideInfo {
   ref: HTMLDivElement
 }
 
-interface SlideProps {
+export interface SlideProps {
   index: number
   children: React.ReactNode
   columnCount: number
+  addSlide: (slide: SlideInfo) => void
 }
 
-export const Slide = ({ index, children, columnCount }: SlideProps) => {
-  const { currentSlide, addSlide } = useCarousel()
+export const Slide = ({ addSlide, children, columnCount }: SlideProps) => {
   const containerElement = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

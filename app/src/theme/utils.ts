@@ -1,17 +1,13 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from '@xstyled/styled-components'
 
-export const getTextAlignment = (
-  position: string | void | null,
-): string | undefined => {
+export const getTextAlignment = (position: string | void | null): string => {
   if (!position) return 'center'
   const split = position.split('-')
   if (split.length > 1) return split[1]
-  return undefined
+  return 'center'
 }
 
-export const getFlexAlignment = (
-  position: string | void | null,
-): string | undefined => {
+export const getFlexAlignment = (position: string | void | null): string => {
   switch (position) {
     case 'top-left':
     case 'top-center':
@@ -26,13 +22,13 @@ export const getFlexAlignment = (
     case 'bottom-right':
       return 'flex-end'
     default:
-      return undefined
+      return 'center'
   }
 }
 
 export const getFlexJustification = (
   position: string | void | null,
-): string | undefined => {
+): string => {
   switch (position) {
     case 'top-left':
     case 'middle-left':
@@ -47,23 +43,20 @@ export const getFlexJustification = (
     case 'bottom-right':
       return 'flex-end'
     default:
-      return undefined
+      return 'center'
   }
 }
 
-export const getColor = (
-  color: string | void | null,
-  theme: DefaultTheme,
-): string | undefined => {
+export const getColor = (color: string | void | null): string => {
   switch (color) {
     case 'black':
-      return theme.color.black
+      return 'grays.9'
     case 'darkGray':
-      return theme.color.grays[8]
+      return 'grays.8'
     case 'lightGray':
-      return theme.color.grays[2]
+      return 'grays.3'
     case 'white':
     default:
-      return theme.color.white
+      return 'grays.0'
   }
 }

@@ -15,9 +15,9 @@ const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-evenly;
-    grid-column-gap: ${theme.layout.spacing.triple};
-    grid-row-gap: ${theme.layout.spacing.triple};
-    padding: ${theme.layout.spacing.triple};
+    grid-column-gap: 6;
+    grid-row-gap: 6;
+    padding: 6;
     > a {
       text-decoration: none;
     }
