@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 import { SanityRichText } from '../../types'
 import { Heading } from '../Text'
 import { RichText } from '../RichText'

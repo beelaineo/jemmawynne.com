@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Document from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet } from '@xstyled/styled-components'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {

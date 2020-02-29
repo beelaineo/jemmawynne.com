@@ -114,13 +114,13 @@ export const ProductVariantSelector = (props: Props) => {
           option && option.name && option.values ? (
             <ProductOptionWrapper key={option.name}>
               <Label htmlFor={option.name} key={option.name}>
-                {name}
+                {option.name}
               </Label>
               <Select
-                onChange={handleSelectForOption(name)}
-                value={getCurrentOptionValue(name)}
-                id={name}
-                name={name}
+                onChange={handleSelectForOption(option.name)}
+                value={getCurrentOptionValue(option.name)}
+                id={option.name}
+                name={option.name}
               >
                 {option.values.map((value) =>
                   value ? (

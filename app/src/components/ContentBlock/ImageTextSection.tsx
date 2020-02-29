@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import { ImageTextSection as ImageTextSectionType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
 import { ImageBlock } from './ImageBlock'

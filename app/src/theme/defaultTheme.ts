@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from '@xstyled/styled-components'
 
 /* generated at: https://www.colorbox.io/#steps=7#hue_start=281#hue_end=271#hue_curve=easeInQuad#sat_start=22#sat_end=0#sat_curve=easeOutQuart#sat_rate=130#lum_start=12#lum_end=100#lum_curve=easeInCubic#minor_steps_map=0 */
 const grays = [
@@ -16,8 +16,11 @@ const grays = [
 
 /* generated at: https://www.colorbox.io/#steps=7#hue_start=281#hue_end=271#hue_curve=easeInQuad#sat_start=4#sat_end=100#sat_curve=linear#sat_rate=130#lum_start=100#lum_end=100#lum_curve=linear#lock_hex=b879f5#minor_steps_map=0 */
 
-const sans = '"Helvetica Neue", helvetica, sans-serif'
-const serif = '"Inferi", Georgia, serif'
+const sans =
+  '"Gotham", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;'
+
+const serif =
+  '"Freight", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;'
 
 export const defaultTheme: DefaultTheme = {
   radii: {

@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { render } from 'react-testing-library'
-import { ThemeProvider } from 'styled-components'
-import { theme } from '../theme'
+import { ThemeProvider } from '@xstyled/styled-components'
+import { defaultTheme } from '../theme'
 
 interface Props {
   children: React.ReactNode
 }
 
 const Providers = ({ children }: Props) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>
 )
 
 const customRender = (ui: React.ReactElement, options = {}) =>

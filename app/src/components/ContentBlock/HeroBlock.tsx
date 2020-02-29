@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 import { Image, ImageWrapper } from '../Image'
 import { Hero } from '../../types'
 import { CTA } from '../CTA'

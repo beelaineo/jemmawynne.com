@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { DefaultTheme, css } from 'styled-components'
+import styled, { DefaultTheme, css } from '@xstyled/styled-components'
 
 interface PictureProps {
   theme: DefaultTheme

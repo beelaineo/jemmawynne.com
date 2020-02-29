@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from '@xstyled/styled-components'
 import normalized from './normalized'
 import fontFaces from './fontFaces'
 

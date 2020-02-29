@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import { RichPageLink as RichPageLinkType } from '../types'
 import { DocumentLink } from './DocumentLink'
 import { RichText } from './RichText'

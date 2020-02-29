@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled from '@xstyled/styled-components'
 import { ImageBlock as ImageBlockType } from '../../types'
 import { Image } from '../Image'
 import { RichText } from '../RichText'

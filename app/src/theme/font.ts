@@ -1,5 +1,3 @@
-// @flow
-
 export const size = {
   h1: '50px',
   h2: '38px',

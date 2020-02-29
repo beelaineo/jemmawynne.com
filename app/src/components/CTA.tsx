@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Heading } from './Text'
-import styled, { css } from 'styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import { DocumentLink } from './DocumentLink'
 import { Cta } from '../types'
 
