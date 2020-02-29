@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
-import { ShopifyProduct, ShopifyCollection } from '../types'
+import { Maybe, ShopifyProduct, ShopifyCollection } from '../types'
 import { ProductThumbnail } from './Product'
 import { CollectionThumbnail } from './Collection'
 
@@ -11,7 +11,7 @@ import { CollectionThumbnail } from './Collection'
 const Grid = styled.div`
   ${({ theme }) => css`
     margin: 0 auto;
-    max-width: ${theme.layout.columns.wide};
+    max-width: wide;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-evenly;
@@ -27,7 +27,7 @@ const Grid = styled.div`
     }
 
     @media screen and (max-width: 560px) {
-      padding: ${theme.layout.spacing.double};
+      padding: 6;
       grid-template-columns: 1fr;
     }
   `}
@@ -37,13 +37,14 @@ const Grid = styled.div`
  * ItemGrid
  */
 
-type ProductOrCollection = ShopifyProduct | ShopifyCollection
+type ProductOrCollection = Maybe<ShopifyProduct> | Maybe<ShopifyCollection>
 
 interface ItemGridProps {
-  items: ProductOrCollection[]
+  items?: ProductOrCollection[] | null
 }
 
 export const ItemGrid = ({ items }: ItemGridProps) => {
+  if (!items) return null
   return (
     <Grid>
       {items.map((item) => {
@@ -56,7 +57,7 @@ export const ItemGrid = ({ items }: ItemGridProps) => {
             <ProductThumbnail key={item._id} product={item} />
           )
         // @ts-ignore
-        if (item.__type === 'shopifyCollection')
+        if (item._type === 'shopifyCollection')
           // if (item.__typename === 'ShopifyCollection')
           return (
             // @ts-ignore

@@ -14,7 +14,7 @@ export const CartSidebar = styled.div`
     max-height: 100vh;
     min-height: 100vh;
     overflow: scroll;
-    background-color: ${props.theme.color.white};
+    background-color: body.0;
     box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
     transition: 350ms ease-in-out;
     width: 500px;
@@ -26,12 +26,12 @@ export const CartSidebar = styled.div`
       background: transparent;
     }
     > * {
-      padding: ${props.theme.layout.spacing.single};
+      padding: 3;
       margin: 0;
     }
     h3 {
-      margin: ${props.theme.layout.spacing.single};
-      margin-top: ${props.theme.layout.spacing.single} !important;
+      margin: 3;
+      margin-top: 3 !important;
     }
     ${props.theme.mediaQueries.mobile} {
       max-width: 340px;
@@ -46,7 +46,7 @@ export const CloseButton = styled.button`
   bottom: 0;
   background-color: black;
   padding: 2rem;
-  padding: ${(props) => props.theme.layout.spacing.single};
+  padding: 3;
 `
 
 export const CartBottom = styled.div`
@@ -54,7 +54,7 @@ export const CartBottom = styled.div`
   position: absolute;
   bottom: 0px;
   left: 0;
-  padding: ${(props) => props.theme.layout.spacing.single};
+  padding: 3;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -63,7 +63,7 @@ export const CartBottom = styled.div`
   background-color: white;
   > div,
   > h6 {
-    margin: ${(props) => props.theme.layout.spacing.single};
+    margin: 3;
   }
 `
 
@@ -74,23 +74,23 @@ export const CartNav = styled.div`
   > button {
     min-width: 30px;
     border-radius: 3px;
-    font-size: ${(props) => props.theme.font.size.h3};
+    font-size: 3;
   }
 `
 
 export const CartInner = styled.div`
   ${(props: CartSidebarProps) => css`
-		height: calc( 100vh - 150px);
-		overflow: scroll;
-		padding-bottom: 90px;
-		margin-top: ${props.theme.layout.spacing.singleHalf}
-		::-webkit-scrollbar {
-			width: 0px;  /* Remove scrollbar space */
-			background: transparent;  /* Optional: just make scrollbar invisible */
-		}
-		/* Optional: show position indicator in red */
-		::-webkit-scrollbar-thumb {
-			background: #FF0000;
-		}
-	`}
+    height: calc(100vh - 150px);
+    overflow: scroll;
+    padding-bottom: 90px;
+    margin-top: 3;
+    ::-webkit-scrollbar {
+      width: 0px; /* Remove scrollbar space */
+      background: transparent; /* Optional: just make scrollbar invisible */
+    }
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+      background: #ff0000;
+    }
+  `}
 `

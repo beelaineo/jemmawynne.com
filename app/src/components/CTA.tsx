@@ -10,14 +10,12 @@ interface CTAProps {
 }
 
 const Wrapper = styled.div`
-  ${({ theme }) => css`
-    display: inline-block;
-    margin: ${theme.layout.spacing.single} 0;
-    padding: ${theme.layout.spacing.single};
-    border: 1px solid;
-    color: inherit;
-    text-decoration: none;
-  `}
+  display: inline-block;
+  margin: 3 0;
+  padding: 3;
+  border: 1px solid;
+  color: inherit;
+  text-decoration: none;
 `
 
 export const CTA = ({ cta }: CTAProps) => {

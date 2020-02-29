@@ -11,20 +11,16 @@ interface SubMenuProps {
 
 export const SubMenu = ({ submenu, active }: SubMenuProps) => {
   const { columns } = submenu
+  if (!columns) return
   return (
     <SubMenuColumns active={active}>
       {columns.map((col) => {
+        if (!col) return null
         switch (col.__typename) {
           case 'RichPageLink':
-            return (
-              //
-              <RichPageLink key={col._key} link={col} />
-            )
+            return <RichPageLink key={col._key || 'some-key'} link={col} />
           case 'LinkGroup':
-            return (
-              //
-              <LinkGroup key={col._key} linkGroup={col} />
-            )
+            return <LinkGroup key={col._key || 'some-key'} linkGroup={col} />
           default:
             throw new Error(
               // @ts-ignore

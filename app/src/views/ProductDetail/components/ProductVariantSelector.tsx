@@ -26,8 +26,10 @@ interface SelectedProductOption {
 const getInitialOptions = (
   options: ShopifySourceProductOption[],
 ): SelectedProductOption[] =>
+  // @ts-ignore
   options.map(({ name, values }) => ({
     name,
+    // @ts-ignore
     currentValue: values[0],
   }))
 
@@ -50,8 +52,10 @@ const getVariantBySelectedOptions = (
 ): ShopifySourceProductVariant | void =>
   variants.find((variant) => {
     const { selectedOptions: optionsForVariant } = variant
+    // @ts-ignore
     return optionsForVariant.reduce<boolean>((acc, variantOption) => {
       if (acc === false) return false
+      if (!variantOption) return false
       const matchingOption = currentOptions.find(
         (o) => o.name === variantOption.name,
       )
@@ -69,16 +73,21 @@ interface Props extends UseProductVariant {
 
 export const ProductVariantSelector = (props: Props) => {
   const { product, selectVariant } = props
+  const { sourceData } = product
 
-  const { options, variants: variantsConnection } = product.sourceData
+  if (!sourceData) return null
+  const { options, variants: variantsConnection } = sourceData
   // @ts-ignore
   const [variants] = unwindEdges(variantsConnection)
 
-  if (!options.length) return null
+  if (!options || !options.length) return null
 
   const [selectedOptions, setSelectedOptions] = useState<
     SelectedProductOption[]
-  >(getInitialOptions(options))
+  >(
+    // @ts-ignore
+    getInitialOptions(options),
+  )
 
   const handleSelectForOption = (name: string) => (
     e: React.ChangeEvent<HTMLSelectElement>,
@@ -87,7 +96,7 @@ export const ProductVariantSelector = (props: Props) => {
     const newOptions = getNewOptions(selectedOptions, name, value)
     setSelectedOptions(newOptions)
     const newVariant = getVariantBySelectedOptions(variants, newOptions)
-    if (newVariant) {
+    if (newVariant && newVariant.id) {
       selectVariant(newVariant.id)
     } else {
       // TODO report to sentry
@@ -95,30 +104,35 @@ export const ProductVariantSelector = (props: Props) => {
   }
 
   const getCurrentOptionValue = (name: string): string =>
+    // @ts-ignore
     selectedOptions.find((o) => o.name === name).currentValue
 
   return (
     <div>
       <NormalizeDiv>
-        {options.map(({ name, values }) => (
-          <ProductOptionWrapper key={name}>
-            <Label htmlFor={name} key={name}>
-              {name}
-            </Label>
-            <Select
-              onChange={handleSelectForOption(name)}
-              value={getCurrentOptionValue(name)}
-              id={name}
-              name={name}
-            >
-              {values.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </Select>
-          </ProductOptionWrapper>
-        ))}
+        {options.map((option) =>
+          option && option.name && option.values ? (
+            <ProductOptionWrapper key={option.name}>
+              <Label htmlFor={option.name} key={option.name}>
+                {name}
+              </Label>
+              <Select
+                onChange={handleSelectForOption(name)}
+                value={getCurrentOptionValue(name)}
+                id={name}
+                name={name}
+              >
+                {option.values.map((value) =>
+                  value ? (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ) : null,
+                )}
+              </Select>
+            </ProductOptionWrapper>
+          ) : null,
+        )}
       </NormalizeDiv>
     </div>
   )

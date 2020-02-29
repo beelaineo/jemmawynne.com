@@ -119,7 +119,7 @@ export const SubmenuPane = styled.div`
     opacity: ${open ? 1 : 0};
     pointer-events: ${open ? 'initial' : 'none'};
     position: absolute;
-    z-index: calc(${theme.z.nav} - 1);
+    z-index: calc(${theme.zIndices.nav} - 1);
     top: 100%;
     left: 0;
     width: 100%;
@@ -138,7 +138,7 @@ export const SubMenuColumns = styled.div`
   ${({ theme, active }: WithVisible) => css`
     display: ${active ? 'grid' : 'none'};
     margin: 0 auto;
-    max-width: ${theme.layout.columns.xWide};
+    max-width: xWide;
     grid-template-columns: repeat(5, 1fr);
     padding: 3 5;
     grid-column-gap: 3;

@@ -44,6 +44,16 @@ export const client = createClient({
   fetch,
 })
 
+const deduplicateFragments = (queryString: string) =>
+  queryString
+    .split(/\n\s+\n/)
+    .map((group) => group.replace(/^([\n\s])+/, '').replace(/\n+$/, ''))
+    .reduce<string[]>((acc, current) => {
+      if (acc.includes(current)) return acc
+      return [...acc, current]
+    }, [])
+    .join('\n\n')
+
 async function shopifyQuery<Response>(
   query: string | DocumentNode,
   variables: object,

@@ -1,11 +1,9 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
 export const CheckoutItem = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    justify-content: space-between;
-    margin: ${theme.layout.spacing.single};
-  `}
+  display: flex;
+  justify-content: space-between;
+  margin: 3;
 `
 
 export const CheckoutItemImage = styled.img`
@@ -14,10 +12,8 @@ export const CheckoutItemImage = styled.img`
 `
 
 export const CheckoutItemInfo = styled.div`
-  ${({ theme }) => css`
-    margin: ${theme.layout.spacing.single};
-    flex: 6;
-  `}
+  margin: 3;
+  flex: 6;
 `
 
 export const CheckoutPrice = styled.div`

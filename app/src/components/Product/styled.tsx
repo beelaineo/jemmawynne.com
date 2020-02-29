@@ -9,7 +9,7 @@ export const ProductThumb = styled.div`
       text-decoration: none;
       &:hover {
         text-decoration: underline;
-        color: ${theme.color.grays[0]};
+        color: body.0;
       }
     }
   `}

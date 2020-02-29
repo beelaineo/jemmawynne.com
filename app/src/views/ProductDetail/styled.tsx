@@ -86,14 +86,14 @@ export const BackgroundImage = styled.div`
 
 interface ButtonProps {
   theme: DefaultTheme
-  disabled?: boolean
+  isDisabled?: boolean
 }
 
 export const Button = styled.button`
-  ${({ disabled }: ButtonProps) => css`
+  ${({ isDisabled }: ButtonProps) => css`
     background-color: body.0;
     color: body.9;
-    cursor: ${disabled ? 'auto' : 'pointer'};
+    cursor: ${isDisabled ? 'auto' : 'pointer'};
     display: inline-block;
     font-family: sans;
     font-weight: 4;
@@ -105,8 +105,8 @@ export const Button = styled.button`
     transition: 0.2s;
     padding: 3;
     margin: 3 0;
-    opacity: ${disabled ? 0.3 : 1};
-    pointer-events: ${disabled ? 'none' : 'auto'};
+    opacity: ${isDisabled ? 0.3 : 1};
+    pointer-events: ${isDisabled ? 'none' : 'auto'};
     max-width: 200px;
     border-radius: 2px;
   `}

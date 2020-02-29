@@ -26,24 +26,24 @@ interface ImageDetails {
 /* Based on the image type, return a src, srcset, altText, etc */
 const getImageDetails = (image: ImageType): null | ImageDetails => {
   // @ts-ignore
-  if (!image || image === {}) return {}
-  // TODO: when the GraphQL types are fixed, remove this to use the switch below
-  // @ts-ignore
-  if (image.originalSrc) {
-    // @ts-ignore
-    return { src: image.originalSrc, altText: image.altText }
-  }
-  // @ts-ignore
-  if (image.asset) {
-    // @ts-ignore
-    return { src: image.asset?.url }
-  }
+  // if (!image || image === {}) return {}
+  // // TODO: when the GraphQL types are fixed, remove this to use the switch below
+  // // @ts-ignore
+  // if (image.originalSrc) {
+  //   // @ts-ignore
+  //   return { src: image.originalSrc, altText: image.altText }
+  // }
+  // // @ts-ignore
+  // if (image.asset) {
+  //   // @ts-ignore
+  //   return { src: image.asset?.url }
+  // }
 
   switch (image.__typename) {
     case 'ShopifySourceImage':
       return { src: image.originalSrc, altText: image.altText }
     case 'Image':
-      return { src: image.asset?.url }
+      return { src: image?.asset?.url }
     case 'RichImage':
       return {
         src: image.asset?.url,

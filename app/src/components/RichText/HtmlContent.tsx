@@ -10,11 +10,6 @@ type ParseFn = (
 
 const parse = (baseParse as unknown) as ParseFn
 
-interface HtmlContentProps {
-  /* */
-  content: string
-}
-
 const defaultOptions = {
   replace: (node) => {
     if (node.type !== 'tag') return undefined
@@ -60,6 +55,8 @@ const defaultOptions = {
   },
 }
 
-export const HtmlContent = ({ content }: HtmlContentProps) => (
-  <>{parse(content, defaultOptions)}</>
-)
+interface HtmlContentProps {
+  content?: string | null
+}
+export const HtmlContent = ({ content }: HtmlContentProps) =>
+  content ? <>{parse(content, defaultOptions)}</> : null

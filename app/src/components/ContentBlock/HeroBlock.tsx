@@ -4,6 +4,12 @@ import { Image, ImageWrapper } from '../Image'
 import { Hero } from '../../types'
 import { CTA } from '../CTA'
 import { RichText } from '../RichText'
+import {
+  getFlexJustification,
+  getFlexAlignment,
+  getTextAlignment,
+  getColor,
+} from '../../theme'
 
 interface HeroBackground {
   theme: DefaultTheme
@@ -41,10 +47,10 @@ const HeroText = styled.div`
     height: 100%;
     padding: 6;
     display: flex;
-    justify-content: ${theme.utils.getFlexJustification(textPosition)};
-    align-items: ${theme.utils.getFlexAlignment(textPosition)};
-    text-align: ${textAlign || theme.utils.getTextAlignment(textPosition)};
-    color: ${theme.utils.getColor(textColor, theme)};
+    justify-content: ${getFlexJustification(textPosition)};
+    align-items: ${getFlexAlignment(textPosition)};
+    text-align: ${textAlign || getTextAlignment(textPosition)};
+    color: ${getColor(textColor)};
 
     .text-container {
       max-width: 400px;
@@ -53,10 +59,10 @@ const HeroText = styled.div`
     }
 
     ${theme.mediaQueries.mobile} {
-      justify-content: ${theme.utils.getFlexJustification(textPositionMobile)};
-      align-items: ${theme.utils.getFlexAlignment(textPositionMobile)};
-      text-align: ${theme.utils.getTextAlignment(textPositionMobile)};
-      color: ${theme.utils.getColor(textColorMobile, theme)};
+      justify-content: ${getFlexJustification(textPositionMobile)};
+      align-items: ${getFlexAlignment(textPositionMobile)};
+      text-align: ${getTextAlignment(textPositionMobile)};
+      color: ${getColor(textColorMobile)};
     }
   `}
 `
@@ -112,7 +118,6 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
       >
         <div className="text-container">
           <RichText body={bodyRaw} />
-
           {cta ? <CTA cta={cta} /> : null}
         </div>
       </HeroText>

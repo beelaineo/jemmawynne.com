@@ -6,17 +6,15 @@ interface WithOpen {
 }
 
 export const ToggleButton = styled.button`
-  ${({ theme }) => css`
-    font-size: ${theme.font.size.h6};
-    font-weight: ${theme.font.weight.semi};
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: ${(props) => props.theme.color.grays[0]};
-  `}
+  font-size: 6;
+  font-weight: 5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: body0;
 `
 
 export const Inner = styled.div`
-  ${({ theme, open }: WithOpen) => css`
+  ${({ open }: WithOpen) => css`
     display: ${open ? 'block' : 'none'};
     padding: 3 0;
   `}
@@ -35,7 +33,8 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     padding: 3;
     margin: 4 0;
-    border-top: 2px solid ${theme.color.light};
-    border-bottom: 2px solid ${theme.color.light};
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: body.2;
   `}
 `

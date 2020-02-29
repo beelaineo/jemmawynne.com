@@ -12,6 +12,10 @@ interface CollectionThumbnailProps {
 export const CollectionThumbnail = ({
   collection,
 }: CollectionThumbnailProps) => {
+  if (!collection.sourceData) return null
+  const { products } = collection.sourceData
+  if (!products || !products.edges || products.edges.length === 0) return null
+
   const to = `/collections/${collection.handle}`
   return (
     <Link href={to}>
@@ -21,7 +25,7 @@ export const CollectionThumbnail = ({
         </ImageWrapper>
         <TextWrapper>
           <Heading level={3}>{collection.title}</Heading>
-          <Heading level={6}>{collection.products.length} items</Heading>
+          <Heading level={6}>{products.edges.length} items</Heading>
         </TextWrapper>
       </a>
     </Link>

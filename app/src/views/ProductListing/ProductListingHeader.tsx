@@ -8,9 +8,14 @@ interface ProductListingHeaderProps {
   collection: ShopifyCollection
 }
 
+export const PLD = ({ collection }: ProductListingHeaderProps) => (
+  <>{collection.title}</>
+)
+
 export const ProductListingHeader = ({
   collection,
 }: ProductListingHeaderProps) => {
+  if (!collection.sourceData) return null
   const { image, title, description } = collection.sourceData
   const textAlign = image ? 'left' : 'center'
   return (

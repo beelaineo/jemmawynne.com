@@ -33,8 +33,6 @@ export const FlexContainer = styled.div`
   }: WrapperProps) => css`
     display: flex;
     flex-wrap: ${wrap};
-    margin: ${theme.layout.spacing[margin]};
-		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'};
 		justify-content: ${center ? 'center' : 'space-between'};
 		height: ${height || 'initial'}; 
 		flex-direction:  ${vertical ? 'column' : 'row'};
@@ -43,7 +41,6 @@ export const FlexContainer = styled.div`
 		text-align: ${text ? text : 'initial'};
 		margin-left: ${align ? 'auto' : 'initial'}
 		margin-right: ${align ? 'auto' : 'initial'};
-		padding: ${theme.layout.spacing[padding] || 'initial'}; 
 	`}
   .visible {
     opacity: 1;
@@ -89,8 +86,4 @@ export const FlexFour = styled.div`
 export const FlexSix = styled.div`
   flex: 6;
   margin: 10px;
-  ${({ theme, marginVertical, margin }: WrapperProps) => `
-		margin-top: ${theme.layout.spacing[marginVertical] || 'initial'} ;
-		margin: ${theme.layout.spacing[margin]} 0;
-	`}
 `

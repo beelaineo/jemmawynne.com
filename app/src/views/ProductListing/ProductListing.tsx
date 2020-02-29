@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useQuery } from 'urql'
 import { ShopifyCollection } from '../../types'
 import { COLLECTION_QUERY, CollectionResult } from './query'
-import { ProductListingHeader } from './ProductListingHeader'
+import { PLD, ProductListingHeader } from './ProductListingHeader'
 import { ItemGrid } from '../../components/ItemGrid'
 
 interface ProductListingProps {
@@ -10,10 +10,11 @@ interface ProductListingProps {
 }
 
 export const ProductListing = ({ collection }: ProductListingProps) => {
+  if (!collection) return null
   return (
-    <React.Fragment>
+    <>
       <ProductListingHeader collection={collection} />
       <ItemGrid items={collection.products} />
-    </React.Fragment>
+    </>
   )
 }

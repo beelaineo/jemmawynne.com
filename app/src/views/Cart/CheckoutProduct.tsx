@@ -18,6 +18,7 @@ interface CheckoutProductProps {
 export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
   const { updateLineItem } = useCheckout()
   const { title, variant, quantity } = lineItem
+  if (!variant) return
 
   const image = getVariantImage(variant)
 
@@ -42,7 +43,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
       onMouseOut={removeHover}
     >
       <FlexThree>{image ? <img src={image} /> : null}</FlexThree>
-      <FlexSix marginVertical="0">
+      <FlexSix>
         <Heading level={5} weight={2} color="grays.0">
           {title}
         </Heading>
@@ -50,12 +51,12 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
           {variant.title}
         </Heading>
         <div>
-          <FlexSix margin="small">
+          <FlexSix>
             <Heading level={5} weight={5} color="grays.0">
               {formatMoney(variant.priceV2)}
             </Heading>
           </FlexSix>
-          <FlexSix margin="small">
+          <FlexSix>
             <QuantitySelectorCart className={hovered} width="40px">
               Quantity: {'     '}
               <button type="button" onClick={() => setQuantity(quantity - 1)}>

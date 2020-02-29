@@ -17,15 +17,17 @@ export const ProductImages = ({
   product,
   currentVariant,
 }: ProductImagesProps) => {
+  const { sourceData } = product
   if (
-    !product.sourceData.images ||
-    !product.sourceData.images.edges ||
-    !product.sourceData.images.edges.length
+    !sourceData ||
+    !sourceData.images ||
+    !sourceData.images.edges ||
+    !sourceData.images.edges.length ||
+    !currentVariant?.image?.id
   )
     return null
   // @ts-ignore
   const [images] = unwindEdges<Image>(product.sourceData.images)
-
   return (
     <ProductGalleryWrapper>
       <Gallery images={images} currentImageId={currentVariant.image.id} />

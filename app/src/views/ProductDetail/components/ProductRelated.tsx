@@ -31,7 +31,9 @@ export const ProductRelated = (props: ProductRelatedProps) => {
   const { collections } = product
   if (!collections || !collections.length) return null
 
-  const defaultTitle = `Shop the ${collections[0].title} Collection`
+  const defaultCollection = collections[0]
+  if (!defaultCollection) return null
+  const defaultTitle = `Shop the ${defaultCollection.title} Collection`
   const collectionContent = {
     title: defaultTitle,
     collection: collections[0],

@@ -1,16 +1,12 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
 export const ImageWrapper = styled.div`
-  ${({ theme }) => css`
-    color: ${theme.color.grays[1]};
-    border: 1px solid;
-    padding: ${theme.layout.spacing.single};
-  `}
+  color: body.1;
+  border: 1px solid;
+  padding: 3;
 `
 
 export const TextWrapper = styled.div`
-  ${({ theme }) => css`
-    margin-top: ${theme.layout.spacing.single};
-    color: black;
-  `}
+  margin-top: 3;
+  color: black;
 `

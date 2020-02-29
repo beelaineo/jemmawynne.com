@@ -14,7 +14,7 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
       <Heading level={5}>{title}</Heading>
       {links && links.length
         ? links.map((menuLink) =>
-            menuLink.document ? (
+            menuLink && menuLink.document ? (
               <Heading level={5} key={menuLink._key || 'some-key'}>
                 <DocumentLink document={menuLink.document} />
               </Heading>

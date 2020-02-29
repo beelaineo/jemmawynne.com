@@ -15,6 +15,8 @@ interface ProductThumbnail {
 
 export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
   if (!product) return null
+  const { sourceData } = product
+  if (!sourceData) return null
   const productImages = product?.sourceData?.images
     ? unwindEdges(
         // @ts-ignore
@@ -23,8 +25,7 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
     : []
 
   const productImage = productImages.length ? productImages[0] : undefined
-  const { minVariantPrice, maxVariantPrice } =
-    product.sourceData.priceRange || {}
+  const { minVariantPrice, maxVariantPrice } = sourceData.priceRange || {}
   const to = `/products/${product.handle}`
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   return (
@@ -42,9 +43,9 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
               <Heading level={6}>
                 {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
               </Heading>
-            ) : (
+            ) : maxVariantPrice ? (
               <Heading level={6}>{formatMoney(maxVariantPrice)}</Heading>
-            )}
+            ) : null}
           </ProductInfo>
         </ProductThumb>
       </a>

@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	body {
-		font-family: ${({ theme }) => theme.font.family.serif};
+    font-family: serif;
 		overflow-x: hidden;
 	}
 

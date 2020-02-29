@@ -10,10 +10,10 @@ const BlocksWrapper = styled.div`
     display: flex;
     width: 100%;
     justify-content: center;
-    padding: ${theme.layout.spacing.double};
+    padding: 5;
 
     & > * + * {
-      margin-left: ${theme.layout.spacing.double};
+      margin-left: 5;
     }
   `}
 `

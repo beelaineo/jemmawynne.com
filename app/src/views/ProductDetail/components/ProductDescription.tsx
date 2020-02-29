@@ -20,12 +20,14 @@ export const ProductDescription = ({
         <Heading level={2} weight={1} color="grays.0">
           {product.title}
         </Heading>
-        <Heading level={4} weight={4} color="grays.0">
-          {formatMoney(currentVariant.priceV2)}
-        </Heading>
+        {currentVariant.priceV2 ? (
+          <Heading level={4} weight={4} color="grays.0">
+            {formatMoney(currentVariant.priceV2)}
+          </Heading>
+        ) : null}
       </NormalizeDiv>
       <NormalizeDiv>
-        <HtmlContent content={product.sourceData.descriptionHtml} />
+        <HtmlContent content={product?.sourceData?.descriptionHtml} />
       </NormalizeDiv>
     </>
   )

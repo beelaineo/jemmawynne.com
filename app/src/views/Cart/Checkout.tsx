@@ -17,13 +17,13 @@ export const Checkout = () => {
   const { checkout, loading } = useCheckout()
 
   if (!checkout || checkout.lineItems.edges.length < 1) {
-    return <NormalizeDiv top="0">Your cart is empty</NormalizeDiv>
+    return <NormalizeDiv>Your cart is empty</NormalizeDiv>
   }
 
   const [lineItems] = unwindEdges(checkout.lineItems)
 
   return (
-    <NormalizeDiv top="0">
+    <NormalizeDiv>
       <Heading level={3} color="grays.0" textAlign="center">
         Your cart
       </Heading>
@@ -60,15 +60,12 @@ export const Checkout = () => {
             </FlexHalf>
           </FlexContainer>
         </Loading>
-        <NormalizeDiv align="center">
+        <NormalizeDiv>
           <Button
             as="a"
             href={checkout.webUrl}
-            background="grays.0"
             color="grays.9"
-            weight="semi"
-            width="100%"
-            disabled={loading}
+            isDisabled={loading}
           >
             Checkout
           </Button>

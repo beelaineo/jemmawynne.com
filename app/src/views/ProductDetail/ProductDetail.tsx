@@ -29,16 +29,10 @@ interface Props {
 
 export const ProductDetail = ({ product }: Props) => {
   /* get additional info blocks from Sanity */
-  const { productInfoBlocks } = useShopData()
-  const globalAccordions = productInfoBlocks
-    ? [
-        ...getInfoBlocksByType(
-          product.sourceData.productType,
-          productInfoBlocks,
-        ),
-        ...getInfoBlocksByTag(product.sourceData.tags, productInfoBlocks),
-      ]
-    : []
+  const { getProductInfoBlocks } = useShopData()
+  const { sourceData } = product
+  if (!sourceData) return null
+  const globalAccordions = getProductInfoBlocks(product)
 
   const extraAccordions = (product && product.infoBlocks) || []
   const accordions = [...extraAccordions, ...globalAccordions]

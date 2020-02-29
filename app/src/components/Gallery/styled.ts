@@ -21,22 +21,18 @@ export const ZoomImageWrapper = styled.div`
 `
 
 export const MainImageWrapper = styled.div`
-  ${({ theme }) => css`
-    margin-bottom: ${theme.layout.spacing.single};
-    position: relative;
+  margin-bottom: 3;
+  position: relative;
 
-    &:hover ${ZoomImageWrapper} {
-      opacity: 1;
-    }
-  `}
+  &:hover ${ZoomImageWrapper} {
+    opacity: 1;
+  }
 `
 
 export const Thumbnails = styled.div`
-  ${({ theme }) => css`
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: ${theme.layout.spacing.single};
-  `}
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 3;
 `
 
 interface ZoomInnerProps {
