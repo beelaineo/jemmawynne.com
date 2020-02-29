@@ -1,14 +1,14 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { ContentBlock } from '../components/ContentBlock'
+import { ContentBlock } from '../src/components/ContentBlock'
 import {
   imageBlockFragment,
   textBlockFragment,
   carouselFragment,
   heroFragment,
-} from '../graphql'
-import { Homepage as HomepageType } from '../types'
+} from '../src/graphql'
+import { Homepage as HomepageType } from '../src/types'
 
 interface HomepageResponse {
   Homepage: HomepageType

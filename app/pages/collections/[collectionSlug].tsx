@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ShopifyCollection } from '../../types'
-import { NotFound, ProductListing } from '../../views'
-import { client } from '../../utils/sanity'
+import { ShopifyCollection } from '../../src/types'
+import { NotFound, ProductListing } from '../../src/views'
+import { client } from '../../src/utils/sanity'
 
 interface CollectionQueryResult {
   collectionByHandle: ShopifyCollection

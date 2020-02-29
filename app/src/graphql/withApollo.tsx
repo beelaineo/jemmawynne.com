@@ -6,7 +6,7 @@ import ApolloClient, {
 import { ApolloProvider } from '@apollo/react-hooks'
 import { SANITY_GRAPHQL_URL } from '../config'
 
-import introspectionQueryResultData from '../fragmentTypes-sanity.json'
+import introspectionQueryResultData from '../../fragmentTypes-sanity.json'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
