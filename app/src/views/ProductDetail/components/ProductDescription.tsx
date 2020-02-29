@@ -17,11 +17,11 @@ export const ProductDescription = ({
   return (
     <>
       <NormalizeDiv>
-        <Heading level={2} weight={1} color="grays.0">
+        <Heading level={2} weight={1}>
           {product.title}
         </Heading>
         {currentVariant.priceV2 ? (
-          <Heading level={4} weight={4} color="grays.0">
+          <Heading level={3} weight={4}>
             {formatMoney(currentVariant.priceV2)}
           </Heading>
         ) : null}

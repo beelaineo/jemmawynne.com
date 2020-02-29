@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
-import { Image, ImageWrapper } from '../Image'
+import { Image } from '../Image'
 import { Hero } from '../../types'
 import { CTA } from '../CTA'
 import { RichText } from '../RichText'
@@ -16,10 +16,8 @@ interface HeroBackground {
 }
 
 const HeroWrapper = styled.div`
-  ${({ theme }: HeroBackground) => css`
-    position: relative;
-    z-index: 0;
-  `}
+  position: relative;
+  z-index: 0;
 `
 
 interface HeroTextProps {

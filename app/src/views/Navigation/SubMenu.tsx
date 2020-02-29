@@ -11,7 +11,7 @@ interface SubMenuProps {
 
 export const SubMenu = ({ submenu, active }: SubMenuProps) => {
   const { columns } = submenu
-  if (!columns) return
+  if (!columns) return null
   return (
     <SubMenuColumns active={active}>
       {columns.map((col) => {

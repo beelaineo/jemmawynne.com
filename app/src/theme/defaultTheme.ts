@@ -64,12 +64,12 @@ export const defaultTheme: DefaultTheme = {
     99, // stupid high, just don't use fontSizes.0
     50, // h1
     25, // h2
-    17, // h3
-    13, // readable text: p, h4
-    11, // small text: h5, captions
+    20, // h3
+    16, // readable text: p, h4
+    14, // small text: h5, captions
     11, // small text: h6, small captions
   ],
-  fontWeights: [0, 100, 200, 300, 400, 700],
+  fontWeights: [0, 200, 400, 500, 700],
   fonts: {
     serif,
     sans,

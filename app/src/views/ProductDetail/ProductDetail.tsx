@@ -1,8 +1,6 @@
 import * as React from 'react'
-import { useQuery } from 'urql'
 import { ProductInfoBlock, ShopifyProduct } from '../../types'
 import { useProductVariant, useCheckout } from 'use-shopify'
-import { NotFound } from '../NotFound'
 import { Column } from '../../components/Layout'
 import {
   ProductVariantSelector,
@@ -21,7 +19,6 @@ import {
   NormalizeDiv,
 } from './styled'
 import { Accordion } from '../../components/Accordion'
-import { getInfoBlocksByType, getInfoBlocksByTag } from './utils'
 
 interface Props {
   product: ShopifyProduct

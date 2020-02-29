@@ -57,14 +57,14 @@ export const NavSection = styled.div`
 `
 
 export const NavTools = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: absolute;
-    top: 5;
-    right: 5;
-  `}
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 28px;
+  right: 24px;
 `
 
 export const Logo = styled.img`
@@ -72,41 +72,46 @@ export const Logo = styled.img`
   max-width: 310px;
 `
 
-interface WithActive {
-  theme: DefaultTheme
-  active?: boolean
-  children: React.ReactNode
-  as?: string
-  onClick?: () => void
+interface CartButtonProps {
+  disabled?: boolean
 }
 
-const NavHeaderElement = styled.span`
-  ${({ active }: WithActive) => css`
-    text-transform: uppercase;
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid ${active ? 'black' : 'transparent'};
-    color: inherit;
-    text-decoration: none;
-    transition: 0.2s;
+export const CartButton = styled.button`
+  ${({ disabled }) => css`
+    opacity: ${disabled ? '0.6' : '1'};
+    pointer-events: ${disabled ? 'none' : 'inherit'};
   `}
 `
 
-export const NavHeader = (props: Omit<WithActive, 'theme'>) => (
-  // @ts-ignore
-  <NavHeaderElement {...props} family="sans" />
-)
+export const NavHeader = styled.div`
+  border-bottom: 2px solid transparent;
+  transition: 0.2s;
+`
+
+interface NavHeaderWrapperProps {
+  active?: boolean
+}
 
 export const NavHeaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  margin: 0 2em;
+  ${({ active }: NavHeaderWrapperProps) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: default;
+    align-items: center;
+    margin: 0 2em;
 
-  &:focus ${NavHeaderElement}, &:hover > ${NavHeaderElement} {
-    border-bottom-color: black;
-  }
+    &:focus > ${NavHeader}, &:hover > ${NavHeader} {
+      border-bottom-color: black;
+    }
+    ${active
+      ? css`
+          & > ${NavHeader} {
+            border-bottom-color: black;
+          }
+        `
+      : ''}
+  `}
 `
 
 interface WithOpen {

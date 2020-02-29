@@ -5,13 +5,12 @@ import { useSearch } from 'use-shopify'
 const { useEffect, useState } = React
 
 const Input = styled.input`
-  ${({ theme }) => css`
-    border: 1px solid;
-    border-color: body.9;
-  `}
+  border: 1px solid;
+  border-color: body.9;
 `
 
 export const SearchInput = () => {
+  return null
   const { search, searchTerm } = useSearch()
   const [localSearchTerm, setLocalSearchTerm] = useState<string>('')
 

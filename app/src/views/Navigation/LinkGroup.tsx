@@ -11,11 +11,18 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
   const { title, links } = linkGroup
   return (
     <div>
-      <Heading level={5}>{title}</Heading>
+      <Heading family="sans" color="body.6" weight={2} level={5}>
+        {title}
+      </Heading>
       {links && links.length
         ? links.map((menuLink) =>
             menuLink && menuLink.document ? (
-              <Heading level={5} key={menuLink._key || 'some-key'}>
+              <Heading
+                family="sans"
+                level={5}
+                weight={2}
+                key={menuLink._key || 'some-key'}
+              >
                 <DocumentLink document={menuLink.document} />
               </Heading>
             ) : null,

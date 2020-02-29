@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Swipeable, EventData } from 'react-swipeable'
+import { Swipeable, useSwipeable, EventData } from 'react-swipeable'
 import {
   CarouselContainer,
   SlidesContainer,
@@ -99,6 +99,8 @@ export const CarouselInner = ({
     }
   }
 
+  const handlers = useSwipeable({ onSwiped: handleSwipe })
+
   return (
     <CarouselContainer ref={outerRef}>
       {children ? (
@@ -112,23 +114,22 @@ export const CarouselInner = ({
       {/* 
            // @ts-ignore */}
       <CarouselMask>
-        <Swipeable onSwiped={handleSwipe}>
-          <SlidesContainer
-            ref={innerRef}
-            left={currentSlide ? -slides[currentSlide].ref.offsetLeft : 0}
-          >
-            {React.Children.map(children, (child, index) => (
-              <Slide
-                addSlide={addSlide}
-                columnCount={columnCount}
-                index={index}
-                key={index}
-              >
-                {child}
-              </Slide>
-            ))}
-          </SlidesContainer>
-        </Swipeable>
+        <SlidesContainer
+          ref={innerRef}
+          left={currentSlide ? -slides[currentSlide].ref.offsetLeft : 0}
+          {...handlers}
+        >
+          {React.Children.map(children, (child, index) => (
+            <Slide
+              addSlide={addSlide}
+              columnCount={columnCount}
+              index={index}
+              key={index}
+            >
+              {child}
+            </Slide>
+          ))}
+        </SlidesContainer>
       </CarouselMask>
       {children ? (
         <CarouselButton

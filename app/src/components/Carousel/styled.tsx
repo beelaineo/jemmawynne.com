@@ -49,7 +49,7 @@ export const SlideContainer = styled.div`
     width: calc(
       (100% - (${theme.space[5]}px * ${columnCount - 1})) / ${columnCount}
     );
-    margin: 0 3;
+    margin-right: 5;
     display: inline-flex;
     align-items: center;
 
@@ -75,7 +75,7 @@ export const CarouselButton = styled.button`
     pointer-events: ${visible ? 'auto' : 'none'};
     position: absolute;
     width: ${WIDTH}px;
-    z-index: 10;
+    z-index: 15;
     height: ${HEIGHT}px;
     top: calc(50% - 30px);
     transition: 0.2s;

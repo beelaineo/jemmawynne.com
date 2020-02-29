@@ -9,20 +9,11 @@ interface LinkProps {
   label?: string
 }
 
-const linkStyles = {
-  textDecoration: 'none',
-  color: 'inherit',
-}
-
 export const DocumentLink = ({ document, children, label }: LinkProps) => {
   if (!document) return null
   return (
     <NextLink href={getDocumentLinkUrl(document)}>
-      <a>
-        <span style={linkStyles}>
-          {children || label || getDocumentLinkLabel(document) || null}
-        </span>
-      </a>
+      <a>{children || label || getDocumentLinkLabel(document) || null}</a>
     </NextLink>
   )
 }

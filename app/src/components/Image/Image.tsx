@@ -26,26 +26,28 @@ interface ImageDetails {
 /* Based on the image type, return a src, srcset, altText, etc */
 const getImageDetails = (image: ImageType): null | ImageDetails => {
   // @ts-ignore
-  // if (!image || image === {}) return {}
-  // // TODO: when the GraphQL types are fixed, remove this to use the switch below
-  // // @ts-ignore
-  // if (image.originalSrc) {
-  //   // @ts-ignore
-  //   return { src: image.originalSrc, altText: image.altText }
-  // }
-  // // @ts-ignore
-  // if (image.asset) {
-  //   // @ts-ignore
-  //   return { src: image.asset?.url }
-  // }
+  if (!image || image === {}) return {}
+  // TODO: when the GraphQL types are fixed, remove this to use the switch below
+  // @ts-ignore
+  if (image.originalSrc) {
+    // @ts-ignore
+    return { src: image.originalSrc, altText: image.altText }
+  }
+  // @ts-ignore
+  if (image.asset) {
+    // @ts-ignore
+    return { src: image.asset?.url }
+  }
 
   switch (image.__typename) {
     case 'ShopifySourceImage':
       return { src: image.originalSrc, altText: image.altText }
     case 'Image':
+      // @ts-ignore
       return { src: image?.asset?.url }
     case 'RichImage':
       return {
+        // @ts-ignore
         src: image.asset?.url,
         altText: image?.altText,
       }
@@ -103,7 +105,6 @@ const ImageElement = ({
   loaded,
   image,
   onLoad,
-  sizes,
 }: ImageElementProps) => {
   const imageRef = React.useRef<HTMLImageElement>(null)
 
@@ -156,7 +157,6 @@ export const Image = ({
   ratio,
 }: ImageProps) => {
   const [loaded, setLoaded] = React.useState(false)
-  if (!image) return null
 
   return (
     <Wrapper>

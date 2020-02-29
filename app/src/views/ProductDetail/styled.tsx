@@ -200,7 +200,6 @@ export const QuantitySelectorCart = styled(QuantitySelector)`
 `
 
 export const Label = styled.label`
-  color: body.3;
   display: block;
   margin-bottom: 4;
   -moz-appearance: none;

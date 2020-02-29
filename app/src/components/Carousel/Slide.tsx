@@ -4,7 +4,6 @@ import { SlideContainer } from './styled'
 const { useRef, useEffect } = React
 
 export interface SlideInfo {
-  // index: number
   ref: HTMLDivElement
 }
 

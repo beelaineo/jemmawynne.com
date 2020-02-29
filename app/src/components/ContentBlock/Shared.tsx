@@ -21,17 +21,15 @@ export const SectionWrapper = styled.div`
         `
       : ''}
 
-    &:nth-of-type(2) {
-      background-color: body.9;
+    &:nth-of-type(2n) {
+      background-color: body.2;
     }
   `}
 `
 
 const SectionHeaderWrapper = styled.div`
-  ${({ theme }) => css`
-    text-align: center;
-    margin-bottom: 3;
-  `}
+  text-align: center;
+  margin-bottom: 3;
 `
 const SubtitleWrapper = styled.div`
   margin: 0 auto;

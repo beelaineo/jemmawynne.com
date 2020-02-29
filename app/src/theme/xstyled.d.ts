@@ -3,8 +3,8 @@ declare module '@xstyled/styled-components' {
     StyledComponent,
     DefaultTheme,
     FlattenSimpleInterpolation,
-  } from '@xstyled/styled-components'
-  export * from '@xstyled/styled-components'
+  } from 'styled-components'
+  export * from 'styled-components'
 
   interface Breakpoints {
     xs: any

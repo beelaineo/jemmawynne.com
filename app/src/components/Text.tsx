@@ -22,40 +22,26 @@ const createTextBase = (as: any) => styled(as)`
     font-family: ${family};
     font-weight: ${weight};
     font-style: ${fontStyle};
-    margin: 2 0 0.5em;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    a {
-      text-decoration: underline;
-      color: bronze;
-    }
-  `}
-`
-
-const TextBase = styled(Box)`
-  ${({
-    theme,
-    family,
-    weight,
-    fontStyle,
-    fontSize,
-    color,
-  }: CustomTextProps) => css`
-    font-size: ${fontSize};
-    font-family: ${family};
-    font-weight: ${weight};
-    font-style: ${fontStyle};
+    letter-spacing: ${family === 'sans' ? 'auto' : '0.06em'};
     margin: 0 0 0.5em;
 
     &:last-child {
       margin-bottom: 0;
     }
-    a {
-      text-decoration: underline;
-      color: bronze;
+  `}
+`
+
+const TextBase = styled(Box)`
+  ${({ family, weight, fontStyle, fontSize }: CustomTextProps) => css`
+    font-size: ${fontSize};
+    font-family: ${family};
+    font-weight: ${weight};
+    font-style: ${fontStyle};
+    letter-spacing: ${family === 'sans' ? 'auto' : '0.06em'};
+    margin: 0 0 0.5em;
+
+    &:last-child {
+      margin-bottom: 0;
     }
   `}
 `
@@ -133,7 +119,6 @@ const LabelBase = createTextBase('label')
 
 export const Label = styled(LabelBase)`
   font-size: 4;
-  color: body.2;
   margin: 0;
 `
 
@@ -157,7 +142,6 @@ const LiBase = createTextBase('li')
 
 export const Li = styled(LiBase)`
   font-size: 4;
-  color: body.2;
   margin: 0;
 `
 

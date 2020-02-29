@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import styled from '@xstyled/styled-components'
+import styled, { Box } from '@xstyled/styled-components'
 import { ImageBlock as ImageBlockType } from '../../types'
 import { Image } from '../Image'
 import { RichText } from '../RichText'
@@ -24,7 +24,9 @@ export const ImageBlock = ({ content }: ImageBlockProps) => {
   const renderInner = () => (
     <ImageBlockWrapper>
       <Image image={backgroundImage} ratio={1} />
-      <RichText body={captionRaw} />
+      <Box mt={2}>
+        <RichText body={captionRaw} />
+      </Box>
     </ImageBlockWrapper>
   )
   return linkTo ? (
