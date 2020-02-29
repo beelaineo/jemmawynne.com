@@ -10,7 +10,7 @@ export type Scalars = {
    * An RFC 3986 and RFC 3987 compliant URI string.
    *
    * Example value: `"https://johns-apparel.myshopify.com"`.
-   **/
+   */
   URL: any
   /** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
   HTML: any
@@ -165,7 +165,7 @@ export enum StorefrontApiArticleSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -209,7 +209,7 @@ export interface StorefrontApiAvailableShippingRates {
    * Whether or not the shipping rates are ready.
    * The `shippingRates` field is `null` when this value is `false`.
    * This field should be polled until its value becomes `true`.
-   **/
+   */
   ready: Scalars['Boolean']
   /** The fetched shipping rates. `null` until the `ready` field is `true`. */
   shippingRates?: Maybe<Array<StorefrontApiShippingRate>>
@@ -278,7 +278,7 @@ export enum StorefrontApiBlogSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -307,7 +307,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
    * The available shipping rates for this Checkout.
    * Should only be used when checkout `requiresShipping` is `true` and
    * the shipping address is valid.
-   **/
+   */
   availableShippingRates?: Maybe<StorefrontApiAvailableShippingRates>
   /** The date and time when the checkout was completed. */
   completedAt?: Maybe<Scalars['DateTime']>
@@ -338,19 +338,19 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   /**
    * The amount left to be paid. This is equal to the cost of the line items, taxes
    * and shipping minus discounts and gift cards.
-   **/
+   */
   paymentDue: Scalars['Money']
   /**
    * The amount left to be paid. This is equal to the cost of the line items, taxes
    * and shipping minus discounts and gift cards.
-   **/
+   */
   paymentDueV2: StorefrontApiMoneyV2
   /**
    * Whether or not the Checkout is ready and can be completed. Checkouts may
    * have asynchronous operations that can take time to finish. If you want
    * to complete a checkout or ensure all the fields are populated and up to
    * date, polling is required until the value is true.
-   **/
+   */
   ready: Scalars['Boolean']
   /** States whether or not the fulfillment requires shipping. */
   requiresShipping: Scalars['Boolean']
@@ -410,7 +410,7 @@ export type StorefrontApiCheckoutAttributesUpdateInput = {
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
    * Full validation of the addresses is still done at complete time.
-   **/
+   */
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
 }
 
@@ -435,7 +435,7 @@ export type StorefrontApiCheckoutAttributesUpdateV2Input = {
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
    * Full validation of the addresses is still done at complete time.
-   **/
+   */
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
 }
 
@@ -529,13 +529,13 @@ export type StorefrontApiCheckoutCreateInput = {
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
    * Full validation of addresses is still done at complete time.
-   **/
+   */
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
   /**
    * The three-letter currency code of one of the shop's enabled presentment currencies.
    * Including this field creates a checkout in the specified currency. By default, new
    * checkouts are created in the shop's primary currency.
-   **/
+   */
   presentmentCurrencyCode?: Maybe<StorefrontApiCurrencyCode>
 }
 
@@ -916,7 +916,7 @@ export interface StorefrontApiCheckoutUserError
 /**
  * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- **/
+ */
 export interface StorefrontApiCollection extends StorefrontApiNode {
   __typename: 'Collection'
   /** Stripped description of the collection, single line with HTML tags removed. */
@@ -926,7 +926,7 @@ export interface StorefrontApiCollection extends StorefrontApiNode {
   /**
    * A human-friendly unique string for the collection automatically generated from its title.
    * Limit of 255 characters.
-   **/
+   */
   handle: Scalars['String']
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -943,7 +943,7 @@ export interface StorefrontApiCollection extends StorefrontApiNode {
 /**
  * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- **/
+ */
 export type StorefrontApiCollectionDescriptionArgs = {
   truncateAt?: Maybe<Scalars['Int']>
 }
@@ -951,7 +951,7 @@ export type StorefrontApiCollectionDescriptionArgs = {
 /**
  * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- **/
+ */
 export type StorefrontApiCollectionImageArgs = {
   maxWidth?: Maybe<Scalars['Int']>
   maxHeight?: Maybe<Scalars['Int']>
@@ -962,7 +962,7 @@ export type StorefrontApiCollectionImageArgs = {
 /**
  * A collection represents a grouping of products that a shop owner can create to
  * organize them or make their shops easier to browse.
- **/
+ */
 export type StorefrontApiCollectionProductsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -1000,7 +1000,7 @@ export enum StorefrontApiCollectionSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -1559,14 +1559,14 @@ export interface StorefrontApiCreditCard {
 /**
  * Specifies the fields required to complete a checkout with
  * a Shopify vaulted credit card payment.
- **/
+ */
 export type StorefrontApiCreditCardPaymentInput = {
   /** The amount of the payment. */
   amount: Scalars['Money']
   /**
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   **/
+   */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: StorefrontApiMailingAddressInput
@@ -1579,14 +1579,14 @@ export type StorefrontApiCreditCardPaymentInput = {
 /**
  * Specifies the fields required to complete a checkout with
  * a Shopify vaulted credit card payment.
- **/
+ */
 export type StorefrontApiCreditCardPaymentInputV2 = {
   /** The amount and currency of the payment. */
   paymentAmount: StorefrontApiMoneyInput
   /**
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   **/
+   */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: StorefrontApiMailingAddressInput
@@ -1902,7 +1902,7 @@ export enum StorefrontApiCurrencyCode {
  * A customer represents a customer account with the shop. Customer accounts store
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
- **/
+ */
 export interface StorefrontApiCustomer {
   __typename: 'Customer'
   /** Indicates whether the customer has consented to be sent marketing material via email. */
@@ -1932,7 +1932,7 @@ export interface StorefrontApiCustomer {
   /**
    * A list of tags assigned to the customer.
    * Additional access scope required: unauthenticated_read_customer_tags.
-   **/
+   */
   tags: Array<Scalars['String']>
   /** The date and time when the customer information was updated. */
   updatedAt: Scalars['DateTime']
@@ -1942,7 +1942,7 @@ export interface StorefrontApiCustomer {
  * A customer represents a customer account with the shop. Customer accounts store
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
- **/
+ */
 export type StorefrontApiCustomerAddressesArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -1955,7 +1955,7 @@ export type StorefrontApiCustomerAddressesArgs = {
  * A customer represents a customer account with the shop. Customer accounts store
  * contact information for the customer, saving logged-in customers the trouble of
  * having to provide it at every checkout.
- **/
+ */
 export type StorefrontApiCustomerOrdersArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -2080,7 +2080,7 @@ export type StorefrontApiCustomerCreateInput = {
    * A unique phone number for the customer.
    *
    * Formatted using E.164 standard. For example, _+16135551111_.
-   **/
+   */
   phone?: Maybe<Scalars['String']>
   /** The login password used by the customer. */
   password: Scalars['String']
@@ -2195,7 +2195,7 @@ export type StorefrontApiCustomerUpdateInput = {
    * A unique phone number for the customer.
    *
    * Formatted using E.164 standard. For example, _+16135551111_.
-   **/
+   */
   phone?: Maybe<Scalars['String']>
   /** The login password used by the customer. */
   password?: Maybe<Scalars['String']>
@@ -2211,7 +2211,7 @@ export interface StorefrontApiCustomerUpdatePayload {
   /**
    * The newly created customer access token. If the customer's password is updated, all previous access tokens
    * (including the one used to perform this mutation) become invalid, and a new token is generated.
-   **/
+   */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
@@ -2255,7 +2255,7 @@ export interface StorefrontApiDiscountAllocation {
 /**
  * Discount applications capture the intentions of a discount source at
  * the time of application.
- **/
+ */
 export type StorefrontApiDiscountApplication = {
   /** The method by which the discount's value is allocated to its entitled items. */
   allocationMethod: StorefrontApiDiscountApplicationAllocationMethod
@@ -2296,7 +2296,7 @@ export interface StorefrontApiDiscountApplicationEdge {
 /**
  * Which lines on the order that the discount is allocated over, of the type
  * defined by the Discount Application's target_type.
- **/
+ */
 export enum StorefrontApiDiscountApplicationTargetSelection {
   /** The discount is allocated onto all the lines. */
   All = 'ALL',
@@ -2317,7 +2317,7 @@ export enum StorefrontApiDiscountApplicationTargetType {
 /**
  * Discount code applications capture the intentions of a discount code at
  * the time that it is applied.
- **/
+ */
 export interface StorefrontApiDiscountCodeApplication
   extends StorefrontApiDiscountApplication {
   __typename: 'DiscountCodeApplication'
@@ -2364,7 +2364,7 @@ export interface StorefrontApiFulfillment {
   /**
    * Tracking information associated with the fulfillment,
    * such as the tracking number and tracking URL.
-   **/
+   */
   trackingInfo: Array<StorefrontApiFulfillmentTrackingInfo>
 }
 
@@ -2451,7 +2451,7 @@ export interface StorefrontApiImage {
    * The location of the original image as a URL.
    *
    * If there are any existing transformations in the original source URL, they will remain and not be stripped.
-   **/
+   */
   originalSrc: Scalars['URL']
   /** The location of the image as a URL. */
   src: Scalars['URL']
@@ -2460,7 +2460,7 @@ export interface StorefrontApiImage {
    *
    * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
    * Otherwise any transformations which an image type does not support will be ignored.
-   **/
+   */
   transformedSrc: Scalars['URL']
 }
 
@@ -2516,13 +2516,13 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
    * The two-letter code for the country of the address.
    *
    * For example, US.
-   **/
+   */
   countryCode?: Maybe<Scalars['String']>
   /**
    * The two-letter code for the country of the address.
    *
    * For example, US.
-   **/
+   */
   countryCodeV2?: Maybe<StorefrontApiCountryCode>
   /** The first name of the customer. */
   firstName?: Maybe<Scalars['String']>
@@ -2544,7 +2544,7 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
    * A unique phone number for the customer.
    *
    * Formatted using E.164 standard. For example, _+16135551111_.
-   **/
+   */
   phone?: Maybe<Scalars['String']>
   /** The region of the address, such as the province, state, or district. */
   province?: Maybe<Scalars['String']>
@@ -2552,7 +2552,7 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
    * The two-letter code for the region.
    *
    * For example, ON.
-   **/
+   */
   provinceCode?: Maybe<Scalars['String']>
   /** The zip or postal code of the address. */
   zip?: Maybe<Scalars['String']>
@@ -2600,7 +2600,7 @@ export type StorefrontApiMailingAddressInput = {
    * A unique phone number for the customer.
    *
    * Formatted using E.164 standard. For example, _+16135551111_.
-   **/
+   */
   phone?: Maybe<Scalars['String']>
   /** The region of the address, such as the province, state, or district. */
   province?: Maybe<Scalars['String']>
@@ -2629,7 +2629,7 @@ export interface StorefrontApiManualDiscountApplication
 /**
  * Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
  * comprised of keys, values, and value types.
- **/
+ */
 export interface StorefrontApiMetafield extends StorefrontApiNode {
   __typename: 'Metafield'
   /** The description of a metafield. */
@@ -2709,7 +2709,7 @@ export type StorefrontApiMoneyInput = {
  *
  * For a more general solution, the [Unicode CLDR number formatting database] is available with many implementations
  * (such as [TwitterCldr](https://github.com/twitter/twitter-cldr-rb)).
- **/
+ */
 export interface StorefrontApiMoneyV2 {
   __typename: 'MoneyV2'
   /** Decimal money amount. */
@@ -2730,7 +2730,7 @@ export interface StorefrontApiMutation {
   /**
    * Completes a checkout without providing payment information. You can use this
    * mutation for free items or items whose purchase price is covered by a gift card.
-   **/
+   */
   checkoutCompleteFree?: Maybe<StorefrontApiCheckoutCompleteFreePayload>
   /** Completes a checkout using a credit card token from Shopify's Vault. */
   checkoutCompleteWithCreditCard?: Maybe<
@@ -2740,7 +2740,7 @@ export interface StorefrontApiMutation {
    * Completes a checkout using a credit card token from Shopify's card vault.
    * Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you
    * need to  [_request payment processing_](https://help.shopify.com/api/guides/sales-channel-sdk/getting-started#request-payment-processing).
-   **/
+   */
   checkoutCompleteWithCreditCardV2?: Maybe<
     StorefrontApiCheckoutCompleteWithCreditCardV2Payload
   >
@@ -2817,7 +2817,7 @@ export interface StorefrontApiMutation {
   /**
    * Creates a customer access token.
    * The customer access token is required to modify the customer object in any way.
-   **/
+   */
   customerAccessTokenCreate?: Maybe<
     StorefrontApiCustomerAccessTokenCreatePayload
   >
@@ -2830,7 +2830,7 @@ export interface StorefrontApiMutation {
    *
    * Access token renewal must happen *before* a token expires.
    * If a token has already expired, a new one should be created instead via `customerAccessTokenCreate`.
-   **/
+   */
   customerAccessTokenRenew?: Maybe<StorefrontApiCustomerAccessTokenRenewPayload>
   /** Activates a customer. */
   customerActivate?: Maybe<StorefrontApiCustomerActivatePayload>
@@ -3103,7 +3103,7 @@ export type StorefrontApiNode = {
  * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- **/
+ */
 export interface StorefrontApiOrder extends StorefrontApiNode {
   __typename: 'Order'
   /** The code of the currency used for the payment. */
@@ -3123,7 +3123,7 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
   /**
    * Unique identifier for the order that appears on the order.
    * For example, _#1000_ or _Store1001.
-   **/
+   */
   name: Scalars['String']
   /** A unique numeric identifier for the order for use by shop owner and customer. */
   orderNumber: Scalars['Int']
@@ -3133,7 +3133,7 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
    * The date and time when the order was imported.
    * This value can be set to dates in the past when importing from other systems.
    * If no value is provided, it will be auto-generated based on current date and time.
-   **/
+   */
   processedAt: Scalars['DateTime']
   /** The address to where the order will be shipped. */
   shippingAddress?: Maybe<StorefrontApiMailingAddress>
@@ -3169,7 +3169,7 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
  * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- **/
+ */
 export type StorefrontApiOrderDiscountApplicationsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3182,7 +3182,7 @@ export type StorefrontApiOrderDiscountApplicationsArgs = {
  * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- **/
+ */
 export type StorefrontApiOrderLineItemsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3195,7 +3195,7 @@ export type StorefrontApiOrderLineItemsArgs = {
  * An order is a customer’s completed request to purchase one or more products from
  * a shop. An order is created when a customer completes the checkout process,
  * during which time they provides an email address, billing address and payment information.
- **/
+ */
 export type StorefrontApiOrderSuccessfulFulfillmentsArgs = {
   first?: Maybe<Scalars['Int']>
 }
@@ -3259,14 +3259,14 @@ export enum StorefrontApiOrderSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
 /**
  * Shopify merchants can create pages to hold static HTML content. Each Page object
  * represents a custom page on the online store.
- **/
+ */
 export interface StorefrontApiPage extends StorefrontApiNode {
   __typename: 'Page'
   /** The description of the page, complete with HTML formatting. */
@@ -3324,7 +3324,7 @@ export enum StorefrontApiPageSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -3369,7 +3369,7 @@ export interface StorefrontApiPaymentSettings {
   /**
    * A list of enabled currencies (ISO 4217 format) that the shop accepts.
    * Merchants can enable currencies from their Shopify Payments settings in the Shopify admin.
-   **/
+   */
   enabledPresentmentCurrencies: Array<StorefrontApiCurrencyCode>
   /** The shop’s Shopify Payments account id. */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>
@@ -3394,7 +3394,7 @@ export type StorefrontApiPricingValue =
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export interface StorefrontApiProduct
   extends StorefrontApiNode,
     StorefrontApiHasMetafields {
@@ -3412,7 +3412,7 @@ export interface StorefrontApiProduct
   /**
    * A human-friendly unique string for the Product automatically generated from its title.
    * They are used by the Liquid templating language to refer to objects.
-   **/
+   */
   handle: Scalars['String']
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -3425,7 +3425,7 @@ export interface StorefrontApiProduct
   /**
    * The online store URL for the product.
    * A value of `null` indicates that the product is not published to the Online Store sales channel.
-   **/
+   */
   onlineStoreUrl?: Maybe<Scalars['URL']>
   /** List of custom product options (maximum of 3 per product). */
   options: Array<StorefrontApiProductOption>
@@ -3440,7 +3440,7 @@ export interface StorefrontApiProduct
   /**
    * A categorization that a product can be tagged with, commonly used for filtering and searching.
    * Additional access scope required for private apps: unauthenticated_read_product_tags.
-   **/
+   */
   tags: Array<Scalars['String']>
   /** The product’s title. */
   title: Scalars['String']
@@ -3450,7 +3450,7 @@ export interface StorefrontApiProduct
    * Find a product’s variant based on its selected options.
    * This is useful for converting a user’s selection of product options into a single matching variant.
    * If there is not a variant for the selected options, `null` will be returned.
-   **/
+   */
   variantBySelectedOptions?: Maybe<StorefrontApiProductVariant>
   /** List of the product’s variants. */
   variants: StorefrontApiProductVariantConnection
@@ -3463,7 +3463,7 @@ export interface StorefrontApiProduct
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductCollectionsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3477,7 +3477,7 @@ export type StorefrontApiProductCollectionsArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductDescriptionArgs = {
   truncateAt?: Maybe<Scalars['Int']>
 }
@@ -3487,7 +3487,7 @@ export type StorefrontApiProductDescriptionArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductImagesArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3506,7 +3506,7 @@ export type StorefrontApiProductImagesArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductMetafieldArgs = {
   namespace: Scalars['String']
   key: Scalars['String']
@@ -3517,7 +3517,7 @@ export type StorefrontApiProductMetafieldArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductMetafieldsArgs = {
   namespace?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
@@ -3532,7 +3532,7 @@ export type StorefrontApiProductMetafieldsArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductOptionsArgs = {
   first?: Maybe<Scalars['Int']>
 }
@@ -3542,7 +3542,7 @@ export type StorefrontApiProductOptionsArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductPresentmentPriceRangesArgs = {
   presentmentCurrencies?: Maybe<Array<StorefrontApiCurrencyCode>>
   first?: Maybe<Scalars['Int']>
@@ -3557,7 +3557,7 @@ export type StorefrontApiProductPresentmentPriceRangesArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductVariantBySelectedOptionsArgs = {
   selectedOptions: Array<StorefrontApiSelectedOptionInput>
 }
@@ -3567,7 +3567,7 @@ export type StorefrontApiProductVariantBySelectedOptionsArgs = {
  * For example, a digital download (such as a movie, music or ebook file) also
  * qualifies as a product, as do services (such as equipment rental, work for hire,
  * customization of another product or an extended warranty).
- **/
+ */
 export type StorefrontApiProductVariantsArgs = {
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -3597,7 +3597,7 @@ export enum StorefrontApiProductCollectionSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -3629,7 +3629,7 @@ export enum StorefrontApiProductImageSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -3638,7 +3638,7 @@ export enum StorefrontApiProductImageSortKeys {
  * Products are based on permutations of these options.
  * A product may have a maximum of 3 options.
  * 255 characters limit each.
- **/
+ */
 export interface StorefrontApiProductOption extends StorefrontApiNode {
   __typename: 'ProductOption'
   /** Globally unique identifier. */
@@ -3696,7 +3696,7 @@ export enum StorefrontApiProductSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -3712,12 +3712,12 @@ export interface StorefrontApiProductVariant
   /**
    * The compare at price of the variant. This can be used to mark a variant as on
    * sale, when `compareAtPrice` is higher than `price`.
-   **/
+   */
   compareAtPrice?: Maybe<Scalars['Money']>
   /**
    * The compare at price of the variant. This can be used to mark a variant as on
    * sale, when `compareAtPriceV2` is higher than `priceV2`.
-   **/
+   */
   compareAtPriceV2?: Maybe<StorefrontApiMoneyV2>
   /** Globally unique identifier. */
   id: Scalars['ID']
@@ -3838,7 +3838,7 @@ export enum StorefrontApiProductVariantSortKeys {
    * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
    * results by relevance to the search term(s). When no search query is specified, this sort key is not
    * deterministic and should not be used.
-   **/
+   */
   Relevance = 'RELEVANCE',
 }
 
@@ -3869,12 +3869,12 @@ export interface StorefrontApiQueryRoot {
    * Find recommended products related to a given `product_id`.
    * To learn more about how recommendations are generated, see
    * [*Showing product recommendations on product pages*](https://help.shopify.com/themes/development/recommended-products).
-   **/
+   */
   productRecommendations?: Maybe<Array<StorefrontApiProduct>>
   /**
    * Tags added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
-   **/
+   */
   productTags: StorefrontApiStringConnection
   /** List of product types for the shop's products that are published to your app. */
   productTypes: StorefrontApiStringConnection
@@ -3994,7 +3994,7 @@ export type StorefrontApiQueryRootProductsArgs = {
 /**
  * Script discount applications capture the intentions of a discount that
  * was created by a Shopify Script.
- **/
+ */
 export interface StorefrontApiScriptDiscountApplication
   extends StorefrontApiDiscountApplication {
   __typename: 'ScriptDiscountApplication'
@@ -4015,7 +4015,7 @@ export interface StorefrontApiScriptDiscountApplication
 /**
  * Custom properties that a shop owner can use to define product variants.
  * Multiple options can exist. Options are represented as: option1, option2, option3, etc.
- **/
+ */
 export interface StorefrontApiSelectedOption {
   __typename: 'SelectedOption'
   /** The product option’s name. */
@@ -4084,7 +4084,7 @@ export interface StorefrontApiShop {
   /**
    * Tags added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
-   **/
+   */
   productTags: StorefrontApiStringConnection
   /** List of the shop’s product types. */
   productTypes: StorefrontApiStringConnection
@@ -4198,14 +4198,14 @@ export interface StorefrontApiStringEdge {
 /**
  * Specifies the fields required to complete a checkout with
  * a tokenized payment.
- **/
+ */
 export type StorefrontApiTokenizedPaymentInput = {
   /** The amount of the payment. */
   amount: Scalars['Money']
   /**
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   **/
+   */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: StorefrontApiMailingAddressInput
@@ -4222,14 +4222,14 @@ export type StorefrontApiTokenizedPaymentInput = {
 /**
  * Specifies the fields required to complete a checkout with
  * a tokenized payment.
- **/
+ */
 export type StorefrontApiTokenizedPaymentInputV2 = {
   /** The amount and currency of the payment. */
   paymentAmount: StorefrontApiMoneyInput
   /**
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new one.
-   **/
+   */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
   billingAddress: StorefrontApiMailingAddressInput
@@ -4238,7 +4238,7 @@ export type StorefrontApiTokenizedPaymentInputV2 = {
   /**
    * Whether to execute the payment in test mode, if possible. Test mode is not
    * supported in production stores. Defaults to `false`.
-   **/
+   */
   test?: Maybe<Scalars['Boolean']>
   /** Public Hash Key used for AndroidPay payments only. */
   identifier?: Maybe<Scalars['String']>

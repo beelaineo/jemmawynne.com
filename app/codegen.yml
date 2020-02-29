@@ -3,7 +3,7 @@ generates:
     schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
     plugins:
       - fragment-matcher
-  types/generated-sanity.ts:
+  src/types/generated-sanity.ts:
     schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
     plugins:
       - typescript
@@ -14,7 +14,7 @@ generates:
         JSON: '{ [key: string]: any }'
       declarationKind:
         type: 'interface'
-  types/generated-shopify.ts:
+  src/types/generated-shopify.ts:
     schema: ./schema-shopify.graphql
     plugins:
       - typescript

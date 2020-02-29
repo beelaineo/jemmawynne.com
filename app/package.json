@@ -17,7 +17,7 @@
 		"dev": "next",
 		"pre-build": "yarn generate-types",
 		"install-types": "typesync && yarn install",
-		"generate-types": "graphql get-schema && graphql-codegen && prettier ./types/**/* --write",
+		"generate-types": "graphql get-schema && graphql-codegen && prettier ./src/types/**/* --write",
 		"test": "jest",
 		"test:watch": "jest --watch"
 	},
