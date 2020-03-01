@@ -51,7 +51,7 @@ export const SlideContainer = styled.div`
     );
     margin-right: 5;
     display: inline-flex;
-    align-items: flex-start;
+    vertical-align: top;
 
     &:last-of-type {
       margin-right: 0;
@@ -126,7 +126,7 @@ export const CarouselButton = styled.button`
           }
         `}
 
-    ${theme.mediaQueries.tablet} {
+    ${theme.mediaQueries.mobile} {
       display: none;
     }
   `}

@@ -1,17 +1,25 @@
 import * as React from 'react'
+import styled from '@xstyled/styled-components'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { useCheckout } from 'use-shopify'
 import { NormalizeDiv } from '../ProductDetail/styled'
 import { Button } from '../../components/Button'
 import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
-import { Loading } from '../Navigation/styled'
 import { Heading } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
 import { CheckoutProduct } from './CheckoutProduct'
+import { StorefrontApiCheckoutLineItem } from '../../types'
+import { formatMoney } from '../../utils/currency'
 
 /**
  * Main Checkout view
  */
+
+const TitleWrapper = styled.div`
+  border-bottom: 1px solid currentColor;
+  padding: 3 2;
+  background-color: body.2;
+`
 
 export const Checkout = () => {
   /* State */
@@ -21,61 +29,35 @@ export const Checkout = () => {
     return <NormalizeDiv>Your cart is empty</NormalizeDiv>
   }
 
-  const [lineItems] = unwindEdges(checkout.lineItems)
+  const [lineItems] = unwindEdges<StorefrontApiCheckoutLineItem>(
+    checkout.lineItems,
+  )
 
   return (
-    <NormalizeDiv>
-      <Heading level={3} color="grays.0" textAlign="center">
-        Your cart
-      </Heading>
+    <>
+      <TitleWrapper>
+        <Heading level={2} textAlign="center" my={0}>
+          Your cart
+        </Heading>
+      </TitleWrapper>
       <CartInner>
         {lineItems.map((lineItem) => (
-          // @ts-ignore
           <CheckoutProduct key={lineItem.id} lineItem={lineItem} />
         ))}
       </CartInner>
 
       <CartBottom>
-        <Loading isLoading={loading}>
-          <FlexContainer width="100%">
-            <FlexHalf>
-              <Heading
-                level={5}
-                textTransform="uppercase"
-                weight={2}
-                color="grays.3"
-              >
-                Subtotal:
-              </Heading>
-            </FlexHalf>
-            <FlexHalf>
-              <Heading
-                level={5}
-                textAlign="right"
-                textTransform="uppercase"
-                weight={2}
-                color="grays.0"
-              >
-                ${checkout.paymentDueV2.amount}
-              </Heading>
-            </FlexHalf>
-          </FlexContainer>
-        </Loading>
-        <NormalizeDiv>
-          <Button
-            as="a"
-            href={checkout.webUrl}
-            color="grays.9"
-            disabled={loading}
-          >
-            Checkout
-          </Button>
+        <Heading family="sans" textAlign="center" level={5} weight={2}>
+          Subtotal: {formatMoney(checkout.paymentDueV2)}
+        </Heading>
+        <Button as="a" href={checkout.webUrl} disabled={loading}>
+          Checkout
+        </Button>
 
-          <Heading level={6} textAlign="center">
-            Shipping and discount codes are added at checkout.
-          </Heading>
-        </NormalizeDiv>
+        <Heading my={3} level={5} textAlign="center">
+          Shipping and discount codes are added at checkout.
+        </Heading>
       </CartBottom>
-    </NormalizeDiv>
+    </>
   )
 }

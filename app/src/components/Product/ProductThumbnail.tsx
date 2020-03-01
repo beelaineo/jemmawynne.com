@@ -1,19 +1,23 @@
 import * as React from 'react'
-import { ShopifyProduct } from '../../types'
+import { RichImage, ShopifyProduct } from '../../types'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Heading } from '../Text'
 import { Image } from '../Image'
 import { formatMoney } from '../../utils'
-
 import { ProductInfo, ProductThumb } from './styled'
 
 interface ProductThumbnail {
   product: ShopifyProduct
+  image?: RichImage | null
   hidePrice?: boolean
 }
 
-export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
+export const ProductThumbnail = ({
+  image,
+  hidePrice,
+  product,
+}: ProductThumbnail) => {
   if (!product) return null
   const { sourceData } = product
   if (!sourceData) return null
@@ -32,19 +36,23 @@ export const ProductThumbnail = ({ hidePrice, product }: ProductThumbnail) => {
     <Link href={to}>
       <a>
         <ProductThumb>
-          <Image image={productImage} hoverImage={hoverImage} />
+          <Image image={image || productImage} hoverImage={hoverImage} />
           <ProductInfo>
-            <Heading level={4}>{product.title}</Heading>
+            <Heading my={2} level={4}>
+              {product.title}
+            </Heading>
             {hidePrice ? null : minVariantPrice &&
               minVariantPrice.amount &&
               maxVariantPrice &&
               maxVariantPrice.amount &&
               minVariantPrice.amount !== maxVariantPrice.amount ? (
-              <Heading level={5}>
+              <Heading color="body.6" level={5}>
                 {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
               </Heading>
             ) : maxVariantPrice ? (
-              <Heading level={5}>{formatMoney(maxVariantPrice)}</Heading>
+              <Heading color="body.6" level={5}>
+                {formatMoney(maxVariantPrice)}
+              </Heading>
             ) : null}
           </ProductInfo>
         </ProductThumb>

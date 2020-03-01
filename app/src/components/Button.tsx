@@ -7,10 +7,12 @@ interface ButtonProps {
 
 export const Button = styled.button`
   ${({ level, disabled }: ButtonProps) => css`
-    width: 100%;
     pointer-events: ${disabled ? 'none' : 'auto'};
     opacity: ${disabled ? 0.5 : 1};
     font-family: sans;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-transform: uppercase;
     height: 42px;
     padding: 0 3;

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   font-family: sans;
-  padding: 6 0;
+  padding: 6 0 0;
 `
 
 export const ProductDetails = styled.div`
@@ -130,24 +130,23 @@ export const QuantitySelector = styled.div`
 `
 
 export const QuantitySelectorCart = styled(QuantitySelector)`
+  margin-top: 4;
+  margin-bottom: 2;
   button {
     text-align-last: center;
-    height: 2rem;
-    border: 1px solid #f1f1f1;
-    border-radius: 0;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    font-size: 0.85rem;
-    cursor: pointer;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    font-size: 6;
     border: none;
+    transition: 0.2s;
+    cursor: pointer;
+    appearance: none;
     background: none;
     border-radius: 0;
-    border: 1px solid #f1f1f1;
-    padding: 0.5rem 0.5rem;
-    font-family: sans-serif;
+
+    margin: 0 2;
+    padding: 0;
+    font-family: sans;
   }
   input {
     text-align: center;

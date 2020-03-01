@@ -18,6 +18,7 @@ export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
     <Carousel>
       {items.map((item) => {
         if (!item) return null
+
         const { __typename, _key } = item
         if (!__typename)
           throw new Error(
@@ -28,8 +29,22 @@ export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
           <ProductThumbnail key={_key || 'some-key'} product={item} />
         ) : item.__typename === 'ShopifyCollection' ? (
           <CollectionThumbnail key={_key || 'some-key'} collection={item} />
-        ) : item.__typename === 'RichPageLink' ? (
-          <RichPageLink key={_key || 'some-key'} link={item} />
+        ) : item.document && item.__typename === 'RichPageLink' ? (
+          item.document.__typename === 'ShopifyProduct' ? (
+            <ProductThumbnail
+              key={_key || 'some-key'}
+              image={item.image}
+              product={item.document}
+            />
+          ) : item.document.__typename === 'ShopifyCollection' ? (
+            <CollectionThumbnail
+              key={_key || 'some-key'}
+              image={item.image}
+              collection={item.document}
+            />
+          ) : (
+            <RichPageLink key={_key || 'some-key'} link={item} />
+          )
         ) : null
       })}
     </Carousel>

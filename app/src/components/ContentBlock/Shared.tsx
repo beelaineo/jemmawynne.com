@@ -11,13 +11,12 @@ interface SectionWrapperProps {
 
 export const SectionWrapper = styled.div`
   ${({ theme, type }: SectionWrapperProps) => css`
-    padding: calc(${theme.space[6]}px * 2) 6;
+    padding: 6;
 
     ${type === 'carousel'
       ? css`
           display: flex;
           flex-direction: column;
-          min-height: 520px;
         `
       : ''}
 

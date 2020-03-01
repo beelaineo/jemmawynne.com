@@ -1,32 +1,42 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { ShopifyCollection } from '../../types'
+import { unwindEdges } from '@good-idea/unwind-edges'
+import { ShopifyCollection, RichImage } from '../../types'
 import { ImageWrapper, TextWrapper } from './styled'
 import { Image } from '../Image'
 import { Heading } from '../Text'
 
 interface CollectionThumbnailProps {
   collection: ShopifyCollection
+  image?: RichImage | null
 }
 
 export const CollectionThumbnail = ({
   collection,
+  image,
 }: CollectionThumbnailProps) => {
-  if (!collection.sourceData) return null
-  const { products } = collection.sourceData
-  if (!products || !products.edges || products.edges.length === 0) return null
+  const { sourceData } = collection
+  if (!sourceData) return null
+
+  const products = sourceData.products
+    ? //
+      // @ts-ignore
+      unwindEdges(sourceData.products)[0]
+    : null
 
   const to = `/collections/${collection.handle}`
   return (
     <Link href={to}>
       <a>
-        <ImageWrapper>
-          <Image image={collection.sourceData.image} ratio={1} />
-        </ImageWrapper>
-        <TextWrapper>
-          <Heading level={3}>{collection.title}</Heading>
-          <Heading level={6}>{products.edges.length} items</Heading>
-        </TextWrapper>
+        <Image image={image || sourceData.image} ratio={1} />
+        <Heading my={2} level={3}>
+          {collection.title}
+        </Heading>
+        {products && products.length ? (
+          <Heading color="body.6" level={5}>
+            {products.length} items
+          </Heading>
+        ) : null}
       </a>
     </Link>
   )

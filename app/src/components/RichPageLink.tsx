@@ -27,7 +27,7 @@ export const RichPageLink = ({ link, label }: RichPageLinkProps) => {
     <DocumentLink document={link.document}>
       <Image hoverImage={hoverImage} image={image} ratio={1} />
 
-      <Heading family="sans" mt={2} textAlign="center" level={4}>
+      <Heading family="serif" mt={2} weight={2} textAlign="center" level={3}>
         {linkTitle}
       </Heading>
       {captionRaw && captionRaw.length ? (

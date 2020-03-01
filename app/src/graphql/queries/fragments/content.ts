@@ -267,6 +267,13 @@ export const saneShopifyCollectionFragment = gql`
       image {
         ...SaneShopifySourceImageFragment
       }
+      products {
+        edges {
+          node {
+            id
+          }
+        }
+      }
     }
   }
   ${saneShopifySourceImageFragment}
