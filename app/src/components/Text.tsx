@@ -118,8 +118,9 @@ interface LabelProps {
 const LabelBase = createTextBase('label')
 
 export const Label = styled(LabelBase)`
+  display: block;
   font-size: 4;
-  margin: 0;
+  margin: 0 0 2;
 `
 
 export const TextAnchor = styled.a``

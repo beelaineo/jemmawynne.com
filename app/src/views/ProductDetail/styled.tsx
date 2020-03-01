@@ -10,6 +10,9 @@ export const Wrapper = styled.div`
 
 export const ProductDetails = styled.div`
   ${({ theme }) => css`
+    max-width: xWide;
+    margin: 0 auto;
+    padding: 0 6;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 5;
@@ -89,53 +92,6 @@ interface ButtonProps {
   isDisabled?: boolean
 }
 
-export const Button = styled.button`
-  ${({ isDisabled }: ButtonProps) => css`
-    background-color: body.0;
-    color: body.9;
-    cursor: ${isDisabled ? 'auto' : 'pointer'};
-    display: inline-block;
-    font-family: sans;
-    font-weight: 4;
-    font-size: 5;
-    letter-spacing: 0.035em;
-    padding: 0.25rem 0.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.2s;
-    padding: 3;
-    margin: 3 0;
-    opacity: ${isDisabled ? 0.3 : 1};
-    pointer-events: ${isDisabled ? 'none' : 'auto'};
-    max-width: 200px;
-    border-radius: 2px;
-  `}
-`
-
-export const ButtonPrimary = styled(Button)``
-
-export const Select = styled.select`
-  text-align-last: center;
-  border: 1px solid #f1f1f1;
-  border-radius: 0;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  font-size: 1rem;
-  cursor: pointer;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-appearance: none;
-  border: none;
-  background: none;
-  border-radius: 0;
-  border: 1px solid #f1f1f1;
-  padding: 12px;
-  font-family: sans-serif;
-  width: 150px;
-  option {
-    font-family: sans-serif;
-  }
-`
 interface QuantitySelector {
   theme: DefaultTheme
   width?: string

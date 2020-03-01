@@ -6,7 +6,10 @@ import {
   ShopifySourceProductVariant,
   ShopifySourceProductOption,
 } from '../../../types'
-import { Select, Label, NormalizeDiv, ProductOptionWrapper } from '../styled'
+import { NormalizeDiv, ProductOptionWrapper } from '../styled'
+import { Label } from '../../../components/Text'
+import { Select } from '../../../components/Forms'
+import { Column } from '../../../components/Layout'
 
 const { useState } = React
 
@@ -109,10 +112,10 @@ export const ProductVariantSelector = (props: Props) => {
 
   return (
     <div>
-      <NormalizeDiv>
-        {options.map((option) =>
-          option && option.name && option.values ? (
-            <ProductOptionWrapper key={option.name}>
+      {options.map((option) =>
+        option && option.name && option.values ? (
+          <ProductOptionWrapper key={option.name}>
+            <Column width="xSmall">
               <Label htmlFor={option.name} key={option.name}>
                 {option.name}
               </Label>
@@ -130,10 +133,10 @@ export const ProductVariantSelector = (props: Props) => {
                   ) : null,
                 )}
               </Select>
-            </ProductOptionWrapper>
-          ) : null,
-        )}
-      </NormalizeDiv>
+            </Column>
+          </ProductOptionWrapper>
+        ) : null,
+      )}
     </div>
   )
 }

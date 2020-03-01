@@ -1,10 +1,18 @@
 import * as React from 'react'
+import styled from '@xstyled/styled-components'
 import * as BlockContent from '@sanity/block-content-to-react'
 import { Heading, P, BlockQuote, Li, Ul, Ol } from '../Text'
 
 interface CustomSerializerConfig {
   blockWrapper?: React.ComponentType
 }
+
+const RichTextWrapper = styled.div`
+  a {
+    text-decoration: underline;
+    color: body.7;
+  }
+`
 
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
@@ -25,6 +33,12 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
     // if (props.node._type === 'videoEmbed') return <VideoEmbed video={props.node} />
 
     switch (style) {
+      case 'ul':
+        return <Ul {...props} />
+      case 'ol':
+        return <Ol {...props} />
+      case 'li':
+        return <Li family="serif" {...props} />
       case 'h1':
         return <Heading level={1} {...props} />
       case 'h2':
@@ -54,5 +68,7 @@ interface RichTextProps {
 
 export const RichText = ({ body, blockWrapper }: RichTextProps) =>
   body ? (
-    <BlockContent blocks={body} serializers={serializers({ blockWrapper })} />
+    <RichTextWrapper>
+      <BlockContent blocks={body} serializers={serializers({ blockWrapper })} />
+    </RichTextWrapper>
   ) : null

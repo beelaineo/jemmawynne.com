@@ -20,7 +20,7 @@ const defaultOptions = {
       case 'ol':
         return <Ol>{domToReact(children, defaultOptions)}</Ol>
       case 'li':
-        return <Li>{domToReact(children, defaultOptions)}</Li>
+        return <Li family="serif">{domToReact(children, defaultOptions)}</Li>
       case 'h1':
         return (
           <Heading level={1}>{domToReact(children, defaultOptions)}</Heading>
@@ -58,5 +58,6 @@ const defaultOptions = {
 interface HtmlContentProps {
   content?: string | null
 }
+
 export const HtmlContent = ({ content }: HtmlContentProps) =>
   content ? <>{parse(content, defaultOptions)}</> : null

@@ -9,7 +9,6 @@ import {
 import { Heading } from '../../components/Text'
 import { ItemGrid } from '../../components/ItemGrid'
 import { Icon } from '../../components/Icon'
-import { useLocation } from '../../providers/LocationProvider'
 
 const { useState, useEffect } = React
 
@@ -25,7 +24,6 @@ export const SearchResults = () => {
   } = useSearch()
   const [open, setOpen] = useState<boolean>(false)
   const [localSearchTerm, setLocalSearchTerm] = useState<string>('')
-  const { location } = useLocation()
   /* Helpers */
   const close = () => {
     setOpen(false)
@@ -49,10 +47,6 @@ export const SearchResults = () => {
     // Open the view on a new search
     if (!open && loading) setOpen(true)
   }, [loading])
-
-  useEffect(() => {
-    close()
-  }, [location.pathname])
 
   if (!open) return null
   const allResults = [...collections, ...products]

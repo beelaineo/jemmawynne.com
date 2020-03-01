@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { ProductInfoBlock, ShopifyProduct } from '../../types'
 import { useProductVariant, useCheckout } from 'use-shopify'
+import { Box } from '@xstyled/styled-components'
+import { ProductInfoBlock, ShopifyProduct } from '../../types'
 import { Column } from '../../components/Layout'
 import {
   ProductVariantSelector,
@@ -16,7 +17,6 @@ import {
   ProductDetails,
   ProductInfoWrapper,
   ProductImagesWrapper,
-  NormalizeDiv,
 } from './styled'
 import { Accordion } from '../../components/Accordion'
 
@@ -49,16 +49,13 @@ export const ProductDetail = ({ product }: Props) => {
 
   return (
     <Wrapper>
-      <Column>
+      <Column center width="xWide">
         <ProductDetails>
           <ProductImagesWrapper>
-            {/*
-          //  @ts-ignore */}
             <ProductImages currentVariant={currentVariant} product={product} />
           </ProductImagesWrapper>
           <ProductInfoWrapper>
             <ProductDescription
-              // @ts-ignore
               currentVariant={currentVariant}
               product={product}
             />
@@ -70,26 +67,36 @@ export const ProductDetail = ({ product }: Props) => {
               currentVariant={currentVariant}
               selectVariant={selectVariant}
             />
-            <NormalizeDiv>
-              <BuyButton
-                addLineItem={addLineItem}
-                // @ts-ignore
-                currentVariant={currentVariant}
-                quantity={quantity}
-              />
-              {accordions
-                ? accordions
-                    .reduce<ProductInfoBlock[]>(
-                      (acc, current) =>
-                        current !== null ? [...acc, current] : acc,
-                      [],
-                    )
-                    .map(({ _key, title, bodyRaw }) => (
-                      // @ts-ignore
-                      <Accordion key={_key} label={title} content={bodyRaw} />
-                    ))
-                : null}
-            </NormalizeDiv>
+            <Box mt={5}>
+              <Column width="xSmall">
+                <BuyButton
+                  addLineItem={addLineItem}
+                  // @ts-ignore
+                  currentVariant={currentVariant}
+                  quantity={quantity}
+                />
+              </Column>
+            </Box>
+            <Box mt={5}>
+              <Column width="medium">
+                {accordions
+                  ? accordions
+                      .reduce<ProductInfoBlock[]>(
+                        (acc, current) =>
+                          current !== null ? [...acc, current] : acc,
+                        [],
+                      )
+                      .map((accordion) =>
+                        accordion && accordion._key ? (
+                          <Accordion
+                            key={accordion._key}
+                            accordion={accordion}
+                          />
+                        ) : null,
+                      )
+                  : null}
+              </Column>
+            </Box>
           </ProductInfoWrapper>
         </ProductDetails>
       </Column>

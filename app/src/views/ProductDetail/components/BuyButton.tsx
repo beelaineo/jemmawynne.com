@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { UseCheckoutValues } from 'use-shopify'
 import { StorefrontApiProductVariant } from '../../../types'
-import { ButtonPrimary } from '../styled'
+import { Button } from '../../../components/Button'
 import { Placeholder } from '../../../components/Placeholder'
+
+const { useState } = React
 
 interface Props extends Pick<UseCheckoutValues, 'addLineItem'> {
   currentVariant?: StorefrontApiProductVariant
@@ -10,16 +12,23 @@ interface Props extends Pick<UseCheckoutValues, 'addLineItem'> {
 }
 
 export const BuyButton = ({ currentVariant, addLineItem, quantity }: Props) => {
+  const [loading, setLoading] = useState(false)
   if (!currentVariant) return null
-  const handleClick = () => {
-    addLineItem({ variantId: currentVariant.id, quantity: quantity || 1 })
+
+  const handleClick = async () => {
+    setLoading(true)
+    await addLineItem({ variantId: currentVariant.id, quantity: quantity || 1 })
+    setLoading(false)
   }
   if (!currentVariant.availableForSale) {
     return <Placeholder>Out of stock</Placeholder>
   }
   return (
-    <ButtonPrimary disabled={Boolean(!currentVariant)} onClick={handleClick}>
+    <Button
+      disabled={loading || Boolean(!currentVariant)}
+      onClick={handleClick}
+    >
       add to cart
-    </ButtonPrimary>
+    </Button>
   )
 }

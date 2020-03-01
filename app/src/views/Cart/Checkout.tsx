@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { useCheckout } from 'use-shopify'
-import { NormalizeDiv, Button } from '../ProductDetail/styled'
+import { NormalizeDiv } from '../ProductDetail/styled'
+import { Button } from '../../components/Button'
 import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
 import { Loading } from '../Navigation/styled'
 import { Heading } from '../../components/Text'
@@ -65,7 +66,7 @@ export const Checkout = () => {
             as="a"
             href={checkout.webUrl}
             color="grays.9"
-            isDisabled={loading}
+            disabled={loading}
           >
             Checkout
           </Button>

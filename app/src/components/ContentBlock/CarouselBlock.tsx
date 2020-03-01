@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styled from 'styled-components'
 import { Carousel as CarouselType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
 import { CollectionCarousel, ItemsCarousel } from '../Carousel'
@@ -6,6 +7,10 @@ import { CollectionCarousel, ItemsCarousel } from '../Carousel'
 interface CarouselBlockProps {
   content: Omit<CarouselType, '__typename'>
 }
+
+const CarouselWrapper = styled.div`
+  height: 30vw;
+`
 
 /**
  * Carousel Block
@@ -21,11 +26,13 @@ export const CarouselBlock = ({ content }: CarouselBlockProps) => {
   return (
     <SectionWrapper type="carousel">
       <SectionHeader title={title} />
-      {collection ? (
-        <CollectionCarousel collection={collection} />
-      ) : items ? (
-        <ItemsCarousel items={items} />
-      ) : null}
+      <CarouselWrapper>
+        {collection ? (
+          <CollectionCarousel collection={collection} />
+        ) : items ? (
+          <ItemsCarousel items={items} />
+        ) : null}
+      </CarouselWrapper>
     </SectionWrapper>
   )
 }

@@ -1,8 +1,14 @@
-import styled, { css } from '@xstyled/styled-components'
+import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+
+interface ColumnProps {
+  theme: DefaultTheme
+  width: string
+  center?: boolean
+}
 
 export const Column = styled.div`
-  ${({ theme }) => css`
-    margin: 0 auto;
-    max-width: calc(${theme.sizes.xWide}px - ${theme.space[8]}px);
+  ${({ width, center }: ColumnProps) => css`
+    margin: ${center ? '0 auto' : 0};
+    max-width: ${width};
   `}
 `

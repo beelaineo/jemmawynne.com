@@ -51,7 +51,7 @@ export const SlideContainer = styled.div`
     );
     margin-right: 5;
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
 
     &:last-of-type {
       margin-right: 0;
@@ -82,11 +82,10 @@ export const CarouselButton = styled.button`
 
     ${direction === 'previous'
       ? css`
-          left: -5;
+          left: -25px;
         `
       : css`
-          left: auto;
-          right: -5;
+          right: -25px;
         `}
     background: transparent;
 

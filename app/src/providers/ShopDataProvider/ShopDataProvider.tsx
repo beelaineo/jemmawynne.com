@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useQuery } from 'urql'
+import { useQuery } from '@apollo/react-hooks'
 import { SHOP_DATA_QUERY, ShopDataResponse } from './shopDataQuery'
 import {
   ShopifyProduct,
@@ -43,9 +43,9 @@ interface Props {
 }
 
 export const ShopDataProvider = ({ children }: Props) => {
-  const [response] = useQuery<ShopDataResponse>({ query: SHOP_DATA_QUERY })
+  const response = useQuery<ShopDataResponse>(SHOP_DATA_QUERY)
 
-  const ready = Boolean(response.data && !response.fetching)
+  const ready = Boolean(response.data && !response.loading)
   const menu = ready ? response?.data?.Menu : undefined
   const productInfoBlocks = ready ? response?.data?.ProductInfo : undefined
 

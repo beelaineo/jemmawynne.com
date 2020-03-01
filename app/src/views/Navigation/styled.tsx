@@ -76,10 +76,31 @@ interface CartButtonProps {
   disabled?: boolean
 }
 
+export const CartCount = styled.div`
+  font-size: 6;
+  font-weight: 3;
+  width: 18px;
+  height: 18px;
+  font-family: sans;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid currentColor;
+  background-color: body.0;
+  position: absolute;
+  top: -4px;
+  right: -11px;
+`
+
 export const CartButton = styled.button`
   ${({ disabled }) => css`
+    position: relative;
     opacity: ${disabled ? '0.6' : '1'};
     pointer-events: ${disabled ? 'none' : 'inherit'};
+    display: flex;
+    font-size: 2;
+    align-items: center;
   `}
 `
 
@@ -124,6 +145,7 @@ export const SubmenuPane = styled.div`
     opacity: ${open ? 1 : 0};
     pointer-events: ${open ? 'initial' : 'none'};
     position: absolute;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
     z-index: calc(${theme.zIndices.nav} - 1);
     top: 100%;
     left: 0;

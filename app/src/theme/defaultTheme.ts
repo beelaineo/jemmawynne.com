@@ -51,6 +51,7 @@ export const defaultTheme: DefaultTheme = {
    */
 
   sizes: {
+    xSmall: 200,
     small: 340,
     medium: 600,
     wide: 1100,

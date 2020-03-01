@@ -5,6 +5,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     space: number[]
     sizes: {
+      xSmall: number
       small: number
       medium: number
       wide: number

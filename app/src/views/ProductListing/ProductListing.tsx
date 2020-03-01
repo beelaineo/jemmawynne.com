@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useQuery } from 'urql'
 import { ShopifyCollection } from '../../types'
 import { COLLECTION_QUERY, CollectionResult } from './query'
 import { PLD, ProductListingHeader } from './ProductListingHeader'
