@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { ApolloClient } from 'apollo-client'
 import { SearchResults, Navigation } from '../src/views'
 import { Providers } from '../src/providers/AllProviders'
 import { withApollo } from '../src/graphql'
@@ -8,6 +8,7 @@ interface AppProps {
   Component: React.ComponentType
   pageProps: any
   router: any
+  apollo: ApolloClient<any>
 }
 
 const App = (props: AppProps) => {
@@ -22,4 +23,4 @@ const App = (props: AppProps) => {
   )
 }
 
-export default withApollo(App)
+export default withApollo()(App)

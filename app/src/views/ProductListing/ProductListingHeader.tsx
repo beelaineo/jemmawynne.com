@@ -3,6 +3,7 @@ import { ShopifyCollection } from '../../types'
 import { Heading } from '../../components/Text'
 import { Image } from '../../components/Image'
 import { PLPHeader, PLPHeaderInner, PLPText, PLPImage } from './styled'
+import { HeroBlock } from '../../components/ContentBlock'
 
 interface ProductListingHeaderProps {
   collection: ShopifyCollection
@@ -17,13 +18,18 @@ export const ProductListingHeader = ({
 }: ProductListingHeaderProps) => {
   if (!collection.sourceData) return null
   const { image, title, description } = collection.sourceData
-  const textAlign = image ? 'left' : 'center'
-  return (
+  const { hero } = collection
+  const textAlign = image && description ? 'left' : 'center'
+  return hero ? (
+    <HeroBlock hero={hero} />
+  ) : (
     <PLPHeader>
       <PLPHeaderInner>
         <PLPText>
-          <Heading level={2}>{title}</Heading>
-          <Heading level={4} family="serif">
+          <Heading textAlign={textAlign} level={2}>
+            {title}
+          </Heading>
+          <Heading textAlign={textAlign} level={4} family="serif">
             {description}
           </Heading>
         </PLPText>

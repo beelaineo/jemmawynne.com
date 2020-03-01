@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 
 export const PLPHeader = styled.div`
   padding: 6;
-  background-color: body.5;
+  background-color: body.3;
   box-shadow: 0 -9px 9px -6px rgba(0, 0, 0, 0.2) inset;
 `
 
@@ -23,6 +23,10 @@ export const PLPText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &:nth-child(1) {
+    grid-column: span 2;
+  }
 `
 
 export const PLPImage = styled.div`

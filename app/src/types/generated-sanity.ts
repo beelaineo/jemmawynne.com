@@ -320,18 +320,21 @@ export interface ImageTextSection {
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
   blocks?: Maybe<Array<Maybe<ImageBlockOrTextBlock>>>
+  backgroundImage?: Maybe<Image>
 }
 
 export type ImageTextSectionFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
+  backgroundImage?: Maybe<ImageFilter>
 }
 
 export type ImageTextSectionSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
+  backgroundImage?: Maybe<ImageSorting>
 }
 
 export interface InternalLink {
@@ -1112,6 +1115,7 @@ export interface ShopifyCollection extends Document {
   handle?: Maybe<Scalars['String']>
   shopifyId?: Maybe<Scalars['String']>
   products?: Maybe<Array<Maybe<ShopifyProduct>>>
+  hero?: Maybe<Hero>
   sourceData?: Maybe<ShopifySourceCollection>
 }
 
@@ -1126,6 +1130,7 @@ export type ShopifyCollectionFilter = {
   title?: Maybe<StringFilter>
   handle?: Maybe<StringFilter>
   shopifyId?: Maybe<StringFilter>
+  hero?: Maybe<HeroFilter>
   sourceData?: Maybe<ShopifySourceCollectionFilter>
 }
 
@@ -1139,6 +1144,7 @@ export type ShopifyCollectionSorting = {
   title?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
   shopifyId?: Maybe<SortOrder>
+  hero?: Maybe<HeroSorting>
   sourceData?: Maybe<ShopifySourceCollectionSorting>
 }
 

@@ -12,10 +12,6 @@ interface ProductProps {
   productData: ShopifyProduct
 }
 
-function head<T>(arr: T[]): T {
-  return arr ? arr[0] : undefined
-}
-
 const Product = ({ productData }: ProductProps) => {
   if (!productData) return <NotFound />
   return <ProductDetail product={productData} />

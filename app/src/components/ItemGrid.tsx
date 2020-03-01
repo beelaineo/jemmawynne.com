@@ -48,21 +48,11 @@ export const ItemGrid = ({ items }: ItemGridProps) => {
   return (
     <Grid>
       {items.map((item) => {
-        // @ts-ignore
-        if (item._type === 'shopifyProduct')
-          // TODO: Restore after graphql is fixed
-          // if (item.__typename === 'ShopifyProduct')
-          return (
-            // @ts-ignore
-            <ProductThumbnail key={item._id} product={item} />
-          )
-        // @ts-ignore
-        if (item._type === 'shopifyCollection')
-          // if (item.__typename === 'ShopifyCollection')
-          return (
-            // @ts-ignore
-            <CollectionThumbnail key={item._id} collection={item} />
-          )
+        if (!item) return null
+        if (item.__typename === 'ShopifyProduct')
+          return <ProductThumbnail key={item._id} product={item} />
+        if (item.__typename === 'ShopifyCollection')
+          return <CollectionThumbnail key={item._id} collection={item} />
 
         console.warn(
           // @ts-ignore

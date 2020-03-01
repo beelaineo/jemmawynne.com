@@ -55,11 +55,14 @@ export const textBlockFragment = gql`
   ${ctaFragment}
 `
 
-export const imageFragment = gql`
-  fragment ImageFragment on Image {
+export const shopifySourceImageFragment = gql`
+  fragment ShopifySourceImageFragment on ShopifySourceImage {
     id
     altText
     originalSrc
+    w100
+    w300
+    w800
   }
 `
 
@@ -106,6 +109,8 @@ export const heroFragment = gql`
     bodyRaw
     textPosition
     textPositionMobile
+    textColor
+    textColorMobile
     textAlign
     cta {
       ...CTAFragment
