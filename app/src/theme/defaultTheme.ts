@@ -68,7 +68,7 @@ export const defaultTheme: DefaultTheme = {
     20, // h3
     16, // readable text: p, h4
     14, // small text: h5, captions
-    11, // small text: h6, small captions
+    12, // small text: h6, small captions
   ],
   fontWeights: [0, 200, 400, 500, 700],
   fonts: {

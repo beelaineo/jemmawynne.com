@@ -6,6 +6,7 @@ import {
   SanityRichText,
   Menu,
   ProductInfoBlock,
+  SiteSettings,
 } from '../../types'
 import { filterMaybes } from '../../utils'
 
@@ -22,6 +23,7 @@ interface DefinitelyProductInfo {
 interface ShopDataContextValue {
   ready: boolean
   menu?: Menu
+  siteSettings?: SiteSettings
   getProductInfoBlocks: (product: ShopifyProduct) => DefinitelyProductInfo[]
 }
 
@@ -45,8 +47,10 @@ interface Props {
 export const ShopDataProvider = ({ children }: Props) => {
   const response = useQuery<ShopDataResponse>(SHOP_DATA_QUERY)
 
+  if (response.error) throw new Error(response.error.message)
   const ready = Boolean(response.data && !response.loading)
   const menu = ready ? response?.data?.Menu : undefined
+  const siteSettings = ready ? response?.data?.SiteSettings : undefined
   const productInfoBlocks = ready ? response?.data?.ProductInfo : undefined
 
   const getProductInfoBlocks = (
@@ -118,6 +122,7 @@ export const ShopDataProvider = ({ children }: Props) => {
   const value = {
     ready,
     menu,
+    siteSettings,
     getProductInfoBlocks,
   }
 

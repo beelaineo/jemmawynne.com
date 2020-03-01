@@ -29,6 +29,15 @@ export const internalLinkFragment = gql`
   }
 `
 
+export const externalLinkFragment = gql`
+  fragment ExternalLinkFragment on ExternalLink {
+    _key
+    _type
+    url
+    newTab
+  }
+`
+
 export const ctaFragment = gql`
   fragment CTAFragment on Cta {
     _key

@@ -123,6 +123,8 @@ export type ExternalLinkFilter = {
   newTab?: Maybe<BooleanFilter>
 }
 
+export type ExternalLinkOrInternalLink = ExternalLink | InternalLink
+
 export type ExternalLinkSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
@@ -1738,7 +1740,9 @@ export interface SiteSettings extends Document {
   _updatedAt: Scalars['DateTime']
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
-  footerLinks?: Maybe<Array<Maybe<Cta>>>
+  links?: Maybe<Array<Maybe<ExternalLinkOrInternalLink>>>
+  mailerTitle?: Maybe<Scalars['String']>
+  mailerSubtitle?: Maybe<Scalars['String']>
 }
 
 export type SiteSettingsFilter = {
@@ -1749,6 +1753,8 @@ export type SiteSettingsFilter = {
   _updatedAt?: Maybe<DatetimeFilter>
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
+  mailerTitle?: Maybe<StringFilter>
+  mailerSubtitle?: Maybe<StringFilter>
 }
 
 export type SiteSettingsSorting = {
@@ -1758,6 +1764,8 @@ export type SiteSettingsSorting = {
   _updatedAt?: Maybe<SortOrder>
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
+  mailerTitle?: Maybe<SortOrder>
+  mailerSubtitle?: Maybe<SortOrder>
 }
 
 export interface Slug {

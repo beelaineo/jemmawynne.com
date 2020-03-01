@@ -46,15 +46,15 @@ const TextBase = styled(Box)`
   `}
 `
 
-// @ts-ignore
-interface HeadingProps
-  extends Omit<CustomTextProps, 'fontSize' | 'theme'>,
-    BoxProps {
+interface HeadingProps extends BoxProps {
   children: React.ReactNode
   level: 1 | 2 | 3 | 4 | 5 | 6
-  /* A default */
-  as?: any
+  fontStyle?: string
+  family?: 'mono' | 'sans' | 'serif'
+  weight?: number
+  color?: string
   htmlFor?: string
+  as?: any
 }
 
 const hTags = ['h1', 'h2', 'h3', 'h4', 'h5']

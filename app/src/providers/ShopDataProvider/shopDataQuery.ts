@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
-import { Menu, ProductInfo } from '../../types'
+import { SiteSettings, Menu, ProductInfo } from '../../types'
 import {
   ctaFragment,
   internalLinkFragment,
+  externalLinkFragment,
   richPageLinkFragment,
   productInfoFragment,
 } from '../../graphql'
@@ -67,9 +68,24 @@ export const SHOP_DATA_QUERY = gql`
         }
       }
     }
+    SiteSettings(id: "site-settings") {
+      _id
+      _type
+      links {
+        ... on ExternalLink {
+          ...ExternalLinkFragment
+        }
+        ... on InternalLink {
+          ...InternalLinkFragment
+        }
+      }
+      mailerTitle
+      mailerSubtitle
+    }
   }
   ${ctaFragment}
   ${internalLinkFragment}
+  ${externalLinkFragment}
   ${productInfoFragment}
   ${richPageLinkFragment}
 `
@@ -77,4 +93,5 @@ export const SHOP_DATA_QUERY = gql`
 export interface ShopDataResponse {
   Menu: Menu
   ProductInfo: ProductInfo
+  SiteSettings: SiteSettings
 }

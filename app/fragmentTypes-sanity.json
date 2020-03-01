@@ -102,6 +102,18 @@
             "name": "TextBlock"
           }
         ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ExternalLinkOrInternalLink",
+        "possibleTypes": [
+          {
+            "name": "ExternalLink"
+          },
+          {
+            "name": "InternalLink"
+          }
+        ]
       }
     ]
   }
