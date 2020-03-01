@@ -2,16 +2,28 @@ export const siteSettings = {
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
-  fieldSets: [{ name: 'footer', title: 'Footer' }],
+  fieldsets: [{ name: 'footer', title: 'Footer' }],
   fields: [
     {
-      name: 'footerLinks',
-      title: 'Footer Links',
+      name: 'links',
+      fieldset: 'footer',
+      title: 'Page Links',
       type: 'array',
-      of: [{ type: 'cta' }],
+      of: [{ type: 'internalLink' }, { type: 'externalLink' }],
+    },
+    {
+      name: 'mailerTitle',
+      fieldset: 'footer',
+      title: 'Mailing List Title',
+      type: 'string',
+    },
+    {
+      name: 'mailerSubtitle',
+      fieldset: 'footer',
+      title: 'Mailing List Subtitle',
+      type: 'string',
     },
   ],
-
   preview: {
     select: {},
     prepare: () => ({

@@ -36,6 +36,10 @@ export const imageTextSection = {
       of: [{ type: 'imageBlock' }, { type: 'textBlock' }],
       validation: (Rule) => Rule.max(3),
     },
+    {
+      name: 'backgroundImage',
+      type: 'image',
+    },
   ],
 }
 

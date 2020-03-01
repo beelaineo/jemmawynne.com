@@ -1,4 +1,4 @@
-export const productConfig = {
+export const product = {
   fields: [
     {
       title: 'Info Blocks',

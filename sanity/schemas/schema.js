@@ -6,10 +6,11 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import { saneShopify } from '@sane-shopify/sanity-plugin'
 import * as documents from './documents'
 import * as objects from './objects'
-import { productConfig } from './saneShopify/product'
+import { product, collection } from './saneShopify'
 
 const saneShopifySchema = saneShopify({
-  product: productConfig,
+  product,
+  collection,
 })
 
 // Then we give our schema to the builder and provide the result to Sanity
