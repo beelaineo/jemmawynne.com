@@ -19,7 +19,8 @@ export const page = {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'Hero',
+      name: 'hero',
+      title: 'Hero',
       type: 'hero',
     },
     {
