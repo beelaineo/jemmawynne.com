@@ -448,7 +448,7 @@ export interface Page extends Document {
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   slug?: Maybe<Slug>
-  Hero?: Maybe<Hero>
+  hero?: Maybe<Hero>
   textAlign?: Maybe<Scalars['String']>
   contentRaw?: Maybe<Scalars['JSON']>
 }
@@ -463,7 +463,7 @@ export type PageFilter = {
   _key?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
   slug?: Maybe<SlugFilter>
-  Hero?: Maybe<HeroFilter>
+  hero?: Maybe<HeroFilter>
   textAlign?: Maybe<StringFilter>
 }
 
@@ -503,7 +503,7 @@ export type PageSorting = {
   _key?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
   slug?: Maybe<SlugSorting>
-  Hero?: Maybe<HeroSorting>
+  hero?: Maybe<HeroSorting>
   textAlign?: Maybe<SortOrder>
 }
 
