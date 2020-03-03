@@ -1,5 +1,5 @@
 # source: https://jemmawynne-development.myshopify.com/api/graphql
-# timestamp: Sat Feb 29 2020 20:55:26 GMT-0800 (Pacific Standard Time)
+# timestamp: Tue Mar 03 2020 15:05:37 GMT-0800 (Pacific Standard Time)
 
 schema {
   query: QueryRoot
@@ -274,7 +274,7 @@ type ArticleEdge {
 }
 
 """
-The set of valid sort keys for the articles query.
+The set of valid sort keys for the Article query.
 """
 enum ArticleSortKeys {
   """
@@ -504,7 +504,7 @@ type BlogEdge {
 }
 
 """
-The set of valid sort keys for the blogs query.
+The set of valid sort keys for the Blog query.
 """
 enum BlogSortKeys {
   """
@@ -1923,7 +1923,7 @@ type CollectionEdge {
 }
 
 """
-The set of valid sort keys for the collections query.
+The set of valid sort keys for the Collection query.
 """
 enum CollectionSortKeys {
   """
@@ -6491,7 +6491,7 @@ type OrderLineItemEdge {
 }
 
 """
-The set of valid sort keys for the orders query.
+The set of valid sort keys for the Order query.
 """
 enum OrderSortKeys {
   """
@@ -6603,7 +6603,7 @@ type PageInfo {
 }
 
 """
-The set of valid sort keys for the pages query.
+The set of valid sort keys for the Page query.
 """
 enum PageSortKeys {
   """
@@ -7062,7 +7062,7 @@ type Product implements Node & HasMetafields {
 }
 
 """
-The set of valid sort keys for the products query.
+The set of valid sort keys for the ProductCollection query.
 """
 enum ProductCollectionSortKeys {
   """
@@ -7133,7 +7133,7 @@ type ProductEdge {
 }
 
 """
-The set of valid sort keys for the images query.
+The set of valid sort keys for the ProductImage query.
 """
 enum ProductImageSortKeys {
   """
@@ -7222,7 +7222,7 @@ type ProductPriceRangeEdge {
 }
 
 """
-The set of valid sort keys for the products query.
+The set of valid sort keys for the Product query.
 """
 enum ProductSortKeys {
   """
@@ -7527,7 +7527,7 @@ type ProductVariantPricePairEdge {
 }
 
 """
-The set of valid sort keys for the variants query.
+The set of valid sort keys for the ProductVariant query.
 """
 enum ProductVariantSortKeys {
   """

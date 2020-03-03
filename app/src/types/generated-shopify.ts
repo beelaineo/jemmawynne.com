@@ -147,7 +147,7 @@ export interface StorefrontApiArticleEdge {
   node: StorefrontApiArticle
 }
 
-/** The set of valid sort keys for the articles query. */
+/** The set of valid sort keys for the Article query. */
 export enum StorefrontApiArticleSortKeys {
   /** Sort by the `title` value. */
   Title = 'TITLE',
@@ -266,7 +266,7 @@ export interface StorefrontApiBlogEdge {
   node: StorefrontApiBlog
 }
 
-/** The set of valid sort keys for the blogs query. */
+/** The set of valid sort keys for the Blog query. */
 export enum StorefrontApiBlogSortKeys {
   /** Sort by the `handle` value. */
   Handle = 'HANDLE',
@@ -988,7 +988,7 @@ export interface StorefrontApiCollectionEdge {
   node: StorefrontApiCollection
 }
 
-/** The set of valid sort keys for the collections query. */
+/** The set of valid sort keys for the Collection query. */
 export enum StorefrontApiCollectionSortKeys {
   /** Sort by the `title` value. */
   Title = 'TITLE',
@@ -3247,7 +3247,7 @@ export interface StorefrontApiOrderLineItemEdge {
   node: StorefrontApiOrderLineItem
 }
 
-/** The set of valid sort keys for the orders query. */
+/** The set of valid sort keys for the Order query. */
 export enum StorefrontApiOrderSortKeys {
   /** Sort by the `processed_at` value. */
   ProcessedAt = 'PROCESSED_AT',
@@ -3312,7 +3312,7 @@ export interface StorefrontApiPageInfo {
   hasPreviousPage: Scalars['Boolean']
 }
 
-/** The set of valid sort keys for the pages query. */
+/** The set of valid sort keys for the Page query. */
 export enum StorefrontApiPageSortKeys {
   /** Sort by the `title` value. */
   Title = 'TITLE',
@@ -3577,7 +3577,7 @@ export type StorefrontApiProductVariantsArgs = {
   sortKey?: Maybe<StorefrontApiProductVariantSortKeys>
 }
 
-/** The set of valid sort keys for the products query. */
+/** The set of valid sort keys for the ProductCollection query. */
 export enum StorefrontApiProductCollectionSortKeys {
   /** Sort by the `title` value. */
   Title = 'TITLE',
@@ -3617,7 +3617,7 @@ export interface StorefrontApiProductEdge {
   node: StorefrontApiProduct
 }
 
-/** The set of valid sort keys for the images query. */
+/** The set of valid sort keys for the ProductImage query. */
 export enum StorefrontApiProductImageSortKeys {
   /** Sort by the `created_at` value. */
   CreatedAt = 'CREATED_AT',
@@ -3674,7 +3674,7 @@ export interface StorefrontApiProductPriceRangeEdge {
   node: StorefrontApiProductPriceRange
 }
 
-/** The set of valid sort keys for the products query. */
+/** The set of valid sort keys for the Product query. */
 export enum StorefrontApiProductSortKeys {
   /** Sort by the `title` value. */
   Title = 'TITLE',
@@ -3824,7 +3824,7 @@ export interface StorefrontApiProductVariantPricePairEdge {
   node: StorefrontApiProductVariantPricePair
 }
 
-/** The set of valid sort keys for the variants query. */
+/** The set of valid sort keys for the ProductVariant query. */
 export enum StorefrontApiProductVariantSortKeys {
   /** Sort by the `title` value. */
   Title = 'TITLE',

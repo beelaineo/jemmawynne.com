@@ -20,6 +20,8 @@ export interface Block {
   list?: Maybe<Scalars['String']>
 }
 
+export type BlockOrRichImage = Block | RichImage
+
 export type BooleanFilter = {
   eq?: Maybe<Scalars['Boolean']>
   neq?: Maybe<Scalars['Boolean']>
@@ -446,6 +448,9 @@ export interface Page extends Document {
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   slug?: Maybe<Slug>
+  Hero?: Maybe<Hero>
+  textAlign?: Maybe<Scalars['String']>
+  contentRaw?: Maybe<Scalars['JSON']>
 }
 
 export type PageFilter = {
@@ -458,6 +463,8 @@ export type PageFilter = {
   _key?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
   slug?: Maybe<SlugFilter>
+  Hero?: Maybe<HeroFilter>
+  textAlign?: Maybe<StringFilter>
 }
 
 export interface PageInfo {
@@ -496,6 +503,8 @@ export type PageSorting = {
   _key?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
   slug?: Maybe<SlugSorting>
+  Hero?: Maybe<HeroSorting>
+  textAlign?: Maybe<SortOrder>
 }
 
 export interface ProductInfo extends Document {

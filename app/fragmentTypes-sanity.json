@@ -12,13 +12,13 @@
             "name": "Page"
           },
           {
+            "name": "SanityImageAsset"
+          },
+          {
             "name": "ShopifyCollection"
           },
           {
             "name": "ShopifyProduct"
-          },
-          {
-            "name": "SanityImageAsset"
           },
           {
             "name": "Homepage"
@@ -112,6 +112,18 @@
           },
           {
             "name": "InternalLink"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "BlockOrRichImage",
+        "possibleTypes": [
+          {
+            "name": "Block"
+          },
+          {
+            "name": "RichImage"
           }
         ]
       }
