@@ -345,7 +345,7 @@ export interface InternalLink {
   __typename: 'InternalLink'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
+  document?: Maybe<PageOrShopifyCollectionOrShopifyProductOrStockists>
 }
 
 export type InternalLinkFilter = {
@@ -493,6 +493,12 @@ export type PageOrShopifyCollectionOrShopifyProduct =
   | Page
   | ShopifyCollection
   | ShopifyProduct
+
+export type PageOrShopifyCollectionOrShopifyProductOrStockists =
+  | Page
+  | ShopifyCollection
+  | ShopifyProduct
+  | Stockists
 
 export type PageSorting = {
   _id?: Maybe<SortOrder>
@@ -1836,6 +1842,7 @@ export interface Stockists extends Document {
   _updatedAt: Scalars['DateTime']
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
   us?: Maybe<Array<Maybe<Stockist>>>
   international?: Maybe<Array<Maybe<Stockist>>>
   online?: Maybe<Array<Maybe<Stockist>>>
@@ -1849,6 +1856,7 @@ export type StockistsFilter = {
   _updatedAt?: Maybe<DatetimeFilter>
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
 }
 
 export type StockistSorting = {
@@ -1867,6 +1875,7 @@ export type StockistsSorting = {
   _updatedAt?: Maybe<SortOrder>
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
 }
 
 export type StringFilter = {

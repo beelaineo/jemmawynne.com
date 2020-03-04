@@ -1,19 +1,10 @@
 import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
 import { Page } from '../types'
-import { Column } from '../components/Layout'
+import { Column, TextHeader } from '../components/Layout'
 import { HeroBlock } from '../components/ContentBlock'
 import { Heading } from '../components/Text'
 import { RichText } from '../components/RichText'
-
-const TextHeader = styled.div`
-  padding: 6;
-  background-color: body.3;
-  box-shadow: 0 -9px 9px -6px rgba(0, 0, 0, 0.2) inset;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
 
 interface MainProps {
   textAlign?: string | null

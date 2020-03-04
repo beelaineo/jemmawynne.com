@@ -29,8 +29,10 @@ export const NewsletterSignup = ({
   return (
     <MailerWrapper>
       <Column center width="small">
-        <Heading level={4}>{mailerTitle}</Heading>
-        <Heading mb={3} level={3}>
+        <Heading level={4} weight={4}>
+          {mailerTitle}
+        </Heading>
+        <Heading mb={3} level={4} weight={2}>
           {mailerSubtitle}
         </Heading>
         <MailerInput onSubmit={handleSubmit}>

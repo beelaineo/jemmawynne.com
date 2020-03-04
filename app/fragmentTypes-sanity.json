@@ -21,6 +21,9 @@
             "name": "ShopifyProduct"
           },
           {
+            "name": "Stockists"
+          },
+          {
             "name": "Homepage"
           },
           {
@@ -28,9 +31,6 @@
           },
           {
             "name": "SiteSettings"
-          },
-          {
-            "name": "Stockists"
           },
           {
             "name": "SanityFileAsset"
@@ -46,6 +46,24 @@
           },
           {
             "name": "SubMenu"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "PageOrShopifyCollectionOrShopifyProductOrStockists",
+        "possibleTypes": [
+          {
+            "name": "Page"
+          },
+          {
+            "name": "ShopifyCollection"
+          },
+          {
+            "name": "ShopifyProduct"
+          },
+          {
+            "name": "Stockists"
           }
         ]
       },

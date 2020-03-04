@@ -48,10 +48,11 @@ export const getDocumentLinkUrl = (document?: Document): string => {
         throw new Error('This page does not have a slug')
       }
       return `/${document.slug.current}`
+
     default:
       throw new Error(
         // @ts-ignore
-        `Unable do create a link URL for type "${document.__typename}"`,
+        `Unable to create a link URL for type "${document.__typename}"`,
       )
   }
 }
@@ -59,7 +60,11 @@ export const getDocumentLinkUrl = (document?: Document): string => {
 type LinkType = RichPageLink | ExternalLink | InternalLink
 
 export const getPageLinkLabel = (link: LinkType): string | void =>
-  link.__typename === 'ExternalLink'
+  link.__typename === 'InternalLink' &&
+  link.document &&
+  link.document.__typename === 'Stockists'
+    ? 'Stockists'
+    : link.__typename === 'ExternalLink'
     ? undefined
     : link?.document?.title || undefined
 
@@ -82,10 +87,12 @@ export const getPageLinkUrl = (link: LinkType): string | void => {
         throw new Error('This page does not have a slug')
       }
       return `/${document.slug.current}`
+    case 'Stockists':
+      return '/stockists'
     default:
       throw new Error(
         // @ts-ignore
-        `Unable do create a link URL for type "${document.__typename}"`,
+        `Unable to create a link URL for type "${document.__typename}"`,
       )
   }
 }

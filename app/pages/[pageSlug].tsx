@@ -34,7 +34,6 @@ interface PageProps {
 }
 
 const Page = ({ page }: PageProps) => {
-  console.log(page)
   if (!page) return <NotFound />
   return <StaticPage page={page} />
 }
