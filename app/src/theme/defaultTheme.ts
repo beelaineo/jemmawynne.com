@@ -54,7 +54,7 @@ export const defaultTheme: DefaultTheme = {
     xSmall: 200,
     small: 340,
     medium: 600,
-    wide: 1100,
+    wide: 860,
     xWide: 1440,
   },
 

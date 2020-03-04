@@ -5,7 +5,6 @@ import fontFaces from './fontFaces'
 export const GlobalStyles = createGlobalStyle`
 
 	${normalized}
-	${fontFaces}
 
 	* {
 		box-sizing: border-box;

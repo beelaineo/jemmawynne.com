@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Head from 'next/head'
 import { ApolloClient } from 'apollo-client'
 import { SearchResults, Navigation } from '../src/views'
 import { Footer } from '../src/components/Footer'
@@ -16,12 +17,17 @@ const App = (props: AppProps) => {
   const { Component, pageProps } = props
 
   return (
-    <Providers>
-      <Navigation />
-      <SearchResults />
-      <Component {...pageProps} />
-      <Footer />
-    </Providers>
+    <>
+      <Head>
+        <link rel="stylesheet" href="/static/fonts/fonts.css" />
+      </Head>
+      <Providers>
+        <Navigation />
+        <SearchResults />
+        <Component {...pageProps} />
+        <Footer />
+      </Providers>
+    </>
   )
 }
 
