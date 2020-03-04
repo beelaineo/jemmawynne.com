@@ -19,7 +19,11 @@ const getPreviewValues = async (values) => {
   if (!document || !document._ref) {
     return { title: '(empty)' }
   }
+
   const doc = await getReferencedDocument(document._ref)
+  if (doc && doc._type === 'stockists') {
+    return { title: 'Stockists' }
+  }
   const customThumbnail = await getImageThumbnail(image)
   const shopifyThumbnail =
     doc && (doc._type === 'shopifyProduct' || doc._type === 'shopifyCollection')
@@ -84,6 +88,7 @@ export const internalLink = {
         { type: 'shopifyProduct' },
         { type: 'shopifyCollection' },
         { type: 'page' },
+        { type: 'stockists' },
       ],
     },
   ],

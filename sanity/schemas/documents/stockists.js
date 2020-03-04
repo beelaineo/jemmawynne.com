@@ -28,6 +28,12 @@ export const stockist = {
       type: 'string',
     },
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'location',
+    },
+  },
 }
 
 export const stockists = {
@@ -35,6 +41,11 @@ export const stockists = {
   name: 'stockists',
   type: 'document',
   fields: [
+    {
+      name: 'title',
+      type: 'string',
+      title: 'Page Title',
+    },
     {
       name: 'us',
       title: 'United States',
