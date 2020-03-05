@@ -18,6 +18,8 @@ export const ProductDetails = styled.div`
     grid-gap: 5;
 
     ${theme.mediaQueries.mobile} {
+      max-width: 500px;
+      margin: 0 auto;
       grid-template-columns: 1fr;
     }
   `}
@@ -26,7 +28,17 @@ export const ProductDetails = styled.div`
 export const ProductImagesWrapper = styled.div``
 
 export const ProductInfoWrapper = styled.div`
-  padding-top: 8;
+  ${({ theme }) => css`
+    padding-top: 8;
+
+    ${theme.mediaQueries.tablet} {
+      padding-top: 6;
+    }
+
+    ${theme.mediaQueries.mobile} {
+      padding-top: 3;
+    }
+  `}
 `
 
 export const Nav = styled.div`
@@ -37,7 +49,7 @@ export const Nav = styled.div`
 `
 
 export const ProductGalleryWrapper = styled.div`
-  margin-bottom: 6;
+  ${({ theme }) => css``}
 `
 
 export const ProductGalleryImage = styled.div``

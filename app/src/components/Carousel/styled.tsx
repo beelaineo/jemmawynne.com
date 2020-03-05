@@ -56,6 +56,13 @@ export const SlideContainer = styled.div`
     &:last-of-type {
       margin-right: 0;
     }
+
+    ${theme.mediaQueries.tablet} {
+      width: calc((100% - (${theme.space[4]}px * 2)) / 3);
+    }
+    ${theme.mediaQueries.mobile} {
+      width: calc((100% - (${theme.space[4]}px * 1)) / 2);
+    }
   `}
 `
 

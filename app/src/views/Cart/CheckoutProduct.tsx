@@ -34,7 +34,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
           {title}
         </Heading>
         {variant.selectedOptions.map((option) => (
-          <Heading level={4} color="body.7" weight={2}>
+          <Heading key={option.name} level={4} color="body.7" weight={2}>
             {option.name}: {option.value}
           </Heading>
         ))}
