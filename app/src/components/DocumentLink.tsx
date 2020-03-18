@@ -1,10 +1,10 @@
 import * as React from 'react'
 import NextLink from 'next/link'
-import { ShopifyProduct, ShopifyCollection, Page } from '../types'
+import { ShopifyProduct, ShopifyCollection, Page, Stockists } from '../types'
 import { getDocumentLinkUrl, getDocumentLinkLabel } from '../utils/links'
 
 interface LinkProps {
-  document?: ShopifyProduct | ShopifyCollection | Page | null
+  document?: ShopifyProduct | Stockists | ShopifyCollection | Page | null
   children?: React.ReactNode
   label?: string
 }

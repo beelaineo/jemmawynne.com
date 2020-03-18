@@ -38,7 +38,13 @@ export const ProductThumbnail = ({
         <ProductThumb>
           <Image image={image || productImage} hoverImage={hoverImage} />
           <ProductInfo>
-            <Heading my={2} level={4}>
+            <Heading
+              mb={3}
+              level={6}
+              textTransform="uppercase"
+              weight={2}
+              family="sans"
+            >
               {product.title}
             </Heading>
             {hidePrice ? null : minVariantPrice &&
@@ -46,11 +52,11 @@ export const ProductThumbnail = ({
               maxVariantPrice &&
               maxVariantPrice.amount &&
               minVariantPrice.amount !== maxVariantPrice.amount ? (
-              <Heading color="body.6" level={5}>
+              <Heading color="body.6" level={5} fontStyle="italic">
                 {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
               </Heading>
             ) : maxVariantPrice ? (
-              <Heading color="body.6" level={5}>
+              <Heading color="body.6" level={5} fontStyle="italic">
                 {formatMoney(maxVariantPrice)}
               </Heading>
             ) : null}

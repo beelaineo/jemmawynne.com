@@ -11,6 +11,7 @@ const BlocksWrapper = styled.div`
     width: 100%;
     justify-content: center;
     padding: 5;
+    padding-top: 0;
 
     & > * + * {
       margin-left: 5;

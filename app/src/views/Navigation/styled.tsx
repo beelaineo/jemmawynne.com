@@ -105,7 +105,10 @@ export const CartButton = styled.button`
 `
 
 export const NavHeader = styled.div`
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
+  font-weight: 2;
+  letter-spacing: 0.08em;
+  padding-bottom: 1;
   transition: 0.2s;
 `
 

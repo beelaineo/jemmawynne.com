@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box } from '@xstyled/styled-components'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { ShopifyCollection, RichImage } from '../../types'
@@ -29,14 +30,22 @@ export const CollectionThumbnail = ({
     <Link href={to}>
       <a>
         <Image image={image || sourceData.image} ratio={1} />
-        <Heading my={2} level={3}>
-          {collection.title}
-        </Heading>
-        {products && products.length ? (
-          <Heading color="body.6" level={5}>
-            {products.length} items
+        <Box mt={5}>
+          <Heading
+            mb={3}
+            level={6}
+            textTransform="uppercase"
+            weight={2}
+            family="sans"
+          >
+            {collection.title}
           </Heading>
-        ) : null}
+          {products && products.length ? (
+            <Heading color="body.6" level={5}>
+              {products.length} items
+            </Heading>
+          ) : null}
+        </Box>
       </a>
     </Link>
   )

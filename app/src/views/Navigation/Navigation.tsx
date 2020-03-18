@@ -140,6 +140,7 @@ export const Navigation = () => {
                       <Heading
                         textTransform="uppercase"
                         family="sans"
+                        fontWeight={2}
                         level={4}
                       >
                         {menuItem.title}
@@ -160,6 +161,7 @@ export const Navigation = () => {
                           textTransform="uppercase"
                           family="sans"
                           level={4}
+                          fontWeight={2}
                         >
                           {getDocumentLinkLabel(menuItem?.link?.document) ||
                             null}

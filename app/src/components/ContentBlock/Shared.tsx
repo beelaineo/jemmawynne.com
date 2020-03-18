@@ -28,7 +28,7 @@ export const SectionWrapper = styled.div`
 
 const SectionHeaderWrapper = styled.div`
   text-align: center;
-  margin-bottom: 3;
+  margin-bottom: 5;
 `
 const SubtitleWrapper = styled.div`
   margin: 0 auto;
@@ -46,7 +46,7 @@ export const SectionHeader = ({ title, subtitle }: SectionHeaderProps) => {
   return (
     <SectionHeaderWrapper>
       {title ? (
-        <Heading level={2} family="sans" weight={3} textTransform="uppercase">
+        <Heading level={3} family="sans" weight={3} textTransform="uppercase">
           {title}
         </Heading>
       ) : null}

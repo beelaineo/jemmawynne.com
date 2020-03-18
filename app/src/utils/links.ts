@@ -5,10 +5,11 @@ import {
   RichPageLink,
   InternalLink,
   ExternalLink,
+  Stockists,
   Page,
 } from '../types'
 
-type Document = ShopifyProduct | ShopifyCollection | Page
+type Document = ShopifyProduct | ShopifyCollection | Page | Stockists
 
 export const getDocumentLinkImage = (
   // document?: PageOrShopifyCollectionOrShopifyProduct,
@@ -39,6 +40,8 @@ export const getDocumentLinkLabel = (
 export const getDocumentLinkUrl = (document?: Document): string => {
   if (!document) throw new Error('This link is missing a document')
   switch (document.__typename) {
+    case 'Stockists':
+      return '/stockists'
     case 'ShopifyCollection':
       return `/collections/${document.handle}`
     case 'ShopifyProduct':

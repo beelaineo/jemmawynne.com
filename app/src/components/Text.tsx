@@ -22,7 +22,7 @@ const createTextBase = (as: any) => styled(as)`
     font-family: ${family};
     font-weight: ${weight};
     font-style: ${fontStyle};
-    letter-spacing: ${family === 'sans' ? 'auto' : '0.06em'};
+    letter-spacing: ${family === 'sans' ? '0.08em' : '0.06em'};
     margin: 0 0 0.5em;
 
     &:last-child {
