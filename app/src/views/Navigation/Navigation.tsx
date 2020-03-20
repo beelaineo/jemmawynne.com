@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import Link from 'next/link'
-import { AiOutlineShopping } from 'react-icons/ai'
+import { AiOutlineShopping, AiOutlineMenu } from 'react-icons/ai'
+import { IoMdClose, IoIosArrowBack } from 'react-icons/io'
 import { DocumentLink } from '../../components/DocumentLink'
 import { Heading } from '../../components/Text'
 import { getDocumentLinkLabel } from '../../utils/links'
@@ -25,6 +26,7 @@ import {
   NavTools,
   NavTop,
   ModalBackground,
+  BurgerMenu,
 } from './styled'
 
 const { useEffect, useReducer } = React
@@ -32,22 +34,25 @@ const { useEffect, useReducer } = React
 interface NavState {
   cartOpen: boolean
   menuOpen: boolean
-  currentSubmenuKey: string | void
+  subMenuOpen: boolean
+  currentSubMenuKey: string | void
 }
 
+const OPEN_MENU = 'OPEN_MENU'
+const CLOSE_MENU = 'CLOSE_MENU'
 const OPEN_SUBMENU = 'OPEN_SUBMENU'
 const OPEN_CART = 'OPEN_CART'
 const CLOSE_CART = 'CLOSE_CART'
-const CLOSE_MENU = 'CLOSE_MENU'
+const CLOSE_SUBMENU = 'CLOSE_SUBMENU'
 const CLOSE_ALL = 'CLOSE_ALL'
 
 interface GenericAction {
-  type: typeof CLOSE_MENU
+  type: typeof CLOSE_SUBMENU | typeof OPEN_MENU | typeof CLOSE_MENU
 }
 
 interface OpenMenuAction {
   type: typeof OPEN_SUBMENU
-  menuKey: string | void
+  subMenuKey: string | void
 }
 
 type Action = GenericAction | OpenMenuAction
@@ -57,13 +62,27 @@ function navReducer(currentState: NavState, action: Action): NavState {
     case OPEN_SUBMENU:
       return {
         ...currentState,
-        currentSubmenuKey: action.menuKey,
+        currentSubMenuKey: action.subMenuKey,
+        subMenuOpen: true,
+      }
+    case CLOSE_SUBMENU:
+      return {
+        ...currentState,
+        subMenuOpen: false,
+        currentSubMenuKey: undefined,
+      }
+    case OPEN_MENU:
+      return {
+        ...currentState,
         menuOpen: true,
       }
+
     case CLOSE_MENU:
       return {
         ...currentState,
         menuOpen: false,
+        subMenuOpen: false,
+        currentSubMenuKey: undefined,
       }
 
     default:
@@ -79,21 +98,32 @@ export const Navigation = () => {
   const { open: cartOpen, openCart, closeCart } = useCart()
 
   /* State */
-  const [{ menuOpen, currentSubmenuKey }, dispatch] = useReducer(navReducer, {
-    cartOpen: false,
-    menuOpen: false,
-    currentSubmenuKey: undefined,
-  })
-
-  /* Effects */
+  const [{ subMenuOpen, menuOpen, currentSubMenuKey }, dispatch] = useReducer(
+    navReducer,
+    {
+      cartOpen: false,
+      menuOpen: false,
+      subMenuOpen: false,
+      currentSubMenuKey: undefined,
+    },
+  )
 
   /* Handlers */
   const openCartMenu = () => openCart()
   const closeCartMenu = () => closeCart()
 
-  const openMenu = (menuKey: string | undefined) => () =>
-    dispatch({ type: OPEN_SUBMENU, menuKey })
+  const openMenu = () => dispatch({ type: OPEN_MENU })
   const closeMenu = () => dispatch({ type: CLOSE_MENU })
+  const toggleMenu = () => (menuOpen ? closeMenu() : openMenu())
+
+  const openSubMenu = (subMenuKey: string | undefined) => () =>
+    dispatch({ type: OPEN_SUBMENU, subMenuKey })
+  const closeSubMenu = () => dispatch({ type: CLOSE_SUBMENU })
+
+  /* Effects */
+  useEffect(() => {
+    if (cartOpen) closeMenu()
+  }, [cartOpen])
 
   /* Parsing */
   const allMenuItems = menu?.menuItems ?? []
@@ -104,6 +134,7 @@ export const Navigation = () => {
   const cartCount = loading ? null : lineItems.length || null
 
   if (!ready) return null
+  console.log(currentSubMenuKey)
   return (
     <Wrapper>
       <NavTop>
@@ -114,6 +145,18 @@ export const Navigation = () => {
         </Link>
       </NavTop>
 
+      <BurgerMenu>
+        {menuOpen ? (
+          currentSubMenuKey ? (
+            <IoIosArrowBack onClick={closeSubMenu} />
+          ) : (
+            <IoMdClose onClick={closeMenu} />
+          )
+        ) : (
+          <AiOutlineMenu onClick={openMenu} />
+        )}
+      </BurgerMenu>
+
       <NavTools>
         <SearchInput />
         <CartButton disabled={loading} onClick={openCartMenu}>
@@ -122,19 +165,20 @@ export const Navigation = () => {
         </CartButton>
       </NavTools>
 
-      <Inner>
+      <Inner open={menuOpen}>
         <NavSection ready={ready}>
           {allMenuItems.map((menuItem) => {
             if (!menuItem || !menuItem._key) return null
             const { _key } = menuItem
-            const active = currentSubmenuKey === _key
+            const active = currentSubMenuKey === _key
             switch (menuItem.__typename) {
               case 'SubMenu':
                 return (
                   <NavHeaderWrapper
                     key={_key}
                     active={active}
-                    onMouseEnter={openMenu(_key)}
+                    onMouseEnter={openSubMenu(_key)}
+                    onClick={openSubMenu(_key)}
                   >
                     <NavHeader>
                       <Heading
@@ -153,7 +197,8 @@ export const Navigation = () => {
                   <NavHeaderWrapper
                     key={_key}
                     active={active}
-                    onMouseEnter={openMenu(undefined)}
+                    onMouseEnter={openSubMenu(undefined)}
+                    onClick={openSubMenu(undefined)}
                   >
                     <NavHeader>
                       <DocumentLink document={menuItem?.link?.document}>
@@ -180,15 +225,15 @@ export const Navigation = () => {
           })}
         </NavSection>
         <SubmenuPane
-          open={Boolean(menuOpen && currentSubmenuKey)}
-          onMouseLeave={closeMenu}
+          open={Boolean(subMenuOpen && currentSubMenuKey)}
+          onMouseLeave={closeSubMenu}
         >
           {submenus.map((submenu) =>
             submenu && submenu._key && submenu.__typename === 'SubMenu' ? (
               <SubMenu
-                key={submenu._key}
+                key={submenu._key || 'some-key'}
                 submenu={submenu}
-                active={currentSubmenuKey === submenu._key}
+                active={currentSubMenuKey === submenu._key}
               />
             ) : null,
           )}

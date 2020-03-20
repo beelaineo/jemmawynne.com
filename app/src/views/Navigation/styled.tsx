@@ -19,11 +19,22 @@ export const NavTop = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
+
+    ${theme.mediaQueries.tablet} {
+      padding-top: 3;
+      padding-bottom: 3;
+      margin-bottom: 0;
+    }
   `}
 `
 
+interface InnerProps {
+  theme: DefaultTheme
+  open: boolean
+}
+
 export const Inner = styled.nav`
-  ${({ theme }) => css`
+  ${({ theme, open }: InnerProps) => css`
     display: flex;
     justify-content: center;
     width: 100%;
@@ -31,6 +42,31 @@ export const Inner = styled.nav`
     padding: 0 6 3;
     width: 100%;
     margin: 0 auto;
+
+    ${theme.mediaQueries.tablet} {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      left: ${open ? '0' : '-102vw'};
+      transition: 0.3s;
+      background-color: white;
+      padding: 0 5;
+      display: block;
+    }
+  `}
+`
+
+export const BurgerMenu = styled.button`
+  ${({ theme }) => css`
+    display: none;
+    position: absolute;
+    top: 11px;
+    left: 15px;
+    font-size: 21px;
+
+    ${theme.mediaQueries.tablet} {
+      display: block;
+    }
   `}
 `
 
@@ -41,7 +77,7 @@ interface WithReady {
 }
 
 export const NavSection = styled.div`
-  ${({ ready }: WithReady) => css`
+  ${({ theme, ready }: WithReady) => css`
     transition: 0.3s;
     flex-grow: 1;
     display: flex;
@@ -53,23 +89,39 @@ export const NavSection = styled.div`
     &:last-child {
       justify-content: flex-end;
     }
+
+    ${theme.mediaQueries.tablet} {
+      height: auto;
+      display: block;
+    }
   `}
 `
 
 export const NavTools = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 28px;
-  right: 24px;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 28px;
+    right: 24px;
+    ${theme.mediaQueries.tablet} {
+      top: 9px;
+      right: 15px;
+    }
+  `}
 `
 
 export const Logo = styled.img`
-  width: 100%;
-  max-width: 310px;
+  ${({ theme }) => css`
+    width: 100%;
+    max-width: 310px;
+    ${theme.mediaQueries.tablet} {
+      max-width: 60vw;
+    }
+  `}
 `
 
 interface CartButtonProps {
@@ -94,13 +146,17 @@ export const CartCount = styled.div`
 `
 
 export const CartButton = styled.button`
-  ${({ disabled }) => css`
+  ${({ theme, disabled }) => css`
     position: relative;
     opacity: ${disabled ? '0.6' : '1'};
     pointer-events: ${disabled ? 'none' : 'inherit'};
     display: flex;
     font-size: 2;
     align-items: center;
+
+    ${theme.mediaQueries.tablet} {
+      font-size: 21px;
+    }
   `}
 `
 
@@ -113,11 +169,12 @@ export const NavHeader = styled.div`
 `
 
 interface NavHeaderWrapperProps {
+  theme: DefaultTheme
   active?: boolean
 }
 
 export const NavHeaderWrapper = styled.div`
-  ${({ active }: NavHeaderWrapperProps) => css`
+  ${({ theme, active }: NavHeaderWrapperProps) => css`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,6 +192,17 @@ export const NavHeaderWrapper = styled.div`
           }
         `
       : ''}
+
+    ${theme.mediaQueries.tablet} {
+      margin: 0;
+      display: block;
+      padding: 3 0;
+      text-align: left;
+
+      & > ${NavHeader} {
+        border-bottom: 0px solid transparent;
+      }
+    }
   `}
 `
 
@@ -156,6 +224,12 @@ export const SubmenuPane = styled.div`
     min-height: 200px;
     background-color: white;
     transition: 0.2s;
+
+    ${theme.mediaQueries.tablet} {
+      top: 0;
+      height: 100%;
+      z-index: calc(${theme.zIndices.nav} + 1);
+    }
   `}
 `
 
@@ -172,6 +246,18 @@ export const SubMenuColumns = styled.div`
     grid-template-columns: repeat(5, 1fr);
     padding: 3 5;
     grid-column-gap: 3;
+
+    ${theme.mediaQueries.tablet} {
+      grid-template-columns: 1fr;
+      grid-row-gap: 3;
+      justify-items: flex-start;
+
+      a {
+        display: grid;
+        grid-template-columns: 20vw 1fr;
+        grid-column-gap: 3;
+      }
+    }
   `}
 `
 

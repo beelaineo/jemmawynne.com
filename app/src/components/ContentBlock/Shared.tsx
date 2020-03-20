@@ -19,10 +19,6 @@ export const SectionWrapper = styled.div`
           flex-direction: column;
         `
       : ''}
-
-    &:nth-of-type(2n) {
-      background-color: body.2;
-    }
   `}
 `
 
