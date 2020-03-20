@@ -3,13 +3,14 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 import Link from 'next/link'
 import { AiOutlineShopping, AiOutlineMenu } from 'react-icons/ai'
 import { IoMdClose, IoIosArrowBack } from 'react-icons/io'
+import { MdChevronRight } from 'react-icons/md'
 import { DocumentLink } from '../../components/DocumentLink'
 import { Heading } from '../../components/Text'
 import { getDocumentLinkLabel } from '../../utils/links'
 import { useCheckout } from 'use-shopify'
+import { useMenu } from '../../providers/MenuProvider'
 import { useShopData } from '../../providers/ShopDataProvider'
-import { useCart } from '../../providers/CartProvider'
-import { CartSidebar, CloseButton } from '../../components/Cart'
+import { CartSidebar } from '../../components/Cart'
 import { Checkout } from '../Cart/Checkout'
 import { SubMenu } from './SubMenu'
 import { SearchInput } from './SearchInput'
@@ -26,99 +27,34 @@ import {
   NavTools,
   NavTop,
   ModalBackground,
+  RightArrowSpan,
   BurgerMenu,
 } from './styled'
 
 const { useEffect, useReducer } = React
 
-interface NavState {
-  cartOpen: boolean
-  menuOpen: boolean
-  subMenuOpen: boolean
-  currentSubMenuKey: string | void
-}
-
-const OPEN_MENU = 'OPEN_MENU'
-const CLOSE_MENU = 'CLOSE_MENU'
-const OPEN_SUBMENU = 'OPEN_SUBMENU'
-const OPEN_CART = 'OPEN_CART'
-const CLOSE_CART = 'CLOSE_CART'
-const CLOSE_SUBMENU = 'CLOSE_SUBMENU'
-const CLOSE_ALL = 'CLOSE_ALL'
-
-interface GenericAction {
-  type: typeof CLOSE_SUBMENU | typeof OPEN_MENU | typeof CLOSE_MENU
-}
-
-interface OpenMenuAction {
-  type: typeof OPEN_SUBMENU
-  subMenuKey: string | void
-}
-
-type Action = GenericAction | OpenMenuAction
-
-function navReducer(currentState: NavState, action: Action): NavState {
-  switch (action.type) {
-    case OPEN_SUBMENU:
-      return {
-        ...currentState,
-        currentSubMenuKey: action.subMenuKey,
-        subMenuOpen: true,
-      }
-    case CLOSE_SUBMENU:
-      return {
-        ...currentState,
-        subMenuOpen: false,
-        currentSubMenuKey: undefined,
-      }
-    case OPEN_MENU:
-      return {
-        ...currentState,
-        menuOpen: true,
-      }
-
-    case CLOSE_MENU:
-      return {
-        ...currentState,
-        menuOpen: false,
-        subMenuOpen: false,
-        currentSubMenuKey: undefined,
-      }
-
-    default:
-      // @ts-ignore
-      throw new Error(`"${action.type}" is not a valid action type`)
-  }
-}
-
 export const Navigation = () => {
   /* State from Providers */
   const { ready, menu } = useShopData()
   const { loading, checkout } = useCheckout()
-  const { open: cartOpen, openCart, closeCart } = useCart()
 
   /* State */
-  const [{ subMenuOpen, menuOpen, currentSubMenuKey }, dispatch] = useReducer(
-    navReducer,
-    {
-      cartOpen: false,
-      menuOpen: false,
-      subMenuOpen: false,
-      currentSubMenuKey: undefined,
-    },
-  )
+  const {
+    cartOpen,
+    menuOpen,
+    subMenuOpen,
+    currentSubMenuKey,
+    openCart: openCartHandler,
+    closeCart,
+    openMenu,
+    closeMenu,
+    openSubMenu: openSubMenuHandler,
+    closeSubMenu,
+  } = useMenu()
 
   /* Handlers */
-  const openCartMenu = () => openCart()
-  const closeCartMenu = () => closeCart()
-
-  const openMenu = () => dispatch({ type: OPEN_MENU })
-  const closeMenu = () => dispatch({ type: CLOSE_MENU })
-  const toggleMenu = () => (menuOpen ? closeMenu() : openMenu())
-
-  const openSubMenu = (subMenuKey: string | undefined) => () =>
-    dispatch({ type: OPEN_SUBMENU, subMenuKey })
-  const closeSubMenu = () => dispatch({ type: CLOSE_SUBMENU })
+  const openSubMenu = (key: string | undefined) => () => openSubMenuHandler(key)
+  const openCart = () => openCartHandler()
 
   /* Effects */
   useEffect(() => {
@@ -159,7 +95,7 @@ export const Navigation = () => {
 
       <NavTools>
         <SearchInput />
-        <CartButton disabled={loading} onClick={openCartMenu}>
+        <CartButton disabled={loading} onClick={openCart}>
           {cartCount ? <CartCount>{cartCount}</CartCount> : null}
           <AiOutlineShopping />
         </CartButton>
@@ -188,6 +124,10 @@ export const Navigation = () => {
                         level={4}
                       >
                         {menuItem.title}
+
+                        <RightArrowSpan>
+                          <MdChevronRight />
+                        </RightArrowSpan>
                       </Heading>
                     </NavHeader>
                   </NavHeaderWrapper>
@@ -239,10 +179,9 @@ export const Navigation = () => {
           )}
         </SubmenuPane>
       </Inner>
-      <ModalBackground open={cartOpen} onClick={closeCartMenu} />
+      <ModalBackground open={cartOpen} onClick={closeCart} />
       <CartSidebar open={cartOpen}>
-        <Checkout />
-        <CloseButton onClick={closeCartMenu}>close</CloseButton>
+        <Checkout closeCartMenu={closeCart} />
       </CartSidebar>
     </Wrapper>
   )

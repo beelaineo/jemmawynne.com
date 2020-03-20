@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styled, { css } from '@xstyled/styled-components'
 import Head from 'next/head'
 import { ApolloClient } from 'apollo-client'
 import { SearchResults, Navigation } from '../src/views'
@@ -13,6 +14,14 @@ interface AppProps {
   apollo: ApolloClient<any>
 }
 
+const Main = styled.main`
+  ${({ theme }) => css`
+    ${theme.mediaQueries.tablet} {
+      padding-top: 42px;
+    }
+  `}
+`
+
 const App = (props: AppProps) => {
   const { Component, pageProps } = props
 
@@ -23,9 +32,11 @@ const App = (props: AppProps) => {
       </Head>
       <Providers>
         <Navigation />
-        <SearchResults />
-        <Component {...pageProps} />
-        <Footer />
+        <Main>
+          <SearchResults />
+          <Component {...pageProps} />
+          <Footer />
+        </Main>
       </Providers>
     </>
   )

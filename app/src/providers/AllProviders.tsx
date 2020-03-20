@@ -6,7 +6,7 @@ import { ThemeProvider } from '@xstyled/styled-components'
 import { ShopifyProvider } from 'use-shopify'
 import { defaultTheme, GlobalStyles } from '../theme'
 import { ShopDataProvider } from './ShopDataProvider'
-import { CartProvider } from './CartProvider'
+import { MenuProvider } from './MenuProvider'
 import {
   SHOPIFY_STOREFRONT_URL,
   SHOPIFY_STOREFRONT_TOKEN,
@@ -64,10 +64,10 @@ export const Providers = ({ children }: Props) => {
     <ShopifyProvider query={shopifyQuery}>
       <ShopDataProvider>
         <ThemeProvider theme={defaultTheme}>
-          <CartProvider>
+          <MenuProvider>
             <GlobalStyles />
             {children}
-          </CartProvider>
+          </MenuProvider>
         </ThemeProvider>
       </ShopDataProvider>
     </ShopifyProvider>

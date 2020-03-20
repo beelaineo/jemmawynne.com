@@ -37,3 +37,17 @@ export const RemoveCart = styled.div`
     cursor: pointer;
   }
 `
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 21px;
+  background-color: body.2;
+`
+
+export const TitleWrapper = styled.div`
+  border-bottom: 1px solid currentColor;
+  padding: 3 2;
+  background-color: body.2;
+`

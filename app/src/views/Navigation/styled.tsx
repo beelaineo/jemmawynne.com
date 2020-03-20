@@ -8,6 +8,13 @@ export const Wrapper = styled.header`
     z-index: nav;
     font-family: sans;
     box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.2);
+
+    ${theme.mediaQueries.tablet} {
+      position: fixed;
+      height: 42px;
+      width: 100%;
+      background-color: white;
+    }
   `}
 `
 
@@ -50,7 +57,7 @@ export const Inner = styled.nav`
       left: ${open ? '0' : '-102vw'};
       transition: 0.3s;
       background-color: white;
-      padding: 0 5;
+      padding: 3 5;
       display: block;
     }
   `}
@@ -121,6 +128,10 @@ export const Logo = styled.img`
     ${theme.mediaQueries.tablet} {
       max-width: 60vw;
     }
+
+    img {
+      display: block;
+    }
   `}
 `
 
@@ -172,6 +183,16 @@ interface NavHeaderWrapperProps {
   theme: DefaultTheme
   active?: boolean
 }
+
+export const RightArrowSpan = styled.span`
+  ${({ theme }) => css`
+    display: none;
+    ${theme.mediaQueries.tablet} {
+      display: initial;
+      vertical-align: top;
+    }
+  `}
+`
 
 export const NavHeaderWrapper = styled.div`
   ${({ theme, active }: NavHeaderWrapperProps) => css`
@@ -252,7 +273,7 @@ export const SubMenuColumns = styled.div`
       grid-row-gap: 3;
       justify-items: flex-start;
 
-      a {
+      > a {
         display: grid;
         grid-template-columns: 20vw 1fr;
         grid-column-gap: 3;

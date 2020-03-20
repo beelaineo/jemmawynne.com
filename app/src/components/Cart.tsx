@@ -28,15 +28,6 @@ export const CartSidebar = styled.div`
   `}
 `
 
-export const CloseButton = styled.button`
-  color: white;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  background-color: black;
-  padding: 3;
-`
-
 export const CartBottom = styled.div`
   background-color: body.2;
   border-top: 1px solid black;
