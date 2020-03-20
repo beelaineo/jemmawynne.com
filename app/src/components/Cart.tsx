@@ -29,16 +29,19 @@ export const CartSidebar = styled.div`
 `
 
 export const CartBottom = styled.div`
-  background-color: body.2;
-  border-top: 1px solid black;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  padding: 5;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  ${({ theme }) => css`
+    background-color: body.2;
+    border-top: 1px solid black;
+    padding: 5;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    ${theme.mediaQueries.tablet} {
+      padding: 3 5;
+    }
+  `}
 `
 
 export const CartNav = styled.div`

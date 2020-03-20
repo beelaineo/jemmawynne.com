@@ -46,6 +46,22 @@ export const CloseButton = styled.button`
   background-color: body.2;
 `
 
+export const CartMessage = styled.div`
+  margin: 0 auto 4;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  span {
+    background-color: highlight;
+    margin-bottom: 2;
+    padding: 1 2;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+`
+
 export const TitleWrapper = styled.div`
   border-bottom: 1px solid currentColor;
   padding: 3 2;

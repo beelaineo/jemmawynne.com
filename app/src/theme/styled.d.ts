@@ -38,6 +38,7 @@ declare module 'styled-components' {
       body: string[]
       bodyMain: string
       background: string
+      highlight: string
       error: string[]
     }
 

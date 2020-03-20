@@ -125,12 +125,11 @@ export const Logo = styled.img`
   ${({ theme }) => css`
     width: 100%;
     max-width: 310px;
+    display: block;
+
     ${theme.mediaQueries.tablet} {
       max-width: 60vw;
-    }
-
-    img {
-      display: block;
+      max-height: 21px;
     }
   `}
 `

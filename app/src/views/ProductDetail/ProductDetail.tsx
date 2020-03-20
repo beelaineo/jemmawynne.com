@@ -71,7 +71,6 @@ export const ProductDetail = ({ product }: Props) => {
               <Column width="xSmall">
                 <BuyButton
                   addLineItem={addLineItem}
-                  // @ts-ignore
                   currentVariant={currentVariant}
                   quantity={quantity}
                 />

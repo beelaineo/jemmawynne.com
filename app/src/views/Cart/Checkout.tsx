@@ -1,28 +1,24 @@
 import * as React from 'react'
-import styled from '@xstyled/styled-components'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { IoMdClose } from 'react-icons/io'
 import { useCheckout } from 'use-shopify'
 import { Button } from '../../components/Button'
-import { FlexContainer, FlexHalf } from '../../components/Layout/Flex'
 import { Heading } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
 import { CheckoutProduct } from './CheckoutProduct'
 import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney } from '../../utils/currency'
-import { TitleWrapper, CloseButton } from './styled'
+import { TitleWrapper, CloseButton, CartMessage } from './styled'
+import { useMenu } from '../../providers/MenuProvider'
 
 /**
  * Main Checkout view
  */
 
-interface CheckoutProps {
-  closeCartMenu: () => void
-}
-
-export const Checkout = ({ closeCartMenu }: CheckoutProps) => {
+export const Checkout = () => {
   /* State */
   const { checkout, loading } = useCheckout()
+  const { closeCart, cartMessage } = useMenu()
 
   const lineItems =
     checkout && checkout.lineItems.edges.length
@@ -31,7 +27,7 @@ export const Checkout = ({ closeCartMenu }: CheckoutProps) => {
 
   return (
     <>
-      <CloseButton onClick={closeCartMenu}>
+      <CloseButton onClick={closeCart}>
         <IoMdClose />
       </CloseButton>
       <TitleWrapper>
@@ -40,6 +36,16 @@ export const Checkout = ({ closeCartMenu }: CheckoutProps) => {
         </Heading>
       </TitleWrapper>
       <CartInner>
+        {cartMessage ? (
+          <CartMessage>
+            <span>
+              <Heading level={5}>{cartMessage}</Heading>
+            </span>
+            <Button level={3} onClick={closeCart}>
+              Continue Shopping
+            </Button>
+          </CartMessage>
+        ) : null}
         {lineItems.length ? (
           lineItems.map((lineItem) => (
             <CheckoutProduct key={lineItem.id} lineItem={lineItem} />
@@ -53,7 +59,7 @@ export const Checkout = ({ closeCartMenu }: CheckoutProps) => {
 
       {lineItems.length ? (
         <CartBottom>
-          <Heading family="sans" textAlign="center" level={5} weight={2}>
+          <Heading family="serif" textAlign="center" level={5} weight={2}>
             Subtotal: {formatMoney(checkout.paymentDueV2)}
           </Heading>
           <Button as="a" href={checkout.webUrl} disabled={loading}>

@@ -1,11 +1,17 @@
-import styled from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 
 export const FooterWrapper = styled.footer`
-  background-color: body.7;
-  color: body.0;
-  padding: 4 6;
-  text-align: center;
-  box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.3);
+  ${({ theme }) => css`
+    background-color: body.7;
+    color: body.0;
+    padding: 4 6;
+    text-align: center;
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.3);
+
+    ${theme.mediaQueries.tablet} {
+      padding: 4 3;
+    }
+  `}
 `
 
 export const FooterInner = styled.div`

@@ -105,6 +105,7 @@ export const defaultTheme: DefaultTheme = {
     /* Shortcut for main body color */
     bodyMain: grays[8],
     background: grays[2],
+    highlight: '#ffd5dd',
     /* Used for errors and warnings. */
     error: ['#e6d49e', '#f09e32', '#f04b32'],
   },

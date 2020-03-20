@@ -181,7 +181,7 @@ export const Navigation = () => {
       </Inner>
       <ModalBackground open={cartOpen} onClick={closeCart} />
       <CartSidebar open={cartOpen}>
-        <Checkout closeCartMenu={closeCart} />
+        <Checkout />
       </CartSidebar>
     </Wrapper>
   )

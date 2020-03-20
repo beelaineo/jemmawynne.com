@@ -8,7 +8,8 @@ interface ButtonProps {
 export const Button = styled.button`
   ${({ level, disabled }: ButtonProps) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
-    opacity: ${disabled ? 0.5 : 1};
+    opacity: ${disabled ? 0.3 : 1};
+    transition: 0.2s;
     font-family: sans;
     display: flex;
     justify-content: center;
@@ -19,15 +20,27 @@ export const Button = styled.button`
     font-size: 4;
     font-weight: 3;
     transition: 0.2s;
+
     ${level === undefined || level === 1
       ? css`
           color: body.1;
           background-color: body.9;
         `
-      : css`
+      : level === 2
+      ? css`
           color: body.9;
           background-color: transparent;
           border: 1px solid;
+        `
+      : css`
+          color: body.6;
+          border: none;
+          font-size: 5;
+          font-weight: 2;
+          height: auto;
+          padding: 0;
+          text-decoration: underline;
+          text-transform: initial;
         `}
   `}
 `
