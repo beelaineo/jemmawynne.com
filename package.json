@@ -9,21 +9,21 @@
 		"start:proxy": "yarn workspace jemmawynne-proxy start"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^8.2.0",
-		"@commitlint/config-conventional": "^8.2.0",
-		"@typescript-eslint/eslint-plugin": "^2.6.1",
-		"@typescript-eslint/parser": "^2.6.1",
+		"@commitlint/cli": "^8.3.5",
+		"@commitlint/config-conventional": "^8.3.4",
+		"@typescript-eslint/eslint-plugin": "^2.24.0",
+		"@typescript-eslint/parser": "^2.24.0",
 		"dotenv": "^8.2.0",
-		"eslint": "^6.6.0",
-		"eslint-config-prettier": "^6.5.0",
-		"eslint-plugin-prettier": "^3.1.1",
-		"eslint-plugin-react": "^7.16.0",
-		"husky": "^3.0.9",
-		"lerna": "^3.18.4",
-		"netlify-cli": "^2.20.2",
+		"eslint": "^6.8.0",
+		"eslint-config-prettier": "^6.10.0",
+		"eslint-plugin-prettier": "^3.1.2",
+		"eslint-plugin-react": "^7.19.0",
+		"husky": "^4.2.3",
+		"lerna": "^3.20.2",
+		"netlify-cli": "^2.40.0",
 		"prettier": "^1.19.1",
 		"pretty-quick": "^2.0.1",
-		"typescript": "^3.7.2",
+		"typescript": "^3.8.3",
 		"yarnhook": "^0.4.3"
 	},
 	"workspaces": [
@@ -41,7 +41,7 @@
 		}
 	},
 	"dependencies": {
-		"react-icons": "^3.8.0"
+		"react-icons": "^3.9.0"
 	},
 	"resolutions": {
 		"graphql": "14.5.8"
