@@ -264,7 +264,7 @@ export const SubMenuColumns = styled.div`
     margin: 0 auto;
     max-width: xWide;
     grid-template-columns: repeat(5, 1fr);
-    padding: 3 5;
+    padding: 3 5 5;
     grid-column-gap: 3;
 
     ${theme.mediaQueries.tablet} {

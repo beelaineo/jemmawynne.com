@@ -3,7 +3,6 @@ import { Box } from '@xstyled/styled-components'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { ShopifyCollection, RichImage } from '../../types'
-import { ImageWrapper, TextWrapper } from './styled'
 import { Image } from '../Image'
 import { Heading } from '../Text'
 
@@ -36,6 +35,7 @@ export const CollectionThumbnail = ({
             level={6}
             textTransform="uppercase"
             weight={2}
+            letterSpacing="0.06em"
             family="sans"
           >
             {collection.title}

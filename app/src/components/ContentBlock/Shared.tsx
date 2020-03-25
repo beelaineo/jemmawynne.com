@@ -10,7 +10,7 @@ interface SectionWrapperProps {
 }
 
 export const SectionWrapper = styled.div`
-  ${({ theme, type }: SectionWrapperProps) => css`
+  ${({ type }: SectionWrapperProps) => css`
     padding: 6;
 
     ${type === 'carousel'
@@ -24,7 +24,7 @@ export const SectionWrapper = styled.div`
 
 const SectionHeaderWrapper = styled.div`
   text-align: center;
-  margin-bottom: 5;
+  margin-bottom: 6;
 `
 const SubtitleWrapper = styled.div`
   margin: 0 auto;

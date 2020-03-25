@@ -11,7 +11,7 @@ import { CollectionThumbnail } from './Collection'
 const Grid = styled.div`
   ${({ theme }) => css`
     margin: 0 auto;
-    max-width: wide;
+    max-width: xWide;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-evenly;
@@ -22,11 +22,10 @@ const Grid = styled.div`
       text-decoration: none;
     }
 
-    @media screen and (max-width: 850px) {
+    ${theme.mediaQueries.tablet} {
       grid-template-columns: 1fr 1fr;
     }
-
-    @media screen and (max-width: 560px) {
+    ${theme.mediaQueries.mobile} {
       padding: 6;
       grid-template-columns: 1fr;
     }
