@@ -6,6 +6,11 @@ export const hero = {
   type: 'object',
   fields: [
     {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    },
+    {
       name: 'body',
       title: 'Text',
       type: 'array',

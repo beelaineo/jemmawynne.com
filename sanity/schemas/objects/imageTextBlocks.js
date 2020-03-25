@@ -19,7 +19,12 @@ export const imageTextSection = {
       of: [
         {
           type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
+          styles: [
+            { title: 'Header 2', value: 'h2' },
+            { title: 'Header 3', value: 'h3' },
+            { title: 'Normal', value: 'normal' },
+          ],
+
           marks: {
             decorators: [
               { title: 'Strong', value: 'strong' },
@@ -62,7 +67,11 @@ export const textBlock = {
       of: [
         {
           type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
+          styles: [
+            { title: 'Header 2', value: 'h2' },
+            { title: 'Header 3', value: 'h3' },
+            { title: 'Normal', value: 'normal' },
+          ],
           marks: {
             decorators: [
               { title: 'Strong', value: 'strong' },
