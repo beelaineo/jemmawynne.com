@@ -11,6 +11,28 @@ export type Scalars = {
   Date: any
 }
 
+export interface Banner {
+  __typename: 'Banner'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  text?: Maybe<Scalars['String']>
+  cta?: Maybe<Cta>
+}
+
+export type BannerFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  text?: Maybe<StringFilter>
+  cta?: Maybe<CtaFilter>
+}
+
+export type BannerSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  text?: Maybe<SortOrder>
+  cta?: Maybe<CtaSorting>
+}
+
 export interface Block {
   __typename: 'Block'
   _key?: Maybe<Scalars['String']>
@@ -1131,9 +1153,9 @@ export interface ShopifyCollection extends Document {
   title?: Maybe<Scalars['String']>
   handle?: Maybe<Scalars['String']>
   shopifyId?: Maybe<Scalars['String']>
+  sourceData?: Maybe<ShopifySourceCollection>
   products?: Maybe<Array<Maybe<ShopifyProduct>>>
   hero?: Maybe<Hero>
-  sourceData?: Maybe<ShopifySourceCollection>
 }
 
 export type ShopifyCollectionFilter = {
@@ -1147,8 +1169,8 @@ export type ShopifyCollectionFilter = {
   title?: Maybe<StringFilter>
   handle?: Maybe<StringFilter>
   shopifyId?: Maybe<StringFilter>
-  hero?: Maybe<HeroFilter>
   sourceData?: Maybe<ShopifySourceCollectionFilter>
+  hero?: Maybe<HeroFilter>
 }
 
 export type ShopifyCollectionSorting = {
@@ -1161,8 +1183,8 @@ export type ShopifyCollectionSorting = {
   title?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
   shopifyId?: Maybe<SortOrder>
-  hero?: Maybe<HeroSorting>
   sourceData?: Maybe<ShopifySourceCollectionSorting>
+  hero?: Maybe<HeroSorting>
 }
 
 export interface ShopifyMoneyV2 {
@@ -1755,6 +1777,7 @@ export interface SiteSettings extends Document {
   _updatedAt: Scalars['DateTime']
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
+  banner?: Maybe<Banner>
   links?: Maybe<Array<Maybe<ExternalLinkOrInternalLink>>>
   mailerTitle?: Maybe<Scalars['String']>
   mailerSubtitle?: Maybe<Scalars['String']>
@@ -1768,6 +1791,7 @@ export type SiteSettingsFilter = {
   _updatedAt?: Maybe<DatetimeFilter>
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
+  banner?: Maybe<BannerFilter>
   mailerTitle?: Maybe<StringFilter>
   mailerSubtitle?: Maybe<StringFilter>
 }
@@ -1779,6 +1803,7 @@ export type SiteSettingsSorting = {
   _updatedAt?: Maybe<SortOrder>
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
+  banner?: Maybe<BannerSorting>
   mailerTitle?: Maybe<SortOrder>
   mailerSubtitle?: Maybe<SortOrder>
 }

@@ -145,6 +145,5 @@ export const MenuProvider = ({ children }: MenuProps) => {
     closeSubMenu,
   }
 
-  console.log(state)
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>
 }

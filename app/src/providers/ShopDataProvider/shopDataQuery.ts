@@ -71,6 +71,14 @@ export const SHOP_DATA_QUERY = gql`
     SiteSettings(id: "site-settings") {
       _id
       _type
+      banner {
+        text
+        cta {
+          ... on Cta {
+            ...CTAFragment
+          }
+        }
+      }
       links {
         ... on ExternalLink {
           ...ExternalLinkFragment

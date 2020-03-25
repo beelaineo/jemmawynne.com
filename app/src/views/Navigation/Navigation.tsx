@@ -70,7 +70,6 @@ export const Navigation = () => {
   const cartCount = loading ? null : lineItems.length || null
 
   if (!ready) return null
-  console.log(currentSubMenuKey)
   return (
     <Wrapper>
       <NavTop>

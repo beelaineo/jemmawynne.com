@@ -14,15 +14,23 @@ interface CustomTextProps {
   weight?: number
   color?: string
   htmlFor?: string
+  textDecoration?: string
 }
 
 const createTextBase = (as: any) => styled(as)`
-  ${({ family, fontStyle, weight, fontSize }: CustomTextProps) => css`
+  ${({
+    family,
+    fontStyle,
+    weight,
+    fontSize,
+    textDecoration,
+  }: CustomTextProps) => css`
     font-size: ${fontSize};
     font-family: ${family};
     font-weight: ${weight};
     font-style: ${fontStyle};
     letter-spacing: ${family === 'sans' ? '0.08em' : '0.06em'};
+    text-decoration: ${textDecoration};
     margin: 0 0 0.5em;
 
     &:last-child {
@@ -32,11 +40,18 @@ const createTextBase = (as: any) => styled(as)`
 `
 
 const TextBase = styled(Box)`
-  ${({ family, weight, fontStyle, fontSize }: CustomTextProps) => css`
+  ${({
+    family,
+    weight,
+    fontStyle,
+    textDecoration,
+    fontSize,
+  }: CustomTextProps) => css`
     font-size: ${fontSize};
     font-family: ${family};
     font-weight: ${weight};
     font-style: ${fontStyle};
+    text-decoration: ${textDecoration};
     letter-spacing: ${family === 'sans' ? 'auto' : '0.06em'};
     margin: 0 0 0.5em;
 
@@ -55,6 +70,7 @@ interface HeadingProps extends BoxProps {
   color?: string
   htmlFor?: string
   as?: any
+  textDecoration?: string
 }
 
 const hTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']

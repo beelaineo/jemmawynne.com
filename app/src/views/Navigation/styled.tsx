@@ -255,7 +255,7 @@ export const SubmenuPane = styled.div`
 
 interface WithVisible {
   theme: DefaultTheme
-  active: Boolean
+  active: boolean
 }
 
 export const SubMenuColumns = styled.div`
