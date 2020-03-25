@@ -212,6 +212,7 @@ export interface Hero {
   __typename: 'Hero'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
   textAlign?: Maybe<Scalars['String']>
   textPosition?: Maybe<Scalars['String']>
@@ -226,6 +227,7 @@ export interface Hero {
 export type HeroFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
   textAlign?: Maybe<StringFilter>
   textPosition?: Maybe<StringFilter>
   cta?: Maybe<CtaFilter>
@@ -239,6 +241,7 @@ export type HeroFilter = {
 export type HeroSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
   textAlign?: Maybe<SortOrder>
   textPosition?: Maybe<SortOrder>
   cta?: Maybe<CtaSorting>

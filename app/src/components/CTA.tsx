@@ -18,6 +18,7 @@ const Inner = styled.div`
   border: 1px solid;
   color: inherit;
   text-decoration: none;
+  min-width: 240px;
 `
 
 export const CTA = ({ cta }: CTAProps) => {
@@ -27,7 +28,7 @@ export const CTA = ({ cta }: CTAProps) => {
     <Wrapper>
       <DocumentLink document={link.document}>
         <Inner>
-          <Heading level={4} textTransform="uppercase" weight={3} family="sans">
+          <Heading level={6} textTransform="uppercase" weight={3} family="sans">
             {label}
           </Heading>
         </Inner>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css } from '@xstyled/styled-components'
+import styled, { css, Box } from '@xstyled/styled-components'
 import { TextBlock as TextBlockType } from '../../types'
 import { Heading } from '../Text'
 import { RichText } from '../RichText'
@@ -20,6 +20,14 @@ const TextBlockWrapper = styled.div`
   `}
 `
 
+const TextContainer = styled.div`
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+`
+
 export interface TextBlockProps {
   content: TextBlockType
 }
@@ -29,11 +37,17 @@ export const TextBlock = ({ content }: TextBlockProps) => {
 
   return (
     <TextBlockWrapper textAlign={textAlign}>
-      <Heading level={2} family="serif">
+      <Heading level={5} mb={5} family="sans">
         {header}
       </Heading>
-      {bodyRaw ? <RichText body={bodyRaw} /> : null}
-      {cta ? <CTA cta={cta} /> : null}
+      <TextContainer>
+        {bodyRaw ? <RichText body={bodyRaw} /> : null}
+        {cta ? (
+          <Box mt={5}>
+            <CTA cta={cta} />
+          </Box>
+        ) : null}
+      </TextContainer>
     </TextBlockWrapper>
   )
 }

@@ -32,18 +32,18 @@ export const defaultTheme: DefaultTheme = {
    *   grid-column-gap, grid-row-gap
    */
   space: [
-    0, //
-    3,
-    6,
-    12,
-    18,
-    24,
-    38,
-    42,
-    48,
-    64,
-    72,
-    120,
+    0, // 0
+    3, // 1
+    6, // 2
+    12, // 3
+    18, // 4
+    24, // 5
+    38, // 6
+    42, // 7
+    48, // 8
+    64, // 9
+    72, // 10
+    120, // 11
   ],
 
   /* Sizing - applies to:
@@ -67,8 +67,8 @@ export const defaultTheme: DefaultTheme = {
     25, // h2
     20, // h3
     16, // readable text: p, h4
-    14, // small text: h5, captions
-    12, // small text: h6, small captions
+    13, // small text: h5, captions
+    8, // small text: h6, small captions
   ],
   fontWeights: [0, 200, 400, 500, 700],
   fonts: {

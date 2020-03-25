@@ -39,7 +39,7 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
           ? links.map((menuLink) =>
               menuLink && menuLink.document ? (
                 <Heading
-                  family="sans"
+                  family="serif"
                   level={5}
                   weight={2}
                   key={menuLink._key || 'some-key'}

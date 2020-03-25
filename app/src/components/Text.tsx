@@ -29,7 +29,7 @@ const createTextBase = (as: any) => styled(as)`
     font-family: ${family};
     font-weight: ${weight};
     font-style: ${fontStyle};
-    letter-spacing: ${family === 'sans' ? '0.08em' : '0.06em'};
+    letter-spacing: ${family === 'sans' ? '0.25em' : '0.06em'};
     text-decoration: ${textDecoration};
     margin: 0 0 0.5em;
 
@@ -52,7 +52,9 @@ const TextBase = styled(Box)`
     font-weight: ${weight};
     font-style: ${fontStyle};
     text-decoration: ${textDecoration};
-    letter-spacing: ${family === 'sans' ? 'auto' : '0.06em'};
+    letter-spacing: ${family === 'sans' ? '0.25em' : '0.06em'};
+    text-transform: ${family === 'sans' ? 'uppercase' : ''};
+
     margin: 0 0 0.5em;
 
     &:last-child {

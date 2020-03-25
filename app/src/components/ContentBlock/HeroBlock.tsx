@@ -1,7 +1,8 @@
 import * as React from 'react'
-import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import styled, { css, Box, DefaultTheme } from '@xstyled/styled-components'
 import { Image } from '../Image'
 import { Hero } from '../../types'
+import { Heading } from '../Text'
 import { CTA } from '../CTA'
 import { RichText } from '../RichText'
 import {
@@ -50,12 +51,6 @@ const HeroText = styled.div`
     text-align: ${textAlign || getTextAlignment(textPosition)};
     color: ${getColor(textColor)};
 
-    .text-container {
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-    }
-
     ${theme.mediaQueries.mobile} {
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
@@ -63,6 +58,18 @@ const HeroText = styled.div`
       color: ${getColor(textColorMobile)};
     }
   `}
+`
+
+const TextOuter = styled.div`
+  min-width: 540px;
+`
+
+const TextContainer = styled.div`
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 `
 
 const HeroImageWrapper = styled.div`
@@ -97,6 +104,7 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
     textAlign,
     mobileImage,
     cta,
+    title,
   } = hero
 
   return (
@@ -114,10 +122,21 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
         textPositionMobile={textPositionMobile}
         textColorMobile={textColorMobile}
       >
-        <div className="text-container">
-          <RichText body={bodyRaw} />
-          {cta ? <CTA cta={cta} /> : null}
-        </div>
+        <TextOuter>
+          <TextContainer>
+            {title ? (
+              <Heading mb={5} family="sans" level={5}>
+                {title}
+              </Heading>
+            ) : null}
+            <RichText body={bodyRaw} />
+            {cta ? (
+              <Box mt={5}>
+                <CTA cta={cta} />
+              </Box>
+            ) : null}
+          </TextContainer>
+        </TextOuter>
       </HeroText>
     </HeroWrapper>
   )

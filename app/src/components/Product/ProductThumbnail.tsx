@@ -42,8 +42,7 @@ export const ProductThumbnail = ({
               mb={3}
               level={6}
               textTransform="uppercase"
-              weight={2}
-              letterSpacing="0.06em"
+              weight={3}
               family="sans"
             >
               {product.title}
