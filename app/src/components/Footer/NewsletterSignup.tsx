@@ -40,7 +40,7 @@ export const NewsletterSignup = ({
             type="email"
             value={inputValue}
             onChange={handleChange}
-            placeholder="enter your email"
+            placeholder="email"
           />
           <button type="submit">
             <MdArrowForward />

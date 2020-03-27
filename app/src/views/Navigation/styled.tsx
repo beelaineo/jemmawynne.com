@@ -20,7 +20,7 @@ export const Wrapper = styled.header`
 
 export const NavTop = styled.div`
   ${({ theme }) => css`
-    padding-top: 5;
+    padding-top: 30px;
     margin-bottom: 5;
     display: flex;
     width: 100%;
@@ -236,7 +236,6 @@ export const SubmenuPane = styled.div`
     opacity: ${open ? 1 : 0};
     pointer-events: ${open ? 'initial' : 'none'};
     position: absolute;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
     z-index: calc(${theme.zIndices.nav} - 1);
     top: 100%;
     left: 0;

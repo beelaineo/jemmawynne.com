@@ -8,7 +8,7 @@ import styled, {
 
 interface CustomTextProps {
   theme: DefaultTheme
-  fontSize: 1 | 2 | 3 | 4 | 5 | 6
+  fontSize: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
   family?: 'mono' | 'sans' | 'serif'
   weight?: number
@@ -65,7 +65,7 @@ const TextBase = styled(Box)`
 
 interface HeadingProps extends BoxProps {
   children: React.ReactNode
-  level: 1 | 2 | 3 | 4 | 5 | 6
+  level: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
   family?: 'mono' | 'sans' | 'serif'
   weight?: number
@@ -75,7 +75,7 @@ interface HeadingProps extends BoxProps {
   textDecoration?: string
 }
 
-const hTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+const hTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7']
 
 export const Heading = ({
   children,
@@ -85,7 +85,7 @@ export const Heading = ({
   htmlFor,
   ...rest
 }: HeadingProps) => {
-  if (level < 1 || level > 6) throw new Error('Heading level must be 1-5')
+  if (level < 1 || level > 7) throw new Error('Heading level must be 1-7')
   const tag = as ? as : hTags[level - 1]
   return (
     <TextBase

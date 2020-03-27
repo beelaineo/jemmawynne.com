@@ -4,12 +4,12 @@ import { DefaultTheme } from '@xstyled/styled-components'
 const grays = [
   '#ffffff',
   '#f9fafa',
-  '#f5f3f4',
+  '#F3EDE8',
   '#e7e6e8',
   '#d1d1d2',
   '#b0b0b0',
   '#818181',
-  '#444443',
+  '#666666',
   '#222222',
   '#000000',
 ]
@@ -68,7 +68,8 @@ export const defaultTheme: DefaultTheme = {
     20, // h3
     16, // readable text: p, h4
     13, // small text: h5, captions
-    8, // small text: h6, small captions
+    11, // h6
+    9, //  h7
   ],
   fontWeights: [0, 200, 400, 500, 700],
   fonts: {

@@ -32,10 +32,9 @@ export const RichPageLink = ({ link, label }: RichPageLinkProps) => {
         <Heading
           family="sans"
           mt={3}
-          letterSpacing="0.06em"
           weight={2}
           textAlign="center"
-          level={6}
+          level={7}
           textTransform="uppercase"
         >
           {linkTitle}

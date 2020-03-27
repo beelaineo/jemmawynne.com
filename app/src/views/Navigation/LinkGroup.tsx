@@ -18,6 +18,7 @@ const LinkGroupWrapper = styled.div`
 
 const LinksWrapper = styled.div`
   ${({ theme }) => css`
+    margin-top: 3;
     ${theme.mediaQueries.tablet} {
       margin-top: 2;
       display: grid;
@@ -31,7 +32,7 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
   const { title, links } = linkGroup
   return (
     <LinkGroupWrapper>
-      <Heading family="sans" color="body.6" weight={2} level={5}>
+      <Heading family="sans" color="body.6" weight={3} level={6}>
         {title}
       </Heading>
       <LinksWrapper>

@@ -43,7 +43,7 @@ const defaultOptions = {
         )
       case 'h6':
         return (
-          <Heading level={6}>{domToReact(children, defaultOptions)}</Heading>
+          <Heading level={7}>{domToReact(children, defaultOptions)}</Heading>
         )
       case 'p':
         return <P>{domToReact(children, defaultOptions)}</P>

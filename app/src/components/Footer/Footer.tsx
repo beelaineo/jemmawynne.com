@@ -5,7 +5,6 @@ import {
   FaTwitter,
   FaPinterest,
 } from 'react-icons/fa'
-import { TiSocialInstagram, TiSocialGooglePlus } from 'react-icons/ti'
 import { PageLink } from '../../components/PageLink'
 import { Heading } from '../../components/Text'
 import { useShopData } from '../../providers/ShopDataProvider'
@@ -33,7 +32,7 @@ export const Footer = () => {
                 weight={2}
                 key={link._key || 'some-key'}
                 family="sans"
-                level={5}
+                level={6}
               >
                 <PageLink link={link} />
               </Heading>
@@ -75,7 +74,7 @@ export const Footer = () => {
         <div />
       </FooterInner>
       <FooterInner>
-        <Heading color="body.4" level={6}>
+        <Heading color="body.7" pt="5px" level={6}>
           © {currentYear} Jemma Wynne
         </Heading>
       </FooterInner>

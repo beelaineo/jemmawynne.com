@@ -50,7 +50,7 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
       case 'h5':
         return <Heading level={5} {...props} />
       case 'h6':
-        return <Heading level={6} {...props} />
+        return <Heading level={7} {...props} />
       case 'blockquote':
         return <BlockQuote {...props} />
       case 'normal':

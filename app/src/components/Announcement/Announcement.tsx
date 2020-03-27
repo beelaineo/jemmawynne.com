@@ -12,19 +12,17 @@ const ANNOUNCEMENT_DISMISSED = 'ANNOUNCEMENT_DISMISSED'
 
 interface AnnouncementWrapperProps {
   open: boolean
-  withCta: boolean
 }
 
 const AnnouncementWrapper = styled.div`
-  ${({ open, withCta }: AnnouncementWrapperProps) => css`
+  ${({ open }: AnnouncementWrapperProps) => css`
     position: relative;
     display: flex;
     overflow: hidden;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: ${open ? (withCta ? '65px' : '45px') : '0'};
-    background-color: highlight;
+    height: ${open ? '45px' : '0'};
+    background-color: body.2;
     transition: 0.5s;
   `}
 `
@@ -35,6 +33,8 @@ const CloseButton = styled.button`
   right: 15px;
   font-size: 21px;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
   background-color: transparent;
 `
 
@@ -60,25 +60,25 @@ export const Announcement = () => {
   const { banner } = siteSettings
   if (!banner?.text || banner.text.length === 0) return null
   const { cta } = banner
-  const withCta = Boolean(cta?.label && cta.link)
 
   return (
-    <AnnouncementWrapper open={open} withCta={withCta}>
+    <AnnouncementWrapper open={open}>
       <CloseButton onClick={dismiss}>
         <IoMdClose />
       </CloseButton>
 
-      <Heading weight={2} family="sans" mb={0} level={5}>
+      <Heading weight={3} family="sans" mb={0} level={6}>
         {banner.text}
       </Heading>
       {cta?.link ? (
         <DocumentLink document={cta.link.document}>
           <Heading
-            weight={2}
-            mt={1}
+            weight={3}
+            mb={0}
+            ml={2}
             family="sans"
             textDecoration="underline"
-            level={5}
+            level={6}
           >
             {cta.label}
           </Heading>

@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    SC_DISABLE_SPEEDY: true,
+  },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

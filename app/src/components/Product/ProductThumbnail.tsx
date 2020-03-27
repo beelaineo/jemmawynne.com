@@ -40,7 +40,7 @@ export const ProductThumbnail = ({
           <ProductInfo>
             <Heading
               mb={3}
-              level={6}
+              level={7}
               textTransform="uppercase"
               weight={3}
               family="sans"

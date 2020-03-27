@@ -32,7 +32,7 @@ export const CollectionThumbnail = ({
         <Box mt={5}>
           <Heading
             mb={3}
-            level={6}
+            level={7}
             textTransform="uppercase"
             weight={2}
             letterSpacing="0.06em"

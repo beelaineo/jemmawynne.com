@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import styled, { Box } from '@xstyled/styled-components'
+import { Heading } from '../Text'
 import { ImageBlock as ImageBlockType } from '../../types'
 import { Image } from '../Image'
 import { RichText } from '../RichText'
@@ -15,6 +16,12 @@ interface ImageBlockProps {
   content: ImageBlockType
 }
 
+const SubtitleWrapper = (props: any) => (
+  <Heading level={7} pt="10px" family="sans" weight={2}>
+    {props.children}
+  </Heading>
+)
+
 export const ImageBlock = ({ content }: ImageBlockProps) => {
   const { link, backgroundImage, captionRaw } = content
   if (!backgroundImage) return null
@@ -25,7 +32,7 @@ export const ImageBlock = ({ content }: ImageBlockProps) => {
     <ImageBlockWrapper>
       <Image image={backgroundImage} ratio={1} />
       <Box mt={2}>
-        <RichText body={captionRaw} />
+        <RichText blockWrapper={SubtitleWrapper} body={captionRaw} />
       </Box>
     </ImageBlockWrapper>
   )
