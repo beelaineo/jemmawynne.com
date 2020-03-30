@@ -1,7 +1,7 @@
 module.exports = {
-	extends: ['@commitlint/config-conventional'],
-	rules: {
-		'scope-empty': [2, 'never'],
-		'scope-enum': [2, 'always', ['repo', 'sanity', 'app', 'proxy']],
-	},
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    'scope-empty': [2, 'never'],
+    'scope-enum': [2, 'always', ['repo', 'migrate', 'sanity', 'app', 'proxy']],
+  },
 }
