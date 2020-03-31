@@ -1,6 +1,6 @@
-export const banner = {
-  name: 'banner',
-  title: 'Announcement Banner',
+export const announcement = {
+  name: 'announcement',
+  title: 'Announcement',
   type: 'object',
   fields: [
     {
@@ -16,35 +16,66 @@ export const banner = {
   ],
 }
 
+export const banner = {
+  name: 'banner',
+  title: 'Announcement Banner',
+  type: 'object',
+  fields: [
+    {
+      name: 'dismissable',
+      title: 'Dismissable',
+      description:
+        'Turn this on to allow users to dismiss the notification header',
+      type: 'boolean',
+    },
+    {
+      name: 'announcements',
+      title: 'Announcements',
+      type: 'array',
+      of: [{ type: 'announcement' }],
+    },
+  ],
+}
+
 export const siteSettings = {
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
-  fieldsets: [{ name: 'footer', title: 'Footer' }],
+  fieldsets: [
+    { name: 'announcement', title: 'Announcement Banner' },
+    { name: 'footer', title: 'Footer' },
+  ],
   fields: [
     {
       name: 'banner',
       title: 'Announcement Banner',
       type: 'banner',
+      fieldset: 'announcement',
     },
     {
-      name: 'links',
+      title: 'About Text',
+      name: 'about',
       fieldset: 'footer',
-      title: 'Page Links',
       type: 'array',
-      of: [{ type: 'internalLink' }, { type: 'externalLink' }],
+      of: [
+        {
+          type: 'block',
+          styles: [],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+          },
+        },
+      ],
     },
     {
-      name: 'mailerTitle',
+      title: 'Links',
+      name: 'linkGroups',
+      type: 'array',
       fieldset: 'footer',
-      title: 'Mailing List Title',
-      type: 'string',
-    },
-    {
-      name: 'mailerSubtitle',
-      fieldset: 'footer',
-      title: 'Mailing List Subtitle',
-      type: 'string',
+      of: [{ type: 'linkGroup' }],
     },
   ],
   preview: {
