@@ -22,7 +22,10 @@ const parseVariant = (variant) => {
   return {
     price: variant.priceV2.amount,
     title: variant.title,
-    image: variant.image.originalSrc,
+    image:
+      variant.image && variant.image.originalSrc
+        ? variant.image.originalSrc
+        : undefined,
     ...options,
   }
 }
@@ -56,48 +59,55 @@ export const putProduct = async (data) => {
     options: original.options,
   }
 
-  const result = await newStore.product.create(options).catch((e) => {
+  try {
+    const result = await newStore.product.create(options)
+
+    const imageIds = result.images.map((image, index) => ({
+      id: image.id,
+      originalUrl: images[index].src,
+    }))
+
+    await Throttle.all(
+      result.variants.map((v, i) => async () => {
+        const originalVariantData = variants[i]
+        const imageId = imageIds.find(
+          (i) => i.originalUrl === originalVariantData.image,
+        )
+
+        if (!imageId) return originalVariantData
+        const updated = await newStore.productVariant
+          .update(v.id, {
+            image_id: imageId ? imageId.id : undefined,
+          })
+          .catch((e) => {
+            console.log('Error updating variant')
+            console.log(e.message)
+            console.log(v, imageId)
+          })
+        await sleep(500)
+        return updated
+      }),
+      {
+        maxInProgress: 2,
+        progressCallback: (status) => {
+          const lastResolvedIndex = status.resolvedIndexes.slice(-1)[0]
+          const lastResolved = status.taskResults[lastResolvedIndex]
+          increment()
+          if (lastResolved)
+            console.log(
+              // @ts-ignore
+              `   Updated variant ${lastResolvedIndex}: ${lastResolved.title}`,
+            )
+        },
+      },
+    )
+    await sleep(500)
+    return { original, sourceData: data, result }
+  } catch (e) {
     console.log('Error creating product')
     console.log(e.message)
+    console.log(e)
+    console.log(original)
     console.log(options)
-  })
-  const imageIds = result.images.map((image, index) => ({
-    id: image.id,
-    originalUrl: images[index].src,
-  }))
-
-  await Throttle.all(
-    result.variants.map((v, i) => async () => {
-      const originalVariantData = variants[i]
-      const imageId = imageIds.find(
-        (i) => i.originalUrl === originalVariantData.image,
-      )
-      const updated = await newStore.productVariant
-        .update(v.id, {
-          image_id: imageId.id,
-        })
-        .catch((e) => {
-          console.log('Error updating variant')
-          console.log(e.message)
-          console.log(v, imageId)
-        })
-      await sleep(500)
-      return updated
-    }),
-    {
-      maxInProgress: 2,
-      progressCallback: (status) => {
-        const lastResolvedIndex = status.resolvedIndexes.slice(-1)[0]
-        const lastResolved = status.taskResults[lastResolvedIndex]
-        increment()
-        if (lastResolved)
-          console.log(
-            // @ts-ignore
-            `   Updated variant ${lastResolvedIndex}: ${lastResolved.title}`,
-          )
-      },
-    },
-  )
-  await sleep(500)
-  return { original, sourceData: data, result }
+  }
 }

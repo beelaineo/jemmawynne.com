@@ -11,4 +11,5 @@ export const newStore = new Shopify({
   shopName: 'jemmawynne-development',
   apiKey: process.env.SHOPIFY_ADMIN_KEY,
   password: process.env.SHOPIFY_ADMIN_PASSWORD,
+  timeout: 60000 * 5,
 })

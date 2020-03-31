@@ -9,10 +9,10 @@ const init = async () => {
   const originalProducts = await fetchProducts(db)
 
   const productQueue = originalProducts
-    // .slice(35, 40)
+    // .slice(173)
     .map((p) => () => putProduct(p))
   const products = await Throttle.all(productQueue, {
-    maxInProgress: 2,
+    maxInProgress: 1,
     progressCallback: (status) => {
       const lastResolvedIndex = status.resolvedIndexes.slice(-1)[0]
       const lastResolved = status.taskResults[lastResolvedIndex]

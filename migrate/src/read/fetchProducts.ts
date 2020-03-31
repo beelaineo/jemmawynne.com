@@ -84,8 +84,11 @@ SELECT taxonomy, name, slug
     const parsed = termIds.reduce(
       (acc, { taxonomy, name, slug }) => {
         if (taxonomy === 'style') {
-          if (acc.style)
+          if (acc.style && slug !== 'pendants') {
+            console.log(termIds)
+            // console.log(name, slug, product)
             throw new Error(`${product.handle} has multiple styles`)
+          }
           return {
             ...acc,
             style: { name, slug },
