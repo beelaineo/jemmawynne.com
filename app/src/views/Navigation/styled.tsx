@@ -7,7 +7,6 @@ export const Wrapper = styled.header`
     position: relative;
     z-index: nav;
     font-family: sans;
-    box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.2);
 
     ${theme.mediaQueries.tablet} {
       position: fixed;

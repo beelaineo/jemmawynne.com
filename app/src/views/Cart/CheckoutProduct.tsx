@@ -43,7 +43,6 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
         </Heading>
         <QuantitySelectorCart>
           <Heading family="serif" level={5} color="body.7" weight={2}>
-            Quantity: {'     '}
             <button type="button" onClick={() => setQuantity(quantity - 1)}>
               &#8722;
             </button>
@@ -53,12 +52,6 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
             </button>
           </Heading>
         </QuantitySelectorCart>
-
-        <RemoveCart onClick={() => setQuantity(0)}>
-          <Heading level={5} color="body.6">
-            Remove from cart
-          </Heading>
-        </RemoveCart>
       </div>
     </Wrapper>
   )

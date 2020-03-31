@@ -25,6 +25,11 @@ export const internalLinkFragment = gql`
         title
         handle
       }
+      ... on Stockists {
+        _key
+        _type
+        title
+      }
     }
   }
 `

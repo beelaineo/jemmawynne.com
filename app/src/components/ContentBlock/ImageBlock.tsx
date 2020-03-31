@@ -17,7 +17,7 @@ interface ImageBlockProps {
 }
 
 const SubtitleWrapper = (props: any) => (
-  <Heading level={7} pt="10px" family="sans" weight={2}>
+  <Heading level={7} pt="10px" family="sans" weight={3}>
     {props.children}
   </Heading>
 )

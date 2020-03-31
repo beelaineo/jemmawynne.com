@@ -5,7 +5,6 @@ export const FooterWrapper = styled.footer`
     background-color: body.2;
     color: body.9;
     padding: 34px 38px;
-    text-align: center;
 
     ${theme.mediaQueries.tablet} {
       padding: 4 3;
@@ -13,26 +12,42 @@ export const FooterWrapper = styled.footer`
   `}
 `
 
-export const FooterInner = styled.div`
+export const Company = styled.div``
+
+export const LinkGroupWrapper = styled.div`
+  padding-top: 16px;
+`
+
+export const FooterBottom = styled.div`
   display: flex;
   justify-content: center;
-  margin: 4 0;
 
-  &:last-child {
-    margin-bottom: 0;
+  & > * + * {
+    margin-left: 5;
   }
 `
 
+export const Logo = styled.img`
+  margin-bottom: 8px;
+  height: 30px;
+`
+
 export const FooterLinks = styled.div`
-  display: flex;
-  margin: 2 0;
+  display: grid;
+  grid-template-columns: 300px 1fr 1fr 1fr;
+  grid-column-gap: 6;
+  margin: 5 auto;
+  padding: 0 3;
+  max-width: 1200px;
 
   & > * + * {
     margin-left: 4;
   }
 `
 
-export const MailerWrapper = styled.div``
+export const MailerWrapper = styled.div`
+  margin: 4 0;
+`
 
 export const MailerInput = styled.form`
   position: relative;
@@ -59,8 +74,10 @@ export const MailerInput = styled.form`
 `
 
 export const Socials = styled.div`
+  margin: 0 auto 5;
   font-size: 3;
   display: flex;
+  justify-content: center;
   a {
     display: flex;
   }

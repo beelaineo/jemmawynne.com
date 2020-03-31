@@ -72,28 +72,30 @@ export const SHOP_DATA_QUERY = gql`
       _id
       _type
       banner {
-        text
-        cta {
-          ... on Cta {
-            ...CTAFragment
+        dismissable
+        announcements {
+          _key
+          text
+          cta {
+            ... on Cta {
+              ...CTAFragment
+            }
           }
         }
       }
-      links {
-        ... on ExternalLink {
-          ...ExternalLinkFragment
-        }
-        ... on InternalLink {
+      aboutRaw
+      linkGroups {
+        _key
+        _type
+        title
+        links {
           ...InternalLinkFragment
         }
       }
-      mailerTitle
-      mailerSubtitle
     }
   }
   ${ctaFragment}
   ${internalLinkFragment}
-  ${externalLinkFragment}
   ${productInfoFragment}
   ${richPageLinkFragment}
 `

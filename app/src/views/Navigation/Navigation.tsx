@@ -31,7 +31,7 @@ import {
   BurgerMenu,
 } from './styled'
 
-const { useEffect, useReducer } = React
+const { useEffect } = React
 
 export const Navigation = () => {
   /* State from Providers */

@@ -52,6 +52,7 @@ export const ShopDataProvider = ({ children }: Props) => {
   const menu = ready ? response?.data?.Menu : undefined
   const siteSettings = ready ? response?.data?.SiteSettings : undefined
   const productInfoBlocks = ready ? response?.data?.ProductInfo : undefined
+  console.log(siteSettings)
 
   const getProductInfoBlocks = (
     product: ShopifyProduct,

@@ -123,18 +123,6 @@
       },
       {
         "kind": "UNION",
-        "name": "ExternalLinkOrInternalLink",
-        "possibleTypes": [
-          {
-            "name": "ExternalLink"
-          },
-          {
-            "name": "InternalLink"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
         "name": "BlockOrRichImage",
         "possibleTypes": [
           {

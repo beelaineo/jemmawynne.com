@@ -29,22 +29,16 @@ export const CollectionThumbnail = ({
     <Link href={to}>
       <a>
         <Image image={image || sourceData.image} ratio={1} />
-        <Box mt={5}>
+        <Box mt={3}>
           <Heading
             mb={3}
+            weight={3}
             level={7}
             textTransform="uppercase"
-            weight={2}
-            letterSpacing="0.06em"
             family="sans"
           >
             {collection.title}
           </Heading>
-          {products && products.length ? (
-            <Heading color="body.6" level={5}>
-              {products.length} items
-            </Heading>
-          ) : null}
         </Box>
       </a>
     </Link>

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
-import { LinkGroup as LinkGroupType } from '../../types'
-import { DocumentLink } from '../../components/DocumentLink'
-import { Heading } from '../../components/Text'
+import { LinkGroup as LinkGroupType } from '../types'
+import { DocumentLink } from './DocumentLink'
+import { Heading } from './Text'
 
 interface LinkGroupProps {
   linkGroup: LinkGroupType

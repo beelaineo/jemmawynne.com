@@ -11,26 +11,46 @@ export type Scalars = {
   Date: any
 }
 
-export interface Banner {
-  __typename: 'Banner'
+export interface Announcement {
+  __typename: 'Announcement'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   text?: Maybe<Scalars['String']>
   cta?: Maybe<Cta>
 }
 
-export type BannerFilter = {
+export type AnnouncementFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   text?: Maybe<StringFilter>
   cta?: Maybe<CtaFilter>
 }
 
-export type BannerSorting = {
+export type AnnouncementSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   text?: Maybe<SortOrder>
   cta?: Maybe<CtaSorting>
+}
+
+export interface Banner {
+  __typename: 'Banner'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  dismissable?: Maybe<Scalars['Boolean']>
+  announcements?: Maybe<Array<Maybe<Announcement>>>
+}
+
+export type BannerFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  dismissable?: Maybe<BooleanFilter>
+}
+
+export type BannerSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  dismissable?: Maybe<SortOrder>
 }
 
 export interface Block {
@@ -146,8 +166,6 @@ export type ExternalLinkFilter = {
   url?: Maybe<StringFilter>
   newTab?: Maybe<BooleanFilter>
 }
-
-export type ExternalLinkOrInternalLink = ExternalLink | InternalLink
 
 export type ExternalLinkSorting = {
   _key?: Maybe<SortOrder>
@@ -1781,9 +1799,8 @@ export interface SiteSettings extends Document {
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   banner?: Maybe<Banner>
-  links?: Maybe<Array<Maybe<ExternalLinkOrInternalLink>>>
-  mailerTitle?: Maybe<Scalars['String']>
-  mailerSubtitle?: Maybe<Scalars['String']>
+  aboutRaw?: Maybe<Scalars['JSON']>
+  linkGroups?: Maybe<Array<Maybe<LinkGroup>>>
 }
 
 export type SiteSettingsFilter = {
@@ -1795,8 +1812,6 @@ export type SiteSettingsFilter = {
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
   banner?: Maybe<BannerFilter>
-  mailerTitle?: Maybe<StringFilter>
-  mailerSubtitle?: Maybe<StringFilter>
 }
 
 export type SiteSettingsSorting = {
@@ -1807,8 +1822,6 @@ export type SiteSettingsSorting = {
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
   banner?: Maybe<BannerSorting>
-  mailerTitle?: Maybe<SortOrder>
-  mailerSubtitle?: Maybe<SortOrder>
 }
 
 export interface Slug {

@@ -1,21 +1,12 @@
 import React, { SyntheticEvent } from 'react'
 import { MdArrowForward } from 'react-icons/md'
 import { Column } from '../../components/Layout'
-import { Heading } from '../../components/Text'
 import { Input } from '../../components/Text'
 import { MailerInput, MailerWrapper } from './styled'
 
 const { useState } = React
 
-interface NewsletterSignupProps {
-  mailerTitle: string
-  mailerSubtitle: string
-}
-
-export const NewsletterSignup = ({
-  mailerTitle,
-  mailerSubtitle,
-}: NewsletterSignupProps) => {
+export const NewsletterSignup = () => {
   const [inputValue, setInputValue] = useState('')
 
   const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -29,18 +20,12 @@ export const NewsletterSignup = ({
   return (
     <MailerWrapper>
       <Column center width="small">
-        <Heading level={4} weight={4}>
-          {mailerTitle}
-        </Heading>
-        <Heading mb={3} level={4} weight={2}>
-          {mailerSubtitle}
-        </Heading>
         <MailerInput onSubmit={handleSubmit}>
           <Input
             type="email"
             value={inputValue}
             onChange={handleChange}
-            placeholder="email"
+            placeholder="Sign up for our mailing list"
           />
           <button type="submit">
             <MdArrowForward />

@@ -28,11 +28,11 @@ export const RichPageLink = ({ link, label }: RichPageLinkProps) => {
     <DocumentLink document={link.document}>
       <Image hoverImage={hoverImage} image={image} ratio={1} />
 
-      <Box mt={5}>
+      <Box mt={3}>
         <Heading
           family="sans"
           mt={3}
-          weight={2}
+          weight={3}
           textAlign="center"
           level={7}
           textTransform="uppercase"

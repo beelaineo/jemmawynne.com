@@ -41,6 +41,7 @@ export const getDocumentLinkUrl = (document?: Document): string => {
   if (!document) throw new Error('This link is missing a document')
   switch (document.__typename) {
     case 'Stockists':
+      console.log(document)
       return '/stockists'
     case 'ShopifyCollection':
       return `/collections/${document.handle}`
