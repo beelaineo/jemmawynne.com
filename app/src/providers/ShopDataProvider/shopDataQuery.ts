@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
-import { SiteSettings, Menu, ProductInfo } from '../../types'
+import { SiteSettings, Menu, ProductInfo, CollectionInfo } from '../../types'
 import {
   ctaFragment,
   internalLinkFragment,
-  externalLinkFragment,
   richPageLinkFragment,
   productInfoFragment,
 } from '../../graphql'
@@ -68,6 +67,16 @@ export const SHOP_DATA_QUERY = gql`
         }
       }
     }
+    CollectionInfo(id: "collectionInfo") {
+      relatedCollections {
+        _id
+        _type
+        _key
+        title
+        handle
+        shopifyId
+      }
+    }
     SiteSettings(id: "site-settings") {
       _id
       _type
@@ -103,5 +112,6 @@ export const SHOP_DATA_QUERY = gql`
 export interface ShopDataResponse {
   Menu: Menu
   ProductInfo: ProductInfo
+  CollectionInfo: CollectionInfo
   SiteSettings: SiteSettings
 }

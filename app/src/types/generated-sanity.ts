@@ -97,6 +97,39 @@ export type CarouselSorting = {
   title?: Maybe<SortOrder>
 }
 
+export interface CollectionInfo extends Document {
+  __typename: 'CollectionInfo'
+  _id: Scalars['ID']
+  _type: Scalars['String']
+  _createdAt: Scalars['DateTime']
+  _updatedAt: Scalars['DateTime']
+  _rev: Scalars['String']
+  _key?: Maybe<Scalars['String']>
+  helpText?: Maybe<Scalars['String']>
+  relatedCollections?: Maybe<Array<Maybe<ShopifyCollection>>>
+}
+
+export type CollectionInfoFilter = {
+  _?: Maybe<DocumentFilter>
+  _id?: Maybe<IdFilter>
+  _type?: Maybe<StringFilter>
+  _createdAt?: Maybe<DatetimeFilter>
+  _updatedAt?: Maybe<DatetimeFilter>
+  _rev?: Maybe<StringFilter>
+  _key?: Maybe<StringFilter>
+  helpText?: Maybe<StringFilter>
+}
+
+export type CollectionInfoSorting = {
+  _id?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  _createdAt?: Maybe<SortOrder>
+  _updatedAt?: Maybe<SortOrder>
+  _rev?: Maybe<SortOrder>
+  _key?: Maybe<SortOrder>
+  helpText?: Maybe<SortOrder>
+}
+
 export interface Cta {
   __typename: 'Cta'
   _key?: Maybe<Scalars['String']>
@@ -697,6 +730,7 @@ export interface RootQuery {
   Homepage?: Maybe<Homepage>
   Page?: Maybe<Page>
   ProductInfo?: Maybe<ProductInfo>
+  CollectionInfo?: Maybe<CollectionInfo>
   SiteSettings?: Maybe<SiteSettings>
   Stockists?: Maybe<Stockists>
   ShopifyProduct?: Maybe<ShopifyProduct>
@@ -707,6 +741,7 @@ export interface RootQuery {
   allHomepage: Array<Homepage>
   allPage: Array<Page>
   allProductInfo: Array<ProductInfo>
+  allCollectionInfo: Array<CollectionInfo>
   allSiteSettings: Array<SiteSettings>
   allStockists: Array<Stockists>
   allShopifyProduct: Array<ShopifyProduct>
@@ -728,6 +763,10 @@ export type RootQueryPageArgs = {
 }
 
 export type RootQueryProductInfoArgs = {
+  id: Scalars['ID']
+}
+
+export type RootQueryCollectionInfoArgs = {
   id: Scalars['ID']
 }
 
@@ -779,6 +818,13 @@ export type RootQueryAllPageArgs = {
 export type RootQueryAllProductInfoArgs = {
   where?: Maybe<ProductInfoFilter>
   sort?: Maybe<Array<ProductInfoSorting>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+}
+
+export type RootQueryAllCollectionInfoArgs = {
+  where?: Maybe<CollectionInfoFilter>
+  sort?: Maybe<Array<CollectionInfoSorting>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
 }
@@ -1177,6 +1223,7 @@ export interface ShopifyCollection extends Document {
   sourceData?: Maybe<ShopifySourceCollection>
   products?: Maybe<Array<Maybe<ShopifyProduct>>>
   hero?: Maybe<Hero>
+  relatedCollections?: Maybe<Array<Maybe<ShopifyCollection>>>
 }
 
 export type ShopifyCollectionFilter = {

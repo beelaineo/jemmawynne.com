@@ -5,7 +5,7 @@ import {
   FaTwitter,
   FaPinterest,
 } from 'react-icons/fa'
-import Link from 'next/Link'
+import Link from 'next/link'
 import { Heading } from '../../components/Text'
 import { RichText } from '../../components/RichText'
 import { useShopData } from '../../providers/ShopDataProvider'

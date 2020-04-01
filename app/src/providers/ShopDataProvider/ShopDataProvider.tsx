@@ -6,6 +6,7 @@ import {
   SanityRichText,
   Menu,
   ProductInfoBlock,
+  CollectionInfo,
   SiteSettings,
 } from '../../types'
 import { filterMaybes } from '../../utils'
@@ -24,6 +25,7 @@ interface ShopDataContextValue {
   ready: boolean
   menu?: Menu
   siteSettings?: SiteSettings
+  collectionInfo?: CollectionInfo
   getProductInfoBlocks: (product: ShopifyProduct) => DefinitelyProductInfo[]
 }
 
@@ -52,7 +54,7 @@ export const ShopDataProvider = ({ children }: Props) => {
   const menu = ready ? response?.data?.Menu : undefined
   const siteSettings = ready ? response?.data?.SiteSettings : undefined
   const productInfoBlocks = ready ? response?.data?.ProductInfo : undefined
-  console.log(siteSettings)
+  const collectionInfo = ready ? response?.data?.CollectionInfo : undefined
 
   const getProductInfoBlocks = (
     product: ShopifyProduct,
@@ -125,6 +127,7 @@ export const ShopDataProvider = ({ children }: Props) => {
     menu,
     siteSettings,
     getProductInfoBlocks,
+    collectionInfo,
   }
 
   return (

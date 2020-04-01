@@ -17,7 +17,6 @@ const Grid = styled.div`
     justify-content: space-evenly;
     grid-column-gap: 6;
     grid-row-gap: 6;
-    padding: 6;
     > a {
       text-decoration: none;
     }

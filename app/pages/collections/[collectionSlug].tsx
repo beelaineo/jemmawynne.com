@@ -29,6 +29,14 @@ export const collectionQuery = gql`
       hero {
         ...HeroFragment
       }
+      relatedCollections {
+        _id
+        _type
+        _key
+        title
+        handle
+        shopifyId
+      }
       products {
         _id
         _key
