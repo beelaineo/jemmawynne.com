@@ -37,7 +37,7 @@ export default () =>
 
       S.listItem()
         .id('productInfo')
-        .title('Product Info')
+        .title('Product Settings')
         .icon(MdInfoOutline)
         .child(
           S.editor()
@@ -53,16 +53,16 @@ export default () =>
         .icon(TiThSmallOutline)
         .child(S.documentTypeList('shopifyCollection')),
 
-      // Shop Page
-      // S.listItem()
-      // 	.title('Shop')
-      // 	.icon(FaShoppingBag)
-      // 	.child(
-      // 		S.editor()
-      // 			.id('shop')
-      // 			.schemaType('shop')
-      // 			.documentId('shop'),
-      // 	),
+      S.listItem()
+        .id('collectionInfo')
+        .title('Collection Settings')
+        .icon(MdInfoOutline)
+        .child(
+          S.editor()
+            .id('collectionInfo')
+            .schemaType('collectionInfo')
+            .documentId('collectionInfo'),
+        ),
       S.listItem()
         .title('Stockists')
         .icon(AiFillShop)

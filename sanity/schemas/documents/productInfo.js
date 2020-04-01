@@ -1,5 +1,5 @@
 export const productInfo = {
-  title: 'Product Info',
+  title: 'Product Page Settings',
   type: 'document',
   name: 'productInfo',
   description: 'description',
