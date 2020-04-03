@@ -89,6 +89,32 @@ export const linkGroup = {
   },
 }
 
+export const submenuSection = {
+  title: 'Submenu Section',
+  name: 'submenuSection',
+  type: 'object',
+  fields: [
+    {
+      title: 'Title',
+      name: 'title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      title: 'Links',
+      name: 'links',
+      type: 'array',
+      of: [{ type: 'richPageLink' }, { type: 'linkGroup' }],
+    },
+    {
+      title: 'Images',
+      name: 'images',
+      type: 'array',
+      of: [{ type: 'richImage' }],
+    },
+  ],
+}
+
 export const subMenu = {
   title: 'Dropdown Menu',
   name: 'subMenu',
@@ -105,7 +131,8 @@ export const subMenu = {
       title: 'Submenu Sections',
       name: 'columns',
       type: 'array',
-      of: [{ type: 'linkGroup' }, { type: 'richPageLink' }],
+      of: [{ type: 'submenuSection' }],
+      // of: [{ type: 'linkGroup' }, { type: 'richPageLink' }],
     },
   ],
   preview: {
