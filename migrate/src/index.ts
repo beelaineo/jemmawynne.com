@@ -9,7 +9,8 @@ const init = async () => {
   const originalProducts = await fetchProducts(db)
 
   const productQueue = originalProducts
-    // .slice(173)
+    //
+    // .slice(9)
     .map((p) => () => putProduct(p))
   const products = await Throttle.all(productQueue, {
     maxInProgress: 1,
@@ -35,10 +36,12 @@ const init = async () => {
       return [...acc, current]
     }, [])
 
+  const noProducts = products.filter((p) => !p || !p.sourceData)
+  console.log('no products', noProducts)
   const collections = await Promise.all(
     collectionNames.map(async (name) => {
       const productIds = products
-        .filter((p) => p.sourceData.collections.includes(name))
+        .filter((p) => p && p.sourceData.collections.includes(name))
         .map((p) => p.result.id)
 
       return createCollection(name, productIds)

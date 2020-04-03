@@ -37,8 +37,18 @@ export const putProduct = async (data) => {
   const [allImages] = unwindEdges(original.images)
 
   const variants = allVariants.map(parseVariant, original.options)
-  const slideshow = data.metadata.product_slideshow || []
-  const images = allImages.map((image) => ({ src: image.originalSrc }))
+  const slideshowImages =
+    data.metadata.product_slideshow.map((originalSrc) => ({ originalSrc })) ||
+    []
+  const images = [...allImages, ...slideshowImages]
+    .map((image) => ({
+      // @ts-ignore
+      src: image.originalSrc,
+    }))
+    .reduce((acc, image) => {
+      if (acc.find((i) => i.src === image.src)) return acc
+      return [...acc, image]
+    }, [])
   const options = {
     title: data.post_title,
     body_html: [
@@ -104,10 +114,11 @@ export const putProduct = async (data) => {
     await sleep(500)
     return { original, sourceData: data, result }
   } catch (e) {
+    console.log('-----------------------------')
     console.log('Error creating product')
     console.log(e.message)
     console.log(e)
-    console.log(original)
     console.log(options)
+    console.log('-----------------------------')
   }
 }

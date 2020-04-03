@@ -62,9 +62,12 @@ export const fetchProducts = async (db) => {
             }
           }),
         )
-        return parsed
-          .filter(Boolean)
-          .reduce((acc, meta) => ({ ...acc, ...meta }), {})
+        return (
+          parsed
+            .filter(Boolean)
+            // @ts-ignore
+            .reduce((acc, meta) => ({ ...acc, ...meta }), {})
+        )
       })
 
     return metadata
@@ -85,8 +88,6 @@ SELECT taxonomy, name, slug
       (acc, { taxonomy, name, slug }) => {
         if (taxonomy === 'style') {
           if (acc.style && slug !== 'pendants') {
-            console.log(termIds)
-            // console.log(name, slug, product)
             throw new Error(`${product.handle} has multiple styles`)
           }
           return {
@@ -107,7 +108,7 @@ SELECT taxonomy, name, slug
   }
 
   const productData = await db.query(
-    'SELECT id, post_title, post_content, post_name, post_status, post_type FROM wp_posts WHERE post_type = "jewelry" AND post_status = "publish"',
+    'SELECT id, post_title, post_content, post_name, post_status, post_type FROM wp_posts WHERE post_type = "jewelry"',
   )
 
   const products = await Promise.all(
@@ -123,5 +124,11 @@ SELECT taxonomy, name, slug
       }
     }),
   )
-  return products
+
+  const filteredProducts = products.filter(({ metadata }) => {
+    // @ts-ignore
+    return Boolean(metadata.migrate && metadata.migrate === '1')
+  })
+
+  return filteredProducts
 }
