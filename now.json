@@ -1,5 +1,12 @@
 {
   "version": 2,
-  "name": "jemmawynne",
-  "builds": [{ "src": "app/package.json", "use": "@now/next" }]
+  "builds": [{ "src": "app/package.json", "use": "@now/next" }],
+  "build": {
+    "env": {
+      "SC_DISABLE_SPEEDY": "true",
+      "SENTRY_DSN": "@jw-sentry-dsn",
+      "KLAVIYO_LIST_ID": "@jw-klaviyo-list-id",
+      "KLAVIYO_API_KEY": "@jw-klaviyo-api-key"
+    }
+  }
 }

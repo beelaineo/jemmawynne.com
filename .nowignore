@@ -1,0 +1,7 @@
+.git
+node_modules
+migrate
+proxy
+sanity
+_working
+app/node_modules
