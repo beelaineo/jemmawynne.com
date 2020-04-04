@@ -12,3 +12,4 @@ watchfiles.js
 
 .yalc
 yalc.lock
+.env*
