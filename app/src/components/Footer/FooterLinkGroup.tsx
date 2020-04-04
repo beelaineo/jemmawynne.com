@@ -18,7 +18,7 @@ const FooterLinkGroupWrapper = styled.div`
 
 const LinksWrapper = styled.div`
   ${({ theme }) => css`
-    margin-top: 3;
+    margin-top: 15px;
     ${theme.mediaQueries.tablet} {
       margin-top: 2;
       display: grid;

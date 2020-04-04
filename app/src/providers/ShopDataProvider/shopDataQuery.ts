@@ -4,6 +4,7 @@ import {
   ctaFragment,
   internalLinkFragment,
   richPageLinkFragment,
+  sanityImageFragment,
   productInfoFragment,
 } from '../../graphql'
 
@@ -23,16 +24,24 @@ export const SHOP_DATA_QUERY = gql`
           _type
           title
           columns {
-            ... on RichPageLink {
-              ...RichPageLinkFragment
-            }
-            ... on LinkGroup {
-              _key
-              _type
-              title
-              links {
-                ...InternalLinkFragment
+            _key
+            title
+            links {
+              ... on RichPageLink {
+                ...RichPageLinkFragment
               }
+              ... on LinkGroup {
+                _key
+                _type
+                title
+                links {
+                  ...InternalLinkFragment
+                }
+              }
+            }
+
+            images {
+              ...SanityImageFragment
             }
           }
         }
@@ -107,6 +116,7 @@ export const SHOP_DATA_QUERY = gql`
   ${internalLinkFragment}
   ${productInfoFragment}
   ${richPageLinkFragment}
+  ${sanityImageFragment}
 `
 
 export interface ShopDataResponse {

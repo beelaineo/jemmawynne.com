@@ -1,5 +1,9 @@
 import * as React from 'react'
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import {
+  Wrapper as ImageElementWrapper,
+  Picture,
+} from '../../components/Image/styled'
 
 export const Wrapper = styled.header`
   ${({ theme }) => css`
@@ -123,7 +127,7 @@ export const NavTools = styled.div`
 export const Logo = styled.img`
   ${({ theme }) => css`
     width: 100%;
-    max-width: 310px;
+    max-width: 360px;
     display: block;
 
     ${theme.mediaQueries.tablet} {
@@ -239,7 +243,8 @@ export const SubmenuPane = styled.div`
     top: 100%;
     left: 0;
     width: 100%;
-    min-height: 200px;
+    padding-top: 2;
+    min-height: 260px;
     background-color: white;
     transition: 0.2s;
 
@@ -251,13 +256,84 @@ export const SubmenuPane = styled.div`
   `}
 `
 
-interface WithVisible {
+interface WithActive {
   theme: DefaultTheme
   active: boolean
 }
 
+export const SubMenuWrapper = styled.div`
+  padding: 0 3;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+`
+
+export const SubMenuTitles = styled.div``
+
+export const ImageLinkWrapper = styled.div`
+  grid-column: span 2;
+`
+
+export const ImageWrapper = styled.div`
+  grid-column: span 3;
+  position: relative;
+
+  &:last-child {
+    grid-column: 6 / 11;
+
+    ${ImageElementWrapper}, ${Picture}, img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+`
+
+export const SubMenuContent = styled.div`
+  position: relative;
+`
+
+export const SubMenuContentSection = styled.div`
+  ${({ active }: WithActive) => css`
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-column-gap: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: ${active ? '1' : '0'};
+    pointer-events: ${active ? 'initial' : 'none'};
+  `}
+`
+
+export const SubMenuTitle = styled.div`
+  ${({ active }: WithActive) => css`
+    margin-bottom: 3;
+    & > * {
+      cursor: pointer;
+      display: inline;
+      padding-bottom: 1;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: 0.3s ease-out;
+        width: ${active ? '100%' : '0'};
+        height: 1px;
+        background-color: currentColor;
+      }
+    }
+  `}
+`
+
 export const SubMenuColumns = styled.div`
-  ${({ theme, active }: WithVisible) => css`
+  ${({ theme, active }: WithActive) => css`
     display: ${active ? 'grid' : 'none'};
     margin: 0 auto;
     max-width: xWide;

@@ -100,7 +100,7 @@ export const Navigation = () => {
         </CartButton>
       </NavTools>
 
-      <Inner open={menuOpen}>
+      <Inner open={menuOpen} onMouseLeave={closeSubMenu}>
         <NavSection ready={ready}>
           {allMenuItems.map((menuItem) => {
             if (!menuItem || !menuItem._key) return null
@@ -163,10 +163,7 @@ export const Navigation = () => {
             }
           })}
         </NavSection>
-        <SubmenuPane
-          open={Boolean(subMenuOpen && currentSubMenuKey)}
-          onMouseLeave={closeSubMenu}
-        >
+        <SubmenuPane open={Boolean(subMenuOpen && currentSubMenuKey)}>
           {submenus.map((submenu) =>
             submenu && submenu._key && submenu.__typename === 'SubMenu' ? (
               <SubMenu

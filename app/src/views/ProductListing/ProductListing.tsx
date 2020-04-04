@@ -13,7 +13,6 @@ interface ProductListingProps {
 
 export const ProductListing = ({ collection }: ProductListingProps) => {
   const { collectionInfo } = useShopData()
-  console.log(collectionInfo)
   if (!collection || !collectionInfo) return null
   const relatedCollections =
     collection.relatedCollections || collectionInfo.relatedCollections || []

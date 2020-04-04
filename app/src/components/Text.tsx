@@ -172,8 +172,13 @@ export const Input = styled.input`
   width: 100%;
   height: 32px;
   padding: 0 3;
+  letter-spacing: 0.06em;
 
   &:focus {
     border-color: body.6;
+  }
+
+  &::placeholder {
+    letter-spacing: 0.06em;
   }
 `

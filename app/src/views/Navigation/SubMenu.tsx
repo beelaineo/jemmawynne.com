@@ -1,15 +1,28 @@
 import * as React from 'react'
 import { Box } from '@xstyled/styled-components'
-import { RichPageLink, SubMenu as SubMenuType } from '../../types'
-import { SubMenuColumns } from './styled'
+import {
+  RichPageLink as RichPageLinkType,
+  SubMenu as SubMenuType,
+} from '../../types'
+import {
+  SubMenuWrapper,
+  SubMenuTitle,
+  SubMenuTitles,
+  SubMenuContent,
+  SubMenuContentSection,
+  ImageWrapper,
+  ImageLinkWrapper,
+} from './styled'
 import { LinkGroup } from '../../components/LinkGroup'
 import { Image } from '../../components/Image'
 import { DocumentLink } from '../../components/DocumentLink'
 import { Heading } from '../../components/Text'
 import { getDocumentLinkImage } from '../../utils/links'
 
+const { useState } = React
+
 interface ImageLinkProps {
-  link: RichPageLink
+  link: RichPageLinkType
 }
 
 export const ImageLink = ({ link }: ImageLinkProps) => {
@@ -18,20 +31,22 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
   const linkTitle = link.title || link?.document?.title || null
 
   return (
-    <DocumentLink document={link.document}>
-      <Image hoverImage={hoverImage} image={image} ratio={1} />
-      <Box mt={2} textAlign="center">
-        <Heading
-          family="sans"
-          weight={3}
-          textAlign="center"
-          level={7}
-          textTransform="uppercase"
-        >
-          {linkTitle}
-        </Heading>
-      </Box>
-    </DocumentLink>
+    <ImageLinkWrapper>
+      <DocumentLink document={link.document}>
+        <Image hoverImage={hoverImage} image={image} ratio={1} />
+        <Box mt={2} textAlign="center">
+          <Heading
+            family="sans"
+            weight={3}
+            textAlign="center"
+            level={7}
+            textTransform="uppercase"
+          >
+            {linkTitle}
+          </Heading>
+        </Box>
+      </DocumentLink>
+    </ImageLinkWrapper>
   )
 }
 
@@ -42,23 +57,77 @@ interface SubMenuProps {
 
 export const SubMenu = ({ submenu, active }: SubMenuProps) => {
   const { columns } = submenu
+  if (!columns || columns.length === 0) return null
+  const firstColumn = columns[0]
+  if (!firstColumn) return null
+  const [activeSection, setActiveSectionValue] = useState(firstColumn._key)
+  const setActiveSection = (key: string | null | undefined) => () =>
+    setActiveSectionValue(key)
+
+  if (!activeSection) return null
+  console.log(submenu)
   if (!columns) return null
+
   return (
-    <SubMenuColumns active={active}>
-      {columns.map((col) => {
-        if (!col) return null
-        switch (col.__typename) {
-          case 'RichPageLink':
-            return <ImageLink key={col._key || 'some-key'} link={col} />
-          case 'LinkGroup':
-            return <LinkGroup key={col._key || 'some-key'} linkGroup={col} />
-          default:
-            throw new Error(
-              // @ts-ignore
-              `Cannot create a column for type "${col.__typename}"`,
-            )
-        }
-      })}
-    </SubMenuColumns>
+    <SubMenuWrapper>
+      <SubMenuTitles>
+        {columns.map((column) =>
+          column ? (
+            <SubMenuTitle
+              active={column._key === activeSection}
+              key={column._key || 'some-key'}
+            >
+              <Heading level={3} family="serif">
+                <span onMouseEnter={setActiveSection(column._key)}>
+                  {column.title}
+                </span>
+              </Heading>
+            </SubMenuTitle>
+          ) : null,
+        )}
+      </SubMenuTitles>
+      <SubMenuContent>
+        {columns.map((column) =>
+          column ? (
+            <SubMenuContentSection
+              active={column._key === activeSection}
+              key={column._key || 'some-key'}
+              aria-hidden={!(column._key === activeSection)}
+            >
+              {column.links
+                ? column.links.map((link) =>
+                    link ? (
+                      link.__typename === 'RichPageLink' ? (
+                        <ImageLink link={link} />
+                      ) : link.__typename === 'LinkGroup' ? (
+                        <ImageLinkWrapper>
+                          <LinkGroup linkGroup={link} />
+                        </ImageLinkWrapper>
+                      ) : null
+                    ) : null,
+                  )
+                : null}
+              {column.images
+                ? column.images.map((image, index) =>
+                    image ? (
+                      <ImageWrapper>
+                        <Image
+                          image={image}
+                          ratio={
+                            column.images && index === column.images.length - 1
+                              ? undefined
+                              : 1
+                          }
+                        />
+                      </ImageWrapper>
+                    ) : null,
+                  )
+                : null}
+            </SubMenuContentSection>
+          ) : null,
+        )}
+      </SubMenuContent>
+    </SubMenuWrapper>
   )
+  return null
 }

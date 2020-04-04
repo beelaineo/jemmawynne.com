@@ -12,10 +12,21 @@ export const FooterWrapper = styled.footer`
   `}
 `
 
-export const Company = styled.div``
+export const Company = styled.div`
+  padding: 0 8;
+
+  h4:first-of-type {
+    margin-bottom: 1.3em;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+`
 
 export const LinkGroupWrapper = styled.div`
-  padding-top: 16px;
+  padding-top: 7px;
 `
 
 export const FooterBottom = styled.div`
@@ -28,21 +39,17 @@ export const FooterBottom = styled.div`
 `
 
 export const Logo = styled.img`
-  margin-bottom: 8px;
-  height: 30px;
+  margin-bottom: 15px;
+  width: 250px;
 `
 
 export const FooterLinks = styled.div`
   display: grid;
-  grid-template-columns: 300px 1fr 1fr 1fr;
+  grid-template-columns: 400px 1fr 1fr 1fr;
   grid-column-gap: 6;
   margin: 5 auto;
   padding: 0 3;
   max-width: 1200px;
-
-  & > * + * {
-    margin-left: 4;
-  }
 `
 
 export const MailerWrapper = styled.div`

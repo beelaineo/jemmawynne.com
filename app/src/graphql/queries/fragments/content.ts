@@ -289,6 +289,7 @@ export const richPageLinkFragment = gql`
   fragment RichPageLinkFragment on RichPageLink {
     _key
     _type
+    __typename
     title
     captionRaw
     image {

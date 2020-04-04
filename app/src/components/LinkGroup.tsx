@@ -18,7 +18,6 @@ const LinkGroupWrapper = styled.div`
 
 const LinksWrapper = styled.div`
   ${({ theme }) => css`
-    margin-top: 3;
     ${theme.mediaQueries.tablet} {
       margin-top: 2;
       display: grid;
@@ -40,9 +39,10 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
           ? links.map((menuLink) =>
               menuLink && menuLink.document ? (
                 <Heading
-                  family="serif"
-                  level={5}
-                  weight={2}
+                  family="sans"
+                  level={7}
+                  mb="1em"
+                  weight={3}
                   key={menuLink._key || 'some-key'}
                 >
                   <DocumentLink document={menuLink.document} />

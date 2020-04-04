@@ -1979,13 +1979,34 @@ export interface SubMenu {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
-  columns?: Maybe<Array<Maybe<LinkGroupOrRichPageLink>>>
+  columns?: Maybe<Array<Maybe<SubmenuSection>>>
 }
 
 export type SubMenuFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
+}
+
+export interface SubmenuSection {
+  __typename: 'SubmenuSection'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  links?: Maybe<Array<Maybe<LinkGroupOrRichPageLink>>>
+  images?: Maybe<Array<Maybe<RichImage>>>
+}
+
+export type SubmenuSectionFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
+}
+
+export type SubmenuSectionSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
 }
 
 export type SubMenuSorting = {
