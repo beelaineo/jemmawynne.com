@@ -35,7 +35,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   }).then(async (r) => {
     const data = await r.json()
-    console.log(r)
     if (r.status !== 200) {
       Sentry.configureScope((scope) => {
         scope.setExtra('status', r.status)
