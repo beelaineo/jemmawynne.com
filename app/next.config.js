@@ -1,6 +1,15 @@
-module.exports = {
+const webpack = require('webpack')
+const withSourceMaps = require('@zeit/next-source-maps')
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+module.exports = withSourceMaps({
   env: {
     SC_DISABLE_SPEEDY: true,
+    KLAVIYO_LIST_ID: process.env.KLAVIYO_LIST_ID,
+    KLAVIYO_API_KEY: process.env.KLAVIYO_API_KEY,
+    SENTRY_DSN: process.env.SENTRY_DSN,
   },
   typescript: {
     // !! WARN !!
@@ -12,4 +21,18 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-}
+
+  webpack: (config, { isServer, buildId }) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
+      }),
+    )
+
+    if (!isServer) {
+      config.resolve.alias['@sentry/node'] = '@sentry/browser'
+    }
+
+    return config
+  },
+})

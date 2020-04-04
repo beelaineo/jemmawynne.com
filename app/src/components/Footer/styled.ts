@@ -58,6 +58,10 @@ export const MailerWrapper = styled.div`
 
 export const MailerInput = styled.form`
   position: relative;
+  border: 1px solid;
+  border-color: body.5;
+  height: 40px;
+  overflow: hidden;
   button {
     color: body.5;
     font-size: 2;
@@ -75,9 +79,48 @@ export const MailerInput = styled.form`
     stroke: currentColor;
   }
 
+  input {
+    border: none;
+    height: 100%;
+  }
+
   input:focus ~ button {
     color: body.7;
   }
+`
+
+interface WithVisible {
+  visible: boolean
+  pending?: boolean
+}
+
+export const InputWrapper = styled.div`
+  ${({ visible, pending }: WithVisible) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: ${pending ? '0.5' : '1'};
+    height: 100%;
+    transform: ${visible ? 'none' : 'translateY(-100%)'};
+    transition: 0.3s;
+  `}
+`
+export const Message = styled.div`
+  ${({ visible }: WithVisible) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: ${visible ? 'none' : 'translateY(100%)'};
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2;
+  `}
 `
 
 export const Socials = styled.div`

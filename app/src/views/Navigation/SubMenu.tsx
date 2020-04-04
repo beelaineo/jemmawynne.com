@@ -65,7 +65,6 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
     setActiveSectionValue(key)
 
   if (!activeSection) return null
-  console.log(submenu)
   if (!columns) return null
 
   return (
@@ -98,9 +97,9 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
                 ? column.links.map((link) =>
                     link ? (
                       link.__typename === 'RichPageLink' ? (
-                        <ImageLink link={link} />
+                        <ImageLink key={link._key || 'some-key'} link={link} />
                       ) : link.__typename === 'LinkGroup' ? (
-                        <ImageLinkWrapper>
+                        <ImageLinkWrapper key={link._key || 'some-key'}>
                           <LinkGroup linkGroup={link} />
                         </ImageLinkWrapper>
                       ) : null
@@ -110,7 +109,7 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
               {column.images
                 ? column.images.map((image, index) =>
                     image ? (
-                      <ImageWrapper>
+                      <ImageWrapper key={image._key || 'some-key'}>
                         <Image
                           image={image}
                           ratio={
