@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "name": "jemmawynne",
+  "builds": [{ "src": "app/package.json", "use": "@now/next" }]
+}

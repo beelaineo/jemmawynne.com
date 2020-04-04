@@ -4,7 +4,7 @@
 	"scripts": {
 		"setup": "yarn install",
 		"test": "yarn workspace jemmawynne-app test",
-		"build": "yarn workspace jemmawynne-app build && yarn workspace jemmawynne-proxy build",
+		"build": "yarn workspace jemmawynne-app build",
 		"start:app": "yarn workspace jemmawynne-app start",
 		"start:proxy": "yarn workspace jemmawynne-proxy start"
 	},
