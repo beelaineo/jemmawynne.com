@@ -11,8 +11,9 @@ interface LinkProps {
 
 export const DocumentLink = ({ document, children, label }: LinkProps) => {
   if (!document) return null
+  const { as, href } = getDocumentLinkUrl(document)
   return (
-    <NextLink href={getDocumentLinkUrl(document)}>
+    <NextLink as={as} href={href}>
       <a>{children || label || getDocumentLinkLabel(document) || null}</a>
     </NextLink>
   )

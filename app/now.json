@@ -1,13 +1,6 @@
 {
   "version": 2,
-  "builds": [{ "src": "app/package.json", "use": "@now/next" }],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app/$1",
-      "continue": true
-    }
-  ],
+  "builds": [{ "src": "./package.json", "use": "@now/next" }],
   "build": {
     "env": {
       "SC_DISABLE_SPEEDY": "true",

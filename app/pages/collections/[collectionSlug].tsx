@@ -1,5 +1,6 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 import { ShopifyCollection } from '../../src/types'
 import { NotFound, ProductListing } from '../../src/views'
 import { heroFragment, shopifySourceImageFragment } from '../../src/graphql'
@@ -76,25 +77,22 @@ export const collectionQuery = gql`
   ${shopifySourceImageFragment}
 `
 interface CollectionProps {
-  collection: ShopifyCollection
+  handle: string
 }
 
-const Collection = ({ collection }: CollectionProps) => {
+const Collection = ({ handle }: CollectionProps) => {
+  const { loading, data } = useQuery(collectionQuery, { variables: { handle } })
+  if (loading) return null
+  const collections = data?.allShopifyCollection
+  const collection = collections.length ? collections[0] : undefined
+
   if (!collection) return <NotFound />
   return <ProductListing collection={collection} />
 }
 
-Collection.getInitialProps = async (ctx: any) => {
-  const { apolloClient, query } = ctx
-  const variables = { handle: query.collectionSlug }
-  const response = await apolloClient.query({
-    query: collectionQuery,
-    variables,
-  })
-
-  const collections = response?.data?.allShopifyCollection
-  const collection = collections.length ? collections[0] : undefined
-  return { collection }
+export const getServerSideProps = async (ctx: any) => {
+  const { query } = ctx
+  return { props: { handle: query.collectionSlug } }
 }
 
 export default Collection

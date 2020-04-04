@@ -36,8 +36,9 @@ export const ImageBlock = ({ content }: ImageBlockProps) => {
       </Box>
     </ImageBlockWrapper>
   )
+
   return linkTo ? (
-    <Link href={linkTo}>
+    <Link href={linkTo.href} as={linkTo.as}>
       <a>{renderInner()}</a>
     </Link>
   ) : (

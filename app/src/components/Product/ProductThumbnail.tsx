@@ -30,10 +30,10 @@ export const ProductThumbnail = ({
 
   const productImage = productImages.length ? productImages[0] : undefined
   const { minVariantPrice, maxVariantPrice } = sourceData.priceRange || {}
-  const to = `/products/${product.handle}`
+  const as = `/products/${product.handle}`
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   return (
-    <Link href={to}>
+    <Link href="/products/[productSlug]" as={as}>
       <a>
         <ProductThumb>
           <Image image={image || productImage} hoverImage={hoverImage} />

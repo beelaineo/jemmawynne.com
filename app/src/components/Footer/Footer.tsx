@@ -88,12 +88,12 @@ export const Footer = () => {
           © {currentYear} Jemma Wynne
         </Heading>
         <Heading color="body.7" pt="5px" level={4}>
-          <Link href="/terms-and-conditions">
+          <Link href="/[pageSlug]" as="/terms-and-conditions">
             <a>Terms & Conditions</a>
           </Link>
         </Heading>
         <Heading color="body.7" pt="5px" level={4}>
-          <Link href="/privacy-policy">
+          <Link href="/[pageSlug]" as="/privacy-policy">
             <a>Privacy Policy</a>
           </Link>
         </Heading>

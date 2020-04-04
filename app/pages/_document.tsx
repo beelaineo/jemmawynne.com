@@ -12,7 +12,7 @@ process.on('uncaughtException', (err) => {
 })
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getServerSideProps(ctx) {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
 

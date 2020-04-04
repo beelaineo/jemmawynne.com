@@ -32,8 +32,6 @@ const ENV = process.env.NODE_ENV
 const FORCE = Boolean(process.env.FORCE_SENTRY)
 const DSN = process.env.SENTRY_DSN
 
-console.log(process.env)
-
 let Sentry: typeof SentryInitializer
 
 if (ENV === 'production' || ENV === 'staging' || FORCE) {

@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { NotFound, Stockists } from '../src/views'
 import { Stockists as StockistsType } from '../src/types'
-import { heroFragment } from '../src/graphql'
 
 interface StockistsResponse {
   stockists: StockistsType
@@ -40,21 +39,13 @@ interface StockistsProps {
   stockists: StockistsType
 }
 
-const StockistsPage = ({ stockists }: StockistsProps) => {
+const StockistsPage = () => {
+  const response = useQuery(stockistsQuery)
+  const { loading, data } = response
+  if (loading) return null
+  const stockists = data.Stockists
   if (!stockists) return <NotFound />
   return <Stockists stockists={stockists} />
-}
-
-StockistsPage.getInitialProps = async (ctx: any) => {
-  const { apolloClient } = ctx
-
-  const response = await apolloClient.query({
-    query: stockistsQuery,
-  })
-
-  const stockists = response?.data?.Stockists
-
-  return { stockists }
 }
 
 export default StockistsPage
