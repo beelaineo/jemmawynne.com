@@ -5,6 +5,14 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 module.exports = withSourceMaps({
+  build: {
+    env: {
+      SC_DISABLE_SPEEDY: true,
+      SENTRY_DSN: '@jw_sentry_dsn',
+      KLAVIYO_LIST_ID: '@jw_klaviyo_list_id',
+      KLAVIYO_API_KEY: '@jw_klaviyo_api_key',
+    },
+  },
   env: {
     SC_DISABLE_SPEEDY: true,
     KLAVIYO_LIST_ID: process.env.KLAVIYO_LIST_ID,
