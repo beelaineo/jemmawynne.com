@@ -10,6 +10,7 @@ import {
   SubMenuTitles,
   SubMenuContent,
   SubMenuContentSection,
+  SubMenuItemWrapper,
   ImageWrapper,
   ImageLinkWrapper,
 } from './styled'
@@ -97,11 +98,13 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
                 ? column.links.map((link) =>
                     link ? (
                       link.__typename === 'RichPageLink' ? (
-                        <ImageLink key={link._key || 'some-key'} link={link} />
+                        <SubMenuItemWrapper key={link._key || 'some-key'}>
+                          <ImageLink link={link} />
+                        </SubMenuItemWrapper>
                       ) : link.__typename === 'LinkGroup' ? (
-                        <ImageLinkWrapper key={link._key || 'some-key'}>
+                        <SubMenuItemWrapper key={link._key || 'some-key'}>
                           <LinkGroup linkGroup={link} />
-                        </ImageLinkWrapper>
+                        </SubMenuItemWrapper>
                       ) : null
                     ) : null,
                   )

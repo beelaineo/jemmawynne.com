@@ -124,7 +124,7 @@ export const NavTools = styled.div`
   `}
 `
 
-export const Logo = styled.img`
+export const LogoWrapper = styled.div`
   ${({ theme }) => css`
     width: 100%;
     max-width: 360px;
@@ -275,12 +275,32 @@ export const ImageLinkWrapper = styled.div`
   grid-column: span 2;
 `
 
-export const ImageWrapper = styled.div`
-  grid-column: span 3;
+export const SubMenuContent = styled.div`
   position: relative;
+`
+
+export const SubMenuItemWrapper = styled.div`
+  flex-basis: 25%;
+  margin-bottom: -16px;
 
   &:last-child {
-    grid-column: 6 / 11;
+    flex-grow: 1;
+  }
+  & + & {
+    margin-left: 2;
+  }
+`
+
+export const ImageWrapper = styled.div`
+  flex-basis: 25%;
+  position: relative;
+
+  & + &,
+  ${SubMenuItemWrapper} + & {
+    margin-left: 2;
+  }
+  &:last-child {
+    flex-grow: 1;
 
     ${ImageElementWrapper}, ${Picture}, img {
       position: absolute;
@@ -290,22 +310,16 @@ export const ImageWrapper = styled.div`
   }
 `
 
-export const SubMenuContent = styled.div`
-  position: relative;
-`
-
 export const SubMenuContentSection = styled.div`
   ${({ active }: WithActive) => css`
-    position: absolute;
-    display: grid;
+    display: ${active ? 'flex' : 'none'};
+    justify-content: space-between;
     grid-template-columns: repeat(10, 1fr);
     grid-column-gap: 3;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: ${active ? '1' : '0'};
-    pointer-events: ${active ? 'initial' : 'none'};
   `}
 `
 

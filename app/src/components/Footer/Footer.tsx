@@ -6,6 +6,7 @@ import {
   FaPinterest,
 } from 'react-icons/fa'
 import Link from 'next/link'
+import Logo from '../../assets/Logo_Large_Black.svg'
 import { Heading } from '../../components/Text'
 import { RichText } from '../../components/RichText'
 import { useShopData } from '../../providers/ShopDataProvider'
@@ -17,7 +18,7 @@ import {
   Company,
   FooterLinks,
   LinkGroupWrapper,
-  Logo,
+  LogoWrapper,
   FooterBottom,
 } from './styled'
 
@@ -66,11 +67,9 @@ export const Footer = () => {
       <NewsletterSignup />
       <FooterLinks>
         <Company>
-          <Logo
-            src="/static/images/Logo_Large_Black.svg"
-            alt="Jemma Wynne Logo"
-          />
-
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
           <RichText body={aboutRaw} blockWrapper={AboutText} />
         </Company>
         {linkGroups

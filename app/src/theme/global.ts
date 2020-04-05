@@ -24,6 +24,10 @@ export const GlobalStyles = createGlobalStyle`
 		border-radius: 0;
 	}
 
+  svg {
+    width: 100%;
+    fill: currentColor;
+  }
 	img {
 		max-width: 100%;
 	}
@@ -32,8 +36,8 @@ export const GlobalStyles = createGlobalStyle`
 		cursor: pointer;
 	}
 
-a {
-text-decoration: none;
-color: inherit;
-}
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `
