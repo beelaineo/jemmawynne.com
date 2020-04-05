@@ -14,6 +14,7 @@ import { CartSidebar } from '../../components/Cart'
 import { Checkout } from '../Cart/Checkout'
 import { SubMenu } from './SubMenu'
 import { SearchInput } from './SearchInput'
+import Logo from '../../assets/Logo_Large_Black.svg'
 import {
   Wrapper,
   Inner,
@@ -23,7 +24,7 @@ import {
   NavHeader,
   NavHeaderWrapper,
   SubmenuPane,
-  Logo,
+  LogoWrapper,
   NavTools,
   NavTop,
   ModalBackground,
@@ -75,7 +76,9 @@ export const Navigation = () => {
       <NavTop>
         <Link href="/">
           <a>
-            <Logo src="/static/images/Logo_Large_Black.svg" />
+            <LogoWrapper>
+              <Logo />
+            </LogoWrapper>
           </a>
         </Link>
       </NavTop>

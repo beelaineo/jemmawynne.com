@@ -38,7 +38,7 @@ export const FooterBottom = styled.div`
   }
 `
 
-export const Logo = styled.img`
+export const LogoWrapper = styled.div`
   margin-bottom: 15px;
   width: 250px;
 `
