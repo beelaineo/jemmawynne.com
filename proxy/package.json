@@ -14,7 +14,7 @@
     "apollo-link-http": "^1.5.16",
     "apollo-server": "^2.9.7",
     "apollo-server-lambda": "^2.9.7",
-    "aws-lambda": "^0.1.2",
+    "aws-lambda": "^1.0.5",
     "convict": "^5.2.0",
     "dotenv": "^8.2.0",
     "graphql": "^14.5.8",
