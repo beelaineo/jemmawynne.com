@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { ShopifyCollection } from '../../types'
 import { Heading } from '../../components/Text'
-import { Image } from '../../components/Image'
-import { PLPHeader, PLPHeaderInner, PLPText, PLPImage } from './styled'
+import { HeaderWrapper } from './styled'
 import { HeroBlock } from '../../components/ContentBlock'
 
 interface ProductListingHeaderProps {
@@ -23,22 +22,10 @@ export const ProductListingHeader = ({
   return hero ? (
     <HeroBlock hero={hero} />
   ) : (
-    <PLPHeader>
-      <PLPHeaderInner>
-        <PLPText>
-          <Heading textAlign={textAlign} level={2}>
-            {title}
-          </Heading>
-          <Heading textAlign={textAlign} level={4} family="serif">
-            {description}
-          </Heading>
-        </PLPText>
-        {image ? (
-          <PLPImage>
-            <Image image={image} ratio={1} />
-          </PLPImage>
-        ) : null}
-      </PLPHeaderInner>
-    </PLPHeader>
+    <HeaderWrapper>
+      <Heading textAlign={textAlign} level={2}>
+        {title}
+      </Heading>
+    </HeaderWrapper>
   )
 }
