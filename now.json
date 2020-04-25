@@ -13,7 +13,12 @@
       "SC_DISABLE_SPEEDY": "true",
       "SENTRY_DSN": "@jw-sentry-dsn",
       "KLAVIYO_LIST_ID": "@jw-klaviyo-list-id",
-      "KLAVIYO_API_KEY": "@jw-klaviyo-api-key"
+      "KLAVIYO_API_KEY": "@jw-klaviyo-api-key",
+      "SANITY_PROJECT_ID": "@jw-sanity-project-id",
+      "SANITY_DATASET": "@jw-sanity-dataset",
+      "SANITY_AUTH_TOKEN": "@jw-sanity-auth-token",
+      "SHOPIFY_SHOP_NAME": "jemmawynne-development",
+      "SHOPIFY_STOREFRONT_TOKEN": "@jw-storefront-token"
     }
   }
 }
