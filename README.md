@@ -5,11 +5,9 @@
 
 ## Local Development
 
-To work locally, start up both the local proxy server and the frontend react app:
+To work locally, just run the frontend react app:
 
-- `yarn start:proxy` (or `cd proxy && yarn start`)
-- Then, in another terminal:
-- `yarn start:app` (or `cd proxy && yarn start`)
+- `yarn start:app` (or `cd app && yarn start`)
 
 ## Commits
 

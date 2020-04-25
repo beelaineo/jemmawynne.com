@@ -1,4 +1,0 @@
-[build]
-  command = "yarn build"
-  functions = "proxy/lambda-build"
-  publish = "app/build"

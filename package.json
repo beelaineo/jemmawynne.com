@@ -27,8 +27,7 @@
 	},
 	"workspaces": [
 		"app",
-		"sanity",
-		"proxy"
+		"sanity"
 	],
 	"husky": {
 		"hooks": {
