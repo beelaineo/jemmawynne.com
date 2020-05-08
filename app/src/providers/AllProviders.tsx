@@ -1,17 +1,12 @@
 import * as React from 'react'
 import fetch from 'isomorphic-unfetch'
 import { DocumentNode } from 'graphql'
-import { pipe, subscribe } from 'wonka'
 import { ThemeProvider } from '@xstyled/styled-components'
 import { ShopifyProvider } from 'use-shopify'
 import { defaultTheme, GlobalStyles } from '../theme'
 import { ShopDataProvider } from './ShopDataProvider'
 import { MenuProvider } from './MenuProvider'
-import {
-  SHOPIFY_STOREFRONT_URL,
-  SHOPIFY_STOREFRONT_TOKEN,
-  SANITY_GRAPHQL_URL,
-} from '../config'
+import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
 
 /**
  * App
@@ -24,9 +19,6 @@ import {
 interface Props {
   children: React.ReactNode
 }
-
-// @ts-ignore
-const isServer = typeof window !== 'object' || Boolean(process?.browser)
 
 const deduplicateFragments = (queryString: string) =>
   queryString

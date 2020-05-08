@@ -6,8 +6,19 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
+  /**
+   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+   * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+   * 8601 standard for representation of dates and times using the Gregorian calendar.
+   */
   DateTime: Date
+  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { [key: string]: any }
+  /**
+   * A date string, such as 2007-12-03, compliant with the `full-date` format
+   * outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
+   * representation of dates and times using the Gregorian calendar.
+   */
   Date: any
 }
 
@@ -37,6 +48,7 @@ export interface Banner {
   __typename: 'Banner'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** Turn this on to allow users to dismiss the notification header */
   dismissable?: Maybe<Scalars['Boolean']>
   announcements?: Maybe<Array<Maybe<Announcement>>>
 }
@@ -65,7 +77,9 @@ export interface Block {
 export type BlockOrRichImage = Block | RichImage
 
 export type BooleanFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Boolean']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['Boolean']>
 }
 
@@ -75,6 +89,7 @@ export interface Carousel {
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
+  /** Create a carousel from a collection. If a collection is used, items linked to below be ignored. */
   collection?: Maybe<ShopifyCollection>
   items?: Maybe<Array<Maybe<RichPageLink>>>
 }
@@ -99,17 +114,28 @@ export type CarouselSorting = {
 
 export interface CollectionInfo extends Document {
   __typename: 'CollectionInfo'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
+  /**
+   * Add a default set of collections for a side menu here. You can add a different
+   * set to the individual collection page. If nothing is defined there, it will
+   * fall back to these links.
+   */
   helpText?: Maybe<Scalars['String']>
   relatedCollections?: Maybe<Array<Maybe<ShopifyCollection>>>
 }
 
 export type CollectionInfoFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -155,33 +181,53 @@ export type CtaSorting = {
 }
 
 export type DateFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Date']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['Date']>
+  /** Checks if the value is greater than the given input. */
   gt?: Maybe<Scalars['Date']>
+  /** Checks if the value is greater than or equal to the given input. */
   gte?: Maybe<Scalars['Date']>
+  /** Checks if the value is lesser than the given input. */
   lt?: Maybe<Scalars['Date']>
+  /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Date']>
 }
 
 export type DatetimeFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['DateTime']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['DateTime']>
+  /** Checks if the value is greater than the given input. */
   gt?: Maybe<Scalars['DateTime']>
+  /** Checks if the value is greater than or equal to the given input. */
   gte?: Maybe<Scalars['DateTime']>
+  /** Checks if the value is lesser than the given input. */
   lt?: Maybe<Scalars['DateTime']>
+  /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['DateTime']>
 }
 
+/** A Sanity document */
 export type Document = {
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
 }
 
 export type DocumentFilter = {
+  /** All documents referencing the given document ID. */
   references?: Maybe<Scalars['ID']>
+  /** All documents that are drafts. */
   is_draft?: Maybe<Scalars['Boolean']>
 }
 
@@ -226,11 +272,17 @@ export type FileSorting = {
 }
 
 export type FloatFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Float']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['Float']>
+  /** Checks if the value is greater than the given input. */
   gt?: Maybe<Scalars['Float']>
+  /** Checks if the value is greater than or equal to the given input. */
   gte?: Maybe<Scalars['Float']>
+  /** Checks if the value is lesser than the given input. */
   lt?: Maybe<Scalars['Float']>
+  /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Float']>
 }
 
@@ -305,16 +357,22 @@ export type HeroSorting = {
 
 export interface Homepage extends Document {
   __typename: 'Homepage'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   content?: Maybe<Array<Maybe<CarouselOrHeroOrImageTextSection>>>
 }
 
 export type HomepageFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -334,8 +392,11 @@ export type HomepageSorting = {
 }
 
 export type IdFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['ID']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['ID']>
+  /** Checks if the value matches the given word/words. */
   matches?: Maybe<Scalars['ID']>
   in?: Maybe<Array<Scalars['ID']>>
   nin?: Maybe<Array<Scalars['ID']>>
@@ -435,11 +496,17 @@ export type InternalLinkSorting = {
 }
 
 export type IntFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Int']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['Int']>
+  /** Checks if the value is greater than the given input. */
   gt?: Maybe<Scalars['Int']>
+  /** Checks if the value is greater than or equal to the given input. */
   gte?: Maybe<Scalars['Int']>
+  /** Checks if the value is lesser than the given input. */
   lt?: Maybe<Scalars['Int']>
+  /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Int']>
 }
 
@@ -467,16 +534,22 @@ export type LinkGroupSorting = {
 
 export interface Menu extends Document {
   __typename: 'Menu'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   menuItems?: Maybe<Array<Maybe<CtaOrSubMenu>>>
 }
 
 export type MenuFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -516,10 +589,15 @@ export type MenuSorting = {
 
 export interface Page extends Document {
   __typename: 'Page'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
@@ -530,6 +608,7 @@ export interface Page extends Document {
 }
 
 export type PageFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -591,18 +670,34 @@ export type PageSorting = {
 
 export interface ProductInfo extends Document {
   __typename: 'ProductInfo'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
+  /**
+   * Use these fields to add snippets of descriptions to all or some projects. For
+   * instance, you could add a 'Shipping and Returns' block on all items, and a
+   * 'Ring Sizing Guide' block to all Rings. These blocks will be displayed in
+   * accordion-dropdowns below the main product information. You can also add info
+   * blocks to individual items on their page here in the CMS.
+   */
   helpText?: Maybe<Scalars['String']>
   globalBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   ringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   earringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   braceletBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   necklaceBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+  /**
+   * Use these fields to add blocks to items with particular tags in Shopify. For
+   * instance, a "Customization" block for anything tagged with "Custom" in Shopify.
+   */
   byTagHelpText?: Maybe<Scalars['String']>
   blocksByTag?: Maybe<Array<Maybe<ProductInfoBlocksByTag>>>
 }
@@ -625,6 +720,7 @@ export interface ProductInfoBlocksByTag {
   __typename: 'ProductInfoBlocksByTag'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** Tag to match from Shopify. */
   tag?: Maybe<Scalars['String']>
   infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
 }
@@ -648,6 +744,7 @@ export type ProductInfoBlockSorting = {
 }
 
 export type ProductInfoFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -674,6 +771,7 @@ export interface RichImage {
   __typename: 'RichImage'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** A short description of the image. Helps with accessibility and SEO */
   altText?: Maybe<Scalars['String']>
   asset?: Maybe<SanityImageAsset>
   hotspot?: Maybe<SanityImageHotspot>
@@ -702,6 +800,7 @@ export interface RichPageLink {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   document?: Maybe<PageOrShopifyCollectionOrShopifyProduct>
+  /** If left empty, the title of the linked page, product, or collection will be used. */
   title?: Maybe<Scalars['String']>
   captionRaw?: Maybe<Scalars['JSON']>
   image?: Maybe<RichImage>
@@ -875,8 +974,11 @@ export interface SanityAssetSourceData {
   __typename: 'SanityAssetSourceData'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** A canonical name for the source this asset is originating from */
   name?: Maybe<Scalars['String']>
+  /** The unique ID for the asset within the originating source so you can programatically find back to it */
   id?: Maybe<Scalars['String']>
+  /** A URL to find more information about this asset in the originating source */
   url?: Maybe<Scalars['String']>
 }
 
@@ -898,10 +1000,15 @@ export type SanityAssetSourceDataSorting = {
 
 export interface SanityFileAsset extends Document {
   __typename: 'SanityFileAsset'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   originalFilename?: Maybe<Scalars['String']>
@@ -919,6 +1026,7 @@ export interface SanityFileAsset extends Document {
 }
 
 export type SanityFileAssetFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -963,10 +1071,15 @@ export type SanityFileAssetSorting = {
 
 export interface SanityImageAsset extends Document {
   __typename: 'SanityImageAsset'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   originalFilename?: Maybe<Scalars['String']>
@@ -985,6 +1098,7 @@ export interface SanityImageAsset extends Document {
 }
 
 export type SanityImageAssetFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -1211,10 +1325,15 @@ export type SanityImagePaletteSwatchSorting = {
 
 export interface ShopifyCollection extends Document {
   __typename: 'ShopifyCollection'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
@@ -1227,6 +1346,7 @@ export interface ShopifyCollection extends Document {
 }
 
 export type ShopifyCollectionFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -1279,10 +1399,15 @@ export type ShopifyMoneyV2Sorting = {
 
 export interface ShopifyProduct extends Document {
   __typename: 'ShopifyProduct'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
@@ -1297,6 +1422,7 @@ export interface ShopifyProduct extends Document {
 }
 
 export type ShopifyProductFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -1839,10 +1965,15 @@ export type ShopifySourceSelectedOptionSorting = {
 
 export interface SiteSettings extends Document {
   __typename: 'SiteSettings'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   banner?: Maybe<Banner>
@@ -1851,6 +1982,7 @@ export interface SiteSettings extends Document {
 }
 
 export type SiteSettingsFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -1891,7 +2023,9 @@ export type SlugSorting = {
 }
 
 export enum SortOrder {
+  /** Sorts on the value in ascending order. */
   Asc = 'ASC',
+  /** Sorts on the value in descending order. */
   Desc = 'DESC',
 }
 
@@ -1924,10 +2058,15 @@ export type StockistFilter = {
 
 export interface Stockists extends Document {
   __typename: 'Stockists'
+  /** Document ID */
   _id: Scalars['ID']
+  /** Document type */
   _type: Scalars['String']
+  /** Date the document was created */
   _createdAt: Scalars['DateTime']
+  /** Date the document was last modified */
   _updatedAt: Scalars['DateTime']
+  /** Current document revision */
   _rev: Scalars['String']
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
@@ -1937,6 +2076,7 @@ export interface Stockists extends Document {
 }
 
 export type StockistsFilter = {
+  /** Apply filters on document level */
   _?: Maybe<DocumentFilter>
   _id?: Maybe<IdFilter>
   _type?: Maybe<StringFilter>
@@ -1967,8 +2107,11 @@ export type StockistsSorting = {
 }
 
 export type StringFilter = {
+  /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['String']>
+  /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['String']>
+  /** Checks if the value matches the given word/words. */
   matches?: Maybe<Scalars['String']>
   in?: Maybe<Array<Scalars['String']>>
   nin?: Maybe<Array<Scalars['String']>>

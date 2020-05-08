@@ -1,6 +1,7 @@
+import * as React from 'react'
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import { Heading } from '../Text'
 import Link from 'next/link'
-import { Header5 } from '../Text'
 
 interface WithAsAndTo {
   theme: DefaultTheme
@@ -9,8 +10,8 @@ interface WithAsAndTo {
   to?: string
 }
 
-export const FigureWrapper = styled.div`
-  ${({ theme, justify }: WithAsAndTo) => css`
+export const FigureWrapper = styled.div<WithAsAndTo>`
+  ${({ justify }) => css`
     display: flex;
     width: 100%;
     height: 100%;
@@ -31,11 +32,19 @@ export const ImageWrapper = styled.div`
   }
 `
 
-export const Caption = styled(Header5)`
-  ${({ theme }) => css`
-    margin-top: 3;
-    min-height: 2.35em;
-    color: inherit;
-    text-decoration: none;
-  `}
+interface CaptionProps {
+  children: React.ReactNode
+}
+
+const CaptionWrapper = styled.figcaption`
+  margin-top: 3;
+  min-height: 2.35em;
+  color: inherit;
+  text-decoration: none;
 `
+
+export const Caption = ({ children }: CaptionProps) => (
+  <CaptionWrapper>
+    <Heading level={5}>{children}</Heading>
+  </CaptionWrapper>
+)

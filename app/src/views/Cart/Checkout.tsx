@@ -7,7 +7,7 @@ import { Heading } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
 import { CheckoutProduct } from './CheckoutProduct'
 import { StorefrontApiCheckoutLineItem } from '../../types'
-import { formatMoney } from '../../utils/currency'
+import { definitely, formatMoney } from '../../utils'
 import { TitleWrapper, CloseButton, CartMessage } from './styled'
 import { useMenu } from '../../providers/MenuProvider'
 
@@ -21,8 +21,10 @@ export const Checkout = () => {
   const { closeCart, cartMessage } = useMenu()
 
   const lineItems =
-    checkout && checkout.lineItems.edges.length
-      ? unwindEdges<StorefrontApiCheckoutLineItem>(checkout.lineItems)[0]
+    checkout && checkout?.lineItems?.edges && checkout.lineItems.edges.length
+      ? //
+        // @ts-ignore
+        unwindEdges<StorefrontApiCheckoutLineItem>(checkout.lineItems)[0]
       : []
 
   return (
@@ -47,8 +49,13 @@ export const Checkout = () => {
           </CartMessage>
         ) : null}
         {lineItems.length ? (
-          lineItems.map((lineItem) => (
-            <CheckoutProduct key={lineItem.id} lineItem={lineItem} />
+          definitely(lineItems).map((lineItem) => (
+            <CheckoutProduct
+              // @ts-ignore
+              key={lineItem.id || 'some-key'}
+              // @ts-ignore
+              lineItem={lineItem}
+            />
           ))
         ) : (
           <Heading textAlign="center" color="body.5" level={3}>
@@ -57,9 +64,14 @@ export const Checkout = () => {
         )}
       </CartInner>
 
-      {lineItems.length ? (
+      {checkout &&
+      checkout.paymentDueV2 &&
+      checkout.webUrl &&
+      lineItems.length ? (
         <CartBottom>
           <Heading family="serif" textAlign="center" level={5} weight={2}>
+            {/* 
+            // @ts-ignore */}
             Subtotal: {formatMoney(checkout.paymentDueV2)}
           </Heading>
           <Button as="a" href={checkout.webUrl} disabled={loading}>

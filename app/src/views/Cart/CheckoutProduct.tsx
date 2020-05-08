@@ -1,17 +1,11 @@
 import * as React from 'react'
 import { useCheckout } from 'use-shopify'
 import { StorefrontApiCheckoutLineItem } from '../../types'
-
-import { formatMoney, getVariantImage } from '../../utils'
-import { FlexContainer, FlexThree, FlexSix } from '../../components/Layout/Flex'
+import { formatMoney } from '../../utils'
 import { QuantitySelectorCart } from '../ProductDetail/styled'
-import { QuantityInput } from '../../components/QuantityInput'
 import { Image } from '../../components/Image'
 import { Heading } from '../../components/Text'
-import { IoMdClose } from 'react-icons/io'
-import { Wrapper, RemoveCart } from './styled'
-
-const { useState } = React
+import { Wrapper } from './styled'
 
 interface CheckoutProductProps {
   lineItem: StorefrontApiCheckoutLineItem

@@ -1,5 +1,5 @@
 # source: https://jemmawynne-development.myshopify.com/api/graphql
-# timestamp: Fri Apr 03 2020 14:32:33 GMT-0700 (Pacific Daylight Time)
+# timestamp: Thu Apr 30 2020 20:08:16 GMT-0700 (Pacific Daylight Time)
 
 schema {
   query: QueryRoot
@@ -448,7 +448,8 @@ type Blog implements Node {
      - `tag`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): ArticleConnection!
@@ -4209,7 +4210,8 @@ type Customer {
     Supported filter parameters:
      - `processed_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): OrderConnection!
@@ -7605,7 +7607,8 @@ type QueryRoot {
      - `tag`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): ArticleConnection!
@@ -7661,7 +7664,8 @@ type QueryRoot {
      - `title`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): BlogConnection!
@@ -7716,7 +7720,8 @@ type QueryRoot {
      - `title`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): CollectionConnection!
@@ -7794,7 +7799,8 @@ type QueryRoot {
      - `title`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): PageConnection!
@@ -7887,7 +7893,8 @@ type QueryRoot {
      - `variants.price`
      - `vendor`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): ProductConnection!
@@ -8056,7 +8063,8 @@ type Shop {
      - `tag`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): ArticleConnection! @deprecated(reason: "Use `QueryRoot.articles` instead.")
@@ -8102,7 +8110,8 @@ type Shop {
      - `title`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): BlogConnection! @deprecated(reason: "Use `QueryRoot.blogs` instead.")
@@ -8158,7 +8167,8 @@ type Shop {
      - `title`
      - `updated_at`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): CollectionConnection!
@@ -8278,7 +8288,8 @@ type Shop {
      - `variants.price`
      - `vendor`
 
-    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax).
+    See the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)
+    for more information about using filters.
     """
     query: String
   ): ProductConnection! @deprecated(reason: "Use `QueryRoot.products` instead.")

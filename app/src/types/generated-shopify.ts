@@ -36,11 +36,17 @@ export interface StorefrontApiApiVersion {
 /** Details about the gift card used on the checkout. */
 export interface StorefrontApiAppliedGiftCard extends StorefrontApiNode {
   __typename: 'AppliedGiftCard'
-  /** The amount that was taken from the gift card by applying it. */
+  /**
+   * The amount that was taken from the gift card by applying it.
+   * @deprecated Use `amountUsedV2` instead
+   */
   amountUsed: Scalars['Money']
   /** The amount that was taken from the gift card by applying it. */
   amountUsedV2: StorefrontApiMoneyV2
-  /** The amount left on the gift card. */
+  /**
+   * The amount left on the gift card.
+   * @deprecated Use `balanceV2` instead
+   */
   balance: Scalars['Money']
   /** The amount left on the gift card. */
   balanceV2: StorefrontApiMoneyV2
@@ -55,7 +61,10 @@ export interface StorefrontApiAppliedGiftCard extends StorefrontApiNode {
 /** An article in an online store blog. */
 export interface StorefrontApiArticle extends StorefrontApiNode {
   __typename: 'Article'
-  /** The article's author. */
+  /**
+   * The article's author.
+   * @deprecated Use `authorV2` instead
+   */
   author: StorefrontApiArticleAuthor
   /** The article's author. */
   authorV2?: Maybe<StorefrontApiArticleAuthor>
@@ -317,7 +326,10 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   currencyCode: StorefrontApiCurrencyCode
   /** A list of extra information that is added to the checkout. */
   customAttributes: Array<StorefrontApiAttribute>
-  /** The customer associated with the checkout. */
+  /**
+   * The customer associated with the checkout.
+   * @deprecated This field will always return null. If you have an authentication token for the customer, you can use the `customer` field on the query root to retrieve it.
+   */
   customer?: Maybe<StorefrontApiCustomer>
   /** Discounts that have been applied on the checkout. */
   discountApplications: StorefrontApiDiscountApplicationConnection
@@ -338,6 +350,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   /**
    * The amount left to be paid. This is equal to the cost of the line items, taxes
    * and shipping minus discounts and gift cards.
+   * @deprecated Use `paymentDueV2` instead
    */
   paymentDue: Scalars['Money']
   /**
@@ -360,7 +373,10 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   shippingDiscountAllocations: Array<StorefrontApiDiscountAllocation>
   /** Once a shipping rate is selected by the customer it is transitioned to a `shipping_line` object. */
   shippingLine?: Maybe<StorefrontApiShippingRate>
-  /** Price of the checkout before shipping and taxes. */
+  /**
+   * Price of the checkout before shipping and taxes.
+   * @deprecated Use `subtotalPriceV2` instead
+   */
   subtotalPrice: Scalars['Money']
   /** Price of the checkout before shipping and taxes. */
   subtotalPriceV2: StorefrontApiMoneyV2
@@ -368,11 +384,17 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   taxExempt: Scalars['Boolean']
   /** Specifies if taxes are included in the line item and shipping line prices. */
   taxesIncluded: Scalars['Boolean']
-  /** The sum of all the prices of all the items in the checkout, taxes and discounts included. */
+  /**
+   * The sum of all the prices of all the items in the checkout, taxes and discounts included.
+   * @deprecated Use `totalPriceV2` instead
+   */
   totalPrice: Scalars['Money']
   /** The sum of all the prices of all the items in the checkout, taxes and discounts included. */
   totalPriceV2: StorefrontApiMoneyV2
-  /** The sum of all the taxes applied to the line items and shipping lines in the checkout. */
+  /**
+   * The sum of all the taxes applied to the line items and shipping lines in the checkout.
+   * @deprecated Use `totalTaxV2` instead
+   */
   totalTax: Scalars['Money']
   /** The sum of all the taxes applied to the line items and shipping lines in the checkout. */
   totalTaxV2: StorefrontApiMoneyV2
@@ -421,7 +443,10 @@ export interface StorefrontApiCheckoutAttributesUpdatePayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -446,7 +471,10 @@ export interface StorefrontApiCheckoutAttributesUpdateV2Payload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -457,7 +485,10 @@ export interface StorefrontApiCheckoutCompleteFreePayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -470,7 +501,10 @@ export interface StorefrontApiCheckoutCompleteWithCreditCardPayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -483,7 +517,10 @@ export interface StorefrontApiCheckoutCompleteWithCreditCardV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -496,7 +533,10 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -509,7 +549,10 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -546,7 +589,10 @@ export interface StorefrontApiCheckoutCreatePayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -570,7 +616,10 @@ export interface StorefrontApiCheckoutCustomerAssociateV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** The associated customer object. */
   customer?: Maybe<StorefrontApiCustomer>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -581,7 +630,10 @@ export interface StorefrontApiCheckoutCustomerDisassociatePayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -592,7 +644,10 @@ export interface StorefrontApiCheckoutCustomerDisassociateV2Payload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -603,7 +658,10 @@ export interface StorefrontApiCheckoutDiscountCodeApplyPayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -614,7 +672,10 @@ export interface StorefrontApiCheckoutDiscountCodeApplyV2Payload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -625,7 +686,10 @@ export interface StorefrontApiCheckoutDiscountCodeRemovePayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -636,7 +700,10 @@ export interface StorefrontApiCheckoutEmailUpdatePayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -647,7 +714,10 @@ export interface StorefrontApiCheckoutEmailUpdateV2Payload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -734,7 +804,10 @@ export interface StorefrontApiCheckoutGiftCardApplyPayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -745,7 +818,10 @@ export interface StorefrontApiCheckoutGiftCardRemovePayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -756,7 +832,10 @@ export interface StorefrontApiCheckoutGiftCardRemoveV2Payload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -767,7 +846,10 @@ export interface StorefrontApiCheckoutGiftCardsAppendPayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -821,7 +903,10 @@ export interface StorefrontApiCheckoutLineItemsAddPayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -832,7 +917,10 @@ export interface StorefrontApiCheckoutLineItemsRemovePayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -852,7 +940,10 @@ export interface StorefrontApiCheckoutLineItemsUpdatePayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -875,7 +966,10 @@ export interface StorefrontApiCheckoutShippingAddressUpdatePayload {
   checkout: StorefrontApiCheckout
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -886,7 +980,10 @@ export interface StorefrontApiCheckoutShippingAddressUpdateV2Payload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -897,7 +994,10 @@ export interface StorefrontApiCheckoutShippingLineUpdatePayload {
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -1990,7 +2090,10 @@ export interface StorefrontApiCustomerAccessTokenCreatePayload {
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2031,7 +2134,10 @@ export interface StorefrontApiCustomerActivatePayload {
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2042,7 +2148,10 @@ export interface StorefrontApiCustomerAddressCreatePayload {
   customerAddress?: Maybe<StorefrontApiMailingAddress>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2053,7 +2162,10 @@ export interface StorefrontApiCustomerAddressDeletePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /** ID of the deleted customer address. */
   deletedCustomerAddressId?: Maybe<Scalars['String']>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2064,7 +2176,10 @@ export interface StorefrontApiCustomerAddressUpdatePayload {
   customerAddress?: Maybe<StorefrontApiMailingAddress>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2095,7 +2210,10 @@ export interface StorefrontApiCustomerCreatePayload {
   customer?: Maybe<StorefrontApiCustomer>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2106,7 +2224,10 @@ export interface StorefrontApiCustomerDefaultAddressUpdatePayload {
   customer?: Maybe<StorefrontApiCustomer>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2145,7 +2266,10 @@ export interface StorefrontApiCustomerRecoverPayload {
   __typename: 'CustomerRecoverPayload'
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2158,7 +2282,10 @@ export interface StorefrontApiCustomerResetByUrlPayload {
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2179,7 +2306,10 @@ export interface StorefrontApiCustomerResetPayload {
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2215,7 +2345,10 @@ export interface StorefrontApiCustomerUpdatePayload {
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
-  /** List of errors that occurred executing the mutation. */
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `customerUserErrors` instead
+   */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2453,7 +2586,51 @@ export interface StorefrontApiImage {
    * If there are any existing transformations in the original source URL, they will remain and not be stripped.
    */
   originalSrc: Scalars['URL']
-  /** The location of the image as a URL. */
+  /**
+   * The location of the image as a URL.
+   * @deprecated Previously an image had a single `src` field. This could either return the original image
+   * location or a URL that contained transformations such as sizing or scale.
+   *
+   * These transformations were specified by arguments on the parent field.
+   *
+   * Now an image has two distinct URL fields: `originalSrc` and `transformedSrc`.
+   *
+   * * `originalSrc` - the original unmodified image URL
+   * * `transformedSrc` - the image URL with the specified transformations included
+   *
+   * To migrate to the new fields, image transformations should be moved from the parent field to `transformedSrc`.
+   *
+   * Before:
+   * ```graphql
+   * {
+   *   shop {
+   *     productImages(maxWidth: 200, scale: 2) {
+   *       edges {
+   *         node {
+   *           src
+   *         }
+   *       }
+   *     }
+   *   }
+   * }
+   * ```
+   *
+   * After:
+   * ```graphql
+   * {
+   *   shop {
+   *     productImages {
+   *       edges {
+   *         node {
+   *           transformedSrc(maxWidth: 200, scale: 2)
+   *         }
+   *       }
+   *     }
+   *   }
+   * }
+   * ```
+   *
+   */
   src: Scalars['URL']
   /**
    * The location of the transformed image as a URL.
@@ -2516,6 +2693,7 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
    * The two-letter code for the country of the address.
    *
    * For example, US.
+   * @deprecated Use `countryCodeV2` instead
    */
   countryCode?: Maybe<Scalars['String']>
   /**
@@ -2721,7 +2899,10 @@ export interface StorefrontApiMoneyV2 {
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
 export interface StorefrontApiMutation {
   __typename: 'Mutation'
-  /** Updates the attributes of a checkout. */
+  /**
+   * Updates the attributes of a checkout.
+   * @deprecated Use `checkoutAttributesUpdateV2` instead
+   */
   checkoutAttributesUpdate?: Maybe<StorefrontApiCheckoutAttributesUpdatePayload>
   /** Updates the attributes of a checkout. */
   checkoutAttributesUpdateV2?: Maybe<
@@ -2732,7 +2913,10 @@ export interface StorefrontApiMutation {
    * mutation for free items or items whose purchase price is covered by a gift card.
    */
   checkoutCompleteFree?: Maybe<StorefrontApiCheckoutCompleteFreePayload>
-  /** Completes a checkout using a credit card token from Shopify's Vault. */
+  /**
+   * Completes a checkout using a credit card token from Shopify's Vault.
+   * @deprecated Use `checkoutCompleteWithCreditCardV2` instead
+   */
   checkoutCompleteWithCreditCard?: Maybe<
     StorefrontApiCheckoutCompleteWithCreditCardPayload
   >
@@ -2744,17 +2928,26 @@ export interface StorefrontApiMutation {
   checkoutCompleteWithCreditCardV2?: Maybe<
     StorefrontApiCheckoutCompleteWithCreditCardV2Payload
   >
-  /** Completes a checkout with a tokenized payment. */
+  /**
+   * Completes a checkout with a tokenized payment.
+   * @deprecated Use `checkoutCompleteWithTokenizedPaymentV2` instead
+   */
   checkoutCompleteWithTokenizedPayment?: Maybe<
     StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload
   >
-  /** Completes a checkout with a tokenized payment. */
+  /**
+   * Completes a checkout with a tokenized payment.
+   * @deprecated Use `checkoutCompleteWithTokenizedPaymentV3` instead
+   */
   checkoutCompleteWithTokenizedPaymentV2?: Maybe<
     StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload
   >
   /** Creates a new checkout. */
   checkoutCreate?: Maybe<StorefrontApiCheckoutCreatePayload>
-  /** Associates a customer to the checkout. */
+  /**
+   * Associates a customer to the checkout.
+   * @deprecated Use `checkoutCustomerAssociateV2` instead
+   */
   checkoutCustomerAssociate?: Maybe<
     StorefrontApiCheckoutCustomerAssociatePayload
   >
@@ -2762,7 +2955,10 @@ export interface StorefrontApiMutation {
   checkoutCustomerAssociateV2?: Maybe<
     StorefrontApiCheckoutCustomerAssociateV2Payload
   >
-  /** Disassociates the current checkout customer from the checkout. */
+  /**
+   * Disassociates the current checkout customer from the checkout.
+   * @deprecated Use `checkoutCustomerDisassociateV2` instead
+   */
   checkoutCustomerDisassociate?: Maybe<
     StorefrontApiCheckoutCustomerDisassociatePayload
   >
@@ -2770,7 +2966,10 @@ export interface StorefrontApiMutation {
   checkoutCustomerDisassociateV2?: Maybe<
     StorefrontApiCheckoutCustomerDisassociateV2Payload
   >
-  /** Applies a discount to an existing checkout using a discount code. */
+  /**
+   * Applies a discount to an existing checkout using a discount code.
+   * @deprecated Use `checkoutDiscountCodeApplyV2` instead
+   */
   checkoutDiscountCodeApply?: Maybe<
     StorefrontApiCheckoutDiscountCodeApplyPayload
   >
@@ -2782,27 +2981,48 @@ export interface StorefrontApiMutation {
   checkoutDiscountCodeRemove?: Maybe<
     StorefrontApiCheckoutDiscountCodeRemovePayload
   >
-  /** Updates the email on an existing checkout. */
+  /**
+   * Updates the email on an existing checkout.
+   * @deprecated Use `checkoutEmailUpdateV2` instead
+   */
   checkoutEmailUpdate?: Maybe<StorefrontApiCheckoutEmailUpdatePayload>
   /** Updates the email on an existing checkout. */
   checkoutEmailUpdateV2?: Maybe<StorefrontApiCheckoutEmailUpdateV2Payload>
-  /** Applies a gift card to an existing checkout using a gift card code. This will replace all currently applied gift cards. */
+  /**
+   * Applies a gift card to an existing checkout using a gift card code. This will replace all currently applied gift cards.
+   * @deprecated Use `checkoutGiftCardsAppend` instead
+   */
   checkoutGiftCardApply?: Maybe<StorefrontApiCheckoutGiftCardApplyPayload>
-  /** Removes an applied gift card from the checkout. */
+  /**
+   * Removes an applied gift card from the checkout.
+   * @deprecated Use `checkoutGiftCardRemoveV2` instead
+   */
   checkoutGiftCardRemove?: Maybe<StorefrontApiCheckoutGiftCardRemovePayload>
   /** Removes an applied gift card from the checkout. */
   checkoutGiftCardRemoveV2?: Maybe<StorefrontApiCheckoutGiftCardRemoveV2Payload>
   /** Appends gift cards to an existing checkout. */
   checkoutGiftCardsAppend?: Maybe<StorefrontApiCheckoutGiftCardsAppendPayload>
-  /** Adds a list of line items to a checkout. */
+  /**
+   * Adds a list of line items to a checkout.
+   * @deprecated Use `checkoutLineItemsReplace` instead
+   */
   checkoutLineItemsAdd?: Maybe<StorefrontApiCheckoutLineItemsAddPayload>
-  /** Removes line items from an existing checkout. */
+  /**
+   * Removes line items from an existing checkout.
+   * @deprecated Use `checkoutLineItemsReplace` instead
+   */
   checkoutLineItemsRemove?: Maybe<StorefrontApiCheckoutLineItemsRemovePayload>
   /** Sets a list of line items to a checkout. */
   checkoutLineItemsReplace?: Maybe<StorefrontApiCheckoutLineItemsReplacePayload>
-  /** Updates line items on a checkout. */
+  /**
+   * Updates line items on a checkout.
+   * @deprecated Use `checkoutLineItemsReplace` instead
+   */
   checkoutLineItemsUpdate?: Maybe<StorefrontApiCheckoutLineItemsUpdatePayload>
-  /** Updates the shipping address of an existing checkout. */
+  /**
+   * Updates the shipping address of an existing checkout.
+   * @deprecated Use `checkoutShippingAddressUpdateV2` instead
+   */
   checkoutShippingAddressUpdate?: Maybe<
     StorefrontApiCheckoutShippingAddressUpdatePayload
   >
@@ -3141,25 +3361,40 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
   shippingDiscountAllocations: Array<StorefrontApiDiscountAllocation>
   /** The unique URL for the order's status page. */
   statusUrl: Scalars['URL']
-  /** Price of the order before shipping and taxes. */
+  /**
+   * Price of the order before shipping and taxes.
+   * @deprecated Use `subtotalPriceV2` instead
+   */
   subtotalPrice?: Maybe<Scalars['Money']>
   /** Price of the order before shipping and taxes. */
   subtotalPriceV2?: Maybe<StorefrontApiMoneyV2>
   /** List of the order’s successful fulfillments. */
   successfulFulfillments?: Maybe<Array<StorefrontApiFulfillment>>
-  /** The sum of all the prices of all the items in the order, taxes and discounts included (must be positive). */
+  /**
+   * The sum of all the prices of all the items in the order, taxes and discounts included (must be positive).
+   * @deprecated Use `totalPriceV2` instead
+   */
   totalPrice: Scalars['Money']
   /** The sum of all the prices of all the items in the order, taxes and discounts included (must be positive). */
   totalPriceV2: StorefrontApiMoneyV2
-  /** The total amount that has been refunded. */
+  /**
+   * The total amount that has been refunded.
+   * @deprecated Use `totalRefundedV2` instead
+   */
   totalRefunded: Scalars['Money']
   /** The total amount that has been refunded. */
   totalRefundedV2: StorefrontApiMoneyV2
-  /** The total cost of shipping. */
+  /**
+   * The total cost of shipping.
+   * @deprecated Use `totalShippingPriceV2` instead
+   */
   totalShippingPrice: Scalars['Money']
   /** The total cost of shipping. */
   totalShippingPriceV2: StorefrontApiMoneyV2
-  /** The total cost of taxes. */
+  /**
+   * The total cost of taxes.
+   * @deprecated Use `totalTaxV2` instead
+   */
   totalTax?: Maybe<Scalars['Money']>
   /** The total cost of taxes. */
   totalTaxV2?: Maybe<StorefrontApiMoneyV2>
@@ -3331,7 +3566,10 @@ export enum StorefrontApiPageSortKeys {
 /** A payment applied to a checkout. */
 export interface StorefrontApiPayment extends StorefrontApiNode {
   __typename: 'Payment'
-  /** The amount of the payment. */
+  /**
+   * The amount of the payment.
+   * @deprecated Use `amountV2` instead
+   */
   amount: Scalars['Money']
   /** The amount of the payment. */
   amountV2: StorefrontApiMoneyV2
@@ -3705,13 +3943,17 @@ export interface StorefrontApiProductVariant
   extends StorefrontApiNode,
     StorefrontApiHasMetafields {
   __typename: 'ProductVariant'
-  /** Indicates if the product variant is in stock. */
+  /**
+   * Indicates if the product variant is in stock.
+   * @deprecated Use `availableForSale` instead
+   */
   available?: Maybe<Scalars['Boolean']>
   /** Indicates if the product variant is available for sale. */
   availableForSale: Scalars['Boolean']
   /**
    * The compare at price of the variant. This can be used to mark a variant as on
    * sale, when `compareAtPrice` is higher than `price`.
+   * @deprecated Use `compareAtPriceV2` instead
    */
   compareAtPrice?: Maybe<Scalars['Money']>
   /**
@@ -3729,7 +3971,10 @@ export interface StorefrontApiProductVariant
   metafields: StorefrontApiMetafieldConnection
   /** List of prices and compare-at prices in the presentment currencies for this shop. */
   presentmentPrices: StorefrontApiProductVariantPricePairConnection
-  /** The product variant’s price. */
+  /**
+   * The product variant’s price.
+   * @deprecated Use `priceV2` instead
+   */
   price: Scalars['Money']
   /** The product variant’s price. */
   priceV2: StorefrontApiMoneyV2
@@ -4000,7 +4245,10 @@ export interface StorefrontApiScriptDiscountApplication
   __typename: 'ScriptDiscountApplication'
   /** The method by which the discount's value is allocated to its entitled items. */
   allocationMethod: StorefrontApiDiscountApplicationAllocationMethod
-  /** The description of the application as defined by the Script. */
+  /**
+   * The description of the application as defined by the Script.
+   * @deprecated Use `title` instead
+   */
   description: Scalars['String']
   /** Which lines of targetType that the discount is allocated over. */
   targetSelection: StorefrontApiDiscountApplicationTargetSelection
@@ -4046,7 +4294,10 @@ export interface StorefrontApiShippingRate {
   __typename: 'ShippingRate'
   /** Human-readable unique identifier for this shipping rate. */
   handle: Scalars['String']
-  /** Price of this shipping rate. */
+  /**
+   * Price of this shipping rate.
+   * @deprecated Use `priceV2` instead
+   */
   price: Scalars['Money']
   /** Price of this shipping rate. */
   priceV2: StorefrontApiMoneyV2
@@ -4057,15 +4308,30 @@ export interface StorefrontApiShippingRate {
 /** Shop represents a collection of the general settings and information about the shop. */
 export interface StorefrontApiShop {
   __typename: 'Shop'
-  /** List of the shop' articles. */
+  /**
+   * List of the shop' articles.
+   * @deprecated Use `QueryRoot.articles` instead.
+   */
   articles: StorefrontApiArticleConnection
-  /** List of the shop' blogs. */
+  /**
+   * List of the shop' blogs.
+   * @deprecated Use `QueryRoot.blogs` instead.
+   */
   blogs: StorefrontApiBlogConnection
-  /** Find a collection by its handle. */
+  /**
+   * Find a collection by its handle.
+   * @deprecated Use `QueryRoot.collectionByHandle` instead.
+   */
   collectionByHandle?: Maybe<StorefrontApiCollection>
-  /** List of the shop’s collections. */
+  /**
+   * List of the shop’s collections.
+   * @deprecated Use `QueryRoot.collections` instead.
+   */
   collections: StorefrontApiCollectionConnection
-  /** The three-letter code for the currency that the shop accepts. */
+  /**
+   * The three-letter code for the currency that the shop accepts.
+   * @deprecated Use `paymentSettings` instead
+   */
   currencyCode: StorefrontApiCurrencyCode
   /** A description of the shop. */
   description?: Maybe<Scalars['String']>
@@ -4079,22 +4345,35 @@ export interface StorefrontApiShop {
   primaryDomain: StorefrontApiDomain
   /** The shop’s privacy policy. */
   privacyPolicy?: Maybe<StorefrontApiShopPolicy>
-  /** Find a product by its handle. */
+  /**
+   * Find a product by its handle.
+   * @deprecated Use `QueryRoot.productByHandle` instead.
+   */
   productByHandle?: Maybe<StorefrontApiProduct>
   /**
    * Tags added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
+   * @deprecated Use `QueryRoot.productTags` instead.
    */
   productTags: StorefrontApiStringConnection
-  /** List of the shop’s product types. */
+  /**
+   * List of the shop’s product types.
+   * @deprecated Use `QueryRoot.productTypes` instead.
+   */
   productTypes: StorefrontApiStringConnection
-  /** List of the shop’s products. */
+  /**
+   * List of the shop’s products.
+   * @deprecated Use `QueryRoot.products` instead.
+   */
   products: StorefrontApiProductConnection
   /** The shop’s refund policy. */
   refundPolicy?: Maybe<StorefrontApiShopPolicy>
   /** Countries that the shop ships to. */
   shipsToCountries: Array<StorefrontApiCountryCode>
-  /** The shop’s Shopify Payments account id. */
+  /**
+   * The shop’s Shopify Payments account id.
+   * @deprecated Use `paymentSettings` instead
+   */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>
   /** The shop’s terms of service. */
   termsOfService?: Maybe<StorefrontApiShopPolicy>
@@ -4249,13 +4528,19 @@ export type StorefrontApiTokenizedPaymentInputV2 = {
 /** An object representing exchange of money for a product or service. */
 export interface StorefrontApiTransaction {
   __typename: 'Transaction'
-  /** The amount of money that the transaction was for. */
+  /**
+   * The amount of money that the transaction was for.
+   * @deprecated Use `amountV2` instead
+   */
   amount: Scalars['Money']
   /** The amount of money that the transaction was for. */
   amountV2: StorefrontApiMoneyV2
   /** The kind of the transaction. */
   kind: StorefrontApiTransactionKind
-  /** The status of the transaction. */
+  /**
+   * The status of the transaction.
+   * @deprecated Use `statusV2` instead
+   */
   status: StorefrontApiTransactionStatus
   /** The status of the transaction. */
   statusV2?: Maybe<StorefrontApiTransactionStatus>

@@ -9,7 +9,7 @@ import {
   CollectionInfo,
   SiteSettings,
 } from '../../types'
-import { filterMaybes } from '../../utils'
+import { definitely } from '../../utils'
 
 const { useContext } = React
 
@@ -69,7 +69,7 @@ export const ShopDataProvider = ({ children }: Props) => {
       blocksByTag,
     } = productInfoBlocks
     const globalBlocks = sourceGlobalBlocks
-      ? filterMaybes(sourceGlobalBlocks)
+      ? definitely(sourceGlobalBlocks)
       : []
     const sourceTags = product?.sourceData?.tags
     const productType = product?.sourceData?.productType
@@ -87,7 +87,7 @@ export const ShopDataProvider = ({ children }: Props) => {
             ) {
               const { infoBlocks } = current
               if (infoBlocks) {
-                const infos = filterMaybes(infoBlocks)
+                const infos = definitely(infoBlocks)
                 return [...acc, ...infos]
               }
             }
