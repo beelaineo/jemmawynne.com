@@ -33,7 +33,11 @@ export default () =>
         .id('products')
         .title('Products')
         .icon(TiDevicePhone)
-        .child(S.documentTypeList('shopifyProduct')),
+        .child(
+          S.documentList()
+            .title('Products')
+            .filter('_type == "shopifyProduct" && archived != true'),
+        ),
 
       S.listItem()
         .id('productInfo')
@@ -51,7 +55,11 @@ export default () =>
         .id('collections')
         .title('Collections')
         .icon(TiThSmallOutline)
-        .child(S.documentTypeList('shopifyCollection')),
+        .child(
+          S.documentList()
+            .title('Collections')
+            .filter('_type == "shopifyCollection" && archived != true'),
+        ),
 
       S.listItem()
         .id('collectionInfo')
