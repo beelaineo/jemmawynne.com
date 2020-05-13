@@ -21,6 +21,9 @@ const getPreviewValues = async (values) => {
 
   const subtitles = [
     collectionDoc ? `🔗 Collection: ${collectionDoc.title}` : undefined,
+    collectionDoc && collectionDoc.archived === true
+      ? `🛑 This collection is archived and will not be displayed on the site.`
+      : undefined,
     items && items.length
       ? `🔗 ${items.length} Link${items.length === 1 ? '' : 's'}`
       : undefined,
@@ -28,7 +31,7 @@ const getPreviewValues = async (values) => {
 
   return {
     title: title ? `🎠 Carousel: ${title}` : '🎠 Carousel',
-    subtitles: subtitles.slice(0, 1),
+    subtitles,
     src: collectionImage || firstItemImage,
   }
 }
@@ -64,8 +67,11 @@ export const carousel = {
       name: 'collection',
       label: 'Collection',
       type: 'reference',
+      options: {
+        filter: 'archived != true',
+      },
       description:
-        'Create a carousel from a collection. If a collection is used, items linked to below be ignored.',
+        'Create a carousel from a collection. If a collection is used, items linked to below will be ignored.',
       to: [{ type: 'shopifyCollection' }],
     },
     {

@@ -5,7 +5,15 @@ export const collection = {
     {
       name: 'relatedCollections',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'shopifyCollection' } }],
+      of: [
+        {
+          type: 'reference',
+          to: { type: 'shopifyCollection' },
+          options: {
+            filter: 'archived != true',
+          },
+        },
+      ],
     },
   ],
 }

@@ -9,6 +9,13 @@ const getPreviewValues = async ({ label, link: previewLink }) => {
     return { title: 'Missing Link' }
   const linkedDoc = await getReferencedDocument(previewLink.document._ref)
 
+  const subtitles = [
+    linkedDoc ? `🔗${linkedDoc.title}` : null,
+    linkedDoc && linkedDoc.archived === true
+      ? `🛑 This collection is archived and will not be displayed on the site.`
+      : undefined,
+  ].filter(Boolean)
+
   const shopifyThumbnail =
     linkedDoc &&
     (linkedDoc._type === 'shopifyProduct' ||
@@ -18,7 +25,7 @@ const getPreviewValues = async ({ label, link: previewLink }) => {
 
   return {
     title: label || linkedDoc.title,
-    subtitles: [linkedDoc ? `🔗${linkedDoc.title}` : null].filter(Boolean),
+    subtitles,
     src: shopifyThumbnail,
   }
 }
@@ -33,15 +40,6 @@ export const MenuLink = {
       name: 'link',
       type: 'cta',
     },
-    // {
-    //   title: 'Label',
-    //   name: 'label',
-    //   type: 'string',
-    // },
-    // {
-    //   type: 'richPageLink',
-    //   name: 'link',
-    // },
   ],
   preview: {
     select: {

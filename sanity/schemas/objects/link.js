@@ -11,6 +11,7 @@ const getTypeText = (doc) => {
   if (doc._type === 'shopifyProduct') return 'Product'
   if (doc._type === 'shopifyCollection') return 'Collection'
   if (doc._type === 'page') return 'Page'
+  return ''
 }
 
 const getPreviewValues = async (values) => {
@@ -29,7 +30,12 @@ const getPreviewValues = async (values) => {
     doc && (doc._type === 'shopifyProduct' || doc._type === 'shopifyCollection')
       ? getShopifyThumbnail(doc)
       : undefined
-  const subtitles = [`🔗 ${getTypeText(doc)}: ${doc.title}`]
+  const subtitles = [
+    `🔗 ${getTypeText(doc)}: ${doc.title}`,
+    doc && doc.archived === true
+      ? `🛑 This collection is archived and will not be displayed on the site.`
+      : undefined,
+  ].filter(Boolean)
 
   return {
     src: customThumbnail || shopifyThumbnail,
@@ -84,6 +90,9 @@ export const internalLink = {
       name: 'document',
       title: 'Linked Page',
       type: 'reference',
+      options: {
+        filter: 'archived != true',
+      },
       to: [
         { type: 'shopifyProduct' },
         { type: 'shopifyCollection' },
@@ -112,6 +121,10 @@ export const richPageLink = {
       name: 'document',
       title: 'Linked Page',
       type: 'reference',
+
+      options: {
+        filter: 'archived != true',
+      },
       to: [
         { type: 'shopifyProduct' },
         { type: 'shopifyCollection' },
