@@ -1,6 +1,5 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import { NotFound, StaticPage } from '../src/views'
 import { Page as PageType } from '../src/types'
 import { heroFragment } from '../src/graphql'

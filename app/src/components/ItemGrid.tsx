@@ -48,9 +48,16 @@ export const ItemGrid = ({ items }: ItemGridProps) => {
       {items.map((item) => {
         if (!item) return null
         if (item.__typename === 'ShopifyProduct')
-          return <ProductThumbnail key={item._id} product={item} />
+          return (
+            <ProductThumbnail key={item._id || 'some-key'} product={item} />
+          )
         if (item.__typename === 'ShopifyCollection')
-          return <CollectionThumbnail key={item._id} collection={item} />
+          return (
+            <CollectionThumbnail
+              key={item._id || 'some-key'}
+              collection={item}
+            />
+          )
 
         console.warn(
           // @ts-ignore

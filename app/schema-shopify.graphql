@@ -1,5 +1,5 @@
 # source: https://jemmawynne-development.myshopify.com/api/graphql
-# timestamp: Thu Apr 30 2020 20:08:16 GMT-0700 (Pacific Daylight Time)
+# timestamp: Fri May 08 2020 11:59:57 GMT-0700 (Pacific Daylight Time)
 
 schema {
   query: QueryRoot

@@ -1,17 +1,15 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-import { ShopifyCollection } from '../../src/types'
+import { PageContext } from '../_app'
+import { ShopifyProduct, ShopifyCollection } from '../../src/types'
 import { NotFound, ProductListing } from '../../src/views'
 import { heroFragment, shopifySourceImageFragment } from '../../src/graphql'
 
-interface CollectionQueryResult {
-  allShopifyCollection: [ShopifyCollection]
-}
-
 export const collectionQuery = gql`
   query CollectionPageQuery($handle: String) {
-    allShopifyCollection(where: { handle: { eq: $handle } }) {
+    allShopifyCollection(
+      where: { handle: { eq: $handle }, archived: { neq: true } }
+    ) {
       _id
       _type
       _key
@@ -38,34 +36,44 @@ export const collectionQuery = gql`
         handle
         shopifyId
       }
-      products {
-        _id
-        _key
-        _type
-        shopifyId
+    }
+  }
+
+  ${heroFragment}
+  ${shopifySourceImageFragment}
+`
+
+const productsQuery = gql`
+  query AllCollectionProducts($collectionId: ID) {
+    allShopifyProduct(
+      where: { _: { references: $collectionId }, archived: { neq: true } }
+    ) {
+      _id
+      _key
+      _type
+      shopifyId
+      title
+      handle
+      sourceData {
+        id
         title
         handle
-        sourceData {
-          id
-          title
-          handle
-          tags
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
+        tags
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
           }
-          images {
-            edges {
-              cursor
-              node {
-                ...ShopifySourceImageFragment
-              }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        images {
+          edges {
+            cursor
+            node {
+              ...ShopifySourceImageFragment
             }
           }
         }
@@ -73,26 +81,47 @@ export const collectionQuery = gql`
     }
   }
 
-  ${heroFragment}
   ${shopifySourceImageFragment}
 `
-interface CollectionProps {
-  handle: string
+
+interface CollectionResponse {
+  allShopifyCollection: ShopifyCollection[]
 }
 
-const Collection = ({ handle }: CollectionProps) => {
-  const { loading, data } = useQuery(collectionQuery, { variables: { handle } })
-  if (loading) return null
-  const collections = data?.allShopifyCollection
+interface ProductsResponse {
+  allShopifyProduct: ShopifyProduct[]
+}
+
+interface CollectionProps {
+  collection?: ShopifyCollection
+  products: ShopifyProduct[]
+}
+
+const Collection = ({ collection, products }: CollectionProps) => {
+  if (!collection) return <NotFound />
+  return <ProductListing collection={collection} products={products} />
+}
+
+Collection.getInitialProps = async (ctx: PageContext) => {
+  const { apolloClient, query } = ctx
+  const collectionResponse = await apolloClient.query<CollectionResponse>({
+    query: collectionQuery,
+    variables: { handle: query.collectionSlug },
+  })
+
+  const collections = collectionResponse?.data?.allShopifyCollection
   const collection = collections.length ? collections[0] : undefined
 
-  if (!collection) return <NotFound />
-  return <ProductListing collection={collection} />
-}
+  const productsResponse = collection
+    ? await apolloClient.query<ProductsResponse>({
+        query: productsQuery,
+        variables: { collectionId: collection._id },
+      })
+    : undefined
 
-export const getServerSideProps = async (ctx: any) => {
-  const { query } = ctx
-  return { props: { handle: query.collectionSlug } }
+  const products = productsResponse?.data?.allShopifyProduct || []
+
+  return { collection, products }
 }
 
 export default Collection

@@ -1,7 +1,6 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { ContentBlock } from '../src/components/ContentBlock'
 import {
   imageBlockFragment,
   textBlockFragment,
@@ -51,6 +50,7 @@ const homepageQuery = /*  GraphQL */ gql`
 
 export const Homepage = () => {
   const { loading, error, data } = useQuery<HomepageResponse>(homepageQuery)
+  console.log(data)
   if (error)
     return (
       <React.Fragment>
