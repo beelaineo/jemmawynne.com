@@ -77,6 +77,11 @@ export const productInfo = {
       of: [{ type: 'productInfoBlocksByTag' }],
       fieldset: 'byTag',
     },
+    {
+      name: 'swatches',
+      type: 'array',
+      of: [{ type: 'swatch' }],
+    },
   ],
   preview: {
     select: {},
