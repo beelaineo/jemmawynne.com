@@ -22,7 +22,6 @@ const AnnouncementWrapper = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 2;
     height: ${open ? '45px' : '0'};
     background-color: body.2;
     transition: 0.5s;
@@ -57,10 +56,16 @@ const AnnouncementText = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 3;
     opacity: ${active ? '1' : '0'};
     pointer-events: ${active ? 'initial' : 'none'};
     transition: 0.3s;
     transition-delay: ${active ? '0.5s' : '0'};
+
+    & > div > *,
+    & > div > * > * {
+      display: inline;
+    }
   `}
 `
 
@@ -118,23 +123,25 @@ export const Announcement = () => {
               active={index === activeAnnouncement}
               aria-hidden={!Boolean(index === activeAnnouncement)}
             >
-              <Heading weight={3} family="sans" mb={0} level={6}>
-                {announcement.text}
-              </Heading>
-              {announcement.cta?.link ? (
-                <DocumentLink document={announcement.cta.link.document}>
-                  <Heading
-                    weight={3}
-                    mb={0}
-                    ml={2}
-                    family="sans"
-                    textDecoration="underline"
-                    level={6}
-                  >
-                    {announcement.cta.label}
-                  </Heading>
-                </DocumentLink>
-              ) : null}
+              <div>
+                <Heading weight={3} family="sans" mb={0} level={6}>
+                  {announcement.text}
+                </Heading>
+                {announcement.cta?.link ? (
+                  <DocumentLink document={announcement.cta.link.document}>
+                    <Heading
+                      weight={3}
+                      mb={0}
+                      ml={2}
+                      family="sans"
+                      textDecoration="underline"
+                      level={6}
+                    >
+                      {announcement.cta.label}
+                    </Heading>
+                  </DocumentLink>
+                ) : null}
+              </div>
             </AnnouncementText>
           ) : null,
         )}

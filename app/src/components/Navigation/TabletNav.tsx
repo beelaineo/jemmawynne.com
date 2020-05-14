@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box } from '@xstyled/styled-components'
 import { CtaOrSubMenu } from '../../types'
 import { TabletSubMenu } from './TabletSubMenu'
 import { TabletInner, NavSection } from './styled'

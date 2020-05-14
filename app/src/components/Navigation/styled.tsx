@@ -193,12 +193,12 @@ export const NavHeader = styled.div`
   transition: 0.2s;
 `
 
-interface WithIndent {
-  indent?: boolean
+interface WithBorders {
+  borders?: boolean
 }
 
-export const NavHeaderMobile = styled.button<WithIndent>`
-  ${({ theme, indent }) => css`
+export const NavHeaderMobile = styled.button<WithBorders>`
+  ${({ theme, borders }) => css`
     ${theme.mediaQueries.aboveTablet} {
       display: none;
     }
@@ -210,7 +210,7 @@ export const NavHeaderMobile = styled.button<WithIndent>`
     justify-content: space-between;
     align-items: center;
     display: flex;
-    border-bottom: ${indent ? 'none' : '1px solid currentColor'};
+    border-bottom: ${borders ? '1px solid currentColor' : 'none'};
   `}
 `
 interface PlusWrapperProps {
@@ -252,8 +252,12 @@ export const PlusWrapper = styled.div<PlusWrapperProps>`
   `}
 `
 
-export const NavHeaderWrapper = styled.div`
-  ${({ theme }) => css`
+interface WithBorders {
+  borders?: boolean
+}
+
+export const NavHeaderWrapper = styled.div<WithBorders>`
+  ${({ theme, borders }) => css`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -262,32 +266,30 @@ export const NavHeaderWrapper = styled.div`
     margin: 0 2em;
 
     &:focus > ${NavHeader}, &:hover > ${NavHeader} {
-      border-bottom-color: black;
+      border-bottom-color: ${borders ? 'body.9' : 'transparent'};
     }
     ${theme.mediaQueries.tablet} {
       margin: 0;
       display: block;
       padding: 0;
       text-align: left;
-
-      & > ${NavHeader} {
-        border-bottom: 0px solid transparent;
-      }
     }
   `}
 `
 
 interface NavPageLinkWrapperProps {
   small?: boolean
+  borders?: boolean
+  align?: string
 }
 
 export const NavPageLinkWrapper = styled.div<NavPageLinkWrapperProps>`
-  ${({ small }) =>
+  ${({ small, borders, align }) =>
     small
       ? css`
-          text-align: center;
-          padding: 5 2;
-          border-bottom: 1px solid currentColor;
+          text-align: ${align || 'center'};
+          padding: ${borders ? '5 0' : '3 0'};
+          border-bottom: ${borders ? '1px solid currentColor' : 'none'};
         `
       : ''}
 `

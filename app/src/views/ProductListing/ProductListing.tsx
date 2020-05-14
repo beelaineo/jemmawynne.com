@@ -20,7 +20,6 @@ export const ProductListing = ({
   if (!collection || !collectionInfo) return null
   const relatedCollections =
     collection.relatedCollections || collectionInfo.relatedCollections || []
-  console.log(collection)
   return (
     <>
       <ProductListingHeader collection={collection} />

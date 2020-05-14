@@ -16,11 +16,18 @@ const { useState } = React
 interface NavPageLinkProps {
   document: InternalLink['document']
   small?: boolean
+  borders?: boolean
+  align?: string
 }
 
-const NavPageLink = ({ document, small }: NavPageLinkProps) => (
+export const NavPageLink = ({
+  document,
+  small,
+  align,
+  borders,
+}: NavPageLinkProps) => (
   <DocumentLink document={document}>
-    <NavPageLinkWrapper small={small}>
+    <NavPageLinkWrapper borders={borders} align={align} small={small}>
       <Heading
         family={small ? 'sans' : 'serif'}
         fontWeight={3}
@@ -39,18 +46,20 @@ interface SubMenuAccordionProps {
   onClick: () => void
   active: boolean
   indent?: boolean
+  borders?: boolean
 }
 
-const SubMenuAccordion = ({
+export const SubMenuAccordion = ({
   title,
   onClick,
   active,
   children,
   indent,
+  borders,
 }: SubMenuAccordionProps) => {
   return (
-    <NavHeaderWrapper>
-      <NavHeaderMobile indent={indent} onClick={onClick}>
+    <NavHeaderWrapper borders={borders}>
+      <NavHeaderMobile borders={borders} onClick={onClick}>
         <Heading
           family="serif"
           fontWeight={3}
@@ -62,11 +71,7 @@ const SubMenuAccordion = ({
         </Heading>
         <PlusWrapper active={active} />
       </NavHeaderMobile>
-      {active ? (
-        <Box mt={indent ? 0 : 4} mb={indent ? 4 : 0}>
-          {children}
-        </Box>
-      ) : null}
+      {active ? children : null}
     </NavHeaderWrapper>
   )
 }
@@ -109,62 +114,69 @@ export const TabletSubMenu = ({
           active={active}
           onClick={openSubMenu(menuItem._key)}
           title={menuItem.title}
+          borders
         >
-          {definitely(menuItem.columns).map((column) => {
-            if (!column.title) {
-              throw new Error('Menu subcolumn was not provided with a title')
-            }
+          <Box mt={5}>
+            {definitely(menuItem.columns).map((column) => {
+              if (!column.title) {
+                throw new Error('Menu subcolumn was not provided with a title')
+              }
 
-            if (!column._key) {
-              throw new Error('Menu item was not provided with a title')
-            }
+              if (!column._key) {
+                throw new Error('Menu item was not provided with a title')
+              }
 
-            const innerActive = activeInnerMenuKey === column._key
-            return (
-              <SubMenuAccordion
-                key={column._key}
-                active={innerActive}
-                onClick={openInnerMenu(column._key)}
-                title={column.title}
-                indent
-              >
-                {definitely(column.links).map((link) => {
-                  switch (link.__typename) {
-                    case 'RichPageLink':
-                      return (
-                        <NavPageLink
-                          small
-                          key={link._key || 'some-key'}
-                          document={link.document}
-                        />
-                      )
-                    case 'LinkGroup':
-                      return (
-                        <React.Fragment key={link._key || 'some-key'}>
-                          {definitely(link.links).map((linkGroupLink) => (
+              const innerActive = activeInnerMenuKey === column._key
+              return (
+                <SubMenuAccordion
+                  key={column._key}
+                  active={innerActive}
+                  onClick={openInnerMenu(column._key)}
+                  title={column.title}
+                  indent
+                >
+                  <Box mb={4}>
+                    {definitely(column.links).map((link) => {
+                      switch (link.__typename) {
+                        case 'RichPageLink':
+                          return (
                             <NavPageLink
                               small
-                              key={linkGroupLink._key || 'some-key'}
-                              document={linkGroupLink.document}
+                              key={link._key || 'some-key'}
+                              document={link.document}
+                              borders
                             />
-                          ))}
-                        </React.Fragment>
-                      )
+                          )
+                        case 'LinkGroup':
+                          return (
+                            <React.Fragment key={link._key || 'some-key'}>
+                              {definitely(link.links).map((linkGroupLink) => (
+                                <NavPageLink
+                                  small
+                                  key={linkGroupLink._key || 'some-key'}
+                                  document={linkGroupLink.document}
+                                  borders
+                                />
+                              ))}
+                            </React.Fragment>
+                          )
 
-                    default:
-                      return null
-                  }
-                })}
-              </SubMenuAccordion>
-            )
-          })}
+                        default:
+                          return null
+                      }
+                    })}
+                  </Box>
+                </SubMenuAccordion>
+              )
+            })}
+          </Box>
         </SubMenuAccordion>
       )
     case 'Cta':
       if (!menuItem?.link?.document) return null
       return (
         <NavHeaderWrapper key={menuItem._key}>
-          <NavHeaderMobile>
+          <NavHeaderMobile borders>
             <NavPageLink document={menuItem.link.document} />
           </NavHeaderMobile>
         </NavHeaderWrapper>

@@ -12,11 +12,13 @@ import { RichText } from '../../components/RichText'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { NewsletterSignup } from './NewsletterSignup'
 import { FooterLinkGroup } from './FooterLinkGroup'
+import { TabletLinks } from './TabletLinks'
+import { definitely } from '../../utils'
 import {
   Socials,
   FooterWrapper,
   Company,
-  FooterLinks,
+  LinkGroupsWrapper,
   LinkGroupWrapper,
   LogoWrapper,
   FooterBottom,
@@ -65,36 +67,36 @@ export const Footer = () => {
         </a>
       </Socials>
       <NewsletterSignup />
-      <FooterLinks>
-        <Company>
-          <LogoWrapper>
-            <Logo />
-          </LogoWrapper>
-          <RichText body={aboutRaw} blockWrapper={AboutText} />
-        </Company>
+      <Company>
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+        <RichText body={aboutRaw} blockWrapper={AboutText} />
+      </Company>
+      <LinkGroupsWrapper>
         {linkGroups
-          ? linkGroups.map((group) =>
-              group ? (
-                <LinkGroupWrapper key={group._key || 'some-key'}>
-                  <FooterLinkGroup linkGroup={group} />
-                </LinkGroupWrapper>
-              ) : null,
-            )
+          ? definitely(linkGroups).map((group) => (
+              <LinkGroupWrapper key={group._key || 'some-key'}>
+                <FooterLinkGroup linkGroup={group} />
+              </LinkGroupWrapper>
+            ))
           : null}
-      </FooterLinks>
+      </LinkGroupsWrapper>
+      <TabletLinks linkGroups={definitely(linkGroups)} />
+
       <FooterBottom>
-        <Heading color="body.7" pt="5px" level={4}>
-          © {currentYear} Jemma Wynne
-        </Heading>
-        <Heading color="body.7" pt="5px" level={4}>
+        <Heading color="body.7" pt="5px" level={5}>
           <Link href="/[pageSlug]" as="/terms-and-conditions">
             <a>Terms & Conditions</a>
           </Link>
         </Heading>
-        <Heading color="body.7" pt="5px" level={4}>
+        <Heading color="body.7" pt="5px" level={5}>
           <Link href="/[pageSlug]" as="/privacy-policy">
             <a>Privacy Policy</a>
           </Link>
+        </Heading>
+        <Heading color="body.7" pt="5px" level={5}>
+          © {currentYear} Jemma Wynne
         </Heading>
       </FooterBottom>
     </FooterWrapper>

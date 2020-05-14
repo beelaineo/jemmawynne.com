@@ -1,32 +1,12 @@
 import * as React from 'react'
-import styled, { css } from '@xstyled/styled-components'
 import { LinkGroup as LinkGroupType } from '../../types'
 import { DocumentLink } from '../DocumentLink'
 import { Heading } from '../Text'
+import { FooterLinkGroupWrapper, LinksWrapper } from './styled'
 
 interface FooterLinkGroupProps {
   linkGroup: LinkGroupType
 }
-
-const FooterLinkGroupWrapper = styled.div`
-  ${({ theme }) => css`
-    ${theme.mediaQueries.tablet} {
-      width: 100%;
-    }
-  `}
-`
-
-const LinksWrapper = styled.div`
-  ${({ theme }) => css`
-    margin-top: 15px;
-    ${theme.mediaQueries.tablet} {
-      margin-top: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-column-gap: 10px;
-    }
-  `}
-`
 
 export const FooterLinkGroup = ({ linkGroup }: FooterLinkGroupProps) => {
   const { title, links } = linkGroup

@@ -38,7 +38,5 @@ export const ProductRelated = (props: ProductRelatedProps) => {
     title: defaultTitle,
     collection: collections[0],
   }
-  console.log(defaultCollection)
-  // @ts-ignore TODO update after graphql migration
   return <CarouselBlock content={collectionContent} />
 }
