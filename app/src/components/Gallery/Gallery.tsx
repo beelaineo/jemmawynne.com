@@ -15,7 +15,7 @@ type GalleryImage = ImageType | ShopifySourceImage
 
 interface GalleryProps {
   images: GalleryImage[]
-  currentImageId: string
+  currentImageId?: string | null
 }
 
 const ZOOM_AMOUNT = 2
@@ -36,7 +36,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
     parsedImages.find((i) => i.imageId === imageId) || images[0]
 
   const [currentImage, setCurrentImage] = useState(
-    getImageById(currentImageId) || images[0],
+    currentImageId ? getImageById(currentImageId) : images[0],
   )
 
   /* State */
@@ -48,6 +48,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 
   /* Update the current image if a new prop is passed in */
   useEffect(() => {
+    if (!currentImageId) return
     setCurrentImage(getImageById(currentImageId))
   }, [currentImageId])
 

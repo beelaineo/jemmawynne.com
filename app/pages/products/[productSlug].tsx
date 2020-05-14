@@ -1,7 +1,7 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
 import { PageContext } from '../_app'
-import { ShopifyProduct } from '../../src/types'
+import { ShopifyProduct, ShopifyCollection } from '../../src/types'
 import {
   saneShopifyCollectionFragment,
   saneShopifyProductFragment,
@@ -10,11 +10,12 @@ import { NotFound, ProductDetail } from '../../src/views'
 
 interface ProductProps {
   product?: ShopifyProduct
+  collections: ShopifyCollection[]
 }
 
-const Product = ({ product }: ProductProps) => {
+const Product = ({ product, collections }: ProductProps) => {
   if (!product) return <NotFound />
-  return <ProductDetail product={product} />
+  return <ProductDetail product={product} collections={collections} />
 }
 
 const productQuery = gql`
@@ -23,8 +24,19 @@ const productQuery = gql`
       where: { handle: { eq: $handle }, archived: { neq: true } }
     ) {
       ...SaneShopifyProductFragment
-      collections {
-        ...SaneShopifyCollectionFragment
+    }
+  }
+  ${saneShopifyProductFragment}
+`
+
+const collectionsQuery = gql`
+  query ProductPageCollectionsQuery($productId: ID) {
+    allShopifyCollection(
+      where: { _: { references: $productId }, archived: { neq: true } }
+    ) {
+      ...SaneShopifyCollectionFragment
+      products {
+        ...SaneShopifyProductFragment
       }
     }
   }
@@ -33,7 +45,11 @@ const productQuery = gql`
 `
 
 interface ProductResponse {
-  allShopifyProduct: [ShopifyProduct]
+  allShopifyProduct: ShopifyProduct[]
+}
+
+interface CollectionsResponse {
+  allShopifyCollection: ShopifyCollection[]
 }
 
 Product.getInitialProps = async (ctx: PageContext) => {
@@ -47,7 +63,18 @@ Product.getInitialProps = async (ctx: PageContext) => {
   const products = productResponse?.data?.allShopifyProduct
   const product = products.length ? products[0] : undefined
 
-  return { product }
+  const collectionsResponse = product
+    ? await apolloClient.query<CollectionsResponse>({
+        query: collectionsQuery,
+        variables: { productId: product._id },
+      })
+    : undefined
+
+  const collections = collectionsResponse
+    ? collectionsResponse?.data?.allShopifyCollection
+    : []
+
+  return { product, collections }
 }
 
 export default Product

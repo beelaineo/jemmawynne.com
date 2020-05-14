@@ -3,7 +3,8 @@ import styled, { css } from '@xstyled/styled-components'
 import App from 'next/app'
 import Head from 'next/head'
 import { ApolloClient } from 'apollo-client'
-import { SearchResults, Navigation } from '../src/views'
+import { SearchResults } from '../src/components/Search'
+import { Navigation } from '../src/components/Navigation'
 import { Footer } from '../src/components/Footer'
 import { Announcement } from '../src/components/Announcement'
 import { Providers } from '../src/providers/AllProviders'
@@ -22,25 +23,9 @@ export interface PageContext {
   apolloClient: ApolloClient<any>
 }
 
-const Main = styled.main`
-  ${({ theme }) => css`
-    ${theme.mediaQueries.tablet} {
-      padding-top: 42px;
-    }
-  `}
-`
+const Main = styled.main``
 
 class MyApp extends App {
-  // static async getInitialProps({ Component, ctx }) {
-  //   let pageProps = {}
-  //
-  //   if (Component.getInitialProps) {
-  //     pageProps = await Component.getInitialProps(ctx)
-  //   }
-  //
-  //   return { pageProps }
-  // }
-
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     Sentry.withScope((scope) => {
       Object.keys(errorInfo).forEach((key) => {

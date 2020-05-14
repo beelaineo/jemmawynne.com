@@ -2,10 +2,9 @@ import * as React from 'react'
 import { useCheckout } from 'use-shopify'
 import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney } from '../../utils'
-import { QuantitySelectorCart } from '../ProductDetail/styled'
 import { Image } from '../../components/Image'
 import { Heading } from '../../components/Text'
-import { Wrapper } from './styled'
+import { QuantitySelectorCart, Wrapper } from './styled'
 
 interface CheckoutProductProps {
   lineItem: StorefrontApiCheckoutLineItem

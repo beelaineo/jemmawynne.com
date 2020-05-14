@@ -3,6 +3,7 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 import { ShopifyCollection, ShopifyProduct } from '../../types'
 import { Carousel } from './Carousel'
 import { ProductThumbnail } from '../Product'
+import { definitely } from '../../utils'
 
 interface CollectionCarouselProps {
   collection: ShopifyCollection
@@ -15,15 +16,16 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
 
   return (
     <Carousel>
-      {//
-      // @ts-ignore no clue here
-      products.map((product: Product | ShopifyProductSource) => {
-        const key =
-          product.__typename === 'Product'
-            ? product.id
-            : product._key || 'some-key'
-        return <ProductThumbnail key={key} product={product} />
-      })}
+      {definitely(products)
+        .filter((product) => product?.archived !== true)
+        .map((product) => {
+          return (
+            <ProductThumbnail
+              key={product._key || 'some-key'}
+              product={product}
+            />
+          )
+        })}
     </Carousel>
   )
 }

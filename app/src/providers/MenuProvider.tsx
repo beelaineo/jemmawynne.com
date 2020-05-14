@@ -1,6 +1,7 @@
 import * as React from 'react'
+import { useLockScroll } from '../components/LockScroll'
 
-const { useReducer } = React
+const { useReducer, useEffect } = React
 
 interface NavState {
   cartOpen: boolean
@@ -120,8 +121,17 @@ const initialState = {
 
 export const MenuProvider = ({ children }: MenuProps) => {
   const [state, dispatch] = useReducer(navReducer, initialState)
+  const { lockScroll, unlockScroll } = useLockScroll()
 
   const { menuOpen } = state
+
+  useEffect(() => {
+    if (menuOpen) {
+      lockScroll()
+    } else {
+      unlockScroll()
+    }
+  }, [menuOpen])
 
   const openMenu = () => dispatch({ type: OPEN_MENU })
   const closeMenu = () => dispatch({ type: CLOSE_MENU })

@@ -1,7 +1,5 @@
-export { Navigation } from './Navigation'
 export { ProductListing } from './ProductListing'
 export { ProductDetail } from './ProductDetail'
-export * from './SearchResults'
 export * from './NotFound'
 export * from './StaticPage'
 export * from './Stockists'

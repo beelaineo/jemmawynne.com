@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Swipeable, useSwipeable, EventData } from 'react-swipeable'
+import { useSwipeable, EventData } from 'react-swipeable'
 import {
   CarouselContainer,
   SlidesContainer,
@@ -37,8 +37,8 @@ export const CarouselInner = ({
 }: CarouselProps) => {
   const columnCount = customColumnCount || 4
   const { currentSlide, setCurrentSlide } = useCarousel()
-  const [hideButtons, setHideButtons] = useState(false)
-  const [hasOverflow, setHasOverflow] = useState(false)
+  // const [hideButtons, setHideButtons] = useState(false)
+  // const [hasOverflow, setHasOverflow] = useState(false)
   const [attempts, setAttempts] = useState(0)
   const [slides, setSlides] = useState<SlideInfo[]>([])
   const innerRef = useRef<HTMLDivElement>(null)
@@ -78,9 +78,9 @@ export const CarouselInner = ({
       }, 100)
       return () => clearTimeout(timeoutId)
     }
-    if (accWidth > outerRef.current.offsetWidth) {
-      setHasOverflow(true)
-    }
+    // if (accWidth > outerRef.current.offsetWidth) {
+    //   setHasOverflow(true)
+    // }
   }, [outerRef.current, attempts])
 
   const addSlide = useMemo(

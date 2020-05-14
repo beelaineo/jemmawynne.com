@@ -19,6 +19,7 @@ export const ProductThumbnail = ({
   product,
 }: ProductThumbnail) => {
   if (!product) return null
+  if (product.archived === true) return null
   const { sourceData } = product
   if (!sourceData) return null
   const productImages = product?.sourceData?.images

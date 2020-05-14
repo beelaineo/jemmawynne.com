@@ -20,6 +20,7 @@ export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
         if (!item) return null
 
         const { __typename, _key } = item
+
         if (!__typename)
           throw new Error(
             `There is no carousel thumbnail for type "${__typename}"`,

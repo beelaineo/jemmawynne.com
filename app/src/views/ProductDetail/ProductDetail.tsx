@@ -1,7 +1,11 @@
 import * as React from 'react'
 import { useProductVariant, useCheckout } from 'use-shopify'
 import { Box } from '@xstyled/styled-components'
-import { ProductInfoBlock, ShopifyProduct } from '../../types'
+import {
+  ProductInfoBlock,
+  ShopifyProduct,
+  ShopifyCollection,
+} from '../../types'
 import { Column } from '../../components/Layout'
 import {
   ProductVariantSelector,
@@ -22,9 +26,10 @@ import { Accordion } from '../../components/Accordion'
 
 interface Props {
   product: ShopifyProduct
+  collections: ShopifyCollection[]
 }
 
-export const ProductDetail = ({ product }: Props) => {
+export const ProductDetail = ({ product, collections }: Props) => {
   /* get additional info blocks from Sanity */
   const { getProductInfoBlocks } = useShopData()
   const { sourceData } = product
@@ -99,7 +104,7 @@ export const ProductDetail = ({ product }: Props) => {
           </ProductInfoWrapper>
         </ProductDetails>
       </Column>
-      <ProductRelated product={product} />
+      <ProductRelated product={product} collections={collections} />
     </Wrapper>
   )
 }

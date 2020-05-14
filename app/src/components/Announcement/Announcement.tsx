@@ -21,6 +21,8 @@ const AnnouncementWrapper = styled.div`
     overflow: hidden;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 0 2;
     height: ${open ? '45px' : '0'};
     background-color: body.2;
     transition: 0.5s;

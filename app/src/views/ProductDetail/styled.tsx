@@ -104,68 +104,6 @@ interface ButtonProps {
   isDisabled?: boolean
 }
 
-interface QuantitySelector {
-  theme: DefaultTheme
-  width?: string
-}
-
-export const QuantitySelector = styled.div`
-  ${(props: QuantitySelector) => css`
-    input[type='text'] {
-      min-width: ${props.width ? props.width : 'initial'};
-      max-width: ${props.width ? props.width : 'initial'};
-    }
-  `}
-  button {
-    text-align-last: center;
-    height: 50px;
-    border: 1px solid #f1f1f1;
-    border-radius: 0;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    font-size: 0.85rem;
-    cursor: pointer;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    background: none;
-    border-radius: 0;
-    border: 1px solid #f1f1f1;
-    padding: 0.5rem 1.2rem;
-    font-family: sans-serif;
-  }
-  input {
-    text-align: center;
-    width: 109px;
-  }
-`
-
-export const QuantitySelectorCart = styled(QuantitySelector)`
-  margin-top: 4;
-  margin-bottom: 2;
-  button {
-    text-align-last: center;
-    height: 1em;
-    width: 1em;
-    font-size: 6;
-    border: none;
-    transition: 0.2s;
-    cursor: pointer;
-    appearance: none;
-    background: none;
-    border-radius: 0;
-
-    margin: 0 2;
-    padding: 0;
-    font-family: sans;
-  }
-  input {
-    text-align: center;
-    width: 2px;
-  }
-`
-
 export const Label = styled.label`
   display: block;
   margin-bottom: 4;

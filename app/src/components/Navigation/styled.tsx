@@ -1,4 +1,4 @@
-import * as React from 'react'
+// @ts-ignore
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 import {
   Wrapper as ImageElementWrapper,
@@ -13,7 +13,8 @@ export const Wrapper = styled.header`
     font-family: sans;
 
     ${theme.mediaQueries.tablet} {
-      position: fixed;
+      position: sticky;
+      top: 0;
       height: 42px;
       width: 100%;
       background-color: white;
@@ -27,24 +28,23 @@ export const NavTop = styled.div`
     margin-bottom: 5;
     display: flex;
     width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
 
+    svg {
+      max-height: 100%;
+    }
+
     ${theme.mediaQueries.tablet} {
-      padding-top: 3;
-      padding-bottom: 3;
+      padding-top: 0;
       margin-bottom: 0;
     }
   `}
 `
 
-interface InnerProps {
-  theme: DefaultTheme
-  open: boolean
-}
-
-export const Inner = styled.nav`
-  ${({ theme, open }: InnerProps) => css`
+export const DesktopInner = styled.nav`
+  ${({ theme }) => css`
     display: flex;
     justify-content: center;
     width: 100%;
@@ -54,15 +54,28 @@ export const Inner = styled.nav`
     margin: 0 auto;
 
     ${theme.mediaQueries.tablet} {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      left: ${open ? '0' : '-102vw'};
-      transition: 0.3s;
-      background-color: white;
-      padding: 3 5;
-      display: block;
+      display: none;
     }
+  `}
+`
+interface InnerProps {
+  theme: DefaultTheme
+  open: boolean
+}
+
+export const TabletInner = styled.nav`
+  ${({ theme, open }: InnerProps) => css`
+    ${theme.mediaQueries.aboveTablet} {
+      display: none;
+    }
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: ${open ? '0' : '-102vw'};
+    transition: 0.3s;
+    background-color: body.2;
+    padding: 3 6;
+    display: block;
   `}
 `
 
@@ -132,7 +145,7 @@ export const LogoWrapper = styled.div`
 
     ${theme.mediaQueries.tablet} {
       max-width: 60vw;
-      max-height: 21px;
+      height: 17px;
     }
   `}
 `
@@ -175,29 +188,72 @@ export const CartButton = styled.button`
 
 export const NavHeader = styled.div`
   border-bottom: 1px solid transparent;
-  font-weight: 2;
   letter-spacing: 0.08em;
   padding-bottom: 1;
   transition: 0.2s;
 `
 
-interface NavHeaderWrapperProps {
+interface WithIndent {
+  indent?: boolean
+}
+
+export const NavHeaderMobile = styled.button<WithIndent>`
+  ${({ theme, indent }) => css`
+    ${theme.mediaQueries.aboveTablet} {
+      display: none;
+    }
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: 3 0;
+    background-color: transparent;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    border-bottom: ${indent ? 'none' : '1px solid currentColor'};
+  `}
+`
+interface PlusWrapperProps {
   theme: DefaultTheme
   active?: boolean
 }
 
-export const RightArrowSpan = styled.span`
-  ${({ theme }) => css`
+export const PlusWrapper = styled.div<PlusWrapperProps>`
+  ${({ theme, active }) => css`
     display: none;
     ${theme.mediaQueries.tablet} {
       display: initial;
       vertical-align: top;
+      width: 16px;
+      height: 16px;
+      position: relative;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        background-color: currentColor;
+      }
+
+      &:before {
+        height: 100%;
+        width: 1px;
+        top: 0;
+        left: 8px;
+        display: ${active ? 'none' : 'initial'};
+      }
+      &:after {
+        width: 100%;
+        height: 1px;
+        top: 8px;
+        left: 0;
+      }
     }
   `}
 `
 
 export const NavHeaderWrapper = styled.div`
-  ${({ theme, active }: NavHeaderWrapperProps) => css`
+  ${({ theme }) => css`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -208,18 +264,10 @@ export const NavHeaderWrapper = styled.div`
     &:focus > ${NavHeader}, &:hover > ${NavHeader} {
       border-bottom-color: black;
     }
-    ${active
-      ? css`
-          & > ${NavHeader} {
-            border-bottom-color: black;
-          }
-        `
-      : ''}
-
     ${theme.mediaQueries.tablet} {
       margin: 0;
       display: block;
-      padding: 3 0;
+      padding: 0;
       text-align: left;
 
       & > ${NavHeader} {
@@ -227,6 +275,21 @@ export const NavHeaderWrapper = styled.div`
       }
     }
   `}
+`
+
+interface NavPageLinkWrapperProps {
+  small?: boolean
+}
+
+export const NavPageLinkWrapper = styled.div<NavPageLinkWrapperProps>`
+  ${({ small }) =>
+    small
+      ? css`
+          text-align: center;
+          padding: 5 2;
+          border-bottom: 1px solid currentColor;
+        `
+      : ''}
 `
 
 interface WithOpen {

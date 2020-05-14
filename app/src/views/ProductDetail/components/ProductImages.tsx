@@ -22,15 +22,14 @@ export const ProductImages = ({
     !sourceData ||
     !sourceData.images ||
     !sourceData.images.edges ||
-    !sourceData.images.edges.length ||
-    !currentVariant?.image?.id
+    !sourceData.images.edges.length
   )
     return null
   // @ts-ignore
   const [images] = unwindEdges<Image>(product.sourceData.images)
   return (
     <ProductGalleryWrapper>
-      <Gallery images={images} currentImageId={currentVariant.image.id} />
+      <Gallery images={images} currentImageId={currentVariant?.image?.id} />
     </ProductGalleryWrapper>
   )
 }

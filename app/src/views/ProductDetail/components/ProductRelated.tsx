@@ -1,13 +1,14 @@
 import * as React from 'react'
-import { ShopifyProduct } from '../../../types'
+import { ShopifyProduct, ShopifyCollection } from '../../../types'
 import { CarouselBlock } from '../../../components/ContentBlock/CarouselBlock'
 
 interface ProductRelatedProps {
   product: ShopifyProduct
+  collections: ShopifyCollection[]
 }
 
 export const ProductRelated = (props: ProductRelatedProps) => {
-  const { product } = props
+  const { collections, product } = props
   const customRelated = product?.related
   /* Return a custom carousel */
   if (customRelated && customRelated.collection) {
@@ -28,7 +29,6 @@ export const ProductRelated = (props: ProductRelatedProps) => {
   }
 
   /* Otherwise, find the first collection form the product */
-  const { collections } = product
   if (!collections || !collections.length) return null
 
   const defaultCollection = collections[0]
@@ -38,6 +38,7 @@ export const ProductRelated = (props: ProductRelatedProps) => {
     title: defaultTitle,
     collection: collections[0],
   }
+  console.log(defaultCollection)
   // @ts-ignore TODO update after graphql migration
   return <CarouselBlock content={collectionContent} />
 }
