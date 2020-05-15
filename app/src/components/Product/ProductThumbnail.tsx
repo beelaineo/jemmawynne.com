@@ -5,6 +5,7 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 import { Heading } from '../Text'
 import { Image } from '../Image'
 import { formatMoney } from '../../utils'
+import { ProductSwatches } from './ProductSwatches'
 import { ProductInfo, ProductThumb } from './styled'
 
 interface ProductThumbnail {
@@ -61,6 +62,7 @@ export const ProductThumbnail = ({
                 {formatMoney(maxVariantPrice)}
               </Heading>
             ) : null}
+            <ProductSwatches product={product} />
           </ProductInfo>
         </ProductThumb>
       </a>

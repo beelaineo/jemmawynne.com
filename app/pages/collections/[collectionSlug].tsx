@@ -59,6 +59,10 @@ const productsQuery = gql`
         title
         handle
         tags
+        options {
+          name
+          values
+        }
         priceRange {
           minVariantPrice {
             amount

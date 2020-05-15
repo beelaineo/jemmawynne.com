@@ -89,7 +89,7 @@ export interface Carousel {
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
-  /** Create a carousel from a collection. If a collection is used, items linked to below be ignored. */
+  /** Create a carousel from a collection. If a collection is used, items linked to below will be ignored. */
   collection?: Maybe<ShopifyCollection>
   items?: Maybe<Array<Maybe<RichPageLink>>>
 }
@@ -700,6 +700,7 @@ export interface ProductInfo extends Document {
    */
   byTagHelpText?: Maybe<Scalars['String']>
   blocksByTag?: Maybe<Array<Maybe<ProductInfoBlocksByTag>>>
+  swatches?: Maybe<Array<Maybe<Swatch>>>
 }
 
 export interface ProductInfoBlock {
@@ -2168,6 +2169,29 @@ export type SubMenuSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
+}
+
+export interface Swatch {
+  __typename: 'Swatch'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  /** This must match the name of the option in Shopify */
+  colorName?: Maybe<Scalars['String']>
+  swatchImage?: Maybe<Image>
+}
+
+export type SwatchFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  colorName?: Maybe<StringFilter>
+  swatchImage?: Maybe<ImageFilter>
+}
+
+export type SwatchSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  colorName?: Maybe<SortOrder>
+  swatchImage?: Maybe<ImageSorting>
 }
 
 export interface TextBlock {

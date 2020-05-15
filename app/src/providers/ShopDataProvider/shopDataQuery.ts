@@ -4,6 +4,7 @@ import {
   ctaFragment,
   internalLinkFragment,
   richPageLinkFragment,
+  sanityRichImageFragment,
   sanityImageFragment,
   productInfoFragment,
 } from '../../graphql'
@@ -41,7 +42,7 @@ export const SHOP_DATA_QUERY = gql`
             }
 
             images {
-              ...SanityImageFragment
+              ...SanityRichImageFragment
             }
           }
         }
@@ -73,6 +74,14 @@ export const SHOP_DATA_QUERY = gql`
         tag
         infoBlocks {
           ...ProductInfoFragment
+        }
+      }
+      swatches {
+        _type
+        _key
+        colorName
+        swatchImage {
+          ...SanityImageFragment
         }
       }
     }
@@ -117,6 +126,7 @@ export const SHOP_DATA_QUERY = gql`
   ${productInfoFragment}
   ${richPageLinkFragment}
   ${sanityImageFragment}
+  ${sanityRichImageFragment}
 `
 
 export interface ShopDataResponse {

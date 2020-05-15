@@ -100,7 +100,17 @@ export const sanityImageAssetFragment = gql`
 `
 
 export const sanityImageFragment = gql`
-  fragment SanityImageFragment on RichImage {
+  fragment SanityImageFragment on Image {
+    _key
+    asset {
+      ...SanityImageAssetFragment
+    }
+  }
+  ${sanityImageAssetFragment}
+`
+
+export const sanityRichImageFragment = gql`
+  fragment SanityRichImageFragment on RichImage {
     _key
     altText
     asset {
@@ -131,13 +141,13 @@ export const heroFragment = gql`
       ...CTAFragment
     }
     mobileImage {
-      ...SanityImageFragment
+      ...SanityRichImageFragment
     }
     image {
-      ...SanityImageFragment
+      ...SanityRichImageFragment
     }
   }
-  ${sanityImageFragment}
+  ${sanityRichImageFragment}
   ${ctaFragment}
 `
 
@@ -146,17 +156,17 @@ export const imageBlockFragment = gql`
     _key
     _type
     backgroundImage {
-      ...SanityImageFragment
+      ...SanityRichImageFragment
     }
     hoverImage {
-      ...SanityImageFragment
+      ...SanityRichImageFragment
     }
     captionRaw
     link {
       ...InternalLinkFragment
     }
   }
-  ${sanityImageFragment}
+  ${sanityRichImageFragment}
   ${internalLinkFragment}
 `
 
@@ -293,10 +303,10 @@ export const richPageLinkFragment = gql`
     title
     captionRaw
     image {
-      ...SanityImageFragment
+      ...SanityRichImageFragment
     }
     hoverImage {
-      ...SanityImageFragment
+      ...SanityRichImageFragment
     }
     document {
       ... on Page {
@@ -315,7 +325,7 @@ export const richPageLinkFragment = gql`
       }
     }
   }
-  ${sanityImageFragment}
+  ${sanityRichImageFragment}
   ${saneShopifyCollectionFragment}
   ${saneShopifyProductFragment}
 `
