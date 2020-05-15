@@ -42,8 +42,9 @@ export const ProductDetail = ({ product, collections }: Props) => {
   /* hook to manage quantity input */
   const { count: quantity, increment, decrement } = useCounter(1, { min: 1 })
   /* get product variant utils */
+  if (!product.sourceData) return null
+
   const { currentVariant, selectVariant } = useProductVariant(
-    // @ts-ignore
     product.sourceData,
   )
 

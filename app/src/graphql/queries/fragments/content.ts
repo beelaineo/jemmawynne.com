@@ -214,6 +214,32 @@ export const saneShopifySourceImagesFragment = gql`
   ${saneShopifySourceImageFragment}
 `
 
+export const productSourceVariantFragment = gql`
+  fragment ProductSourceVariantFragment on ShopifySourceProductVariant {
+    _key
+    _type
+    availableForSale
+    id
+    title
+    sku
+    weight
+    weightUnit
+    image {
+      ...ShopifySourceImageFragment
+    }
+    priceV2 {
+      ...ShopifyMoneyV2Fragment
+    }
+    requiresShipping
+    selectedOptions {
+      name
+      value
+    }
+  }
+  ${shopifySourceImageFragment}
+  ${saneMoneyV2Fragment}
+`
+
 export const saneShopifyProductFragment = gql`
   fragment SaneShopifyProductFragment on ShopifyProduct {
     _id
@@ -243,9 +269,7 @@ export const saneShopifyProductFragment = gql`
         edges {
           cursor
           node {
-            _key
-            _type
-            id
+            ...ProductSourceVariantFragment
           }
         }
       }
@@ -266,6 +290,7 @@ export const saneShopifyProductFragment = gql`
   }
   ${saneMoneyV2Fragment}
   ${productInfoFragment}
+  ${productSourceVariantFragment}
   ${saneShopifySourceImagesFragment}
 `
 

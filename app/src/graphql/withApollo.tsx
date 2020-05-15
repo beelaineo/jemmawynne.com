@@ -27,7 +27,8 @@ const createApolloClient = (initialState = {}) => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
-      uri: SANITY_GRAPHQL_URL,
+      // uri: SANITY_GRAPHQL_URL,
+      uri: `${SANITY_GRAPHQL_URL}x`,
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),
@@ -84,15 +85,6 @@ export const withApollo = ({ ssr = true } = {}) => (PageComponent) => {
     WithApollo.getInitialProps = async (ctx) => {
       const { AppTree } = ctx
       const inAppContext = Boolean(ctx.ctx)
-
-      if (process.env.NODE_ENV === 'development') {
-        if (inAppContext) {
-          console.warn(
-            'Warning: You have opted-out of Automatic Static Optimization due to `withApollo` in `pages/_app`.\n' +
-              'Read more: https://err.sh/next.js/opt-out-auto-static-optimization\n',
-          )
-        }
-      }
 
       if (ctx.apolloClient) {
         throw new Error('Multiple instances of withApollo found.')
