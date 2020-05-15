@@ -2,7 +2,7 @@ import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 import { ApolloProvider } from '@apollo/react-hooks'
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient, QueryOptions, ApolloQueryResult } from 'apollo-client'
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher,
@@ -27,8 +27,7 @@ const createApolloClient = (initialState = {}) => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
-      // uri: SANITY_GRAPHQL_URL,
-      uri: `${SANITY_GRAPHQL_URL}x`,
+      uri: SANITY_GRAPHQL_URL,
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import { PageContext } from '../_app'
+import { PageContext, catchErrors } from '../_app'
 import { ShopifyProduct, ShopifyCollection } from '../../src/types'
 import { NotFound, ProductListing } from '../../src/views'
 import { heroFragment, shopifySourceImageFragment } from '../../src/graphql'
@@ -106,7 +106,7 @@ const Collection = ({ collection, products }: CollectionProps) => {
   return <ProductListing collection={collection} products={products} />
 }
 
-Collection.getInitialProps = async (ctx: PageContext) => {
+Collection.getInitialProps = catchErrors(async (ctx: PageContext) => {
   const { apolloClient, query } = ctx
   const collectionResponse = await apolloClient.query<CollectionResponse>({
     query: collectionQuery,
@@ -126,6 +126,6 @@ Collection.getInitialProps = async (ctx: PageContext) => {
   const products = productsResponse?.data?.allShopifyProduct || []
 
   return { collection, products }
-}
+})
 
 export default Collection

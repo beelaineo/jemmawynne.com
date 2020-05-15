@@ -1,6 +1,6 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import { PageContext } from '../_app'
+import { PageContext, catchErrors } from '../_app'
 import { ShopifyProduct, ShopifyCollection } from '../../src/types'
 import {
   saneShopifyCollectionFragment,
@@ -52,29 +52,35 @@ interface CollectionsResponse {
   allShopifyCollection: ShopifyCollection[]
 }
 
-Product.getInitialProps = async (ctx: PageContext) => {
+Product.getInitialProps = catchErrors(async (ctx: PageContext) => {
   const { apolloClient, query } = ctx
   const { productSlug } = query
-  const productResponse = await apolloClient.query<ProductResponse>({
-    query: productQuery,
-    variables: { handle: productSlug },
-  })
+  try {
+    const productResponse = await apolloClient.query<ProductResponse>({
+      query: productQuery,
+      variables: { handle: productSlug },
+    })
 
-  const products = productResponse?.data?.allShopifyProduct
-  const product = products.length ? products[0] : undefined
+    const products = productResponse?.data?.allShopifyProduct
+    const product = products.length ? products[0] : undefined
 
-  const collectionsResponse = product
-    ? await apolloClient.query<CollectionsResponse>({
-        query: collectionsQuery,
-        variables: { productId: product._id },
-      })
-    : undefined
+    const collectionsResponse = product
+      ? await apolloClient.query<CollectionsResponse>({
+          query: collectionsQuery,
+          variables: { productId: product._id },
+        })
+      : undefined
 
-  const collections = collectionsResponse
-    ? collectionsResponse?.data?.allShopifyCollection
-    : []
+    const collections = collectionsResponse
+      ? collectionsResponse?.data?.allShopifyCollection
+      : []
 
-  return { product, collections }
-}
+    return { product, collections }
+  } catch (error) {
+    return {
+      error,
+    }
+  }
+})
 
 export default Product

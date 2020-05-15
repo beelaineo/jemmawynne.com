@@ -6,7 +6,7 @@ import { ShopifyProvider } from 'use-shopify'
 import { defaultTheme, GlobalStyles } from '../theme'
 import { ShopDataProvider } from './ShopDataProvider'
 import { MenuProvider } from './MenuProvider'
-import { ErrorProvider } from './ErrorProvider'
+import { useError } from './ErrorProvider'
 import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
 
 /**
@@ -31,41 +31,45 @@ const deduplicateFragments = (queryString: string) =>
     }, [])
     .join('\n\n')
 
-async function shopifyQuery<Response>(
-  query: string | DocumentNode,
-  variables: object,
-): Promise<Response> {
-  const queryString =
-    typeof query === 'string'
-      ? query
-      : //
-        // @ts-ignore
-        deduplicateFragments(query.loc.source.body)
-  const result = await fetch(SHOPIFY_STOREFRONT_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
-      'X-Shopify-Storefront-Access-Tokens': SHOPIFY_STOREFRONT_TOKEN,
-    },
-    body: JSON.stringify({ query: queryString, variables }),
-  }).then((r) => r.json())
-  return result
+type ErrorHandler = (err: Error) => void
+
+const shopifyQuery = (handleError: ErrorHandler) => {
+  return async function <Response>(
+    query: string | DocumentNode,
+    variables: object,
+  ): Promise<Response> {
+    const queryString =
+      typeof query === 'string'
+        ? query
+        : //
+          // @ts-ignore
+          deduplicateFragments(query.loc.source.body)
+    const result = await fetch(SHOPIFY_STOREFRONT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
+      },
+      body: JSON.stringify({ query: queryString, variables }),
+    })
+      .then((r) => r.json())
+      .catch((err) => handleError(err))
+    return result
+  }
 }
 
 export const Providers = ({ children }: Props) => {
+  const { handleError } = useError()
   return (
-    <ErrorProvider>
-      <ShopifyProvider query={shopifyQuery}>
-        <ShopDataProvider>
-          <ThemeProvider theme={defaultTheme}>
-            <MenuProvider>
-              <GlobalStyles />
-              {children}
-            </MenuProvider>
-          </ThemeProvider>
-        </ShopDataProvider>
-      </ShopifyProvider>
-    </ErrorProvider>
+    <ShopifyProvider query={shopifyQuery(handleError)}>
+      <ShopDataProvider>
+        <ThemeProvider theme={defaultTheme}>
+          <MenuProvider>
+            <GlobalStyles />
+            {children}
+          </MenuProvider>
+        </ThemeProvider>
+      </ShopDataProvider>
+    </ShopifyProvider>
   )
 }

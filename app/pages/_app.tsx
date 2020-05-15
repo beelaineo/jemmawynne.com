@@ -1,6 +1,6 @@
 import * as React from 'react'
-import styled, { css } from '@xstyled/styled-components'
-import App from 'next/app'
+import App, { AppInitialProps } from 'next/app'
+import { NextPageContext } from 'next'
 import Head from 'next/head'
 import { ApolloClient } from 'apollo-client'
 import { SearchResults } from '../src/components/Search'
@@ -9,6 +9,7 @@ import { Footer } from '../src/components/Footer'
 import { Announcement } from '../src/components/Announcement'
 import { Providers } from '../src/providers/AllProviders'
 import { withApollo } from '../src/graphql'
+import { ErrorProvider, ErrorWrapper } from '../src/providers/ErrorProvider'
 import Sentry from '../src/services/sentry'
 
 interface AppProps {
@@ -18,14 +19,27 @@ interface AppProps {
   apollo: ApolloClient<any>
 }
 
-export interface PageContext {
-  query: any
+export interface PageContext extends NextPageContext {
   apolloClient: ApolloClient<any>
 }
 
-const Main = styled.main``
+type GetInitialProps = (
+  ctx: PageContext,
+) => Promise<AppInitialProps['pageProps']>
 
-class MyApp extends App {
+export const catchErrors = (getInitialProps: GetInitialProps) => async (
+  ctx: PageContext,
+) => {
+  try {
+    return getInitialProps(ctx)
+  } catch (error) {
+    return {
+      error,
+    }
+  }
+}
+
+class MyApp extends App<AppProps> {
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     Sentry.withScope((scope) => {
       Object.keys(errorInfo).forEach((key) => {
@@ -40,20 +54,25 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props
+    const { error } = pageProps
     return (
       <>
         <Head>
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
         </Head>
-        <Providers>
-          <Announcement />
-          <Navigation />
-          <Main>
-            <SearchResults />
-            <Component {...pageProps} />
-            <Footer />
-          </Main>
-        </Providers>
+        <ErrorProvider error={error}>
+          <Providers>
+            <Announcement />
+            <Navigation />
+            <main>
+              <SearchResults />
+              <ErrorWrapper>
+                <Component {...pageProps} />
+              </ErrorWrapper>
+              <Footer />
+            </main>
+          </Providers>
+        </ErrorProvider>
       </>
     )
   }

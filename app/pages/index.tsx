@@ -1,6 +1,5 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import {
   imageBlockFragment,
   textBlockFragment,
@@ -9,6 +8,8 @@ import {
 } from '../src/graphql'
 import { Homepage as HomepageType } from '../src/types'
 import { Homepage as HomepageView } from '../src/views/Homepage'
+import { NotFound } from '../src/views/NotFound'
+import { catchErrors, PageContext } from './_app'
 
 interface HomepageResponse {
   Homepage: HomepageType
@@ -48,20 +49,23 @@ const homepageQuery = /*  GraphQL */ gql`
   ${heroFragment}
 `
 
-export const Homepage = () => {
-  const { loading, error, data } = useQuery<HomepageResponse>(homepageQuery)
-  console.log(data)
-  if (error)
-    return (
-      <React.Fragment>
-        <p>error!</p>
-        <pre>{JSON.stringify(error, null, 2)}</pre>
-      </React.Fragment>
-    )
-
-  if (loading || !data || !data.Homepage.content) return null
-
-  return <HomepageView homepage={data.Homepage} />
+interface HomepageProps {
+  homepage?: HomepageType
 }
+
+export const Homepage = ({ homepage }: HomepageProps) => {
+  if (!homepage) return <NotFound />
+
+  return <HomepageView homepage={homepage} />
+}
+
+Homepage.getInitialProps = catchErrors(async (ctx: PageContext) => {
+  const { apolloClient } = ctx
+  const response = await apolloClient.query({ query: homepageQuery })
+
+  const homepage = response?.data?.Homepage
+
+  return { homepage }
+})
 
 export default Homepage

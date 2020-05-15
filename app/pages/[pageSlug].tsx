@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { NotFound, StaticPage } from '../src/views'
 import { Page as PageType } from '../src/types'
 import { heroFragment } from '../src/graphql'
+import { PageContext, catchErrors } from './_app'
 
 interface PageResponse {
   allPage: PageType[]
@@ -37,7 +38,7 @@ const Page = ({ page }: PageProps) => {
   return <StaticPage page={page} />
 }
 
-Page.getInitialProps = async (ctx: any) => {
+Page.getInitialProps = catchErrors(async (ctx: PageContext) => {
   const { apolloClient, query } = ctx
   const variables = { slug: query.pageSlug }
 
@@ -50,6 +51,6 @@ Page.getInitialProps = async (ctx: any) => {
 
   const page = pages.length ? pages[0] : undefined
   return { page }
-}
+})
 
 export default Page

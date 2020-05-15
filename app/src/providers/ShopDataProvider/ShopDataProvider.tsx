@@ -8,6 +8,7 @@ import {
   DefinitelyProductInfo,
   SwatchOption,
 } from './utils'
+import { useError } from '../ErrorProvider'
 
 const { useContext } = React
 
@@ -39,8 +40,6 @@ interface Props {
 
 export const ShopDataProvider = ({ children }: Props) => {
   const response = useQuery<ShopDataResponse>(SHOP_DATA_QUERY)
-
-  if (response.error) throw new Error(response.error.message)
   const ready = Boolean(response.data && !response.loading)
   const menu = ready ? response?.data?.Menu : undefined
   const siteSettings = ready ? response?.data?.SiteSettings : undefined
