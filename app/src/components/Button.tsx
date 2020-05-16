@@ -15,16 +15,19 @@ export const Button = styled.button`
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    height: 42px;
+    height: 54px;
     padding: 0 3;
-    font-size: 4;
-    font-weight: 3;
+    font-size: 6;
+    font-weight: 2;
+    letter-spacing: 0.25em;
     transition: 0.2s;
+    width: 100%;
 
     ${level === undefined || level === 1
       ? css`
-          color: body.1;
-          background-color: body.9;
+          color: body.9;
+          background-color: body.0;
+          border: 1px solid;
         `
       : level === 2
       ? css`

@@ -63,7 +63,7 @@ export const defaultTheme: DefaultTheme = {
    */
   fontSizes: [
     99, // stupid high, just don't use fontSizes.0
-    50, // h1
+    35, // h1
     25, // h2
     20, // h3
     16, // readable text: p, h4

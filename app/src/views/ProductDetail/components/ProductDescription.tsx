@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Box } from '@xstyled/styled-components'
-import { NormalizeDiv } from '../styled'
 import { ShopifyProduct, ShopifySourceProductVariant } from '../../../types'
 import { Heading } from '../../../components/Text'
 import { HtmlContent } from '../../../components/RichText'
 import { formatMoney } from '../../../utils'
+import { DescriptionWrapper } from '../styled'
 
 interface ProductDescriptionProps {
   product: ShopifyProduct
@@ -16,16 +16,19 @@ export const ProductDescription = ({
   currentVariant,
 }: ProductDescriptionProps) => {
   return (
-    <Box mb={4}>
-      <Heading level={2} mb={1} weight={1}>
+    <DescriptionWrapper>
+      <Heading level={1} mb={1} weight={1}>
         {product.title}
       </Heading>
       {currentVariant.priceV2 ? (
-        <Heading level={3} weight={4}>
+        <Heading level={1} weight={1} fontStyle="italic" color="body.5">
           {formatMoney(currentVariant.priceV2)}
         </Heading>
       ) : null}
-      <HtmlContent content={product?.sourceData?.descriptionHtml} />
-    </Box>
+
+      <Box my={6}>
+        <HtmlContent html={product?.sourceData?.descriptionHtml} />
+      </Box>
+    </DescriptionWrapper>
   )
 }

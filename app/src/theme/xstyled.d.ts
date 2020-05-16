@@ -1,6 +1,8 @@
 declare module '@xstyled/styled-components' {
-  import styled, {
+  import _styled, {
     StyledComponent,
+    ThemedStyledInterface,
+    ThemedStyledFunction,
     DefaultTheme,
     FlattenSimpleInterpolation,
   } from 'styled-components'
@@ -130,13 +132,17 @@ declare module '@xstyled/styled-components' {
   /* adds support for { xs: arg } and makes all props optional */
   export type BoxProps = WithBreakpointArgs<BoxPropsBase>
 
-  // type BoxPropsWithBreakpointArgs = WithBreakpointArgs<BoxProps>
-  // export const Box: React.ComponentType<BoxProps>
-  export const Box: StyledComponent<
-    'div',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
+  // TODO: If styled-components default tags are overridden,
+  // these will work
+  // const styled: {
+  //   [Key in keyof JSX.IntrinsicElements]: ThemedStyledFunction<
+  //     Key,
+  //     DefaultTheme,
+  //     BoxProps
+  //   >
+  // }
+
+  export const Box: ThemeStyledFunction<'div', DefaultTheme, BoxProps>
 
   export const breakpoints: (
     styles: BreakpointObject<FlattenSimpleInterpolation | string>,
@@ -146,681 +152,159 @@ declare module '@xstyled/styled-components' {
    * List of dom elements from Styled Components:
    * https://github.com/styled-components/styled-components/blob/master/packages/styled-components/src/utils/domElements.js */
 
-  export const aBox: StyledComponent<
-    'a',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const abbrBox: StyledComponent<
-    'abbr',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const addressBox: StyledComponent<
-    'address',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const areaBox: StyledComponent<
-    'area',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const articleBox: StyledComponent<
-    'article',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const asideBox: StyledComponent<
-    'aside',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const audioBox: StyledComponent<
-    'audio',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const bBox: StyledComponent<
-    'b',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const baseBox: StyledComponent<
-    'base',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const bdiBox: StyledComponent<
-    'bdi',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const bdoBox: StyledComponent<
-    'bdo',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const bigBox: StyledComponent<
-    'big',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const blockquoteBox: StyledComponent<
-    'blockquote',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const bodyBox: StyledComponent<
-    'body',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const brBox: StyledComponent<
-    'br',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const buttonBox: StyledComponent<
-    'button',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const canvasBox: StyledComponent<
-    'canvas',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const captionBox: StyledComponent<
-    'caption',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const citeBox: StyledComponent<
-    'cite',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const codeBox: StyledComponent<
-    'code',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const colBox: StyledComponent<
-    'col',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const colgroupBox: StyledComponent<
-    'colgroup',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const dataBox: StyledComponent<
-    'data',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const datalistBox: StyledComponent<
-    'datalist',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const ddBox: StyledComponent<
-    'dd',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const delBox: StyledComponent<
-    'del',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const detailsBox: StyledComponent<
-    'details',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const dfnBox: StyledComponent<
-    'dfn',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const dialogBox: StyledComponent<
-    'dialog',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const divBox: StyledComponent<
-    'div',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const dlBox: StyledComponent<
-    'dl',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const dtBox: StyledComponent<
-    'dt',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const emBox: StyledComponent<
-    'em',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const embedBox: StyledComponent<
-    'embed',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const fieldsetBox: StyledComponent<
-    'fieldset',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const figcaptionBox: StyledComponent<
-    'figcaption',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const figureBox: StyledComponent<
-    'figure',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const footerBox: StyledComponent<
-    'footer',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const formBox: StyledComponent<
-    'form',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const h1Box: StyledComponent<
-    'h1',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const h2Box: StyledComponent<
-    'h2',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const h3Box: StyledComponent<
-    'h3',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const h4Box: StyledComponent<
-    'h4',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const h5Box: StyledComponent<
-    'h5',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const h6Box: StyledComponent<
-    'h6',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const headBox: StyledComponent<
-    'head',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const headerBox: StyledComponent<
-    'header',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const hgroupBox: StyledComponent<
-    'hgroup',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const hrBox: StyledComponent<
-    'hr',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const htmlBox: StyledComponent<
-    'html',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const iBox: StyledComponent<
-    'i',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const iframeBox: StyledComponent<
-    'iframe',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const imgBox: StyledComponent<
-    'img',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const inputBox: StyledComponent<
-    'input',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const insBox: StyledComponent<
-    'ins',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const kbdBox: StyledComponent<
-    'kbd',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const keygenBox: StyledComponent<
-    'keygen',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const labelBox: StyledComponent<
-    'label',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const legendBox: StyledComponent<
-    'legend',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const liBox: StyledComponent<
-    'li',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const linkBox: StyledComponent<
-    'link',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const mainBox: StyledComponent<
-    'main',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const mapBox: StyledComponent<
-    'map',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const markBox: StyledComponent<
-    'mark',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
+  const styled: typeof _styled & {
+    aBox: ThemeStyledFunction<'a', DefaultTheme, BoxProps>
+    abbrBox: ThemeStyledFunction<'abbr', DefaultTheme, BoxProps>
+    addressBox: ThemeStyledFunction<'address', DefaultTheme, BoxProps>
+    areaBox: ThemeStyledFunction<'area', DefaultTheme, BoxProps>
+    articleBox: ThemeStyledFunction<'article', DefaultTheme, BoxProps>
+    asideBox: ThemeStyledFunction<'aside', DefaultTheme, BoxProps>
+    audioBox: ThemeStyledFunction<'audio', DefaultTheme, BoxProps>
+    bBox: ThemeStyledFunction<'b', DefaultTheme, BoxProps>
+    baseBox: ThemeStyledFunction<'base', DefaultTheme, BoxProps>
+    bdiBox: ThemeStyledFunction<'bdi', DefaultTheme, BoxProps>
+    bdoBox: ThemeStyledFunction<'bdo', DefaultTheme, BoxProps>
+    bigBox: ThemeStyledFunction<'big', DefaultTheme, BoxProps>
+    blockquoteBox: ThemeStyledFunction<'blockquote', DefaultTheme, BoxProps>
+    bodyBox: ThemeStyledFunction<'body', DefaultTheme, BoxProps>
+    brBox: ThemeStyledFunction<'br', DefaultTheme, BoxProps>
+    buttonBox: ThemeStyledFunction<'button', DefaultTheme, BoxProps>
+    canvasBox: ThemeStyledFunction<'canvas', DefaultTheme, BoxProps>
+    captionBox: ThemeStyledFunction<'caption', DefaultTheme, BoxProps>
+    citeBox: ThemeStyledFunction<'cite', DefaultTheme, BoxProps>
+    codeBox: ThemeStyledFunction<'code', DefaultTheme, BoxProps>
+    colBox: ThemeStyledFunction<'col', DefaultTheme, BoxProps>
+    colgroupBox: ThemeStyledFunction<'colgroup', DefaultTheme, BoxProps>
+    dataBox: ThemeStyledFunction<'data', DefaultTheme, BoxProps>
+    datalistBox: ThemeStyledFunction<'datalist', DefaultTheme, BoxProps>
+    ddBox: ThemeStyledFunction<'dd', DefaultTheme, BoxProps>
+    delBox: ThemeStyledFunction<'del', DefaultTheme, BoxProps>
+    detailsBox: ThemeStyledFunction<'details', DefaultTheme, BoxProps>
+    dfnBox: ThemeStyledFunction<'dfn', DefaultTheme, BoxProps>
+    dialogBox: ThemeStyledFunction<'dialog', DefaultTheme, BoxProps>
+    divBox: ThemeStyledFunction<'div', DefaultTheme, BoxProps>
+    dlBox: ThemeStyledFunction<'dl', DefaultTheme, BoxProps>
+    dtBox: ThemeStyledFunction<'dt', DefaultTheme, BoxProps>
+    emBox: ThemeStyledFunction<'em', DefaultTheme, BoxProps>
+    embedBox: ThemeStyledFunction<'embed', DefaultTheme, BoxProps>
+    fieldsetBox: ThemeStyledFunction<'fieldset', DefaultTheme, BoxProps>
+    figcaptionBox: ThemeStyledFunction<'figcaption', DefaultTheme, BoxProps>
+    figureBox: ThemeStyledFunction<'figure', DefaultTheme, BoxProps>
+    footerBox: ThemeStyledFunction<'footer', DefaultTheme, BoxProps>
+    formBox: ThemeStyledFunction<'form', DefaultTheme, BoxProps>
+    h1Box: ThemeStyledFunction<'h1', DefaultTheme, BoxProps>
+    h2Box: ThemeStyledFunction<'h2', DefaultTheme, BoxProps>
+    h3Box: ThemeStyledFunction<'h3', DefaultTheme, BoxProps>
+    h4Box: ThemeStyledFunction<'h4', DefaultTheme, BoxProps>
+    h5Box: ThemeStyledFunction<'h5', DefaultTheme, BoxProps>
+    h6Box: ThemeStyledFunction<'h6', DefaultTheme, BoxProps>
+    headBox: ThemeStyledFunction<'head', DefaultTheme, BoxProps>
+    headerBox: ThemeStyledFunction<'header', DefaultTheme, BoxProps>
+    hgroupBox: ThemeStyledFunction<'hgroup', DefaultTheme, BoxProps>
+    hrBox: ThemeStyledFunction<'hr', DefaultTheme, BoxProps>
+    htmlBox: ThemeStyledFunction<'html', DefaultTheme, BoxProps>
+    iBox: ThemeStyledFunction<'i', DefaultTheme, BoxProps>
+    iframeBox: ThemeStyledFunction<'iframe', DefaultTheme, BoxProps>
+    imgBox: ThemeStyledFunction<'img', DefaultTheme, BoxProps>
+    inputBox: ThemeStyledFunction<'input', DefaultTheme, BoxProps>
+    insBox: ThemeStyledFunction<'ins', DefaultTheme, BoxProps>
+    kbdBox: ThemeStyledFunction<'kbd', DefaultTheme, BoxProps>
+    keygenBox: ThemeStyledFunction<'keygen', DefaultTheme, BoxProps>
+    labelBox: ThemeStyledFunction<'label', DefaultTheme, BoxProps>
+    legendBox: ThemeStyledFunction<'legend', DefaultTheme, BoxProps>
+    liBox: ThemeStyledFunction<'li', DefaultTheme, BoxProps>
+    linkBox: ThemeStyledFunction<'link', DefaultTheme, BoxProps>
+    mainBox: ThemeStyledFunction<'main', DefaultTheme, BoxProps>
+    mapBox: ThemeStyledFunction<'map', DefaultTheme, BoxProps>
+    markBox: ThemeStyledFunction<'mark', DefaultTheme, BoxProps>
 
-  /* This one breaks, it looks like marquee is not supported in JSX.IntrinsicElements */
-  // export const marqueeBox: StyledComponent<'marquee', DefaultTheme, WithBreakpointArgs<BoxProps>>
+    /* This one breaks, it looks like marquee is not supported in JSX.IntrinsicElements */
+    // marqueeBox: ThemeStyledFunction<'marquee', DefaultTheme, BoxProps>
 
-  export const menuBox: StyledComponent<
-    'menu',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const menuitemBox: StyledComponent<
-    'menuitem',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const metaBox: StyledComponent<
-    'meta',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const meterBox: StyledComponent<
-    'meter',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const navBox: StyledComponent<
-    'nav',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const noscriptBox: StyledComponent<
-    'noscript',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const objectBox: StyledComponent<
-    'object',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const olBox: StyledComponent<
-    'ol',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const optgroupBox: StyledComponent<
-    'optgroup',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const optionBox: StyledComponent<
-    'option',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const outputBox: StyledComponent<
-    'output',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const pBox: StyledComponent<
-    'p',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const paramBox: StyledComponent<
-    'param',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const pictureBox: StyledComponent<
-    'picture',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const preBox: StyledComponent<
-    'pre',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const progressBox: StyledComponent<
-    'progress',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const qBox: StyledComponent<
-    'q',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const rpBox: StyledComponent<
-    'rp',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const rtBox: StyledComponent<
-    'rt',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const rubyBox: StyledComponent<
-    'ruby',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const sBox: StyledComponent<
-    's',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const sampBox: StyledComponent<
-    'samp',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const scriptBox: StyledComponent<
-    'script',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const sectionBox: StyledComponent<
-    'section',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const selectBox: StyledComponent<
-    'select',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const smallBox: StyledComponent<
-    'small',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const sourceBox: StyledComponent<
-    'source',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const spanBox: StyledComponent<
-    'span',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const strongBox: StyledComponent<
-    'strong',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const styleBox: StyledComponent<
-    'style',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const subBox: StyledComponent<
-    'sub',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const summaryBox: StyledComponent<
-    'summary',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const supBox: StyledComponent<
-    'sup',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const tableBox: StyledComponent<
-    'table',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const tbodyBox: StyledComponent<
-    'tbody',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const tdBox: StyledComponent<
-    'td',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const textareaBox: StyledComponent<
-    'textarea',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const tfootBox: StyledComponent<
-    'tfoot',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const thBox: StyledComponent<
-    'th',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const theadBox: StyledComponent<
-    'thead',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const timeBox: StyledComponent<
-    'time',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const titleBox: StyledComponent<
-    'title',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const trBox: StyledComponent<
-    'tr',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const trackBox: StyledComponent<
-    'track',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const uBox: StyledComponent<
-    'u',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const ulBox: StyledComponent<
-    'ul',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const varBox: StyledComponent<
-    'var',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const videoBox: StyledComponent<
-    'video',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const wbrBox: StyledComponent<
-    'wbr',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
+    menuBox: ThemeStyledFunction<'menu', DefaultTheme, BoxProps>
+    menuitemBox: ThemeStyledFunction<'menuitem', DefaultTheme, BoxProps>
+    metaBox: ThemeStyledFunction<'meta', DefaultTheme, BoxProps>
+    meterBox: ThemeStyledFunction<'meter', DefaultTheme, BoxProps>
+    navBox: ThemeStyledFunction<'nav', DefaultTheme, BoxProps>
+    noscriptBox: ThemeStyledFunction<'noscript', DefaultTheme, BoxProps>
+    objectBox: ThemeStyledFunction<'object', DefaultTheme, BoxProps>
+    olBox: ThemeStyledFunction<'ol', DefaultTheme, BoxProps>
+    optgroupBox: ThemeStyledFunction<'optgroup', DefaultTheme, BoxProps>
+    optionBox: ThemeStyledFunction<'option', DefaultTheme, BoxProps>
+    outputBox: ThemeStyledFunction<'output', DefaultTheme, BoxProps>
+    pBox: ThemeStyledFunction<'p', DefaultTheme, BoxProps>
+    paramBox: ThemeStyledFunction<'param', DefaultTheme, BoxProps>
+    pictureBox: ThemeStyledFunction<'picture', DefaultTheme, BoxProps>
+    preBox: ThemeStyledFunction<'pre', DefaultTheme, BoxProps>
+    progressBox: ThemeStyledFunction<'progress', DefaultTheme, BoxProps>
+    qBox: ThemeStyledFunction<'q', DefaultTheme, BoxProps>
+    rpBox: ThemeStyledFunction<'rp', DefaultTheme, BoxProps>
+    rtBox: ThemeStyledFunction<'rt', DefaultTheme, BoxProps>
+    rubyBox: ThemeStyledFunction<'ruby', DefaultTheme, BoxProps>
+    sBox: ThemeStyledFunction<'s', DefaultTheme, BoxProps>
+    sampBox: ThemeStyledFunction<'samp', DefaultTheme, BoxProps>
+    scriptBox: ThemeStyledFunction<'script', DefaultTheme, BoxProps>
+    sectionBox: ThemeStyledFunction<'section', DefaultTheme, BoxProps>
+    selectBox: ThemeStyledFunction<'select', DefaultTheme, BoxProps>
+    smallBox: ThemeStyledFunction<'small', DefaultTheme, BoxProps>
+    sourceBox: ThemeStyledFunction<'source', DefaultTheme, BoxProps>
+    spanBox: ThemeStyledFunction<'span', DefaultTheme, BoxProps>
+    strongBox: ThemeStyledFunction<'strong', DefaultTheme, BoxProps>
+    styleBox: ThemeStyledFunction<'style', DefaultTheme, BoxProps>
+    subBox: ThemeStyledFunction<'sub', DefaultTheme, BoxProps>
+    summaryBox: ThemeStyledFunction<'summary', DefaultTheme, BoxProps>
+    supBox: ThemeStyledFunction<'sup', DefaultTheme, BoxProps>
+    tableBox: ThemeStyledFunction<'table', DefaultTheme, BoxProps>
+    tbodyBox: ThemeStyledFunction<'tbody', DefaultTheme, BoxProps>
+    tdBox: ThemeStyledFunction<'td', DefaultTheme, BoxProps>
+    textareaBox: ThemeStyledFunction<'textarea', DefaultTheme, BoxProps>
+    tfootBox: ThemeStyledFunction<'tfoot', DefaultTheme, BoxProps>
+    thBox: ThemeStyledFunction<'th', DefaultTheme, BoxProps>
+    theadBox: ThemeStyledFunction<'thead', DefaultTheme, BoxProps>
+    timeBox: ThemeStyledFunction<'time', DefaultTheme, BoxProps>
+    titleBox: ThemeStyledFunction<'title', DefaultTheme, BoxProps>
+    trBox: ThemeStyledFunction<'tr', DefaultTheme, BoxProps>
+    trackBox: ThemeStyledFunction<'track', DefaultTheme, BoxProps>
+    uBox: ThemeStyledFunction<'u', DefaultTheme, BoxProps>
+    ulBox: ThemeStyledFunction<'ul', DefaultTheme, BoxProps>
+    varBox: ThemeStyledFunction<'var', DefaultTheme, BoxProps>
+    videoBox: ThemeStyledFunction<'video', DefaultTheme, BoxProps>
+    wbrBox: ThemeStyledFunction<'wbr', DefaultTheme, BoxProps>
 
-  // SVG
-  export const circleBox: StyledComponent<
-    'circle',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const clipPathBox: StyledComponent<
-    'clipPath',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const defsBox: StyledComponent<
-    'defs',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const ellipseBox: StyledComponent<
-    'ellipse',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const foreignObjectBox: StyledComponent<
-    'foreignObject',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const gBox: StyledComponent<
-    'g',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const imageBox: StyledComponent<
-    'image',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const lineBox: StyledComponent<
-    'line',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const linearGradientBox: StyledComponent<
-    'linearGradient',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const markerBox: StyledComponent<
-    'marker',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const maskBox: StyledComponent<
-    'mask',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const pathBox: StyledComponent<
-    'path',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const patternBox: StyledComponent<
-    'pattern',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const polygonBox: StyledComponent<
-    'polygon',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const polylineBox: StyledComponent<
-    'polyline',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const radialGradientBox: StyledComponent<
-    'radialGradient',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const rectBox: StyledComponent<
-    'rect',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const stopBox: StyledComponent<
-    'stop',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const svgBox: StyledComponent<
-    'svg',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const textBox: StyledComponent<
-    'text',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
-  export const tspanBox: StyledComponent<
-    'tspan',
-    DefaultTheme,
-    WithBreakpointArgs<BoxProps>
-  >
+    // SVG
+    circleBox: ThemeStyledFunction<'circle', DefaultTheme, BoxProps>
+    clipPathBox: ThemeStyledFunction<'clipPath', DefaultTheme, BoxProps>
+    defsBox: ThemeStyledFunction<'defs', DefaultTheme, BoxProps>
+    ellipseBox: ThemeStyledFunction<'ellipse', DefaultTheme, BoxProps>
+    foreignObjectBox: ThemeStyledFunction<
+      'foreignObject',
+      DefaultTheme,
+      BoxProps
+    >
+    gBox: ThemeStyledFunction<'g', DefaultTheme, BoxProps>
+    imageBox: ThemeStyledFunction<'image', DefaultTheme, BoxProps>
+    lineBox: ThemeStyledFunction<'line', DefaultTheme, BoxProps>
+    linearGradientBox: ThemeStyledFunction<
+      'linearGradient',
+      DefaultTheme,
+      BoxProps
+    >
+    markerBox: ThemeStyledFunction<'marker', DefaultTheme, BoxProps>
+    maskBox: ThemeStyledFunction<'mask', DefaultTheme, BoxProps>
+    pathBox: ThemeStyledFunction<'path', DefaultTheme, BoxProps>
+    patternBox: ThemeStyledFunction<'pattern', DefaultTheme, BoxProps>
+    polygonBox: ThemeStyledFunction<'polygon', DefaultTheme, BoxProps>
+    polylineBox: ThemeStyledFunction<'polyline', DefaultTheme, BoxProps>
+    radialGradientBox: ThemeStyledFunction<
+      'radialGradient',
+      DefaultTheme,
+      BoxProps
+    >
+    rectBox: ThemeStyledFunction<'rect', DefaultTheme, BoxProps>
+    stopBox: ThemeStyledFunction<'stop', DefaultTheme, BoxProps>
+    svgBox: ThemeStyledFunction<'svg', DefaultTheme, BoxProps>
+    textBox: ThemeStyledFunction<'text', DefaultTheme, BoxProps>
+    tspanBox: ThemeStyledFunction<'tspan', DefaultTheme, BoxProps>
+  }
   export default styled
 }

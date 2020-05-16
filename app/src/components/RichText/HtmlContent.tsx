@@ -1,63 +1,118 @@
 import * as React from 'react'
-import * as baseParse from 'html-react-parser'
-import { domToReact, HTMLReactParserOptions } from 'html-react-parser'
-import { Ul, Ol, Li, Heading, P, BlockQuote } from '../Text'
+import Link from 'next/link'
+import ReactHtmlParser, { TransformFunction } from 'react-html-parser'
+import { getLinkFromHref } from '../../utils'
+import { Heading, P, Ol, Ul, Li, Span } from '../Text'
 
-type ParseFn = (
-  html: string,
-  options: HTMLReactParserOptions,
-) => React.ReactNode
+const css2obj = (css: string): object => {
+  const r = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g,
+    o = {}
+  css.replace(r, (m, p, v) => (o[p] = v))
+  return o
+}
 
-const parse = (baseParse as unknown) as ParseFn
+const wrapBareText = (text: string) =>
+  text
+    .replace(/^(?!<)(.*)(<\/\w+>)?/gm, '<span>$1</span>')
+    .replace('<span></span>', '')
 
-const defaultOptions = {
-  replace: (node) => {
-    if (node.type !== 'tag') return undefined
-    const { name, children } = node
-    switch (name) {
-      case 'ul':
-        return <Ul>{domToReact(children, defaultOptions)}</Ul>
-      case 'ol':
-        return <Ol>{domToReact(children, defaultOptions)}</Ol>
-      case 'li':
-        return <Li family="serif">{domToReact(children, defaultOptions)}</Li>
-      case 'h1':
-        return (
-          <Heading level={1}>{domToReact(children, defaultOptions)}</Heading>
-        )
-      case 'h2':
-        return (
-          <Heading level={2}>{domToReact(children, defaultOptions)}</Heading>
-        )
-      case 'h3':
-        return (
-          <Heading level={3}>{domToReact(children, defaultOptions)}</Heading>
-        )
-      case 'h4':
-        return (
-          <Heading level={4}>{domToReact(children, defaultOptions)}</Heading>
-        )
-      case 'h5':
-        return (
-          <Heading level={5}>{domToReact(children, defaultOptions)}</Heading>
-        )
-      case 'h6':
-        return (
-          <Heading level={7}>{domToReact(children, defaultOptions)}</Heading>
-        )
-      case 'p':
-        return <P>{domToReact(children, defaultOptions)}</P>
-      case 'blockquote':
-        return <BlockQuote>{domToReact(children, defaultOptions)}</BlockQuote>
-      default:
-        return undefined
-    }
-  },
+const internalUrlRegex = /^https?:\/\/(www.)?(localhost:3000|spinellikilcollin.com|spinellikilcollin.(good-idea.)?now.sh)(\/[\w|\/]+)?/
+
+const transform: TransformFunction = (node, index) => {
+  const styles = css2obj(node?.attribs?.style ?? '')
+  switch (node.type) {
+    case 'text':
+      return <React.Fragment key={index}>{node.data}</React.Fragment>
+    case 'tag':
+      if (!node.children || node.children.length === 0) return null
+      switch (node.name) {
+        case 'h1':
+        case 'h2':
+        case 'h3':
+        case 'h4':
+        case 'h5':
+        case 'h6':
+          return (
+            <Heading style={styles} level={3} key={index}>
+              {node.children.map(transform)}
+            </Heading>
+          )
+        case 'p':
+        case 'span':
+          if (node.parent) {
+            return (
+              <Span key={index} style={styles} weight={3}>
+                {node.children.map(transform)}
+              </Span>
+            )
+          }
+          return (
+            <P key={index} style={styles} weight={3}>
+              {node.children.map(transform)}
+            </P>
+          )
+        case 'ul':
+          return (
+            <Ul family="serif" key={index}>
+              {node.children.map(transform)}
+            </Ul>
+          )
+        case 'ol':
+          return (
+            <Ol family="serif" key={index}>
+              {node.children.map(transform)}
+            </Ol>
+          )
+        case 'li':
+          return <Li key={index}>{node.children.map(transform)}</Li>
+        case 'em':
+          return <em key={index}>{node.children.map(transform)}</em>
+        case 'strong':
+          return <strong key={index}>{node.children.map(transform)}</strong>
+        case 'a':
+          const href = node.attribs.href
+          if (!href) return null
+
+          const isInternal = internalUrlRegex.test(href)
+          if (isInternal) {
+            const { href: aHref, as } = getLinkFromHref(href)
+            return (
+              <Link key={index} href={aHref} as={as}>
+                <a>{node.children.map(transform)}</a>
+              </Link>
+            )
+          }
+          return (
+            <a
+              key={index}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {node.children.map(transform)}
+            </a>
+          )
+        default:
+          console.warn('Did not parse node:', node)
+          return null
+      }
+    default:
+      return null
+  }
+}
+
+export const parseHTML = (htmlString?: string | null): React.ReactNode => {
+  if (!htmlString) return null
+  return ReactHtmlParser(wrapBareText(htmlString), {
+    transform,
+  })
 }
 
 interface HtmlContentProps {
-  content?: string | null
+  html?: string | null
 }
 
-export const HtmlContent = ({ content }: HtmlContentProps) =>
-  content ? <>{parse(content, defaultOptions)}</> : null
+export const HtmlContent = ({ html }: HtmlContentProps) => {
+  if (!html) return null
+  return <div>{parseHTML(html)}</div>
+}

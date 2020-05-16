@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useProductVariant, useCheckout } from 'use-shopify'
 import { Box } from '@xstyled/styled-components'
+import { Heading } from '../../components/Text'
 import {
   ProductInfoBlock,
   ShopifyProduct,
@@ -53,6 +54,16 @@ export const ProductDetail = ({ product, collections }: Props) => {
 
   if (!currentVariant) return null
 
+  const inquireMailTo = [
+    'mailto:inquiries@jemmawynne.com?',
+    'subject=',
+    encodeURIComponent(`Inquiry about ${product.title}`),
+    '&body=',
+    encodeURIComponent(
+      `Hello,\n\nI have some questions about your ${product.title}.\n\nhttps://www.jemmawynne.com/products/${product.handle}`,
+    ),
+  ].join('')
+
   return (
     <Wrapper>
       <Column center width="xWide">
@@ -74,13 +85,37 @@ export const ProductDetail = ({ product, collections }: Props) => {
               selectVariant={selectVariant}
             />
             <Box mt={5}>
-              <Column width="xSmall">
+              <Column width="small">
                 <BuyButton
                   addLineItem={addLineItem}
                   currentVariant={currentVariant}
                   quantity={quantity}
                 />
               </Column>
+            </Box>
+            <Box mt={5}>
+              <Heading
+                level={6}
+                family="sans"
+                textTransform="uppercase"
+                color="body.5"
+              >
+                Drop a hint
+              </Heading>
+              <Heading
+                level={6}
+                family="sans"
+                textTransform="uppercase"
+                color="body.5"
+              >
+                <a
+                  href={inquireMailTo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Inquire
+                </a>
+              </Heading>
             </Box>
             <Box mt={5}>
               <Column width="medium">

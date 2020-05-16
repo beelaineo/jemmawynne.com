@@ -2,6 +2,7 @@ import * as React from 'react'
 import { RichImage, ShopifyProduct } from '../../types'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
+import { useShopData } from '../../providers/ShopDataProvider'
 import { Heading } from '../Text'
 import { Image } from '../Image'
 import { formatMoney } from '../../utils'
@@ -19,6 +20,7 @@ export const ProductThumbnail = ({
   hidePrice,
   product,
 }: ProductThumbnail) => {
+  const { getProductSwatchOptions } = useShopData()
   if (!product) return null
   if (product.archived === true) return null
   const { sourceData } = product
@@ -34,6 +36,8 @@ export const ProductThumbnail = ({
   const { minVariantPrice, maxVariantPrice } = sourceData.priceRange || {}
   const as = `/products/${product.handle}`
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
+  const swatchOptions = getProductSwatchOptions(product)
+  const swatchOption = swatchOptions.length ? swatchOptions[0] : undefined
   return (
     <Link href="/products/[productSlug]" as={as}>
       <a>
@@ -62,7 +66,7 @@ export const ProductThumbnail = ({
                 {formatMoney(maxVariantPrice)}
               </Heading>
             ) : null}
-            <ProductSwatches product={product} />
+            {swatchOption ? <ProductSwatches option={swatchOption} /> : null}
           </ProductInfo>
         </ProductThumb>
       </a>

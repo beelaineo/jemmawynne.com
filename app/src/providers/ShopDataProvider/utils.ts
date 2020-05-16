@@ -3,18 +3,46 @@ import {
   ProductInfo,
   SanityRichText,
   ProductInfoBlock,
+  ShopifySourceProductOption,
   Image,
+  SwatchOption,
 } from '../../types'
 import { definitely } from '../../utils'
 
-interface SwatchOptionValue {
-  label: string
-  image: Image
-}
+export const createGetOptionSwatches = (productInfo?: ProductInfo) => (
+  option: ShopifySourceProductOption,
+): SwatchOption | null => {
+  const swatches = definitely(productInfo?.swatches)
+  const { values } = option
+  const hasImages = definitely(values).every((value) =>
+    swatches.find((sw) => sw?.colorName === value),
+  )
+  if (!hasImages) return null
 
-export interface SwatchOption {
-  name: string
-  values: SwatchOptionValue[]
+  const getImage = (name: string): Image | undefined => {
+    const match = swatches.find((sw) => sw.colorName === name)
+    return match?.swatchImage || undefined
+  }
+
+  const valuesWithSwatches = definitely(
+    definitely(values).map((value) => {
+      const image = getImage(value)
+      if (!image) return null
+      return {
+        value,
+        label: value,
+        image,
+      }
+    }),
+  )
+
+  if (!option.name) return null
+  if (!valuesWithSwatches.every((sw) => Boolean(sw?.image))) return null
+
+  return {
+    name: option.name,
+    values: valuesWithSwatches,
+  }
 }
 
 export const createGetSwatchOptions = (productInfo?: ProductInfo) => (
@@ -26,46 +54,11 @@ export const createGetSwatchOptions = (productInfo?: ProductInfo) => (
 
   if (!swatches.length || !options.length) return []
 
-  const getImage = (name: string): Image | undefined => {
-    const match = swatches.find((sw) => sw.colorName === name)
-    return match?.swatchImage || undefined
-  }
+  const getOptionSwatches = createGetOptionSwatches(productInfo)
 
-  const matches = definitely(
-    options
-      .filter(({ values }) =>
-        definitely(values).every((value) =>
-          swatches.find((sw) => sw?.colorName === value),
-        ),
-      )
-      .map(({ name, values }) => {
-        const valuesWithSwatches = definitely(
-          definitely(values).map((value) => {
-            const image = getImage(value)
-            if (!image) return null
-            return {
-              label: value,
-              image,
-            }
-          }),
-        )
-
-        if (!name) return null
-        if (!valuesWithSwatches.every((sw) => Boolean(sw?.image))) return null
-
-        return {
-          name,
-          values: valuesWithSwatches,
-        }
-      }),
-  )
+  const matches = definitely(options.map(getOptionSwatches))
   return matches
 }
-
-// export const getSwatchImages = ({ values }: ShopifyProductOption): Image[] =>
-//   definitely(values)
-//     .map(({ swatch }) => swatch)
-//     .reduce<Image[]>((acc, o) => (o ? [...acc, o] : acc), [])
 
 export interface DefinitelyProductInfo {
   __typename: 'ProductInfoBlock'

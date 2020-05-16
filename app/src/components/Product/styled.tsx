@@ -1,4 +1,4 @@
-import styled from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 
 export const ProductThumb = styled.div``
 
@@ -24,9 +24,16 @@ export const SwatchLabel = styled.div`
   opacity: 0;
 `
 
+interface SwatchImageWrapperProps {
+  clickable: boolean
+}
+
 export const SwatchImageWrapper = styled.div`
-  border-radius: 15px;
-  overflow: hidden;
+  ${({ clickable }: SwatchImageWrapperProps) => css`
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: ${clickable ? 'pointer' : 'auto'};
+  `}
 `
 
 export const SwatchWrapper = styled.div`

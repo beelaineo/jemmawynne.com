@@ -282,6 +282,7 @@ export const saneShopifyProductFragment = gql`
         }
       }
       description
+      descriptionHtml
       id
       images {
         ...SaneShopifySourceImagesFragment
@@ -304,6 +305,7 @@ export const saneShopifyCollectionFragment = gql`
     shopifyId
     sourceData {
       description
+      descriptionHtml
       id
       image {
         ...SaneShopifySourceImageFragment

@@ -1,15 +1,22 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { UseProductVariant } from 'use-shopify'
 import {
   ShopifyProduct,
   ShopifySourceProductVariant,
   ShopifySourceProductOption,
+  SwatchOptionValue,
 } from '../../../types'
-import { NormalizeDiv, ProductOptionWrapper } from '../styled'
-import { Label } from '../../../components/Text'
+import { useShopData } from '../../../providers/ShopDataProvider'
+import {
+  SwatchWrapper,
+  SelectWrapper,
+  SwatchLabelWrapper,
+  ProductOptionWrapper,
+} from '../styled'
+import { Heading, Label } from '../../../components/Text'
 import { Select } from '../../../components/Forms'
-import { Column } from '../../../components/Layout'
+import { definitely } from '../../../utils'
+import { ProductSwatches } from '../../../components/Product'
 
 const { useState } = React
 
@@ -67,8 +74,98 @@ const getVariantBySelectedOptions = (
     }, true)
   })
 
-interface Props extends UseProductVariant {
+interface OptionSelectorProps {
+  option: ShopifySourceProductOption
+  changeOption: (value: string) => void
+  currentValue: string
+}
+
+const OptionSelector = ({
+  option,
+  changeOption,
+  currentValue,
+}: OptionSelectorProps) => {
+  if (!option.name || !option.values) return null
+
+  const { getOptionSwatches } = useShopData()
+  const validSwatchOption = getOptionSwatches(option)
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    changeOption(e.target.value)
+  }
+
+  const handleSwatchClick = (value: SwatchOptionValue) => () => {
+    changeOption(value.value)
+  }
+
+  return (
+    <ProductOptionWrapper key={option.name}>
+      {validSwatchOption ? (
+        <SwatchWrapper>
+          <SwatchLabelWrapper>
+            <Label
+              fontSize={6}
+              weight={3}
+              mr={2}
+              color="body.5"
+              textTransform="uppercase"
+              htmlFor={option.name}
+              key={option.name}
+            >
+              {option.name}:
+            </Label>
+
+            <Heading
+              family="sans"
+              mr={2}
+              level={6}
+              weight={3}
+              textTransform="uppercase"
+            >
+              {currentValue}
+            </Heading>
+          </SwatchLabelWrapper>
+          <ProductSwatches
+            option={validSwatchOption}
+            onSwatchClick={handleSwatchClick}
+          />
+        </SwatchWrapper>
+      ) : (
+        <SelectWrapper>
+          <Label
+            fontSize={6}
+            weight={3}
+            mr={2}
+            mb={0}
+            color="body.5"
+            textTransform="uppercase"
+            htmlFor={option.name}
+            key={option.name}
+          >
+            {option.name}:
+          </Label>
+
+          <Select
+            onChange={handleSelectChange}
+            value={currentValue}
+            id={option.name}
+            name={option.name}
+          >
+            {definitely(option.values).map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </Select>
+        </SelectWrapper>
+      )}
+    </ProductOptionWrapper>
+  )
+}
+
+interface Props {
   product: ShopifyProduct
+  currentVariant: ShopifySourceProductVariant
+  selectVariant: (id: string) => void
   quantity: number
   increment: () => void
   decrement: () => void
@@ -92,49 +189,33 @@ export const ProductVariantSelector = (props: Props) => {
     getInitialOptions(options),
   )
 
-  const handleSelectForOption = (name: string) => (
-    e: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const { value } = e.target
+  const changeOption = (name: string) => (value: string) => {
     const newOptions = getNewOptions(selectedOptions, name, value)
     setSelectedOptions(newOptions)
     const newVariant = getVariantBySelectedOptions(variants, newOptions)
     if (newVariant && newVariant.id) {
       selectVariant(newVariant.id)
     } else {
-      // TODO report to sentry
+      throw new Error('Could not select a new variant')
     }
   }
 
-  const getCurrentOptionValue = (name: string): string =>
-    // @ts-ignore
-    selectedOptions.find((o) => o.name === name).currentValue
+  const getCurrentOptionValue = (name: string): string => {
+    const option = selectedOptions.find((o) => o && o.name === name)
+    if (!option || !option.currentValue) throw new Error('No option value')
+    return option.currentValue
+  }
 
   return (
     <div>
-      {options.map((option) =>
-        option && option.name && option.values ? (
-          <ProductOptionWrapper key={option.name}>
-            <Column width="xSmall">
-              <Label htmlFor={option.name} key={option.name}>
-                {option.name}
-              </Label>
-              <Select
-                onChange={handleSelectForOption(option.name)}
-                value={getCurrentOptionValue(option.name)}
-                id={option.name}
-                name={option.name}
-              >
-                {option.values.map((value) =>
-                  value ? (
-                    <option key={value} value={value}>
-                      {value}
-                    </option>
-                  ) : null,
-                )}
-              </Select>
-            </Column>
-          </ProductOptionWrapper>
+      {definitely(options).map((option) =>
+        option.name ? (
+          <OptionSelector
+            key={option.name || 'some-key'}
+            option={option}
+            changeOption={changeOption(option.name)}
+            currentValue={getCurrentOptionValue(option.name)}
+          />
         ) : null,
       )}
     </div>

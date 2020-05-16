@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { useShopData } from '../../providers/ShopDataProvider'
 import { Image } from '../../components/Image'
 import { Heading } from '../../components/Text'
-import { ShopifyProduct } from '../../types'
+import { SwatchOption, SwatchOptionValue } from '../../types'
 import { definitely } from '../../utils'
 import {
   SwatchesWrapper,
@@ -12,28 +11,31 @@ import {
 } from './styled'
 
 interface ProductSwatchesProps {
-  product: ShopifyProduct
+  option: SwatchOption
+  onSwatchClick?: (value: SwatchOptionValue) => () => void
 }
 
-export const ProductSwatches = ({ product }: ProductSwatchesProps) => {
-  const { getProductSwatchOptions } = useShopData()
-  const swatchOptions = getProductSwatchOptions(product)
-  if (!swatchOptions.length) return null
-  const option = swatchOptions[0]
-  if (!option) return null
-
+export const ProductSwatches = ({
+  option,
+  onSwatchClick,
+}: ProductSwatchesProps) => {
   return (
     <SwatchesWrapper>
       {definitely(option.values).map((value) => (
         <SwatchWrapper key={value.label}>
-          <SwatchImageWrapper>
+          <SwatchImageWrapper
+            onClick={onSwatchClick ? onSwatchClick(value) : undefined}
+            clickable={Boolean(onSwatchClick)}
+          >
             <Image image={value.image} ratio={1} sizes="20px" />
           </SwatchImageWrapper>
-          <SwatchLabel>
-            <Heading level={5} weight={2}>
-              {value.label}
-            </Heading>
-          </SwatchLabel>
+          {!Boolean(onSwatchClick) ? (
+            <SwatchLabel>
+              <Heading level={5} weight={2}>
+                {value.label}
+              </Heading>
+            </SwatchLabel>
+          ) : null}
         </SwatchWrapper>
       ))}
     </SwatchesWrapper>

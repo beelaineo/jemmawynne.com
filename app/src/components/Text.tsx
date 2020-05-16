@@ -6,7 +6,7 @@ import styled, {
   BoxProps,
 } from '@xstyled/styled-components'
 
-interface CustomTextProps {
+interface CustomTextProps extends BoxProps {
   theme: DefaultTheme
   fontSize: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
@@ -15,6 +15,7 @@ interface CustomTextProps {
   color?: string
   htmlFor?: string
   textDecoration?: string
+  style?: any
 }
 
 const createTextBase = (as: any) => styled(as)`
@@ -24,11 +25,15 @@ const createTextBase = (as: any) => styled(as)`
     weight,
     fontSize,
     textDecoration,
+    color,
+    textTransform,
   }: CustomTextProps) => css`
     font-size: ${fontSize};
     font-family: ${family};
     font-weight: ${weight};
     font-style: ${fontStyle};
+    text-transform: ${textTransform};
+    color: ${color};
     letter-spacing: ${family === 'sans' ? '0.25em' : '0.06em'};
     text-decoration: ${textDecoration};
     margin: 0 0 0.5em;
@@ -63,7 +68,9 @@ const TextBase = styled(Box)`
   `}
 `
 
-interface HeadingProps extends BoxProps {
+interface HeadingProps
+  extends Omit<CustomTextProps, 'fontSize' | 'theme'>,
+    BoxProps {
   children: React.ReactNode
   level: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
@@ -136,10 +143,14 @@ interface LabelProps {
 const LabelBase = createTextBase('label')
 
 export const Label = styled(LabelBase)`
-  display: block;
-  font-size: 4;
-  margin: 0 0 2;
+  margin-bottom: 0;
+
+  letter-spacing: 0.25em;
 `
+
+Label.defaultProps = {
+  fontSize: 4,
+}
 
 export const TextAnchor = styled.a``
 
@@ -150,18 +161,35 @@ const listStyles = css`
   padding-left: 2em;
 `
 
-export const Ol = styled.ol`
+export const Ol = styled(createTextBase('ol'))`
   ${listStyles};
 `
 
-export const Ul = styled.ul`
+Ol.defaultProps = {
+  fontSize: 4,
+  family: 'body',
+  weight: 400,
+  color: 'body',
+}
+
+export const Ul = styled(createTextBase('ul'))`
   ${listStyles};
 `
-const LiBase = createTextBase('li')
 
-export const Li = styled(LiBase)`
+Ul.defaultProps = {
+  fontSize: 4,
+  family: 'body',
+  weight: 400,
+  color: 'body',
+}
+
+export const Li = styled(createTextBase('li'))`
   font-size: 4;
   margin: 0;
+`
+
+export const Span = styled(createTextBase('span'))`
+  font-size: inherit;
 `
 
 export const Input = styled.input`

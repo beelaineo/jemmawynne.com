@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 
 export const Wrapper = styled.div`
   position: relative;
@@ -19,26 +19,19 @@ export const ProductDetails = styled.div`
 
     ${theme.mediaQueries.mobile} {
       max-width: 500px;
-      margin: 0 auto;
       grid-template-columns: 1fr;
+      margin: 0 auto;
     }
   `}
 `
 
 export const ProductImagesWrapper = styled.div``
 
-export const ProductInfoWrapper = styled.div`
-  ${({ theme }) => css`
-    padding-top: 8;
+export const ProductInfoWrapper = styled.div``
 
-    ${theme.mediaQueries.tablet} {
-      padding-top: 6;
-    }
-
-    ${theme.mediaQueries.mobile} {
-      padding-top: 3;
-    }
-  `}
+export const DescriptionWrapper = styled.div`
+  padding-right: 6;
+  max-width: 550px;
 `
 
 export const Nav = styled.div`
@@ -48,8 +41,23 @@ export const Nav = styled.div`
   font-family: sans;
 `
 
-export const ProductGalleryWrapper = styled.div`
-  ${({ theme }) => css``}
+export const ProductGalleryWrapper = styled.div``
+
+export const SwatchWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 230px 1fr;
+`
+
+export const SwatchLabelWrapper = styled.div`
+  display: flex;
+  > label {
+    margin-right: 2;
+  }
+`
+
+export const SelectWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 export const ProductGalleryImage = styled.div``
@@ -68,51 +76,12 @@ export const ProductRelatedWrapper = styled.div`
 `
 
 export const ProductRelatedInner = styled.div`
-  ${({ theme }) => css`
-    height: 500px;
-  `}
-`
-
-export const NormalizeDiv = styled.div`
-  margin: 3;
+  height: 500px;
 `
 
 export const ProductOptionWrapper = styled.div`
-  ${({ theme }) => css`
-    margin-top: 3;
-  `}
-`
-
-interface BackgroundImageProps {
-  imageSrc: string
-}
-
-export const BackgroundImage = styled.div`
-  ${({ imageSrc }: BackgroundImageProps) => css`
-    background-image: url(${(props: BackgroundImageProps) =>
-      props.imageSrc || ''});
-    background-size: cover;
-    background-position: center;
-    a {
-      color: transparent;
-    }
-  `}
-`
-
-interface ButtonProps {
-  theme: DefaultTheme
-  isDisabled?: boolean
-}
-
-export const Label = styled.label`
-  display: block;
-  margin-bottom: 4;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-appearance: none;
-  border: none;
-  background: none;
-  border-radius: 0;
+  margin-top: 3;
+  display: flex;
 `
 
 export const ArrowDown = styled.div`

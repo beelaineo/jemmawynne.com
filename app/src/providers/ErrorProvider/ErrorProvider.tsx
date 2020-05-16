@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { ApolloError } from 'apollo-client'
+import Sentry from '../../services/sentry'
 
 const { useState, useEffect } = React
 
@@ -36,15 +37,17 @@ const getErrorMessage = (error: ApolloError | Error): string => {
 
 export const ErrorProvider = ({ children, error }: ErrorProps) => {
   const initialMessage = error ? getErrorMessage(error) : undefined
-  if (error) {
-    console.warn(error)
-  }
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     initialMessage,
   )
 
-  const handleError = (error: ApolloError | Error) => {
+  const handleError = (error: ApolloError | Error, scope?: any) => {
     const message = getErrorMessage(error)
+    console.error(error)
+    if (scope) {
+      Sentry.configureScope(scope)
+    }
+    Sentry.captureException(error)
     setErrorMessage(message)
   }
   const clearError = () => setErrorMessage(undefined)

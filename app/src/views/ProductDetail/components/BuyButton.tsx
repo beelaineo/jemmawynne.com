@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { UseCheckoutValues } from 'use-shopify'
-import { StorefrontApiProductVariant } from '../../../types'
+import { StorefrontApiProductVariant, MaybeAll } from '../../../types'
 import { Button } from '../../../components/Button'
 import { Placeholder } from '../../../components/Placeholder'
 import { useMenu } from '../../../providers/MenuProvider'
@@ -8,7 +8,9 @@ import { useMenu } from '../../../providers/MenuProvider'
 const { useState } = React
 
 interface Props extends Pick<UseCheckoutValues, 'addLineItem'> {
-  currentVariant?: StorefrontApiProductVariant
+  currentVariant?: MaybeAll<
+    Pick<StorefrontApiProductVariant, 'id' | 'availableForSale'>
+  >
   quantity?: number
 }
 
@@ -19,6 +21,9 @@ export const BuyButton = ({ currentVariant, addLineItem, quantity }: Props) => {
 
   const handleClick = async () => {
     setLoading(true)
+    if (!currentVariant.id) {
+      throw new Error('The current variant was not provided with an id')
+    }
     await addLineItem({ variantId: currentVariant.id, quantity: quantity || 1 })
     setLoading(false)
     openCart('Product added to cart')
@@ -31,7 +36,7 @@ export const BuyButton = ({ currentVariant, addLineItem, quantity }: Props) => {
       disabled={loading || Boolean(!currentVariant)}
       onClick={handleClick}
     >
-      add to cart
+      Add to cart
     </Button>
   )
 }

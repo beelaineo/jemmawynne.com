@@ -5,11 +5,6 @@ import { RewriteFrames } from '@sentry/integrations'
 import Debug from 'debug'
 import { Severity } from '@sentry/node'
 
-const SentryInitializer =
-  typeof window === 'undefined'
-    ? NodeSentryInitializer
-    : BrowserSentryInitializer
-
 /** Some Sentry setup for sourcemaps */
 // This allows TypeScript to detect our global value
 declare global {
@@ -31,6 +26,11 @@ const debug = Debug('dev:sentry')
 const ENV = process.env.NODE_ENV
 const FORCE = Boolean(process.env.FORCE_SENTRY)
 const DSN = process.env.SENTRY_DSN
+
+const SentryInitializer =
+  typeof window === 'undefined'
+    ? NodeSentryInitializer
+    : BrowserSentryInitializer
 
 let Sentry: typeof SentryInitializer
 
@@ -61,9 +61,7 @@ if (ENV === 'production' || ENV === 'staging' || FORCE) {
     captureException: (e: any) => {
       debug('Captured exception:')
       debug(e)
-      const randomId = Math.random()
-        .toString()
-        .replace('0.', '')
+      const randomId = Math.random().toString().replace('0.', '')
       return `mock-ref-${randomId}`
     },
     captureMessage: (m: string, severity?: Severity) => {

@@ -1,14 +1,20 @@
 import * as React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { SHOP_DATA_QUERY, ShopDataResponse } from './shopDataQuery'
-import { ShopifyProduct, Menu, CollectionInfo, SiteSettings } from '../../types'
+import {
+  ShopifyProduct,
+  Menu,
+  CollectionInfo,
+  ShopifySourceProductOption,
+  SiteSettings,
+} from '../../types'
 import {
   createGetSwatchOptions,
   createGetProductInfoBlocks,
+  createGetOptionSwatches,
   DefinitelyProductInfo,
   SwatchOption,
 } from './utils'
-import { useError } from '../ErrorProvider'
 
 const { useContext } = React
 
@@ -19,6 +25,7 @@ interface ShopDataContextValue {
   collectionInfo?: CollectionInfo
   getProductInfoBlocks: (product: ShopifyProduct) => DefinitelyProductInfo[]
   getProductSwatchOptions: (product: ShopifyProduct) => SwatchOption[]
+  getOptionSwatches: (option: ShopifySourceProductOption) => SwatchOption | null
 }
 
 const ShopDataContext = React.createContext<ShopDataContextValue | undefined>(
@@ -48,6 +55,7 @@ export const ShopDataProvider = ({ children }: Props) => {
 
   const getProductInfoBlocks = createGetProductInfoBlocks(productInfo)
   const getProductSwatchOptions = createGetSwatchOptions(productInfo)
+  const getOptionSwatches = createGetOptionSwatches(productInfo)
 
   const value = {
     ready,
@@ -56,6 +64,7 @@ export const ShopDataProvider = ({ children }: Props) => {
     getProductInfoBlocks,
     getProductSwatchOptions,
     collectionInfo,
+    getOptionSwatches,
   }
 
   return (

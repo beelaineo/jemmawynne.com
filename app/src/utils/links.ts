@@ -113,3 +113,14 @@ export const getPageLinkUrl = (link: LinkType): string | void => {
       )
   }
 }
+
+export const getLinkFromHref = (href: string): LinkInfo => {
+  const { pathname } = new URL(href)
+  if (/\/products\/\w+/.test(pathname)) {
+    return { href: '/products/[productSlug]', as: pathname }
+  }
+  if (/\/collections\/\w+/.test(pathname)) {
+    return { href: '/collections/[collectionSlug]', as: pathname }
+  }
+  return { href: '/[pageSlug]', as: pathname }
+}
