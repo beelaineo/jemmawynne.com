@@ -9,6 +9,15 @@ export const GlobalStyles = createGlobalStyle`
 		box-sizing: border-box;
 	}
 
+  html, body, #__next, main {
+    height: 100%;
+  }
+
+  main {
+    height: 100%;
+    overflow: scroll;
+  }
+
 	body {
     font-family: serif;
 		overflow-x: hidden;

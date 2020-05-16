@@ -68,10 +68,10 @@ export const TabletInner = styled.nav`
     ${theme.mediaQueries.aboveTablet} {
       display: none;
     }
-    position: fixed;
+    position: sticky;
     width: 100vw;
     height: 100vh;
-    left: ${open ? '0' : '-102vw'};
+    transform: translateX(${open ? '0' : '-102vw'});
     transition: 0.3s;
     background-color: body.2;
     padding: 3 6;

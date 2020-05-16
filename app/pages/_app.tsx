@@ -62,16 +62,16 @@ class MyApp extends App<AppProps> {
         </Head>
         <ErrorProvider error={error}>
           <Providers>
-            <Announcement />
-            <Navigation />
-            <div id="modal" />
-            <main>
+            <main id="main">
+              <Announcement />
+              <Navigation />
               <SearchResults />
               <ErrorWrapper>
                 <Component {...pageProps} />
               </ErrorWrapper>
               <Footer />
             </main>
+            <div id="modal" />
           </Providers>
         </ErrorProvider>
       </>
