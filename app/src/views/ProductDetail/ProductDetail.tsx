@@ -8,6 +8,7 @@ import {
   ShopifyCollection,
 } from '../../types'
 import { Column } from '../../components/Layout'
+import { Button } from '../../components/Button'
 import {
   ProductVariantSelector,
   BuyButton,
@@ -16,14 +17,17 @@ import {
   ProductRelated,
 } from './components'
 import { useShopData } from '../../providers/ShopDataProvider'
-import { useCounter } from '../../utils/hooks'
+import { useCounter, buildMailTo } from '../../utils'
+import { Accordion } from '../../components/Accordion'
 import {
   Wrapper,
   ProductDetails,
   ProductInfoWrapper,
   ProductImagesWrapper,
 } from './styled'
-import { Accordion } from '../../components/Accordion'
+import { HintModal } from './HintModal'
+
+const { useState } = React
 
 interface Props {
   product: ShopifyProduct
@@ -34,6 +38,9 @@ export const ProductDetail = ({ product, collections }: Props) => {
   /* get additional info blocks from Sanity */
   const { getProductInfoBlocks } = useShopData()
   const { sourceData } = product
+  const [hintModalOpen, setHintModalOpen] = useState(false)
+  const openHintModal = () => setHintModalOpen(true)
+  const closeHintModal = () => setHintModalOpen(false)
   if (!sourceData) return null
   const globalAccordions = getProductInfoBlocks(product)
 
@@ -54,15 +61,11 @@ export const ProductDetail = ({ product, collections }: Props) => {
 
   if (!currentVariant) return null
 
-  const inquireMailTo = [
-    'mailto:inquiries@jemmawynne.com?',
-    'subject=',
-    encodeURIComponent(`Inquiry about ${product.title}`),
-    '&body=',
-    encodeURIComponent(
-      `Hello,\n\nI have some questions about your ${product.title}.\n\nhttps://www.jemmawynne.com/products/${product.handle}`,
-    ),
-  ].join('')
+  const inquireMailTo = buildMailTo({
+    to: 'concierge@jemmawynne.com',
+    subject: `Inquiry about ${product.title}`,
+    body: `Hello,\n\nI have some questions about your ${product.title}.\n\nhttps://www.jemmawynne.com/products/${product.handle}`,
+  })
 
   return (
     <Wrapper>
@@ -94,14 +97,9 @@ export const ProductDetail = ({ product, collections }: Props) => {
               </Column>
             </Box>
             <Box mt={5}>
-              <Heading
-                level={6}
-                family="sans"
-                textTransform="uppercase"
-                color="body.5"
-              >
+              <Button level={3} onClick={openHintModal}>
                 Drop a hint
-              </Heading>
+              </Button>
               <Heading
                 level={6}
                 family="sans"
@@ -141,6 +139,11 @@ export const ProductDetail = ({ product, collections }: Props) => {
         </ProductDetails>
       </Column>
       <ProductRelated product={product} collections={collections} />
+      <HintModal
+        product={product}
+        open={hintModalOpen}
+        closeModal={closeHintModal}
+      />
     </Wrapper>
   )
 }

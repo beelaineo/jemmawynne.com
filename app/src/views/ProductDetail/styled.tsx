@@ -34,6 +34,14 @@ export const DescriptionWrapper = styled.div`
   max-width: 550px;
 `
 
+export const HintFieldsWrapper = styled.div`
+  width: 425px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1;
+  grid-gap: 4;
+`
+
 export const Nav = styled.div`
   width: calc(100% - 4rem);
   max-width: 1200px;

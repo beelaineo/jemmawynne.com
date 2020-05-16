@@ -21,3 +21,5 @@ export const Select = styled.select`
   background-position: right 0 top 50%;
   background-size: 0.75em auto;
 `
+
+export const FormWrapper = styled.div``

@@ -1,4 +1,5 @@
 export * from './currency'
+export * from './email'
 export * from './cookies'
 export * from './parsing'
 export * from './data'

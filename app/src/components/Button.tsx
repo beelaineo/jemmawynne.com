@@ -22,28 +22,33 @@ export const Button = styled.button`
     letter-spacing: 0.25em;
     transition: 0.2s;
     width: 100%;
+    background-color: transparent;
 
     ${level === undefined || level === 1
       ? css`
           color: body.9;
-          background-color: body.0;
           border: 1px solid;
         `
       : level === 2
       ? css`
           color: body.9;
-          background-color: transparent;
           border: 1px solid;
         `
-      : css`
-          color: body.6;
+      : level === 3
+      ? css`
+          color: body.5;
           border: none;
-          font-size: 5;
-          font-weight: 2;
+          font-size: 6;
+          font-weight: 3;
+          display: inline;
+          width: auto;
           height: auto;
           padding: 0;
-          text-decoration: underline;
-          text-transform: initial;
-        `}
+          margin: 3 0;
+          text-transform: uppercase;
+
+          padding: 0;
+        `
+      : ''}
   `}
 `

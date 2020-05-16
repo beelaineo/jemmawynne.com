@@ -64,6 +64,7 @@ class MyApp extends App<AppProps> {
           <Providers>
             <Announcement />
             <Navigation />
+            <div id="modal" />
             <main>
               <SearchResults />
               <ErrorWrapper>

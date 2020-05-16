@@ -17,7 +17,6 @@ const OPEN_SUBMENU = 'OPEN_SUBMENU'
 const OPEN_CART = 'OPEN_CART'
 const CLOSE_CART = 'CLOSE_CART'
 const CLOSE_SUBMENU = 'CLOSE_SUBMENU'
-const CLOSE_ALL = 'CLOSE_ALL'
 
 interface GenericAction {
   type: typeof CLOSE_SUBMENU | typeof OPEN_MENU | typeof CLOSE_MENU
@@ -123,15 +122,15 @@ export const MenuProvider = ({ children }: MenuProps) => {
   const [state, dispatch] = useReducer(navReducer, initialState)
   const { lockScroll, unlockScroll } = useLockScroll()
 
-  const { menuOpen } = state
+  const { menuOpen, cartOpen } = state
 
   useEffect(() => {
-    if (menuOpen) {
+    if (menuOpen || cartOpen) {
       lockScroll()
     } else {
       unlockScroll()
     }
-  }, [menuOpen])
+  }, [menuOpen, cartOpen])
 
   const openMenu = () => dispatch({ type: OPEN_MENU })
   const closeMenu = () => dispatch({ type: CLOSE_MENU })
