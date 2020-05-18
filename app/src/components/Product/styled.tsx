@@ -32,7 +32,7 @@ export const SwatchImageWrapper = styled.div`
   ${({ clickable }: SwatchImageWrapperProps) => css`
     border-radius: 15px;
     overflow: hidden;
-    cursor: ${clickable ? 'pointer' : 'auto'};
+    cursor: ${clickable ? 'pointer' : 'inherit'};
   `}
 `
 

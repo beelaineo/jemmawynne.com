@@ -115,7 +115,7 @@ export const ProductDetail = ({ product, collections }: Props) => {
                 </a>
               </Heading>
             </Box>
-            <Box mt={5}>
+            <Box mt={4} pt={2} borderTop="1px solid">
               <Column width="medium">
                 {accordions
                   ? accordions

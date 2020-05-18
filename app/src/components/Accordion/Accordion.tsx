@@ -18,8 +18,15 @@ export const Accordion = ({ accordion }: AccordionProps) => {
   return (
     <Wrapper>
       <ToggleButton onClick={toggleOpen}>
-        {title}
-        <Span>{open === true ? ' −' : ' +'}</Span>
+        <Heading
+          level={6}
+          color="body.5"
+          textTransform="uppercase"
+          family="sans"
+        >
+          {title}
+          <Span>{open === true ? ' −' : ' +'}</Span>
+        </Heading>
       </ToggleButton>
       <Inner open={open}>
         <RichText blockWrapper={AccordionTextWrapper} body={bodyRaw} />

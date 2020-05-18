@@ -7,6 +7,7 @@ import {
   CarouselMask,
 } from './styled'
 import { Slide, SlideInfo } from './Slide'
+import { useViewportSize } from '../../utils'
 
 const { useState, useEffect, useMemo, useRef } = React
 
@@ -37,11 +38,9 @@ export const CarouselInner = ({
 }: CarouselProps) => {
   const columnCount = customColumnCount || 4
   const { currentSlide, setCurrentSlide } = useCarousel()
-  // const [hideButtons, setHideButtons] = useState(false)
-  // const [hasOverflow, setHasOverflow] = useState(false)
-  const [attempts, setAttempts] = useState(0)
+  const { width: viewportWidth } = useViewportSize()
+  const [hasOverflow, setHasOverflow] = useState(false)
   const [slides, setSlides] = useState<SlideInfo[]>([])
-  const innerRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
 
   const goNext = () => {
@@ -71,18 +70,15 @@ export const CarouselInner = ({
       0,
     )
     /* Give it 5 attempts to load images & get a width greater than 0 */
-    if (accWidth === 0) {
-      if (attempts === 5) return
-      const timeoutId = setTimeout(() => {
-        setAttempts(attempts + 1)
-      }, 100)
-      return () => clearTimeout(timeoutId)
+    if (accWidth > outerRef.current.offsetWidth) {
+      setHasOverflow(true)
     }
-    // if (accWidth > outerRef.current.offsetWidth) {
-    //   setHasOverflow(true)
-    // }
-  }, [outerRef.current, attempts])
+  }, [outerRef.current, viewportWidth])
 
+  // useEffect(() => {
+  //   setCurrentSlide(currentSlide || 0)
+  // }, [viewportWidth])
+  //
   const addSlide = useMemo(
     () => (newSlide: SlideInfo) => {
       setSlides((prevSlides) => [...prevSlides, newSlide])
@@ -105,17 +101,14 @@ export const CarouselInner = ({
     <CarouselContainer ref={outerRef}>
       {children ? (
         <CarouselButton
+          visible={hasOverflow && !isAtFirst}
           aria-label="previous slide"
           direction="previous"
           onClick={goPrevious}
-          visible={!isAtFirst}
         />
       ) : null}
-      {/* 
-           // @ts-ignore */}
       <CarouselMask>
         <SlidesContainer
-          ref={innerRef}
           left={currentSlide ? -slides[currentSlide].ref.offsetLeft : 0}
           {...handlers}
         >
@@ -133,7 +126,7 @@ export const CarouselInner = ({
       </CarouselMask>
       {children ? (
         <CarouselButton
-          visible={!isAtLast}
+          visible={hasOverflow && !isAtLast}
           direction="next"
           aria-label="next slide"
           onClick={goNext}

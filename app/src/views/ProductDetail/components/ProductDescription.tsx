@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
 import { ShopifyProduct, ShopifySourceProductVariant } from '../../../types'
 import { Heading } from '../../../components/Text'
 import { HtmlContent } from '../../../components/RichText'
 import { formatMoney } from '../../../utils'
-import { DescriptionWrapper } from '../styled'
+import { TitleWrapper, DescriptionWrapper } from '../styled'
+import { ShareButton } from './ShareButton'
 
 interface ProductDescriptionProps {
   product: ShopifyProduct
@@ -17,18 +17,19 @@ export const ProductDescription = ({
 }: ProductDescriptionProps) => {
   return (
     <DescriptionWrapper>
-      <Heading level={1} mb={1} weight={1}>
-        {product.title}
-      </Heading>
-      {currentVariant.priceV2 ? (
-        <Heading level={1} weight={1} fontStyle="italic" color="body.5">
-          {formatMoney(currentVariant.priceV2)}
+      <TitleWrapper>
+        <Heading level={1} mb={1} weight={1}>
+          {product.title}
         </Heading>
-      ) : null}
+        {currentVariant.priceV2 ? (
+          <Heading level={1} weight={1} fontStyle="italic" color="body.5">
+            {formatMoney(currentVariant.priceV2)}
+          </Heading>
+        ) : null}
+        <ShareButton product={product} />
+      </TitleWrapper>
 
-      <Box my={6}>
-        <HtmlContent html={product?.sourceData?.descriptionHtml} />
-      </Box>
+      <HtmlContent html={product?.sourceData?.descriptionHtml} />
     </DescriptionWrapper>
   )
 }

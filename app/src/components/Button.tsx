@@ -5,7 +5,7 @@ interface ButtonProps {
   disabled?: boolean
 }
 
-export const Button = styled.button`
+export const Button = styled.buttonBox`
   ${({ level, disabled }: ButtonProps) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
     opacity: ${disabled ? 0.3 : 1};

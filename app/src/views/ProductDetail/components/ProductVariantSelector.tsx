@@ -12,6 +12,7 @@ import {
   SelectWrapper,
   SwatchLabelWrapper,
   ProductOptionWrapper,
+  ProductOptionsWrapper,
 } from '../styled'
 import { Heading, Label } from '../../../components/Text'
 import { Select } from '../../../components/Forms'
@@ -207,7 +208,7 @@ export const ProductVariantSelector = (props: Props) => {
   }
 
   return (
-    <div>
+    <ProductOptionsWrapper>
       {definitely(options).map((option) =>
         option.name ? (
           <OptionSelector
@@ -218,6 +219,6 @@ export const ProductVariantSelector = (props: Props) => {
           />
         ) : null,
       )}
-    </div>
+    </ProductOptionsWrapper>
   )
 }

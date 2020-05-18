@@ -88,7 +88,7 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
       </MainImageWrapper>
       {parsedImages.length > 1 && (
         <Thumbnails data-testid="thumbnails">
-          {parsedImages.map((image, i) => (
+          {parsedImages.map((image) => (
             <button key={image.imageId} onClick={changeImage(image.imageId)}>
               <Image ratio={1} image={image} />
             </button>

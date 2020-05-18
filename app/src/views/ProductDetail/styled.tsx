@@ -15,7 +15,7 @@ export const ProductDetails = styled.div`
     padding: 0 6;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 5;
+    grid-gap: 7;
 
     ${theme.mediaQueries.mobile} {
       max-width: 500px;
@@ -27,11 +27,14 @@ export const ProductDetails = styled.div`
 
 export const ProductImagesWrapper = styled.div``
 
-export const ProductInfoWrapper = styled.div``
+export const ProductInfoWrapper = styled.div`
+  position: relative;
+`
 
 export const DescriptionWrapper = styled.div`
   padding-right: 6;
   max-width: 550px;
+  margin-bottom: 7;
 `
 
 export const HintFieldsWrapper = styled.div`
@@ -49,7 +52,12 @@ export const Nav = styled.div`
   font-family: sans;
 `
 
-export const ProductGalleryWrapper = styled.div``
+export const ProductGalleryWrapper = styled.div`
+  ${({ theme }) => css`
+    position: sticky;
+    top: ${theme.space[4]}px;
+  `}
+`
 
 export const SwatchWrapper = styled.div`
   display: grid;
@@ -87,6 +95,10 @@ export const ProductRelatedInner = styled.div`
   height: 500px;
 `
 
+export const ProductOptionsWrapper = styled.div`
+  margin-bottom: 7;
+`
+
 export const ProductOptionWrapper = styled.div`
   margin-top: 3;
   display: flex;
@@ -106,4 +118,33 @@ export const ArrowDown = styled.div`
   ${(props) => props.theme.mediaQueries.tablet} {
     display: none;
   }
+`
+
+export const TitleWrapper = styled.div`
+  position: relative;
+  margin-bottom: 6;
+`
+
+export const ShareButtonWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+`
+
+interface WithOpen {
+  open: boolean
+}
+
+export const ShareButtonDropdown = styled.div<WithOpen>`
+  ${({ open }) => css`
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2;
+    border: 1px solid;
+    border-color: currentColor;
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.2);
+    display: ${open ? 'block' : 'none'};
+  `}
 `

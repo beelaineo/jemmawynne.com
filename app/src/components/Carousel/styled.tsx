@@ -8,11 +8,6 @@ export const CarouselContainer = styled.div`
 `
 
 export const CarouselMask = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
 `
 
@@ -23,12 +18,12 @@ interface SlidesContainerProps {
 
 export const SlidesContainer = styled.div`
   ${({ left }: SlidesContainerProps) => css`
-    position: absolute;
+    position: relative;
     height: 100%;
     width: 100%;
     top: 0;
     white-space: nowrap;
-    left: ${left}px;
+    transform: translate(${left}px);
     transition: 0.4s cubic-bezier(0.57, 0.06, 0.05, 0.95);
 
     & > * {

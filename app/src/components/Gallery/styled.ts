@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import { ImageWrapper } from '../Image'
 
 export const GalleryWrapper = styled.div`
@@ -21,7 +21,7 @@ export const ZoomImageWrapper = styled.div`
 `
 
 export const MainImageWrapper = styled.div`
-  margin-bottom: 3;
+  margin-bottom: 2;
   position: relative;
 
   &:hover ${ZoomImageWrapper} {
@@ -31,8 +31,8 @@ export const MainImageWrapper = styled.div`
 
 export const Thumbnails = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 3;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2;
 `
 
 interface ZoomInnerProps {

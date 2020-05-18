@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { unwindEdges } from '@good-idea/unwind-edges'
-import { ShopifyCollection, ShopifyProduct } from '../../types'
+import { ShopifyCollection } from '../../types'
 import { Carousel } from './Carousel'
 import { ProductThumbnail } from '../Product'
 import { definitely } from '../../utils'
