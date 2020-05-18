@@ -154,21 +154,10 @@ interface CartButtonProps {
   disabled?: boolean
 }
 
-export const CartCount = styled.div`
+export const CartCount = styled.span`
   font-size: 6;
   font-weight: 3;
-  width: 18px;
-  height: 18px;
   font-family: sans;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid currentColor;
-  background-color: body.0;
-  position: absolute;
-  top: -4px;
-  right: -11px;
 `
 
 export const CartButton = styled.button`
@@ -179,6 +168,12 @@ export const CartButton = styled.button`
     display: flex;
     font-size: 2;
     align-items: center;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
 
     ${theme.mediaQueries.tablet} {
       font-size: 21px;

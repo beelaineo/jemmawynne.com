@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import Link from 'next/link'
-import { AiOutlineShopping, AiOutlineMenu } from 'react-icons/ai'
+import { AiOutlineMenu } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import { definitely } from '../../utils'
 import { useCheckout } from 'use-shopify'
@@ -92,7 +92,6 @@ export const Navigation = () => {
         <SearchInput />
         <CartButton disabled={loading} onClick={openCart}>
           {cartCount ? <CartCount>{cartCount}</CartCount> : null}
-          <AiOutlineShopping />
         </CartButton>
       </NavTools>
       <DesktopNav

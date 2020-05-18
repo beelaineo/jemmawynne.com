@@ -37,12 +37,11 @@ export const DesktopNav = ({
         {menuItems.map((menuItem) => {
           if (!menuItem || !menuItem._key) return null
           const { _key } = menuItem
-          const active = currentSubMenuKey === _key
           switch (menuItem.__typename) {
             case 'SubMenu':
               return (
                 <NavHeaderWrapper key={_key}>
-                  <NavHeader active={active} onMouseEnter={openSubMenu(_key)}>
+                  <NavHeader onMouseEnter={openSubMenu(_key)}>
                     <Heading
                       textTransform="uppercase"
                       family="sans"
@@ -57,10 +56,7 @@ export const DesktopNav = ({
             case 'Cta':
               return (
                 <NavHeaderWrapper key={_key}>
-                  <NavHeader
-                    active={active}
-                    onMouseEnter={openSubMenu(undefined)}
-                  >
+                  <NavHeader onMouseEnter={openSubMenu(undefined)}>
                     <DocumentLink document={menuItem?.link?.document}>
                       <Heading
                         textTransform="uppercase"

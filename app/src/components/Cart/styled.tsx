@@ -1,10 +1,22 @@
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 
-export const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  grid-column-gap: 3;
-  margin-bottom: 4;
+interface WithUpdating {
+  updating: boolean
+}
+export const Wrapper = styled.div<WithUpdating>`
+  ${({ updating }) => css`
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-column-gap: 3;
+    padding: 4 0;
+    border-top: 1px solid;
+    opacity: ${updating ? 0.5 : 1};
+    pointer-events: ${updating ? 'none' : 'inherit'};
+
+    & + & {
+      border-bottom: 1px solid;
+    }
+  `}
 `
 
 export const CheckoutItem = styled.div`
@@ -64,7 +76,7 @@ export const CartMessage = styled.div`
 
 export const TitleWrapper = styled.div`
   border-bottom: 1px solid currentColor;
-  padding: 3 2;
+  height: 45px;
   background-color: body.2;
 `
 
@@ -73,57 +85,33 @@ interface QuantitySelectorProps {
   width?: string
 }
 
-export const QuantitySelector = styled.div`
-  ${(props: QuantitySelectorProps) => css`
-    input[type='text'] {
-      min-width: ${props.width ? props.width : 'initial'};
-      max-width: ${props.width ? props.width : 'initial'};
-    }
-  `}
-  button {
-    text-align-last: center;
-    height: 50px;
-    border: 1px solid #f1f1f1;
-    border-radius: 0;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    font-size: 0.85rem;
-    cursor: pointer;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    background: none;
-    border-radius: 0;
-    border: 1px solid #f1f1f1;
-    padding: 0.5rem 1.2rem;
-    font-family: sans-serif;
-  }
-  input {
-    text-align: center;
-    width: 109px;
-  }
+export const RemoveButtonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `
 
-export const QuantitySelectorCart = styled(QuantitySelector)`
+export const QuantityButton = styled.button`
+  text-align-last: center;
+  border: 1px solid #f1f1f1;
+  height: 1em;
+  width: 1em;
+  font-size: 6;
+  border: none;
+  transition: 0.2s;
+  cursor: pointer;
+  appearance: none;
+  background: none;
+  border-radius: 0;
+  margin: 0 2;
+  padding: 0;
+  font-family: sans;
+`
+
+export const QuantitySelectorCart = styled.div`
+  position: relative;
   margin-top: 4;
   margin-bottom: 2;
-  button {
-    text-align-last: center;
-    height: 1em;
-    width: 1em;
-    font-size: 6;
-    border: none;
-    transition: 0.2s;
-    cursor: pointer;
-    appearance: none;
-    background: none;
-    border-radius: 0;
-
-    margin: 0 2;
-    padding: 0;
-    font-family: sans;
-  }
   input {
     text-align: center;
     width: 2px;
