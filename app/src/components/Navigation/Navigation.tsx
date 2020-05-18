@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
+import { Router } from 'next/router'
 import Link from 'next/link'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
@@ -25,7 +26,11 @@ import {
 
 const { useEffect } = React
 
-export const Navigation = () => {
+interface NavigationProps {
+  router: Router
+}
+
+export const Navigation = ({ router }: NavigationProps) => {
   /* State from Providers */
   const { ready, menu } = useShopData()
   const { loading, checkout } = useCheckout()
@@ -58,6 +63,10 @@ export const Navigation = () => {
   useEffect(() => {
     if (cartOpen) closeMenu()
   }, [cartOpen])
+
+  useEffect(() => {
+    closeMenu()
+  }, [router.asPath])
 
   /* Parsing */
   const allMenuItems = definitely(menu?.menuItems) ?? []

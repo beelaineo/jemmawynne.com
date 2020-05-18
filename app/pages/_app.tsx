@@ -1,5 +1,5 @@
 import * as React from 'react'
-import App, { AppInitialProps } from 'next/app'
+import App, { AppInitialProps, AppProps as NextAppProps } from 'next/app'
 import { NextPageContext } from 'next'
 import Head from 'next/head'
 import { ApolloClient } from 'apollo-client'
@@ -12,12 +12,14 @@ import { withApollo } from '../src/graphql'
 import { ErrorProvider, ErrorWrapper } from '../src/providers/ErrorProvider'
 import Sentry from '../src/services/sentry'
 
-interface AppProps {
+interface Props {
   Component: React.ComponentType
   pageProps: any
   router: any
   apollo: ApolloClient<any>
 }
+
+type AppProps = NextAppProps<Props>
 
 export interface PageContext extends NextPageContext {
   apolloClient: ApolloClient<any>
@@ -53,7 +55,7 @@ class MyApp extends App<AppProps> {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, router } = this.props
     const { error } = pageProps
     return (
       <>
@@ -64,7 +66,7 @@ class MyApp extends App<AppProps> {
           <Providers>
             <main id="main">
               <Announcement />
-              <Navigation />
+              <Navigation router={router} />
               <SearchResults />
               <ErrorWrapper>
                 <Component {...pageProps} />
