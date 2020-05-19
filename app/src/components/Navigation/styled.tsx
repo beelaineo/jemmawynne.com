@@ -143,6 +143,10 @@ export const LogoWrapper = styled.div`
     max-width: 360px;
     display: block;
 
+    svg {
+      width: 100%;
+    }
+
     ${theme.mediaQueries.tablet} {
       max-width: 60vw;
       height: 17px;
@@ -157,7 +161,18 @@ interface CartButtonProps {
 export const CartCount = styled.span`
   font-size: 6;
   font-weight: 3;
+  width: 18px;
+  height: 18px;
   font-family: sans;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid currentColor;
+  background-color: body.0;
+  position: absolute;
+  top: -4px;
+  right: -11px;
 `
 
 export const CartButton = styled.button`
@@ -173,7 +188,6 @@ export const CartButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid;
 
     ${theme.mediaQueries.tablet} {
       font-size: 21px;
@@ -410,7 +424,7 @@ export const SubMenuColumns = styled.div`
   ${({ theme, active }: WithActive) => css`
     display: ${active ? 'grid' : 'none'};
     margin: 0 auto;
-    max-width: xWide;
+    max-width: xxWide;
     grid-template-columns: repeat(5, 1fr);
     padding: 3 5 5;
     grid-column-gap: 3;

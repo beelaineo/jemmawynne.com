@@ -13,17 +13,6 @@ export const SwatchesWrapper = styled.div`
   justify-content: center;
 `
 
-export const SwatchLabel = styled.div`
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 50%;
-  text-align: center;
-  white-space: nowrap;
-  transform: translate(-50%);
-  transition: 0.2s;
-  opacity: 0;
-`
-
 interface SwatchImageWrapperProps {
   clickable: boolean
 }
@@ -36,14 +25,22 @@ export const SwatchImageWrapper = styled.div`
   `}
 `
 
-export const SwatchWrapper = styled.div`
-  position: relative;
-  width: 12px;
-  margin: 0 2;
+interface WithActive {
+  active: boolean
+}
 
-  &:hover {
-    ${SwatchLabel} {
-      opacity: 1;
+export const SwatchWrapper = styled.div<WithActive>`
+  ${({ active }) => css`
+    position: relative;
+    width: 16px;
+    margin: 0 2;
+    border-radius: 15px;
+    padding: 2px;
+    border: 1px solid;
+    border-color: ${active ? 'body.5' : 'transparent'};
+
+    &:hover {
+      border-color: body.6;
     }
-  }
+  `}
 `

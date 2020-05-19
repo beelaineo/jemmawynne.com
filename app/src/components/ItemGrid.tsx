@@ -11,7 +11,7 @@ import { CollectionThumbnail } from './Collection'
 const Grid = styled.div`
   ${({ theme }) => css`
     margin: 0 auto;
-    max-width: xWide;
+    max-width: xxWide;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-evenly;

@@ -1,7 +1,7 @@
 import styled, { css } from '@xstyled/styled-components'
 
 interface ButtonProps {
-  level?: 1 | 2 | 3
+  level?: 1 | 2 | 3 | 4
   disabled?: boolean
 }
 
@@ -46,8 +46,14 @@ export const Button = styled.buttonBox`
           padding: 0;
           margin: 3 0;
           text-transform: uppercase;
-
-          padding: 0;
+        `
+      : level === 4
+      ? css`
+          padding: 0 0 1 1;
+          border-bottom: 1px solid;
+          font-size: 7;
+          width: auto;
+          height: auto;
         `
       : ''}
   `}

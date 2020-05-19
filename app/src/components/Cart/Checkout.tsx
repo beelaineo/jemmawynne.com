@@ -7,7 +7,12 @@ import { Heading } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
 import { CheckoutProduct } from './CheckoutProduct'
 import { definitely, formatMoney } from '../../utils'
-import { TitleWrapper, CloseButton, CartMessage } from './styled'
+import {
+  TitleWrapper,
+  CloseButton,
+  LineItemsWrapper,
+  SubtotalWrapper,
+} from './styled'
 import { useMenu } from '../../providers/MenuProvider'
 
 /**
@@ -17,7 +22,7 @@ import { useMenu } from '../../providers/MenuProvider'
 export const Checkout = () => {
   /* State */
   const { checkout, loading } = useCheckout()
-  const { closeCart, cartMessage } = useMenu()
+  const { closeCart } = useMenu()
 
   const lineItems =
     checkout && checkout?.lineItems?.edges && checkout.lineItems.edges.length
@@ -34,38 +39,40 @@ export const Checkout = () => {
         <Heading level={2} mb={3}>
           {lineItems.length ? 'Your Cart' : 'Your cart is empty'}
         </Heading>
-        {cartMessage ? (
-          <CartMessage>
-            <span>
-              <Heading level={5}>{cartMessage}</Heading>
-            </span>
-            <Button level={3} onClick={closeCart}>
-              Continue Shopping
-            </Button>
-          </CartMessage>
+        <LineItemsWrapper>
+          {definitely(lineItems).map((lineItem) => (
+            <CheckoutProduct
+              key={lineItem.id || 'some-key'}
+              // @ts-ignore
+              lineItem={lineItem}
+            />
+          ))}
+        </LineItemsWrapper>
+        {checkout && checkout?.paymentDueV2 ? (
+          <>
+            <SubtotalWrapper>
+              <Heading family="sans" level={6} weight={3}>
+                Subtotal
+              </Heading>
+              <Heading family="serif" level={4} fontStyle="italic" weight={2}>
+                {formatMoney(checkout.paymentDueV2)}
+              </Heading>
+            </SubtotalWrapper>
+
+            <Heading my={0} level={6} textAlign="left">
+              Shipping and discount codes are added at checkout.
+            </Heading>
+          </>
         ) : null}
-        {definitely(lineItems).map((lineItem) => (
-          <CheckoutProduct
-            key={lineItem.id || 'some-key'}
-            // @ts-ignore
-            lineItem={lineItem}
-          />
-        ))}
       </CartInner>
       {checkout &&
       checkout.paymentDueV2 &&
       checkout.webUrl &&
       lineItems.length ? (
         <CartBottom>
-          <Heading family="serif" textAlign="center" level={5} weight={2}>
-            Subtotal: {formatMoney(checkout.paymentDueV2)}
-          </Heading>
           <Button as="a" href={checkout.webUrl} disabled={loading}>
             Checkout
           </Button>
-          <Heading my={3} level={5} textAlign="center">
-            Shipping and discount codes are added at checkout.
-          </Heading>
         </CartBottom>
       ) : null}
     </>

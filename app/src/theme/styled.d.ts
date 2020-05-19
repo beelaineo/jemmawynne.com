@@ -10,6 +10,7 @@ declare module 'styled-components' {
       medium: number
       wide: number
       xWide: number
+      xxWide: number
     }
     fontSizes: number[]
     fontWeights: number[]

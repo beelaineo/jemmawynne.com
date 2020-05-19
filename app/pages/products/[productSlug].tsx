@@ -5,6 +5,7 @@ import { ShopifyProduct, ShopifyCollection } from '../../src/types'
 import {
   saneShopifyCollectionFragment,
   saneShopifyProductFragment,
+  carouselFragment,
 } from '../../src/graphql'
 import { NotFound, ProductDetail } from '../../src/views'
 
@@ -15,7 +16,13 @@ interface ProductProps {
 
 const Product = ({ product, collections }: ProductProps) => {
   if (!product) return <NotFound />
-  return <ProductDetail product={product} collections={collections} />
+  return (
+    <ProductDetail
+      key={product._id || 'some-key'}
+      product={product}
+      collections={collections}
+    />
+  )
 }
 
 const productQuery = gql`
@@ -24,9 +31,13 @@ const productQuery = gql`
       where: { handle: { eq: $handle }, archived: { neq: true } }
     ) {
       ...SaneShopifyProductFragment
+      related {
+        ...CarouselFragment
+      }
     }
   }
   ${saneShopifyProductFragment}
+  ${carouselFragment}
 `
 
 const collectionsQuery = gql`

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Router } from 'next/router'
 import Link from 'next/link'
-import { AiOutlineMenu } from 'react-icons/ai'
+import { AiOutlineShopping, AiOutlineMenu } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import { definitely } from '../../utils'
 import { useCheckout } from 'use-shopify'
@@ -66,6 +66,10 @@ export const Navigation = ({ router }: NavigationProps) => {
 
   useEffect(() => {
     closeMenu()
+
+    const scrollingElement = document?.getElementById('main')
+    if (!scrollingElement) return
+    scrollingElement.scrollTop = 0
   }, [router.asPath])
 
   /* Parsing */
@@ -101,6 +105,7 @@ export const Navigation = ({ router }: NavigationProps) => {
         <SearchInput />
         <CartButton disabled={loading} onClick={openCart}>
           {cartCount ? <CartCount>{cartCount}</CartCount> : null}
+          <AiOutlineShopping />
         </CartButton>
       </NavTools>
       <DesktopNav

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
+import { FaFacebookF, FaTwitter, FaPinterest } from 'react-icons/fa'
 import { ShopifyProduct } from '../../../types'
 import { Button } from '../../../components/Button'
 import { Heading } from '../../../components/Text'
@@ -9,6 +10,7 @@ const { useState, useEffect } = React
 
 interface ButtonInfo {
   label: string
+  icon: React.ComponentType
   href: string
 }
 
@@ -16,13 +18,23 @@ interface ShareLinkProps {
   button: ButtonInfo
 }
 
-const ShareLink = ({ button }: ShareLinkProps) => (
-  <Heading level={6} family="sans" color="body.5" textAlign="center">
-    <a href={button.href} target="_blank" rel="noopener noreferrer">
-      {button.label}
-    </a>
-  </Heading>
-)
+const ShareLink = ({ button }: ShareLinkProps) => {
+  const Icon = button.icon
+  const ariaLabel = `Share on ${button.label}`
+
+  return (
+    <Heading m={0} level={6} family="sans" color="body.5" textAlign="center">
+      <a
+        href={button.href}
+        aria-label={ariaLabel}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon />
+      </a>
+    </Heading>
+  )
+}
 
 interface GetButtonsProps {
   url: string
@@ -33,14 +45,17 @@ interface GetButtonsProps {
 const getButtons = ({ url, text, imageUrl }: GetButtonsProps): ButtonInfo[] => [
   {
     label: 'Facebook',
+    icon: FaFacebookF,
     href: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
   },
   {
     label: 'Twitter',
+    icon: FaTwitter,
     href: `https://twitter.com/share?url=${url}&text=${text}`,
   },
   {
     label: 'Pinterest',
+    icon: FaPinterest,
     href: `http://pinterest.com/pin/create/button/?url=${url}&media=${imageUrl}&description=${text}`,
   },
 ]

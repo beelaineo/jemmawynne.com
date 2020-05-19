@@ -1,13 +1,24 @@
 import * as React from 'react'
-import { RichImage, ShopifyProduct } from '../../types'
+import {
+  RichImage,
+  ShopifyProduct,
+  SwatchOption,
+  SwatchOptionValue,
+} from '../../types'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { Heading } from '../Text'
 import { Image } from '../Image'
-import { formatMoney } from '../../utils'
+import {
+  getVariantBySelectedOption,
+  formatMoney,
+  definitely,
+} from '../../utils'
 import { ProductSwatches } from './ProductSwatches'
 import { ProductInfo, ProductThumb } from './styled'
+
+const { useState } = React
 
 interface ProductThumbnail {
   product: ShopifyProduct
@@ -21,10 +32,10 @@ export const ProductThumbnail = ({
   product,
 }: ProductThumbnail) => {
   const { getProductSwatchOptions } = useShopData()
-  if (!product) return null
+  const [variants] = unwindEdges(product?.sourceData?.variants)
+  const [currentVariant, setCurrentVariant] = useState(variants[0])
+  if (!product?.sourceData) return null
   if (product.archived === true) return null
-  const { sourceData } = product
-  if (!sourceData) return null
   const productImages = product?.sourceData?.images
     ? unwindEdges(
         // @ts-ignore
@@ -32,12 +43,28 @@ export const ProductThumbnail = ({
       )[0]
     : []
 
-  const productImage = productImages.length ? productImages[0] : undefined
-  const { minVariantPrice, maxVariantPrice } = sourceData.priceRange || {}
+  const productImage =
+    currentVariant?.image ?? productImages.length ? productImages[0] : undefined
+  const { minVariantPrice, maxVariantPrice } =
+    product.sourceData.priceRange || {}
   const as = `/products/${product.handle}`
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   const swatchOptions = getProductSwatchOptions(product)
   const swatchOption = swatchOptions.length ? swatchOptions[0] : undefined
+  const activeOption = swatchOption
+    ? definitely(currentVariant.selectedOptions).find(
+        (o) => o.name === swatchOption.name,
+      )
+    : undefined
+  const onSwatchHover = (
+    option: SwatchOption,
+    value: SwatchOptionValue,
+  ) => () => {
+    const optionValue = { name: option.name, currentValue: value.value }
+    const updatedVariant = getVariantBySelectedOption(variants, optionValue)
+    if (updatedVariant) setCurrentVariant(updatedVariant)
+  }
+
   return (
     <Link href="/products/[productSlug]" as={as}>
       <a>
@@ -66,7 +93,13 @@ export const ProductThumbnail = ({
                 {formatMoney(maxVariantPrice)}
               </Heading>
             ) : null}
-            {swatchOption ? <ProductSwatches option={swatchOption} /> : null}
+            {swatchOption ? (
+              <ProductSwatches
+                onSwatchHover={onSwatchHover}
+                option={swatchOption}
+                activeValue={activeOption?.value}
+              />
+            ) : null}
           </ProductInfo>
         </ProductThumb>
       </a>

@@ -34,7 +34,6 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
   svg {
-    width: 100%;
     fill: currentColor;
   }
 	img {

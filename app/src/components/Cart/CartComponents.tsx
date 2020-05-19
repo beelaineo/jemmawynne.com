@@ -31,15 +31,14 @@ export const CartSidebar = styled.div`
 export const CartBottom = styled.div`
   ${({ theme }) => css`
     background-color: body.2;
-    border-top: 1px solid black;
-    padding: 5;
+    padding: 4 9;
     width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 
-    ${theme.mediaQueries.tablet} {
-      padding: 3 5;
+    ${theme.mediaQueries.mobile} {
+      padding: 4 5;
     }
   `}
 `
@@ -51,7 +50,13 @@ export const CartNav = styled.div`
 `
 
 export const CartInner = styled.div`
-  flex-grow: 1;
-  overflow: scroll;
-  padding: 5;
+  ${({ theme }) => css`
+    flex-grow: 1;
+    overflow: scroll;
+    padding: 7 9;
+
+    ${theme.mediaQueries.mobile} {
+      padding: 5;
+    }
+  `}
 `

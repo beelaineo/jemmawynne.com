@@ -55,7 +55,8 @@ export const defaultTheme: DefaultTheme = {
     small: 340,
     medium: 600,
     wide: 860,
-    xWide: 1440,
+    xWide: 1190,
+    xxWide: 1440,
   },
 
   /* Font Sizes, applies to:

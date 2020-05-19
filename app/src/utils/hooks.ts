@@ -23,7 +23,7 @@ const minMax = (min: number, max: number) => (input: number): number =>
   Math.min(Math.max(input, min), max)
 
 export const useCounter = (
-  initialCount: 0,
+  initialCount: number = 0,
   options: Options,
 ): UseCounterValues => {
   const { min, max } = {

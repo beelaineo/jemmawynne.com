@@ -16,7 +16,11 @@ import {
 } from '../styled'
 import { Heading, Label } from '../../../components/Text'
 import { Select } from '../../../components/Forms'
-import { definitely } from '../../../utils'
+import {
+  SelectedProductOption,
+  getVariantBySelectedOptions,
+  definitely,
+} from '../../../utils'
 import { ProductSwatches } from '../../../components/Product'
 
 const { useState } = React
@@ -28,11 +32,6 @@ const { useState } = React
  * - highlights the current variant
  * - does not render anything if there is only one variant
  */
-
-interface SelectedProductOption {
-  name: string
-  currentValue: string
-}
 
 const getInitialOptions = (
   options: ShopifySourceProductOption[],
@@ -57,24 +56,6 @@ const getNewOptions = (
     }
   })
 
-const getVariantBySelectedOptions = (
-  variants: ShopifySourceProductVariant[],
-  currentOptions: SelectedProductOption[],
-): ShopifySourceProductVariant | void =>
-  variants.find((variant) => {
-    const { selectedOptions: optionsForVariant } = variant
-    // @ts-ignore
-    return optionsForVariant.reduce<boolean>((acc, variantOption) => {
-      if (acc === false) return false
-      if (!variantOption) return false
-      const matchingOption = currentOptions.find(
-        (o) => o.name === variantOption.name,
-      )
-      if (matchingOption)
-        return matchingOption.currentValue === variantOption.value
-    }, true)
-  })
-
 interface OptionSelectorProps {
   option: ShopifySourceProductOption
   changeOption: (value: string) => void
@@ -86,7 +67,7 @@ const OptionSelector = ({
   changeOption,
   currentValue,
 }: OptionSelectorProps) => {
-  if (!option.name || !option.values) return null
+  if (!option.name || !option.values || option.values.length < 2) return null
 
   const { getOptionSwatches } = useShopData()
   const validSwatchOption = getOptionSwatches(option)

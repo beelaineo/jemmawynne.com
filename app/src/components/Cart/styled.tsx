@@ -8,14 +8,8 @@ export const Wrapper = styled.div<WithUpdating>`
     display: grid;
     grid-template-columns: 110px 1fr;
     grid-column-gap: 3;
-    padding: 4 0;
-    border-top: 1px solid;
     opacity: ${updating ? 0.5 : 1};
     pointer-events: ${updating ? 'none' : 'inherit'};
-
-    & + & {
-      border-bottom: 1px solid;
-    }
   `}
 `
 
@@ -55,7 +49,7 @@ export const CloseButton = styled.button`
   top: 12px;
   right: 15px;
   font-size: 21px;
-  background-color: body.2;
+  background-color: transparent;
 `
 
 export const CartMessage = styled.div`
@@ -75,9 +69,30 @@ export const CartMessage = styled.div`
 `
 
 export const TitleWrapper = styled.div`
-  border-bottom: 1px solid currentColor;
   height: 45px;
   background-color: body.2;
+`
+
+export const LineItemsWrapper = styled.div`
+  ${({ theme }) => css`
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin: 4 0;
+    padding: 6 0;
+    display: grid;
+    grid-template-columns: 1;
+    grid-gap: 6;
+
+    ${theme.mediaQueries.mobile} {
+      padding: 5 0;
+      grid-gap: 5;
+    }
+  `}
+`
+
+export const SubtotalWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 interface QuantitySelectorProps {

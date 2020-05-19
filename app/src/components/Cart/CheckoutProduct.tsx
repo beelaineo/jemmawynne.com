@@ -32,34 +32,38 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
     setUpdating(false)
   }
 
+  console.log(variant.selectedOptions)
+
   return (
     <Wrapper updating={updating}>
       {image ? <Image image={image} /> : <div />}
       <div>
-        <Heading level={3} weight={2}>
+        <Heading level={3} fontSize="18px" weight={2}>
           {title}
         </Heading>
         <Box my={3}>
-          {variant.selectedOptions.map((option) => (
-            <Heading
-              key={option.name}
-              level={7}
-              color="body.5"
-              family="sans"
-              weight={3}
-            >
-              {option.name}:{' '}
-              <Box as="span" color="body.7">
-                {option.value}
-              </Box>
-            </Heading>
-          ))}
+          {variant.selectedOptions.map((option) =>
+            option.value !== 'Default Title' ? (
+              <Heading
+                key={option.name}
+                level={7}
+                color="body.5"
+                family="sans"
+                weight={3}
+              >
+                {option.name}:{' '}
+                <Box as="span" color="body.7">
+                  {option.value}
+                </Box>
+              </Heading>
+            ) : null,
+          )}
         </Box>
-        <Heading level={5} weight={5}>
+        <Heading level={5} weight={5} fontStyle="italic">
           {formatMoney(variant.priceV2)}
         </Heading>
         <QuantitySelectorCart>
-          <Heading family="serif" level={5} color="body.7" weight={2}>
+          <Heading family="sans" level={6} color="body.7" weight={2}>
             <QuantityButton type="button" onClick={setQuantity(quantity - 1)}>
               &#8722;
             </QuantityButton>
@@ -69,7 +73,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
             </QuantityButton>
           </Heading>
           <RemoveButtonWrapper>
-            <Button level={3} my={0} onClick={setQuantity(0)}>
+            <Button level={4} my={0} onClick={setQuantity(0)}>
               Remove
             </Button>
           </RemoveButtonWrapper>

@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const ProductDetails = styled.div`
   ${({ theme }) => css`
-    max-width: xWide;
+    max-width: xxWide;
     margin: 0 auto;
     padding: 0 6;
     display: grid;
@@ -143,8 +143,18 @@ export const ShareButtonDropdown = styled.div<WithOpen>`
     transform: translateX(-50%);
     padding: 2;
     border: 1px solid;
-    border-color: currentColor;
+    border-color: body.3;
     box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.2);
-    display: ${open ? 'block' : 'none'};
+    display: ${open ? 'grid' : 'none'};
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 2;
+
+    & > * {
+      display: inline;
+
+      &:hover {
+        color: body.7;
+      }
+    }
   `}
 `
