@@ -4,6 +4,10 @@ export const hero = {
   name: 'hero',
   title: 'Hero',
   type: 'object',
+  options: {
+    collapsible: true,
+    collapsed: true,
+  },
   fields: [
     {
       name: 'title',
