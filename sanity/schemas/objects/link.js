@@ -25,6 +25,12 @@ const getPreviewValues = async (values) => {
   if (doc && doc._type === 'stockists') {
     return { title: 'Stockists' }
   }
+  if (!doc) {
+    return {
+      title: '🛑 Document reference is missing',
+      subtitles: 'To fix, delete this item and add a new link',
+    }
+  }
   const customThumbnail = await getImageThumbnail(image)
   const shopifyThumbnail =
     doc && (doc._type === 'shopifyProduct' || doc._type === 'shopifyCollection')
