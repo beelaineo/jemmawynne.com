@@ -2,7 +2,7 @@ import * as React from 'react'
 import { RichText } from '../RichText'
 import { Heading } from '../Text'
 import { ProductInfoBlock } from '../../types'
-import { Wrapper, ToggleButton, Inner, Span } from './styled'
+import { Wrapper, ToggleButton, Inner, PlusMinus } from './styled'
 
 interface AccordionProps {
   accordion: ProductInfoBlock
@@ -21,12 +21,13 @@ export const Accordion = ({ accordion }: AccordionProps) => {
         <Heading
           level={6}
           color="body.5"
+          mb={0}
           textTransform="uppercase"
           family="sans"
         >
           {title}
-          <Span>{open === true ? ' −' : ' +'}</Span>
         </Heading>
+        <PlusMinus open={open} />
       </ToggleButton>
       <Inner open={open}>
         <RichText blockWrapper={AccordionTextWrapper} body={bodyRaw} />

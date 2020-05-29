@@ -34,7 +34,7 @@ const createTextBase = (as: any) => styled(as)`
     font-style: ${fontStyle};
     text-transform: ${textTransform};
     color: ${color};
-    letter-spacing: ${family === 'sans' ? '0.25em' : '0.06em'};
+    letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
     text-decoration: ${textDecoration};
     margin: 0 0 0.5em;
 

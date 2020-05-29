@@ -37,10 +37,6 @@ export const SwatchWrapper = styled.div<WithActive>`
     border-radius: 15px;
     padding: 2px;
     border: 1px solid;
-    border-color: ${active ? 'body.5' : 'transparent'};
-
-    &:hover {
-      border-color: body.6;
-    }
+    border-color: ${active ? 'body.6' : 'transparent'};
   `}
 `

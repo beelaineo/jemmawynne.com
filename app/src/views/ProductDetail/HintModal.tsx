@@ -39,7 +39,7 @@ export const HintModal = ({ open, closeModal, product }: HintModalProps) => {
   }
   return (
     <Modal open={open} closeModal={closeModal}>
-      <Heading level={1} family="serif">
+      <Heading textAlign="center" mb={6} level={1} family="serif">
         Drop a Hint
       </Heading>
       <Form<FormValues> onSubmit={handleSubmit} initialValues={initialValues}>
@@ -52,7 +52,9 @@ export const HintModal = ({ open, closeModal, product }: HintModalProps) => {
             type="email"
             required
           />
-          <Button type="submit">Send Hint</Button>
+          <Button mt={5} type="submit">
+            Send Hint
+          </Button>
         </HintFieldsWrapper>
       </Form>
     </Modal>

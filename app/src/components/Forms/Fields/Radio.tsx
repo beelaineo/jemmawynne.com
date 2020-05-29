@@ -11,10 +11,9 @@ export interface RadioProps extends FieldProps {
   options?: Option[]
 }
 
-export const Radio = ({ name, options, label }: RadioProps) => {
+export const Radio = ({ name, options }: RadioProps) => {
   return (
     <>
-      <Label htmlFor={name}>{label}</Label>
       {options
         ? options.map((option) => (
             <OptionWrapper key={option.id}>

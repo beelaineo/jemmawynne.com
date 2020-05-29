@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from '@xstyled/styled-components'
 import { Field as FormikField } from 'formik'
 import { FieldProps } from './Field'
-import { Label, Input } from './styled'
+import { Input } from './styled'
 
 const Outer = styled.div`
   text-align: center;
@@ -51,7 +51,7 @@ interface NumberProps extends FieldProps {
   type?: string
 }
 
-export const NumberInput = ({ label, name, required }: NumberProps) => (
+export const NumberInput = ({ name }: NumberProps) => (
   <FormikField name={name}>
     {({ field, form }) => {
       const increment = () => {
@@ -64,9 +64,6 @@ export const NumberInput = ({ label, name, required }: NumberProps) => (
       }
       return (
         <Outer>
-          <Label required={required} htmlFor={name}>
-            {label}
-          </Label>
           <Wrapper>
             <NumberButton type="button" onClick={decrement}>
               -

@@ -23,7 +23,7 @@ const ShareLink = ({ button }: ShareLinkProps) => {
   const ariaLabel = `Share on ${button.label}`
 
   return (
-    <Heading m={0} level={6} family="sans" color="body.5" textAlign="center">
+    <Heading m={0} level={5} family="sans" color="body.5" textAlign="center">
       <a
         href={button.href}
         aria-label={ariaLabel}
@@ -95,7 +95,13 @@ export const ShareButton = ({ product }: ShareButtonProps) => {
   }, [open])
   return (
     <ShareButtonWrapper>
-      <Button my={0} level={3} onClick={handleClick}>
+      <Button
+        my={0}
+        level={3}
+        pl={1}
+        borderBottom="1px solid"
+        onClick={handleClick}
+      >
         Share
       </Button>
       <ShareButtonDropdown open={open}>

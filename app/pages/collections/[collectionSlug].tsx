@@ -28,6 +28,7 @@ export const collectionQuery = gql`
       hero {
         ...HeroFragment
       }
+      disableMenu
       relatedCollections {
         _id
         _type
@@ -62,6 +63,22 @@ const productsQuery = gql`
         options {
           name
           values
+        }
+        variants {
+          edges {
+            cursor
+            node {
+              _key
+              _type
+              selectedOptions {
+                name
+                value
+              }
+              image {
+                ...ShopifySourceImageFragment
+              }
+            }
+          }
         }
         priceRange {
           minVariantPrice {

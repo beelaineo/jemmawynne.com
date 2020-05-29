@@ -20,11 +20,12 @@ export const ProductListing = ({
   if (!collection || !collectionInfo) return null
   const relatedCollections =
     collection.relatedCollections || collectionInfo.relatedCollections || []
+  const { disableMenu } = collection
   return (
     <>
       <ProductListingHeader collection={collection} />
-      <CollectionsMain>
-        <div>
+      <CollectionsMain menuDisabled={disableMenu}>
+        {disableMenu !== true ? (
           <CollectionsMenu>
             <Heading mb={4} level={7} weight={2} family="sans" color="body.8">
               Collections
@@ -36,7 +37,7 @@ export const ProductListing = ({
                   key={rc.handle || 'some-key'}
                   mt={5}
                   level={7}
-                  weight={2}
+                  weight={3}
                   family="sans"
                   color="body.6"
                 >
@@ -45,7 +46,7 @@ export const ProductListing = ({
               ) : null,
             )}
           </CollectionsMenu>
-        </div>
+        ) : null}
         <ItemGrid items={products} />
       </CollectionsMain>
     </>

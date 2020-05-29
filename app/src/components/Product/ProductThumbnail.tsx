@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   RichImage,
   ShopifyProduct,
+  ShopifyProductOptionValue,
   SwatchOption,
   SwatchOptionValue,
 } from '../../types'
@@ -14,6 +15,7 @@ import {
   getVariantBySelectedOption,
   formatMoney,
   definitely,
+  optionMatchesVariant,
 } from '../../utils'
 import { ProductSwatches } from './ProductSwatches'
 import { ProductInfo, ProductThumb } from './styled'
@@ -51,25 +53,40 @@ export const ProductThumbnail = ({
   const hoverImage = productImages.length >= 2 ? productImages[1] : undefined
   const swatchOptions = getProductSwatchOptions(product)
   const swatchOption = swatchOptions.length ? swatchOptions[0] : undefined
-  const activeOption = swatchOption
-    ? definitely(currentVariant.selectedOptions).find(
-        (o) => o.name === swatchOption.name,
-      )
-    : undefined
+
   const onSwatchHover = (
     option: SwatchOption,
     value: SwatchOptionValue,
   ) => () => {
-    const optionValue = { name: option.name, currentValue: value.value }
-    const updatedVariant = getVariantBySelectedOption(variants, optionValue)
-    if (updatedVariant) setCurrentVariant(updatedVariant)
+    const currentSelection = {
+      name: option.name || 'foo',
+      currentValue: value.value,
+    }
+    const newVariant = getVariantBySelectedOption(variants, currentSelection)
+    if (newVariant) setCurrentVariant(newVariant)
+  }
+
+  const isSwatchActive = (
+    option: SwatchOption,
+    value: SwatchOptionValue,
+  ): boolean => {
+    const matches = optionMatchesVariant(
+      option.name || 'foo',
+      value,
+      currentVariant,
+    )
+    return matches
   }
 
   return (
     <Link href="/products/[productSlug]" as={as}>
       <a>
         <ProductThumb>
-          <Image image={image || productImage} hoverImage={hoverImage} />
+          <Image
+            ratio={1}
+            image={image || productImage}
+            hoverImage={hoverImage}
+          />
           <ProductInfo>
             <Heading
               mb={3}
@@ -95,9 +112,9 @@ export const ProductThumbnail = ({
             ) : null}
             {swatchOption ? (
               <ProductSwatches
-                onSwatchHover={onSwatchHover}
                 option={swatchOption}
-                activeValue={activeOption?.value}
+                onSwatchHover={onSwatchHover}
+                isSwatchActive={isSwatchActive}
               />
             ) : null}
           </ProductInfo>

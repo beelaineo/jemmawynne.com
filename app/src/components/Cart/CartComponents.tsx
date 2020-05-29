@@ -31,7 +31,7 @@ export const CartSidebar = styled.div`
 export const CartBottom = styled.div`
   ${({ theme }) => css`
     background-color: body.2;
-    padding: 4 9;
+    padding: 30px 9;
     width: 100%;
     display: flex;
     justify-content: space-between;

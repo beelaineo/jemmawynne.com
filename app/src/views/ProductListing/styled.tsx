@@ -1,11 +1,23 @@
-import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 
-export const CollectionsMain = styled.div`
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-column-gap: 8;
-  padding: 6;
-  position: relative;
+interface CollectionsMainProps {
+  menuDisabled?: boolean | null
+}
+export const CollectionsMain = styled.div<CollectionsMainProps>`
+  ${({ menuDisabled }) =>
+    menuDisabled
+      ? css`
+          padding: 6;
+          max-width: 1100px;
+          margin: 0 auto;
+        `
+      : css`
+          display: grid;
+          grid-template-columns: 250px 1fr;
+          grid-column-gap: 8;
+          padding: 6;
+          position: relative;
+        `}
 `
 export const CollectionsMenu = styled.div`
   padding-top: 6;
@@ -22,5 +34,5 @@ export const Hr = styled.hr`
 `
 
 export const HeaderWrapper = styled.div`
-  padding: 6 3;
+  padding: 6;
 `

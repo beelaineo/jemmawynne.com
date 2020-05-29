@@ -18,7 +18,7 @@ export const ProductDescription = ({
   return (
     <DescriptionWrapper>
       <TitleWrapper>
-        <Heading level={1} mb={1} weight={1}>
+        <Heading level={1} mb={3} weight={1}>
           {product.title}
         </Heading>
         {currentVariant.priceV2 ? (

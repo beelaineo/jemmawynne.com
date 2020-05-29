@@ -5,6 +5,7 @@ import {
   ShopifySourceProductVariant,
   ShopifySourceProductOption,
   SwatchOptionValue,
+  SwatchOption,
 } from '../../../types'
 import { useShopData } from '../../../providers/ShopDataProvider'
 import {
@@ -75,7 +76,10 @@ const OptionSelector = ({
     changeOption(e.target.value)
   }
 
-  const handleSwatchClick = (value: SwatchOptionValue) => () => {
+  const handleSwatchClick = (
+    option: SwatchOption,
+    value: SwatchOptionValue,
+  ) => () => {
     changeOption(value.value)
   }
 

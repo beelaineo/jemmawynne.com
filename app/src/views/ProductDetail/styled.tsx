@@ -142,9 +142,6 @@ export const ShareButtonDropdown = styled.div<WithOpen>`
     left: 50%;
     transform: translateX(-50%);
     padding: 2;
-    border: 1px solid;
-    border-color: body.3;
-    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.2);
     display: ${open ? 'grid' : 'none'};
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 2;

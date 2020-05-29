@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Field as FormikField } from 'formik'
 import { FieldProps } from './Field'
-import { Label, InputWrapper, Input as InputElement } from './styled'
+import { InputWrapper, Input as InputElement } from './styled'
 
 export interface InputProps extends FieldProps {
   type?: string
@@ -10,7 +10,6 @@ export interface InputProps extends FieldProps {
 
 export const Input = (props: InputProps) => {
   const {
-    label,
     name,
     required,
     readOnly,
@@ -25,11 +24,6 @@ export const Input = (props: InputProps) => {
     <FormikField validate={validate} name={name}>
       {({ field }) => (
         <div>
-          {label ? (
-            <Label required={required} htmlFor={name}>
-              {label}
-            </Label>
-          ) : null}
           <InputWrapper>
             {renderBeforeInput ? renderBeforeInput() : null}
             <InputElement

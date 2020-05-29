@@ -53,8 +53,8 @@ export const Picture = styled.picture`
   `}
 `
 
-export const RatioImageFill = styled.img`
-  display: block;
+export const ImageFillWrapper = styled.div`
+  position: relative;
 
   & + picture > img {
     position: absolute;
@@ -65,4 +65,13 @@ export const RatioImageFill = styled.img`
     object-fit: cover;
     object-position: center;
   }
+`
+
+export const RatioImageFill = styled.img`
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `

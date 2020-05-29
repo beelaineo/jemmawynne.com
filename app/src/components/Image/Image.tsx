@@ -1,11 +1,17 @@
 import * as React from 'react'
-import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import styled from '@xstyled/styled-components'
 import {
   ShopifySourceImage,
   Image as SanityImage,
   RichImage,
 } from '../../types'
-import { HoverImageWrapper, Wrapper, Picture, RatioImageFill } from './styled'
+import {
+  ImageFillWrapper,
+  HoverImageWrapper,
+  Wrapper,
+  Picture,
+  RatioImageFill,
+} from './styled'
 
 export const ImageWrapper = styled.img`
   display: block;
@@ -85,10 +91,15 @@ const RatioPadding = ({ ratio }: RatioPaddingProps) => {
     setSrc(srcData)
   }, [ratio])
 
-  return src ? (
-    //
-    <RatioImageFill src={src} />
-  ) : null
+  const styles = {
+    paddingBottom: `${100 * ratio}%`,
+  }
+  return (
+    <ImageFillWrapper>
+      <div style={styles} />
+      {src ? <RatioImageFill src={src} /> : null}
+    </ImageFillWrapper>
+  )
 }
 
 interface ImageElementProps {

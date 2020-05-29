@@ -11,7 +11,7 @@ import { Radio } from './Radio'
 import { Input } from './Input'
 import { NumberInput } from './Number'
 import { Select } from './Select'
-import { FieldWrapper } from './styled'
+import { FieldWrapper, Label } from './styled'
 
 /**
  * Base Field
@@ -47,7 +47,7 @@ export interface FieldProps {
 }
 
 export const Field = (fieldProps: FieldProps) => {
-  const { type, helpText, children } = fieldProps
+  const { label, required, type, helpText, children } = fieldProps
   if (fieldProps.type === 'hidden') {
     return (
       <FormikField name={fieldProps.name}>
@@ -77,6 +77,11 @@ export const Field = (fieldProps: FieldProps) => {
   return (
     <div className={className}>
       <FieldWrapper noBorder={noBorder}>
+        {label ? (
+          <Label required={required} htmlFor={name}>
+            {label}
+          </Label>
+        ) : null}
         {children ? children : renderInner()}
       </FieldWrapper>
       {helpText ? (

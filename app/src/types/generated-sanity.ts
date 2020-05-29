@@ -1344,6 +1344,7 @@ export interface ShopifyCollection extends Document {
   sourceData?: Maybe<ShopifySourceCollection>
   products?: Maybe<Array<Maybe<ShopifyProduct>>>
   hero?: Maybe<Hero>
+  disableMenu?: Maybe<Scalars['Boolean']>
   relatedCollections?: Maybe<Array<Maybe<ShopifyCollection>>>
 }
 
@@ -1362,6 +1363,7 @@ export type ShopifyCollectionFilter = {
   archived?: Maybe<BooleanFilter>
   sourceData?: Maybe<ShopifySourceCollectionFilter>
   hero?: Maybe<HeroFilter>
+  disableMenu?: Maybe<BooleanFilter>
 }
 
 export type ShopifyCollectionSorting = {
@@ -1377,6 +1379,7 @@ export type ShopifyCollectionSorting = {
   archived?: Maybe<SortOrder>
   sourceData?: Maybe<ShopifySourceCollectionSorting>
   hero?: Maybe<HeroSorting>
+  disableMenu?: Maybe<SortOrder>
 }
 
 export interface ShopifyMoneyV2 {

@@ -43,7 +43,6 @@ export const Checkout = () => {
           {definitely(lineItems).map((lineItem) => (
             <CheckoutProduct
               key={lineItem.id || 'some-key'}
-              // @ts-ignore
               lineItem={lineItem}
             />
           ))}
@@ -70,7 +69,12 @@ export const Checkout = () => {
       checkout.webUrl &&
       lineItems.length ? (
         <CartBottom>
-          <Button as="a" href={checkout.webUrl} disabled={loading}>
+          <Button
+            fontWeight={3}
+            as="a"
+            href={checkout.webUrl}
+            disabled={loading}
+          >
             Checkout
           </Button>
         </CartBottom>

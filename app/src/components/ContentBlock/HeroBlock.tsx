@@ -19,6 +19,8 @@ interface HeroBackground {
 const HeroWrapper = styled.div`
   position: relative;
   z-index: 0;
+  max-height: 450px;
+  overflow: hidden;
 `
 
 interface HeroTextProps {

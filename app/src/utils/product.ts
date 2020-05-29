@@ -1,6 +1,10 @@
 import {
   ShopifySourceProductOption,
   ShopifySourceProductVariant,
+  ShopifyProductOptionValue,
+  ShopifyProductVariant,
+  ShopifyProduct,
+  SwatchOptionValue,
 } from '../types'
 import { definitely } from './index'
 
@@ -55,3 +59,30 @@ export const getVariantBySelectedOption = (
         option.value === currentOption.currentValue,
     )
   })
+
+export const optionMatchesVariant = (
+  optionName: string,
+  option: ShopifyProductOptionValue | SwatchOptionValue,
+  variant: ShopifySourceProductVariant,
+): boolean =>
+  definitely(variant?.selectedOptions).some(
+    (vso) => optionName === vso.name && option.value === vso.value,
+  )
+
+export const getSelectedOptionValues = (
+  product: ShopifyProduct,
+  variant: ShopifyProductVariant,
+): ShopifyProductOptionValue[] => {
+  const variantSelectedOptions = variant?.sourceData?.selectedOptions
+  if (!product.options || !variantSelectedOptions) return []
+
+  const selectedOptionValues = definitely(product?.options).reduce<
+    ShopifyProductOptionValue[]
+  >((acc, currentOption) => {
+    const currentOptionValues = definitely(currentOption?.values).filter((co) =>
+      optionMatchesVariant(currentOption?.name || 'foo', co, variant),
+    )
+    return [...acc, ...currentOptionValues]
+  }, [])
+  return definitely(selectedOptionValues)
+}

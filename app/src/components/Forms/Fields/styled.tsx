@@ -36,8 +36,9 @@ export const Label = styled(BaseLabel)`
     font-family: sans;
     color: body.6;
     text-transform: uppercase;
-    margin-bottom: 1;
+    margin-bottom: 2;
     font-size: 6;
+    font-weight: 3;
 
     a {
       color: higlight.0;
@@ -64,7 +65,7 @@ export const InputWrapper = styled.div`
 export const Input = styled.input`
   ${({ color, theme }) => css`
     padding: 2;
-    height: 32px;
+    height: 50px;
     width: 100%;
     display: block;
     border: 1px solid;

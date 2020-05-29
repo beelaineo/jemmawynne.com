@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field as FormikField } from 'formik'
-import { Label, SelectElement } from '../Fields/styled'
+import { SelectElement } from '../Fields/styled'
 import { Option, FieldProps } from './Field'
 
 interface SelectProps extends FieldProps {
@@ -8,17 +8,12 @@ interface SelectProps extends FieldProps {
 }
 
 export const Select = (props: SelectProps) => {
-  const { options, label, name, required, disabled, placeholder } = props
+  const { options, name, required, disabled, placeholder } = props
   if (!options) return null
   return (
     <FormikField name={name}>
       {({ field }) => (
         <>
-          {label ? (
-            <Label required={required} htmlFor={name}>
-              {label}
-            </Label>
-          ) : null}
           <SelectElement
             {...field}
             value={field.value}

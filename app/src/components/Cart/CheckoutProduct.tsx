@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Box } from '@xstyled/styled-components'
-import { useCheckout } from 'use-shopify'
+import { useCheckout, CheckoutLineItem } from 'use-shopify'
 import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney } from '../../utils'
 import { Image } from '../../components/Image'
@@ -11,12 +11,13 @@ import {
   RemoveButtonWrapper,
   Wrapper,
 } from './styled'
+import { definitely } from '../../utils'
 import { Button } from '../../components/Button'
 
 const { useState } = React
 
 interface CheckoutProductProps {
-  lineItem: StorefrontApiCheckoutLineItem
+  lineItem: StorefrontApiCheckoutLineItem | CheckoutLineItem
 }
 
 export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
@@ -32,8 +33,6 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
     setUpdating(false)
   }
 
-  console.log(variant.selectedOptions)
-
   return (
     <Wrapper updating={updating}>
       {image ? <Image image={image} /> : <div />}
@@ -42,7 +41,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
           {title}
         </Heading>
         <Box my={3}>
-          {variant.selectedOptions.map((option) =>
+          {definitely(variant.selectedOptions).map((option) =>
             option.value !== 'Default Title' ? (
               <Heading
                 key={option.name}
@@ -63,7 +62,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
           {formatMoney(variant.priceV2)}
         </Heading>
         <QuantitySelectorCart>
-          <Heading family="sans" level={6} color="body.7" weight={2}>
+          <Heading family="sans" level={6} color="body.7" weight={3}>
             <QuantityButton type="button" onClick={setQuantity(quantity - 1)}>
               &#8722;
             </QuantityButton>
@@ -73,7 +72,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
             </QuantityButton>
           </Heading>
           <RemoveButtonWrapper>
-            <Button level={4} my={0} onClick={setQuantity(0)}>
+            <Button level={4} my={0} fontWeight={3} onClick={setQuantity(0)}>
               Remove
             </Button>
           </RemoveButtonWrapper>
