@@ -45,6 +45,8 @@ interface LinkInfo {
 export const getDocumentLinkUrl = (document?: Document): LinkInfo => {
   if (!document) throw new Error('This link is missing a document')
   switch (document.__typename) {
+    case 'PressPage':
+      return { href: '/press' }
     case 'Stockists':
       return { href: '/stockists' }
     case 'ShopifyCollection':

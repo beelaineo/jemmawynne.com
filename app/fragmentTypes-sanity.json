@@ -15,6 +15,9 @@
             "name": "SanityImageAsset"
           },
           {
+            "name": "PressPage"
+          },
+          {
             "name": "ShopifyCollection"
           },
           {
@@ -57,10 +60,13 @@
       },
       {
         "kind": "UNION",
-        "name": "PageOrShopifyCollectionOrShopifyProductOrStockists",
+        "name": "PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists",
         "possibleTypes": [
           {
             "name": "Page"
+          },
+          {
+            "name": "PressPage"
           },
           {
             "name": "ShopifyCollection"

@@ -482,7 +482,9 @@ export interface InternalLink {
   __typename: 'InternalLink'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  document?: Maybe<PageOrShopifyCollectionOrShopifyProductOrStockists>
+  document?: Maybe<
+    PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists
+  >
 }
 
 export type InternalLinkFilter = {
@@ -644,16 +646,17 @@ export type PageInfoSorting = {
   hasPreviousPage?: Maybe<SortOrder>
 }
 
+export type PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists =
+  | Page
+  | PressPage
+  | ShopifyCollection
+  | ShopifyProduct
+  | Stockists
+
 export type PageOrShopifyCollectionOrShopifyProduct =
   | Page
   | ShopifyCollection
   | ShopifyProduct
-
-export type PageOrShopifyCollectionOrShopifyProductOrStockists =
-  | Page
-  | ShopifyCollection
-  | ShopifyProduct
-  | Stockists
 
 export type PageSorting = {
   _id?: Maybe<SortOrder>
@@ -719,6 +722,47 @@ export type PressItemSorting = {
   subtitle?: Maybe<SortOrder>
   link?: Maybe<ExternalLinkSorting>
   image?: Maybe<RichImageSorting>
+}
+
+export interface PressPage extends Document {
+  __typename: 'PressPage'
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>
+  /** Document type */
+  _type?: Maybe<Scalars['String']>
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>
+  _key?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  hero?: Maybe<Hero>
+}
+
+export type PressPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<DocumentFilter>
+  _id?: Maybe<IdFilter>
+  _type?: Maybe<StringFilter>
+  _createdAt?: Maybe<DatetimeFilter>
+  _updatedAt?: Maybe<DatetimeFilter>
+  _rev?: Maybe<StringFilter>
+  _key?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
+  hero?: Maybe<HeroFilter>
+}
+
+export type PressPageSorting = {
+  _id?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  _createdAt?: Maybe<SortOrder>
+  _updatedAt?: Maybe<SortOrder>
+  _rev?: Maybe<SortOrder>
+  _key?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
+  hero?: Maybe<HeroSorting>
 }
 
 export interface ProductInfo extends Document {
@@ -886,6 +930,7 @@ export interface RootQuery {
   CollectionInfo?: Maybe<CollectionInfo>
   SiteSettings?: Maybe<SiteSettings>
   Stockists?: Maybe<Stockists>
+  PressPage?: Maybe<PressPage>
   PressItem?: Maybe<PressItem>
   ShopifyProduct?: Maybe<ShopifyProduct>
   ShopifyCollection?: Maybe<ShopifyCollection>
@@ -898,6 +943,7 @@ export interface RootQuery {
   allCollectionInfo: Array<CollectionInfo>
   allSiteSettings: Array<SiteSettings>
   allStockists: Array<Stockists>
+  allPressPage: Array<PressPage>
   allPressItem: Array<PressItem>
   allShopifyProduct: Array<ShopifyProduct>
   allShopifyCollection: Array<ShopifyCollection>
@@ -930,6 +976,10 @@ export type RootQuerySiteSettingsArgs = {
 }
 
 export type RootQueryStockistsArgs = {
+  id: Scalars['ID']
+}
+
+export type RootQueryPressPageArgs = {
   id: Scalars['ID']
 }
 
@@ -998,6 +1048,13 @@ export type RootQueryAllSiteSettingsArgs = {
 export type RootQueryAllStockistsArgs = {
   where?: Maybe<StockistsFilter>
   sort?: Maybe<Array<StockistsSorting>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+}
+
+export type RootQueryAllPressPageArgs = {
+  where?: Maybe<PressPageFilter>
+  sort?: Maybe<Array<PressPageSorting>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
 }

@@ -1,17 +1,19 @@
 import * as React from 'react'
 import { Heading } from '../../components/Text'
 import { Column } from '../../components/Layout'
-import { PressItem as PressItemType } from '../../types'
+import { PressItem as PressItemType, PressPage } from '../../types'
 import { PressItemsContainer, FilterButton, FilterButtons } from './styled'
 import { PressItem } from './PressItem'
+import { definitely } from '../../utils'
 
 const { useState } = React
 
 interface PressViewProps {
-  pressItems: PressItemType[]
+  pressPage: PressPage
+  pressItems?: PressItemType[]
 }
 
-export const PressView = ({ pressItems }: PressViewProps) => {
+export const PressView = ({ pressPage, pressItems }: PressViewProps) => {
   const [filter, setFilterState] = useState('all')
 
   const setFilter = (type: string) => () => setFilterState(type)
@@ -19,36 +21,30 @@ export const PressView = ({ pressItems }: PressViewProps) => {
   return (
     <Column py={5} maxWidth="wide">
       <Heading textAlign="center" level={1}>
-        Press
+        {pressPage.title || 'Press'}
       </Heading>
       <FilterButtons>
-        <FilterButton
-          active={filter === 'all'}
-          level={4}
-          onClick={setFilter('all')}
-        >
+        <FilterButton isActive={filter === 'all'} onClick={setFilter('all')}>
           View All
         </FilterButton>
         <FilterButton
-          active={filter === 'editorial'}
-          level={4}
+          isActive={filter === 'editorial'}
           onClick={setFilter('editorial')}
         >
           Editorial
         </FilterButton>
         <FilterButton
-          active={filter === 'celebrity'}
-          level={4}
+          isActive={filter === 'celebrity'}
           onClick={setFilter('celebrity')}
         >
           Celebrity
         </FilterButton>
       </FilterButtons>
       <PressItemsContainer>
-        {pressItems
+        {definitely(pressItems)
           .filter((pi) => (filter === 'all' ? true : pi.type === filter))
           .map((pi) => (
-            <PressItem key={pi._key || 'some-key'} pressItem={pi} />
+            <PressItem key={pi._id || 'some-key'} pressItem={pi} />
           ))}
       </PressItemsContainer>
     </Column>

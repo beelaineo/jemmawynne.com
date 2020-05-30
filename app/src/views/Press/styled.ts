@@ -1,5 +1,4 @@
 import styled, { css } from '@xstyled/styled-components'
-import { Button } from '../../components/Button'
 
 export const FilterButtons = styled.div`
   display: flex;
@@ -11,12 +10,20 @@ export const FilterButtons = styled.div`
 `
 
 interface WithActive {
-  active: boolean
+  isActive: boolean
 }
 
-export const FilterButton = styled(Button)<WithActive>`
-  ${({ active }) => css`
-    border-bottom-color: ${active ? 'currentColor' : 'transparent'};
+export const FilterButton = styled.button<WithActive>`
+  ${({ isActive }) => css`
+    font-size: 6;
+    font-weight: 3;
+    font-family: sans;
+    color: body.5;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    padding: 0 0 1 1;
+    border-bottom: 2px solid;
+    border-bottom-color: ${isActive ? 'currentColor' : 'transparent'};
     transition: 0.2s;
   `}
 `
