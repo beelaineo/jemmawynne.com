@@ -11,6 +11,8 @@ const getTypeText = (doc) => {
   if (doc._type === 'shopifyProduct') return 'Product'
   if (doc._type === 'shopifyCollection') return 'Collection'
   if (doc._type === 'page') return 'Page'
+  if (doc._type === 'pressPage') return 'Press Page'
+  if (doc._type === 'stockists') return 'Stockists'
   return ''
 }
 
@@ -25,6 +27,10 @@ const getPreviewValues = async (values) => {
   if (doc && doc._type === 'stockists') {
     return { title: 'Stockists' }
   }
+  if (doc && doc._type === 'pressPage') {
+    return { title: 'Press Page' }
+  }
+
   if (!doc) {
     return {
       title: '🛑 Document reference is missing',
@@ -104,6 +110,7 @@ export const internalLink = {
         { type: 'shopifyCollection' },
         { type: 'page' },
         { type: 'stockists' },
+        { type: 'pressPage' },
       ],
     },
   ],

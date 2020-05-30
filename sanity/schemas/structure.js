@@ -79,6 +79,16 @@ export default () =>
         ),
 
       S.listItem()
+        .title('Main Press Page')
+        .icon(FaRegNewspaper)
+        .child(
+          S.editor()
+            .id('pressPage')
+            .schemaType('pressPage')
+            .documentId('pressPage'),
+        ),
+
+      S.listItem()
         .title('Press')
         .icon(FaRegNewspaper)
         .child(S.documentTypeList('pressItem')),

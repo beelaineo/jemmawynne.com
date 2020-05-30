@@ -1,3 +1,21 @@
+export const pressPage = {
+  type: 'document',
+  name: 'pressPage',
+  title: 'Press Page',
+  fields: [
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    },
+    {
+      name: 'hero',
+      type: 'hero',
+      title: 'Hero',
+    },
+  ],
+}
+
 export const pressItem = {
   type: 'document',
   name: 'pressItem',
