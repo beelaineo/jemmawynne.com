@@ -1,7 +1,7 @@
 import S from '@sanity/desk-tool/structure-builder'
 import { MdSettings, MdHome, MdInfoOutline } from 'react-icons/md'
 import { TiDevicePhone, TiThSmallOutline, TiDocument } from 'react-icons/ti'
-import { FaShoppingBag } from 'react-icons/fa'
+import { FaRegNewspaper } from 'react-icons/fa'
 import { AiFillShop } from 'react-icons/ai'
 import { FiCompass } from 'react-icons/fi'
 
@@ -22,10 +22,7 @@ export default () =>
         .title('Nav Menu')
         .icon(FiCompass)
         .child(
-          S.editor()
-            .id('menu')
-            .schemaType('menu')
-            .documentId('menu-settings'),
+          S.editor().id('menu').schemaType('menu').documentId('menu-settings'),
         ),
 
       // Products
@@ -80,6 +77,11 @@ export default () =>
             .schemaType('stockists')
             .documentId('stockists'),
         ),
+
+      S.listItem()
+        .title('Press')
+        .icon(FaRegNewspaper)
+        .child(S.documentTypeList('pressItem')),
 
       // Pages
       S.listItem()
