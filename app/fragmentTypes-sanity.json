@@ -36,6 +36,9 @@
             "name": "SiteSettings"
           },
           {
+            "name": "PressItem"
+          },
+          {
             "name": "SanityFileAsset"
           }
         ]

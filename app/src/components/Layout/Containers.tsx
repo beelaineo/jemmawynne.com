@@ -6,11 +6,8 @@ interface ColumnProps {
   center?: boolean
 }
 
-export const Column = styled.div`
-  ${({ width, center }: ColumnProps) => css`
-    margin: ${center ? '0 auto' : 0};
-    max-width: ${width};
-  `}
+export const Column = styled.divBox`
+  margin: 0 auto;
 `
 
 export const TextHeader = styled.div`

@@ -69,7 +69,7 @@ export const ProductDetail = ({ product, collections }: Props) => {
 
   return (
     <Wrapper>
-      <Column center width="xWide">
+      <Column maxWidth="xWide">
         <ProductDetails>
           <ProductImagesWrapper>
             <ProductImages currentVariant={currentVariant} product={product} />
@@ -88,7 +88,7 @@ export const ProductDetail = ({ product, collections }: Props) => {
               selectVariant={selectVariant}
             />
             <Box mt={5}>
-              <Column width="small">
+              <Column maxWidth="small">
                 <BuyButton
                   addLineItem={addLineItem}
                   currentVariant={currentVariant}
@@ -116,7 +116,7 @@ export const ProductDetail = ({ product, collections }: Props) => {
               </Heading>
             </Box>
             <Box mt={4} pt={2} borderTop="1px solid">
-              <Column width="medium">
+              <Column maxWidth="medium">
                 {accordions
                   ? accordions
                       .reduce<ProductInfoBlock[]>(

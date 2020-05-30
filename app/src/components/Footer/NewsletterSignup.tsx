@@ -40,7 +40,7 @@ export const NewsletterSignup = () => {
 
   return (
     <MailerWrapper>
-      <Column center width="small">
+      <Column maxWidth="small">
         <MailerInput onSubmit={handleSubmit}>
           <InputWrapper
             visible={state === READY || state === PENDING}

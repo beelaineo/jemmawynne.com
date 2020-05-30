@@ -45,7 +45,7 @@ export const StaticPage = ({ page }: StaticPageProps) => {
         </TextHeader>
       )}
       <Main textAlign={textAlign}>
-        <Column center width="wide">
+        <Column maxWidth="wide">
           <RichText body={contentRaw} />
         </Column>
       </Main>

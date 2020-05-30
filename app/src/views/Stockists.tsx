@@ -90,7 +90,7 @@ export const Stockists = ({ stockists }: StockistsProps) => {
       <TextHeader>
         <Heading level={1}>Stockists</Heading>
       </TextHeader>
-      <Column center width="wide">
+      <Column maxWidth="wide">
         {us && us.length ? (
           <SectionWrapper>
             <Heading level={2} textAlign="center">

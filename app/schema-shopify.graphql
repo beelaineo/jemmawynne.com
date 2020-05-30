@@ -1,5 +1,5 @@
 # source: https://jemmawynne-development.myshopify.com/api/graphql
-# timestamp: Thu May 28 2020 19:55:50 GMT-0700 (Pacific Daylight Time)
+# timestamp: Sat May 30 2020 14:11:24 GMT-0700 (Pacific Daylight Time)
 
 schema {
   query: QueryRoot
@@ -2029,7 +2029,7 @@ enum CountryCode {
   AF
 
   """
-  Aland Islands.
+  Åland Islands.
   """
   AX
 
@@ -2059,7 +2059,7 @@ enum CountryCode {
   AI
 
   """
-  Antigua And Barbuda.
+  Antigua & Barbuda.
   """
   AG
 
@@ -2149,7 +2149,7 @@ enum CountryCode {
   BO
 
   """
-  Bosnia And Herzegovina.
+  Bosnia & Herzegovina.
   """
   BA
 
@@ -2259,12 +2259,12 @@ enum CountryCode {
   KM
 
   """
-  Congo.
+  Congo - Brazzaville.
   """
   CG
 
   """
-  Congo, The Democratic Republic Of The.
+  Congo - Kinshasa.
   """
   CD
 
@@ -2299,12 +2299,12 @@ enum CountryCode {
   CY
 
   """
-  Czech Republic.
+  Czechia.
   """
   CZ
 
   """
-  Côte d'Ivoire.
+  Côte d’Ivoire.
   """
   CI
 
@@ -2369,7 +2369,7 @@ enum CountryCode {
   ET
 
   """
-  Falkland Islands (Malvinas).
+  Falkland Islands.
   """
   FK
 
@@ -2474,7 +2474,7 @@ enum CountryCode {
   GN
 
   """
-  Guinea Bissau.
+  Guinea-Bissau.
   """
   GW
 
@@ -2489,12 +2489,12 @@ enum CountryCode {
   HT
 
   """
-  Heard Island And Mcdonald Islands.
+  Heard & McDonald Islands.
   """
   HM
 
   """
-  Holy See (Vatican City State).
+  Vatican City.
   """
   VA
 
@@ -2504,7 +2504,7 @@ enum CountryCode {
   HN
 
   """
-  Hong Kong.
+  Hong Kong SAR China.
   """
   HK
 
@@ -2529,7 +2529,7 @@ enum CountryCode {
   ID
 
   """
-  Iran, Islamic Republic Of.
+  Iran.
   """
   IR
 
@@ -2544,7 +2544,7 @@ enum CountryCode {
   IE
 
   """
-  Isle Of Man.
+  Isle of Man.
   """
   IM
 
@@ -2594,7 +2594,7 @@ enum CountryCode {
   KI
 
   """
-  Korea, Democratic People's Republic Of.
+  North Korea.
   """
   KP
 
@@ -2614,7 +2614,7 @@ enum CountryCode {
   KG
 
   """
-  Lao People's Democratic Republic.
+  Laos.
   """
   LA
 
@@ -2639,7 +2639,7 @@ enum CountryCode {
   LR
 
   """
-  Libyan Arab Jamahiriya.
+  Libya.
   """
   LY
 
@@ -2659,7 +2659,7 @@ enum CountryCode {
   LU
 
   """
-  Macao.
+  Macao SAR China.
   """
   MO
 
@@ -2719,7 +2719,7 @@ enum CountryCode {
   MX
 
   """
-  Moldova, Republic of.
+  Moldova.
   """
   MD
 
@@ -2754,7 +2754,7 @@ enum CountryCode {
   MZ
 
   """
-  Myanmar.
+  Myanmar (Burma).
   """
   MM
 
@@ -2839,7 +2839,7 @@ enum CountryCode {
   PK
 
   """
-  Palestinian Territory, Occupied.
+  Palestinian Territories.
   """
   PS
 
@@ -2869,7 +2869,7 @@ enum CountryCode {
   PH
 
   """
-  Pitcairn.
+  Pitcairn Islands.
   """
   PN
 
@@ -2889,12 +2889,12 @@ enum CountryCode {
   QA
 
   """
-  Republic of Cameroon.
+  Cameroon.
   """
   CM
 
   """
-  Reunion.
+  Réunion.
   """
   RE
 
@@ -2914,32 +2914,32 @@ enum CountryCode {
   RW
 
   """
-  Saint Barthélemy.
+  St. Barthélemy.
   """
   BL
 
   """
-  Saint Helena.
+  St. Helena.
   """
   SH
 
   """
-  Saint Kitts And Nevis.
+  St. Kitts & Nevis.
   """
   KN
 
   """
-  Saint Lucia.
+  St. Lucia.
   """
   LC
 
   """
-  Saint Martin.
+  St. Martin.
   """
   MF
 
   """
-  Saint Pierre And Miquelon.
+  St. Pierre & Miquelon.
   """
   PM
 
@@ -2954,7 +2954,7 @@ enum CountryCode {
   SM
 
   """
-  Sao Tome And Principe.
+  São Tomé & Príncipe.
   """
   ST
 
@@ -3019,7 +3019,7 @@ enum CountryCode {
   ZA
 
   """
-  South Georgia And The South Sandwich Islands.
+  South Georgia & South Sandwich Islands.
   """
   GS
 
@@ -3044,7 +3044,7 @@ enum CountryCode {
   LK
 
   """
-  St. Vincent.
+  St. Vincent & Grenadines.
   """
   VC
 
@@ -3059,7 +3059,7 @@ enum CountryCode {
   SR
 
   """
-  Svalbard And Jan Mayen.
+  Svalbard & Jan Mayen.
   """
   SJ
 
@@ -3089,7 +3089,7 @@ enum CountryCode {
   TJ
 
   """
-  Tanzania, United Republic Of.
+  Tanzania.
   """
   TZ
 
@@ -3099,7 +3099,7 @@ enum CountryCode {
   TH
 
   """
-  Timor Leste.
+  Timor-Leste.
   """
   TL
 
@@ -3119,7 +3119,7 @@ enum CountryCode {
   TO
 
   """
-  Trinidad and Tobago.
+  Trinidad & Tobago.
   """
   TT
 
@@ -3139,7 +3139,7 @@ enum CountryCode {
   TM
 
   """
-  Turks and Caicos Islands.
+  Turks & Caicos Islands.
   """
   TC
 
@@ -3174,7 +3174,7 @@ enum CountryCode {
   US
 
   """
-  United States Minor Outlying Islands.
+  U.S. Outlying Islands.
   """
   UM
 
@@ -3204,12 +3204,12 @@ enum CountryCode {
   VN
 
   """
-  Virgin Islands, British.
+  British Virgin Islands.
   """
   VG
 
   """
-  Wallis And Futuna.
+  Wallis & Futuna.
   """
   WF
 
