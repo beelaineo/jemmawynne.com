@@ -59,9 +59,9 @@ const getButtons = ({ url, text, imageUrl }: GetButtonsProps): ButtonInfo[] => [
     href: `http://pinterest.com/pin/create/button/?url=${url}&media=${imageUrl}&description=${text}`,
   },
 ]
+
 interface ShareButtonProps {
   product: ShopifyProduct
-  /* */
 }
 
 export const ShareButton = ({ product }: ShareButtonProps) => {
@@ -95,13 +95,7 @@ export const ShareButton = ({ product }: ShareButtonProps) => {
   }, [open])
   return (
     <ShareButtonWrapper>
-      <Button
-        my={0}
-        level={3}
-        pl={1}
-        borderBottom="1px solid"
-        onClick={handleClick}
-      >
+      <Button level={4} onClick={handleClick}>
         Share
       </Button>
       <ShareButtonDropdown open={open}>

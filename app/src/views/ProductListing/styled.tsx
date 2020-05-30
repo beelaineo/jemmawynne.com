@@ -20,9 +20,11 @@ export const CollectionsMain = styled.div<CollectionsMainProps>`
         `}
 `
 export const CollectionsMenu = styled.div`
-  padding-top: 6;
-  position: sticky;
-  top: 0;
+  ${({ theme }) => css`
+    padding-top: 6;
+    position: sticky;
+    top: ${theme.navHeight};
+  `}
 `
 
 export const Hr = styled.hr`

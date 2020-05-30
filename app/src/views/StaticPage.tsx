@@ -5,6 +5,7 @@ import { Column, TextHeader } from '../components/Layout'
 import { HeroBlock } from '../components/ContentBlock'
 import { Heading } from '../components/Text'
 import { RichText } from '../components/RichText'
+import { isValidHero } from '../utils'
 
 interface MainProps {
   textAlign?: string | null
@@ -36,7 +37,7 @@ export const StaticPage = ({ page }: StaticPageProps) => {
   const { hero, textAlign, contentRaw, title } = page
   return (
     <>
-      {hero ? (
+      {isValidHero(hero) ? (
         <HeroBlock hero={hero} />
       ) : (
         <TextHeader>

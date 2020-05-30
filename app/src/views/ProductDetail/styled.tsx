@@ -62,6 +62,7 @@ export const ProductGalleryWrapper = styled.div`
 export const SwatchWrapper = styled.div`
   display: grid;
   grid-template-columns: 230px 1fr;
+  align-items: center;
 `
 
 export const SwatchLabelWrapper = styled.div`

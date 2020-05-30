@@ -32,7 +32,7 @@ interface WithActive {
 export const SwatchWrapper = styled.div<WithActive>`
   ${({ active }) => css`
     position: relative;
-    width: 16px;
+    width: 20px;
     margin: 0 2;
     border-radius: 15px;
     padding: 2px;

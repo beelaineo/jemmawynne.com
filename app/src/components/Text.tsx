@@ -57,7 +57,7 @@ const TextBase = styled(Box)`
     font-weight: ${weight};
     font-style: ${fontStyle};
     text-decoration: ${textDecoration};
-    letter-spacing: ${family === 'sans' ? '0.25em' : '0.06em'};
+    letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
     text-transform: ${family === 'sans' ? 'uppercase' : ''};
 
     margin: 0 0 0.5em;

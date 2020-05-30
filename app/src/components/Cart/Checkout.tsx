@@ -12,6 +12,7 @@ import {
   CloseButton,
   LineItemsWrapper,
   SubtotalWrapper,
+  EmptyWrapper,
 } from './styled'
 import { useMenu } from '../../providers/MenuProvider'
 
@@ -36,33 +37,51 @@ export const Checkout = () => {
       </CloseButton>
       <TitleWrapper />
       <CartInner>
-        <Heading level={2} mb={3}>
-          {lineItems.length ? 'Your Cart' : 'Your cart is empty'}
-        </Heading>
-        <LineItemsWrapper>
-          {definitely(lineItems).map((lineItem) => (
-            <CheckoutProduct
-              key={lineItem.id || 'some-key'}
-              lineItem={lineItem}
-            />
-          ))}
-        </LineItemsWrapper>
-        {checkout && checkout?.paymentDueV2 ? (
-          <>
-            <SubtotalWrapper>
-              <Heading family="sans" level={6} weight={3}>
-                Subtotal
-              </Heading>
-              <Heading family="serif" level={4} fontStyle="italic" weight={2}>
-                {formatMoney(checkout.paymentDueV2)}
-              </Heading>
-            </SubtotalWrapper>
-
-            <Heading my={0} level={6} textAlign="left">
-              Shipping and discount codes are added at checkout.
+        {lineItems.length === 0 ? (
+          <EmptyWrapper>
+            <Heading level={2} mb={3}>
+              {lineItems.length ? 'Your Cart' : 'Your cart is empty'}
             </Heading>
+            <Button mt={4} level={2} onClick={closeCart}>
+              Continue Shopping
+            </Button>
+          </EmptyWrapper>
+        ) : (
+          <>
+            <Heading level={2} mb={3}>
+              'Your Cart'
+            </Heading>
+            <LineItemsWrapper>
+              {definitely(lineItems).map((lineItem) => (
+                <CheckoutProduct
+                  key={lineItem.id || 'some-key'}
+                  lineItem={lineItem}
+                />
+              ))}
+            </LineItemsWrapper>
+            {checkout && checkout?.paymentDueV2 ? (
+              <>
+                <SubtotalWrapper>
+                  <Heading family="sans" level={6} weight={3}>
+                    Subtotal
+                  </Heading>
+                  <Heading
+                    family="serif"
+                    level={4}
+                    fontStyle="italic"
+                    weight={2}
+                  >
+                    {formatMoney(checkout.paymentDueV2)}
+                  </Heading>
+                </SubtotalWrapper>
+
+                <Heading my={0} level={6} textAlign="left">
+                  Shipping and discount codes are added at checkout.
+                </Heading>
+              </>
+            ) : null}
           </>
-        ) : null}
+        )}
       </CartInner>
       {checkout &&
       checkout.paymentDueV2 &&

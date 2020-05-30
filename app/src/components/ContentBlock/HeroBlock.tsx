@@ -92,10 +92,11 @@ const HeroImageWrapper = styled.div`
 `
 
 interface HeroBlockProps {
-  hero: Hero
+  hero?: Hero | null
 }
 
 export const HeroBlock = ({ hero }: HeroBlockProps) => {
+  if (!hero) return null
   const {
     textPosition,
     textColor,

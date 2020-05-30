@@ -50,9 +50,11 @@ export const Button = styled.buttonBox`
         `
       : level === 4
       ? css`
+          color: body.5;
           padding: 0 0 1 1;
-          border-bottom: 1px solid;
-          font-size: 7;
+          border-bottom: 2px solid;
+          font-size: 6;
+          font-weight: 3;
           width: auto;
           height: auto;
         `

@@ -90,6 +90,13 @@ export const LineItemsWrapper = styled.div`
   `}
 `
 
+export const EmptyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 export const SubtotalWrapper = styled.div`
   display: flex;
   justify-content: space-between;

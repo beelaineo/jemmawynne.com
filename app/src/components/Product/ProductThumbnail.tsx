@@ -2,7 +2,6 @@ import * as React from 'react'
 import {
   RichImage,
   ShopifyProduct,
-  ShopifyProductOptionValue,
   SwatchOption,
   SwatchOptionValue,
 } from '../../types'
@@ -14,7 +13,6 @@ import { Image } from '../Image'
 import {
   getVariantBySelectedOption,
   formatMoney,
-  definitely,
   optionMatchesVariant,
 } from '../../utils'
 import { ProductSwatches } from './ProductSwatches'
@@ -39,14 +37,15 @@ export const ProductThumbnail = ({
   if (!product?.sourceData) return null
   if (product.archived === true) return null
   const productImages = product?.sourceData?.images
-    ? unwindEdges(
-        // @ts-ignore
-        product.sourceData.images,
-      )[0]
+    ? unwindEdges(product.sourceData.images)[0]
     : []
 
-  const productImage =
-    currentVariant?.image ?? productImages.length ? productImages[0] : undefined
+  const productImage = currentVariant?.image
+    ? currentVariant.image
+    : productImages.length
+    ? productImages[0]
+    : undefined
+
   const { minVariantPrice, maxVariantPrice } =
     product.sourceData.priceRange || {}
   const as = `/products/${product.handle}`

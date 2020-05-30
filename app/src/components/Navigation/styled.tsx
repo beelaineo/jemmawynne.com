@@ -11,13 +11,14 @@ export const Wrapper = styled.header`
     position: relative;
     z-index: nav;
     font-family: sans;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    height: navHeight;
 
     ${theme.mediaQueries.tablet} {
-      position: sticky;
-      top: 0;
       height: 42px;
       width: 100%;
-      background-color: white;
     }
   `}
 `

@@ -24,9 +24,9 @@ interface PlusMinusProps {
 
 export const PlusMinus = styled.span<PlusMinusProps>`
   ${({ open }) => css`
-    width: 13px;
-    height: 13px;
-    margin-left: 2em;
+    width: 9px;
+    height: 9px;
+    margin-left: 1em;
     display: block;
     position: relative;
 
@@ -38,8 +38,8 @@ export const PlusMinus = styled.span<PlusMinusProps>`
     }
 
     &:after {
-      left: 6px;
-      top: 0;
+      left: 4px;
+      top: 0px;
       height: 100%;
       width: 1px;
       display: ${open ? 'none' : 'block'};
@@ -47,7 +47,7 @@ export const PlusMinus = styled.span<PlusMinusProps>`
 
     &:before {
       left: 0;
-      top: 6px;
+      top: 4px;
       width: 100%;
       height: 1px;
     }

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box } from '@xstyled/styled-components'
 import Link from 'next/link'
 import ReactHtmlParser, { TransformFunction } from 'react-html-parser'
 import { getLinkFromHref } from '../../utils'
@@ -92,9 +93,11 @@ const transform: TransformFunction = (node, index) => {
               {node.children.map(transform)}
             </a>
           )
+        case 'div':
+          return <Box family="serif">{node.children.map(transform)}</Box>
         default:
           console.warn('Did not parse node:', node)
-          return null
+          return <Box family="serif">{node.children.map(transform)}</Box>
       }
     default:
       return null

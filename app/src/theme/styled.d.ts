@@ -3,6 +3,7 @@ import '@xstyled/styled-components'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    navHeight: string
     space: number[]
     sizes: {
       xSmall: number

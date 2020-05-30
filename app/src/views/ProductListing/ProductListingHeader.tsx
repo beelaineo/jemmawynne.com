@@ -3,6 +3,7 @@ import { ShopifyCollection } from '../../types'
 import { Heading } from '../../components/Text'
 import { HeaderWrapper } from './styled'
 import { HeroBlock } from '../../components/ContentBlock'
+import { isValidHero } from '../../utils'
 
 interface ProductListingHeaderProps {
   collection: ShopifyCollection
@@ -15,7 +16,7 @@ export const ProductListingHeader = ({
   const { image, title, description } = collection.sourceData
   const { hero } = collection
   const textAlign = image && description ? 'left' : 'left'
-  return hero ? (
+  return isValidHero(hero) ? (
     <HeroBlock hero={hero} />
   ) : (
     <HeaderWrapper>

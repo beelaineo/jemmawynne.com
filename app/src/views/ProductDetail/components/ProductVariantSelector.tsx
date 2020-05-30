@@ -76,6 +76,13 @@ const OptionSelector = ({
     changeOption(e.target.value)
   }
 
+  const isSwatchActive = (
+    option: SwatchOption,
+    value: SwatchOptionValue,
+  ): boolean => {
+    return value.value === currentValue
+  }
+
   const handleSwatchClick = (
     option: SwatchOption,
     value: SwatchOptionValue,
@@ -113,6 +120,7 @@ const OptionSelector = ({
           <ProductSwatches
             option={validSwatchOption}
             onSwatchClick={handleSwatchClick}
+            isSwatchActive={isSwatchActive}
           />
         </SwatchWrapper>
       ) : (
