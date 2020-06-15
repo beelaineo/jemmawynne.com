@@ -25,6 +25,15 @@ const productQuery = gql`
       where: { handle: { eq: $handle }, archived: { neq: true } }
     ) {
       ...SaneShopifyProductFragment
+      collections {
+        __typename
+        _id
+        _key
+        title
+        handle
+        shopifyId
+      }
+
       related {
         ...CarouselFragment
       }

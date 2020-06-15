@@ -5,28 +5,44 @@ const { useRef, useEffect } = React
 
 export interface SlideInfo {
   ref: HTMLDivElement
+  index: number
 }
 
 export interface SlideProps {
-  index: number
   children: React.ReactNode
-  columnCount: number
+  columnCount?: number
   addSlide: (slide: SlideInfo) => void
+  removeSlide: (index: number) => void
+  index: number
+  single?: boolean
 }
 
-export const Slide = ({ addSlide, children, columnCount }: SlideProps) => {
+export const Slide = ({
+  index,
+  addSlide,
+  children,
+  columnCount,
+  removeSlide,
+  single,
+}: SlideProps) => {
   const containerElement = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ref = containerElement.current
     if (!ref) return
     addSlide({
+      index,
       ref,
     })
+    return () => removeSlide(index)
   }, [])
 
   return (
-    <SlideContainer ref={containerElement} columnCount={columnCount}>
+    <SlideContainer
+      single={single}
+      ref={containerElement}
+      columnCount={columnCount}
+    >
       {children}
     </SlideContainer>
   )

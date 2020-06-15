@@ -451,6 +451,9 @@ export const saneShopifyCollectionFragment = gql`
     title
     handle
     shopifyId
+    products {
+      ...SaneShopifyProductFragment
+    }
     sourceData {
       __typename
       description
@@ -472,6 +475,7 @@ export const saneShopifyCollectionFragment = gql`
     }
   }
   ${saneShopifySourceImageFragment}
+  ${saneShopifyProductFragment}
 `
 
 export const richPageLinkFragment = gql`

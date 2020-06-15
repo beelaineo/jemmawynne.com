@@ -1,49 +1,78 @@
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 
-export const CarouselContainer = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
-  flex-grow: 1;
+interface WithSingle {
+  single?: boolean
+}
+
+export const CarouselContainer = styled.div<WithSingle>`
+  ${({ theme, single }) => css`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    img,
+    picture {
+      pointer-events: none;
+    }
+    ${theme.mediaQueries.mobile} {
+      overflow: hidden;
+      padding: ${single ? 0 : '0 32vw'};
+    }
+  `}
 `
 
 export const CarouselMask = styled.div`
-  overflow: hidden;
+  ${({ theme }) => css`
+    overflow: hidden;
+
+    ${theme.mediaQueries.mobile} {
+      max-width: 100%;
+      overflow: visible;
+    }
+  `}
 `
 
 interface SlidesContainerProps {
   left: number
+  isSwiping: boolean
   theme: DefaultTheme
 }
 
-export const SlidesContainer = styled.div`
-  ${({ left }: SlidesContainerProps) => css`
+export const SlidesContainer = styled.div.attrs<SlidesContainerProps>(
+  (props) => ({
+    style: {
+      transform: `translateX(${props.left}px)`,
+    },
+  }),
+)`
+  ${({ theme, isSwiping }: SlidesContainerProps) => css`
     position: relative;
     height: 100%;
     width: 100%;
     top: 0;
     white-space: nowrap;
-    transform: translate(${left}px);
-    transition: 0.4s cubic-bezier(0.57, 0.06, 0.05, 0.95);
+    transition: ${isSwiping ? 0 : '0.4s cubic-bezier(0.57, 0.06, 0.05, 0.95)'};
 
     & > * {
       white-space: initial;
+    }
+
+    ${theme.mediaQueries.mobile} {
+      padding: 0;
     }
   `}
 `
 
 interface WithColumnCount {
   theme: DefaultTheme
-  columnCount: number
+  columnCount?: number
+  single?: boolean
 }
 
 export const SlideContainer = styled.div`
-  ${({ theme, columnCount }: WithColumnCount) => css`
+  ${({ theme, columnCount, single }: WithColumnCount) => css`
     height: 100%;
     text-align: center;
-    width: calc(
-      (100% - (${theme.space[5]}px * ${columnCount - 1})) / ${columnCount}
-    );
     margin-right: 5;
     display: inline-flex;
     vertical-align: top;
@@ -52,16 +81,33 @@ export const SlideContainer = styled.div`
       margin-right: 0;
     }
 
-    > * {
-      width: 100%;
-    }
+    ${single
+      ? css`
+          width: 100%;
+          margin-right: 0;
+        `
+      : columnCount
+      ? css`
+          width: calc(
+            (100% - (${theme.space[5]}px * ${columnCount - 1})) / ${columnCount}
+          );
+        `
+      : css`
+          width: calc((100% - (${theme.space[5]}px * 4)) / 5);
+          margin-right: 5;
 
-    ${theme.mediaQueries.tablet} {
-      width: calc((100% - (${theme.space[4]}px * 2)) / 3);
-    }
-    ${theme.mediaQueries.mobile} {
-      width: calc((100% - (${theme.space[4]}px * 1)) / 2);
-    }
+          ${theme.mediaQueries.desktop} {
+            width: calc((100% - (${theme.space[4]}px * 3)) / 4);
+            margin-right: 4;
+          }
+
+          ${theme.mediaQueries.tablet} {
+            width: calc((100% - (${theme.space[4]}px * 2)) / 3);
+          }
+          ${theme.mediaQueries.mobile} {
+            width: calc((100%) / 1);
+          }
+        `}
   `}
 `
 
@@ -137,3 +183,4 @@ export const CarouselButton = styled.button`
     }
   `}
 `
+

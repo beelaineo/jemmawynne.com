@@ -9,6 +9,7 @@ interface ProductRelatedProps {
 export const ProductRelated = ({ product }: ProductRelatedProps) => {
   const { collections } = product
   const customRelated = product?.related
+  console.log(collections, customRelated)
   /* Return a custom carousel */
   if (customRelated && customRelated.collection) {
     const customTitle = customRelated.title || customRelated?.collection?.title
