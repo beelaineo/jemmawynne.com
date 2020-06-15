@@ -6,7 +6,6 @@ import {
   PressPage as PressPageType,
   PressItem as PressItemType,
 } from '../src/types'
-import { PageContext, catchErrors } from './_app'
 import {
   request,
   requestShopData,

@@ -8,6 +8,7 @@ import { ShopDataProvider } from './ShopDataProvider'
 import { MenuProvider } from './MenuProvider'
 import { useError } from './ErrorProvider'
 import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
+import { ShopDataResponse } from '../graphql'
 
 /**
  * App

@@ -64,9 +64,8 @@ if (ENV === 'production' || ENV === 'staging' || FORCE) {
       const randomId = Math.random().toString().replace('0.', '')
       return `mock-ref-${randomId}`
     },
-    captureMessage: (m: string, severity?: Severity) => {
+    captureMessage: (m: string) => {
       debug('Captured message:')
-      debug(severity)
       debug(m)
       return m
     },

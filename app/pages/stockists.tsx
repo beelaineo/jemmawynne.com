@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { GetStaticProps } from 'next'
 import { NotFound, Stockists } from '../src/views'
 import { Stockists as StockistsType } from '../src/types'
-import { PageContext, catchErrors } from './_app'
 import { request, requestShopData } from '../src/graphql'
 
 interface StockistsResponse {

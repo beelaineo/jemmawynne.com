@@ -79,8 +79,14 @@ export const getSelectedOptionValues = (
   const selectedOptionValues = definitely(product?.options).reduce<
     ShopifyProductOptionValue[]
   >((acc, currentOption) => {
-    const currentOptionValues = definitely(currentOption?.values).filter((co) =>
-      optionMatchesVariant(currentOption?.name || 'foo', co, variant),
+    const currentOptionValues = definitely(currentOption?.values).filter(
+      (co) =>
+        variant?.sourceData &&
+        optionMatchesVariant(
+          currentOption?.name || 'foo',
+          co,
+          variant.sourceData,
+        ),
     )
     return [...acc, ...currentOptionValues]
   }, [])

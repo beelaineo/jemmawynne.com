@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box } from '@xstyled/styled-components'
 import Link from 'next/link'
-import ReactHtmlParser, { TransformFunction } from 'react-html-parser'
+import HTMLParser from 'html-parser-lite'
 import { getLinkFromHref } from '../../utils'
 import { Heading, P, Ol, Ul, Li, Span } from '../Text'
 
@@ -19,96 +19,86 @@ const wrapBareText = (text: string) =>
 
 const internalUrlRegex = /^https?:\/\/(www.)?(localhost:3000|spinellikilcollin.com|spinellikilcollin.(good-idea.)?now.sh)(\/[\w|\/]+)?/
 
-const transform: TransformFunction = (node, index) => {
+const parser = new HTMLParser()
+
+const transform = (node, index) => {
   const styles = css2obj(node?.attribs?.style ?? '')
-  switch (node.type) {
+  switch (node.tagName) {
+    case 'document':
+      return (
+        <React.Fragment key={index}>
+          {node.childNodes.map(transform)}
+        </React.Fragment>
+      )
     case 'text':
-      return <React.Fragment key={index}>{node.data}</React.Fragment>
-    case 'tag':
-      if (!node.children || node.children.length === 0) return null
-      switch (node.name) {
-        case 'h1':
-        case 'h2':
-        case 'h3':
-        case 'h4':
-        case 'h5':
-        case 'h6':
-          return (
-            <Heading style={styles} level={3} key={index}>
-              {node.children.map(transform)}
-            </Heading>
-          )
-        case 'p':
-        case 'span':
-          if (node.parent) {
-            return (
-              <Span key={index} style={styles} weight={3}>
-                {node.children.map(transform)}
-              </Span>
-            )
-          }
-          return (
-            <P key={index} style={styles} weight={3}>
-              {node.children.map(transform)}
-            </P>
-          )
-        case 'ul':
-          return (
-            <Ul family="serif" key={index}>
-              {node.children.map(transform)}
-            </Ul>
-          )
-        case 'ol':
-          return (
-            <Ol family="serif" key={index}>
-              {node.children.map(transform)}
-            </Ol>
-          )
-        case 'li':
-          return <Li key={index}>{node.children.map(transform)}</Li>
-        case 'em':
-          return <em key={index}>{node.children.map(transform)}</em>
-        case 'strong':
-          return <strong key={index}>{node.children.map(transform)}</strong>
-        case 'a':
-          const href = node.attribs.href
-          if (!href) return null
-
-          const isInternal = internalUrlRegex.test(href)
-          if (isInternal) {
-            const { href: aHref, as } = getLinkFromHref(href)
-            return (
-              <Link key={index} href={aHref} as={as}>
-                <a>{node.children.map(transform)}</a>
-              </Link>
-            )
-          }
-          return (
-            <a
-              key={index}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {node.children.map(transform)}
-            </a>
-          )
-        case 'div':
-          return <Box family="serif">{node.children.map(transform)}</Box>
-        default:
-          console.warn('Did not parse node:', node)
-          return <Box family="serif">{node.children.map(transform)}</Box>
+      return <React.Fragment key={index}>{node.textContent}</React.Fragment>
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6':
+      return (
+        <Heading style={styles} level={3} key={index}>
+          {node.childNodes.map(transform)}
+        </Heading>
+      )
+    case 'p':
+    case 'span':
+      if (node.parent) {
+        return (
+          <Span key={index} style={styles} weight={3}>
+            {node.childNodes.map(transform)}
+          </Span>
+        )
       }
-    default:
-      return null
-  }
-}
+      return (
+        <P key={index} style={styles} weight={3}>
+          {node.childNodes.map(transform)}
+        </P>
+      )
+    case 'ul':
+      return (
+        <Ul family="serif" key={index}>
+          {node.childNodes.map(transform)}
+        </Ul>
+      )
+    case 'ol':
+      return (
+        <Ol family="serif" key={index}>
+          {node.childNodes.map(transform)}
+        </Ol>
+      )
+    case 'li':
+      return <Li key={index}>{node.childNodes.map(transform)}</Li>
+    case 'em':
+      return <em key={index}>{node.childNodes.map(transform)}</em>
+    case 'strong':
+      return <strong key={index}>{node.childNodes.map(transform)}</strong>
+    case 'a':
+      const href = node.attribs.href
+      if (!href) return null
 
-export const parseHTML = (htmlString?: string | null): React.ReactNode => {
-  if (!htmlString) return null
-  return ReactHtmlParser(wrapBareText(htmlString), {
-    transform,
-  })
+      const isInternal = internalUrlRegex.test(href)
+      if (isInternal) {
+        const { href: aHref, as } = getLinkFromHref(href)
+        return (
+          <Link key={index} href={aHref} as={as}>
+            <a>{node.childNodes.map(transform)}</a>
+          </Link>
+        )
+      }
+      return (
+        <a key={index} href={href} target="_blank" rel="noopener noreferrer">
+          {node.childNodes.map(transform)}
+        </a>
+      )
+    case 'div':
+      return <Box family="serif">{node.childNodes.map(transform)}</Box>
+    default:
+      console.warn('Did not parse node:', node)
+      return <Box family="serif">{node.childNodes.map(transform)}</Box>
+  }
 }
 
 interface HtmlContentProps {
@@ -117,5 +107,8 @@ interface HtmlContentProps {
 
 export const HtmlContent = ({ html }: HtmlContentProps) => {
   if (!html) return null
-  return <div>{parseHTML(html)}</div>
+  const parsed = parser.parse(wrapBareText(html))
+  const transformed = transform(parsed, 'root')
+  console.log(parsed, transformed)
+  return <div>{transformed}</div>
 }
