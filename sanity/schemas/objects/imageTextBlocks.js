@@ -15,133 +15,120 @@ export const imageTextSection = {
     {
       name: 'subtitle',
       label: 'Subtitle',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Header 2', value: 'h2' },
-            { title: 'Header 3', value: 'h3' },
-            { title: 'Normal', value: 'normal' },
-          ],
-
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-            ],
-          },
-        },
-      ],
+      type: 'richText',
     },
     {
       name: 'blocks',
       title: 'Content Blocks',
       type: 'array',
-      of: [{ type: 'imageBlock' }, { type: 'textBlock' }],
-      validation: (Rule) => Rule.max(3),
-    },
-    {
-      name: 'backgroundImage',
-      type: 'image',
+      of: [{ type: 'imageTextBlock' }],
+      validation: (Rule) => Rule.max(4),
     },
   ],
+  preview: {
+    select: {
+      blocks: 'blocks',
+      title: 'title',
+      subtitle: 'subtitle',
+    },
+    prepare: (props) => {
+      const { title, subtitle, blocks } = props
+      const firstBlockTitle = blocks.find((block) => block?.header)?.header
+      const firstBlockImage = blocks.find((block) => block?.backgroundImage)
+        ?.backgroundImage
+
+      return {
+        title: firstBlockTitle || title,
+        subtitle,
+        media: firstBlockImage,
+      }
+    },
+  },
 }
 
 export const textBlock = {
-  name: 'textBlock',
+  name: 'imageTextBlock',
   type: 'object',
-  title: 'Text Block',
+  title: 'Image / Text Block',
   icon: MdTextFields,
+  fieldsets: [
+    {
+      title: 'Text',
+      name: 'text',
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      title: 'Image',
+      name: 'image',
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     {
       name: 'header',
       title: 'Header',
       type: 'string',
+      fieldset: 'text',
+    },
+    {
+      name: 'headerFont',
+      title: 'Header Font',
+      type: 'fontPicker',
+      fieldset: 'text',
     },
     {
       name: 'body',
       title: 'Body',
-      type: 'array',
-      description: 'Tip: Use shift+return for a soft-wrapping line',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Header 2', value: 'h2' },
-            { title: 'Header 3', value: 'h3' },
-            { title: 'Normal', value: 'normal' },
-          ],
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-            ],
-          },
-        },
-      ],
+      type: 'richText',
+      fieldset: 'text',
+    },
+    {
+      name: 'backgroundColor',
+      title: 'Background Color',
+      type: 'colorPicker',
+      fieldset: 'text',
+    },
+    {
+      name: 'textColor',
+      title: 'Text Color',
+      type: 'colorPicker',
+      fieldset: 'text',
     },
     {
       name: 'textAlign',
       type: 'textAlign',
+      fieldset: 'text',
     },
-    { name: 'cta', title: 'Link Button', type: 'cta' },
-  ],
-}
+    {
+      name: 'cta',
+      title: 'Link Button',
+      type: 'cta',
 
-export const imageBlock = {
-  name: 'imageBlock',
-  type: 'object',
-  title: 'Image Block',
-  fields: [
+      fieldset: 'text',
+    },
     {
       name: 'backgroundImage',
       title: 'Background Image',
       type: 'richImage',
-    },
-    {
-      name: 'link',
-      type: 'internalLink',
-    },
-    {
-      name: 'caption',
-      title: 'Caption',
-      type: 'array',
-      description: 'Tip: Use shift+return for a soft-wrapping line',
-      of: [
-        {
-          type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-            ],
-          },
-        },
-      ],
+      fieldset: 'image',
     },
     {
       name: 'hoverImage',
       title: 'Hover Image',
       type: 'richImage',
+      fieldset: 'image',
     },
   ],
-  // validation: (Rule) => {
-  //   console.log(Rule)
-  //   return Rule.required()
-  //   return undefined
-  // },
+
   preview: {
     select: {
-      caption: 'caption',
+      header: 'header',
       media: 'backgroundImage',
     },
-    prepare: ({ caption, media }) => {
+    prepare: ({ header, media }) => {
       return {
+        title: header,
         media,
-        title:
-          caption && caption.length ? blocksToPlainText(caption) : '(no text)',
       }
     },
   },

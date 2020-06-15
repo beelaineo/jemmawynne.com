@@ -16,9 +16,14 @@
   "scripts": {
     "start": "sanity start",
     "test": "sanity check",
-    "deploy": "yarn deploy:cms && yarn deploy:graphql",
+    "deploy": "yarn deploy:graphql && yarn deploy:cms",
     "deploy:cms": "yarn sanity deploy",
-    "deploy:graphql": "yarn sanity graphql deploy --generation gen2 --playground"
+    "deploy:graphql": "yarn sanity graphql deploy --generation gen2 --playground && yarn workspace jemmawynne-app generate-types",
+    "sync:export": "sanity dataset export production",
+    "sync:reset": "sanity dataset delete staging && yarn sanity dataset create staging",
+    "sync:import": "sanity dataset import production.tar.gz staging --replace",
+    "sync:cleanup": "rm production.tar.gz",
+    "sync": "yarn sync:reset && yarn sync:export && yarn sync:import && yarn sync:cleanup"
   },
   "dependencies": {
     "@sane-shopify/sanity-plugin": "^0.15.2",

@@ -8,5 +8,19 @@ export const textAlign = {
       { title: 'Right', value: 'right' },
     ],
     layout: 'radio',
+    direction: 'horizontal',
+  },
+}
+
+export const fontPicker = {
+  type: 'string',
+  name: 'fontPicker',
+  options: {
+    list: [
+      { title: 'Sans Serif', value: 'sans' },
+      { title: 'Serif', value: 'serif' },
+    ],
+    layout: 'radio',
+    direction: 'horizontal',
   },
 }
