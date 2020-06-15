@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { ApolloError } from 'apollo-client'
 import Sentry from '../../services/sentry'
 
 const { useState, useEffect } = React
 
 interface ErrorContextValue {
   errorMessage: string | undefined
-  handleError: (error: ApolloError | Error) => void
+  handleError: (error: Error) => void
   clearError: () => void
 }
 
@@ -25,10 +24,10 @@ export const useError = () => {
 
 interface ErrorProps {
   children: React.ReactNode
-  error?: ApolloError | Error
+  error?: Error
 }
 
-const getErrorMessage = (error: ApolloError | Error): string => {
+const getErrorMessage = (error: Error): string => {
   if ('networkError' in error || 'graphQLErrors' in error) {
     return 'Sorry, there was a problem connecting to our servers. Our engineers have been notified.'
   }
@@ -41,7 +40,7 @@ export const ErrorProvider = ({ children, error }: ErrorProps) => {
     initialMessage,
   )
 
-  const handleError = (error: ApolloError | Error, scope?: any) => {
+  const handleError = (error: Error, scope?: any) => {
     const message = getErrorMessage(error)
     console.error(error)
     if (scope) {

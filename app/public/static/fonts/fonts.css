@@ -28,15 +28,8 @@
  */
 
 /* @import must be at top of file, otherwise CSS will not work */
-
-@font-face {
-  font-family: 'Freight';
-  src: url('/static/fonts/FreightBigProBook-Regular.woff2') format('woff2'),
-    url('/static/fonts/FreightBigProBook-Regular.woff') format('woff'),
-    url('/static/fonts/FreightBigProBook-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Freight pro via Adobe */
+@import url('https://use.typekit.net/nqv4aqq.css');
 
 @font-face {
   font-family: 'Gotham';

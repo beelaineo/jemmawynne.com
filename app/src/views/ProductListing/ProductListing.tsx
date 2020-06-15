@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ShopifyCollection, ShopifyProduct } from '../../types'
+import { ShopifyCollection } from '../../types'
 import { DocumentLink } from '../../components/DocumentLink'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { ProductListingHeader } from './ProductListingHeader'
@@ -9,18 +9,14 @@ import { Hr, CollectionsMain, CollectionsMenu } from './styled'
 
 interface ProductListingProps {
   collection: ShopifyCollection
-  products: ShopifyProduct[]
 }
 
-export const ProductListing = ({
-  collection,
-  products,
-}: ProductListingProps) => {
+export const ProductListing = ({ collection }: ProductListingProps) => {
   const { collectionInfo } = useShopData()
   if (!collection || !collectionInfo) return null
   const relatedCollections =
     collection.relatedCollections || collectionInfo.relatedCollections || []
-  const { disableMenu } = collection
+  const { products, disableMenu } = collection
   return (
     <>
       <ProductListingHeader collection={collection} />

@@ -1,9 +1,15 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
-import { PageContext, catchErrors } from '../_app'
-import { ShopifyProduct, ShopifyCollection } from '../../src/types'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ShopifyCollection } from '../../src/types'
 import { NotFound, ProductListing } from '../../src/views'
-import { heroFragment, shopifySourceImageFragment } from '../../src/graphql'
+import {
+  request,
+  requestShopData,
+  shopifyProductThumbnailFragment,
+  heroFragment,
+  shopifySourceImageFragment,
+} from '../../src/graphql'
 
 export const collectionQuery = gql`
   query CollectionPageQuery($handle: String) {
@@ -16,6 +22,9 @@ export const collectionQuery = gql`
       title
       handle
       shopifyId
+      products {
+        ...ShopifyProductThumbnailFragment
+      }
       sourceData {
         id
         handle
@@ -42,107 +51,68 @@ export const collectionQuery = gql`
 
   ${heroFragment}
   ${shopifySourceImageFragment}
-`
-
-const productsQuery = gql`
-  query AllCollectionProducts($collectionId: ID) {
-    allShopifyProduct(
-      where: { _: { references: $collectionId }, archived: { neq: true } }
-    ) {
-      _id
-      _key
-      _type
-      shopifyId
-      title
-      handle
-      sourceData {
-        id
-        title
-        handle
-        tags
-        options {
-          name
-          values
-        }
-        variants {
-          edges {
-            cursor
-            node {
-              _key
-              _type
-              selectedOptions {
-                name
-                value
-              }
-              image {
-                ...ShopifySourceImageFragment
-              }
-            }
-          }
-        }
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-          maxVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        images {
-          edges {
-            cursor
-            node {
-              ...ShopifySourceImageFragment
-            }
-          }
-        }
-      }
-    }
-  }
-
-  ${shopifySourceImageFragment}
+  ${shopifyProductThumbnailFragment}
 `
 
 interface CollectionResponse {
   allShopifyCollection: ShopifyCollection[]
 }
 
-interface ProductsResponse {
-  allShopifyProduct: ShopifyProduct[]
-}
-
 interface CollectionProps {
   collection?: ShopifyCollection
-  products: ShopifyProduct[]
 }
 
-const Collection = ({ collection, products }: CollectionProps) => {
+const Collection = ({ collection }: CollectionProps) => {
   if (!collection) return <NotFound />
-  return <ProductListing collection={collection} products={products} />
+  return <ProductListing collection={collection} />
 }
 
-Collection.getInitialProps = catchErrors(async (ctx: PageContext) => {
-  const { apolloClient, query } = ctx
-  const collectionResponse = await apolloClient.query<CollectionResponse>({
-    query: collectionQuery,
-    variables: { handle: query.collectionSlug },
-  })
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const variables = { handle: ctx?.params?.collectionSlug || 'foo' }
+  const [response, shopData] = await Promise.all([
+    request<CollectionResponse>(collectionQuery, variables),
+    requestShopData(),
+  ])
 
-  const collections = collectionResponse?.data?.allShopifyCollection
+  const collections = response?.allShopifyCollection
   const collection = collections.length ? collections[0] : undefined
 
-  const productsResponse = collection
-    ? await apolloClient.query<ProductsResponse>({
-        query: productsQuery,
-        variables: { collectionId: collection._id },
-      })
-    : undefined
+  return {
+    props: {
+      shopData,
+      collection,
+    },
+    unstable_revalidate: 60,
+  }
+}
 
-  const products = productsResponse?.data?.allShopifyProduct || []
+/**
+ * Static Routes
+ */
 
-  return { collection, products }
-})
+// const collectionHandlesQuery = gql`
+//   query CollectionHandlesQuery {
+//     allShopifyCollection {
+//       _id
+//       shopifyId
+//       handle
+//     }
+//   }
+// `
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // const result = await request<CollectionResponse>(collectionHandlesQuery)
+  // const collections = definitely(result?.allShopifyCollection)
+  // const paths = collections.map((collection) => ({
+  //   params: {
+  //     collectionSlug: collection.handle ? collection.handle : undefined,
+  //   },
+  // }))
+
+  return {
+    paths: [],
+    fallback: true,
+  }
+}
 
 export default Collection

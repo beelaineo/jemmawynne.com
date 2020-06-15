@@ -52,6 +52,10 @@ export const SlideContainer = styled.div`
       margin-right: 0;
     }
 
+    > * {
+      width: 100%;
+    }
+
     ${theme.mediaQueries.tablet} {
       width: calc((100% - (${theme.space[4]}px * 2)) / 3);
     }

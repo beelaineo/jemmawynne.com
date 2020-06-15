@@ -7,9 +7,15 @@ import {
   ExternalLink,
   Stockists,
   Page,
+  PressPage,
 } from '../types'
 
-type Document = ShopifyProduct | ShopifyCollection | Page | Stockists
+type Document =
+  | ShopifyProduct
+  | ShopifyCollection
+  | Page
+  | Stockists
+  | PressPage
 
 export const getDocumentLinkImage = (
   // document?: PageOrShopifyCollectionOrShopifyProduct,

@@ -20,7 +20,7 @@ const sans =
   '"Gotham", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;'
 
 const serif =
-  '"Freight", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;'
+  '"freight-big-pro", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;'
 
 export const defaultTheme: DefaultTheme = {
   radii: {
@@ -73,7 +73,7 @@ export const defaultTheme: DefaultTheme = {
     11, // h6
     9, //  h7
   ],
-  fontWeights: [0, 200, 400, 500, 700],
+  fontWeights: [0, 300, 400, 500, 700],
   fonts: {
     serif,
     sans,

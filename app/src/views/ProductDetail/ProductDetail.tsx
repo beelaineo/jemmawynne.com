@@ -2,11 +2,7 @@ import * as React from 'react'
 import { useProductVariant, useCheckout } from 'use-shopify'
 import { Box } from '@xstyled/styled-components'
 import { Heading } from '../../components/Text'
-import {
-  ProductInfoBlock,
-  ShopifyProduct,
-  ShopifyCollection,
-} from '../../types'
+import { ProductInfoBlock, ShopifyProduct } from '../../types'
 import { Column } from '../../components/Layout'
 import { Button } from '../../components/Button'
 import {
@@ -31,10 +27,9 @@ const { useState } = React
 
 interface Props {
   product: ShopifyProduct
-  collections: ShopifyCollection[]
 }
 
-export const ProductDetail = ({ product, collections }: Props) => {
+export const ProductDetail = ({ product }: Props) => {
   /* get additional info blocks from Sanity */
   const { getProductInfoBlocks } = useShopData()
   const { sourceData } = product
@@ -138,7 +133,7 @@ export const ProductDetail = ({ product, collections }: Props) => {
           </ProductInfoWrapper>
         </ProductDetails>
       </Column>
-      <ProductRelated product={product} collections={collections} />
+      <ProductRelated product={product} />
       <HintModal
         product={product}
         open={hintModalOpen}

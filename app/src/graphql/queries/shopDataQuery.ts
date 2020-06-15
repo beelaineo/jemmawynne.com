@@ -7,31 +7,38 @@ import {
   sanityRichImageFragment,
   sanityImageFragment,
   productInfoFragment,
-} from '../../graphql'
+} from './fragments'
+import { request } from '../request'
 
 export const SHOP_DATA_QUERY = gql`
   {
     Menu(id: "menu-settings") {
+      __typename
       _id
       _type
       _key
       _createdAt
       menuItems {
         ... on Cta {
+          __typename
           ...CTAFragment
         }
         ... on SubMenu {
+          __typename
           _key
           _type
           title
           columns {
+            __typename
             _key
             title
             links {
               ... on RichPageLink {
+                __typename
                 ...RichPageLinkFragment
               }
               ... on LinkGroup {
+                __typename
                 _key
                 _type
                 title
@@ -49,6 +56,7 @@ export const SHOP_DATA_QUERY = gql`
       }
     }
     ProductInfo(id: "productInfo") {
+      __typename
       _id
       _type
       _key
@@ -69,6 +77,7 @@ export const SHOP_DATA_QUERY = gql`
         ...ProductInfoFragment
       }
       blocksByTag {
+        __typename
         _key
         _type
         tag
@@ -77,6 +86,7 @@ export const SHOP_DATA_QUERY = gql`
         }
       }
       swatches {
+        __typename
         _type
         _key
         colorName
@@ -86,7 +96,9 @@ export const SHOP_DATA_QUERY = gql`
       }
     }
     CollectionInfo(id: "collectionInfo") {
+      __typename
       relatedCollections {
+        __typename
         _id
         _type
         _key
@@ -96,11 +108,14 @@ export const SHOP_DATA_QUERY = gql`
       }
     }
     SiteSettings(id: "site-settings") {
+      __typename
       _id
       _type
       banner {
+        __typename
         dismissable
         announcements {
+          __typename
           _key
           text
           cta {
@@ -112,6 +127,7 @@ export const SHOP_DATA_QUERY = gql`
       }
       aboutRaw
       linkGroups {
+        __typename
         _key
         _type
         title
@@ -134,4 +150,9 @@ export interface ShopDataResponse {
   ProductInfo: ProductInfo
   CollectionInfo: CollectionInfo
   SiteSettings: SiteSettings
+}
+
+export const requestShopData = async () => {
+  const response = await request<ShopDataResponse>(SHOP_DATA_QUERY)
+  return response
 }

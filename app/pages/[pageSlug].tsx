@@ -1,9 +1,9 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { NotFound, StaticPage } from '../src/views'
 import { Page as PageType } from '../src/types'
-import { heroFragment } from '../src/graphql'
-import { PageContext, catchErrors } from './_app'
+import { heroFragment, request, requestShopData } from '../src/graphql'
 
 interface PageResponse {
   allPage: PageType[]
@@ -38,19 +38,50 @@ const Page = ({ page }: PageProps) => {
   return <StaticPage page={page} />
 }
 
-Page.getInitialProps = catchErrors(async (ctx: PageContext) => {
-  const { apolloClient, query } = ctx
-  const variables = { slug: query.pageSlug }
+/**
+ * Initial Props
+ */
 
-  const response = await apolloClient.query({
-    query: pageQuery,
-    variables,
-  })
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const { params } = ctx
+  if (!params) return { props: { page: undefined } }
+  const variables = { slug: params.pageSlug }
+  const [response, shopData] = await Promise.all([
+    request<PageResponse>(pageQuery, variables),
+    requestShopData(),
+  ])
 
-  const pages = response?.data?.allPage
+  const pages = response?.allPage
+  const page = pages && pages.length ? pages[0] : null
+  return { props: { page, shopData }, unstable_revalidate: 60 }
+}
 
-  const page = pages.length ? pages[0] : undefined
-  return { page }
-})
+/**
+ * Static Paths
+ */
+
+// const pageHandlesQuery = gql`
+//   query PageSlugQuery {
+//     allPage {
+//       _id
+//       slug {
+//         current
+//       }
+//     }
+//   }
+// `
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // const result = await request<PageResponse>(pageHandlesQuery)
+  // const pages = definitely(result?.allPage)
+  // const paths = pages.map((page) => ({
+  //   params: { pageSlug: page?.slug?.current ?? undefined },
+  // }))
+
+  return {
+    paths: [],
+    fallback: true,
+  }
+}
 
 export default Page

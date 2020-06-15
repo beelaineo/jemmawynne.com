@@ -19,17 +19,20 @@ import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
 
 interface Props {
   children: React.ReactNode
+  shopData: ShopDataResponse
 }
 
-const deduplicateFragments = (queryString: string) =>
+const deduplicateFragments = (queryString?: string) =>
   queryString
-    .split(/\n\s+\n/)
-    .map((group) => group.replace(/^([\n\s])+/, '').replace(/\n+$/, ''))
-    .reduce<string[]>((acc, current) => {
-      if (acc.includes(current)) return acc
-      return [...acc, current]
-    }, [])
-    .join('\n\n')
+    ? queryString
+        .split(/\n\s+\n/)
+        .map((group) => group.replace(/^([\n\s])+/, '').replace(/\n+$/, ''))
+        .reduce<string[]>((acc, current) => {
+          if (acc.includes(current)) return acc
+          return [...acc, current]
+        }, [])
+        .join('\n\n')
+    : ''
 
 type ErrorHandler = (err: Error) => void
 
@@ -41,9 +44,7 @@ const shopifyQuery = (handleError: ErrorHandler) => {
     const queryString =
       typeof query === 'string'
         ? query
-        : //
-          // @ts-ignore
-          deduplicateFragments(query.loc.source.body)
+        : deduplicateFragments(query?.loc?.source.body)
     const result = await fetch(SHOPIFY_STOREFRONT_URL, {
       method: 'POST',
       headers: {
@@ -58,11 +59,11 @@ const shopifyQuery = (handleError: ErrorHandler) => {
   }
 }
 
-export const Providers = ({ children }: Props) => {
+export const Providers = ({ children, shopData }: Props) => {
   const { handleError } = useError()
   return (
     <ShopifyProvider query={shopifyQuery(handleError)}>
-      <ShopDataProvider>
+      <ShopDataProvider shopData={shopData}>
         <ThemeProvider theme={defaultTheme}>
           <MenuProvider>
             <GlobalStyles />

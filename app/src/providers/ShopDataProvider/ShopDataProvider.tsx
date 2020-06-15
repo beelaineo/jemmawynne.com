@@ -1,19 +1,18 @@
 import * as React from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { SHOP_DATA_QUERY, ShopDataResponse } from './shopDataQuery'
+import { ShopDataResponse } from '../../graphql'
 import {
   ShopifyProduct,
   Menu,
   CollectionInfo,
   ShopifySourceProductOption,
   SiteSettings,
+  SwatchOption,
 } from '../../types'
 import {
   createGetSwatchOptions,
   createGetProductInfoBlocks,
   createGetOptionSwatches,
   DefinitelyProductInfo,
-  SwatchOption,
 } from './utils'
 
 const { useContext } = React
@@ -43,15 +42,16 @@ export const useShopData = () => {
 
 interface Props {
   children: React.ReactNode
+  shopData: ShopDataResponse
 }
 
-export const ShopDataProvider = ({ children }: Props) => {
-  const response = useQuery<ShopDataResponse>(SHOP_DATA_QUERY)
-  const ready = Boolean(response.data && !response.loading)
-  const menu = ready ? response?.data?.Menu : undefined
-  const siteSettings = ready ? response?.data?.SiteSettings : undefined
-  const productInfo = ready ? response?.data?.ProductInfo : undefined
-  const collectionInfo = ready ? response?.data?.CollectionInfo : undefined
+export const ShopDataProvider = ({ children, shopData }: Props) => {
+  const ready = true
+
+  const menu = shopData?.Menu
+  const siteSettings = shopData?.SiteSettings
+  const productInfo = shopData?.ProductInfo
+  const collectionInfo = shopData?.CollectionInfo
 
   const getProductInfoBlocks = createGetProductInfoBlocks(productInfo)
   const getProductSwatchOptions = createGetSwatchOptions(productInfo)

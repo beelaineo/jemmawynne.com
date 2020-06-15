@@ -1,15 +1,22 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
+import { GetStaticProps } from 'next'
 import { NotFound, PressView } from '../src/views'
 import {
   PressPage as PressPageType,
   PressItem as PressItemType,
 } from '../src/types'
 import { PageContext, catchErrors } from './_app'
-import { externalLinkFragment, sanityRichImageFragment } from '../src/graphql'
+import {
+  request,
+  requestShopData,
+  externalLinkFragment,
+  sanityRichImageFragment,
+} from '../src/graphql'
 
-interface PressItemResponse {
-  stockists: PressItemType
+interface PressPageResponse {
+  allPressItem: PressItemType[]
+  PressPage: PressPageType
 }
 
 const query = gql`
@@ -49,23 +56,28 @@ const PressPage = ({ pressPage, pressItems }: PressItemProps) => {
   return <PressView pressPage={pressPage} pressItems={pressItems} />
 }
 
-PressPage.getInitialProps = catchErrors(async (ctx: PageContext) => {
-  const { apolloClient } = ctx
+export const getStaticProps: GetStaticProps = async () => {
   const now = new Date()
   const currentDate = [
     now.getFullYear(),
     (now.getMonth() + 1).toString().padStart(2, '0'),
     now.getDate().toString().padStart(2, '0'),
   ].join('-')
-
   const variables = {
     currentDate,
   }
-  const response = await apolloClient.query({ query, variables })
 
-  const pressItems = response?.data?.allPressItem
-  const pressPage = response?.data?.PressPage
-  return { pressPage, pressItems }
-})
+  const [shopData, response] = await Promise.all([
+    requestShopData(),
+    request<PressPageResponse>(query, variables),
+  ])
+  const pressItems = response?.allPressItem
+  const pressPage = response?.PressPage
+
+  return {
+    props: { shopData, pressItems, pressPage },
+    unstable_revalidate: 60,
+  }
+}
 
 export default PressPage

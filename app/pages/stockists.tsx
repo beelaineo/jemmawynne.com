@@ -1,11 +1,13 @@
 import * as React from 'react'
 import gql from 'graphql-tag'
+import { GetStaticProps } from 'next'
 import { NotFound, Stockists } from '../src/views'
 import { Stockists as StockistsType } from '../src/types'
 import { PageContext, catchErrors } from './_app'
+import { request, requestShopData } from '../src/graphql'
 
 interface StockistsResponse {
-  stockists: StockistsType
+  Stockists: StockistsType
 }
 
 const stockistsQuery = gql`
@@ -44,12 +46,21 @@ const StockistsPage = ({ stockists }: StockistsProps) => {
   return <Stockists stockists={stockists} />
 }
 
-StockistsPage.getInitialProps = catchErrors(async (ctx: PageContext) => {
-  const { apolloClient } = ctx
-  const response = await apolloClient.query({ query: stockistsQuery })
+export const getStaticProps: GetStaticProps = async () => {
+  const [shopData, response] = await Promise.all([
+    requestShopData(),
+    request<StockistsResponse>(stockistsQuery),
+  ])
 
-  const stockists = response?.data?.Stockists
-  return { stockists }
-})
+  const stockists = response?.Stockists
+
+  return {
+    props: {
+      shopData,
+      stockists,
+    },
+    unstable_revalidate: 60,
+  }
+}
 
 export default StockistsPage

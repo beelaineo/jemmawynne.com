@@ -1,14 +1,13 @@
 import * as React from 'react'
-import { ShopifyProduct, ShopifyCollection } from '../../../types'
+import { ShopifyProduct } from '../../../types'
 import { CarouselBlock } from '../../../components/ContentBlock/CarouselBlock'
 
 interface ProductRelatedProps {
   product: ShopifyProduct
-  collections: ShopifyCollection[]
 }
 
-export const ProductRelated = (props: ProductRelatedProps) => {
-  const { collections, product } = props
+export const ProductRelated = ({ product }: ProductRelatedProps) => {
+  const { collections } = product
   const customRelated = product?.related
   /* Return a custom carousel */
   if (customRelated && customRelated.collection) {
