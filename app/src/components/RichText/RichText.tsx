@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from '@xstyled/styled-components'
 import * as BlockContent from '@sanity/block-content-to-react'
-import { Heading, P, BlockQuote, Li, Ul, Ol } from '../Text'
+import { Span, Heading, P, BlockQuote, Li, Ul, Ol } from '../Text'
 
 interface CustomSerializerConfig {
   blockWrapper?: React.ComponentType
@@ -21,6 +21,14 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
     if (props.type === 'number') return <Ol {...props} />
     return <Ul {...props} />
   },
+  marks: {
+    thin: ({ children }) => <Span fontWeight={100}>{children}</Span>,
+    light: ({ children }) => <Span fontWeight={200}>{children}</Span>,
+    book: ({ children }) => <Span fontWeight={300}>{children}</Span>,
+    regular: ({ children }) => <Span fontWeight={400}>{children}</Span>,
+    bold: ({ children }) => <Span fontWeight={700}>{children}</Span>,
+  },
+
   listItem: (props) => <Li {...props} />,
   block: (props): React.ReactNode => {
     /* If a custom block wrapper was passed in, use it instead.

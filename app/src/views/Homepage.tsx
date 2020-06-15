@@ -12,7 +12,7 @@ export const Homepage = ({ homepage }: HomepageProps) => {
   return (
     <React.Fragment>
       {content
-        ? content.map((content, index) =>
+        ? content.map((content) =>
             content ? (
               <ContentBlock
                 key={content._key || 'some-key'}

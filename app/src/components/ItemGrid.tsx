@@ -22,11 +22,10 @@ const Grid = styled.div`
     }
 
     ${theme.mediaQueries.tablet} {
-      grid-template-columns: 1fr 1fr;
+      padding: 6;
     }
     ${theme.mediaQueries.mobile} {
-      padding: 6;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
     }
   `}
 `

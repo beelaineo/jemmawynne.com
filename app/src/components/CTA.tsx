@@ -1,40 +1,62 @@
 import * as React from 'react'
 import { Heading } from './Text'
-import styled from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import { DocumentLink } from './DocumentLink'
 import { Cta } from '../types'
 
 interface CTAProps {
   cta: Cta
+  level?: number
+}
+
+interface WithLevel {
+  level?: number
 }
 
 const Wrapper = styled.div`
-  margin: 3 0;
+  ${({ theme }) => css`
+    margin: 3 0;
+    ${theme.mediaQueries.tablet} {
+      margin: 1 0;
+    }
+  `}
 `
 
-const Inner = styled.div`
-  padding: 3;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid;
-  color: inherit;
-  text-decoration: none;
-  min-width: 240px;
+const Inner = styled.div<WithLevel>`
+  ${({ level }) => css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    text-decoration: none;
+
+    ${level === undefined || level === 1
+      ? css`
+          padding: 3;
+          border: 1px solid;
+          min-width: 240px;
+        `
+      : level === 2
+      ? css`
+          padding: 0 1 1;
+          border-bottom: 1px solid;
+        `
+      : ''}
+  `}
 `
 
-export const CTA = ({ cta }: CTAProps) => {
+export const CTA = ({ cta, level }: CTAProps) => {
   const { label, link } = cta
   if (!link || !link.document) return null
   return (
     <Wrapper>
       <DocumentLink document={link.document}>
-        <Inner>
+        <Inner level={level}>
           <Heading
             level={7}
             my={0}
             textTransform="uppercase"
-            weight={3}
+            weight={4}
             family="sans"
           >
             {label}

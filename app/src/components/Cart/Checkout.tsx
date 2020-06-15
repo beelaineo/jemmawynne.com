@@ -49,7 +49,7 @@ export const Checkout = () => {
         ) : (
           <>
             <Heading level={2} mb={3}>
-              'Your Cart'
+              Your Cart
             </Heading>
             <LineItemsWrapper>
               {definitely(lineItems).map((lineItem) => (
@@ -89,7 +89,7 @@ export const Checkout = () => {
       lineItems.length ? (
         <CartBottom>
           <Button
-            fontWeight={3}
+            fontWeight={4}
             as="a"
             href={checkout.webUrl}
             disabled={loading}

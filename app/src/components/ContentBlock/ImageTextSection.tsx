@@ -2,8 +2,8 @@ import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
 import { ImageTextSection as ImageTextSectionType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
-import { ImageBlock } from './ImageBlock'
-import { TextBlock } from './TextBlock'
+import { ImageTextBlock } from './ImageTextBlock'
+import { definitely } from '../../utils'
 
 const BlocksWrapper = styled.div`
   ${({ theme }) => css`
@@ -15,6 +15,16 @@ const BlocksWrapper = styled.div`
 
     & > * + * {
       margin-left: 5;
+    }
+
+    ${theme.mediaQueries.tablet} {
+      flex-direction: column;
+      padding: 0;
+
+      & > * + * {
+        margin-left: 0;
+        margin-top: 3;
+      }
     }
   `}
 `
@@ -35,29 +45,11 @@ export const ImageTextSection = ({ content }: ImageTextSectionProps) => {
       <SectionHeader title={title} subtitle={subtitleRaw} />
       {content.blocks ? (
         <BlocksWrapper>
-          {content.blocks.map((block, index) => {
-            if (!block) return null
-            const key = block._key || index
-            switch (block.__typename) {
-              case 'ImageBlock':
-                return (
-                  <BlockWrapper key={key}>
-                    <ImageBlock content={block} />
-                  </BlockWrapper>
-                )
-              case 'TextBlock':
-                return (
-                  <BlockWrapper key={key}>
-                    <TextBlock content={block} />
-                  </BlockWrapper>
-                )
-              default:
-                throw new Error(
-                  // @ts-ignore
-                  `There is no content block for type "${block.__typename}"`,
-                )
-            }
-          })}
+          {definitely(content.blocks).map((block) => (
+            <BlockWrapper key={block._key || 'some-key'}>
+              <ImageTextBlock block={block} />
+            </BlockWrapper>
+          ))}
         </BlocksWrapper>
       ) : null}
     </SectionWrapper>

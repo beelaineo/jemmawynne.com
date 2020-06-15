@@ -12,7 +12,7 @@ export const FooterLinkGroup = ({ linkGroup }: FooterLinkGroupProps) => {
   const { title, links } = linkGroup
   return (
     <FooterLinkGroupWrapper>
-      <Heading family="sans" color="body.6" weight={3} level={5}>
+      <Heading family="sans" color="body.6" weight={4} level={5}>
         {title}
       </Heading>
       <LinksWrapper>

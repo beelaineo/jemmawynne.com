@@ -73,7 +73,19 @@ export const defaultTheme: DefaultTheme = {
     11, // h6
     9, //  h7
   ],
-  fontWeights: [0, 300, 400, 500, 700],
+
+  mobileFontSizes: [
+    99, // stupid high, just don't use fontSizes.0
+    35, // h1
+    25, // h2
+    20, // h3
+    16, // readable text: p, h4
+    13, // small text: h5, captions
+    11, // h6
+    9, //  h7
+  ],
+
+  fontWeights: [0, 200, 300, 400, 500, 700],
   fonts: {
     serif,
     sans,
@@ -121,8 +133,8 @@ export const defaultTheme: DefaultTheme = {
   breakpoints: {
     xs: 0,
     sm: 576,
-    md: 768,
-    lg: 992,
+    md: 650,
+    lg: 900,
     xl: 1200,
   },
 
@@ -131,5 +143,7 @@ export const defaultTheme: DefaultTheme = {
     aboveMobile: '@media screen and (min-width: 651px)',
     tablet: '@media screen and (max-width: 900px)',
     aboveTablet: '@media screen and (min-width: 901px)',
+    desktop: '@media screen and (max-width: 1200px)',
+    aboveDesktop: '@media screen and (min-width: 1201px)',
   },
 }

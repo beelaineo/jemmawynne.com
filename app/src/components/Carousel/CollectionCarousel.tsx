@@ -45,14 +45,14 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
   }, [data])
 
   const fetchedCollection = data?.allShopifyCollection[0]
-  const products = definitely(fetchedCollection?.products)
+  const fetchedProducts = definitely(fetchedCollection?.products)
 
-  console.log(data)
-  if (!products.length) return null
+  const products = fetchedProducts.length ? fetchedProducts : collectionProducts
 
-  const initialSlide = viewportWidth && viewportWidth < 650 ? 1 : 0
+  if (!products?.length) return null
+
   return (
-    <Carousel initialSlide={initialSlide}>
+    <Carousel>
       {definitely(products)
         .filter((product) => product?.archived !== true)
         .map((product) => {

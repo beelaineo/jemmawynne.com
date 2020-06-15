@@ -17,23 +17,7 @@ export const hero = {
     {
       name: 'body',
       title: 'Text',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Header 2', value: 'h2' },
-            { title: 'Header 3', value: 'h3' },
-            { title: 'Normal', value: 'normal' },
-          ],
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-            ],
-          },
-        },
-      ],
+      type: 'richText',
     },
     {
       name: 'textAlign',

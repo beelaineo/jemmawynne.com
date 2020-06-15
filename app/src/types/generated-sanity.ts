@@ -6,19 +6,11 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  /**
-   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
-   * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
-   * 8601 standard for representation of dates and times using the Gregorian calendar.
-   */
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: Date
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { [key: string]: any }
-  /**
-   * A date string, such as 2007-12-03, compliant with the `full-date` format
-   * outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
-   * representation of dates and times using the Gregorian calendar.
-   */
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any
 }
 
@@ -411,34 +403,6 @@ export interface Image {
   crop?: Maybe<SanityImageCrop>
 }
 
-export interface ImageBlock {
-  __typename: 'ImageBlock'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  backgroundImage?: Maybe<RichImage>
-  link?: Maybe<InternalLink>
-  captionRaw?: Maybe<Scalars['JSON']>
-  hoverImage?: Maybe<RichImage>
-}
-
-export type ImageBlockFilter = {
-  _key?: Maybe<StringFilter>
-  _type?: Maybe<StringFilter>
-  backgroundImage?: Maybe<RichImageFilter>
-  link?: Maybe<InternalLinkFilter>
-  hoverImage?: Maybe<RichImageFilter>
-}
-
-export type ImageBlockOrTextBlock = ImageBlock | TextBlock
-
-export type ImageBlockSorting = {
-  _key?: Maybe<SortOrder>
-  _type?: Maybe<SortOrder>
-  backgroundImage?: Maybe<RichImageSorting>
-  link?: Maybe<InternalLinkSorting>
-  hoverImage?: Maybe<RichImageSorting>
-}
-
 export type ImageFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
@@ -454,28 +418,66 @@ export type ImageSorting = {
   crop?: Maybe<SanityImageCropSorting>
 }
 
+export interface ImageTextBlock {
+  __typename: 'ImageTextBlock'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  header?: Maybe<Scalars['String']>
+  headerFont?: Maybe<Scalars['String']>
+  bodyRaw?: Maybe<Scalars['JSON']>
+  backgroundColor?: Maybe<Scalars['String']>
+  textColor?: Maybe<Scalars['String']>
+  textAlign?: Maybe<Scalars['String']>
+  cta?: Maybe<Cta>
+  backgroundImage?: Maybe<RichImage>
+  hoverImage?: Maybe<RichImage>
+}
+
+export type ImageTextBlockFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  header?: Maybe<StringFilter>
+  headerFont?: Maybe<StringFilter>
+  backgroundColor?: Maybe<StringFilter>
+  textColor?: Maybe<StringFilter>
+  textAlign?: Maybe<StringFilter>
+  cta?: Maybe<CtaFilter>
+  backgroundImage?: Maybe<RichImageFilter>
+  hoverImage?: Maybe<RichImageFilter>
+}
+
+export type ImageTextBlockSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  header?: Maybe<SortOrder>
+  headerFont?: Maybe<SortOrder>
+  backgroundColor?: Maybe<SortOrder>
+  textColor?: Maybe<SortOrder>
+  textAlign?: Maybe<SortOrder>
+  cta?: Maybe<CtaSorting>
+  backgroundImage?: Maybe<RichImageSorting>
+  hoverImage?: Maybe<RichImageSorting>
+}
+
 export interface ImageTextSection {
   __typename: 'ImageTextSection'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   subtitleRaw?: Maybe<Scalars['JSON']>
-  blocks?: Maybe<Array<Maybe<ImageBlockOrTextBlock>>>
-  backgroundImage?: Maybe<Image>
+  blocks?: Maybe<Array<Maybe<ImageTextBlock>>>
 }
 
 export type ImageTextSectionFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
-  backgroundImage?: Maybe<ImageFilter>
 }
 
 export type ImageTextSectionSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
-  backgroundImage?: Maybe<ImageSorting>
 }
 
 export interface InternalLink {
@@ -512,6 +514,19 @@ export type IntFilter = {
   lte?: Maybe<Scalars['Int']>
 }
 
+export interface Link {
+  __typename: 'Link'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  href?: Maybe<Scalars['String']>
+}
+
+export type LinkFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  href?: Maybe<StringFilter>
+}
+
 export interface LinkGroup {
   __typename: 'LinkGroup'
   _key?: Maybe<Scalars['String']>
@@ -532,6 +547,12 @@ export type LinkGroupSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
+}
+
+export type LinkSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  href?: Maybe<SortOrder>
 }
 
 export interface Menu extends Document {
@@ -1543,6 +1564,8 @@ export interface ShopifyProduct extends Document {
   title?: Maybe<Scalars['String']>
   handle?: Maybe<Scalars['String']>
   shopifyId?: Maybe<Scalars['String']>
+  minVariantPrice?: Maybe<Scalars['Float']>
+  maxVariantPrice?: Maybe<Scalars['Float']>
   archived?: Maybe<Scalars['Boolean']>
   sourceData?: Maybe<ShopifySourceProduct>
   collections?: Maybe<Array<Maybe<ShopifyCollection>>>
@@ -1564,6 +1587,8 @@ export type ShopifyProductFilter = {
   title?: Maybe<StringFilter>
   handle?: Maybe<StringFilter>
   shopifyId?: Maybe<StringFilter>
+  minVariantPrice?: Maybe<FloatFilter>
+  maxVariantPrice?: Maybe<FloatFilter>
   archived?: Maybe<BooleanFilter>
   sourceData?: Maybe<ShopifySourceProductFilter>
   related?: Maybe<CarouselFilter>
@@ -1621,6 +1646,8 @@ export type ShopifyProductSorting = {
   title?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
   shopifyId?: Maybe<SortOrder>
+  minVariantPrice?: Maybe<SortOrder>
+  maxVariantPrice?: Maybe<SortOrder>
   archived?: Maybe<SortOrder>
   sourceData?: Maybe<ShopifySourceProductSorting>
   related?: Maybe<CarouselSorting>
@@ -2318,30 +2345,4 @@ export type SwatchSorting = {
   _type?: Maybe<SortOrder>
   colorName?: Maybe<SortOrder>
   swatchImage?: Maybe<ImageSorting>
-}
-
-export interface TextBlock {
-  __typename: 'TextBlock'
-  _key?: Maybe<Scalars['String']>
-  _type?: Maybe<Scalars['String']>
-  header?: Maybe<Scalars['String']>
-  bodyRaw?: Maybe<Scalars['JSON']>
-  textAlign?: Maybe<Scalars['String']>
-  cta?: Maybe<Cta>
-}
-
-export type TextBlockFilter = {
-  _key?: Maybe<StringFilter>
-  _type?: Maybe<StringFilter>
-  header?: Maybe<StringFilter>
-  textAlign?: Maybe<StringFilter>
-  cta?: Maybe<CtaFilter>
-}
-
-export type TextBlockSorting = {
-  _key?: Maybe<SortOrder>
-  _type?: Maybe<SortOrder>
-  header?: Maybe<SortOrder>
-  textAlign?: Maybe<SortOrder>
-  cta?: Maybe<CtaSorting>
 }

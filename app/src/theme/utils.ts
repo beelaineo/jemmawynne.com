@@ -1,5 +1,3 @@
-import { DefaultTheme } from '@xstyled/styled-components'
-
 export const getTextAlignment = (position: string | void | null): string => {
   if (!position) return 'center'
   const split = position.split('-')
@@ -47,16 +45,19 @@ export const getFlexJustification = (
   }
 }
 
-export const getColor = (color: string | void | null): string => {
+export const getColor = (color: string | void | null): string | void => {
   switch (color) {
+    case 'beige':
+      return 'body.2'
     case 'black':
-      return 'grays.9'
+      return 'body.9'
     case 'darkGray':
-      return 'grays.8'
+      return 'body.8'
     case 'lightGray':
-      return 'grays.3'
+      return 'body.3'
     case 'white':
+      return 'body.0'
     default:
-      return 'grays.0'
+      return undefined
   }
 }

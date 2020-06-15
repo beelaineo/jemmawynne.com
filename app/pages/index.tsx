@@ -2,8 +2,7 @@ import * as React from 'react'
 import gql from 'graphql-tag'
 import { GetStaticProps } from 'next'
 import {
-  imageBlockFragment,
-  textBlockFragment,
+  imageTextBlockFragment,
   carouselFragment,
   heroFragment,
   requestShopData,
@@ -30,13 +29,7 @@ const homepageQuery = /*  GraphQL */ gql`
           title
           subtitleRaw
           blocks {
-            __typename
-            ... on TextBlock {
-              ...TextBlockFragment
-            }
-            ... on ImageBlock {
-              ...ImageBlockFragment
-            }
+            ...ImageTextBlockFragment
           }
         }
         ... on Hero {
@@ -48,9 +41,8 @@ const homepageQuery = /*  GraphQL */ gql`
       }
     }
   }
-  ${textBlockFragment}
-  ${imageBlockFragment}
   ${carouselFragment}
+  ${imageTextBlockFragment}
   ${heroFragment}
 `
 

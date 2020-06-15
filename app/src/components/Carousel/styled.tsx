@@ -5,31 +5,19 @@ interface WithSingle {
 }
 
 export const CarouselContainer = styled.div<WithSingle>`
-  ${({ theme, single }) => css`
-    position: relative;
-    height: 100%;
-    width: 100%;
-    flex-grow: 1;
-    img,
-    picture {
-      pointer-events: none;
-    }
-    ${theme.mediaQueries.mobile} {
-      overflow: hidden;
-      padding: ${single ? 0 : '0 32vw'};
-    }
-  `}
+  position: relative;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  img,
+  picture {
+    pointer-events: none;
+  }
 `
 
 export const CarouselMask = styled.div`
-  ${({ theme }) => css`
-    overflow: hidden;
-
-    ${theme.mediaQueries.mobile} {
-      max-width: 100%;
-      overflow: visible;
-    }
-  `}
+  overflow: hidden;
+  max-width: 100%;
 `
 
 interface SlidesContainerProps {
@@ -81,6 +69,10 @@ export const SlideContainer = styled.div`
       margin-right: 0;
     }
 
+    & > * {
+      width: 100%;
+    }
+
     ${single
       ? css`
           width: 100%;
@@ -104,9 +96,6 @@ export const SlideContainer = styled.div`
           ${theme.mediaQueries.tablet} {
             width: calc((100% - (${theme.space[4]}px * 2)) / 3);
           }
-          ${theme.mediaQueries.mobile} {
-            width: calc((100%) / 1);
-          }
         `}
   `}
 `
@@ -122,7 +111,7 @@ const HEIGHT = WIDTH * 2
 const STROKE = 2
 
 export const CarouselButton = styled.button`
-  ${({ theme, visible, direction }: CarouselButtonProps) => css`
+  ${({ visible, direction }: CarouselButtonProps) => css`
     opacity: ${visible ? '1' : '0'};
     pointer-events: ${visible ? 'auto' : 'none'};
     position: absolute;
@@ -177,10 +166,6 @@ export const CarouselButton = styled.button`
             transform: rotate(-45deg);
           }
         `}
-
-    ${theme.mediaQueries.mobile} {
-      display: none;
-    }
   `}
 `
 

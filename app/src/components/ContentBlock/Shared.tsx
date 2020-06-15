@@ -42,7 +42,7 @@ export const SectionHeader = ({ title, subtitle }: SectionHeaderProps) => {
   return (
     <SectionHeaderWrapper>
       {title ? (
-        <Heading level={4} family="sans" weight={3} textTransform="uppercase">
+        <Heading level={4} family="sans" weight={4} textTransform="uppercase">
           {title}
         </Heading>
       ) : null}

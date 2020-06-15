@@ -10,63 +10,65 @@ interface CustomTextProps extends BoxProps {
   theme: DefaultTheme
   fontSize: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
-  family?: 'mono' | 'sans' | 'serif'
+  family?: string
   weight?: number
   color?: string
   htmlFor?: string
+  level?: number
   textDecoration?: string
   style?: any
 }
 
+const getCustomTextStyles = ({
+  family,
+  color,
+  fontStyle,
+  textDecoration,
+  weight,
+  level,
+  theme,
+}: CustomTextProps) => css`
+  font-size: ${level};
+  font-family: ${family};
+  font-weight: ${weight};
+  font-style: ${fontStyle};
+  color: ${color};
+  text-transform: ${family === 'sans' ? 'uppercase' : 'none'};
+  text-decoration: ${textDecoration};
+  ${theme.mediaQueries.tablet} {
+    ${level !== undefined
+      ? css`
+          font-size: ${theme.mobileFontSizes[level]}px;
+        `
+      : ''}
+  }
+`
+
 const createTextBase = (as: any) => styled(as)`
-  ${({
-    family,
-    fontStyle,
-    weight,
-    fontSize,
-    textDecoration,
-    color,
-    textTransform,
-  }: CustomTextProps) => css`
-    font-size: ${fontSize};
-    font-family: ${family};
-    font-weight: ${weight};
-    font-style: ${fontStyle};
-    text-transform: ${textTransform};
-    color: ${color};
-    letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
-    text-decoration: ${textDecoration};
-    margin: 0 0 0.5em;
+  ${(props: CustomTextProps) => css`
+    ${getCustomTextStyles(props)}
+    line-height: 1.4em;
+    margin: 2 0 0.5em;
 
     &:last-child {
       margin-bottom: 0;
     }
-  `}
-`
 
-const TextBase = styled(Box)`
-  ${({
-    family,
-    weight,
-    fontStyle,
-    textDecoration,
-    fontSize,
-  }: CustomTextProps) => css`
-    font-size: ${fontSize};
-    font-family: ${family};
-    font-weight: ${weight};
-    font-style: ${fontStyle};
-    text-decoration: ${textDecoration};
-    letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
-    text-transform: ${family === 'sans' ? 'uppercase' : ''};
+    a {
+      text-decoration: none;
+    }
 
-    margin: 0 0 0.5em;
+    strong {
+      font-weight: 4;
+    }
 
-    &:last-child {
-      margin-bottom: 0;
+    em {
+      font-style: italic;
     }
   `}
 `
+
+const TextBase = createTextBase(Box)
 
 interface HeadingProps
   extends Omit<CustomTextProps, 'fontSize' | 'theme'>,
@@ -74,7 +76,7 @@ interface HeadingProps
   children: React.ReactNode
   level: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
-  family?: 'mono' | 'sans' | 'serif'
+  family?: string
   weight?: number
   color?: string
   htmlFor?: string
@@ -97,8 +99,8 @@ export const Heading = ({
   return (
     <TextBase
       as={tag}
-      fontSize={level}
-      weight={weight || 500}
+      level={level}
+      weight={weight || 4}
       htmlFor={htmlFor}
       {...rest}
     >
@@ -109,7 +111,6 @@ export const Heading = ({
 
 Heading.defaultProps = {
   family: 'serif',
-  weight: 3,
 }
 
 type PProps = Omit<HeadingProps, 'level'>
@@ -120,7 +121,7 @@ export const P = ({ children, color, family, weight, htmlFor }: PProps) => {
       as="p"
       fontSize={4}
       family={family}
-      weight={weight || 400}
+      weight={weight || 2}
       color={color}
       htmlFor={htmlFor}
       lineHeight="1.4em"
@@ -132,7 +133,7 @@ export const P = ({ children, color, family, weight, htmlFor }: PProps) => {
 
 P.defaultProps = {
   family: 'body',
-  weight: 400,
+  weight: 2,
   color: 'body',
 }
 
@@ -169,7 +170,7 @@ export const Ol = styled(createTextBase('ol'))`
 Ol.defaultProps = {
   fontSize: 4,
   family: 'body',
-  weight: 400,
+  weight: 2,
   color: 'body',
 }
 
@@ -180,7 +181,7 @@ export const Ul = styled(createTextBase('ul'))`
 Ul.defaultProps = {
   fontSize: 4,
   family: 'body',
-  weight: 400,
+  weight: 2,
   color: 'body',
 }
 
@@ -189,8 +190,15 @@ export const Li = styled(createTextBase('li'))`
   margin: 0;
 `
 
-export const Span = styled(createTextBase('span'))`
+const SpanBase = styled.spanBox``
+
+export const Span = styled(createTextBase(SpanBase))`
   font-size: inherit;
+
+  &[role='button'] {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `
 
 export const Input = styled.input`

@@ -51,13 +51,13 @@ const HeroText = styled.div`
     justify-content: ${getFlexJustification(textPosition)};
     align-items: ${getFlexAlignment(textPosition)};
     text-align: ${textAlign || getTextAlignment(textPosition)};
-    color: ${getColor(textColor)};
+    color: ${getColor(textColor) || 'currentColor'};
 
     ${theme.mediaQueries.mobile} {
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
       text-align: ${getTextAlignment(textPositionMobile)};
-      color: ${getColor(textColorMobile)};
+      color: ${getColor(textColorMobile) || 'currentColor'};
     }
   `}
 `
@@ -135,7 +135,7 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
             <RichText body={bodyRaw} />
             {cta ? (
               <Box mt={5}>
-                <CTA cta={cta} />
+                <CTA level={2} cta={cta} />
               </Box>
             ) : null}
           </TextContainer>

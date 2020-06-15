@@ -44,7 +44,7 @@ export const TextBlock = ({ content }: TextBlockProps) => {
         {bodyRaw ? <RichText body={bodyRaw} /> : null}
         {cta ? (
           <Box mt={5}>
-            <CTA cta={cta} />
+            <CTA level={2} cta={cta} />
           </Box>
         ) : null}
       </TextContainer>

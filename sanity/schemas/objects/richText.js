@@ -54,30 +54,12 @@ export const richText = {
               fontWeight: 400,
             }),
           },
-
-          {
-            title: 'Thin',
-            value: 'thin',
-            blockEditor: createBlockEditorConfig({
-              label: 'Thin',
-              fontWeight: 100,
-            }),
-          },
           {
             title: 'Light',
             value: 'light',
             blockEditor: createBlockEditorConfig({
               label: 'Light',
               fontWeight: 200,
-            }),
-          },
-          {
-            title: 'Book',
-            value: 'book',
-
-            blockEditor: createBlockEditorConfig({
-              label: 'Book',
-              fontWeight: 300,
             }),
           },
           {

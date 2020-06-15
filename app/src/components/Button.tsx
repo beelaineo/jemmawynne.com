@@ -40,7 +40,7 @@ export const Button = styled.buttonBox`
           color: body.5;
           border: none;
           font-size: 6;
-          font-weight: 3;
+          font-weight: 4;
           display: inline;
           width: auto;
           height: auto;
@@ -54,7 +54,7 @@ export const Button = styled.buttonBox`
           padding: 0 0 1 1;
           border-bottom: 2px solid;
           font-size: 6;
-          font-weight: 3;
+          font-weight: 4;
           width: auto;
           height: auto;
         `

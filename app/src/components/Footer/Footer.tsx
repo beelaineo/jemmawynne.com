@@ -26,10 +26,6 @@ import {
 
 const currentYear = new Date().getFullYear()
 
-const AboutText = (props: any) => (
-  <Heading family="serif" level={4} {...props} />
-)
-
 export const Footer = () => {
   const { siteSettings } = useShopData()
   if (!siteSettings) return null
@@ -71,7 +67,7 @@ export const Footer = () => {
         <LogoWrapper>
           <Logo />
         </LogoWrapper>
-        <RichText body={aboutRaw} blockWrapper={AboutText} />
+        <RichText body={aboutRaw} />
       </Company>
       <LinkGroupsWrapper>
         {linkGroups

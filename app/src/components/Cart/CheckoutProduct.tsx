@@ -72,7 +72,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
             </QuantityButton>
           </Heading>
           <RemoveButtonWrapper>
-            <Button level={4} my={0} fontWeight={3} onClick={setQuantity(0)}>
+            <Button level={4} my={0} fontWeight={4} onClick={setQuantity(0)}>
               Remove
             </Button>
           </RemoveButtonWrapper>

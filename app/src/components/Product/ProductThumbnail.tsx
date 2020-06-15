@@ -78,9 +78,9 @@ export const ProductThumbnail = ({
   }
 
   return (
-    <Link href="/products/[productSlug]" as={as}>
-      <a>
-        <ProductThumb>
+    <ProductThumb>
+      <Link href="/products/[productSlug]" as={as}>
+        <a>
           <Image
             ratio={1}
             image={image || productImage}
@@ -91,7 +91,7 @@ export const ProductThumbnail = ({
               mb={3}
               level={7}
               textTransform="uppercase"
-              weight={3}
+              weight={4}
               family="sans"
             >
               {product.title}
@@ -117,8 +117,8 @@ export const ProductThumbnail = ({
               />
             ) : null}
           </ProductInfo>
-        </ProductThumb>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </ProductThumb>
   )
 }

@@ -58,21 +58,6 @@ export const ctaFragment = gql`
   ${internalLinkFragment}
 `
 
-export const textBlockFragment = gql`
-  fragment TextBlockFragment on TextBlock {
-    __typename
-    _key
-    _type
-    header
-    bodyRaw
-    textAlign
-    cta {
-      ...CTAFragment
-    }
-  }
-  ${ctaFragment}
-`
-
 export const shopifySourceImageFragment = gql`
   fragment ShopifySourceImageFragment on ShopifySourceImage {
     __typename
@@ -135,6 +120,31 @@ export const sanityRichImageFragment = gql`
     }
   }
   ${sanityImageAssetFragment}
+`
+
+export const imageTextBlockFragment = gql`
+  fragment ImageTextBlockFragment on ImageTextBlock {
+    __typename
+    _key
+    _type
+    header
+    headerFont
+    bodyRaw
+    backgroundColor
+    textColor
+    textAlign
+    cta {
+      ...CTAFragment
+    }
+    backgroundImage {
+      ...SanityRichImageFragment
+    }
+    hoverImage {
+      ...SanityRichImageFragment
+    }
+  }
+  ${ctaFragment}
+  ${sanityRichImageFragment}
 `
 
 export const shopifySourceProductVariantFragment = gql`
@@ -282,26 +292,6 @@ export const heroFragment = gql`
   }
   ${sanityRichImageFragment}
   ${ctaFragment}
-`
-
-export const imageBlockFragment = gql`
-  fragment ImageBlockFragment on ImageBlock {
-    __typename
-    _key
-    _type
-    backgroundImage {
-      ...SanityRichImageFragment
-    }
-    hoverImage {
-      ...SanityRichImageFragment
-    }
-    captionRaw
-    link {
-      ...InternalLinkFragment
-    }
-  }
-  ${sanityRichImageFragment}
-  ${internalLinkFragment}
 `
 
 export const saneMoneyV2Fragment = gql`

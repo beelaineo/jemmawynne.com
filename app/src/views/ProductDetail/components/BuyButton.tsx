@@ -35,7 +35,7 @@ export const BuyButton = ({ currentVariant, addLineItem, quantity }: Props) => {
     <Button
       disabled={loading || Boolean(!currentVariant)}
       onClick={handleClick}
-      fontWeight={3}
+      fontWeight={4}
     >
       Add to cart
     </Button>

@@ -45,7 +45,7 @@ export const DesktopNav = ({
                     <Heading
                       textTransform="uppercase"
                       family="sans"
-                      fontWeight={3}
+                      fontWeight={4}
                       level={6}
                     >
                       {menuItem.title}
@@ -62,7 +62,7 @@ export const DesktopNav = ({
                         textTransform="uppercase"
                         family="sans"
                         level={6}
-                        fontWeight={3}
+                        fontWeight={4}
                       >
                         {getDocumentLinkLabel(menuItem?.link?.document) || null}
                       </Heading>

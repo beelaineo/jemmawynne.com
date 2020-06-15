@@ -123,18 +123,6 @@
       },
       {
         "kind": "UNION",
-        "name": "ImageBlockOrTextBlock",
-        "possibleTypes": [
-          {
-            "name": "ImageBlock"
-          },
-          {
-            "name": "TextBlock"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
         "name": "BlockOrRichImage",
         "possibleTypes": [
           {

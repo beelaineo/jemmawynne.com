@@ -1,4 +1,3 @@
-import * as React from 'react'
 import styled, { DefaultTheme, css } from '@xstyled/styled-components'
 
 interface PictureProps {

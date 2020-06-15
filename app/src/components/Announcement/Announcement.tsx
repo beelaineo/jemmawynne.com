@@ -130,7 +130,7 @@ export const Announcement = () => {
                 {announcement.cta?.link ? (
                   <DocumentLink document={announcement.cta.link.document}>
                     <Heading
-                      weight={3}
+                      weight={4}
                       mb={0}
                       ml={2}
                       family="sans"
