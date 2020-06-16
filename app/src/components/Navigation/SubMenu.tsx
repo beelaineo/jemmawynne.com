@@ -40,7 +40,7 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
         <Box mt={2} textAlign="center">
           <Heading
             family="sans"
-            weight={3}
+            weight={4}
             textAlign="center"
             level={7}
             textTransform="uppercase"

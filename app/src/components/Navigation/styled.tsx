@@ -358,7 +358,7 @@ export const SubMenuItemWrapper = styled.div`
   flex-basis: 25%;
   margin-bottom: -16px;
 
-  &:last-child {
+  &:last-child:not(:only-child) {
     flex-grow: 1;
   }
   & + & {
@@ -369,6 +369,14 @@ export const SubMenuItemWrapper = styled.div`
 export const ImageWrapper = styled.div`
   flex-basis: 25%;
   position: relative;
+
+  & > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
   & + &,
   ${SubMenuItemWrapper} + & {

@@ -47,6 +47,7 @@ export const collectionQuery = gql`
         _id
         _type
         _key
+        archived
         title
         handle
         shopifyId
