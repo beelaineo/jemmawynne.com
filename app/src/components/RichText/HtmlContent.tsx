@@ -94,10 +94,22 @@ const transform = (node, index) => {
         </a>
       )
     case 'div':
-      return <Box family="serif">{node.childNodes.map(transform)}</Box>
+      return (
+        <Box key={index} family="serif">
+          {node.childNodes.map(transform)}
+        </Box>
+      )
+    case 'meta':
+      return null
+    case 'br':
+      return <br key={index} />
     default:
       console.warn('Did not parse node:', node)
-      return <Box family="serif">{node.childNodes.map(transform)}</Box>
+      return (
+        <Box key={index} family="serif">
+          {node.childNodes.map(transform)}
+        </Box>
+      )
   }
 }
 

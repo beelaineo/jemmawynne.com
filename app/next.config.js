@@ -1,39 +1,34 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack')
+const dotEnv = require('dotenv')
+const bundleAnalyzer = require('@next/bundle-analyzer')
 const withSourceMaps = require('@zeit/next-source-maps')
-const dotenv = require('dotenv')
 
-dotenv.config()
+dotEnv.config()
 
-module.exports = withSourceMaps({
-  env: {
-    SC_DISABLE_SPEEDY: true,
-    KLAVIYO_LIST_ID: process.env.KLAVIYO_LIST_ID,
-    KLAVIYO_API_KEY: process.env.KLAVIYO_API_KEY,
-    SENTRY_DSN: process.env.SENTRY_DSN,
-  },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    //
-    // This option is rarely needed, and should be reserved for advanced
-    // setups. You may be looking for `ignoreDevErrors` instead.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
-
-  webpack: (config, { isServer, buildId }) => {
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
-      }),
-    )
-
-    if (!isServer) {
-      config.resolve.alias['@sentry/node'] = '@sentry/browser'
-    }
-
-    return config
-  },
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
 })
+
+module.exports = withSourceMaps(
+  withBundleAnalyzer({
+    env: {
+      SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
+      SANITY_DATASET: process.env.SANITY_DATASET,
+      SANITY_READ_TOKEN: process.env.SANITY_READ_TOKEN,
+      SENTRY_DSN: process.env.SENTRY_DSN,
+    },
+    webpack: (config, { isServer, buildId }) => {
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
+        }),
+      )
+
+      if (!isServer) {
+        config.resolve.alias['@sentry/node'] = '@sentry/browser'
+      }
+
+      return config
+    },
+  }),
+)

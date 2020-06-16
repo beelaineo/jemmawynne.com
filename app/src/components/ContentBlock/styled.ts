@@ -16,13 +16,18 @@ export const TextWrapper = styled.div`
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    max-width: 400px;
-    margin: 0 auto;
+
+    div {
+      margin: 0 auto;
+      max-width: 400px;
+    }
 
     ${theme.mediaQueries.tablet} {
       position: relative;
       padding: 3 3;
-      max-width: 350px;
+      div {
+        max-width: 350px;
+      }
     }
   `}
 `

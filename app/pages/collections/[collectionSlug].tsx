@@ -10,6 +10,7 @@ import {
   heroFragment,
   shopifySourceImageFragment,
 } from '../../src/graphql'
+import { definitely } from '../../src/utils'
 
 export const collectionQuery = gql`
   query CollectionPageQuery($handle: String) {
@@ -90,27 +91,27 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
  * Static Routes
  */
 
-// const collectionHandlesQuery = gql`
-//   query CollectionHandlesQuery {
-//     allShopifyCollection {
-//       _id
-//       shopifyId
-//       handle
-//     }
-//   }
-// `
+const collectionHandlesQuery = gql`
+  query CollectionHandlesQuery {
+    allShopifyCollection {
+      _id
+      shopifyId
+      handle
+    }
+  }
+`
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const result = await request<CollectionResponse>(collectionHandlesQuery)
-  // const collections = definitely(result?.allShopifyCollection)
-  // const paths = collections.map((collection) => ({
-  //   params: {
-  //     collectionSlug: collection.handle ? collection.handle : undefined,
-  //   },
-  // }))
+  const result = await request<CollectionResponse>(collectionHandlesQuery)
+  const collections = definitely(result?.allShopifyCollection)
+  const paths = collections.map((collection) => ({
+    params: {
+      collectionSlug: collection.handle ? collection.handle : undefined,
+    },
+  }))
 
   return {
-    paths: [],
+    paths,
     fallback: true,
   }
 }

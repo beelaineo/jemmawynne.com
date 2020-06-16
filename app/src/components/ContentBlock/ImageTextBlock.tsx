@@ -50,21 +50,23 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
 
         {header || bodyRaw || cta ? (
           <TextWrapper>
-            {header ? (
-              <Heading
-                level={5}
-                family={headerFont || 'sans'}
-                mb={{ xs: 0, lg: 5 }}
-              >
-                {header}
-              </Heading>
-            ) : null}
-            {bodyRaw ? <RichText body={bodyRaw} /> : null}
-            {cta ? (
-              <Box mt={{ lg: 5 }}>
-                <CTA level={2} cta={cta} />
-              </Box>
-            ) : null}
+            <div>
+              {header ? (
+                <Heading
+                  level={5}
+                  family={headerFont || 'sans'}
+                  mb={{ xs: 0, lg: 5 }}
+                >
+                  {header}
+                </Heading>
+              ) : null}
+              {bodyRaw ? <RichText body={bodyRaw} /> : null}
+              {cta ? (
+                <Box mt={{ lg: 5 }}>
+                  <CTA level={2} cta={cta} />
+                </Box>
+              ) : null}
+            </div>
           </TextWrapper>
         ) : null}
       </Wrapper>

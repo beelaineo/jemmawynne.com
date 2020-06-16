@@ -9,12 +9,15 @@ import {
   requestShopData,
 } from '../../src/graphql'
 import { NotFound, ProductDetail } from '../../src/views'
+import { definitely } from '../../src/utils'
 
 interface ProductProps {
   product?: ShopifyProduct
+  updatedAt: string
 }
 
-const Product = ({ product }: ProductProps) => {
+const Product = ({ product, updatedAt }: ProductProps) => {
+  const timeString = new Date(updatedAt).toLocaleTimeString()
   if (!product) return <NotFound />
   return <ProductDetail key={product._id || 'some-key'} product={product} />
 }
@@ -63,31 +66,45 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const products = response?.allShopifyProduct
 
   const product = products && products.length ? products[0] : null
-  return { props: { product, shopData }, unstable_revalidate: 60 }
+  return {
+    props: {
+      product,
+      shopData,
+      updatedAt: Date.now(),
+    },
+    unstable_revalidate: 60,
+  }
 }
 
 /**
  * Static Paths
  */
-// const pageHandlesQuery = gql`
-//   query ProductHandlesQuery {
-//     allShopifyProduct {
-//       _id
-//       shopifyId
-//       handle
-//     }
-//   }
-// `
+const pageHandlesQuery = gql`
+  query ProductHandlesQuery {
+    allShopifyProduct(
+      where: { shopifyId: { neq: null }, archived: { neq: true } }
+    ) {
+      archived
+      _id
+      shopifyId
+      handle
+    }
+  }
+`
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const result = await request<Response>(pageHandlesQuery)
-  // const products = definitely(result?.allShopifyProduct)
-  // const paths = products.map((product) => ({
-  //   params: { productSlug: product.handle ? product.handle : undefined },
-  // }))
+  const result = await request<ProductResponse>(pageHandlesQuery)
+  const products = definitely(result?.allShopifyProduct)
+  console.log(products.length)
+  products.forEach((product) => {
+    if (!product?.shopifyId) throw new Error('Sorry')
+  })
+  const paths = products.map((product) => ({
+    params: { productSlug: product.handle ? product.handle : undefined },
+  }))
 
   return {
-    paths: [],
+    paths: paths,
     fallback: true,
   }
 }

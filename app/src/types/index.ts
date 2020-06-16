@@ -1,5 +1,26 @@
-import { Image, Scalars, Maybe } from './generated-sanity'
+import {
+  SanityImageCrop,
+  SanityImageHotspot,
+  Image,
+  Scalars,
+  Maybe,
+} from './generated-sanity'
 
+/**
+ * Used for images returned from a raw JSON (rich text) object
+ */
+export interface SanityRawImage {
+  __typename: void
+  _key: string
+  _type: 'richImage' | 'image'
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+  crop: SanityImageCrop
+  hotspot: SanityImageHotspot
+  altText?: string
+}
 export * from './generated-shopify'
 // @ts-ignore
 export * from './generated-sanity'

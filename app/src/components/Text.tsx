@@ -33,6 +33,7 @@ const getCustomTextStyles = ({
   font-weight: ${weight};
   font-style: ${fontStyle};
   color: ${color};
+  letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
   text-transform: ${family === 'sans' ? 'uppercase' : 'none'};
   text-decoration: ${textDecoration};
   ${theme.mediaQueries.tablet} {
@@ -134,7 +135,7 @@ export const P = ({ children, color, family, weight, htmlFor }: PProps) => {
 P.defaultProps = {
   family: 'body',
   weight: 2,
-  color: 'body',
+  color: 'body.9',
 }
 
 interface LabelProps {

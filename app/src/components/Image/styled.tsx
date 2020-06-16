@@ -1,9 +1,27 @@
 import styled, { DefaultTheme, css } from '@xstyled/styled-components'
 
-interface PictureProps {
-  theme: DefaultTheme
-  loaded: boolean
-}
+export const MainImage = styled.img``
+
+export const HoverImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.3s;
+`
+
+export const PreloadWrapper = styled.div`
+  position: fixed;
+  top: -500;
+  left: -500;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -100;
+`
 
 export const Wrapper = styled.div`
   position: relative;
@@ -30,24 +48,26 @@ export const HoverImageWrapper = styled.div`
     object-position: center;
   }
 `
+interface PictureProps {
+  theme: DefaultTheme
+  loaded: boolean
+  objectFit?: string
+}
 
 export const Picture = styled.picture`
-  ${({ loaded }: PictureProps) => css`
+  ${({ loaded, objectFit }: PictureProps) => css`
     max-height: 100%;
+    max-width: 100%;
     width: auto;
     background-color: transparent;
     display: block;
 
-    &:hover ${HoverImageWrapper} {
-      opacity: 1;
-    }
-
-    & > img {
-      opacity: ${loaded ? '1' : '0'};
+    & > ${MainImage} {
+      opacity: ${loaded ? 1 : 0};
       transition: 0.3s;
       transition-delay: 0.3s;
       max-width: 100%;
-      object-fit: cover;
+      object-fit: ${objectFit || 'cover'};
     }
   `}
 `
@@ -65,12 +85,16 @@ export const ImageFillWrapper = styled.div`
     object-position: center;
   }
 `
-
-export const RatioImageFill = styled.img`
+export const RatioImageFill = styled.div`
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+  & + picture > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 `
