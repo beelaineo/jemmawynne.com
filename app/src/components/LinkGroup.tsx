@@ -37,7 +37,10 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
       <LinksWrapper>
         {links && links.length
           ? links.map((menuLink) =>
-              menuLink && menuLink.document ? (
+              menuLink &&
+              menuLink.document &&
+              // @ts-ignore
+              menuLink.document?.archived !== true ? (
                 <Heading
                   family="sans"
                   level={7}

@@ -19,6 +19,7 @@ import { Image } from '../../components/Image'
 import { DocumentLink } from '../../components/DocumentLink'
 import { Heading } from '../../components/Text'
 import { getDocumentLinkImage } from '../../utils/links'
+import { definitely } from '../../utils'
 
 const { useState } = React
 
@@ -30,6 +31,7 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
   const { image: customImage, hoverImage } = link
   const image = customImage ?? getDocumentLinkImage(link.document)
   const linkTitle = link.title || link?.document?.title || null
+  console.log(link.document)
 
   return (
     <ImageLinkWrapper>
@@ -67,6 +69,7 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
 
   if (!activeSection) return null
   if (!columns) return null
+  console.log(columns)
 
   return (
     <SubMenuWrapper>
@@ -94,21 +97,19 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
               key={column._key || 'some-key'}
               aria-hidden={!(column._key === activeSection)}
             >
-              {column.links
-                ? column.links.map((link) =>
-                    link ? (
-                      link.__typename === 'RichPageLink' ? (
-                        <SubMenuItemWrapper key={link._key || 'some-key'}>
-                          <ImageLink link={link} />
-                        </SubMenuItemWrapper>
-                      ) : link.__typename === 'LinkGroup' ? (
-                        <SubMenuItemWrapper key={link._key || 'some-key'}>
-                          <LinkGroup linkGroup={link} />
-                        </SubMenuItemWrapper>
-                      ) : null
-                    ) : null,
-                  )
-                : null}
+              {definitely(column.links).map((link) =>
+                link.__typename === 'RichPageLink' &&
+                // @ts-ignore
+                link?.document?.archived !== true ? (
+                  <SubMenuItemWrapper key={link._key || 'some-key'}>
+                    <ImageLink link={link} />
+                  </SubMenuItemWrapper>
+                ) : link.__typename === 'LinkGroup' ? (
+                  <SubMenuItemWrapper key={link._key || 'some-key'}>
+                    <LinkGroup linkGroup={link} />
+                  </SubMenuItemWrapper>
+                ) : null,
+              )}
               {column.images
                 ? column.images.map((image, index) =>
                     image ? (

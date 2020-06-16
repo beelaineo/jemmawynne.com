@@ -15,7 +15,11 @@ import { definitely } from '../../src/utils'
 export const collectionQuery = gql`
   query CollectionPageQuery($handle: String) {
     allShopifyCollection(
-      where: { handle: { eq: $handle }, archived: { neq: true } }
+      where: {
+        shopifyId: { neq: null }
+        handle: { eq: $handle }
+        archived: { neq: true }
+      }
     ) {
       _id
       _type
@@ -93,7 +97,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 const collectionHandlesQuery = gql`
   query CollectionHandlesQuery {
-    allShopifyCollection {
+    allShopifyCollection(
+      where: { shopifyId: { neq: null }, archived: { neq: true } }
+    ) {
       _id
       shopifyId
       handle

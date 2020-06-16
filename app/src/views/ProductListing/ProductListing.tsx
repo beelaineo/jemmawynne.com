@@ -6,6 +6,7 @@ import { ProductListingHeader } from './ProductListingHeader'
 import { ItemGrid } from '../../components/ItemGrid'
 import { Heading } from '../../components/Text'
 import { Hr, CollectionsMain, CollectionsMenu } from './styled'
+import { definitely } from '../../utils'
 
 interface ProductListingProps {
   collection: ShopifyCollection
@@ -27,8 +28,8 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
               Collections
             </Heading>
             <Hr />
-            {relatedCollections.map((rc) =>
-              rc ? (
+            {definitely(relatedCollections).map((rc) =>
+              rc.archived !== true ? (
                 <Heading
                   key={rc.handle || 'some-key'}
                   mt={5}

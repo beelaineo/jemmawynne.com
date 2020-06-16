@@ -19,12 +19,14 @@ export const internalLinkFragment = gql`
         _type
         title
         handle
+        archived
       }
       ... on ShopifyCollection {
         _key
         _type
         title
         handle
+        archived
       }
       ... on Stockists {
         _key
@@ -376,6 +378,7 @@ export const saneShopifyProductFragment = gql`
     _id
     _type
     _key
+    archived
     title
     handle
     shopifyId
@@ -435,6 +438,7 @@ export const saneShopifyProductFragment = gql`
 export const saneShopifyCollectionFragment = gql`
   fragment SaneShopifyCollectionFragment on ShopifyCollection {
     __typename
+    archived
     _id
     _type
     _key

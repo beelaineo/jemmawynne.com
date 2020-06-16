@@ -16,8 +16,7 @@ interface ProductProps {
   updatedAt: string
 }
 
-const Product = ({ product, updatedAt }: ProductProps) => {
-  const timeString = new Date(updatedAt).toLocaleTimeString()
+const Product = ({ product }: ProductProps) => {
   if (!product) return <NotFound />
   return <ProductDetail key={product._id || 'some-key'} product={product} />
 }
@@ -25,7 +24,11 @@ const Product = ({ product, updatedAt }: ProductProps) => {
 const productQuery = gql`
   query ProductPageQuery($handle: String) {
     allShopifyProduct(
-      where: { handle: { eq: $handle }, archived: { neq: true } }
+      where: {
+        shopifyId: { neq: null }
+        handle: { eq: $handle }
+        archived: { neq: true }
+      }
     ) {
       ...SaneShopifyProductFragment
       collections {
@@ -70,7 +73,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       product,
       shopData,
-      updatedAt: Date.now(),
     },
     unstable_revalidate: 60,
   }

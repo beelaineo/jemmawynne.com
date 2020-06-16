@@ -3,6 +3,7 @@ import { LinkGroup as LinkGroupType } from '../../types'
 import { DocumentLink } from '../DocumentLink'
 import { Heading } from '../Text'
 import { FooterLinkGroupWrapper, LinksWrapper } from './styled'
+import { definitely } from '../../utils'
 
 interface FooterLinkGroupProps {
   linkGroup: LinkGroupType
@@ -16,20 +17,20 @@ export const FooterLinkGroup = ({ linkGroup }: FooterLinkGroupProps) => {
         {title}
       </Heading>
       <LinksWrapper>
-        {links && links.length
-          ? links.map((menuLink) =>
-              menuLink && menuLink.document ? (
-                <Heading
-                  family="serif"
-                  level={4}
-                  weight={2}
-                  key={menuLink._key || 'some-key'}
-                >
-                  <DocumentLink document={menuLink.document} />
-                </Heading>
-              ) : null,
-            )
-          : null}
+        {definitely(links).map((menuLink) =>
+          menuLink.document &&
+          // @ts-ignore
+          menuLink.document?.archived !== true ? (
+            <Heading
+              family="serif"
+              level={4}
+              weight={2}
+              key={menuLink._key || 'some-key'}
+            >
+              <DocumentLink document={menuLink.document} />
+            </Heading>
+          ) : null,
+        )}
       </LinksWrapper>
     </FooterLinkGroupWrapper>
   )
