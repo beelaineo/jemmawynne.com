@@ -1,7 +1,7 @@
 import * as React from 'react'
 import App, { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
-import { SearchResults } from '../src/components/Search'
+import { SearchPane } from '../src/components/Search'
 import { Navigation } from '../src/components/Navigation'
 import { Footer } from '../src/components/Footer'
 import { Announcement } from '../src/components/Announcement'
@@ -43,7 +43,7 @@ class MyApp extends App<AppProps> {
             <main id="main">
               <Announcement />
               <Navigation router={router} />
-              <SearchResults />
+              <SearchPane />
               <ErrorWrapper>
                 <Component {...pageProps} />
               </ErrorWrapper>

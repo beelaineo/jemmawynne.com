@@ -181,9 +181,7 @@ export const CartButton = styled.button`
     position: relative;
     opacity: ${disabled ? '0.6' : '1'};
     pointer-events: ${disabled ? 'none' : 'inherit'};
-    display: flex;
     font-size: 2;
-    align-items: center;
     min-width: 18px;
     height: 18px;
     display: flex;
