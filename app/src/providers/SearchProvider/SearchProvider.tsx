@@ -6,7 +6,7 @@ import {
   SearchResult,
 } from './reducer'
 import { useSanityQuery } from '../../hooks'
-import { searchQuery } from './searchQuery'
+import { searchQuery } from './query'
 
 type SearchContextValue = SearchState &
   Pick<
