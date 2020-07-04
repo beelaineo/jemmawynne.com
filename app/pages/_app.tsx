@@ -6,7 +6,7 @@ import { Navigation } from '../src/components/Navigation'
 import { Footer } from '../src/components/Footer'
 import { Announcement } from '../src/components/Announcement'
 import { Providers } from '../src/providers/AllProviders'
-import { ErrorProvider, ErrorWrapper } from '../src/providers/ErrorProvider'
+import { ErrorProvider, ErrorDisplay } from '../src/providers/ErrorProvider'
 import Sentry from '../src/services/sentry'
 
 interface Props {
@@ -44,9 +44,8 @@ class MyApp extends App<AppProps> {
               <Announcement />
               <Navigation router={router} />
               <SearchPane />
-              <ErrorWrapper>
-                <Component {...pageProps} />
-              </ErrorWrapper>
+              <ErrorDisplay />
+              <Component {...pageProps} />
               <Footer />
             </main>
             <div id="modal" />

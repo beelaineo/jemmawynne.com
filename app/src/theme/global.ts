@@ -23,6 +23,10 @@ export const GlobalStyles = createGlobalStyle`
 		overflow-x: hidden;
 	}
 
+  pre {
+    margin: 0;
+  }
+
 	button, input, select, option, textarea {
 		background: white;
 		font-weight: 300;

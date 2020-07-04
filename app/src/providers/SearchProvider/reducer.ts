@@ -6,7 +6,7 @@ export type SearchResult = ShopifyProduct | ShopifyCollection
 enum ActionTypes {
   OPEN = 'open',
   CLOSE = 'close',
-  SEARCH = 'search',
+  START_SEARCH = 'startSearch',
   SUCCESS = 'success',
   RESET = 'reset',
   ERROR = 'error',
@@ -32,8 +32,7 @@ interface ResetAction {
 }
 
 interface SearchAction {
-  type: ActionTypes.SEARCH
-  searchTerm?: string
+  type: ActionTypes.START_SEARCH
 }
 
 interface SuccessAction {
@@ -78,12 +77,11 @@ const reducer = (state: SearchState, action: Action): SearchState => {
       }
     case ActionTypes.RESET:
       return initialSearchState
-    case ActionTypes.SEARCH:
+    case ActionTypes.START_SEARCH:
       return {
         ...state,
         open: true,
         loading: true,
-        searchTerm: action.searchTerm ? action.searchTerm : state.searchTerm,
       }
     case ActionTypes.SUCCESS:
       return {
@@ -122,7 +120,7 @@ export interface SearchActions {
   closeSearch: () => void
   reset: () => void
   setSearchTerm: (searchTerm?: string) => void
-  search: (searchTerm?: string) => void
+  startSearch: () => void
   onError: (errorMessage: string) => void
   onSuccess: (searchResults: SearchResult[]) => void
 }
@@ -136,8 +134,7 @@ export const useSearchReducer = () => {
   const setSearchTerm = (searchTerm?: string) =>
     dispatch({ type: ActionTypes.SET_TERM, searchTerm })
   const reset = () => dispatch({ type: ActionTypes.RESET })
-  const search = (searchTerm?: string) =>
-    dispatch({ type: ActionTypes.SEARCH, searchTerm })
+  const startSearch = () => dispatch({ type: ActionTypes.START_SEARCH })
   const onError = (errorMessage: string) =>
     dispatch({ type: ActionTypes.ERROR, errorMessage })
   const onSuccess = (searchResults: SearchResult[]) =>
@@ -148,7 +145,7 @@ export const useSearchReducer = () => {
     closeSearch,
     setSearchTerm,
     reset,
-    search,
+    startSearch,
     onError,
     onSuccess,
   }

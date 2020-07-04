@@ -1,10 +1,13 @@
 import * as React from 'react'
 import Sentry from '../../services/sentry'
+import { useErrorReducer } from './reducer'
+import { parseError } from './parseError'
 
-const { useState, useEffect } = React
+const { useEffect } = React
 
 interface ErrorContextValue {
-  errorMessage: string | undefined
+  errorMessage: string | React.ReactNode | undefined
+  isFatal?: boolean
   handleError: (error: Error) => void
   clearError: () => void
 }
@@ -27,42 +30,37 @@ interface ErrorProps {
   error?: Error
 }
 
-const getErrorMessage = (error: Error): string => {
-  if ('networkError' in error || 'graphQLErrors' in error) {
-    return 'Sorry, there was a problem connecting to our servers. Our engineers have been notified.'
-  }
-  return 'Sorry, there was an error loading this page. Our engineers have been notified.'
-}
+export const ErrorProvider = ({ children, error: parentError }: ErrorProps) => {
+  const [state, actions] = useErrorReducer()
+  const { errorMessage, isFatal } = state
+  const { setError, reset } = actions
 
-export const ErrorProvider = ({ children, error }: ErrorProps) => {
-  const initialMessage = error ? getErrorMessage(error) : undefined
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(
-    initialMessage,
-  )
+  /* Handle errors coming in from the parent (typically _app.tsx) */
+  useEffect(() => {
+    if (parentError) {
+      setError(parseError(parentError))
+    } else {
+      reset()
+    }
+  }, [parentError])
 
   const handleError = (error: Error, scope?: any) => {
-    const message = getErrorMessage(error)
+    const args = parseError(error)
     console.error(error)
-    if (scope) {
-      Sentry.configureScope(scope)
-    }
-    Sentry.captureException(error)
-    setErrorMessage(message)
-  }
-  const clearError = () => setErrorMessage(undefined)
 
-  useEffect(() => {
-    if (error) {
-      handleError(error)
-    } else {
-      setErrorMessage(undefined)
+    if (args.isFatal) {
+      if (scope) Sentry.configureScope(scope)
+
+      Sentry.captureException(error)
     }
-  }, [error])
+    setError(args)
+  }
 
   const value = {
     errorMessage,
+    isFatal,
     handleError,
-    clearError,
+    clearError: reset,
   }
 
   return <ErrorContext.Provider value={value}>{children}</ErrorContext.Provider>

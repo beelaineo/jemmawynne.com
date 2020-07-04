@@ -2,6 +2,7 @@ import { useReducer, useState } from 'react'
 import type { SanityClient } from '@sanity/client'
 import type { Reducer } from 'react'
 import { withTypenames } from './withTypenames'
+import { useError } from '../../providers/ErrorProvider'
 
 const RESET = 'RESET'
 const SUCCESS = 'SUCCESS'
@@ -65,9 +66,10 @@ type Response = Document[]
 type Variables = { [key: string]: any }
 
 export const useSanityQuery = <
-  R extends Document,
+  R extends Response = Response,
   V extends Variables = Variables
 >() => {
+  const { handleError } = useError()
   const [sanityClient, setSanityClient] = useState<SanityClient | null>(null)
   const [state, dispatch] = useReducer<Reducer<State<R>, Action<R>>>(
     reducer,
@@ -84,19 +86,24 @@ export const useSanityQuery = <
 
   const reset = () => dispatch({ type: RESET })
 
-  const executeQuery = async (query: string, customParams: V) => {
+  const query = async (query: string, customParams: V) => {
     dispatch({ type: FETCH })
     const client = await fetchOrGetClient()
     const params = customParams ? customParams : {}
-    const results = await client.fetch<R>(query, params)
-    // @ts-ignore ???
-    const r = withTypenames<R>(results)
-    dispatch({ type: SUCCESS, results: r })
+    try {
+      const results = await client.fetch<R>(query, params)
+      // @ts-ignore ???
+      const r = withTypenames<R>(results)
+      dispatch({ type: SUCCESS, results: r })
+    } catch (err) {
+      console.log('caught', err)
+      handleError(err)
+    }
   }
 
   return {
     state,
     reset,
-    executeQuery,
+    query,
   }
 }

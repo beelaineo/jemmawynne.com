@@ -1,2 +1,2 @@
 export * from './ErrorProvider'
-export * from './ErrorWrapper'
+export * from './ErrorDisplay'
