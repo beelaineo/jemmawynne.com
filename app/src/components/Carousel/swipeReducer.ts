@@ -88,7 +88,6 @@ export const useSwipeReducer = (element: HTMLElement | null) => {
   }
 
   const stopAnchorClick = (e: MouseEvent) => {
-    console.log('stop')
     e.preventDefault()
   }
 

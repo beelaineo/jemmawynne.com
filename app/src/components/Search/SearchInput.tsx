@@ -1,34 +1,26 @@
 import * as React from 'react'
-import { Formik, Field as FormikField } from 'formik'
 import { SearchForm, SearchInputWrapper, StyledSearchInput } from './styled'
 import { Button } from '../Button'
+import { useSearch } from '../../providers/SearchProvider'
 
-interface SearchInputProps {
-  handleSubmit: (values: any) => void
-  searchTerm?: string
-  /* */
-}
-
-export const SearchInput = ({ handleSubmit, searchTerm }: SearchInputProps) => {
-  const initialValues = {
-    searchTerm: searchTerm || '',
+export const SearchInput = () => {
+  const { loading, search, searchTerm, setSearchTerm } = useSearch()
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    search()
   }
   return (
     <SearchInputWrapper>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ handleSubmit: formikHandleSubmit }) => (
-          <SearchForm onSubmit={formikHandleSubmit}>
-            <FormikField name="searchTerm">
-              {({ field }) => (
-                <StyledSearchInput name="searchTerm" {...field} />
-              )}
-            </FormikField>
-            <Button level={1} type="submit">
-              Search
-            </Button>
-          </SearchForm>
-        )}
-      </Formik>
+      <SearchForm disabled={loading} onSubmit={handleSubmit}>
+        <StyledSearchInput
+          name="searchTerm"
+          value={searchTerm}
+          onChange={setSearchTerm}
+        />
+        <Button level={1} disabled={loading} type="submit">
+          Search
+        </Button>
+      </SearchForm>
     </SearchInputWrapper>
   )
 }

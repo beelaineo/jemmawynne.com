@@ -8,13 +8,13 @@ export const searchQuery = `
     defined(shopifyId)
   && 
   (
-    [title, sourceData.description] match "$searchTerm"
+    [title, sourceData.description] match $searchTerm
     ||
-    sourceData.productType == "$searchTerm"
+    sourceData.productType == $searchTerm
     ||
-    "$searchTerm" in sourceData.options[].value
+    $searchTerm in sourceData.options[].value
     || 
-    "$searchTerm" in sourceData.tags
+    $searchTerm in sourceData.tags
   )
 ] {
   ...

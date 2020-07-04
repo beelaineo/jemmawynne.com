@@ -31,7 +31,6 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
   const { image: customImage, hoverImage } = link
   const image = customImage ?? getDocumentLinkImage(link.document)
   const linkTitle = link.title || link?.document?.title || null
-  console.log(link.document)
 
   return (
     <ImageLinkWrapper>
@@ -69,7 +68,6 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
 
   if (!activeSection) return null
   if (!columns) return null
-  console.log(columns)
 
   return (
     <SubMenuWrapper>

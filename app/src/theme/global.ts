@@ -1,4 +1,4 @@
-import { createGlobalStyle } from '@xstyled/styled-components'
+import { css, createGlobalStyle } from '@xstyled/styled-components'
 import normalized from './normalized'
 
 export const GlobalStyles = createGlobalStyle`
@@ -26,6 +26,38 @@ export const GlobalStyles = createGlobalStyle`
   pre {
     margin: 0;
   }
+
+  h1 {font-size: 1; }
+  h2 { font-size: 2; }
+  h3 { font-size: 3; }
+  p, h4 { font-size: 4; }
+  h5 { font-size: 5; }
+  h6 { font-size: 6; }
+
+  ${({ theme }) => css`
+    ${theme.mediaQueries.mobile} {
+      h1 {
+        font-size: ${theme.mobileFontSizes[1]};
+      }
+      h2 {
+        font-size: ${theme.mobileFontSizes[2]};
+      }
+      h3 {
+        font-size: ${theme.mobileFontSizes[3]};
+      }
+      p,
+      h4 {
+        font-size: ${theme.mobileFontSizes[4]};
+      }
+      h5 {
+        font-size: ${theme.mobileFontSizes[5]};
+      }
+      h6 {
+        font-size: ${theme.mobileFontSizes[6]};
+      }
+    }
+  `}
+
 
 	button, input, select, option, textarea {
 		background: white;

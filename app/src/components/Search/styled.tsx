@@ -17,20 +17,20 @@ export const Outer = styled.div`
 
 export const Wrapper = styled.div<WithVisible>`
   ${({ theme, visible }) => css`
-    background-color: body.1;
     position: absolute;
+    background-color: body.1;
     z-index: calc(${theme.zIndices.nav} - 1);
     top: 0px;
     left: 0;
     padding-top: 6;
     width: 100%;
-    min-height: calc(100vh - 50px);
+    height: calc(100vh - 42px);
     overflow: scroll;
     text-align: center;
     opacity: ${visible ? 1 : 0};
     pointer-events: ${visible ? 'inherit' : 'none'};
     transition: 0.3s ease-out;
-    transform: ${visible ? 'none' : 'translateY(-50px)'};
+    transform: ${visible ? 'none' : 'translateY(-10px)'};
   `}
 `
 
@@ -42,11 +42,20 @@ export const SearchInputWrapper = styled.div`
   `}
 `
 
-export const SearchForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+interface WithDisabled {
+  disabled: boolean
+}
+
+export const SearchForm = styled.form<WithDisabled>`
+  ${({ disabled }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    opacity: ${disabled ? 0.7 : 1};
+    pointer-events: ${disabled ? 'none' : 'inherit'};
+  `}
 `
 
 export const SearchHeader = styled.div`
@@ -54,12 +63,17 @@ export const SearchHeader = styled.div`
 `
 
 export const CloseButton = styled(Button)`
-  position: absolute;
-  right: 7;
-  top: 3;
+  ${({ theme }) => css`
+    position: absolute;
+    right: ${theme.space[3]}px;
+    top: ${theme.space[2]}px;
+  `}
 `
 
-export const Results = styled.div``
+export const Results = styled.div`
+  background-color: body.0;
+  padding: 3 0 8;
+`
 
 export const StyledSearchInput = styled(Input)`
   font-size: 1;

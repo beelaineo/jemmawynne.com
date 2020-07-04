@@ -119,7 +119,9 @@ export interface SearchActions {
   openSearch: (searchTerm?: string) => void
   closeSearch: () => void
   reset: () => void
-  setSearchTerm: (searchTerm?: string) => void
+  setSearchTerm: (
+    searchTerm?: string | React.ChangeEvent<HTMLInputElement>,
+  ) => void
   startSearch: () => void
   onError: (errorMessage: string) => void
   onSuccess: (searchResults: SearchResult[]) => void
@@ -131,8 +133,17 @@ export const useSearchReducer = () => {
   const openSearch = (searchTerm?: string) =>
     dispatch({ type: ActionTypes.OPEN, searchTerm })
   const closeSearch = () => dispatch({ type: ActionTypes.CLOSE })
-  const setSearchTerm = (searchTerm?: string) =>
+  const setSearchTerm = (
+    input?: string | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const searchTerm =
+      input === undefined
+        ? ''
+        : typeof input === 'string'
+        ? input
+        : input.target.value
     dispatch({ type: ActionTypes.SET_TERM, searchTerm })
+  }
   const reset = () => dispatch({ type: ActionTypes.RESET })
   const startSearch = () => dispatch({ type: ActionTypes.START_SEARCH })
   const onError = (errorMessage: string) =>

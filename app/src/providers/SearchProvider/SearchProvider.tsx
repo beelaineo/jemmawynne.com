@@ -1,11 +1,20 @@
 import * as React from 'react'
-import { SearchState, SearchActions, useSearchReducer } from './reducer'
+import {
+  SearchState,
+  SearchActions,
+  useSearchReducer,
+  SearchResult,
+} from './reducer'
 import { useSanityQuery } from '../../hooks'
 import { searchQuery } from './searchQuery'
 
-type SearchContextValue = Omit<SearchState & SearchActions, 'startSearch'> & {
-  search: (searchTerm?: string) => Promise<void>
-}
+type SearchContextValue = SearchState &
+  Pick<
+    SearchActions,
+    'reset' | 'openSearch' | 'closeSearch' | 'setSearchTerm'
+  > & {
+    search: (searchTerm?: string) => Promise<void>
+  }
 
 const SearchContext = React.createContext<SearchContextValue | undefined>(
   undefined,
@@ -26,7 +35,7 @@ interface SearchProps {
 
 export const SearchProvider = ({ children }: SearchProps) => {
   const { state, actions } = useSearchReducer()
-  const { startSearch, ...publicActions } = actions
+  const { startSearch, onSuccess, onError, ...publicActions } = actions
   const { query } = useSanityQuery()
 
   const search = async (newSearchTerm?: string): Promise<void> => {
@@ -37,9 +46,9 @@ export const SearchProvider = ({ children }: SearchProps) => {
     startSearch()
 
     const params = { searchTerm: searchTerm.replace(/\s/, '* ') }
-    console.log(params)
-    const result = await query(searchQuery, params)
-    console.log(result)
+    const results = await query<SearchResult[]>(searchQuery, params)
+    console.log({ results })
+    onSuccess(results || [])
   }
 
   const value: SearchContextValue = {

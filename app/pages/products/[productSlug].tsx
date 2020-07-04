@@ -97,7 +97,6 @@ const pageHandlesQuery = gql`
 export const getStaticPaths: GetStaticPaths = async () => {
   const result = await request<ProductResponse>(pageHandlesQuery)
   const products = definitely(result?.allShopifyProduct)
-  console.log(products.length)
   products.forEach((product) => {
     if (!product?.shopifyId) throw new Error('Sorry')
   })

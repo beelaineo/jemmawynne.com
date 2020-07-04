@@ -25,10 +25,7 @@ const getCustomTextStyles = ({
   fontStyle,
   textDecoration,
   weight,
-  level,
-  theme,
 }: CustomTextProps) => css`
-  font-size: ${level};
   font-family: ${family};
   font-weight: ${weight};
   font-style: ${fontStyle};
@@ -36,13 +33,6 @@ const getCustomTextStyles = ({
   letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
   text-transform: ${family === 'sans' ? 'uppercase' : 'none'};
   text-decoration: ${textDecoration};
-  ${theme.mediaQueries.tablet} {
-    ${level !== undefined
-      ? css`
-          font-size: ${theme.mobileFontSizes[level]}px;
-        `
-      : ''}
-  }
 `
 
 const createTextBase = (as: any) => styled(as)`
@@ -147,7 +137,7 @@ const LabelBase = createTextBase('label')
 
 export const Label = styled(LabelBase)`
   margin-bottom: 0;
-
+  font-size: 5;
   letter-spacing: 0.25em;
 `
 
@@ -161,7 +151,7 @@ export const BlockQuote = styled.blockquote``
 
 const listStyles = css`
   margin: 3 0;
-  padding-left: 2em;
+  padding-left: 5;
 `
 
 export const Ol = styled(createTextBase('ol'))`

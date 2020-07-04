@@ -1,42 +1,54 @@
 import * as React from 'react'
+import { useRouter } from 'next/router'
 import { Column } from '../Layout'
 import { Heading } from '../Text'
 import { ItemGrid } from '../ItemGrid'
+import { Button } from '../Button'
+import { useLockScroll } from '../LockScroll'
 import { useSearch } from '../../providers/SearchProvider'
 import { SearchInput } from './SearchInput'
 import { Outer, CloseButton, SearchHeader, Results, Wrapper } from './styled'
+import { Footer } from '../Footer'
 
 const { useEffect } = React
 
 export const SearchPane = () => {
   const {
-    searchTerm,
     open,
-    openSearch,
     loading,
     errorMessage,
     searchResults,
+    openSearch,
     reset,
-    search,
     closeSearch,
   } = useSearch()
-  console.log(open, searchTerm)
+  const { lockScroll, unlockScroll } = useLockScroll()
+  const { asPath } = useRouter()
 
   /* Handlers */
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    search()
-  }
 
   const close = () => {
     closeSearch()
     reset()
   }
 
+  useEffect(() => {
+    closeSearch()
+  }, [asPath])
+
+  useEffect(() => {
+    if (open) {
+      lockScroll()
+    } else {
+      unlockScroll()
+    }
+  }, [open])
+
   /** Effects */
   useEffect(() => {
     // Open the view on a new search
+    // This could happen if the search is triggered from outside of
+    // this component
     if (!open && loading) openSearch()
   }, [loading])
 
@@ -44,7 +56,7 @@ export const SearchPane = () => {
     ? `Found ${searchResults.length} result${
         searchResults.length === 1 ? '' : 's'
       }`
-    : ''
+    : undefined
 
   return (
     <Outer>
@@ -54,8 +66,8 @@ export const SearchPane = () => {
         </CloseButton>
 
         <SearchHeader>
-          <Column width="medium">
-            <SearchInput searchTerm={searchTerm} handleSubmit={handleSubmit} />
+          <Column maxWidth="medium">
+            <SearchInput />
           </Column>
         </SearchHeader>
         {searchResults === undefined ? null : (
@@ -68,12 +80,21 @@ export const SearchPane = () => {
               <Heading level={2}>Sorry, there were no search results.</Heading>
             ) : (
               <>
-                <Heading level={5}>{countMessage}</Heading>
+                {countMessage ? (
+                  <Heading mt={3} fontStyle="italic" level={5}>
+                    {countMessage}
+                  </Heading>
+                ) : null}
+
                 <ItemGrid items={searchResults} />
+                <Button onClick={close} level={3}>
+                  Close
+                </Button>
               </>
             )}
           </Results>
         )}
+        <Footer />
       </Wrapper>
     </Outer>
   )
