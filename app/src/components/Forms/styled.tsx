@@ -9,7 +9,7 @@ export const Select = styled.select`
   background: none;
   padding: 0 3 0 2;
   font-family: sans;
-  font-weight: 3;
+  font-weight: 4;
   appearance: none;
   letter-spacing: 0.25em;
   color: body.9;

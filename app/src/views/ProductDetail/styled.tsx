@@ -12,7 +12,7 @@ export const ProductDetails = styled.div`
   ${({ theme }) => css`
     max-width: xxWide;
     margin: 0 auto;
-    padding: 0 6;
+    padding: 0 6 6;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 7;
@@ -67,6 +67,7 @@ export const SwatchWrapper = styled.div`
 
 export const SwatchLabelWrapper = styled.div`
   display: flex;
+  align-items: center;
   > label {
     margin-right: 2;
   }

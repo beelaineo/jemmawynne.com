@@ -97,7 +97,7 @@ const OptionSelector = ({
           <SwatchLabelWrapper>
             <Label
               fontSize={6}
-              weight={3}
+              fontWeight={4}
               mr={2}
               color="body.5"
               textTransform="uppercase"
@@ -110,8 +110,9 @@ const OptionSelector = ({
             <Heading
               family="sans"
               mr={2}
+              my={0}
               level={6}
-              weight={3}
+              fontWeight={4}
               textTransform="uppercase"
             >
               {currentValue}
@@ -127,7 +128,7 @@ const OptionSelector = ({
         <SelectWrapper>
           <Label
             fontSize={6}
-            weight={3}
+            fontWeight={4}
             mr={2}
             mb={0}
             color="body.5"

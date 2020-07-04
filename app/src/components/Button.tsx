@@ -22,7 +22,6 @@ export const Button = styled.buttonBox`
     letter-spacing: 0.25em;
     transition: 0.2s;
     width: 100%;
-    max-width: 120px;
     background-color: transparent;
 
     ${level === undefined || level === 1

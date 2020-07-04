@@ -133,17 +133,15 @@ interface LabelProps {
   children: string
 }
 
-const LabelBase = createTextBase('label')
+const LabelBase = createTextBase('labelBox')
 
-export const Label = styled(LabelBase)`
-  margin-bottom: 0;
-  font-size: 5;
-  letter-spacing: 0.25em;
+export const Label = styled.labelBox`
+  ${(props) => css`
+    margin-bottom: 0;
+    font-size: 5;
+    letter-spacing: 0.25em;
+  `}
 `
-
-Label.defaultProps = {
-  fontSize: 4,
-}
 
 export const TextAnchor = styled.a``
 

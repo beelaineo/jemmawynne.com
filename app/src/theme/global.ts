@@ -31,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
   h2 { font-size: 2; }
   h3 { font-size: 3; }
   p, h4 { font-size: 4; }
-  h5 { font-size: 5; }
+  h5, label { font-size: 5; }
   h6 { font-size: 6; }
 
   ${({ theme }) => css`
@@ -49,7 +49,8 @@ export const GlobalStyles = createGlobalStyle`
       h4 {
         font-size: ${theme.mobileFontSizes[4]};
       }
-      h5 {
+      h5,
+      label {
         font-size: ${theme.mobileFontSizes[5]};
       }
       h6 {

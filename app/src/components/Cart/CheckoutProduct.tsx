@@ -37,7 +37,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
     <Wrapper updating={updating}>
       {image ? <Image image={image} /> : <div />}
       <div>
-        <Heading level={3} fontSize="18px" weight={2}>
+        <Heading level={3} my={0} fontSize="18px" weight={2}>
           {title}
         </Heading>
         <Box my={3}>

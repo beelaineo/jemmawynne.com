@@ -38,21 +38,16 @@ const Form = styled.form<WithVisible>`
 `
 
 const SearchButton = styled.button`
-  ${({ theme }) => css`
-    min-width: 18px;
-    height: 18px;
-    font-size: 2;
-    min-width: 18px;
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: -1px;
-
-    ${theme.mediaQueries.tablet} {
-      font-size: 17px;
-    }
-  `}
+  min-width: 18px;
+  height: 18px;
+  font-size: 2;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -1px;
+  font-size: 16px;
 `
 
 const Input = styled.input`
