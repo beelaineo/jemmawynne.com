@@ -11,7 +11,8 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
   const customRelated = product?.related
   /* Return a custom carousel */
   if (customRelated && customRelated.collection) {
-    const customTitle = customRelated.title || customRelated?.collection?.title
+    const customTitle =
+      customRelated.title || customRelated?.collection?.title || 'More to love'
     const content = {
       title: customTitle,
       collection: customRelated.collection,
@@ -21,7 +22,7 @@ export const ProductRelated = ({ product }: ProductRelatedProps) => {
 
   if (customRelated && customRelated.items && customRelated.items.length > 0) {
     const content = {
-      title: customRelated.title,
+      title: customRelated.title || 'More to love',
       items: customRelated.items,
     }
     return <CarouselBlock content={content} />
