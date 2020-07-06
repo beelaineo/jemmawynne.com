@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useProductVariant, useCheckout } from 'use-shopify'
+import { unwindEdges } from '@good-idea/unwind-edges'
 import { Box } from '@xstyled/styled-components'
+import { useRouter } from 'next/router'
 import { Heading } from '../../components/Text'
 import { ProductInfoBlock, ShopifyProduct } from '../../types'
 import { Column } from '../../components/Layout'
@@ -13,7 +15,7 @@ import {
   ProductRelated,
 } from './components'
 import { useShopData } from '../../providers/ShopDataProvider'
-import { useCounter, buildMailTo } from '../../utils'
+import { useCounter, buildMailTo, getUrlParameter } from '../../utils'
 import { Accordion } from '../../components/Accordion'
 import {
   Wrapper,
@@ -31,6 +33,7 @@ interface Props {
 
 export const ProductDetail = ({ product }: Props) => {
   /* get additional info blocks from Sanity */
+  const { asPath } = useRouter()
   const { getProductInfoBlocks } = useShopData()
   const { sourceData } = product
   const [hintModalOpen, setHintModalOpen] = useState(false)
@@ -47,9 +50,18 @@ export const ProductDetail = ({ product }: Props) => {
   /* get product variant utils */
   if (!product.sourceData) return null
 
-  const { currentVariant, selectVariant } = useProductVariant(
-    product.sourceData,
-  )
+  const initialVariantTitle = getUrlParameter('v', asPath)
+  const initialVariant = initialVariantTitle.length
+    ? unwindEdges(product?.sourceData?.variants)[0].find(
+        (v) => v && v.title === initialVariantTitle,
+      )?.id ?? undefined
+    : undefined
+  console.log(initialVariant)
+  console.log(product)
+  const {
+    currentVariant,
+    selectVariant,
+  } = useProductVariant(product.sourceData, { initialVariant })
 
   /* get checkout utils */
   const { addLineItem } = useCheckout()
@@ -136,6 +148,7 @@ export const ProductDetail = ({ product }: Props) => {
       <ProductRelated product={product} />
       <HintModal
         product={product}
+        currentVariant={currentVariant}
         open={hintModalOpen}
         closeModal={closeHintModal}
       />

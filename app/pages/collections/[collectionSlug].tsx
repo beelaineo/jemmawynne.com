@@ -43,7 +43,9 @@ export const collectionQuery = gql`
         ...HeroFragment
       }
       disableMenu
+      relatedCollectionsTitle
       relatedCollections {
+        __typename
         _id
         _type
         _key

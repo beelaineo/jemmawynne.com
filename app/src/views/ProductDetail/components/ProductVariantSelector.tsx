@@ -36,14 +36,35 @@ const { useState } = React
 
 const getInitialOptions = (
   options: ShopifySourceProductOption[],
-): SelectedProductOption[] =>
-  // @ts-ignore
-  options.map(({ name, values }) => ({
-    name,
-    // @ts-ignore
-    currentValue: values[0],
-  }))
+  currentVariant: ShopifySourceProductVariant,
+): SelectedProductOption[] => {
+  console.log(currentVariant)
+  const o = options.reduce<SelectedProductOption[]>((acc, option) => {
+    const { name, values } = option
+    if (!name) return acc
+    const currentVariantOption = currentVariant?.selectedOptions?.find(
+      (o) => o && o.name === option.name,
+    )
+    const currentValue = currentVariantOption
+      ? currentVariantOption.value ?? definitely(values)[0]
+      : definitely(values)[0]
+    return [
+      ...acc,
+      {
+        name,
+        currentValue,
+      },
+    ]
+  }, [])
+  return o
 
+  // const options = options.map(({ name, values }) => ({
+  //   name,
+  //   currentValue: definitely(values)[0],
+  // }))
+  //
+  // return options.filter((o) => o.name && o.currentValue)
+}
 const getNewOptions = (
   options: SelectedProductOption[],
   optionName: string,
@@ -167,7 +188,7 @@ interface Props {
 }
 
 export const ProductVariantSelector = (props: Props) => {
-  const { product, selectVariant } = props
+  const { product, selectVariant, currentVariant } = props
   const { sourceData } = product
 
   if (!sourceData) return null
@@ -179,10 +200,9 @@ export const ProductVariantSelector = (props: Props) => {
 
   const [selectedOptions, setSelectedOptions] = useState<
     SelectedProductOption[]
-  >(
-    // @ts-ignore
-    getInitialOptions(options),
-  )
+  >(getInitialOptions(definitely(options), currentVariant))
+
+  console.log(selectedOptions)
 
   const changeOption = (name: string) => (value: string) => {
     const newOptions = getNewOptions(selectedOptions, name, value)

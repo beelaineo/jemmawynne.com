@@ -15,9 +15,10 @@ interface ProductListingProps {
 export const ProductListing = ({ collection }: ProductListingProps) => {
   const { collectionInfo } = useShopData()
   if (!collection || !collectionInfo) return null
-  const relatedCollections =
-    collection.relatedCollections || collectionInfo.relatedCollections || []
-  const { products, disableMenu } = collection
+  const relatedCollections = collection?.relatedCollections?.length
+    ? collection.relatedCollections
+    : collectionInfo.relatedCollections ?? []
+  const { products, relatedCollectionsTitle, disableMenu } = collection
   return (
     <>
       <ProductListingHeader collection={collection} />
@@ -25,7 +26,7 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
         {disableMenu !== true ? (
           <CollectionsMenu>
             <Heading mb={4} level={7} weight={3} family="sans" color="body.8">
-              Collections
+              {relatedCollectionsTitle || 'Collections'}
             </Heading>
             <Hr />
             {definitely(relatedCollections).map((rc) =>

@@ -1,23 +1,42 @@
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
+import { Wrapper as ImageWrapper } from '../Image/styled'
 
 interface WithSingle {
   single?: boolean
 }
 
 export const CarouselContainer = styled.div<WithSingle>`
-  position: relative;
-  height: 100%;
-  width: 100%;
-  flex-grow: 1;
-  img,
-  picture {
-    pointer-events: none;
-  }
+  ${({ theme, single }) => css`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    img,
+    picture {
+      pointer-events: none;
+    }
+    padding: 0 9;
+    ${theme.mediaQueries.desktop} {
+      padding: 0 9;
+    }
+    ${theme.mediaQueries.mobile} {
+      overflow: hidden;
+      padding: ${single ? '0' : '0 32vw'};
+    }
+  `}
 `
 
-export const CarouselMask = styled.div`
-  overflow: hidden;
-  max-width: 100%;
+export const CarouselMask = styled.div<WithSingle>`
+  ${({ theme, single }) => css`
+    overflow: hidden;
+
+    ${theme.mediaQueries.mobile} {
+      max-width: 100%;
+      overflow: visible;
+
+      ${single ? css`` : ''}
+    }
+  `}
 `
 
 interface SlidesContainerProps {
@@ -69,10 +88,6 @@ export const SlideContainer = styled.div`
       margin-right: 0;
     }
 
-    & > * {
-      width: 100%;
-    }
-
     ${single
       ? css`
           width: 100%;
@@ -85,87 +100,93 @@ export const SlideContainer = styled.div`
           );
         `
       : css`
-          width: calc((100% - (${theme.space[5]}px * 4)) / 5);
-          margin-right: 5;
+          width: calc((100% - (20px * 4)) / 5);
+          margin-right: 20px;
+
+          ${ImageWrapper} {
+            overflow: hidden;
+            picture {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              transform: scale(1.3);
+            }
+          }
 
           ${theme.mediaQueries.desktop} {
-            width: calc((100% - (${theme.space[4]}px * 3)) / 4);
-            margin-right: 4;
+            margin-right: 20px;
+            width: calc((100% - (20px * 3)) / 4);
           }
 
           ${theme.mediaQueries.tablet} {
-            width: calc((100% - (${theme.space[4]}px * 2)) / 3);
+            width: calc((100% - (20px * 2)) / 3);
+          }
+          ${theme.mediaQueries.mobile} {
+            width: calc((100%) / 1);
           }
         `}
   `}
 `
 
-interface CarouselButtonProps {
-  theme: DefaultTheme
+interface ButtonWrapperProps {
   visible: boolean
   direction: 'previous' | 'next'
 }
 
-const WIDTH = 20
-const HEIGHT = WIDTH * 2
-const STROKE = 2
-
-export const CarouselButton = styled.button`
-  ${({ visible, direction }: CarouselButtonProps) => css`
+export const ButtonWrapper = styled.div<ButtonWrapperProps>`
+  ${({ direction, visible, theme }) => css`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 61%;
+    width: ${theme.space[9]}px;
+    top: 0;
     opacity: ${visible ? '1' : '0'};
     pointer-events: ${visible ? 'auto' : 'none'};
-    position: absolute;
-    width: ${WIDTH}px;
-    z-index: 15;
-    height: ${HEIGHT}px;
-    top: calc(50% - 30px);
-    transition: 0.2s;
 
-    ${direction === 'previous'
+    ${direction === 'next'
       ? css`
-          left: -25px;
+          right: 0;
         `
       : css`
-          right: -25px;
+          left: 0;
         `}
-    background: transparent;
 
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      ${direction === 'previous'
-        ? css`
-            left: 1px;
-            transform-origin: ${STROKE / 2}px 50%;
-          `
-        : css`
-            right: 3px;
-            transform-origin: calc(100% - ${STROKE / 2}px) 50%;
-          `};
-      top: 50%;
-      height: ${STROKE}px;
-      width: ${WIDTH}px;
-      background-color: black;
+    ${theme.mediaQueries.desktop} {
+      width: ${theme.space[9]}px;
     }
-
-    ${direction === 'previous'
-      ? css`
-          &:before {
-            transform: rotate(-315deg);
-          }
-          &:after {
-            transform: rotate(-45deg);
-          }
-        `
-      : css`
-          &:before {
-            transform: rotate(45deg);
-          }
-          &:after {
-            transform: rotate(-45deg);
-          }
-        `}
   `}
 `
 
+interface CarouselButtonProps {
+  direction: 'previous' | 'next'
+}
+export const CarouselButton = styled.button<CarouselButtonProps>`
+  ${({ theme, direction }) => css`
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    top: calc(50% - 30px);
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ${direction === 'next'
+      ? css`
+          right: -25px;
+        `
+      : css`
+          left: -25px;
+          transform: rotate(180deg);
+        `}
+    background: transparent;
+
+    ${theme.mediaQueries.mobile} {
+      display: none;
+    }
+  `}
+`

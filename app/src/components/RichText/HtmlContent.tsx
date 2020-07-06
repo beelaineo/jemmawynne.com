@@ -4,6 +4,7 @@ import Link from 'next/link'
 import HTMLParser from 'html-parser-lite'
 import { getLinkFromHref } from '../../utils'
 import { Heading, P, Ol, Ul, Li, Span } from '../Text'
+import { decodeHTML } from './utils'
 
 const css2obj = (css: string): object => {
   const r = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g,
@@ -31,7 +32,11 @@ const transform = (node, index) => {
         </React.Fragment>
       )
     case 'text':
-      return <React.Fragment key={index}>{node.textContent}</React.Fragment>
+      return (
+        <React.Fragment key={index}>
+          {decodeHTML(node.textContent)}
+        </React.Fragment>
+      )
     case 'h1':
     case 'h2':
     case 'h3':

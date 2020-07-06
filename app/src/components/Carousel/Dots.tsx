@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
+import { Column } from '../Layout'
 
 interface DotsProps {
   currentSlide: number
@@ -11,16 +12,28 @@ interface WithActive {
 }
 
 const Wrapper = styled.div`
+  ${({ theme }) => css`
+    margin: 7 auto 3;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+
+    ${theme.mediaQueries.mobile} {
+      padding: 0 0;
+    }
+  `}
+`
+
+const Inner = styled.div`
+  max-width: small;
   display: flex;
   justify-content: flex-start;
-  margin: 3 auto 2;
-  padding: 0 3;
-  max-width: small;
+  margin: 0 auto;
 `
 
 const Dot = styled.div<WithActive>`
   ${({ active }) => css`
-    margin: 0 1;
+    margin-right: 2;
     width: 6px;
     height: 6px;
     border-radius: 10px;
@@ -31,11 +44,13 @@ const Dot = styled.div<WithActive>`
 export const Dots = ({ currentSlide, totalSlides }: DotsProps) => {
   return (
     <Wrapper>
-      {Array(totalSlides)
-        .fill(null)
-        .map((_, index) => (
-          <Dot key={index} active={index === currentSlide} />
-        ))}
+      <Inner>
+        {Array(totalSlides)
+          .fill(null)
+          .map((_, index) => (
+            <Dot key={index} active={index === currentSlide} />
+          ))}
+      </Inner>
     </Wrapper>
   )
 }

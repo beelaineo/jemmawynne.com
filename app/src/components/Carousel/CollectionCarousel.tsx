@@ -45,14 +45,13 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
   }, [data])
 
   const fetchedCollection = data?.allShopifyCollection[0]
-  const fetchedProducts = definitely(fetchedCollection?.products)
+  const products = definitely(fetchedCollection?.products)
 
-  const products = fetchedProducts.length ? fetchedProducts : collectionProducts
+  if (!products.length) return null
 
-  if (!products?.length) return null
-
+  const initialSlide = viewportWidth < 650 ? 1 : 0
   return (
-    <Carousel>
+    <Carousel initialSlide={initialSlide}>
       {definitely(products)
         .filter((product) => product?.archived !== true)
         .map((product) => {
@@ -60,6 +59,9 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
             <ProductThumbnail
               key={product._key || 'some-key'}
               product={product}
+              displaySwatches={false}
+              displayTags={false}
+              headingLevel={5}
             />
           )
         })}
