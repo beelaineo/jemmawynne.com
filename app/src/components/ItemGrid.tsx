@@ -48,7 +48,11 @@ export const ItemGrid = ({ items }: ItemGridProps) => {
         if (!item) return null
         if (item.__typename === 'ShopifyProduct')
           return (
-            <ProductThumbnail key={item._id || 'some-key'} product={item} />
+            <ProductThumbnail
+              displayTags
+              key={item._id || 'some-key'}
+              product={item}
+            />
           )
         if (item.__typename === 'ShopifyCollection')
           return (

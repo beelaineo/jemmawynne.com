@@ -1,6 +1,12 @@
 import styled, { css } from '@xstyled/styled-components'
 
-export const ProductThumb = styled.div``
+export const ProductThumb = styled.div`
+  position: relative;
+`
+
+export const ImageWrapper = styled.div`
+  position: relative;
+`
 
 export const ProductInfo = styled.div`
   margin-top: 3;
@@ -39,4 +45,25 @@ export const SwatchWrapper = styled.div<WithActive>`
     border: 1px solid;
     border-color: ${active ? 'body.6' : 'transparent'};
   `}
+`
+
+export const TagBadgeWrapper = styled.div`
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+export const TagBadge = styled.div`
+  border-radius: 20px;
+  margin: 0 1;
+  height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 3 0;
+  background-color: highlight;
+  box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.2);
 `

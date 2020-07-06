@@ -6,8 +6,10 @@ import {
   ShopifySourceProductOption,
   Image,
   SwatchOption,
+  TagBadge,
 } from '../../types'
 import { definitely } from '../../utils'
+import { useMemo } from 'react'
 
 export const createGetOptionSwatches = (productInfo?: ProductInfo) => (
   option: ShopifySourceProductOption,
@@ -127,4 +129,25 @@ export const createGetProductInfoBlocks = (productInfo?: ProductInfo) => (
     [],
   )
   return filteredBlocks
+}
+
+export const createGetTagBadges = (productInfo?: ProductInfo) => (
+  product: ShopifyProduct,
+): TagBadge[] => {
+  if (!productInfo) return []
+  const allTagBadges = definitely(productInfo?.tagBadges) ?? []
+  const productTags = definitely(product?.sourceData?.tags)
+
+  const matches = useMemo(
+    () =>
+      definitely(
+        allTagBadges.filter((tb) =>
+          productTags.find(
+            (tag) => tb.tag && tb.tag.toLowerCase() === tag.toLowerCase(),
+          ),
+        ),
+      ),
+    [allTagBadges, productTags],
+  )
+  return matches
 }

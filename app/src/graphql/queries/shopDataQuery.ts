@@ -7,6 +7,7 @@ import {
   sanityRichImageFragment,
   sanityImageFragment,
   productInfoFragment,
+  tagBadgeFragment,
 } from './fragments'
 import { request } from '../request'
 
@@ -61,6 +62,9 @@ export const SHOP_DATA_QUERY = gql`
       _type
       _key
       _createdAt
+      tagBadges {
+        ...TagBadgeFragment
+      }
       globalBlocks {
         ...ProductInfoFragment
       }
@@ -143,6 +147,7 @@ export const SHOP_DATA_QUERY = gql`
   ${richPageLinkFragment}
   ${sanityImageFragment}
   ${sanityRichImageFragment}
+  ${tagBadgeFragment}
 `
 
 export interface ShopDataResponse {

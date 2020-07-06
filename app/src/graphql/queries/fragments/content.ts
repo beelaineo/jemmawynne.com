@@ -304,6 +304,15 @@ export const saneMoneyV2Fragment = gql`
   }
 `
 
+export const tagBadgeFragment = gql`
+  fragment TagBadgeFragment on TagBadge {
+    __typename
+    _key
+    tag
+    label
+  }
+`
+
 export const productInfoFragment = gql`
   fragment ProductInfoFragment on ProductInfoBlock {
     __typename

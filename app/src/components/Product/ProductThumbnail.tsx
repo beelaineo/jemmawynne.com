@@ -16,7 +16,8 @@ import {
   optionMatchesVariant,
 } from '../../utils'
 import { ProductSwatches } from './ProductSwatches'
-import { ProductInfo, ProductThumb } from './styled'
+import { ProductInfo, ImageWrapper, ProductThumb } from './styled'
+import { TagBadges } from './TagBadges'
 
 const { useState } = React
 
@@ -24,11 +25,13 @@ interface ProductThumbnail {
   product: ShopifyProduct
   image?: RichImage | null
   hidePrice?: boolean
+  displayTags?: boolean
 }
 
 export const ProductThumbnail = ({
   image,
   hidePrice,
+  displayTags,
   product,
 }: ProductThumbnail) => {
   const { getProductSwatchOptions } = useShopData()
@@ -81,11 +84,15 @@ export const ProductThumbnail = ({
     <ProductThumb>
       <Link href="/products/[productSlug]" as={as}>
         <a>
-          <Image
-            ratio={1}
-            image={image || productImage}
-            hoverImage={hoverImage}
-          />
+          <ImageWrapper>
+            <Image
+              ratio={1}
+              image={image || productImage}
+              hoverImage={hoverImage}
+            />
+
+            {displayTags ? <TagBadges product={product} /> : null}
+          </ImageWrapper>
           <ProductInfo>
             <Heading
               mb={3}

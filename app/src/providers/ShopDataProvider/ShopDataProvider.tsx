@@ -7,8 +7,10 @@ import {
   ShopifySourceProductOption,
   SiteSettings,
   SwatchOption,
+  TagBadge,
 } from '../../types'
 import {
+  createGetTagBadges,
   createGetSwatchOptions,
   createGetProductInfoBlocks,
   createGetOptionSwatches,
@@ -25,6 +27,7 @@ interface ShopDataContextValue {
   getProductInfoBlocks: (product: ShopifyProduct) => DefinitelyProductInfo[]
   getProductSwatchOptions: (product: ShopifyProduct) => SwatchOption[]
   getOptionSwatches: (option: ShopifySourceProductOption) => SwatchOption | null
+  getTagBadges: (product: ShopifyProduct) => TagBadge[]
 }
 
 const ShopDataContext = React.createContext<ShopDataContextValue | undefined>(
@@ -57,6 +60,8 @@ export const ShopDataProvider = ({ children, shopData }: Props) => {
   const getProductSwatchOptions = createGetSwatchOptions(productInfo)
   const getOptionSwatches = createGetOptionSwatches(productInfo)
 
+  const getTagBadges = createGetTagBadges(productInfo)
+
   const value = {
     ready,
     menu,
@@ -65,6 +70,7 @@ export const ShopDataProvider = ({ children, shopData }: Props) => {
     getProductSwatchOptions,
     collectionInfo,
     getOptionSwatches,
+    getTagBadges,
   }
 
   return (

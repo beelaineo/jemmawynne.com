@@ -799,6 +799,9 @@ export interface ProductInfo extends Document {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>
   _key?: Maybe<Scalars['String']>
+  /** Use these fields to create badges that appear on product thumbnails */
+  tagBadgeHelpText?: Maybe<Scalars['String']>
+  tagBadges?: Maybe<Array<Maybe<TagBadge>>>
   /**
    * Use these fields to add snippets of descriptions to all or some projects. For
    * instance, you could add a 'Shipping and Returns' block on all items, and a
@@ -808,6 +811,8 @@ export interface ProductInfo extends Document {
    */
   helpText?: Maybe<Scalars['String']>
   globalBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+  /** Use these fields to add snippets of descriptions to all products of different types */
+  byTypeHelpText?: Maybe<Scalars['String']>
   ringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   earringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   braceletBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
@@ -871,7 +876,9 @@ export type ProductInfoFilter = {
   _updatedAt?: Maybe<DatetimeFilter>
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
+  tagBadgeHelpText?: Maybe<StringFilter>
   helpText?: Maybe<StringFilter>
+  byTypeHelpText?: Maybe<StringFilter>
   byTagHelpText?: Maybe<StringFilter>
 }
 
@@ -882,7 +889,9 @@ export type ProductInfoSorting = {
   _updatedAt?: Maybe<SortOrder>
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
+  tagBadgeHelpText?: Maybe<SortOrder>
   helpText?: Maybe<SortOrder>
+  byTypeHelpText?: Maybe<SortOrder>
   byTagHelpText?: Maybe<SortOrder>
 }
 
@@ -2348,4 +2357,28 @@ export type SwatchSorting = {
   _type?: Maybe<SortOrder>
   colorName?: Maybe<SortOrder>
   swatchImage?: Maybe<ImageSorting>
+}
+
+export interface TagBadge {
+  __typename: 'TagBadge'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  /** The tag to match from Shopify */
+  tag?: Maybe<Scalars['String']>
+  /** (optional) An alternate label to display in the badge */
+  label?: Maybe<Scalars['String']>
+}
+
+export type TagBadgeFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  tag?: Maybe<StringFilter>
+  label?: Maybe<StringFilter>
+}
+
+export type TagBadgeSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  tag?: Maybe<SortOrder>
+  label?: Maybe<SortOrder>
 }
