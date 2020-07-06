@@ -10,6 +10,12 @@ export const collection = {
       title: 'Disable Side Menu',
     },
     {
+      name: 'relatedCollectionsTitle',
+      type: 'string',
+      title: 'Related Collections menu title (optional)',
+      fieldset: 'related',
+    },
+    {
       name: 'relatedCollections',
       fieldset: 'related',
       type: 'array',
