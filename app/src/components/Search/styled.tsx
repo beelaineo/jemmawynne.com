@@ -75,6 +75,12 @@ export const Results = styled.div`
   padding: 3 0 8;
 `
 
+export const ResultsInner = styled.div`
+  margin: 0 auto;
+  padding: 0 2;
+  max-width: 1100px;
+`
+
 export const StyledSearchInput = styled(Input)`
   font-size: 1;
   border: none;

@@ -7,7 +7,14 @@ import { Button } from '../Button'
 import { useLockScroll } from '../LockScroll'
 import { useSearch } from '../../providers/SearchProvider'
 import { SearchInput } from './SearchInput'
-import { Outer, CloseButton, SearchHeader, Results, Wrapper } from './styled'
+import {
+  Outer,
+  CloseButton,
+  SearchHeader,
+  Results,
+  ResultsInner,
+  Wrapper,
+} from './styled'
 import { Footer } from '../Footer'
 
 const { useEffect } = React
@@ -72,26 +79,30 @@ export const SearchPane = () => {
         </SearchHeader>
         {searchResults === undefined ? null : (
           <Results>
-            {loading ? (
-              <p>Loading..</p>
-            ) : errorMessage ? (
-              <Heading level={3}>Sorry, an error occurred.</Heading>
-            ) : searchResults.length === 0 ? (
-              <Heading level={2}>Sorry, there were no search results.</Heading>
-            ) : (
-              <>
-                {countMessage ? (
-                  <Heading mt={3} fontStyle="italic" level={5}>
-                    {countMessage}
-                  </Heading>
-                ) : null}
+            <ResultsInner>
+              {loading ? (
+                <p>Loading..</p>
+              ) : errorMessage ? (
+                <Heading level={3}>Sorry, an error occurred.</Heading>
+              ) : searchResults.length === 0 ? (
+                <Heading level={2}>
+                  Sorry, there were no search results.
+                </Heading>
+              ) : (
+                <>
+                  {countMessage ? (
+                    <Heading mt={3} fontStyle="italic" level={5}>
+                      {countMessage}
+                    </Heading>
+                  ) : null}
 
-                <ItemGrid items={searchResults} />
-                <Button onClick={close} level={3}>
-                  Close
-                </Button>
-              </>
-            )}
+                  <ItemGrid items={searchResults} />
+                  <Button onClick={close} level={3}>
+                    Close
+                  </Button>
+                </>
+              )}
+            </ResultsInner>
           </Results>
         )}
         <Footer />
