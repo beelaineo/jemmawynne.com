@@ -56,8 +56,6 @@ export const ProductDetail = ({ product }: Props) => {
         (v) => v && v.title === initialVariantTitle,
       )?.id ?? undefined
     : undefined
-  console.log(initialVariant)
-  console.log(product)
   const {
     currentVariant,
     selectVariant,

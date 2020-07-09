@@ -28,7 +28,6 @@ interface HomepageProps {
 export const Homepage = ({ homepage }: HomepageProps) => {
   const { content } = homepage
   const { open: announcementOpen } = useAnnouncement()
-  console.log(content)
   return (
     <HomepageWrapper announcementOpen={announcementOpen}>
       {content

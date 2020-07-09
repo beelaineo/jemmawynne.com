@@ -36,7 +36,6 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
   }
   const [getCarousel, response] = useLazyRequest<Response, Variables>(query)
   const { data } = response
-  console.log(data)
 
   useEffect(() => {
     if (Boolean(data)) return

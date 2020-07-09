@@ -38,7 +38,6 @@ const getInitialOptions = (
   options: ShopifySourceProductOption[],
   currentVariant: ShopifySourceProductVariant,
 ): SelectedProductOption[] => {
-  console.log(currentVariant)
   const o = options.reduce<SelectedProductOption[]>((acc, option) => {
     const { name, values } = option
     if (!name) return acc
@@ -201,8 +200,6 @@ export const ProductVariantSelector = (props: Props) => {
   const [selectedOptions, setSelectedOptions] = useState<
     SelectedProductOption[]
   >(getInitialOptions(definitely(options), currentVariant))
-
-  console.log(selectedOptions)
 
   const changeOption = (name: string) => (value: string) => {
     const newOptions = getNewOptions(selectedOptions, name, value)
