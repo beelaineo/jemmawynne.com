@@ -10,3 +10,8 @@ export const TextWrapper = styled.div`
   margin-top: 3;
   color: black;
 `
+
+export const CollectionThumb = styled.div`
+  position: relative;
+  width: 100%;
+`

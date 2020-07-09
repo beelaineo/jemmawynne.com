@@ -45,7 +45,9 @@ export const SearchProvider = ({ children }: SearchProps) => {
 
     startSearch()
 
-    const params = { searchTerm: searchTerm.replace(/\s/, '* ') }
+    const term = searchTerm.replace(/\s/, '* ')
+    const termSingular = term.replace(/s$/, '')
+    const params = { searchTerm: term, searchTermSingular: termSingular }
     const results = await query<SearchResult[]>(searchQuery, params)
     console.log({ results })
     onSuccess(results || [])

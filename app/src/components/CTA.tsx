@@ -38,7 +38,7 @@ const Inner = styled.div<WithLevel>`
         `
       : level === 2
       ? css`
-          padding: 0 1 1;
+          padding: 0 0px 1 1;
           border-bottom: 1px solid;
         `
       : ''}

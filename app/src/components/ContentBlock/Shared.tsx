@@ -11,7 +11,7 @@ interface SectionWrapperProps {
 
 export const SectionWrapper = styled.div`
   ${({ type }: SectionWrapperProps) => css`
-    padding: 6;
+    padding: 4 6 6;
 
     ${type === 'carousel'
       ? css`

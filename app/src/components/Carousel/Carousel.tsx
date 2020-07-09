@@ -5,6 +5,8 @@ import {
   ButtonWrapper,
   CarouselButton,
   CarouselMask,
+  ButtonPadding,
+  ButtonsWrapper,
 } from './styled'
 import { Slide, SlideInfo } from './Slide'
 import { Dots } from './Dots'
@@ -137,21 +139,40 @@ export const CarouselInner = ({
 
   return (
     <CarouselContainer single={single}>
-      {children && buttons ? (
-        <ButtonWrapper
-          direction="previous"
-          aria-hidden={!Boolean(hasOverflow && !isAtFirst)}
-          visible={hasOverflow && !isAtFirst}
-        >
-          <CarouselButton
-            aria-label="previous slide"
-            direction="previous"
-            onClick={goPrevious}
-          >
-            <CarouselButtonIcon />
-          </CarouselButton>
-        </ButtonWrapper>
-      ) : null}
+      <ButtonsWrapper>
+        {children && buttons ? (
+          <>
+            <ButtonWrapper
+              direction="previous"
+              aria-hidden={!Boolean(hasOverflow && !isAtFirst)}
+              visible={hasOverflow && !isAtFirst}
+            >
+              <ButtonPadding />
+              <CarouselButton
+                aria-label="previous slide"
+                direction="previous"
+                onClick={goPrevious}
+              >
+                <CarouselButtonIcon />
+              </CarouselButton>
+            </ButtonWrapper>
+            <ButtonWrapper
+              direction="next"
+              aria-hidden={!Boolean(hasOverflow && !isAtLast)}
+              visible={hasOverflow && !isAtLast}
+            >
+              <ButtonPadding />
+              <CarouselButton
+                direction="next"
+                aria-label="next slide"
+                onClick={goNext}
+              >
+                <CarouselButtonIcon />
+              </CarouselButton>
+            </ButtonWrapper>
+          </>
+        ) : null}
+      </ButtonsWrapper>
       <CarouselMask single={single} ref={outerRef}>
         <SlidesContainer
           isSwiping={state.active}
@@ -173,21 +194,6 @@ export const CarouselInner = ({
           ))}
         </SlidesContainer>
       </CarouselMask>
-      {children && buttons ? (
-        <ButtonWrapper
-          direction="next"
-          aria-hidden={!Boolean(hasOverflow && !isAtLast)}
-          visible={hasOverflow && !isAtLast}
-        >
-          <CarouselButton
-            direction="next"
-            aria-label="next slide"
-            onClick={goNext}
-          >
-            <CarouselButtonIcon />
-          </CarouselButton>
-        </ButtonWrapper>
-      ) : null}
       {slides.length > 1 && currentSlide !== null ? (
         <Dots currentSlide={currentSlide} totalSlides={slides.length} />
       ) : null}

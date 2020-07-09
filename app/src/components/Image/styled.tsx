@@ -23,8 +23,24 @@ export const PreloadWrapper = styled.div`
   z-index: -100;
 `
 
-export const Wrapper = styled.div`
-  position: relative;
+interface WithFill {
+  fillContainer?: boolean
+}
+
+export const ImageWrapper = styled.div<WithFill>`
+  ${({ fillContainer }) => css`
+    ${fillContainer
+      ? css`
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        `
+      : css`
+          position: relative;
+        `}
+  `}
 `
 
 export const HoverImageWrapper = styled.div`

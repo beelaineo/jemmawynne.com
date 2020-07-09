@@ -1,6 +1,6 @@
 import styled, { css } from '@xstyled/styled-components'
 import { getColor, getTextAlignment } from '../../theme/utils'
-import { Wrapper as ImageWrapper } from '../Image/styled'
+import { ImageWrapper } from '../Image/styled'
 
 export const TextWrapper = styled.div`
   ${({ theme }) => css`
@@ -19,14 +19,52 @@ export const TextWrapper = styled.div`
 
     div {
       margin: 0 auto;
-      max-width: 400px;
+      max-width: 320px;
     }
 
     ${theme.mediaQueries.tablet} {
       position: relative;
       padding: 3 3;
-      div {
-        max-width: 350px;
+    }
+  `}
+`
+export const HeroWrapper = styled.div`
+  position: relative;
+  z-index: 0;
+  max-height: 450px;
+  overflow: hidden;
+`
+
+export const TextOuter = styled.div`
+  min-width: 540px;
+`
+
+export const TextContainer = styled.div`
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+`
+
+export const HeroImageWrapper = styled.div`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    & > div:nth-of-type(2) {
+      display: none;
+    }
+
+    ${theme.mediaQueries.mobile} {
+      & > div:nth-of-type(1) {
+        display: none;
+      }
+      & > div:last-child {
+        display: block;
       }
     }
   `}
@@ -46,7 +84,7 @@ export const Wrapper = styled.div<WrapperProps>`
     text-align: ${getTextAlignment(textAlign) || 'center'};
 
     ${theme.mediaQueries.aboveTablet} {
-      height: 45vw;
+      height: 40vw;
       max-height: 85vh;
       & ${TextWrapper}:nth-child(2) {
         opacity: 0;
@@ -64,6 +102,14 @@ export const Wrapper = styled.div<WrapperProps>`
       margin-bottom: 3;
     }
   `}
+`
+
+export const RichTextWrapper = styled.div`
+  h1,
+  h2,
+  h3 {
+    font-weight: 2;
+  }
 `
 
 export const BackgroundImageWrapper = styled.div`

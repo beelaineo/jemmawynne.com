@@ -85,13 +85,19 @@ export const SearchPane = () => {
               ) : errorMessage ? (
                 <Heading level={3}>Sorry, an error occurred.</Heading>
               ) : searchResults.length === 0 ? (
-                <Heading level={2}>
+                <Heading weight={1} level={2}>
                   Sorry, there were no search results.
                 </Heading>
               ) : (
                 <>
                   {countMessage ? (
-                    <Heading mt={3} fontStyle="italic" level={5}>
+                    <Heading
+                      mt={3}
+                      mb={0}
+                      fontStyle="italic"
+                      weight={1}
+                      level={5}
+                    >
                       {countMessage}
                     </Heading>
                   ) : null}

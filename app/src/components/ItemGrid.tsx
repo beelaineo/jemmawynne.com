@@ -25,6 +25,8 @@ const Grid = styled.div`
       padding: 6;
     }
     ${theme.mediaQueries.mobile} {
+      padding: 3;
+      grid-gap: 3;
       grid-template-columns: 1fr 1fr;
     }
   `}

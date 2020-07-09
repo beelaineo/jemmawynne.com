@@ -5,7 +5,12 @@ import { Image } from '../Image'
 import { Heading } from '../Text'
 import { RichText } from '../RichText'
 import { CTA } from '../CTA'
-import { TextWrapper, Wrapper, BackgroundImageWrapper } from './styled'
+import {
+  TextWrapper,
+  Wrapper,
+  RichTextWrapper,
+  BackgroundImageWrapper,
+} from './styled'
 import { DocumentLink } from '../DocumentLink'
 
 interface LinkWrapperProps {
@@ -53,16 +58,21 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
             <div>
               {header ? (
                 <Heading
-                  level={5}
+                  level={headerFont === 'serif' ? 4 : 5}
                   family={headerFont || 'sans'}
-                  mb={{ xs: 0, lg: 5 }}
+                  weight={headerFont === 'serif' ? 2 : 4}
+                  mb={{ xs: 0, lg: headerFont === 'serif' ? 2 : 5 }}
                 >
                   {header}
                 </Heading>
               ) : null}
-              {bodyRaw ? <RichText body={bodyRaw} /> : null}
+              {bodyRaw ? (
+                <RichTextWrapper>
+                  <RichText body={bodyRaw} />
+                </RichTextWrapper>
+              ) : null}
               {cta ? (
-                <Box mt={{ lg: 5 }}>
+                <Box mt={{ lg: headerFont === 'serif' ? 4 : 5 }}>
                   <CTA level={2} cta={cta} />
                 </Box>
               ) : null}

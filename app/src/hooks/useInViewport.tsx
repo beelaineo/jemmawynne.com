@@ -14,7 +14,7 @@ export const useInViewport = (node: React.RefObject<HTMLElement>) => {
   useEffect(() => {
     if (observer?.current) observer.current.disconnect()
     const options = {
-      rootMargin: '0px 600px',
+      rootMargin: '100px 600px',
     }
 
     observer.current = new IntersectionObserver(([entry]) => {

@@ -11,17 +11,16 @@ import {
   getTextAlignment,
   getColor,
 } from '../../theme'
+import {
+  TextOuter,
+  TextContainer,
+  HeroImageWrapper,
+  HeroWrapper,
+} from './styled'
 
 interface HeroBackground {
   theme: DefaultTheme
 }
-
-const HeroWrapper = styled.div`
-  position: relative;
-  z-index: 0;
-  max-height: 450px;
-  overflow: hidden;
-`
 
 interface HeroTextProps {
   theme: DefaultTheme
@@ -62,35 +61,6 @@ const HeroText = styled.div`
   `}
 `
 
-const TextOuter = styled.div`
-  min-width: 540px;
-`
-
-const TextContainer = styled.div`
-  max-width: 350px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-`
-
-const HeroImageWrapper = styled.div`
-  ${({ theme }) => css`
-    & > div:nth-of-type(2) {
-      display: none;
-    }
-
-    ${theme.mediaQueries.mobile} {
-      & > div:nth-of-type(1) {
-        display: none;
-      }
-      & > div:last-child {
-        display: block;
-      }
-    }
-  `}
-`
-
 interface HeroBlockProps {
   hero?: Hero | null
 }
@@ -113,7 +83,7 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
   return (
     <HeroWrapper>
       <HeroImageWrapper>
-        {image ? <Image ratio={0.45} image={image} /> : null}
+        {image ? <Image fillContainer ratio={0.45} image={image} /> : null}
         {mobileImage ? (
           <Image ratio={1.1} image={mobileImage || image} />
         ) : null}

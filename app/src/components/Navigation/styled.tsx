@@ -1,7 +1,7 @@
 // @ts-ignore
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 import {
-  Wrapper as ImageElementWrapper,
+  ImageWrapper as ImageElementWrapper,
   Picture,
 } from '../../components/Image/styled'
 
@@ -26,12 +26,16 @@ export const Wrapper = styled.header`
 export const NavTop = styled.div`
   ${({ theme }) => css`
     padding-top: 30px;
-    margin-bottom: 5;
+    margin-bottom: 3;
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
+
+    a {
+      width: 390px;
+    }
 
     svg {
       max-height: 100%;
@@ -140,8 +144,7 @@ export const NavTools = styled.div`
 
 export const LogoWrapper = styled.div`
   ${({ theme }) => css`
-    width: 100%;
-    max-width: 360px;
+    width: 390px;
     display: block;
 
     svg {

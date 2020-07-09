@@ -4,6 +4,7 @@ import '@xstyled/styled-components'
 declare module 'styled-components' {
   export interface DefaultTheme {
     navHeight: string
+    announcementHeight: string
     space: number[]
     sizes: {
       xSmall: number

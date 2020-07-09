@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
-import { Wrapper as ImageWrapper } from '../Image/styled'
+import { ImageWrapper } from '../Image/styled'
 
 interface WithSingle {
   single?: boolean
@@ -20,8 +20,7 @@ export const CarouselContainer = styled.div<WithSingle>`
       padding: 0 9;
     }
     ${theme.mediaQueries.mobile} {
-      overflow: hidden;
-      padding: ${single ? '0' : '0 32vw'};
+      padding: 0;
     }
   `}
 `
@@ -32,9 +31,6 @@ export const CarouselMask = styled.div<WithSingle>`
 
     ${theme.mediaQueries.mobile} {
       max-width: 100%;
-      overflow: visible;
-
-      ${single ? css`` : ''}
     }
   `}
 `
@@ -124,7 +120,7 @@ export const SlideContainer = styled.div`
             width: calc((100% - (20px * 2)) / 3);
           }
           ${theme.mediaQueries.mobile} {
-            width: calc((100%) / 1);
+            width: calc((100% - (20px * 1)) / 2);
           }
         `}
   `}
@@ -135,28 +131,69 @@ interface ButtonWrapperProps {
   direction: 'previous' | 'next'
 }
 
+export const ButtonPadding = styled.div`
+  position: relative;
+  top: 0;
+  width: 30%;
+  padding-bottom: 100%;
+`
+
 export const ButtonWrapper = styled.div<ButtonWrapperProps>`
   ${({ direction, visible, theme }) => css`
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 61%;
-    width: ${theme.space[9]}px;
     top: 0;
     opacity: ${visible ? '1' : '0'};
     pointer-events: ${visible ? 'auto' : 'none'};
 
+    button {
+      position: absolute;
+      top: 0;
+      left: ${direction === 'next' ? 0 : 'auto'};
+      right: ${direction === 'next' ? 'auto' : 0};
+      width: ${theme.space[9]}px;
+      height: 100%;
+    }
+
     ${direction === 'next'
       ? css`
-          right: 0;
+          left: 100%;
         `
       : css`
-          left: 0;
+          right: 100%;
         `}
 
+    width: calc((100% - (20px * 4)) / 5);
+
     ${theme.mediaQueries.desktop} {
-      width: ${theme.space[9]}px;
+      width: calc((100% - (20px * 3)) / 4);
+    }
+
+    ${theme.mediaQueries.tablet} {
+      width: calc((100% - (20px * 2)) / 3);
+    }
+    ${theme.mediaQueries.mobile} {
+      width: calc((100% - (20px * 1)) / 2);
+
+      button {
+        width: ${theme.space[6]}px;
+      }
+    }
+  `}
+`
+
+export const ButtonsWrapper = styled.div`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 0;
+    left: ${theme.space[9]}px;
+    width: calc(100% - (${theme.space[9]}px * 2));
+    height: 100%;
+    ${theme.mediaQueries.mobile} {
+      left: 0;
+      width: 100%;
     }
   `}
 `
@@ -184,9 +221,5 @@ export const CarouselButton = styled.button<CarouselButtonProps>`
           transform: rotate(180deg);
         `}
     background: transparent;
-
-    ${theme.mediaQueries.mobile} {
-      display: none;
-    }
   `}
 `

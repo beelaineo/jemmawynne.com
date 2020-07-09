@@ -78,7 +78,7 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
               active={column._key === activeSection}
               key={column._key || 'some-key'}
             >
-              <Heading level={3} family="serif">
+              <Heading weight={2} level={3} family="serif">
                 <span onMouseEnter={setActiveSection(column._key)}>
                   {column.title}
                 </span>

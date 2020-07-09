@@ -16,6 +16,7 @@
 	"scripts": {
 		"start": "DEBUG=dev:* next",
 		"pre-build": "yarn generate-types",
+    "update": "npx ncu -x babel-plugin-styled-components",
 		"install-types": "typesync && yarn install",
 		"generate-types": "graphql get-schema && graphql-codegen && prettier ./src/types/**/* --write",
 		"test": "jest",
@@ -36,7 +37,7 @@
 		"@types/tsc-watch": "^4.2.0",
 		"@types/zeit__next-source-maps": "^0.0.1",
 		"babel-plugin-inline-react-svg": "^1.1.1",
-		"babel-plugin-styled-components": "1.10.7",
+		"babel-plugin-styled-components": "1.10.2",
 		"graphql": "^15.1.0",
 		"graphql-cli": "^4.0.0",
 		"jest": "^26.1.0",

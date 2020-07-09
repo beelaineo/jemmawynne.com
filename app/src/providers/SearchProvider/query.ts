@@ -1,16 +1,15 @@
 export const searchQuery = `
 *[
   (
-    _type == "shopifyProduct" ||
-    _type == "shopifyCollection"
+    _type == "shopifyProduct"
   )
   &&
     defined(shopifyId)
   && 
   (
-    [title, sourceData.description] match $searchTerm
+    [title, sourceData.description, sourceData.productType] match $searchTerm
     ||
-    sourceData.productType == $searchTerm
+    [sourceData.productType] match $searchTermSingular
     ||
     $searchTerm in sourceData.options[].value
     || 

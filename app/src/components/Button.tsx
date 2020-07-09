@@ -28,7 +28,7 @@ export const Button = styled.buttonBox`
       ? css`
           color: body.9;
           border: 1px solid;
-          font-weight: 3;
+          font-weight: 4;
         `
       : level === 2
       ? css`

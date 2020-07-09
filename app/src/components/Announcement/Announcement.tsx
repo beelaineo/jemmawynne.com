@@ -3,26 +3,24 @@ import { IoMdClose } from 'react-icons/io'
 import { DocumentLink } from '../DocumentLink'
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 import { useShopData } from '../../providers/ShopDataProvider'
+import { useAnnouncement } from '../../providers/AnnouncementProvider'
 import { Heading } from '../../components/Text'
-import { getCookie, setCookie } from '../../utils'
 
 const { useState, useEffect } = React
-
-const ANNOUNCEMENT_DISMISSED = 'ANNOUNCEMENT_DISMISSED'
 
 interface AnnouncementWrapperProps {
   open: boolean
 }
 
 const AnnouncementWrapper = styled.div`
-  ${({ open }: AnnouncementWrapperProps) => css`
+  ${({ open, theme }: AnnouncementWrapperProps) => css`
     position: relative;
     display: flex;
     overflow: hidden;
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: ${open ? '45px' : '0'};
+    height: ${open ? theme.announcementHeight : '0'};
     background-color: body.2;
     transition: 0.5s;
   `}
@@ -71,19 +69,10 @@ const AnnouncementText = styled.div`
 
 export const Announcement = () => {
   const { siteSettings } = useShopData()
-  const [open, setOpen] = useState(false)
+  const { dismiss, open, setOpen } = useAnnouncement()
   const [activeAnnouncement, setActiveAnnouncement] = useState(0)
   const { banner } = siteSettings || {}
   const { dismissable, announcements } = banner || {}
-
-  useEffect(() => {
-    const dismissed = getCookie(ANNOUNCEMENT_DISMISSED)
-    if (dismissed) return
-    const timeout = setTimeout(() => {
-      setOpen(true)
-    }, 5000)
-    return () => clearTimeout(timeout)
-  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -97,11 +86,6 @@ export const Announcement = () => {
     }, 10000)
     return () => clearTimeout(timeout)
   }, [open, announcements, activeAnnouncement])
-
-  const dismiss = () => {
-    setOpen(false)
-    setCookie(ANNOUNCEMENT_DISMISSED, true)
-  }
 
   if (!siteSettings) return null
 

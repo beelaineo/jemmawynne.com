@@ -45,7 +45,7 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
                   family="sans"
                   level={7}
                   mb="1em"
-                  weight={3}
+                  weight={4}
                   key={menuLink._key || 'some-key'}
                 >
                   <DocumentLink document={menuLink.document} />

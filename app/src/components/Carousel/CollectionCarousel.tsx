@@ -36,6 +36,7 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
   }
   const [getCarousel, response] = useLazyRequest<Response, Variables>(query)
   const { data } = response
+  console.log(data)
 
   useEffect(() => {
     if (Boolean(data)) return
@@ -45,11 +46,12 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
   }, [data])
 
   const fetchedCollection = data?.allShopifyCollection[0]
-  const products = definitely(fetchedCollection?.products)
+  const products =
+    collection.products || definitely(fetchedCollection?.products)
 
   if (!products.length) return null
 
-  const initialSlide = viewportWidth < 650 ? 1 : 0
+  const initialSlide = viewportWidth && viewportWidth < 650 ? 1 : 0
   return (
     <Carousel initialSlide={initialSlide}>
       {definitely(products)
@@ -59,9 +61,7 @@ export const CollectionCarousel = ({ collection }: CollectionCarouselProps) => {
             <ProductThumbnail
               key={product._key || 'some-key'}
               product={product}
-              displaySwatches={false}
               displayTags={false}
-              headingLevel={5}
             />
           )
         })}

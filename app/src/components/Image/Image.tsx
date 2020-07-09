@@ -4,7 +4,7 @@ import { ImageType, getImageDetails, getImageKey } from './utils'
 import {
   MainImage,
   HoverImage,
-  Wrapper,
+  ImageWrapper,
   Picture,
   RatioImageFill,
   PreloadWrapper,
@@ -51,6 +51,7 @@ interface ImageProps {
   image?: Maybe<ImageType> | void
   altText?: Maybe<string>
   hoverImage?: Maybe<ImageType>
+  fillContainer?: boolean
   ratio?: number
   sizes?: string
   onLoad?: () => void
@@ -59,10 +60,9 @@ interface ImageProps {
   objectFit?: string
 }
 
-export const ImageWrapper = Wrapper
-
 export const Image = ({
   image,
+  fillContainer,
   sizes: customSizes,
   hoverImage,
   altText: customAltText,
@@ -105,7 +105,7 @@ export const Image = ({
   }
 
   return (
-    <Wrapper ref={containerRef}>
+    <ImageWrapper fillContainer={fillContainer} ref={containerRef}>
       {ratio ? <RatioPadding canvasFill={canvasFill} ratio={ratio} /> : null}
       {src && isInViewOnce ? (
         <Picture objectFit={objectFit} loaded={loaded}>
@@ -137,6 +137,6 @@ export const Image = ({
           ))}
         </PreloadWrapper>
       ) : null}
-    </Wrapper>
+    </ImageWrapper>
   )
 }

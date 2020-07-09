@@ -8,6 +8,7 @@ import { ShopDataProvider } from './ShopDataProvider'
 import { MenuProvider } from './MenuProvider'
 import { useError } from './ErrorProvider'
 import { SearchProvider } from './SearchProvider'
+import { AnnouncementProvider } from './AnnouncementProvider'
 import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
 import { ShopDataResponse } from '../graphql'
 
@@ -68,9 +69,11 @@ export const Providers = ({ children, shopData }: Props) => {
       <ShopDataProvider shopData={shopData}>
         <ThemeProvider theme={defaultTheme}>
           <GlobalStyles />
-          <SearchProvider>
-            <MenuProvider>{children}</MenuProvider>
-          </SearchProvider>
+          <AnnouncementProvider>
+            <SearchProvider>
+              <MenuProvider>{children}</MenuProvider>
+            </SearchProvider>
+          </AnnouncementProvider>
         </ThemeProvider>
       </ShopDataProvider>
     </ShopifyProvider>
