@@ -16,7 +16,7 @@ interface ItemsCarouselProps {
 
 export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
   const { width: viewportWidth } = useViewportSize()
-  const initialSlide = viewportWidth < 650 ? 1 : 0
+  const initialSlide = viewportWidth && viewportWidth < 650 ? 1 : 0
   return (
     <Carousel initialSlide={initialSlide}>
       {items.map((item) => {
@@ -24,13 +24,7 @@ export const ItemsCarousel = ({ items }: ItemsCarouselProps) => {
         const { _key } = item
         switch (item.__typename) {
           case 'ShopifyProduct':
-            return (
-              <ProductThumbnail
-                key={_key || 'some-key'}
-                headingLevel={5}
-                product={item}
-              />
-            )
+            return <ProductThumbnail key={_key || 'some-key'} product={item} />
           case 'ShopifyCollection':
             return (
               <CollectionThumbnail key={_key || 'some-key'} collection={item} />

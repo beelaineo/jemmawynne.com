@@ -12,8 +12,8 @@ interface AnnouncementWrapperProps {
   open: boolean
 }
 
-const AnnouncementWrapper = styled.div`
-  ${({ open, theme }: AnnouncementWrapperProps) => css`
+const AnnouncementWrapper = styled.div<AnnouncementWrapperProps>`
+  ${({ open, theme }) => css`
     position: relative;
     display: flex;
     overflow: hidden;

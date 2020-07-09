@@ -1,5 +1,5 @@
 import styled, { css } from '@xstyled/styled-components'
-import { ImageWrapper } from '../Image'
+import { ImageWrapper } from '../Image/styled'
 
 export const GalleryWrapper = styled.div`
   position: relative;
