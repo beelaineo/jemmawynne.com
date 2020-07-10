@@ -99,6 +99,13 @@ export const internalLink = {
   type: 'object',
   fields: [
     {
+      name: 'label',
+      title: 'Alternate Label',
+      description:
+        '(optional) The title of the linked page will be used by default',
+      type: 'string',
+    },
+    {
       name: 'document',
       title: 'Linked Page',
       type: 'reference',
