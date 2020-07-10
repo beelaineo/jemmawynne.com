@@ -21,11 +21,14 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
   const { products, relatedCollectionsTitle, disableMenu } = collection
   return (
     <>
-      <ProductListingHeader collection={collection} />
+      <ProductListingHeader
+        menuDisabled={disableMenu}
+        collection={collection}
+      />
       <CollectionsMain menuDisabled={disableMenu}>
         {disableMenu !== true ? (
           <CollectionsMenu>
-            <Heading mb={4} level={7} weight={3} family="sans" color="body.8">
+            <Heading mb={4} level={7} weight={4} family="sans" color="body.8">
               {relatedCollectionsTitle || 'Collections'}
             </Heading>
             <Hr />
@@ -35,7 +38,7 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
                   key={rc.handle || 'some-key'}
                   mt={5}
                   level={7}
-                  weight={3}
+                  weight={4}
                   family="sans"
                   color="body.6"
                 >
