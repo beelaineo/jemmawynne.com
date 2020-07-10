@@ -92,14 +92,12 @@ export const ProductDetail = ({ product }: Props) => {
               currentVariant={currentVariant}
               selectVariant={selectVariant}
             />
-            <Box mt={5}>
-              <Column maxWidth="small">
-                <BuyButton
-                  addLineItem={addLineItem}
-                  currentVariant={currentVariant}
-                  quantity={quantity}
-                />
-              </Column>
+            <Box maxWidth="small" mt={5}>
+              <BuyButton
+                addLineItem={addLineItem}
+                currentVariant={currentVariant}
+                quantity={quantity}
+              />
             </Box>
             <Box mt={5}>
               <Button level={3} onClick={openHintModal}>

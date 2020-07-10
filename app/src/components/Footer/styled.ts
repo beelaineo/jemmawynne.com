@@ -8,6 +8,7 @@ export const FooterWrapper = styled.footer`
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 5;
+    margin-top: 6;
 
     ${theme.mediaQueries.tablet} {
       padding: 3;

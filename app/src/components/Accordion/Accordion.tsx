@@ -21,7 +21,7 @@ export const Accordion = ({ accordion }: AccordionProps) => {
         <Heading
           level={6}
           color="body.5"
-          mb={0}
+          my={0}
           textTransform="uppercase"
           family="sans"
         >

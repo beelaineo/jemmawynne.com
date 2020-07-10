@@ -28,9 +28,6 @@ export const BuyButton = ({ currentVariant, addLineItem, quantity }: Props) => {
     setLoading(false)
     openCart('Product added to cart')
   }
-  if (!currentVariant.availableForSale) {
-    return <Placeholder>Out of stock</Placeholder>
-  }
   return (
     <Button
       disabled={loading || Boolean(!currentVariant)}
