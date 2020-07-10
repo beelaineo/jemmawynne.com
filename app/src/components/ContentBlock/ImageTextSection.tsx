@@ -10,8 +10,7 @@ const BlocksWrapper = styled.div`
     display: flex;
     width: 100%;
     justify-content: center;
-    padding: 5;
-    padding-top: 0;
+    padding: 0 5;
 
     & > * + * {
       margin-left: 5;

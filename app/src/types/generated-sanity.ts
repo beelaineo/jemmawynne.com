@@ -1,4 +1,5 @@
 export type Maybe<T> = T | null
+export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -484,6 +485,8 @@ export interface InternalLink {
   __typename: 'InternalLink'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** (optional) The title of the linked page will be used by default */
+  label?: Maybe<Scalars['String']>
   document?: Maybe<
     PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists
   >
@@ -492,11 +495,13 @@ export interface InternalLink {
 export type InternalLinkFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
+  label?: Maybe<StringFilter>
 }
 
 export type InternalLinkSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
+  label?: Maybe<SortOrder>
 }
 
 export type IntFilter = {

@@ -93,7 +93,7 @@ export const SearchPane = () => {
                   {countMessage ? (
                     <Heading
                       mt={3}
-                      mb={0}
+                      mb={4}
                       fontStyle="italic"
                       weight={1}
                       level={5}

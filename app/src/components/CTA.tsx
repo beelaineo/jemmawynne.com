@@ -29,6 +29,7 @@ const Inner = styled.div<WithLevel>`
     justify-content: center;
     color: inherit;
     text-decoration: none;
+    position: relative;
 
     ${level === undefined || level === 1
       ? css`
@@ -38,8 +39,17 @@ const Inner = styled.div<WithLevel>`
         `
       : level === 2
       ? css`
-          padding: 0 0px 1 1;
-          border-bottom: 1px solid;
+          padding: 0 0 1 0;
+
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: calc(100% - 2px);
+            height: 1px;
+            background-color: currentColor;
+          }
         `
       : ''}
   `}

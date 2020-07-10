@@ -44,11 +44,15 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
                 <Heading
                   family="sans"
                   level={7}
+                  fontSize={7}
                   mb="1em"
                   weight={4}
                   key={menuLink._key || 'some-key'}
                 >
-                  <DocumentLink document={menuLink.document} />
+                  <DocumentLink
+                    label={menuLink.label}
+                    document={menuLink.document}
+                  />
                 </Heading>
               ) : null,
             )

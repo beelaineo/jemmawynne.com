@@ -319,7 +319,7 @@ export const SubmenuPane = styled.div`
     top: 100%;
     left: 0;
     width: 100%;
-    padding-top: 2;
+    padding: 5 0 8;
     min-height: 260px;
     background-color: white;
     transition: 0.2s;
@@ -370,6 +370,8 @@ export const SubMenuItemWrapper = styled.div`
 export const ImageWrapper = styled.div`
   flex-basis: 25%;
   position: relative;
+  max-height: 215px;
+  overflow: hidden;
 
   & > div {
     position: absolute;
@@ -381,14 +383,18 @@ export const ImageWrapper = styled.div`
 
   & + &,
   ${SubMenuItemWrapper} + & {
-    margin-left: 2;
+    margin-left: 4;
   }
   &:last-child {
     flex-grow: 1;
 
-    ${ImageElementWrapper}, ${Picture}, img {
-      position: absolute;
-      width: 100%;
+    display: flex;
+    justify-content: flex-center;
+
+    ${ImageElementWrapper} {
+      position: relative;
+      max-width: 480px;
+      margin: 0 auto;
       height: 100%;
     }
   }

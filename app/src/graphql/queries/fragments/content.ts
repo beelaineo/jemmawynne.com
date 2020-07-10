@@ -4,6 +4,7 @@ export const internalLinkFragment = gql`
   fragment InternalLinkFragment on InternalLink {
     _key
     _type
+    label
     document {
       __typename
       ... on Page {

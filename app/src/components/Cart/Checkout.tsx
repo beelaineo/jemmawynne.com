@@ -39,10 +39,10 @@ export const Checkout = () => {
       <CartInner>
         {lineItems.length === 0 ? (
           <EmptyWrapper>
-            <Heading level={2} mb={3}>
+            <Heading level={2} weight={2} mb={3}>
               {lineItems.length ? 'Your Cart' : 'Your cart is empty'}
             </Heading>
-            <Button mt={4} level={2} onClick={closeCart}>
+            <Button mt={4} level={1} onClick={closeCart}>
               Continue Shopping
             </Button>
           </EmptyWrapper>

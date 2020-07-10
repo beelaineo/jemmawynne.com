@@ -24,6 +24,7 @@ export const SectionWrapper = styled.div`
 
 const SectionHeaderWrapper = styled.div`
   text-align: center;
+  margin-top: 6;
   margin-bottom: 6;
 `
 const SubtitleWrapper = styled.div`

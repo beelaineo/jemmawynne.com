@@ -81,17 +81,17 @@ export const Footer = () => {
       <TabletLinks linkGroups={definitely(linkGroups)} />
 
       <FooterBottom>
-        <Heading color="body.7" pt="5px" level={5}>
+        <Heading color="body.5" pt="5px" level={5}>
           <Link href="/[pageSlug]" as="/terms-and-conditions">
             <a>Terms & Conditions</a>
           </Link>
         </Heading>
-        <Heading color="body.7" pt="5px" level={5}>
+        <Heading color="body.5" pt="5px" level={5}>
           <Link href="/[pageSlug]" as="/privacy-policy">
             <a>Privacy Policy</a>
           </Link>
         </Heading>
-        <Heading color="body.7" pt="5px" level={5}>
+        <Heading color="body.5" pt="5px" level={5}>
           © {currentYear} Jemma Wynne
         </Heading>
       </FooterBottom>

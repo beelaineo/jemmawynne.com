@@ -194,7 +194,7 @@ export const CarouselInner = ({
           ))}
         </SlidesContainer>
       </CarouselMask>
-      {slides.length > 1 && currentSlide !== null ? (
+      {dots && slides.length > 1 && currentSlide !== null ? (
         <Dots currentSlide={currentSlide} totalSlides={slides.length} />
       ) : null}
     </CarouselContainer>
