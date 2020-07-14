@@ -35,7 +35,12 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
   return (
     <ImageLinkWrapper>
       <DocumentLink document={link.document}>
-        <Image hoverImage={hoverImage} image={image} ratio={1} />
+        <Image
+          displayCaption={false}
+          hoverImage={hoverImage}
+          image={image}
+          ratio={1}
+        />
         <Box mt={2} textAlign="center">
           <Heading
             family="sans"

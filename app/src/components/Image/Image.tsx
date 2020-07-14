@@ -59,6 +59,7 @@ interface ImageProps {
   preloadImages?: ImageType[]
   canvasFill?: boolean
   objectFit?: string
+  displayCaption?: boolean
 }
 
 export const Image = ({
@@ -72,6 +73,7 @@ export const Image = ({
   canvasFill,
   preloadImages,
   objectFit,
+  displayCaption,
 }: ImageProps) => {
   const sizes = customSizes || '100vw'
   const [loaded, setLoaded] = React.useState(false)
@@ -147,11 +149,15 @@ export const Image = ({
           ))}
         </PreloadWrapper>
       ) : null}
-      {caption ? (
+      {caption && displayCaption ? (
         <Heading level={6} family="sans" textTransform="uppercase">
           {caption}
         </Heading>
       ) : null}
     </ImageWrapper>
   )
+}
+
+Image.defaultProps = {
+  displayCaption: true,
 }
