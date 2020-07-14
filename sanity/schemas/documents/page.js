@@ -97,39 +97,5 @@ export const page = {
       type: 'array',
       of: [{ type: 'pageBlock' }, { type: 'hero' }, { type: 'carousel' }],
     },
-    {
-      name: 'content',
-      label: 'Content',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Header 2', value: 'h2' },
-            { title: 'Header 3', value: 'h3' },
-            { title: 'Normal', value: 'normal' },
-          ],
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-            ],
-          },
-          lists: [
-            {
-              title: 'Bullet',
-              value: 'bullet',
-            },
-            {
-              title: 'Numbered',
-              value: 'number',
-            },
-          ],
-        },
-        {
-          type: 'richImage',
-        },
-      ],
-    },
   ],
 }
