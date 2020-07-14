@@ -7,11 +7,19 @@ export const richImage = {
   },
   fields: [
     {
+      name: 'caption',
+      title: 'Caption',
+      type: 'string',
+      options: {
+        isHighlighted: true,
+      },
+    },
+    {
       name: 'altText',
       title: 'Alt Text',
       type: 'string',
       description:
-        'A short description of the image. Helps with accessibility and SEO',
+        'A short description of the image. Helps with accessibility and SEO. Defaults to the caption if not defined.',
       options: {
         isHighlighted: true,
       },

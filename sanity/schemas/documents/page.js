@@ -39,6 +39,12 @@ export const pageBlock = {
       title: 'Background Color',
     },
     {
+      name: 'textColor',
+      type: 'colorPicker',
+      title: 'Text Color',
+    },
+
+    {
       name: 'alignment',
       type: 'position',
       title: 'Content Alignment',
