@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { NotFound, StaticPage } from '../src/views'
 import { Page as PageType } from '../src/types'
-import { heroFragment, request, requestShopData } from '../src/graphql'
+import {
+  heroFragment,
+  carouselFragment,
+  pageBlockFragment,
+  request,
+  requestShopData,
+} from '../src/graphql'
 import { definitely } from '../src/utils'
 
 interface PageResponse {
@@ -20,14 +26,26 @@ const pageQuery = gql`
       slug {
         current
       }
-      textAlign
+
+      body {
+        ... on Hero {
+          ...HeroFragment
+        }
+        ... on Carousel {
+          ...CarouselFragment
+        }
+        ... on PageBlock {
+          ...PageBlockFragment
+        }
+      }
       hero {
         ...HeroFragment
       }
-      contentRaw
     }
   }
   ${heroFragment}
+  ${carouselFragment}
+  ${pageBlockFragment}
 `
 
 interface PageProps {

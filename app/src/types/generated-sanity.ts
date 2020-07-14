@@ -99,6 +99,8 @@ export type CarouselOrHeroOrImageTextSection =
   | Hero
   | ImageTextSection
 
+export type CarouselOrHeroOrPageBlock = Carousel | Hero | PageBlock
+
 export type CarouselSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
@@ -631,8 +633,34 @@ export interface Page extends Document {
   title?: Maybe<Scalars['String']>
   slug?: Maybe<Slug>
   hero?: Maybe<Hero>
-  textAlign?: Maybe<Scalars['String']>
+  body?: Maybe<Array<Maybe<CarouselOrHeroOrPageBlock>>>
   contentRaw?: Maybe<Scalars['JSON']>
+}
+
+export interface PageBlock {
+  __typename: 'PageBlock'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  backgroundColor?: Maybe<Scalars['String']>
+  textColor?: Maybe<Scalars['String']>
+  alignment?: Maybe<Scalars['String']>
+  content?: Maybe<Array<Maybe<PageTextOrRichImage>>>
+}
+
+export type PageBlockFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  backgroundColor?: Maybe<StringFilter>
+  textColor?: Maybe<StringFilter>
+  alignment?: Maybe<StringFilter>
+}
+
+export type PageBlockSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  backgroundColor?: Maybe<SortOrder>
+  textColor?: Maybe<SortOrder>
+  alignment?: Maybe<SortOrder>
 }
 
 export type PageFilter = {
@@ -647,7 +675,6 @@ export type PageFilter = {
   title?: Maybe<StringFilter>
   slug?: Maybe<SlugFilter>
   hero?: Maybe<HeroFilter>
-  textAlign?: Maybe<StringFilter>
 }
 
 export interface PageInfo {
@@ -694,7 +721,28 @@ export type PageSorting = {
   title?: Maybe<SortOrder>
   slug?: Maybe<SlugSorting>
   hero?: Maybe<HeroSorting>
-  textAlign?: Maybe<SortOrder>
+}
+
+export interface PageText {
+  __typename: 'PageText'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  heading?: Maybe<Scalars['String']>
+  bodyRaw?: Maybe<Scalars['JSON']>
+}
+
+export type PageTextFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  heading?: Maybe<StringFilter>
+}
+
+export type PageTextOrRichImage = PageText | RichImage
+
+export type PageTextSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  heading?: Maybe<SortOrder>
 }
 
 export interface PressItem extends Document {
@@ -904,7 +952,8 @@ export interface RichImage {
   __typename: 'RichImage'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  /** A short description of the image. Helps with accessibility and SEO */
+  caption?: Maybe<Scalars['String']>
+  /** A short description of the image. Helps with accessibility and SEO. Defaults to the caption if not defined. */
   altText?: Maybe<Scalars['String']>
   asset?: Maybe<SanityImageAsset>
   hotspot?: Maybe<SanityImageHotspot>
@@ -914,6 +963,7 @@ export interface RichImage {
 export type RichImageFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
+  caption?: Maybe<StringFilter>
   altText?: Maybe<StringFilter>
   asset?: Maybe<SanityImageAssetFilter>
   hotspot?: Maybe<SanityImageHotspotFilter>
@@ -923,6 +973,7 @@ export type RichImageFilter = {
 export type RichImageSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
+  caption?: Maybe<SortOrder>
   altText?: Maybe<SortOrder>
   hotspot?: Maybe<SanityImageHotspotSorting>
   crop?: Maybe<SanityImageCropSorting>

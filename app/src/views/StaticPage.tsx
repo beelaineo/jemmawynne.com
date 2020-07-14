@@ -1,54 +1,33 @@
 import * as React from 'react'
-import styled, { css } from '@xstyled/styled-components'
 import { Page } from '../types'
-import { Column, TextHeader } from '../components/Layout'
-import { HeroBlock } from '../components/ContentBlock'
+import { TextHeader } from '../components/Layout'
+import { HeroBlock, PageBodyBlock } from '../components/ContentBlock'
 import { Heading } from '../components/Text'
-import { RichText } from '../components/RichText'
-import { isValidHero } from '../utils'
-
-interface MainProps {
-  textAlign?: string | null
-}
-
-const Main = styled.div`
-  ${({ textAlign }: MainProps) => css`
-    margin: 8 0;
-    padding: 0 5;
-    text-align: ${textAlign ? textAlign : 'left'};
-
-    h1,
-    h2,
-    h3 {
-      margin-top: 1em;
-
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-  `}
-`
+import { definitely, isValidHero } from '../utils'
 
 interface StaticPageProps {
   page: Page
 }
 
 export const StaticPage = ({ page }: StaticPageProps) => {
-  const { hero, textAlign, contentRaw, title } = page
+  console.log(page)
+  const { hero, body, title } = page
   return (
     <>
       {isValidHero(hero) ? (
         <HeroBlock hero={hero} />
-      ) : (
+      ) : title ? (
         <TextHeader>
-          {title ? <Heading level={1}>{title}</Heading> : null}
+          <Heading level={1}>{title}</Heading>
         </TextHeader>
-      )}
-      <Main textAlign={textAlign}>
-        <Column maxWidth="wide">
-          <RichText body={contentRaw} />
-        </Column>
-      </Main>
+      ) : null}
+      {definitely(body).map((b, index, blocks) => (
+        <PageBodyBlock
+          key={b._key || 'some-key'}
+          block={b}
+          previousBlock={blocks[index - 1]}
+        />
+      ))}
     </>
   )
 }

@@ -1,5 +1,11 @@
 import styled, { css } from '@xstyled/styled-components'
-import { getColor, getTextAlignment } from '../../theme/utils'
+import {
+  getColor,
+  getFlexAlignment,
+  getFlexJustification,
+  getTextAlignment,
+} from '../../theme/utils'
+import { Position } from '../../types'
 import { ImageWrapper } from '../Image/styled'
 
 export const TextWrapper = styled.div`
@@ -139,4 +145,34 @@ export const BackgroundImageWrapper = styled.div`
       max-height: 420px;
     }
   `}
+`
+
+interface PageBlockWrapperProps {
+  alignment?: string | null
+  backgroundColor?: string | null
+  shiftDown?: boolean
+  padTop?: boolean
+}
+
+export const PageBlockWrapper = styled.div<PageBlockWrapperProps>`
+  ${({ alignment, padTop, shiftDown, backgroundColor }) => css`
+    padding: ${padTop ? 11 : 3} 6 6;
+    display: flex;
+    justify-content: ${getFlexJustification(alignment)};
+    align-items: ${getFlexAlignment(alignment)};
+    background-color: ${getColor(backgroundColor) || 'body.0'};
+    margin-bottom: ${shiftDown ? '-100px' : '0'};
+
+    & > * {
+      flex: 1 1 0px;
+    }
+  `}
+`
+
+export const PageText = styled.div`
+  padding: 0 5;
+`
+
+export const PageImage = styled.div`
+  max-width: 600px;
 `

@@ -67,7 +67,6 @@ interface HeroBlockProps {
 
 export const HeroBlock = ({ hero }: HeroBlockProps) => {
   if (!hero) return null
-  console.log(hero)
   const {
     textPosition,
     textColor,

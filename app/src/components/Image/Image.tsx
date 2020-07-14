@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Maybe } from '../../types'
 import { ImageType, getImageDetails, getImageKey } from './utils'
+import { Heading } from '../Text'
 import {
   MainImage,
   HoverImage,
@@ -67,7 +68,7 @@ export const Image = ({
   hoverImage,
   altText: customAltText,
   onLoad,
-  ratio,
+  ratio: customRatio,
   canvasFill,
   preloadImages,
   objectFit,
@@ -79,7 +80,16 @@ export const Image = ({
   const { isInViewOnce } = useInViewport(containerRef)
 
   const imageDetails = React.useMemo(() => getImageDetails(image), [image])
-  const { src, altText: cmsAltText, srcSet, srcSetWebp } = imageDetails || {}
+  const {
+    src,
+    ratio: cmsRatio,
+    caption,
+    altText: cmsAltText,
+    srcSet,
+    srcSetWebp,
+  } = imageDetails || {}
+
+  const ratio = customRatio || cmsRatio
 
   const altText = customAltText || cmsAltText
   const hoverDetails = React.useMemo(
@@ -136,6 +146,11 @@ export const Image = ({
             <Image key={getImageKey(p)} image={p} />
           ))}
         </PreloadWrapper>
+      ) : null}
+      {caption ? (
+        <Heading level={6} family="sans" textTransform="uppercase">
+          {caption}
+        </Heading>
       ) : null}
     </ImageWrapper>
   )

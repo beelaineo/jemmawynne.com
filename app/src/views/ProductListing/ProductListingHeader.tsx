@@ -22,7 +22,6 @@ export const ProductListingHeader = ({
     : image && description
     ? 'left'
     : 'left'
-  console.log(title, hero)
   return isValidHero(hero) ? (
     <HeroBlock hero={hero} />
   ) : (

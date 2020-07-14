@@ -111,6 +111,7 @@ export const sanityRichImageFragment = gql`
     __typename
     _key
     altText
+    caption
     asset {
       ...SanityImageAssetFragment
     }
@@ -537,4 +538,26 @@ export const carouselFragment = gql`
   }
   ${saneShopifyProductFragment}
   ${richPageLinkFragment}
+`
+
+export const pageBlockFragment = gql`
+  fragment PageBlockFragment on PageBlock {
+    __typename
+    _key
+    _type
+    backgroundColor
+    alignment
+    content {
+      ... on RichImage {
+        ...SanityRichImageFragment
+      }
+      ... on PageText {
+        __typename
+        _type
+        heading
+        bodyRaw
+      }
+    }
+  }
+  ${sanityRichImageFragment}
 `

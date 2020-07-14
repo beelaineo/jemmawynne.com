@@ -15,13 +15,13 @@
             "name": "SanityImageAsset"
           },
           {
-            "name": "PressPage"
-          },
-          {
             "name": "ShopifyCollection"
           },
           {
             "name": "ShopifyProduct"
+          },
+          {
+            "name": "PressPage"
           },
           {
             "name": "Stockists"
@@ -81,6 +81,21 @@
       },
       {
         "kind": "UNION",
+        "name": "CarouselOrHeroOrPageBlock",
+        "possibleTypes": [
+          {
+            "name": "Carousel"
+          },
+          {
+            "name": "Hero"
+          },
+          {
+            "name": "PageBlock"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
         "name": "PageOrShopifyCollectionOrShopifyProduct",
         "possibleTypes": [
           {
@@ -91,6 +106,18 @@
           },
           {
             "name": "ShopifyProduct"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "PageTextOrRichImage",
+        "possibleTypes": [
+          {
+            "name": "PageText"
+          },
+          {
+            "name": "RichImage"
           }
         ]
       },

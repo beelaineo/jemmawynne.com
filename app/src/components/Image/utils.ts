@@ -31,6 +31,8 @@ export interface ImageDetails {
   altText?: string | null
   srcSet?: string | null
   srcSetWebp?: string | null
+  caption?: string
+  ratio?: number
 }
 
 interface ImageWidth {
@@ -72,9 +74,17 @@ const getSanityImageDetails = (
     })),
   )
 
-  const { altText } = image
+  const caption =
+    image.__typename === 'RichImage' ? image.caption ?? undefined : undefined
+  const altText = caption ?? image.altText
 
-  return { src, srcSet, srcSetWebp, altText }
+  const aspectRatio =
+    image.__typename === 'RichImage'
+      ? image.asset?.metadata?.dimensions?.aspectRatio ?? undefined
+      : undefined
+
+  const ratio = aspectRatio ? 1 / aspectRatio : undefined
+  return { src, srcSet, srcSetWebp, altText, caption, ratio }
 }
 
 const widths = [100, 300, 800, 1200, 1600]
