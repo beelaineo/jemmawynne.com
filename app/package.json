@@ -15,6 +15,7 @@
 	],
 	"scripts": {
 		"start": "DEBUG=dev:* next",
+    "build": "next build",
 		"pre-build": "yarn generate-types",
     "update": "npx ncu -x babel-plugin-styled-components",
 		"install-types": "typesync && yarn install",

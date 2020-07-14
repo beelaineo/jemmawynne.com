@@ -18,7 +18,7 @@ interface LinkProps {
     | Page
     | null
   children?: React.ReactNode
-  label?: string
+  label?: string | null
 }
 
 export const DocumentLink = ({ document, children, label }: LinkProps) => {
