@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { Page } from '../types'
-import { TextHeader } from '../components/Layout'
 import { HeroBlock, PageBodyBlock } from '../components/ContentBlock'
-import { Heading } from '../components/Text'
 import { definitely, isValidHero } from '../utils'
 
 interface StaticPageProps {
@@ -10,17 +8,10 @@ interface StaticPageProps {
 }
 
 export const StaticPage = ({ page }: StaticPageProps) => {
-  console.log(page)
-  const { hero, body, title } = page
+  const { hero, body } = page
   return (
     <>
-      {isValidHero(hero) ? (
-        <HeroBlock hero={hero} />
-      ) : title ? (
-        <TextHeader>
-          <Heading level={1}>{title}</Heading>
-        </TextHeader>
-      ) : null}
+      {isValidHero(hero) ? <HeroBlock hero={hero} /> : null}
       {definitely(body).map((b, index, blocks) => (
         <PageBodyBlock
           key={b._key || 'some-key'}

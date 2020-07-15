@@ -90,6 +90,7 @@ export const Image = ({
     srcSet,
     srcSetWebp,
   } = imageDetails || {}
+  console.log(image, caption, displayCaption)
 
   const ratio = customRatio || cmsRatio
 
@@ -117,44 +118,46 @@ export const Image = ({
   }
 
   return (
-    <ImageWrapper fillContainer={fillContainer} ref={containerRef}>
-      {ratio ? <RatioPadding canvasFill={canvasFill} ratio={ratio} /> : null}
-      {src && isInViewOnce ? (
-        <Picture objectFit={objectFit} loaded={loaded}>
-          {srcSetWebp ? (
-            <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
-          ) : null}
-          {srcSet ? (
-            <source type="image/jpg" srcSet={srcSet} sizes={sizes} />
-          ) : null}
-          <MainImage
-            src={src}
-            alt={altText || ''}
-            ref={imageRef}
-            onLoad={handleOnLoad}
-          />
-          {hoverDetails && hoverDetails.src ? (
-            <HoverImage
-              src={hoverDetails.src}
-              sizes={sizes}
-              srcSet={srcSetWebp || srcSet || undefined}
+    <div>
+      <ImageWrapper fillContainer={fillContainer} ref={containerRef}>
+        {ratio ? <RatioPadding canvasFill={canvasFill} ratio={ratio} /> : null}
+        {src && isInViewOnce ? (
+          <Picture objectFit={objectFit} loaded={loaded}>
+            {srcSetWebp ? (
+              <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
+            ) : null}
+            {srcSet ? (
+              <source type="image/jpg" srcSet={srcSet} sizes={sizes} />
+            ) : null}
+            <MainImage
+              src={src}
+              alt={altText || ''}
+              ref={imageRef}
+              onLoad={handleOnLoad}
             />
-          ) : null}
-        </Picture>
-      ) : null}
-      {isInViewOnce && preloadImages && preloadImages.length ? (
-        <PreloadWrapper>
-          {preloadImages.map((p) => (
-            <Image key={getImageKey(p)} image={p} />
-          ))}
-        </PreloadWrapper>
-      ) : null}
+            {hoverDetails && hoverDetails.src ? (
+              <HoverImage
+                src={hoverDetails.src}
+                sizes={sizes}
+                srcSet={srcSetWebp || srcSet || undefined}
+              />
+            ) : null}
+          </Picture>
+        ) : null}
+        {isInViewOnce && preloadImages && preloadImages.length ? (
+          <PreloadWrapper>
+            {preloadImages.map((p) => (
+              <Image key={getImageKey(p)} image={p} />
+            ))}
+          </PreloadWrapper>
+        ) : null}
+      </ImageWrapper>
       {caption && displayCaption ? (
-        <Heading level={6} family="sans" textTransform="uppercase">
+        <Heading level={6} mt={3} family="sans" textTransform="uppercase">
           {caption}
         </Heading>
       ) : null}
-    </ImageWrapper>
+    </div>
   )
 }
 

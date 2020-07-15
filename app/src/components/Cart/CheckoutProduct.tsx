@@ -58,7 +58,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
             ) : null,
           )}
         </Box>
-        <Heading level={5} weight={5} fontStyle="italic">
+        <Heading level={5} weight={2} fontStyle="italic">
           {formatMoney(variant.priceV2)}
         </Heading>
         <QuantitySelectorCart>
@@ -72,7 +72,13 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
             </QuantityButton>
           </Heading>
           <RemoveButtonWrapper>
-            <Button level={4} my={0} fontWeight={4} onClick={setQuantity(0)}>
+            <Button
+              fontSize="9px"
+              level={4}
+              my={0}
+              fontWeight={4}
+              onClick={setQuantity(0)}
+            >
               Remove
             </Button>
           </RemoveButtonWrapper>

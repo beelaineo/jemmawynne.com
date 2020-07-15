@@ -9,7 +9,13 @@ import { Image } from '../Image'
 import { Heading } from '../Text'
 import { RichText } from '../RichText'
 import { definitely } from '../../utils'
-import { PageImage, PageBlockWrapper, PageText } from './styled'
+import {
+  PageTextInner,
+  PageBlockInner,
+  PageImage,
+  PageBlockWrapper,
+  PageText,
+} from './styled'
 
 interface PageBlockProps {
   block: PageBlockType
@@ -30,28 +36,34 @@ export const PageBlock = ({ block, previousBlock }: PageBlockProps) => {
   const { alignment, backgroundColor, content } = block
   const shiftDown = hasShift(block)
   const padTop = hasShift(previousBlock)
-  console.log({ block, previousBlock, shiftDown, padTop })
+  const innerBlocks = definitely(content)
+  const isAlone =
+    innerBlocks.length === 1 && innerBlocks[0].__typename === 'PageText'
   return (
     <PageBlockWrapper
       shiftDown={shiftDown}
       padTop={padTop}
-      alignment={alignment}
       backgroundColor={backgroundColor}
+      isAlone={isAlone}
     >
-      {definitely(content).map((c) =>
-        c.__typename === 'PageText' ? (
-          <PageText key={c._key || 'some-key'}>
-            <Heading level={5} mb={5} family="sans">
-              {c.heading}
-            </Heading>
-            <RichText body={c.bodyRaw} />
-          </PageText>
-        ) : c.__typename === 'RichImage' ? (
-          <PageImage key={c._key || 'some-key'}>
-            <Image image={c} />
-          </PageImage>
-        ) : null,
-      )}
+      <PageBlockInner alignment={alignment}>
+        {innerBlocks.map((c) =>
+          c.__typename === 'PageText' ? (
+            <PageText isAlone={isAlone} key={c._key || 'some-key'}>
+              <Heading level={5} mb={5} family="sans">
+                {c.heading}
+              </Heading>
+              <PageTextInner isAlone={isAlone}>
+                <RichText body={c.bodyRaw} />
+              </PageTextInner>
+            </PageText>
+          ) : c.__typename === 'RichImage' ? (
+            <PageImage key={c._key || 'some-key'}>
+              <Image image={c} />
+            </PageImage>
+          ) : null,
+        )}
+      </PageBlockInner>
     </PageBlockWrapper>
   )
 }

@@ -148,31 +148,57 @@ export const BackgroundImageWrapper = styled.div`
 `
 
 interface PageBlockWrapperProps {
-  alignment?: string | null
   backgroundColor?: string | null
   shiftDown?: boolean
   padTop?: boolean
+  isAlone?: boolean
 }
 
 export const PageBlockWrapper = styled.div<PageBlockWrapperProps>`
-  ${({ alignment, padTop, shiftDown, backgroundColor }) => css`
-    padding: ${padTop ? 11 : 3} 6 6;
+  ${({ padTop, shiftDown, isAlone, backgroundColor }) => css`
+    padding: 0 6;
+    padding-top: ${isAlone ? '100px' : padTop ? '150px' : 3};
+    padding-bottom: ${isAlone ? '100px' : 10};
+    background-color: ${getColor(backgroundColor) || 'body.0'};
+    margin-bottom: ${shiftDown ? '-170px' : '0'};
+  `}
+`
+
+interface PageBlockInnerProps {
+  alignment?: string | null
+}
+
+export const PageBlockInner = styled.div<PageBlockInnerProps>`
+  ${({ alignment }) => css`
+    max-width: 980px;
+    margin: 0 auto;
     display: flex;
     justify-content: ${getFlexJustification(alignment)};
     align-items: ${getFlexAlignment(alignment)};
-    background-color: ${getColor(backgroundColor) || 'body.0'};
-    margin-bottom: ${shiftDown ? '-100px' : '0'};
-
     & > * {
       flex: 1 1 0px;
     }
   `}
 `
+interface PageTextInnerProps {
+  isAlone: boolean
+}
 
-export const PageText = styled.div`
-  padding: 0 5;
+export const PageText = styled.div<PageTextInnerProps>`
+  ${({ isAlone }) => css`
+    padding: ${isAlone ? 0 : '0 8 8'};
+  `}
+`
+
+export const PageTextInner = styled.div<PageTextInnerProps>`
+  ${({ isAlone }) => css`
+    max-width: ${isAlone ? '800px' : '370px'};
+    text-align: ${isAlone ? 'center' : 'auto'};
+    margin: ${isAlone ? '0 auto' : '0'};
+  `}
 `
 
 export const PageImage = styled.div`
-  max-width: 600px;
+  max-width: 740px;
+  max-height: 75vh;
 `

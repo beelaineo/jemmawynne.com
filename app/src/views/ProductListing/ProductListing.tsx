@@ -27,26 +27,28 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
       />
       <CollectionsMain menuDisabled={disableMenu}>
         {disableMenu !== true ? (
-          <CollectionsMenu>
-            <Heading mb={4} level={7} weight={4} family="sans" color="body.8">
-              {relatedCollectionsTitle || 'Collections'}
-            </Heading>
-            <Hr />
-            {definitely(relatedCollections).map((rc) =>
-              rc.archived !== true ? (
-                <Heading
-                  key={rc.handle || 'some-key'}
-                  mt={5}
-                  level={7}
-                  weight={4}
-                  family="sans"
-                  color="body.6"
-                >
-                  <DocumentLink document={rc}>{rc.title}</DocumentLink>
-                </Heading>
-              ) : null,
-            )}
-          </CollectionsMenu>
+          <div>
+            <CollectionsMenu>
+              <Heading mb={4} level={7} weight={4} family="sans" color="body.8">
+                {relatedCollectionsTitle || 'Collections'}
+              </Heading>
+              <Hr />
+              {definitely(relatedCollections).map((rc) =>
+                rc.archived !== true ? (
+                  <Heading
+                    key={rc.handle || 'some-key'}
+                    mt={5}
+                    level={7}
+                    weight={4}
+                    family="sans"
+                    color="body.6"
+                  >
+                    <DocumentLink document={rc}>{rc.title}</DocumentLink>
+                  </Heading>
+                ) : null,
+              )}
+            </CollectionsMenu>
+          </div>
         ) : null}
         <ItemGrid items={products} />
       </CollectionsMain>

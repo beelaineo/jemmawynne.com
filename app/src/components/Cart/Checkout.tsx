@@ -62,7 +62,7 @@ export const Checkout = () => {
             {checkout && checkout?.paymentDueV2 ? (
               <>
                 <SubtotalWrapper>
-                  <Heading family="sans" level={6} weight={3}>
+                  <Heading family="sans" level={6} weight={4}>
                     Subtotal
                   </Heading>
                   <Heading
