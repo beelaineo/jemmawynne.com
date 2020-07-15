@@ -90,7 +90,6 @@ export const Image = ({
     srcSet,
     srcSetWebp,
   } = imageDetails || {}
-  console.log(image, caption, displayCaption)
 
   const ratio = customRatio || cmsRatio
 

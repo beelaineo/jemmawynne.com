@@ -538,6 +538,7 @@ export interface LinkGroup {
   __typename: 'LinkGroup'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** (optional) A light gray header that appears above the list of links */
   title?: Maybe<Scalars['String']>
   links?: Maybe<Array<Maybe<InternalLink>>>
 }
@@ -634,7 +635,6 @@ export interface Page extends Document {
   slug?: Maybe<Slug>
   hero?: Maybe<Hero>
   body?: Maybe<Array<Maybe<CarouselOrHeroOrPageBlock>>>
-  contentRaw?: Maybe<Scalars['JSON']>
 }
 
 export interface PageBlock {
