@@ -61,6 +61,8 @@ export const linkGroup = {
     {
       title: 'Group Title',
       name: 'title',
+      description:
+        '(optional) A light gray header that appears above the list of links',
       type: 'string',
     },
     {
