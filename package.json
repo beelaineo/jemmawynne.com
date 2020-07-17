@@ -1,6 +1,9 @@
 {
 	"name": "root",
 	"private": true,
+  "engines": {
+    "node": "12.x"
+  },
 	"scripts": {
 		"setup": "yarn install",
 		"test": "yarn workspace jemmawynne-app test",
