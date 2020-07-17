@@ -26,7 +26,7 @@
     "sync": "yarn sync:reset && yarn sync:export && yarn sync:import && yarn sync:cleanup"
   },
   "dependencies": {
-    "@sane-shopify/sanity-plugin": "^0.17.0",
+    "@sane-shopify/sanity-plugin": "^0.17.1",
     "@sanity/base": "^1.149.18",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/cli": "^1.149.18",
