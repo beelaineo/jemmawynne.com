@@ -23,11 +23,9 @@ module.exports = withSourceMaps(
           'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
         }),
       )
-
       if (!isServer) {
         config.resolve.alias['@sentry/node'] = '@sentry/browser'
       }
-
       return config
     },
   }),
