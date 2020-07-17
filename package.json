@@ -5,7 +5,9 @@
 		"setup": "yarn install",
 		"test": "yarn workspace jemmawynne-app test",
 		"build": "yarn workspace jemmawynne-app build",
-		"start:app": "yarn workspace jemmawynne-app start"
+		"start:app": "yarn workspace jemmawynne-app start",
+    "update": "yarn ncu && yarn workspaces run ncu",
+    "ncu:u": "yarn exec ncu -u && yarn workspaces run ncu -u && yarn install"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^9.0.1",
