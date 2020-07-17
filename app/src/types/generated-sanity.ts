@@ -2097,6 +2097,7 @@ export interface ShopifySourceProductVariant {
   id?: Maybe<Scalars['String']>
   image?: Maybe<ShopifySourceImage>
   priceV2?: Maybe<ShopifyMoneyV2>
+  compareAtPriceV2?: Maybe<ShopifyMoneyV2>
   selectedOptions?: Maybe<Array<Maybe<ShopifySourceSelectedOption>>>
   requiresShipping?: Maybe<Scalars['Boolean']>
   sku?: Maybe<Scalars['String']>
@@ -2134,6 +2135,7 @@ export type ShopifySourceProductVariantFilter = {
   id?: Maybe<StringFilter>
   image?: Maybe<ShopifySourceImageFilter>
   priceV2?: Maybe<ShopifyMoneyV2Filter>
+  compareAtPriceV2?: Maybe<ShopifyMoneyV2Filter>
   requiresShipping?: Maybe<BooleanFilter>
   sku?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
@@ -2168,6 +2170,7 @@ export type ShopifySourceProductVariantSorting = {
   id?: Maybe<SortOrder>
   image?: Maybe<ShopifySourceImageSorting>
   priceV2?: Maybe<ShopifyMoneyV2Sorting>
+  compareAtPriceV2?: Maybe<ShopifyMoneyV2Sorting>
   requiresShipping?: Maybe<SortOrder>
   sku?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
