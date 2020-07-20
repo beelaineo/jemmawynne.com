@@ -51,7 +51,7 @@
 	},
 	"dependencies": {
 		"@good-idea/unwind-edges": "^1.4.0",
-		"@sane-shopify/server": "^0.17.2",
+		"@sane-shopify/server": "^0.17.3",
 		"@sanity/block-content-to-react": "^2.0.7",
 		"@sanity/client": "^1.149.18",
 		"@sentry/browser": "^5.19.2",
