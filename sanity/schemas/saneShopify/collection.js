@@ -10,6 +10,12 @@ export const collection = {
       title: 'Disable Side Menu',
     },
     {
+      name: 'collectionBlocks',
+      description: 'Insert blocks of content between products',
+      type: 'array',
+      of: [{ type: 'collectionBlock' }],
+    },
+    {
       name: 'relatedCollectionsTitle',
       type: 'string',
       title: 'Related Collections menu title (optional)',

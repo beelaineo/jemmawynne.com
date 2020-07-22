@@ -1,4 +1,5 @@
 export * from './link'
+export * from './collectionBlock'
 export * from './swatches'
 export * from './subMenu'
 export * from './cta'
