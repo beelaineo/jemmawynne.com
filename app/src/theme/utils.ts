@@ -45,7 +45,7 @@ export const getFlexJustification = (
   }
 }
 
-export const getColor = (color: string | void | null): string | void => {
+export const getColor = (color: string | void | null): string => {
   switch (color) {
     case 'beige':
       return 'body.2'
@@ -58,6 +58,6 @@ export const getColor = (color: string | void | null): string | void => {
     case 'white':
       return 'body.0'
     default:
-      return undefined
+      return 'inherit'
   }
 }

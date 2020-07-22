@@ -1,7 +1,7 @@
 import { useReducer, useState } from 'react'
 import type { SanityClient } from '@sanity/client'
 import type { Reducer } from 'react'
-import { withTypenames } from './withTypenames'
+import { withTypenames } from '../../utils'
 import { useError } from '../../providers/ErrorProvider'
 
 const RESET = 'RESET'
@@ -66,7 +66,7 @@ type Response = Document[]
 type Variables = { [key: string]: any }
 
 export const useSanityQuery = <
-  R extends Response = Response,
+  R extends Document,
   V extends Variables = Variables
 >() => {
   const { handleError } = useError()
@@ -86,10 +86,7 @@ export const useSanityQuery = <
 
   const reset = () => dispatch({ type: RESET })
 
-  const query = async <R = any[]>(
-    query: string,
-    customParams: V,
-  ): Promise<R> => {
+  const query = async (query: string, customParams: V): Promise<R[]> => {
     dispatch({ type: FETCH })
     const client = await fetchOrGetClient()
     const params = customParams ? customParams : {}

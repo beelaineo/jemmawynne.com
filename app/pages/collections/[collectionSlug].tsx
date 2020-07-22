@@ -2,65 +2,11 @@ import * as React from 'react'
 import gql from 'graphql-tag'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { ShopifyCollection } from '../../src/types'
+import { sanityQuery } from '../../src/services/sanity'
 import { NotFound, ProductListing } from '../../src/views'
-import {
-  request,
-  requestShopData,
-  shopifyProductThumbnailFragment,
-  heroFragment,
-  shopifySourceImageFragment,
-} from '../../src/graphql'
+import { request, requestShopData } from '../../src/graphql'
 import { definitely } from '../../src/utils'
-
-export const collectionQuery = gql`
-  query CollectionPageQuery($handle: String) {
-    allShopifyCollection(
-      where: {
-        shopifyId: { neq: null }
-        handle: { eq: $handle }
-        archived: { neq: true }
-      }
-    ) {
-      _id
-      _type
-      _key
-      title
-      handle
-      shopifyId
-      products {
-        ...ShopifyProductThumbnailFragment
-      }
-      sourceData {
-        id
-        handle
-        title
-        description
-        image {
-          ...ShopifySourceImageFragment
-        }
-      }
-      hero {
-        ...HeroFragment
-      }
-      disableMenu
-      relatedCollectionsTitle
-      relatedCollections {
-        __typename
-        _id
-        _type
-        _key
-        archived
-        title
-        handle
-        shopifyId
-      }
-    }
-  }
-
-  ${heroFragment}
-  ${shopifySourceImageFragment}
-  ${shopifyProductThumbnailFragment}
-`
+import { sanityCollectionQuery } from '../../src/views/ProductListing'
 
 interface CollectionResponse {
   allShopifyCollection: ShopifyCollection[]
@@ -76,19 +22,21 @@ const Collection = ({ collection }: CollectionProps) => {
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const variables = { handle: ctx?.params?.collectionSlug || 'foo' }
-  const [response, shopData] = await Promise.all([
-    request<CollectionResponse>(collectionQuery, variables),
+  const handle = ctx?.params?.collectionSlug ?? 'foo'
+  const [collections, shopData] = await Promise.all([
+    sanityQuery<ShopifyCollection[]>(sanityCollectionQuery, {
+      handle,
+      productStart: 0,
+      productEnd: 13,
+    }),
+
     requestShopData(),
   ])
-
-  const collections = response?.allShopifyCollection
-  const collection = collections.length ? collections[0] : undefined
 
   return {
     props: {
       shopData,
-      collection,
+      collection: collections[0] || null,
     },
     unstable_revalidate: 60,
   }

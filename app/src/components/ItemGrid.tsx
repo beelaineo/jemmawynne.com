@@ -1,8 +1,12 @@
 import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
-import { Maybe, ShopifyProduct, ShopifyCollection } from '../types'
+import {
+  CollectionBlock as CollectionBlockType,
+  ShopifyProduct,
+  ShopifyCollection,
+} from '../types'
 import { ProductThumbnail } from './Product'
-import { CollectionThumbnail } from './Collection'
+import { CollectionBlock, CollectionThumbnail } from './Collection'
 
 /**
  * Styled Components
@@ -32,14 +36,53 @@ const Grid = styled.div`
   `}
 `
 
+interface WithFormat {
+  format?: string | null
+}
+
+export const ProductGridItemPadding = styled.div<WithFormat>`
+  ${({ format, theme }) => css`
+    padding-bottom: ${format === 'wide'
+      ? '50%'
+      : format === 'tall'
+      ? '200%'
+      : '100%'};
+
+    ${theme.mediaQueries.mobile} {
+      padding-bottom: ${format === 'wide'
+        ? '100%'
+        : format === 'tall'
+        ? '200%'
+        : '100%'};
+    }
+  `}
+`
+
+export const ProductGridItem = styled.div<WithFormat>`
+  ${({ theme, format }) => css`
+    grid-column: ${format === 'wide' ? 'span 2' : 'auto'};
+    grid-row: ${format === 'tall' ? 'span 2' : 'auto'};
+    position: relative;
+
+    ${theme.mediaQueries.tablet} {
+      grid-column: ${format === 'wide' ? 'span 2' : 'auto'};
+      grid-row: ${format === 'tall' ? 'span 2' : 'auto'};
+    }
+    ${theme.mediaQueries.mobile} {
+      grid-column: ${format === 'wide' ? 'span 1' : 'auto'};
+      grid-row: ${format === 'tall' ? 'span 2' : 'auto'};
+    }
+  `}
+`
+
 /**
  * ItemGrid
  */
 
-type ProductOrCollection = Maybe<ShopifyProduct> | Maybe<ShopifyCollection>
+type Item = ShopifyProduct | ShopifyCollection | CollectionBlockType
 
 interface ItemGridProps {
-  items?: ProductOrCollection[] | null
+  items?: Item[] | null
 }
 
 export const ItemGrid = ({ items }: ItemGridProps) => {
@@ -48,6 +91,15 @@ export const ItemGrid = ({ items }: ItemGridProps) => {
     <Grid>
       {items.map((item) => {
         if (!item) return null
+        if (item.__typename == 'CollectionBlock') {
+          return (
+            <ProductGridItem format={item.format} key={item._key || 'some-key'}>
+              <ProductGridItemPadding format={item.format} />
+              <CollectionBlock format={item.format} collectionBlock={item} />
+            </ProductGridItem>
+          )
+        }
+
         if (item.__typename === 'ShopifyProduct')
           return (
             <ProductThumbnail

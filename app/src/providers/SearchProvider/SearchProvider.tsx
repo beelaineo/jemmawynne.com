@@ -36,7 +36,7 @@ interface SearchProps {
 export const SearchProvider = ({ children }: SearchProps) => {
   const { state, actions } = useSearchReducer()
   const { startSearch, onSuccess, onError, ...publicActions } = actions
-  const { query } = useSanityQuery()
+  const { query } = useSanityQuery<SearchResult>()
 
   const search = async (newSearchTerm?: string): Promise<void> => {
     if (newSearchTerm) actions.setSearchTerm(newSearchTerm)
@@ -48,7 +48,7 @@ export const SearchProvider = ({ children }: SearchProps) => {
     const term = searchTerm.replace(/\s/, '* ')
     const termSingular = term.replace(/s$/, '')
     const params = { searchTerm: term, searchTermSingular: termSingular }
-    const results = await query<SearchResult[]>(searchQuery, params)
+    const results = await query(searchQuery, params)
     onSuccess(results || [])
   }
 

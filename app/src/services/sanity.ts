@@ -1,4 +1,5 @@
 import createSanityClient from '@sanity/client'
+import { withTypenames } from '../utils'
 
 const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID
 const SANITY_DATASET = process.env.SANITY_DATASET
@@ -16,3 +17,12 @@ export const sanityClient = createSanityClient({
   useCdn: true, // `false` if you want to ensure fresh data
   useProjectHostname: true,
 })
+
+export const sanityQuery = async <R>(
+  query: string,
+  params?: Record<string, any>,
+): Promise<R> => {
+  const results = await sanityClient.fetch<R>(query, params || {})
+  // @ts-ignore
+  return withTypenames<R>(results)
+}
