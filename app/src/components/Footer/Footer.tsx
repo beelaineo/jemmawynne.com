@@ -22,6 +22,7 @@ import {
   LinkGroupWrapper,
   LogoWrapper,
   FooterBottom,
+  FooterMain,
 } from './styled'
 
 const currentYear = new Date().getFullYear()
@@ -63,21 +64,23 @@ export const Footer = () => {
         </a>
       </Socials>
       <NewsletterSignup />
-      <Company>
-        <LogoWrapper>
-          <Logo />
-        </LogoWrapper>
-        <RichText body={aboutRaw} />
-      </Company>
-      <LinkGroupsWrapper>
-        {linkGroups
-          ? definitely(linkGroups).map((group) => (
-              <LinkGroupWrapper key={group._key || 'some-key'}>
-                <FooterLinkGroup linkGroup={group} />
-              </LinkGroupWrapper>
-            ))
-          : null}
-      </LinkGroupsWrapper>
+      <FooterMain>
+        <Company>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
+          <RichText body={aboutRaw} />
+        </Company>
+        <LinkGroupsWrapper>
+          {linkGroups
+            ? definitely(linkGroups).map((group) => (
+                <LinkGroupWrapper key={group._key || 'some-key'}>
+                  <FooterLinkGroup linkGroup={group} />
+                </LinkGroupWrapper>
+              ))
+            : null}
+        </LinkGroupsWrapper>
+      </FooterMain>
       <TabletLinks linkGroups={definitely(linkGroups)} />
 
       <FooterBottom>

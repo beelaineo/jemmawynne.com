@@ -1,9 +1,5 @@
-// @ts-ignore
 import styled, { css, DefaultTheme } from '@xstyled/styled-components'
-import {
-  ImageWrapper as ImageElementWrapper,
-  Picture,
-} from '../../components/Image/styled'
+import { ImageWrapper as ImageElementWrapper } from '../../components/Image/styled'
 
 export const Wrapper = styled.header`
   ${({ theme }) => css`
@@ -44,6 +40,16 @@ export const NavTop = styled.div`
     ${theme.mediaQueries.tablet} {
       padding-top: 0;
       margin-bottom: 0;
+      max-width: calc(100% - 140px);
+      margin: 0 auto;
+
+      svg {
+        height: auto;
+      }
+
+      a {
+        width: 100%;
+      }
     }
   `}
 `
@@ -145,6 +151,7 @@ export const NavTools = styled.div`
 export const LogoWrapper = styled.div`
   ${({ theme }) => css`
     width: 390px;
+    margin: 0 auto;
     display: block;
 
     svg {
@@ -154,6 +161,7 @@ export const LogoWrapper = styled.div`
     ${theme.mediaQueries.tablet} {
       max-width: 60vw;
       height: 17px;
+      width: auto;
     }
   `}
 `

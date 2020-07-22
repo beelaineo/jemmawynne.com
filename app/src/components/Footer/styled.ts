@@ -5,14 +5,15 @@ export const FooterWrapper = styled.footer`
     background-color: body.2;
     color: body.9;
     padding: 34px 38px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 5;
     margin-top: 6;
+    display: flex;
+    flex-direction: column;
 
     ${theme.mediaQueries.tablet} {
       padding: 3;
       grid-gap: 4;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
     }
   `}
 `
@@ -20,7 +21,7 @@ export const FooterWrapper = styled.footer`
 export const Company = styled.div`
   ${({ theme }) => css`
     padding: 0;
-    grid-column: 1 / 6;
+    grid-column: 1 / 5;
 
     h4:first-of-type {
       margin-bottom: 1.3em;
@@ -29,11 +30,6 @@ export const Company = styled.div`
     a {
       text-decoration: none;
       color: inherit;
-    }
-    ${theme.mediaQueries.tablet} {
-      grid-row: 1;
-      grid-column: span 12;
-      text-align: center;
     }
   `}
 `
@@ -76,6 +72,25 @@ export const FooterBottom = styled.div`
       & > * {
         margin: 0 3;
       }
+    }
+  `}
+`
+
+export const FooterMain = styled.div`
+  ${({ theme }) => css`
+    margin: 0 auto;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 5;
+    margin-bottom: 5;
+
+    ${theme.mediaQueries.tablet} {
+      display: block;
+      grid-column: span 12;
+      grid-row: 1;
+      margin-bottom: 0;
+      text-align: center;
     }
   `}
 `
@@ -143,36 +158,43 @@ export const MailerWrapper = styled.div`
 `
 
 export const MailerInput = styled.form`
-  position: relative;
-  border: 1px solid;
-  border-color: body.5;
-  height: 40px;
-  overflow: hidden;
-  button {
-    color: body.5;
-    font-size: 2;
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 11px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  ${({ theme }) => css`
+    position: relative;
+    border: 1px solid;
+    border-color: body.5;
+    height: 40px;
+    overflow: hidden;
+    margin-bottom: 5;
+    button {
+      color: body.5;
+      font-size: 2;
+      background-color: transparent;
+      position: absolute;
+      top: 0;
+      right: 11px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-  svg {
-    stroke: currentColor;
-  }
+    svg {
+      stroke: currentColor;
+    }
 
-  input {
-    border: none;
-    height: 100%;
-  }
+    input {
+      border: none;
+      height: 100%;
+    }
 
-  input:focus ~ button {
-    color: body.7;
-  }
+    input:focus ~ button {
+      color: body.7;
+    }
+
+    ${theme.mediaQueries.tablet} {
+      margin-bottom: 0;
+    }
+  `}
 `
 
 interface WithVisible {
@@ -192,6 +214,7 @@ export const InputWrapper = styled.div`
     transition: 0.3s;
   `}
 `
+
 export const Message = styled.div`
   ${({ visible }: WithVisible) => css`
     position: absolute;
@@ -210,18 +233,24 @@ export const Message = styled.div`
 `
 
 export const Socials = styled.div`
-  margin: 0 auto;
-  font-size: 3;
-  display: flex;
-  justify-content: center;
-  grid-column: span 12;
-  a {
+  ${({ theme }) => css`
+    margin: 0 auto 5;
+    font-size: 3;
     display: flex;
-  }
-  a + a {
-    margin-left: 5;
-  }
-  svg {
-    fill: currentColor;
-  }
+    justify-content: center;
+    grid-column: span 12;
+    a {
+      display: flex;
+    }
+    a + a {
+      margin-left: 5;
+    }
+    svg {
+      fill: currentColor;
+    }
+
+    ${theme.mediaQueries.tablet} {
+      margin: 0 auto;
+    }
+  `}
 `
