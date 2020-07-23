@@ -508,16 +508,22 @@ export const richPageLinkFragment = gql`
         }
       }
       ... on ShopifyProduct {
-        ...SaneShopifyProductFragment
+        _key
+        _type
+        title
+        handle
+        archived
       }
       ... on ShopifyCollection {
-        ...SaneShopifyCollectionFragment
+        _key
+        _type
+        title
+        handle
+        archived
       }
     }
   }
   ${sanityRichImageFragment}
-  ${saneShopifyCollectionFragment}
-  ${saneShopifyProductFragment}
 `
 
 export const carouselFragment = gql`

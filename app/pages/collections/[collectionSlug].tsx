@@ -14,9 +14,11 @@ interface CollectionResponse {
 
 interface CollectionProps {
   collection?: ShopifyCollection
+  params: any
 }
 
-const Collection = ({ collection }: CollectionProps) => {
+const Collection = ({ params, collection, ...rest }: CollectionProps) => {
+  if (typeof window !== 'undefined') console.log({ params, ...rest })
   if (!collection) return <NotFound />
   return <ProductListing collection={collection} />
 }
@@ -36,6 +38,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       shopData,
+      params: ctx.params,
       collection: collections[0] || null,
     },
     unstable_revalidate: 60,
@@ -46,29 +49,29 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
  * Static Routes
  */
 
-const collectionHandlesQuery = gql`
-  query CollectionHandlesQuery {
-    allShopifyCollection(
-      where: { shopifyId: { neq: null }, archived: { neq: true } }
-    ) {
-      _id
-      shopifyId
-      handle
-    }
-  }
-`
+// const collectionHandlesQuery = gql`
+//   query CollectionHandlesQuery {
+//     allShopifyCollection(
+//       where: { shopifyId: { neq: null }, archived: { neq: true } }
+//     ) {
+//       _id
+//       shopifyId
+//       handle
+//     }
+//   }
+// `
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const result = await request<CollectionResponse>(collectionHandlesQuery)
-  const collections = definitely(result?.allShopifyCollection)
-  const paths = collections.map((collection) => ({
-    params: {
-      collectionSlug: collection.handle ? collection.handle : undefined,
-    },
-  }))
+  // const result = await request<CollectionResponse>(collectionHandlesQuery)
+  // const collections = definitely(result?.allShopifyCollection)
+  // const paths = collections.map((collection) => ({
+  //   params: {
+  //     collectionSlug: collection.handle ? collection.handle : undefined,
+  //   },
+  // }))
 
   return {
-    paths,
+    paths: [],
     fallback: true,
   }
 }
