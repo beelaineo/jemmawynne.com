@@ -47,7 +47,6 @@ if (ENV === 'production' || ENV === 'staging' || FORCE) {
     ],
   })
 } else {
-  debug('Mocking local sentry')
   const noop = () => undefined
   Sentry = {
     // @ts-ignore

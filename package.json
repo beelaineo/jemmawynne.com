@@ -1,16 +1,13 @@
 {
 	"name": "root",
 	"private": true,
-  "engines": {
-    "node": "12.x"
-  },
 	"scripts": {
 		"setup": "yarn install",
 		"test": "yarn workspace jemmawynne-app test",
 		"build": "yarn workspace jemmawynne-app build",
 		"start:app": "yarn workspace jemmawynne-app start",
-    "ncu": "yarn exec ncu && yarn workspaces run ncu",
-    "ncu:u": "yarn exec ncu -u && yarn workspaces run ncu -u && yarn install"
+		"ncu": "yarn exec ncu && yarn workspaces run ncu",
+		"ncu:u": "yarn exec ncu -u && yarn workspaces run ncu -u && yarn install"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^9.0.1",
@@ -28,7 +25,7 @@
 		"prettier": "^2.0.5",
 		"pretty-quick": "^2.0.1",
 		"typescript": "^3.9.6",
-		"vercel": "^19.1.1",
+		"vercel": "^19.2.0",
 		"yarnhook": "^0.4.3"
 	},
 	"workspaces": [

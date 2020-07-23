@@ -18,7 +18,7 @@ export const Outer = styled.div`
 export const Wrapper = styled.div<WithVisible>`
   ${({ theme, visible }) => css`
     position: absolute;
-    background-color: body.1;
+    background-color: body.2;
     z-index: calc(${theme.zIndices.nav} - 1);
     top: 0px;
     left: 0;
