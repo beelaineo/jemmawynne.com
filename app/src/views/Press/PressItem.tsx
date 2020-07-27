@@ -2,6 +2,7 @@ import * as React from 'react'
 import { PressItem as PressItemType } from '../../types'
 import { PressItemContainer } from './styled'
 import { Image } from '../../components/Image'
+import { Button } from '../../components/Button'
 import { Heading } from '../../components/Text'
 
 interface PressItemProps {
@@ -47,17 +48,22 @@ export const PressItem = ({ pressItem }: PressItemProps) => {
             image={image}
             sizes="(max-width: 600px) 90vw, 500px"
           />
-          <Heading mt={3} mb={2} level={3}>
+          <Heading fontWeight={1} mt={3} mb={subtitle ? 0 : 2} level={3}>
             {title}
           </Heading>
           {subtitle ? (
-            <Heading level={4} color="body.6">
+            <Heading mt={0} mb={0} level={4} color="body.6">
               {subtitle}
             </Heading>
           ) : null}
-          <Heading level={5} color="body.6">
+          <Heading mt={2} fontStyle="italic" level={5} color="body.6">
             {dateString}
           </Heading>
+          {link && link.url ? (
+            <Button mt={3} mx="auto" level={4}>
+              Read More
+            </Button>
+          ) : null}
         </>,
       )}
     </PressItemContainer>

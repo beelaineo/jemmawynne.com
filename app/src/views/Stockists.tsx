@@ -13,7 +13,7 @@ interface StockistProps {
 }
 
 const SectionWrapper = styled.div`
-  margin-top: 7;
+  margin-bottom: 10;
 `
 
 const StockistListWrapper = styled.div`
@@ -22,7 +22,7 @@ const StockistListWrapper = styled.div`
     padding: 0 4;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-row-gap: 30px;
+    grid-row-gap: 50px;
     grid-column-gap: 30px;
     max-width: 900px;
     ${theme.mediaQueries.tablet} {
@@ -52,7 +52,7 @@ const StockistList = ({ stockists }: StockistProps) =>
         return (
           <StockistWrapper key={_key || 'some-key'}>
             {name ? (
-              <Heading level={4} mb={0} family="sans">
+              <Heading level={5} mb={0} family="sans">
                 {name}
               </Heading>
             ) : null}
@@ -69,7 +69,7 @@ const StockistList = ({ stockists }: StockistProps) =>
               </Heading>
             ) : null}
             {phone ? (
-              <Heading weight={2} mb={0} level={4}>
+              <Heading mt={0} weight={2} mb={0} level={4}>
                 <a href={`tel:${phone}`}>{phone}</a>
               </Heading>
             ) : null}
@@ -88,12 +88,14 @@ export const Stockists = ({ stockists }: StockistsProps) => {
   return (
     <Box pb={7}>
       <TextHeader>
-        <Heading level={1}>Stockists</Heading>
+        <Heading weight={1} level={1}>
+          Where to Buy
+        </Heading>
       </TextHeader>
       <Column maxWidth="wide">
         {us && us.length ? (
           <SectionWrapper>
-            <Heading level={2} textAlign="center">
+            <Heading level={1} fontWeight={1} textAlign="center">
               United States
             </Heading>
             <StockistList stockists={us} />
@@ -101,7 +103,7 @@ export const Stockists = ({ stockists }: StockistsProps) => {
         ) : null}
         {international && international.length ? (
           <SectionWrapper>
-            <Heading level={2} textAlign="center">
+            <Heading level={1} fontWeight={1} textAlign="center">
               International
             </Heading>
             <StockistList stockists={international} />
@@ -109,7 +111,7 @@ export const Stockists = ({ stockists }: StockistsProps) => {
         ) : null}
         {online && online.length ? (
           <SectionWrapper>
-            <Heading level={2} textAlign="center">
+            <Heading level={1} fontWeight={1} textAlign="center">
               Online
             </Heading>
             <StockistList stockists={online} />

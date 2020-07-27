@@ -3,10 +3,6 @@ import styled, { css } from '@xstyled/styled-components'
 export const FilterButtons = styled.div`
   display: flex;
   justify-content: center;
-
-  & > button {
-    margin: 0 2;
-  }
 `
 
 interface WithActive {
@@ -16,12 +12,13 @@ interface WithActive {
 export const FilterButton = styled.button<WithActive>`
   ${({ isActive }) => css`
     font-size: 6;
-    font-weight: 3;
+    font-weight: 4;
     font-family: sans;
     color: body.5;
     text-transform: uppercase;
     letter-spacing: 0.25em;
     padding: 0 0 1 1;
+    margin: 0 4;
     border-bottom: 2px solid;
     border-bottom-color: ${isActive ? 'currentColor' : 'transparent'};
     transition: 0.2s;

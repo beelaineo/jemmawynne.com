@@ -20,7 +20,7 @@ export const PressView = ({ pressPage, pressItems }: PressViewProps) => {
 
   return (
     <Column py={5} maxWidth="wide">
-      <Heading textAlign="center" level={1}>
+      <Heading fontWeight={1} textAlign="center" level={1}>
         {pressPage.title || 'Press'}
       </Heading>
       <FilterButtons>
