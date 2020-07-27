@@ -50,9 +50,11 @@ export const PageBlock = ({ block, previousBlock }: PageBlockProps) => {
         {innerBlocks.map((c) =>
           c.__typename === 'PageText' ? (
             <PageText isAlone={isAlone} key={c._key || 'some-key'}>
-              <Heading level={5} mb={5} family="sans">
-                {c.heading}
-              </Heading>
+              {c.heading ? (
+                <Heading level={5} mb={5} family="sans">
+                  {c.heading}
+                </Heading>
+              ) : null}
               <PageTextInner isAlone={isAlone}>
                 <RichText body={c.bodyRaw} />
               </PageTextInner>

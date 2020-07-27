@@ -15,6 +15,11 @@ export const internalLinkFragment = gql`
           current
         }
       }
+      ... on PressPage {
+        _type
+        _key
+        title
+      }
       ... on ShopifyProduct {
         _key
         _type

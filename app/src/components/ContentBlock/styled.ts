@@ -193,8 +193,8 @@ export const PageText = styled.div<PageTextInnerProps>`
 export const PageTextInner = styled.div<PageTextInnerProps>`
   ${({ isAlone }) => css`
     max-width: ${isAlone ? '800px' : '370px'};
-    text-align: ${isAlone ? 'center' : 'auto'};
     margin: ${isAlone ? '0 auto' : '0'};
+    text-align: left;
   `}
 `
 

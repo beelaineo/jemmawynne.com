@@ -1,8 +1,14 @@
-export const getTextAlignment = (position: string | void | null): string => {
-  if (!position) return 'center'
+const defaultAlignment = 'left'
+
+export const getTextAlignment = (
+  position: string | void | null,
+  customDefault?: string,
+): string => {
+  const fallback = customDefault || defaultAlignment
+  if (!position) return fallback
   const split = position.split('-')
   if (split.length > 1) return split[1]
-  return 'center'
+  return fallback
 }
 
 export const getFlexAlignment = (position: string | void | null): string => {

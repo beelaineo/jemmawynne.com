@@ -8,6 +8,17 @@ interface CustomSerializerConfig {
 }
 
 const RichTextWrapper = styled.div`
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 2em;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
   a {
     text-decoration: underline;
     color: body.7;
@@ -48,17 +59,17 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
       case 'li':
         return <Li family="serif" {...props} />
       case 'h1':
-        return <Heading level={1} {...props} />
+        return <Heading level={1} fontWeight={1} {...props} />
       case 'h2':
-        return <Heading level={2} {...props} />
+        return <Heading level={2} fontWeight={1} {...props} />
       case 'h3':
-        return <Heading level={3} {...props} />
+        return <Heading level={3} fontWeight={1} {...props} />
       case 'h4':
-        return <Heading level={4} {...props} />
+        return <Heading level={4} family="sans" {...props} />
       case 'h5':
-        return <Heading level={5} {...props} />
+        return <Heading level={5} family="sans" {...props} />
       case 'h6':
-        return <Heading level={7} {...props} />
+        return <Heading level={7} family="sans" {...props} />
       case 'blockquote':
         return <BlockQuote {...props} />
       case 'normal':
