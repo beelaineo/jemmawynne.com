@@ -28,6 +28,42 @@ export const pageText = {
   ],
 }
 
+const getRichTextBlockPreviewValues = async (props) => {
+  const { content } = props
+  const firstImage = content.find((c) => c._type === 'richImage')
+  const src = firstImage ? await getImageThumbnail(firstImage) : undefined
+  const title = blocksToPlainText(content)
+  return { title, src }
+}
+
+export const richTextBlock = {
+  title: 'Text Column',
+  name: 'richTextBlock',
+  type: 'object',
+  fields: [
+    {
+      name: 'body',
+      title: 'Body',
+      type: 'richText',
+    },
+  ],
+
+  preview: {
+    select: {
+      content: 'body',
+    },
+    prepare: ({ content }) => {
+      return { content }
+    },
+    component: (props) => (
+      <BlockPreview
+        {...props}
+        getPreviewValues={getRichTextBlockPreviewValues}
+      />
+    ),
+  },
+}
+
 export const pageBlock = {
   title: 'Page Block',
   name: 'pageBlock',
@@ -95,7 +131,12 @@ export const page = {
       name: 'body',
       label: 'Content',
       type: 'array',
-      of: [{ type: 'pageBlock' }, { type: 'hero' }, { type: 'carousel' }],
+      of: [
+        { type: 'richTextBlock' },
+        { type: 'pageBlock' },
+        { type: 'hero' },
+        { type: 'carousel' },
+      ],
     },
   ],
 }
