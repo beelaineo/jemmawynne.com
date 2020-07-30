@@ -27,11 +27,13 @@ const Grid = styled.div`
 
     ${theme.mediaQueries.tablet} {
       padding: 6;
+      grid-template-columns: 1fr 1fr;
     }
     ${theme.mediaQueries.mobile} {
+      padding: 4;
       padding: 3;
       grid-gap: 3;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
   `}
 `
