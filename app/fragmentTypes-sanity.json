@@ -81,7 +81,7 @@
       },
       {
         "kind": "UNION",
-        "name": "CarouselOrHeroOrPageBlock",
+        "name": "CarouselOrHeroOrPageBlockOrRichTextBlock",
         "possibleTypes": [
           {
             "name": "Carousel"
@@ -91,6 +91,9 @@
           },
           {
             "name": "PageBlock"
+          },
+          {
+            "name": "RichTextBlock"
           }
         ]
       },

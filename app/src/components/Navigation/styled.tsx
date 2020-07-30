@@ -10,10 +10,10 @@ export const Wrapper = styled.header`
     position: sticky;
     top: 0;
     background-color: white;
-    height: navHeight;
+    height: ${theme.navHeight};
 
     ${theme.mediaQueries.tablet} {
-      height: 42px;
+      height: ${theme.tabletNavHeight};
       width: 100%;
     }
   `}
@@ -25,7 +25,6 @@ export const NavTop = styled.div`
     margin-bottom: 3;
     display: flex;
     width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
 
@@ -42,6 +41,7 @@ export const NavTop = styled.div`
       margin-bottom: 0;
       max-width: calc(100% - 140px);
       margin: 0 auto;
+      height: 100%;
 
       svg {
         height: auto;
@@ -70,18 +70,23 @@ export const DesktopInner = styled.nav`
   `}
 `
 interface InnerProps {
-  theme: DefaultTheme
   open: boolean
+  announcementOpen: boolean
 }
 
-export const TabletInner = styled.nav`
-  ${({ theme, open }: InnerProps) => css`
+export const TabletInner = styled.nav<InnerProps>`
+  ${({ theme, open, announcementOpen }) => css`
     ${theme.mediaQueries.aboveTablet} {
       display: none;
     }
+    display: none;
     position: sticky;
     width: 100vw;
-    height: 100vh;
+    height: calc(
+      100vh - ${theme.tabletNavHeight} -
+        ${announcementOpen ? theme.announcementHeight : '0px'}
+    );
+    overflow: scroll;
     transform: translateX(${open ? '0' : '-102vw'});
     transition: 0.3s;
     background-color: body.2;

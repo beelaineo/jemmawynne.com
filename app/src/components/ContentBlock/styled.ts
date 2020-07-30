@@ -8,15 +8,18 @@ import {
 import { Position } from '../../types'
 import { ImageWrapper } from '../Image/styled'
 
-export const TextWrapper = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    z-index: 20;
+interface TextWrapperProps {
+  withBackgroundImage: boolean
+}
+
+export const TextWrapper = styled.div<TextWrapperProps>`
+  ${({ theme, withBackgroundImage }) => css`
+    position: ${withBackgroundImage ? 'absolute' : 'relative'};
     top: 0;
     left: 0;
+    z-index: 20;
     width: 100%;
     height: 100%;
-    padding: 6;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,15 +46,26 @@ export const HeroWrapper = styled.div`
 `
 
 export const TextOuter = styled.div`
-  min-width: 540px;
+  ${({ theme }) => css`
+    min-width: 540px;
+
+    ${theme.mediaQueries.mobile} {
+      min-width: initial;
+    }
+  `}
 `
 
 export const TextContainer = styled.div`
-  max-width: 350px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
+  ${({ theme }) => css`
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    ${theme.mediaQueries.mobile} {
+      max-width: calc(100vw - (${theme.space[2]}px * 2));
+    }
+  `}
 `
 
 export const HeroImageWrapper = styled.div`
@@ -88,11 +102,11 @@ export const Wrapper = styled.div<WrapperProps>`
     position: relative;
     background-color: ${getColor(backgroundColor) || 'transparent'};
     color: ${getColor(textColor) || 'body.9'};
-    text-align: ${getTextAlignment(textAlign) || 'center'};
+    text-align: ${getTextAlignment(textAlign, 'center') || 'center'};
 
     ${theme.mediaQueries.aboveTablet} {
-      height: 40vw;
       max-height: 85vh;
+      height: 100%;
       & ${TextWrapper}:nth-child(2) {
         opacity: 0;
         transition: 0.2s;
@@ -194,7 +208,7 @@ export const PageTextInner = styled.div<PageTextInnerProps>`
   ${({ isAlone }) => css`
     max-width: ${isAlone ? '800px' : '370px'};
     margin: ${isAlone ? '0 auto' : '0'};
-    text-align: left;
+    text-align: ${isAlone ? 'center' : 'left'};
   `}
 `
 

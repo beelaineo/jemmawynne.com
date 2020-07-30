@@ -26,7 +26,6 @@ const pageQuery = gql`
       slug {
         current
       }
-
       body {
         ... on Hero {
           ...HeroFragment
@@ -36,6 +35,12 @@ const pageQuery = gql`
         }
         ... on PageBlock {
           ...PageBlockFragment
+        }
+        ... on RichTextBlock {
+          _type
+          __typename
+          _key
+          bodyRaw
         }
       }
       hero {

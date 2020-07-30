@@ -85,7 +85,7 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
       <HeroImageWrapper>
         {image ? <Image fillContainer ratio={0.45} image={image} /> : null}
         {mobileImage ? (
-          <Image ratio={1.1} image={mobileImage || image} />
+          <Image fillContainer ratio={1.1} image={mobileImage || image} />
         ) : null}
       </HeroImageWrapper>
       <HeroText

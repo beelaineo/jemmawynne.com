@@ -27,6 +27,7 @@ export const defaultTheme: DefaultTheme = {
     round: '9px',
   },
   navHeight: '110px',
+  tabletNavHeight: '42px',
   announcementHeight: '45px',
   /* Spacing - applies to:
    *   margin, margin-top, margin-right, margin-bottom, margin-left, padding,

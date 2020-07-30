@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { useAnnouncement } from '../../providers/AnnouncementProvider'
 import { CtaOrSubMenu } from '../../types'
 import { TabletSubMenu } from './TabletSubMenu'
 import { TabletInner, NavSection } from './styled'
@@ -19,8 +19,9 @@ export const TabletNav = ({
   currentSubMenuKey,
   menuItems,
 }: TabletNav) => {
+  const { open: announcementOpen } = useAnnouncement()
   return (
-    <TabletInner open={open}>
+    <TabletInner announcementOpen={announcementOpen} open={open}>
       <NavSection ready={ready}>
         {menuItems.map((menuItem) => {
           if (!menuItem || !menuItem._key) return null

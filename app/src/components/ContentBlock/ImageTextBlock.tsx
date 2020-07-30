@@ -54,14 +54,14 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
         ) : null}
 
         {header || bodyRaw || cta ? (
-          <TextWrapper>
+          <TextWrapper withBackgroundImage={Boolean(backgroundImage)}>
             <div>
               {header ? (
                 <Heading
                   level={headerFont === 'serif' ? 4 : 5}
                   family={headerFont || 'sans'}
                   weight={headerFont === 'serif' ? 2 : 4}
-                  mb={{ xs: 0, lg: headerFont === 'serif' ? 2 : 5 }}
+                  mb={headerFont === 'serif' ? 2 : 5}
                 >
                   {header}
                 </Heading>
@@ -72,7 +72,7 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
                 </RichTextWrapper>
               ) : null}
               {cta ? (
-                <Box mt={{ lg: headerFont === 'serif' ? 4 : 5 }}>
+                <Box mt={headerFont === 'serif' ? 4 : 5}>
                   <CTA level={2} cta={cta} />
                 </Box>
               ) : null}

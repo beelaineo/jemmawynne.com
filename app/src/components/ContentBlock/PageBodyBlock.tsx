@@ -1,9 +1,11 @@
 import * as React from 'react'
 import {
   PageBlock as PageBlockType,
-  CarouselOrHeroOrPageBlock,
+  RichTextBlock as RichTextBlockType,
+  CarouselOrHeroOrPageBlockOrRichTextBlock,
 } from '../../types'
 import { CarouselBlock } from './CarouselBlock'
+import { Column } from '../Layout'
 import { HeroBlock } from './HeroBlock'
 import { Image } from '../Image'
 import { Heading } from '../Text'
@@ -17,12 +19,26 @@ import {
   PageText,
 } from './styled'
 
-interface PageBlockProps {
-  block: PageBlockType
-  previousBlock?: CarouselOrHeroOrPageBlock
+interface RichTextBlockProps {
+  block: RichTextBlockType
 }
 
-const hasShift = (block?: CarouselOrHeroOrPageBlock): boolean => {
+const RichTextBlock = ({ block }: RichTextBlockProps) => {
+  return (
+    <Column my={5} maxWidth="medium">
+      <RichText body={block.bodyRaw} />
+    </Column>
+  )
+}
+
+interface PageBlockProps {
+  block: PageBlockType
+  previousBlock?: CarouselOrHeroOrPageBlockOrRichTextBlock
+}
+
+const hasShift = (
+  block?: CarouselOrHeroOrPageBlockOrRichTextBlock,
+): boolean => {
   if (!block) return false
   if (block.__typename !== 'PageBlock') return false
   if (!block.content) return false
@@ -71,8 +87,8 @@ export const PageBlock = ({ block, previousBlock }: PageBlockProps) => {
 }
 
 interface PageBodyBlockProps {
-  block: CarouselOrHeroOrPageBlock
-  previousBlock?: CarouselOrHeroOrPageBlock
+  block: CarouselOrHeroOrPageBlockOrRichTextBlock
+  previousBlock?: CarouselOrHeroOrPageBlockOrRichTextBlock
 }
 
 export const PageBodyBlock = ({ block, previousBlock }: PageBodyBlockProps) => {
@@ -83,6 +99,8 @@ export const PageBodyBlock = ({ block, previousBlock }: PageBodyBlockProps) => {
       return <HeroBlock hero={block} />
     case 'PageBlock':
       return <PageBlock block={block} previousBlock={previousBlock} />
+    case 'RichTextBlock':
+      return <RichTextBlock block={block} />
     default:
       // @ts-ignore
       throw new Error(`Block type "${block.__typename}" is not valid`)

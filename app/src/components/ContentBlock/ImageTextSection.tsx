@@ -29,8 +29,11 @@ const BlocksWrapper = styled.div`
 `
 
 const BlockWrapper = styled.div`
-  flex-grow: 1;
-  flex-basis: 45%;
+  ${({ theme }) => css`
+    flex-grow: 1;
+    flex-basis: 45%;
+    min-height: 45vw;
+  `}
 `
 
 interface ImageTextSectionProps {

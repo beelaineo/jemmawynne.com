@@ -10,8 +10,9 @@ interface SectionWrapperProps {
 }
 
 export const SectionWrapper = styled.div`
-  ${({ type }: SectionWrapperProps) => css`
+  ${({ theme, type }: SectionWrapperProps) => css`
     padding: 4 6 6;
+    overflow-x: hidden;
 
     ${type === 'carousel'
       ? css`
@@ -19,6 +20,10 @@ export const SectionWrapper = styled.div`
           flex-direction: column;
         `
       : ''}
+
+    ${theme.mediaQueries.mobile} {
+      padding: 4 3 3;
+    }
   `}
 `
 

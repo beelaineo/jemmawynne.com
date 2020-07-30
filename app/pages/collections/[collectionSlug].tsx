@@ -5,7 +5,7 @@ import { ShopifyCollection } from '../../src/types'
 import { sanityQuery } from '../../src/services/sanity'
 import { NotFound, ProductListing } from '../../src/views'
 import { request, requestShopData } from '../../src/graphql'
-import { definitely } from '../../src/utils'
+import { getParam, definitely } from '../../src/utils'
 import { sanityCollectionQuery } from '../../src/views/ProductListing'
 
 interface CollectionResponse {
@@ -17,14 +17,17 @@ interface CollectionProps {
   params: any
 }
 
-const Collection = ({ params, collection, ...rest }: CollectionProps) => {
-  if (typeof window !== 'undefined') console.log({ params, ...rest })
+const Collection = ({ collection }: CollectionProps) => {
   if (!collection) return <NotFound />
   return <ProductListing collection={collection} />
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const handle = ctx?.params?.collectionSlug ?? 'foo'
+  if (!ctx?.params?.collectionSlug) {
+    return { props: { products: undefined, collection: undefined } }
+  }
+  const handle = getParam(ctx.params.collectionSlug)
+
   const [collections, shopData] = await Promise.all([
     sanityQuery<ShopifyCollection[]>(sanityCollectionQuery, {
       handle,
@@ -49,29 +52,29 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
  * Static Routes
  */
 
-// const collectionHandlesQuery = gql`
-//   query CollectionHandlesQuery {
-//     allShopifyCollection(
-//       where: { shopifyId: { neq: null }, archived: { neq: true } }
-//     ) {
-//       _id
-//       shopifyId
-//       handle
-//     }
-//   }
-// `
+const collectionHandlesQuery = gql`
+  query CollectionHandlesQuery {
+    allShopifyCollection(
+      where: { shopifyId: { neq: null }, archived: { neq: true } }
+    ) {
+      _id
+      shopifyId
+      handle
+    }
+  }
+`
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const result = await request<CollectionResponse>(collectionHandlesQuery)
-  // const collections = definitely(result?.allShopifyCollection)
-  // const paths = collections.map((collection) => ({
-  //   params: {
-  //     collectionSlug: collection.handle ? collection.handle : undefined,
-  //   },
-  // }))
+  const result = await request<CollectionResponse>(collectionHandlesQuery)
+  const collections = definitely(result?.allShopifyCollection)
+  const paths = collections.map((collection) => ({
+    params: {
+      collectionSlug: collection.handle ? collection.handle : undefined,
+    },
+  }))
 
   return {
-    paths: [],
+    paths,
     fallback: true,
   }
 }

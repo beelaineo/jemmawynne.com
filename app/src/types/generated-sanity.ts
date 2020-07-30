@@ -99,7 +99,11 @@ export type CarouselOrHeroOrImageTextSection =
   | Hero
   | ImageTextSection
 
-export type CarouselOrHeroOrPageBlock = Carousel | Hero | PageBlock
+export type CarouselOrHeroOrPageBlockOrRichTextBlock =
+  | Carousel
+  | Hero
+  | PageBlock
+  | RichTextBlock
 
 export type CarouselSorting = {
   _key?: Maybe<SortOrder>
@@ -670,7 +674,7 @@ export interface Page extends Document {
   title?: Maybe<Scalars['String']>
   slug?: Maybe<Slug>
   hero?: Maybe<Hero>
-  body?: Maybe<Array<Maybe<CarouselOrHeroOrPageBlock>>>
+  body?: Maybe<Array<Maybe<CarouselOrHeroOrPageBlockOrRichTextBlock>>>
 }
 
 export interface PageBlock {
@@ -1041,6 +1045,23 @@ export type RichPageLinkSorting = {
   title?: Maybe<SortOrder>
   image?: Maybe<RichImageSorting>
   hoverImage?: Maybe<RichImageSorting>
+}
+
+export interface RichTextBlock {
+  __typename: 'RichTextBlock'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  bodyRaw?: Maybe<Scalars['JSON']>
+}
+
+export type RichTextBlockFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+}
+
+export type RichTextBlockSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
 }
 
 export interface RootQuery {

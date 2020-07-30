@@ -6,24 +6,35 @@ import { getLinkFromHref } from '../../utils'
 import { Heading, P, Ol, Ul, Li, Span } from '../Text'
 import { decodeHTML } from './utils'
 
-const css2obj = (css: string): object => {
-  const r = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g,
-    o = {}
-  css.replace(r, (m, p, v) => (o[p] = v))
-  return o
+function cssToObj(css?: string): Record<string, string> {
+  if (!css) return {}
+  const obj = {}
+  const s = css
+    .toLowerCase()
+    .replace(/-(.)/g, function (m, g) {
+      return g.toUpperCase()
+    })
+    .replace(/;\s?$/g, '')
+    .split(/:|;/g)
+  for (let i = 0; i < s.length; i += 2) {
+    obj[s[i].replace(/\s/g, '')] = s[i + 1].replace(/^\s+|\s+$/g, '')
+  }
+  return obj
 }
 
-const wrapBareText = (text: string) =>
+const wrapBareText = (text?: string) =>
   text
-    .replace(/^(?!<)(.*)(<\/\w+>)?/gm, '<span>$1</span>')
-    .replace('<span></span>', '')
+    ? text
+        .replace(/^(?!<)(.*)(<\/\w+>)?/gm, '<span>$1</span>')
+        .replace('<span></span>', '')
+    : ''
 
 const internalUrlRegex = /^https?:\/\/(www.)?(localhost:3000|spinellikilcollin.com|spinellikilcollin.(good-idea.)?now.sh)(\/[\w|\/]+)?/
 
 const parser = new HTMLParser()
 
 const transform = (node, index) => {
-  const styles = css2obj(node?.attribs?.style ?? '')
+  const styles = cssToObj(node?.attribs?.style ?? '')
   switch (node.tagName) {
     case 'document':
       return (
