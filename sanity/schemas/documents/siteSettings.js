@@ -43,6 +43,7 @@ export const siteSettings = {
   type: 'document',
   fieldsets: [
     { name: 'announcement', title: 'Announcement Banner' },
+    { name: 'instagram', title: 'Instagram' },
     { name: 'footer', title: 'Footer' },
   ],
   fields: [
@@ -69,6 +70,12 @@ export const siteSettings = {
           },
         },
       ],
+    },
+    {
+      title: 'Instagram Settings',
+      type: 'instagramSettings',
+      name: 'instagramSettings',
+      fieldset: 'instagram',
     },
     {
       title: 'Links',
