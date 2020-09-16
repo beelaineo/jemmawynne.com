@@ -47,7 +47,7 @@ const Padding = styled.div<WithFormat>`
 `
 
 const Wrapper = styled.div<WrapperProps>`
-  ${({ backgroundColor, textPosition, textColor }) => css`
+  ${({ theme, backgroundColor, textPosition, textColor }) => css`
     position: absolute;
     width: 100%;
     height: 100%;

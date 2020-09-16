@@ -7,6 +7,9 @@ import {
 } from './reducer'
 import { useSanityQuery } from '../../hooks'
 import { searchQuery } from './query'
+import { useMenu } from '../MenuProvider'
+
+const { useEffect } = React
 
 type SearchContextValue = SearchState &
   Pick<
@@ -35,8 +38,20 @@ interface SearchProps {
 
 export const SearchProvider = ({ children }: SearchProps) => {
   const { state, actions } = useSearchReducer()
-  const { startSearch, onSuccess, onError, ...publicActions } = actions
+  const {
+    startSearch,
+    onSuccess,
+    onError,
+    openSearch: openSearchAction,
+    ...publicActions
+  } = actions
   const { query } = useSanityQuery<SearchResult>()
+
+  const { closeMenu } = useMenu()
+
+  useEffect(() => {
+    if (state.open) closeMenu()
+  }, [state.open])
 
   const search = async (newSearchTerm?: string): Promise<void> => {
     if (newSearchTerm) actions.setSearchTerm(newSearchTerm)
@@ -52,9 +67,15 @@ export const SearchProvider = ({ children }: SearchProps) => {
     onSuccess(results || [])
   }
 
+  const openSearch = () => {
+    openSearchAction()
+    closeMenu()
+  }
+
   const value: SearchContextValue = {
     ...state,
     ...publicActions,
+    openSearch,
     search,
   }
 

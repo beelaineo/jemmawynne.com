@@ -47,6 +47,6 @@ export const Hr = styled.hr`
   margin: 0;
 `
 
-export const HeaderWrapper = styled.div`
-  padding: 6;
+export const HeaderWrapper = styled.divBox`
+  padding: 6 6 3;
 `

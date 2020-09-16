@@ -17,7 +17,13 @@ export const TagBadges = ({ product }: TagBadgesProps) => {
     <TagBadgeWrapper>
       {tagBadges.map((match) => (
         <TagBadge key={match.tag || 'some-key'}>
-          <Heading my={0} family="sans" weight={2} level={6}>
+          <Heading
+            my={0}
+            textTransform="uppercase"
+            family="sans"
+            weight={2}
+            level={6}
+          >
             {match.label || match.tag}
           </Heading>
         </TagBadge>

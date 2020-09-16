@@ -63,9 +63,10 @@ const HeroText = styled.div`
 
 interface HeroBlockProps {
   hero?: Hero | null
+  landscape?: boolean
 }
 
-export const HeroBlock = ({ hero }: HeroBlockProps) => {
+export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
   if (!hero) return null
   const {
     textPosition,
@@ -81,7 +82,7 @@ export const HeroBlock = ({ hero }: HeroBlockProps) => {
   } = hero
 
   return (
-    <HeroWrapper>
+    <HeroWrapper landscape={landscape}>
       <HeroImageWrapper>
         {image ? <Image fillContainer ratio={0.45} image={image} /> : null}
         {mobileImage ? (

@@ -33,16 +33,23 @@ export const TextWrapper = styled.div<TextWrapperProps>`
 
     ${theme.mediaQueries.tablet} {
       position: relative;
-      padding: 3 3;
+      padding: 6 3;
     }
   `}
 `
-export const HeroWrapper = styled.div`
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  height: 450px;
-  overflow: hidden;
+
+interface HeroWrapperProps {
+  landscape?: boolean
+}
+
+export const HeroWrapper = styled.div<HeroWrapperProps>`
+  ${({ landscape }) => css`
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: ${landscape ? '50vw' : '450px'};
+    overflow: hidden;
+  `}
 `
 
 export const TextOuter = styled.div`
@@ -133,6 +140,18 @@ export const RichTextWrapper = styled.div`
   }
 `
 
+export const BackgroundImagePadding = styled.div`
+  ${({ theme }) => css`
+    display: none;
+
+    ${theme.mediaQueries.tablet} {
+      display: block;
+      width: 100%;
+      padding-bottom: 100%;
+    }
+  `}
+`
+
 export const BackgroundImageWrapper = styled.div`
   ${({ theme }) => css`
     position: absolute;
@@ -155,8 +174,14 @@ export const BackgroundImageWrapper = styled.div`
     }
     ${theme.mediaQueries.tablet} {
       position: relative;
-      height: 80vw;
-      max-height: 420px;
+
+      &:after {
+        content: '';
+        width: 100%;
+        padding-bottom: 100%;
+      }
+      /* height: 80vw; */
+      /* max-height: 420px; */
     }
   `}
 `
@@ -189,6 +214,8 @@ export const PageBlockInner = styled.div<PageBlockInnerProps>`
     display: flex;
     justify-content: ${getFlexJustification(alignment)};
     align-items: ${getFlexAlignment(alignment)};
+    text-align: ${getTextAlignment(alignment)};
+
     & > * {
       flex: 1 1 0px;
     }
@@ -201,6 +228,7 @@ interface PageTextInnerProps {
 export const PageText = styled.div<PageTextInnerProps>`
   ${({ isAlone }) => css`
     padding: ${isAlone ? 0 : '0 8 8'};
+    margin: ${isAlone ? '0 auto' : 0};
   `}
 `
 
@@ -208,7 +236,6 @@ export const PageTextInner = styled.div<PageTextInnerProps>`
   ${({ isAlone }) => css`
     max-width: ${isAlone ? '800px' : '370px'};
     margin: ${isAlone ? '0 auto' : '0'};
-    text-align: ${isAlone ? 'center' : 'left'};
   `}
 `
 

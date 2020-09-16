@@ -21,6 +21,7 @@ const Grid = styled.div`
     justify-content: space-evenly;
     grid-column-gap: 6;
     grid-row-gap: 6;
+    grid-auto-flow: dense;
     > a {
       text-decoration: none;
     }
@@ -33,7 +34,6 @@ const Grid = styled.div`
       padding: 4;
       padding: 3;
       grid-gap: 3;
-      grid-template-columns: 1fr;
     }
   `}
 `
@@ -71,6 +71,7 @@ export const ProductGridItem = styled.div<WithFormat>`
       grid-row: ${format === 'tall' ? 'span 2' : 'auto'};
     }
     ${theme.mediaQueries.mobile} {
+      display: none;
       grid-column: ${format === 'wide' ? 'span 1' : 'auto'};
       grid-row: ${format === 'tall' ? 'span 2' : 'auto'};
     }

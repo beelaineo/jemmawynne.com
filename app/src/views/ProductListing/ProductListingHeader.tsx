@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ShopifyCollection } from '../../types'
-import { Heading } from '../../components/Text'
+import { Span, Heading } from '../../components/Text'
 import { HeaderWrapper } from './styled'
 import { HeroBlock } from '../../components/ContentBlock'
 import { isValidHero } from '../../utils'
@@ -14,6 +14,8 @@ export const ProductListingHeader = ({
   collection,
   menuDisabled,
 }: ProductListingHeaderProps) => {
+  console.log({ collection, menuDisabled })
+
   if (!collection.sourceData) return null
   const { image, title, description } = collection.sourceData
   const { hero } = collection
@@ -22,12 +24,13 @@ export const ProductListingHeader = ({
     : image && description
     ? 'left'
     : 'left'
+  console.log({ hero, valid: isValidHero(hero) })
   return isValidHero(hero) ? (
-    <HeroBlock hero={hero} />
+    <HeroBlock hero={hero} landscape />
   ) : (
-    <HeaderWrapper>
-      <Heading textAlign={textAlign} level={2} weight={2} fontStyle="italic">
-        {title}
+    <HeaderWrapper textAlign={{ xs: 'center', lg: textAlign }}>
+      <Heading level={1} weight={2}>
+        Shop: <Span fontStyle="italic">{title}</Span>
       </Heading>
     </HeaderWrapper>
   )

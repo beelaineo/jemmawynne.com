@@ -50,7 +50,13 @@ export const HintModal = ({
   }
   return (
     <Modal open={open} closeModal={closeModal}>
-      <Heading textAlign="center" mb={6} level={1} family="serif">
+      <Heading
+        textAlign="center"
+        fontWeight={2}
+        mb={6}
+        level={1}
+        family="serif"
+      >
         Drop a Hint
       </Heading>
       <Form<FormValues> onSubmit={handleSubmit} initialValues={initialValues}>

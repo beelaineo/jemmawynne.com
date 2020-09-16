@@ -57,13 +57,13 @@ export const TagBadgeWrapper = styled.div`
 `
 
 export const TagBadge = styled.div`
-  border-radius: 20px;
   margin: 0 1;
-  height: 19px;
+  height: 21px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1px 3 0;
-  background-color: highlight;
-  box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.2);
+  padding: 0 3;
+  border: 1px solid;
+  border-color: body.9;
+  background-color: rgba(255, 255, 255, 0.8);
 `

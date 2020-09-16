@@ -10,6 +10,7 @@ import {
   Wrapper,
   RichTextWrapper,
   BackgroundImageWrapper,
+  BackgroundImagePadding,
 } from './styled'
 import { DocumentLink } from '../DocumentLink'
 
@@ -49,6 +50,7 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
       >
         {backgroundImage ? (
           <BackgroundImageWrapper>
+            <BackgroundImagePadding />
             <Image image={backgroundImage} hoverImage={hoverImage} />
           </BackgroundImageWrapper>
         ) : null}
@@ -62,6 +64,7 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
                   family={headerFont || 'sans'}
                   weight={headerFont === 'serif' ? 2 : 4}
                   mb={headerFont === 'serif' ? 2 : 5}
+                  mt={0}
                 >
                   {header}
                 </Heading>

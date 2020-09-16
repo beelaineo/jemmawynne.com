@@ -22,6 +22,14 @@ export const sanityCollectionQuery = `
     "bodyRaw": body,
     ...,
   },
+  sourceData {
+    title,
+    handle,
+    image {
+      asset->,
+      ...,
+    }
+  },
   products[$productStart...$productEnd]->[]{
     _id,
     _type,

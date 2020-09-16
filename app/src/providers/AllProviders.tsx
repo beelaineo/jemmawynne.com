@@ -70,9 +70,9 @@ export const Providers = ({ children, shopData }: Props) => {
         <ThemeProvider theme={defaultTheme}>
           <GlobalStyles />
           <AnnouncementProvider>
-            <SearchProvider>
-              <MenuProvider>{children}</MenuProvider>
-            </SearchProvider>
+            <MenuProvider>
+              <SearchProvider>{children}</SearchProvider>
+            </MenuProvider>
           </AnnouncementProvider>
         </ThemeProvider>
       </ShopDataProvider>

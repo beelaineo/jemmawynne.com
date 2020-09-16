@@ -55,6 +55,7 @@ export const PageBlock = ({ block, previousBlock }: PageBlockProps) => {
   const innerBlocks = definitely(content)
   const isAlone =
     innerBlocks.length === 1 && innerBlocks[0].__typename === 'PageText'
+  console.log({ innerBlocks, isAlone })
   return (
     <PageBlockWrapper
       shiftDown={shiftDown}

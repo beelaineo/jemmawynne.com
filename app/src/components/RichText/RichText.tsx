@@ -14,7 +14,8 @@ const RichTextWrapper = styled.div`
   h4,
   h5,
   h6 {
-    margin-top: 2em;
+    margin-top: 2.5em;
+    margin-bottom: 1em;
     &:first-child {
       margin-top: 0;
     }

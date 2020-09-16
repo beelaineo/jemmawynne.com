@@ -21,6 +21,8 @@ export const ProductDetails = styled.div`
       max-width: 500px;
       grid-template-columns: 1fr;
       margin: 0 auto;
+      grid-gap: 4;
+      padding-bottom: 0;
     }
   `}
 `
@@ -60,9 +62,15 @@ export const ProductGalleryWrapper = styled.div`
 `
 
 export const SwatchWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 230px 1fr;
-  align-items: center;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    align-items: center;
+    ${theme.mediaQueries.mobile} {
+      grid-gap: 2;
+      grid-template-columns: 1fr;
+    }
+  `}
 `
 
 export const SwatchLabelWrapper = styled.div`
@@ -123,14 +131,20 @@ export const ArrowDown = styled.div`
 `
 
 export const TitleWrapper = styled.div`
-  position: relative;
-  margin-bottom: 6;
+  ${({ theme }) => css`
+    position: relative;
+    margin-bottom: 6;
+
+    ${theme.mediaQueries.mobile} {
+      margin-bottom: 3;
+    }
+  `}
 `
 
 export const ShareButtonWrapper = styled.div`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 11px;
 `
 
 interface WithOpen {

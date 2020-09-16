@@ -523,6 +523,30 @@ export type ImageTextSectionSorting = {
   title?: Maybe<SortOrder>
 }
 
+export interface InstagramSettings {
+  __typename: 'InstagramSettings'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  /** Don't include the @ */
+  handle?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  images?: Maybe<Array<Maybe<RichImage>>>
+}
+
+export type InstagramSettingsFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  handle?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
+}
+
+export type InstagramSettingsSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  handle?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
+}
+
 export interface InternalLink {
   __typename: 'InternalLink'
   _key?: Maybe<Scalars['String']>
@@ -2273,6 +2297,7 @@ export interface SiteSettings extends Document {
   _key?: Maybe<Scalars['String']>
   banner?: Maybe<Banner>
   aboutRaw?: Maybe<Scalars['JSON']>
+  instagramSettings?: Maybe<InstagramSettings>
   linkGroups?: Maybe<Array<Maybe<LinkGroup>>>
 }
 
@@ -2286,6 +2311,7 @@ export type SiteSettingsFilter = {
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
   banner?: Maybe<BannerFilter>
+  instagramSettings?: Maybe<InstagramSettingsFilter>
 }
 
 export type SiteSettingsSorting = {
@@ -2296,6 +2322,7 @@ export type SiteSettingsSorting = {
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
   banner?: Maybe<BannerSorting>
+  instagramSettings?: Maybe<InstagramSettingsSorting>
 }
 
 export interface Slug {

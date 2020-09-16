@@ -30,7 +30,7 @@ export const NavPageLink = ({
     <NavPageLinkWrapper borders={borders} align={align} small={small}>
       <Heading
         family={small ? 'sans' : 'serif'}
-        fontWeight={4}
+        fontWeight={2}
         m={0}
         level={small ? 6 : 2}
       >
@@ -62,7 +62,7 @@ export const SubMenuAccordion = ({
       <NavHeaderMobile borders={borders} onClick={onClick}>
         <Heading
           family="serif"
-          fontWeight={4}
+          fontWeight={2}
           m={0}
           ml={indent ? 5 : 0}
           level={2}
