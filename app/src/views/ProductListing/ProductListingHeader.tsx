@@ -14,8 +14,6 @@ export const ProductListingHeader = ({
   collection,
   menuDisabled,
 }: ProductListingHeaderProps) => {
-  console.log({ collection, menuDisabled })
-
   if (!collection.sourceData) return null
   const { image, title, description } = collection.sourceData
   const { hero } = collection
@@ -24,7 +22,6 @@ export const ProductListingHeader = ({
     : image && description
     ? 'left'
     : 'left'
-  console.log({ hero, valid: isValidHero(hero) })
   return isValidHero(hero) ? (
     <HeroBlock hero={hero} landscape />
   ) : (

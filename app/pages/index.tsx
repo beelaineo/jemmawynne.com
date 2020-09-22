@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const homepage = response?.Homepage
   return {
     props: { shopData, homepage },
-    unstable_revalidate: 60,
+    revalidate: 60,
   }
 }
 

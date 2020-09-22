@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps = async () => {
       shopData,
       stockists,
     },
-    unstable_revalidate: 60,
+    revalidate: 60,
   }
 }
 

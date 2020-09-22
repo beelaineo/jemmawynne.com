@@ -1,7 +1,6 @@
 import useSWR, { responseInterface as ResponseInterface } from 'swr'
 import { DocumentNode } from 'graphql'
 import { print } from 'graphql/language/printer'
-import { Variables } from 'graphql-request/dist/src/types'
 import { request as gqlRequest } from 'graphql-request'
 import { SANITY_GRAPHQL_URL } from '../config'
 
@@ -14,6 +13,8 @@ interface RequestArgs<V> {
   variables?: V
   options?: RequestOptions
 }
+
+type Variables = Record<string, any>
 
 export const request = async <R, V extends Variables = Variables>(
   query: DocumentNode | string,

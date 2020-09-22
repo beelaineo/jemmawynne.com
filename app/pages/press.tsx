@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { shopData, pressItems, pressPage },
-    unstable_revalidate: 60,
+    revalidate: 60,
   }
 }
 

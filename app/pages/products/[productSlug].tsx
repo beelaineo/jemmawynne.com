@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       product,
       shopData,
     },
-    unstable_revalidate: 60,
+    revalidate: 60,
   }
 }
 

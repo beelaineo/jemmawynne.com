@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   const pages = response?.allPage
   const page = pages && pages.length ? pages[0] : null
-  return { props: { page, shopData }, unstable_revalidate: 60 }
+  return { props: { page, shopData }, revalidate: 60 }
 }
 
 /**

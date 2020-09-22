@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       params: ctx.params,
       collection: collections[0] || null,
     },
-    unstable_revalidate: 60,
+    revalidate: 60,
   }
 }
 
