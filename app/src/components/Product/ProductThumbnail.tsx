@@ -21,7 +21,7 @@ import { TagBadges } from './TagBadges'
 
 const { useState } = React
 
-interface ProductThumbnail {
+interface ProductThumbnailProps {
   product: ShopifyProduct
   image?: RichImage | null
   hidePrice?: boolean
@@ -33,7 +33,7 @@ export const ProductThumbnail = ({
   hidePrice,
   displayTags,
   product,
-}: ProductThumbnail) => {
+}: ProductThumbnailProps) => {
   const { getProductSwatchOptions } = useShopData()
   const [variants] = unwindEdges(product?.sourceData?.variants)
   const [currentVariant, setCurrentVariant] = useState(variants[0])

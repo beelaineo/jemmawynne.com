@@ -53,6 +53,7 @@ export const sanityCollectionQuery = `
       title,
       tags,
       priceRange,
+      options[]{...},
       variants {
         edges[]{
           cursor,

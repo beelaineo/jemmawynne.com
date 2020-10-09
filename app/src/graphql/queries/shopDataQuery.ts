@@ -129,6 +129,13 @@ export const SHOP_DATA_QUERY = gql`
           }
         }
       }
+      instagramSettings {
+        handle
+        title
+        images {
+          ...SanityRichImageFragment
+        }
+      }
       aboutRaw
       linkGroups {
         __typename

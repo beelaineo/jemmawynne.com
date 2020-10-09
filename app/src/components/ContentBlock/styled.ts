@@ -147,7 +147,7 @@ export const BackgroundImagePadding = styled.div`
     ${theme.mediaQueries.tablet} {
       display: block;
       width: 100%;
-      padding-bottom: 100%;
+      padding-bottom: 140%;
     }
   `}
 `

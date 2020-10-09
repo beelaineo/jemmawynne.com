@@ -3,6 +3,7 @@ import styled, { css } from '@xstyled/styled-components'
 import { useAnnouncement } from '../providers/AnnouncementProvider'
 import { ContentBlock } from '../components/ContentBlock'
 import { HeroWrapper } from '../components/ContentBlock/styled'
+import { InstagramBlock } from '../components/Instagram'
 import { Homepage as HomepageType } from '../types'
 
 interface WithAnnouncement {
@@ -40,6 +41,7 @@ export const Homepage = ({ homepage }: HomepageProps) => {
             ) : null,
           )
         : null}
+      <InstagramBlock />
     </HomepageWrapper>
   )
 }

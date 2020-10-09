@@ -75,7 +75,7 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
                 </RichTextWrapper>
               ) : null}
               {cta ? (
-                <Box mt={headerFont === 'serif' ? 4 : 5}>
+                <Box mt={headerFont === 'serif' ? 3 : 5}>
                   <CTA level={2} cta={cta} />
                 </Box>
               ) : null}
