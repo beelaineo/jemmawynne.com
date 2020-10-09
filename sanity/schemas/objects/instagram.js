@@ -10,15 +10,10 @@ export const instagram = {
       description: "Don't include the @",
     },
     {
-      title: 'Title',
-      name: 'title',
-      type: 'string',
-    },
-    {
       title: 'Images',
       name: 'images',
       type: 'array',
-      validation: (Rule) => Rule.max(5),
+      validation: (Rule) => Rule.max(6),
       of: [
         {
           type: 'richImage',
