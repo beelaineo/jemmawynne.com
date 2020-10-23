@@ -126,18 +126,6 @@
       },
       {
         "kind": "UNION",
-        "name": "LinkGroupOrRichPageLink",
-        "possibleTypes": [
-          {
-            "name": "LinkGroup"
-          },
-          {
-            "name": "RichPageLink"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
         "name": "CarouselOrHeroOrImageTextSection",
         "possibleTypes": [
           {
@@ -148,6 +136,18 @@
           },
           {
             "name": "ImageTextSection"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "LinkGroupOrRichPageLink",
+        "possibleTypes": [
+          {
+            "name": "LinkGroup"
+          },
+          {
+            "name": "RichPageLink"
           }
         ]
       },

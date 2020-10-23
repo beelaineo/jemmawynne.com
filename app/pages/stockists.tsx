@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import { GetStaticProps } from 'next'
 import { NotFound, Stockists } from '../src/views'
 import { Stockists as StockistsType } from '../src/types'
-import { request, requestShopData } from '../src/graphql'
+import {
+  imageTextBlockFragment,
+  carouselFragment,
+  heroFragment,
+  request,
+  requestShopData,
+} from '../src/graphql'
 
 interface StockistsResponse {
   Stockists: StockistsType
@@ -15,12 +21,33 @@ const stockistsQuery = gql`
       _id
       _type
       title
+      content {
+        ... on ImageTextSection {
+          _key
+          __typename
+          _type
+          title
+          subtitleRaw
+          blocks {
+            ...ImageTextBlockFragment
+          }
+        }
+        ... on Hero {
+          ...HeroFragment
+        }
+        ... on Carousel {
+          ...CarouselFragment
+        }
+      }
+      showUs
       us {
         ...StockistFragment
       }
+      showIntl
       international {
         ...StockistFragment
       }
+      showOnline
       online {
         ...StockistFragment
       }
@@ -34,6 +61,9 @@ const stockistsQuery = gql`
     website
     phone
   }
+  ${carouselFragment}
+  ${imageTextBlockFragment}
+  ${heroFragment}
 `
 
 interface StockistsProps {

@@ -12,7 +12,6 @@ interface SectionWrapperProps {
 export const SectionWrapper = styled.div`
   ${({ theme, type }: SectionWrapperProps) => css`
     padding: 4 6 6;
-    overflow-x: hidden;
 
     ${type === 'carousel'
       ? css`

@@ -6,7 +6,9 @@ import {
   Stockists as StockistsType,
 } from '../types'
 import { Heading } from '../components/Text'
+import { ContentBlock } from '../components/ContentBlock'
 import { TextHeader, Column } from '../components/Layout'
+import { definitely } from '../utils'
 
 interface StockistProps {
   stockists?: Maybe<StockistType>[]
@@ -44,11 +46,8 @@ const StockistWrapper = styled.div`
 const StockistList = ({ stockists }: StockistProps) =>
   stockists ? (
     <StockistListWrapper>
-      {stockists.map((stockist) => {
-        if (!stockist) return null
-
+      {definitely(stockists).map((stockist) => {
         const { _key, name, location, website, phone } = stockist
-
         return (
           <StockistWrapper key={_key || 'some-key'}>
             {name ? (
@@ -84,40 +83,53 @@ interface StockistsProps {
 }
 
 export const Stockists = ({ stockists }: StockistsProps) => {
-  const { us, international, online } = stockists
+  const {
+    content,
+    us,
+    international,
+    online,
+    showUs,
+    showIntl,
+    showOnline,
+  } = stockists
   return (
-    <Box pb={7}>
-      <TextHeader>
-        <Heading weight={1} level={1}>
-          Where to Buy
-        </Heading>
-      </TextHeader>
-      <Column maxWidth="wide">
-        {us && us.length ? (
-          <SectionWrapper>
-            <Heading level={1} fontWeight={1} textAlign="center">
-              United States
-            </Heading>
-            <StockistList stockists={us} />
-          </SectionWrapper>
-        ) : null}
-        {international && international.length ? (
-          <SectionWrapper>
-            <Heading level={1} fontWeight={1} textAlign="center">
-              International
-            </Heading>
-            <StockistList stockists={international} />
-          </SectionWrapper>
-        ) : null}
-        {online && online.length ? (
-          <SectionWrapper>
-            <Heading level={1} fontWeight={1} textAlign="center">
-              Online
-            </Heading>
-            <StockistList stockists={online} />
-          </SectionWrapper>
-        ) : null}
-      </Column>
-    </Box>
+    <>
+      {definitely(content).map((c) => (
+        <ContentBlock key={c._key || 'some-key'} content={c} />
+      ))}
+      <Box pb={7}>
+        <TextHeader>
+          <Heading weight={1} level={1}>
+            Where to Buy
+          </Heading>
+        </TextHeader>
+        <Column maxWidth="wide">
+          {us && us.length && showUs ? (
+            <SectionWrapper>
+              <Heading level={1} fontWeight={1} textAlign="center">
+                United States
+              </Heading>
+              <StockistList stockists={us} />
+            </SectionWrapper>
+          ) : null}
+          {international && international.length && showIntl ? (
+            <SectionWrapper>
+              <Heading level={1} fontWeight={1} textAlign="center">
+                International
+              </Heading>
+              <StockistList stockists={international} />
+            </SectionWrapper>
+          ) : null}
+          {online && online.length && showOnline ? (
+            <SectionWrapper>
+              <Heading level={1} fontWeight={1} textAlign="center">
+                Online
+              </Heading>
+              <StockistList stockists={online} />
+            </SectionWrapper>
+          ) : null}
+        </Column>
+      </Box>
+    </>
   )
 }

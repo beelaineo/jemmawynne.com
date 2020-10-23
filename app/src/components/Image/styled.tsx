@@ -29,6 +29,7 @@ interface WithFill {
 
 export const ImageWrapper = styled.div<WithFill>`
   ${({ fillContainer }) => css`
+    overflow: hidden;
     ${fillContainer
       ? css`
           position: absolute;

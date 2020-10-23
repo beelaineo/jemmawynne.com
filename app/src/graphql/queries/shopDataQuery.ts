@@ -131,7 +131,6 @@ export const SHOP_DATA_QUERY = gql`
       }
       instagramSettings {
         handle
-        title
         images {
           ...SanityRichImageFragment
         }

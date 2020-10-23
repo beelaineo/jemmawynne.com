@@ -531,7 +531,6 @@ export interface InstagramSettings {
   _type?: Maybe<Scalars['String']>
   /** Don't include the @ */
   handle?: Maybe<Scalars['String']>
-  title?: Maybe<Scalars['String']>
   images?: Maybe<Array<Maybe<RichImage>>>
 }
 
@@ -539,14 +538,12 @@ export type InstagramSettingsFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   handle?: Maybe<StringFilter>
-  title?: Maybe<StringFilter>
 }
 
 export type InstagramSettingsSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
-  title?: Maybe<SortOrder>
 }
 
 export interface InternalLink {
@@ -2394,8 +2391,12 @@ export interface Stockists extends Document {
   _rev?: Maybe<Scalars['String']>
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
+  content?: Maybe<Array<Maybe<CarouselOrHeroOrImageTextSection>>>
+  showUs?: Maybe<Scalars['Boolean']>
   us?: Maybe<Array<Maybe<Stockist>>>
+  showIntl?: Maybe<Scalars['Boolean']>
   international?: Maybe<Array<Maybe<Stockist>>>
+  showOnline?: Maybe<Scalars['Boolean']>
   online?: Maybe<Array<Maybe<Stockist>>>
 }
 
@@ -2409,6 +2410,9 @@ export type StockistsFilter = {
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
+  showUs?: Maybe<BooleanFilter>
+  showIntl?: Maybe<BooleanFilter>
+  showOnline?: Maybe<BooleanFilter>
 }
 
 export type StockistSorting = {
@@ -2428,6 +2432,9 @@ export type StockistsSorting = {
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
+  showUs?: Maybe<SortOrder>
+  showIntl?: Maybe<SortOrder>
+  showOnline?: Maybe<SortOrder>
 }
 
 export type StringFilter = {
