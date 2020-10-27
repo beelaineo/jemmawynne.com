@@ -70,6 +70,7 @@ export const stockists = {
       of: [
         { type: 'hero' },
         { type: 'carousel' },
+
         { type: 'imageTextSection' },
       ],
     },
@@ -107,13 +108,17 @@ export const stockists = {
       type: 'boolean',
       fieldset: 'online',
     },
-
     {
       name: 'online',
       title: 'Online',
       type: 'array',
       fieldset: 'online',
       of: [{ type: 'stockist' }],
+    },
+    {
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
     },
   ],
 

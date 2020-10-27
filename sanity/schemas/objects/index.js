@@ -1,3 +1,4 @@
+export * from './seo'
 export * from './link'
 export * from './collectionBlock'
 export * from './swatches'

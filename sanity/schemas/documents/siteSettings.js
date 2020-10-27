@@ -84,6 +84,13 @@ export const siteSettings = {
       fieldset: 'footer',
       of: [{ type: 'linkGroup' }],
     },
+    {
+      name: 'seo',
+      title: 'Default SEO',
+      description:
+        'These SEO settings will be used as fallbacks for any pages that do not have custom information.',
+      type: 'seo',
+    },
   ],
   preview: {
     select: {},

@@ -13,6 +13,11 @@ export const homepage = {
         { type: 'imageTextSection' },
       ],
     },
+    {
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+    },
   ],
   preview: {
     select: {},

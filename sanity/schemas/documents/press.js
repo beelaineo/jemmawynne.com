@@ -13,6 +13,11 @@ export const pressPage = {
       type: 'hero',
       title: 'Hero',
     },
+    {
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+    },
   ],
 }
 
@@ -84,21 +89,3 @@ export const pressItem = {
     },
   },
 }
-
-// export const pressPage = {
-//   type: 'document',
-//   name: 'pressPage',
-//   title: 'Press',
-//   fields: [
-//     {
-//       title: 'Title',
-//       type: 'string',
-//       name: 'title',
-//     },
-//     {
-//       name: 'hero',
-//       type: 'hero',
-//       title: 'Hero',
-//     },
-//   ],
-// }

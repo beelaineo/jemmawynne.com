@@ -138,5 +138,10 @@ export const page = {
         { type: 'carousel' },
       ],
     },
+    {
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+    },
   ],
 }
