@@ -406,6 +406,7 @@ export interface Homepage extends Document {
   _rev?: Maybe<Scalars['String']>
   _key?: Maybe<Scalars['String']>
   content?: Maybe<Array<Maybe<CarouselOrHeroOrImageTextSection>>>
+  seo?: Maybe<Seo>
 }
 
 export type HomepageFilter = {
@@ -417,6 +418,7 @@ export type HomepageFilter = {
   _updatedAt?: Maybe<DatetimeFilter>
   _rev?: Maybe<StringFilter>
   _key?: Maybe<StringFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export type HomepageSorting = {
@@ -426,6 +428,7 @@ export type HomepageSorting = {
   _updatedAt?: Maybe<SortOrder>
   _rev?: Maybe<SortOrder>
   _key?: Maybe<SortOrder>
+  seo?: Maybe<SeoSorting>
 }
 
 export type IdFilter = {
@@ -698,6 +701,7 @@ export interface Page extends Document {
   slug?: Maybe<Slug>
   hero?: Maybe<Hero>
   body?: Maybe<Array<Maybe<CarouselOrHeroOrPageBlockOrRichTextBlock>>>
+  seo?: Maybe<Seo>
 }
 
 export interface PageBlock {
@@ -738,6 +742,7 @@ export type PageFilter = {
   title?: Maybe<StringFilter>
   slug?: Maybe<SlugFilter>
   hero?: Maybe<HeroFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export interface PageInfo {
@@ -784,6 +789,7 @@ export type PageSorting = {
   title?: Maybe<SortOrder>
   slug?: Maybe<SlugSorting>
   hero?: Maybe<HeroSorting>
+  seo?: Maybe<SeoSorting>
 }
 
 export interface PageText {
@@ -876,6 +882,7 @@ export interface PressPage extends Document {
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   hero?: Maybe<Hero>
+  seo?: Maybe<Seo>
 }
 
 export type PressPageFilter = {
@@ -889,6 +896,7 @@ export type PressPageFilter = {
   _key?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
   hero?: Maybe<HeroFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export type PressPageSorting = {
@@ -900,6 +908,7 @@ export type PressPageSorting = {
   _key?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
   hero?: Maybe<HeroSorting>
+  seo?: Maybe<SeoSorting>
 }
 
 export interface ProductInfo extends Document {
@@ -1613,6 +1622,44 @@ export type SanityImagePaletteSwatchSorting = {
   title?: Maybe<SortOrder>
 }
 
+export interface Seo {
+  __typename: 'Seo'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  /** title for the browser window */
+  title?: Maybe<Scalars['String']>
+  /** title for search results */
+  metaTitle?: Maybe<Scalars['String']>
+  /**
+   * This is the description that will appear underneath the preview link when
+   * shared in Facebook. It should be less than 200 characters
+   */
+  description?: Maybe<Scalars['String']>
+  image?: Maybe<Image>
+  /** Comma-separated SEO keywords */
+  keywords?: Maybe<Scalars['String']>
+}
+
+export type SeoFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
+  metaTitle?: Maybe<StringFilter>
+  description?: Maybe<StringFilter>
+  image?: Maybe<ImageFilter>
+  keywords?: Maybe<StringFilter>
+}
+
+export type SeoSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
+  metaTitle?: Maybe<SortOrder>
+  description?: Maybe<SortOrder>
+  image?: Maybe<ImageSorting>
+  keywords?: Maybe<SortOrder>
+}
+
 export interface ShopifyCollection extends Document {
   __typename: 'ShopifyCollection'
   /** Document ID */
@@ -2298,6 +2345,7 @@ export interface SiteSettings extends Document {
   aboutRaw?: Maybe<Scalars['JSON']>
   instagramSettings?: Maybe<InstagramSettings>
   linkGroups?: Maybe<Array<Maybe<LinkGroup>>>
+  seo?: Maybe<Seo>
 }
 
 export type SiteSettingsFilter = {
@@ -2311,6 +2359,7 @@ export type SiteSettingsFilter = {
   _key?: Maybe<StringFilter>
   banner?: Maybe<BannerFilter>
   instagramSettings?: Maybe<InstagramSettingsFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export type SiteSettingsSorting = {
@@ -2322,6 +2371,7 @@ export type SiteSettingsSorting = {
   _key?: Maybe<SortOrder>
   banner?: Maybe<BannerSorting>
   instagramSettings?: Maybe<InstagramSettingsSorting>
+  seo?: Maybe<SeoSorting>
 }
 
 export interface Slug {
@@ -2398,6 +2448,7 @@ export interface Stockists extends Document {
   international?: Maybe<Array<Maybe<Stockist>>>
   showOnline?: Maybe<Scalars['Boolean']>
   online?: Maybe<Array<Maybe<Stockist>>>
+  seo?: Maybe<Seo>
 }
 
 export type StockistsFilter = {
@@ -2413,6 +2464,7 @@ export type StockistsFilter = {
   showUs?: Maybe<BooleanFilter>
   showIntl?: Maybe<BooleanFilter>
   showOnline?: Maybe<BooleanFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export type StockistSorting = {
@@ -2435,6 +2487,7 @@ export type StockistsSorting = {
   showUs?: Maybe<SortOrder>
   showIntl?: Maybe<SortOrder>
   showOnline?: Maybe<SortOrder>
+  seo?: Maybe<SeoSorting>
 }
 
 export type StringFilter = {
