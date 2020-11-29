@@ -13,6 +13,7 @@ export type Scalars = {
    * An RFC 3986 and RFC 3987 compliant URI string.
    *
    * Example value: `"https://johns-apparel.myshopify.com"`.
+   *
    */
   URL: any
   /** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
@@ -342,7 +343,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   id: Scalars['ID']
   /** A list of line item objects, each one containing information about an item in the checkout. */
   lineItems: StorefrontApiCheckoutLineItemConnection
-  /** The sum of all the prices of all the items in the checkout. Taxes, shipping and discounts excluded. */
+  /** The sum of all the prices of all the items in the checkout. Duties, taxes, shipping and discounts excluded. */
   lineItemsSubtotalPrice: StorefrontApiMoneyV2
   /** The note associated with the checkout. */
   note?: Maybe<Scalars['String']>
@@ -357,8 +358,8 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
    */
   paymentDue: Scalars['Money']
   /**
-   * The amount left to be paid. This is equal to the cost of the line items, taxes
-   * and shipping minus discounts and gift cards.
+   * The amount left to be paid. This is equal to the cost of the line items,
+   * duties, taxes and shipping minus discounts and gift cards.
    */
   paymentDueV2: StorefrontApiMoneyV2
   /**
@@ -381,7 +382,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
    * @deprecated Use `subtotalPriceV2` instead
    */
   subtotalPrice: Scalars['Money']
-  /** Price of the checkout before shipping and taxes. */
+  /** Price of the checkout before duties, shipping and taxes. */
   subtotalPriceV2: StorefrontApiMoneyV2
   /** Specifies if the Checkout is tax exempt. */
   taxExempt: Scalars['Boolean']
@@ -392,7 +393,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
    * @deprecated Use `totalPriceV2` instead
    */
   totalPrice: Scalars['Money']
-  /** The sum of all the prices of all the items in the checkout, taxes and discounts included. */
+  /** The sum of all the prices of all the items in the checkout, duties, taxes and discounts included. */
   totalPriceV2: StorefrontApiMoneyV2
   /**
    * The sum of all the taxes applied to the line items and shipping lines in the checkout.
@@ -546,6 +547,22 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload {
 /** Return type for `checkoutCompleteWithTokenizedPaymentV2` mutation. */
 export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload {
   __typename: 'CheckoutCompleteWithTokenizedPaymentV2Payload'
+  /** The checkout on which the payment was applied. */
+  checkout?: Maybe<StorefrontApiCheckout>
+  /** List of errors that occurred executing the mutation. */
+  checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
+  /** A representation of the attempted payment. */
+  payment?: Maybe<StorefrontApiPayment>
+  /**
+   * List of errors that occurred executing the mutation.
+   * @deprecated Use `checkoutUserErrors` instead
+   */
+  userErrors: Array<StorefrontApiUserError>
+}
+
+/** Return type for `checkoutCompleteWithTokenizedPaymentV3` mutation. */
+export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload {
+  __typename: 'CheckoutCompleteWithTokenizedPaymentV3Payload'
   /** The checkout on which the payment was applied. */
   checkout?: Maybe<StorefrontApiCheckout>
   /** List of errors that occurred executing the mutation. */
@@ -724,7 +741,7 @@ export interface StorefrontApiCheckoutEmailUpdateV2Payload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Possible error codes that could be returned by a checkout mutation. */
+/** Possible error codes that could be returned by CheckoutUserError. */
 export enum StorefrontApiCheckoutErrorCode {
   /** Input value is blank. */
   Blank = 'BLANK',
@@ -798,6 +815,10 @@ export enum StorefrontApiCheckoutErrorCode {
   TotalPriceMismatch = 'TOTAL_PRICE_MISMATCH',
   /** Line item was not found in checkout. */
   LineItemNotFound = 'LINE_ITEM_NOT_FOUND',
+  /** Unable to apply discount. */
+  UnableToApply = 'UNABLE_TO_APPLY',
+  /** Discount already applied. */
+  DiscountAlreadyApplied = 'DISCOUNT_ALREADY_APPLIED',
 }
 
 /** Return type for `checkoutGiftCardApply` mutation. */
@@ -869,6 +890,8 @@ export interface StorefrontApiCheckoutLineItem extends StorefrontApiNode {
   quantity: Scalars['Int']
   /** Title of the line item. Defaults to the product's title. */
   title: Scalars['String']
+  /** Unit price of the line item. */
+  unitPrice?: Maybe<StorefrontApiMoneyV2>
   /** Product variant of the line item. */
   variant?: Maybe<StorefrontApiProductVariant>
 }
@@ -1799,18 +1822,26 @@ export enum StorefrontApiCurrencyCode {
   Czk = 'CZK',
   /** Danish Kroner (DKK). */
   Dkk = 'DKK',
+  /** Djiboutian Franc (DJF). */
+  Djf = 'DJF',
   /** Dominican Peso (DOP). */
   Dop = 'DOP',
   /** East Caribbean Dollar (XCD). */
   Xcd = 'XCD',
   /** Egyptian Pound (EGP). */
   Egp = 'EGP',
+  /** Eritrean Nakfa (ERN). */
+  Ern = 'ERN',
   /** Ethiopian Birr (ETB). */
   Etb = 'ETB',
+  /** Falkland Islands Pounds (FKP). */
+  Fkp = 'FKP',
   /** CFP Franc (XPF). */
   Xpf = 'XPF',
   /** Fijian Dollars (FJD). */
   Fjd = 'FJD',
+  /** Gibraltar Pounds (GIP). */
+  Gip = 'GIP',
   /** Gambian Dalasi (GMD). */
   Gmd = 'GMD',
   /** Ghanaian Cedi (GHS). */
@@ -1821,6 +1852,8 @@ export enum StorefrontApiCurrencyCode {
   Gyd = 'GYD',
   /** Georgian Lari (GEL). */
   Gel = 'GEL',
+  /** Guinean Franc (GNF). */
+  Gnf = 'GNF',
   /** Haitian Gourde (HTG). */
   Htg = 'HTG',
   /** Honduran Lempira (HNL). */
@@ -1837,6 +1870,8 @@ export enum StorefrontApiCurrencyCode {
   Idr = 'IDR',
   /** Israeli New Shekel (NIS). */
   Ils = 'ILS',
+  /** Iranian Rial (IRR). */
+  Irr = 'IRR',
   /** Iraqi Dinar (IQD). */
   Iqd = 'IQD',
   /** Jamaican Dollars (JMD). */
@@ -1851,6 +1886,8 @@ export enum StorefrontApiCurrencyCode {
   Kzt = 'KZT',
   /** Kenyan Shilling (KES). */
   Kes = 'KES',
+  /** Kiribati Dollar (KID). */
+  Kid = 'KID',
   /** Kuwaiti Dinar (KWD). */
   Kwd = 'KWD',
   /** Kyrgyzstani Som (KGS). */
@@ -1865,6 +1902,8 @@ export enum StorefrontApiCurrencyCode {
   Lsl = 'LSL',
   /** Liberian Dollar (LRD). */
   Lrd = 'LRD',
+  /** Libyan Dinar (LYD). */
+  Lyd = 'LYD',
   /** Lithuanian Litai (LTL). */
   Ltl = 'LTL',
   /** Malagasy Ariary (MGA). */
@@ -1877,6 +1916,8 @@ export enum StorefrontApiCurrencyCode {
   Mwk = 'MWK',
   /** Maldivian Rufiyaa (MVR). */
   Mvr = 'MVR',
+  /** Mauritanian Ouguiya (MRU). */
+  Mru = 'MRU',
   /** Mexican Pesos (MXN). */
   Mxn = 'MXN',
   /** Malaysian Ringgits (MYR). */
@@ -1931,6 +1972,8 @@ export enum StorefrontApiCurrencyCode {
   Rwf = 'RWF',
   /** Samoan Tala (WST). */
   Wst = 'WST',
+  /** Saint Helena Pounds (SHP). */
+  Shp = 'SHP',
   /** Saudi Riyal (SAR). */
   Sar = 'SAR',
   /** Sao Tome And Principe Dobra (STD). */
@@ -1939,10 +1982,14 @@ export enum StorefrontApiCurrencyCode {
   Rsd = 'RSD',
   /** Seychellois Rupee (SCR). */
   Scr = 'SCR',
+  /** Sierra Leonean Leone (SLL). */
+  Sll = 'SLL',
   /** Singapore Dollars (SGD). */
   Sgd = 'SGD',
   /** Sudanese Pound (SDG). */
   Sdg = 'SDG',
+  /** Somali Shilling (SOS). */
+  Sos = 'SOS',
   /** Syrian Pound (SYP). */
   Syp = 'SYP',
   /** South African Rand (ZAR). */
@@ -1967,8 +2014,12 @@ export enum StorefrontApiCurrencyCode {
   Twd = 'TWD',
   /** Thai baht (THB). */
   Thb = 'THB',
+  /** Tajikistani Somoni (TJS). */
+  Tjs = 'TJS',
   /** Tanzanian Shilling (TZS). */
   Tzs = 'TZS',
+  /** Tongan Pa'anga (TOP). */
+  Top = 'TOP',
   /** Trinidad and Tobago Dollars (TTD). */
   Ttd = 'TTD',
   /** Tunisian Dinar (TND). */
@@ -1991,6 +2042,8 @@ export enum StorefrontApiCurrencyCode {
   Vuv = 'VUV',
   /** Venezuelan Bolivares (VEF). */
   Vef = 'VEF',
+  /** Venezuelan Bolivares (VES). */
+  Ves = 'VES',
   /** Vietnamese đồng (VND). */
   Vnd = 'VND',
   /** West African CFA franc (XOF). */
@@ -2033,7 +2086,7 @@ export interface StorefrontApiCustomer {
   /** The customer’s phone number. */
   phone?: Maybe<Scalars['String']>
   /**
-   * A list of tags assigned to the customer.
+   * A comma separated list of tags that have been added to the customer.
    * Additional access scope required: unauthenticated_read_customer_tags.
    */
   tags: Array<Scalars['String']>
@@ -2100,6 +2153,15 @@ export interface StorefrontApiCustomerAccessTokenCreatePayload {
   userErrors: Array<StorefrontApiUserError>
 }
 
+/** Return type for `customerAccessTokenCreateWithMultipass` mutation. */
+export interface StorefrontApiCustomerAccessTokenCreateWithMultipassPayload {
+  __typename: 'CustomerAccessTokenCreateWithMultipassPayload'
+  /** An access token object associated with the customer. */
+  customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
+  /** List of errors that occurred executing the mutation. */
+  customerUserErrors: Array<StorefrontApiCustomerUserError>
+}
+
 /** Return type for `customerAccessTokenDelete` mutation. */
 export interface StorefrontApiCustomerAccessTokenDeletePayload {
   __typename: 'CustomerAccessTokenDeletePayload'
@@ -2118,6 +2180,17 @@ export interface StorefrontApiCustomerAccessTokenRenewPayload {
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
   /** List of errors that occurred executing the mutation. */
   userErrors: Array<StorefrontApiUserError>
+}
+
+/** Return type for `customerActivateByUrl` mutation. */
+export interface StorefrontApiCustomerActivateByUrlPayload {
+  __typename: 'CustomerActivateByUrlPayload'
+  /** The customer that was activated. */
+  customer?: Maybe<StorefrontApiCustomer>
+  /** A new customer access token for the customer. */
+  customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
+  /** List of errors that occurred executing the mutation. */
+  customerUserErrors: Array<StorefrontApiCustomerUserError>
 }
 
 /** Specifies the input fields required to activate a customer. */
@@ -2234,7 +2307,7 @@ export interface StorefrontApiCustomerDefaultAddressUpdatePayload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Possible error codes that could be returned by a customer mutation. */
+/** Possible error codes that could be returned by CustomerUserError. */
 export enum StorefrontApiCustomerErrorCode {
   /** Input value is blank. */
   Blank = 'BLANK',
@@ -2262,6 +2335,10 @@ export enum StorefrontApiCustomerErrorCode {
   AlreadyEnabled = 'ALREADY_ENABLED',
   /** Address does not exist. */
   NotFound = 'NOT_FOUND',
+  /** Input email contains an invalid domain name. */
+  BadDomain = 'BAD_DOMAIN',
+  /** Multipass token is not valid. */
+  InvalidMultipassRequest = 'INVALID_MULTIPASS_REQUEST',
 }
 
 /** Return type for `customerRecover` mutation. */
@@ -2327,7 +2404,7 @@ export type StorefrontApiCustomerUpdateInput = {
   /**
    * A unique phone number for the customer.
    *
-   * Formatted using E.164 standard. For example, _+16135551111_.
+   * Formatted using E.164 standard. For example, _+16135551111_. To remove the phone number, specify `null`.
    */
   phone?: Maybe<Scalars['String']>
   /** The login password used by the customer. */
@@ -2488,6 +2565,23 @@ export interface StorefrontApiDomain {
   sslEnabled: Scalars['Boolean']
   /** The URL of the domain (eg: `https://example.com`). */
   url: Scalars['URL']
+}
+
+/** Represents a video hosted outside of Shopify. */
+export interface StorefrontApiExternalVideo
+  extends StorefrontApiNode,
+    StorefrontApiMedia {
+  __typename: 'ExternalVideo'
+  /** A word or phrase to share the nature or contents of a media. */
+  alt?: Maybe<Scalars['String']>
+  /** The URL. */
+  embeddedUrl: Scalars['URL']
+  /** Globally unique identifier. */
+  id: Scalars['ID']
+  /** The media content type. */
+  mediaContentType: StorefrontApiMediaContentType
+  /** The preview image for the media. */
+  previewImage?: Maybe<StorefrontApiImage>
 }
 
 /** Represents a single fulfillment in an order. */
@@ -2807,12 +2901,69 @@ export interface StorefrontApiManualDiscountApplication
   value: StorefrontApiPricingValue
 }
 
+/** Represents a media interface. */
+export type StorefrontApiMedia = {
+  /** A word or phrase to share the nature or contents of a media. */
+  alt?: Maybe<Scalars['String']>
+  /** The media content type. */
+  mediaContentType: StorefrontApiMediaContentType
+  /** The preview image for the media. */
+  previewImage?: Maybe<StorefrontApiImage>
+}
+
+export interface StorefrontApiMediaConnection {
+  __typename: 'MediaConnection'
+  /** A list of edges. */
+  edges: Array<StorefrontApiMediaEdge>
+  /** Information to aid in pagination. */
+  pageInfo: StorefrontApiPageInfo
+}
+
+/** The possible content types for a media object. */
+export enum StorefrontApiMediaContentType {
+  /** An externally hosted video. */
+  ExternalVideo = 'EXTERNAL_VIDEO',
+  /** A Shopify hosted image. */
+  Image = 'IMAGE',
+  /** A 3d model. */
+  Model_3D = 'MODEL_3D',
+  /** A Shopify hosted video. */
+  Video = 'VIDEO',
+}
+
+export interface StorefrontApiMediaEdge {
+  __typename: 'MediaEdge'
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']
+  /** The item at the end of MediaEdge. */
+  node: StorefrontApiMedia
+}
+
+/** Represents a Shopify hosted image. */
+export interface StorefrontApiMediaImage
+  extends StorefrontApiNode,
+    StorefrontApiMedia {
+  __typename: 'MediaImage'
+  /** A word or phrase to share the nature or contents of a media. */
+  alt?: Maybe<Scalars['String']>
+  /** Globally unique identifier. */
+  id: Scalars['ID']
+  /** The image for the media. */
+  image?: Maybe<StorefrontApiImage>
+  /** The media content type. */
+  mediaContentType: StorefrontApiMediaContentType
+  /** The preview image for the media. */
+  previewImage?: Maybe<StorefrontApiImage>
+}
+
 /**
  * Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are
  * comprised of keys, values, and value types.
  */
 export interface StorefrontApiMetafield extends StorefrontApiNode {
   __typename: 'Metafield'
+  /** The date and time when the storefront metafield was created. */
+  createdAt: Scalars['DateTime']
   /** The description of a metafield. */
   description?: Maybe<Scalars['String']>
   /** Globally unique identifier. */
@@ -2823,6 +2974,8 @@ export interface StorefrontApiMetafield extends StorefrontApiNode {
   namespace: Scalars['String']
   /** The parent object that the metafield belongs to. */
   parentResource: StorefrontApiMetafieldParentResource
+  /** The date and time when the storefront metafield was updated. */
+  updatedAt: Scalars['DateTime']
   /** The value of a metafield. */
   value: Scalars['String']
   /** Represents the metafield value type. */
@@ -2858,6 +3011,36 @@ export enum StorefrontApiMetafieldValueType {
   Integer = 'INTEGER',
   /** A json string metafield. */
   JsonString = 'JSON_STRING',
+}
+
+/** Represents a Shopify hosted 3D model. */
+export interface StorefrontApiModel3d
+  extends StorefrontApiNode,
+    StorefrontApiMedia {
+  __typename: 'Model3d'
+  /** A word or phrase to share the nature or contents of a media. */
+  alt?: Maybe<Scalars['String']>
+  /** Globally unique identifier. */
+  id: Scalars['ID']
+  /** The media content type. */
+  mediaContentType: StorefrontApiMediaContentType
+  /** The preview image for the media. */
+  previewImage?: Maybe<StorefrontApiImage>
+  /** The sources for a 3d model. */
+  sources: Array<StorefrontApiModel3dSource>
+}
+
+/** Represents a source for a Shopify hosted 3d model. */
+export interface StorefrontApiModel3dSource {
+  __typename: 'Model3dSource'
+  /** The filesize of the 3d model. */
+  filesize: Scalars['Int']
+  /** The format of the 3d model. */
+  format: Scalars['String']
+  /** The MIME type of the 3d model. */
+  mimeType: Scalars['String']
+  /** The URL of the 3d model. */
+  url: Scalars['String']
 }
 
 /** Specifies the fields for a monetary value with currency. */
@@ -2897,6 +3080,22 @@ export interface StorefrontApiMoneyV2 {
   amount: Scalars['Decimal']
   /** Currency of the money. */
   currencyCode: StorefrontApiCurrencyCode
+}
+
+export interface StorefrontApiMoneyV2Connection {
+  __typename: 'MoneyV2Connection'
+  /** A list of edges. */
+  edges: Array<StorefrontApiMoneyV2Edge>
+  /** Information to aid in pagination. */
+  pageInfo: StorefrontApiPageInfo
+}
+
+export interface StorefrontApiMoneyV2Edge {
+  __typename: 'MoneyV2Edge'
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']
+  /** The item at the end of MoneyV2Edge. */
+  node: StorefrontApiMoneyV2
 }
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
@@ -2944,6 +3143,10 @@ export interface StorefrontApiMutation {
    */
   checkoutCompleteWithTokenizedPaymentV2?: Maybe<
     StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload
+  >
+  /** Completes a checkout with a tokenized payment. */
+  checkoutCompleteWithTokenizedPaymentV3?: Maybe<
+    StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload
   >
   /** Creates a new checkout. */
   checkoutCreate?: Maybe<StorefrontApiCheckoutCreatePayload>
@@ -3005,22 +3208,13 @@ export interface StorefrontApiMutation {
   checkoutGiftCardRemoveV2?: Maybe<StorefrontApiCheckoutGiftCardRemoveV2Payload>
   /** Appends gift cards to an existing checkout. */
   checkoutGiftCardsAppend?: Maybe<StorefrontApiCheckoutGiftCardsAppendPayload>
-  /**
-   * Adds a list of line items to a checkout.
-   * @deprecated Use `checkoutLineItemsReplace` instead
-   */
+  /** Adds a list of line items to a checkout. */
   checkoutLineItemsAdd?: Maybe<StorefrontApiCheckoutLineItemsAddPayload>
-  /**
-   * Removes line items from an existing checkout.
-   * @deprecated Use `checkoutLineItemsReplace` instead
-   */
+  /** Removes line items from an existing checkout. */
   checkoutLineItemsRemove?: Maybe<StorefrontApiCheckoutLineItemsRemovePayload>
   /** Sets a list of line items to a checkout. */
   checkoutLineItemsReplace?: Maybe<StorefrontApiCheckoutLineItemsReplacePayload>
-  /**
-   * Updates line items on a checkout.
-   * @deprecated Use `checkoutLineItemsReplace` instead
-   */
+  /** Updates line items on a checkout. */
   checkoutLineItemsUpdate?: Maybe<StorefrontApiCheckoutLineItemsUpdatePayload>
   /**
    * Updates the shipping address of an existing checkout.
@@ -3044,6 +3238,14 @@ export interface StorefrontApiMutation {
   customerAccessTokenCreate?: Maybe<
     StorefrontApiCustomerAccessTokenCreatePayload
   >
+  /**
+   * Creates a customer access token using a multipass token instead of email and password.
+   * A customer record is created if customer does not exist. If a customer record already
+   * exists but the record is disabled, then it's enabled.
+   */
+  customerAccessTokenCreateWithMultipass?: Maybe<
+    StorefrontApiCustomerAccessTokenCreateWithMultipassPayload
+  >
   /** Permanently destroys a customer access token. */
   customerAccessTokenDelete?: Maybe<
     StorefrontApiCustomerAccessTokenDeletePayload
@@ -3057,6 +3259,8 @@ export interface StorefrontApiMutation {
   customerAccessTokenRenew?: Maybe<StorefrontApiCustomerAccessTokenRenewPayload>
   /** Activates a customer. */
   customerActivate?: Maybe<StorefrontApiCustomerActivatePayload>
+  /** Activates a customer with the activation url received from `customerCreate`. */
+  customerActivateByUrl?: Maybe<StorefrontApiCustomerActivateByUrlPayload>
   /** Creates a new address for a customer. */
   customerAddressCreate?: Maybe<StorefrontApiCustomerAddressCreatePayload>
   /** Permanently deletes the address of an existing customer. */
@@ -3118,6 +3322,12 @@ export type StorefrontApiMutationCheckoutCompleteWithTokenizedPaymentArgs = {
 export type StorefrontApiMutationCheckoutCompleteWithTokenizedPaymentV2Args = {
   checkoutId: Scalars['ID']
   payment: StorefrontApiTokenizedPaymentInputV2
+}
+
+/** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
+export type StorefrontApiMutationCheckoutCompleteWithTokenizedPaymentV3Args = {
+  checkoutId: Scalars['ID']
+  payment: StorefrontApiTokenizedPaymentInputV3
 }
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
@@ -3248,6 +3458,11 @@ export type StorefrontApiMutationCustomerAccessTokenCreateArgs = {
 }
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
+export type StorefrontApiMutationCustomerAccessTokenCreateWithMultipassArgs = {
+  multipassToken: Scalars['String']
+}
+
+/** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
 export type StorefrontApiMutationCustomerAccessTokenDeleteArgs = {
   customerAccessToken: Scalars['String']
 }
@@ -3261,6 +3476,12 @@ export type StorefrontApiMutationCustomerAccessTokenRenewArgs = {
 export type StorefrontApiMutationCustomerActivateArgs = {
   id: Scalars['ID']
   input: StorefrontApiCustomerActivateInput
+}
+
+/** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
+export type StorefrontApiMutationCustomerActivateByUrlArgs = {
+  activationUrl: Scalars['URL']
+  password: Scalars['String']
 }
 
 /** The schema’s entry-point for mutations. This acts as the public, top-level API from which all mutation queries must start. */
@@ -3329,16 +3550,37 @@ export type StorefrontApiNode = {
  */
 export interface StorefrontApiOrder extends StorefrontApiNode {
   __typename: 'Order'
+  /** Represents the reason for the order's cancellation. Returns null if the order wasn't canceled. */
+  cancelReason?: Maybe<StorefrontApiOrderCancelReason>
+  /** The date and time when the order was canceled. Returns null if the order wasn't canceled. */
+  canceledAt?: Maybe<Scalars['DateTime']>
   /** The code of the currency used for the payment. */
   currencyCode: StorefrontApiCurrencyCode
+  /**
+   * The subtotal of line items and their discounts, excluding line items that have
+   * been removed. Does not contain order-level discounts, duties, shipping costs,
+   * or shipping discounts. Taxes are not included unless the order is a
+   * taxes-included order.
+   */
+  currentSubtotalPrice: StorefrontApiMoneyV2
+  /** The total amount of the order, including duties, taxes and discounts, minus amounts for line items that have been removed. */
+  currentTotalPrice: StorefrontApiMoneyV2
+  /** The total of all taxes applied to the order, excluding taxes for returned line items. */
+  currentTotalTax: StorefrontApiMoneyV2
   /** The locale code in which this specific order happened. */
   customerLocale?: Maybe<Scalars['String']>
   /** The unique URL that the customer can use to access the order. */
   customerUrl?: Maybe<Scalars['URL']>
   /** Discounts that have been applied on the order. */
   discountApplications: StorefrontApiDiscountApplicationConnection
+  /** Whether the order has had any edits applied or not. */
+  edited: Scalars['Boolean']
   /** The customer's email address. */
   email?: Maybe<Scalars['String']>
+  /** The financial status of the order. */
+  financialStatus?: Maybe<StorefrontApiOrderFinancialStatus>
+  /** The fulfillment status for the order. */
+  fulfillmentStatus: StorefrontApiOrderFulfillmentStatus
   /** Globally unique identifier. */
   id: Scalars['ID']
   /** List of the order’s line items. */
@@ -3350,6 +3592,8 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
   name: Scalars['String']
   /** A unique numeric identifier for the order for use by shop owner and customer. */
   orderNumber: Scalars['Int']
+  /** The total price of the order before any applied edits. */
+  originalTotalPrice: StorefrontApiMoneyV2
   /** The customer's phone number for receiving SMS notifications. */
   phone?: Maybe<Scalars['String']>
   /**
@@ -3369,7 +3613,7 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
    * @deprecated Use `subtotalPriceV2` instead
    */
   subtotalPrice?: Maybe<Scalars['Money']>
-  /** Price of the order before shipping and taxes. */
+  /** Price of the order before duties, shipping and taxes. */
   subtotalPriceV2?: Maybe<StorefrontApiMoneyV2>
   /** List of the order’s successful fulfillments. */
   successfulFulfillments?: Maybe<Array<StorefrontApiFulfillment>>
@@ -3378,7 +3622,7 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
    * @deprecated Use `totalPriceV2` instead
    */
   totalPrice: Scalars['Money']
-  /** The sum of all the prices of all the items in the order, taxes and discounts included (must be positive). */
+  /** The sum of all the prices of all the items in the order, duties, taxes and discounts included (must be positive). */
   totalPriceV2: StorefrontApiMoneyV2
   /**
    * The total amount that has been refunded.
@@ -3438,6 +3682,20 @@ export type StorefrontApiOrderSuccessfulFulfillmentsArgs = {
   first?: Maybe<Scalars['Int']>
 }
 
+/** Represents the reason for the order's cancellation. */
+export enum StorefrontApiOrderCancelReason {
+  /** The customer wanted to cancel the order. */
+  Customer = 'CUSTOMER',
+  /** The order was fraudulent. */
+  Fraud = 'FRAUD',
+  /** There was insufficient inventory. */
+  Inventory = 'INVENTORY',
+  /** Payment was declined. */
+  Declined = 'DECLINED',
+  /** The order was canceled for an unlisted reason. */
+  Other = 'OTHER',
+}
+
 export interface StorefrontApiOrderConnection {
   __typename: 'OrderConnection'
   /** A list of edges. */
@@ -3454,13 +3712,59 @@ export interface StorefrontApiOrderEdge {
   node: StorefrontApiOrder
 }
 
+/** Represents the order's current financial status. */
+export enum StorefrontApiOrderFinancialStatus {
+  /** Displayed as **Pending**. */
+  Pending = 'PENDING',
+  /** Displayed as **Authorized**. */
+  Authorized = 'AUTHORIZED',
+  /** Displayed as **Partially paid**. */
+  PartiallyPaid = 'PARTIALLY_PAID',
+  /** Displayed as **Partially refunded**. */
+  PartiallyRefunded = 'PARTIALLY_REFUNDED',
+  /** Displayed as **Voided**. */
+  Voided = 'VOIDED',
+  /** Displayed as **Paid**. */
+  Paid = 'PAID',
+  /** Displayed as **Refunded**. */
+  Refunded = 'REFUNDED',
+}
+
+/** Represents the order's current fulfillment status. */
+export enum StorefrontApiOrderFulfillmentStatus {
+  /** Displayed as **Unfulfilled**. */
+  Unfulfilled = 'UNFULFILLED',
+  /** Displayed as **Partially fulfilled**. */
+  PartiallyFulfilled = 'PARTIALLY_FULFILLED',
+  /** Displayed as **Fulfilled**. */
+  Fulfilled = 'FULFILLED',
+  /** Displayed as **Restocked**. */
+  Restocked = 'RESTOCKED',
+  /** Displayed as **Pending fulfillment**. */
+  PendingFulfillment = 'PENDING_FULFILLMENT',
+  /** Displayed as **Open**. */
+  Open = 'OPEN',
+  /** Displayed as **In progress**. */
+  InProgress = 'IN_PROGRESS',
+}
+
 /** Represents a single line in an order. There is one line item for each distinct product variant. */
 export interface StorefrontApiOrderLineItem {
   __typename: 'OrderLineItem'
+  /** The number of entries associated to the line item minus the items that have been removed. */
+  currentQuantity: Scalars['Int']
   /** List of custom attributes associated to the line item. */
   customAttributes: Array<StorefrontApiAttribute>
   /** The discounts that have been allocated onto the order line item by discount applications. */
   discountAllocations: Array<StorefrontApiDiscountAllocation>
+  /** The total price of the line item, including discounts, and displayed in the presentment currency. */
+  discountedTotalPrice: StorefrontApiMoneyV2
+  /**
+   * The total price of the line item, not including any discounts. The total price
+   * is calculated using the original unit price multiplied by the quantity, and it
+   * is displayed in the presentment currency.
+   */
+  originalTotalPrice: StorefrontApiMoneyV2
   /** The number of products variants associated to the line item. */
   quantity: Scalars['Int']
   /** The title of the product combined with title of the variant. */
@@ -3588,6 +3892,8 @@ export interface StorefrontApiPayment extends StorefrontApiNode {
   id: Scalars['ID']
   /** A client-side generated token to identify a payment and perform idempotent operations. */
   idempotencyKey?: Maybe<Scalars['String']>
+  /** The URL where the customer needs to be redirected so they can complete the 3D Secure payment flow. */
+  nextActionUrl?: Maybe<Scalars['URL']>
   /** Whether or not the payment is still processing asynchronously. */
   ready: Scalars['Boolean']
   /** A flag to indicate if the payment is to be done in test mode for gateways that support it. */
@@ -3618,6 +3924,18 @@ export interface StorefrontApiPaymentSettings {
   supportedDigitalWallets: Array<StorefrontApiDigitalWallet>
 }
 
+/** The valid values for the types of payment token. */
+export enum StorefrontApiPaymentTokenType {
+  /** Apple Pay token type. */
+  ApplePay = 'APPLE_PAY',
+  /** Vault payment token type. */
+  Vault = 'VAULT',
+  /** Shopify Pay token type. */
+  ShopifyPay = 'SHOPIFY_PAY',
+  /** Google Pay token type. */
+  GooglePay = 'GOOGLE_PAY',
+}
+
 /** The value of the percentage pricing object. */
 export interface StorefrontApiPricingPercentageValue {
   __typename: 'PricingPercentageValue'
@@ -3627,8 +3945,8 @@ export interface StorefrontApiPricingPercentageValue {
 
 /** The price value (fixed or percentage) for a discount application. */
 export type StorefrontApiPricingValue =
-  | StorefrontApiPricingPercentageValue
   | StorefrontApiMoneyV2
+  | StorefrontApiPricingPercentageValue
 
 /**
  * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
@@ -3644,6 +3962,8 @@ export interface StorefrontApiProduct
   availableForSale: Scalars['Boolean']
   /** List of collections a product belongs to. */
   collections: StorefrontApiCollectionConnection
+  /** The compare at price of the product across all variants. */
+  compareAtPriceRange: StorefrontApiProductPriceRange
   /** The date and time when the product was created. */
   createdAt: Scalars['DateTime']
   /** Stripped description of the product, single line with HTML tags removed. */
@@ -3659,6 +3979,8 @@ export interface StorefrontApiProduct
   id: Scalars['ID']
   /** List of images associated with the product. */
   images: StorefrontApiImageConnection
+  /** The media associated with the product. */
+  media: StorefrontApiMediaConnection
   /** The metafield associated with the resource. */
   metafield?: Maybe<StorefrontApiMetafield>
   /** A paginated list of metafields associated with the resource. */
@@ -3679,12 +4001,14 @@ export interface StorefrontApiProduct
   /** The date and time when the product was published to the channel. */
   publishedAt: Scalars['DateTime']
   /**
-   * A categorization that a product can be tagged with, commonly used for filtering and searching.
+   * A comma separated list of tags that have been added to the product.
    * Additional access scope required for private apps: unauthenticated_read_product_tags.
    */
   tags: Array<Scalars['String']>
   /** The product’s title. */
   title: Scalars['String']
+  /** The total quantity of inventory in stock for this Product. */
+  totalInventory?: Maybe<Scalars['Int']>
   /** The date and time when the product was last modified. */
   updatedAt: Scalars['DateTime']
   /**
@@ -3740,6 +4064,20 @@ export type StorefrontApiProductImagesArgs = {
   maxHeight?: Maybe<Scalars['Int']>
   crop?: Maybe<StorefrontApiCropRegion>
   scale?: Maybe<Scalars['Int']>
+}
+
+/**
+ * A product represents an individual item for sale in a Shopify store. Products are often physical, but they don't have to be.
+ * For example, a digital download (such as a movie, music or ebook file) also
+ * qualifies as a product, as do services (such as equipment rental, work for hire,
+ * customization of another product or an extended warranty).
+ */
+export type StorefrontApiProductMediaArgs = {
+  first?: Maybe<Scalars['Int']>
+  after?: Maybe<Scalars['String']>
+  last?: Maybe<Scalars['Int']>
+  before?: Maybe<Scalars['String']>
+  reverse?: Maybe<Scalars['Boolean']>
 }
 
 /**
@@ -3964,6 +4302,8 @@ export interface StorefrontApiProductVariant
    * sale, when `compareAtPriceV2` is higher than `priceV2`.
    */
   compareAtPriceV2?: Maybe<StorefrontApiMoneyV2>
+  /** Whether a product is out of stock but still available for purchase (used for backorders). */
+  currentlyNotInStock: Scalars['Boolean']
   /** Globally unique identifier. */
   id: Scalars['ID']
   /** Image associated with the product variant. This field falls back to the product image if no image is available. */
@@ -3974,6 +4314,8 @@ export interface StorefrontApiProductVariant
   metafields: StorefrontApiMetafieldConnection
   /** List of prices and compare-at prices in the presentment currencies for this shop. */
   presentmentPrices: StorefrontApiProductVariantPricePairConnection
+  /** List of unit prices in the presentment currencies for this shop. */
+  presentmentUnitPrices: StorefrontApiMoneyV2Connection
   /**
    * The product variant’s price.
    * @deprecated Use `priceV2` instead
@@ -3983,6 +4325,8 @@ export interface StorefrontApiProductVariant
   priceV2: StorefrontApiMoneyV2
   /** The product object that the product variant belongs to. */
   product: StorefrontApiProduct
+  /** The total sellable quantity of the variant for online sales channels. */
+  quantityAvailable?: Maybe<Scalars['Int']>
   /** Whether a customer needs to provide a shipping address when placing an order for the product variant. */
   requiresShipping: Scalars['Boolean']
   /** List of product options applied to the variant. */
@@ -3991,6 +4335,10 @@ export interface StorefrontApiProductVariant
   sku?: Maybe<Scalars['String']>
   /** The product variant’s title. */
   title: Scalars['String']
+  /** The unit price value for the variant based on the variant's measurement. */
+  unitPrice?: Maybe<StorefrontApiMoneyV2>
+  /** The unit price measurement for the variant. */
+  unitPriceMeasurement?: Maybe<StorefrontApiUnitPriceMeasurement>
   /** The weight of the product variant in the unit system specified with `weight_unit`. */
   weight?: Maybe<Scalars['Float']>
   /** Unit of measurement for weight. */
@@ -4023,6 +4371,16 @@ export type StorefrontApiProductVariantMetafieldsArgs = {
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
 export type StorefrontApiProductVariantPresentmentPricesArgs = {
+  presentmentCurrencies?: Maybe<Array<StorefrontApiCurrencyCode>>
+  first?: Maybe<Scalars['Int']>
+  after?: Maybe<Scalars['String']>
+  last?: Maybe<Scalars['Int']>
+  before?: Maybe<Scalars['String']>
+  reverse?: Maybe<Scalars['Boolean']>
+}
+
+/** A product variant represents a different version of a product, such as differing sizes or differing colors. */
+export type StorefrontApiProductVariantPresentmentUnitPricesArgs = {
   presentmentCurrencies?: Maybe<Array<StorefrontApiCurrencyCode>>
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
@@ -4354,7 +4712,7 @@ export interface StorefrontApiShop {
    */
   productByHandle?: Maybe<StorefrontApiProduct>
   /**
-   * Tags added to products.
+   * A comma separated list of tags that have been added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
    * @deprecated Use `QueryRoot.productTags` instead.
    */
@@ -4371,6 +4729,8 @@ export interface StorefrontApiShop {
   products: StorefrontApiProductConnection
   /** The shop’s refund policy. */
   refundPolicy?: Maybe<StorefrontApiShopPolicy>
+  /** The shop’s shipping policy. */
+  shippingPolicy?: Maybe<StorefrontApiShopPolicy>
   /** Countries that the shop ships to. */
   shipsToCountries: Array<StorefrontApiCountryCode>
   /**
@@ -4528,6 +4888,33 @@ export type StorefrontApiTokenizedPaymentInputV2 = {
   type: Scalars['String']
 }
 
+/**
+ * Specifies the fields required to complete a checkout with
+ * a tokenized payment.
+ */
+export type StorefrontApiTokenizedPaymentInputV3 = {
+  /** The amount and currency of the payment. */
+  paymentAmount: StorefrontApiMoneyInput
+  /**
+   * A unique client generated key used to avoid duplicate charges. When a
+   * duplicate payment is found, the original is returned instead of creating a new one.
+   */
+  idempotencyKey: Scalars['String']
+  /** The billing address for the payment. */
+  billingAddress: StorefrontApiMailingAddressInput
+  /** A simple string or JSON containing the required payment data for the tokenized payment. */
+  paymentData: Scalars['String']
+  /**
+   * Whether to execute the payment in test mode, if possible. Test mode is not
+   * supported in production stores. Defaults to `false`.
+   */
+  test?: Maybe<Scalars['Boolean']>
+  /** Public Hash Key used for AndroidPay payments only. */
+  identifier?: Maybe<Scalars['String']>
+  /** The type of payment token. */
+  type: StorefrontApiPaymentTokenType
+}
+
 /** An object representing exchange of money for a product or service. */
 export interface StorefrontApiTransaction {
   __typename: 'Transaction'
@@ -4566,6 +4953,59 @@ export enum StorefrontApiTransactionStatus {
   Error = 'ERROR',
 }
 
+/** The measurement used to calculate a unit price for a product variant (e.g. $9.99 / 100ml). */
+export interface StorefrontApiUnitPriceMeasurement {
+  __typename: 'UnitPriceMeasurement'
+  /** The type of unit of measurement for the unit price measurement. */
+  measuredType?: Maybe<StorefrontApiUnitPriceMeasurementMeasuredType>
+  /** The quantity unit for the unit price measurement. */
+  quantityUnit?: Maybe<StorefrontApiUnitPriceMeasurementMeasuredUnit>
+  /** The quantity value for the unit price measurement. */
+  quantityValue: Scalars['Float']
+  /** The reference unit for the unit price measurement. */
+  referenceUnit?: Maybe<StorefrontApiUnitPriceMeasurementMeasuredUnit>
+  /** The reference value for the unit price measurement. */
+  referenceValue: Scalars['Int']
+}
+
+/** The accepted types of unit of measurement. */
+export enum StorefrontApiUnitPriceMeasurementMeasuredType {
+  /** Unit of measurements representing volumes. */
+  Volume = 'VOLUME',
+  /** Unit of measurements representing weights. */
+  Weight = 'WEIGHT',
+  /** Unit of measurements representing lengths. */
+  Length = 'LENGTH',
+  /** Unit of measurements representing areas. */
+  Area = 'AREA',
+}
+
+/** The valid units of measurement for a unit price measurement. */
+export enum StorefrontApiUnitPriceMeasurementMeasuredUnit {
+  /** 1000 milliliters equals 1 liter. */
+  Ml = 'ML',
+  /** 100 centiliters equals 1 liter. */
+  Cl = 'CL',
+  /** Metric system unit of volume. */
+  L = 'L',
+  /** 1 cubic meter equals 1000 liters. */
+  M3 = 'M3',
+  /** 1000 milligrams equals 1 gram. */
+  Mg = 'MG',
+  /** Metric system unit of weight. */
+  G = 'G',
+  /** 1 kilogram equals 1000 grams. */
+  Kg = 'KG',
+  /** 1000 millimeters equals 1 meter. */
+  Mm = 'MM',
+  /** 100 centimeters equals 1 meter. */
+  Cm = 'CM',
+  /** Metric system unit of length. */
+  M = 'M',
+  /** Metric system unit of area. */
+  M2 = 'M2',
+}
+
 /** Represents an error in the input of a mutation. */
 export interface StorefrontApiUserError extends StorefrontApiDisplayableError {
   __typename: 'UserError'
@@ -4573,6 +5013,38 @@ export interface StorefrontApiUserError extends StorefrontApiDisplayableError {
   field?: Maybe<Array<Scalars['String']>>
   /** The error message. */
   message: Scalars['String']
+}
+
+/** Represents a Shopify hosted video. */
+export interface StorefrontApiVideo
+  extends StorefrontApiNode,
+    StorefrontApiMedia {
+  __typename: 'Video'
+  /** A word or phrase to share the nature or contents of a media. */
+  alt?: Maybe<Scalars['String']>
+  /** Globally unique identifier. */
+  id: Scalars['ID']
+  /** The media content type. */
+  mediaContentType: StorefrontApiMediaContentType
+  /** The preview image for the media. */
+  previewImage?: Maybe<StorefrontApiImage>
+  /** The sources for a video. */
+  sources: Array<StorefrontApiVideoSource>
+}
+
+/** Represents a source for a Shopify hosted video. */
+export interface StorefrontApiVideoSource {
+  __typename: 'VideoSource'
+  /** The format of the video source. */
+  format: Scalars['String']
+  /** The height of the video. */
+  height: Scalars['Int']
+  /** The video MIME type. */
+  mimeType: Scalars['String']
+  /** The URL of the video. */
+  url: Scalars['String']
+  /** The width of the video. */
+  width: Scalars['Int']
 }
 
 /** Units of measurement for weight. */

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { unwindEdges } from '@good-idea/unwind-edges'
 import { ShopifyProduct, CollectionBlock, ShopifyCollection } from '../../types'
 import { DocumentLink } from '../../components/DocumentLink'
 import { useShopData } from '../../providers/ShopDataProvider'
@@ -9,6 +10,8 @@ import { Heading } from '../../components/Text'
 import { Hr, CollectionsMain, CollectionsMenu } from './styled'
 import { definitely } from '../../utils'
 import { moreProductsQuery } from './sanityCollectionQuery'
+import { SEO } from '../../components/SEO'
+import { getHeroImage } from '../../utils'
 
 const { useRef, useState, useEffect } = React
 
@@ -45,7 +48,14 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
   const relatedCollections = collection?.relatedCollections?.length
     ? collection.relatedCollections
     : collectionInfo.relatedCollections ?? []
-  const { collectionBlocks, relatedCollectionsTitle, disableMenu } = collection
+  const {
+    handle,
+    hero,
+    seo,
+    collectionBlocks,
+    relatedCollectionsTitle,
+    disableMenu,
+  } = collection
 
   const allProducts = [
     ...definitely(collection.products).slice(0, PAGE_SIZE),
@@ -87,8 +97,23 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
       }, definitely(allProducts))
     : definitely(allProducts)
 
+  if (!handle) throw new Error('No handle was fetched')
+  const firstProduct = definitely(collection.products)[0]
+  const firstProductImage = firstProduct
+    ? unwindEdges(firstProduct?.sourceData?.images)[0][0]
+    : undefined
+
+  const path = ['collections', handle].join('/')
+  const defaultSeo = {
+    title: collection.title || '',
+    description: collection.sourceData?.description,
+    image:
+      getHeroImage(hero) || collection?.sourceData?.image || firstProductImage,
+  }
+
   return (
     <>
+      <SEO seo={seo} defaultSeo={defaultSeo} path={path} />
       <ProductListingHeader
         menuDisabled={disableMenu}
         collection={collection}

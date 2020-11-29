@@ -1,168 +1,58 @@
 {
-  "__schema": {
-    "types": [
-      {
-        "kind": "INTERFACE",
-        "name": "Document",
-        "possibleTypes": [
-          {
-            "name": "Menu"
-          },
-          {
-            "name": "Page"
-          },
-          {
-            "name": "SanityImageAsset"
-          },
-          {
-            "name": "ShopifyCollection"
-          },
-          {
-            "name": "ShopifyProduct"
-          },
-          {
-            "name": "PressPage"
-          },
-          {
-            "name": "Stockists"
-          },
-          {
-            "name": "Homepage"
-          },
-          {
-            "name": "ProductInfo"
-          },
-          {
-            "name": "CollectionInfo"
-          },
-          {
-            "name": "SiteSettings"
-          },
-          {
-            "name": "PressItem"
-          },
-          {
-            "name": "SanityFileAsset"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "CtaOrSubMenu",
-        "possibleTypes": [
-          {
-            "name": "Cta"
-          },
-          {
-            "name": "SubMenu"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists",
-        "possibleTypes": [
-          {
-            "name": "Page"
-          },
-          {
-            "name": "PressPage"
-          },
-          {
-            "name": "ShopifyCollection"
-          },
-          {
-            "name": "ShopifyProduct"
-          },
-          {
-            "name": "Stockists"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "CarouselOrHeroOrPageBlockOrRichTextBlock",
-        "possibleTypes": [
-          {
-            "name": "Carousel"
-          },
-          {
-            "name": "Hero"
-          },
-          {
-            "name": "PageBlock"
-          },
-          {
-            "name": "RichTextBlock"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "PageOrShopifyCollectionOrShopifyProduct",
-        "possibleTypes": [
-          {
-            "name": "Page"
-          },
-          {
-            "name": "ShopifyCollection"
-          },
-          {
-            "name": "ShopifyProduct"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "PageTextOrRichImage",
-        "possibleTypes": [
-          {
-            "name": "PageText"
-          },
-          {
-            "name": "RichImage"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "CarouselOrHeroOrImageTextSection",
-        "possibleTypes": [
-          {
-            "name": "Carousel"
-          },
-          {
-            "name": "Hero"
-          },
-          {
-            "name": "ImageTextSection"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "LinkGroupOrRichPageLink",
-        "possibleTypes": [
-          {
-            "name": "LinkGroup"
-          },
-          {
-            "name": "RichPageLink"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "BlockOrRichImage",
-        "possibleTypes": [
-          {
-            "name": "Block"
-          },
-          {
-            "name": "RichImage"
-          }
-        ]
-      }
+  "possibleTypes": {
+    "Document": [
+      "Menu",
+      "Page",
+      "SanityImageAsset",
+      "ShopifyCollection",
+      "ShopifyProduct",
+      "PressPage",
+      "Stockists",
+      "Homepage",
+      "ProductInfo",
+      "CollectionInfo",
+      "SiteSettings",
+      "PressItem",
+      "SanityFileAsset"
+    ],
+    "CtaOrSubMenu": [
+      "Cta",
+      "SubMenu"
+    ],
+    "PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists": [
+      "Page",
+      "PressPage",
+      "ShopifyCollection",
+      "ShopifyProduct",
+      "Stockists"
+    ],
+    "CarouselOrHeroOrPageBlockOrRichTextBlock": [
+      "Carousel",
+      "Hero",
+      "PageBlock",
+      "RichTextBlock"
+    ],
+    "PageOrShopifyCollectionOrShopifyProduct": [
+      "Page",
+      "ShopifyCollection",
+      "ShopifyProduct"
+    ],
+    "PageTextOrRichImage": [
+      "PageText",
+      "RichImage"
+    ],
+    "CarouselOrHeroOrImageTextSection": [
+      "Carousel",
+      "Hero",
+      "ImageTextSection"
+    ],
+    "LinkGroupOrRichPageLink": [
+      "LinkGroup",
+      "RichPageLink"
+    ],
+    "BlockOrRichImage": [
+      "Block",
+      "RichImage"
     ]
   }
 }

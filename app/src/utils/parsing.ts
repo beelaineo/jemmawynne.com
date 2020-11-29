@@ -1,8 +1,13 @@
-import { Hero } from '../types'
+import { RichImage, Hero } from '../types'
 
 export const isValidHero = (hero?: Hero | null): boolean => {
   if (!hero) return false
   return Boolean(hero?.image)
+}
+
+export const getHeroImage = (hero?: Hero | null): RichImage | undefined => {
+  if (!hero) return
+  return hero.image ?? undefined
 }
 
 export function getUrlParameter(name: string, path: string) {

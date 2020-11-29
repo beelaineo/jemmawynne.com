@@ -1098,6 +1098,7 @@ export type RichTextBlockSorting = {
 
 export interface RootQuery {
   __typename: 'RootQuery'
+  Document?: Maybe<Document>
   Menu?: Maybe<Menu>
   Homepage?: Maybe<Homepage>
   Page?: Maybe<Page>
@@ -1124,6 +1125,10 @@ export interface RootQuery {
   allShopifyCollection: Array<ShopifyCollection>
   allSanityImageAsset: Array<SanityImageAsset>
   allSanityFileAsset: Array<SanityFileAsset>
+}
+
+export type RootQueryDocumentArgs = {
+  id: Scalars['ID']
 }
 
 export type RootQueryMenuArgs = {
@@ -1684,6 +1689,7 @@ export interface ShopifyCollection extends Document {
   collectionBlocks?: Maybe<Array<Maybe<CollectionBlock>>>
   relatedCollectionsTitle?: Maybe<Scalars['String']>
   relatedCollections?: Maybe<Array<Maybe<ShopifyCollection>>>
+  seo?: Maybe<Seo>
 }
 
 export type ShopifyCollectionFilter = {
@@ -1703,6 +1709,7 @@ export type ShopifyCollectionFilter = {
   hero?: Maybe<HeroFilter>
   disableMenu?: Maybe<BooleanFilter>
   relatedCollectionsTitle?: Maybe<StringFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export type ShopifyCollectionSorting = {
@@ -1720,6 +1727,7 @@ export type ShopifyCollectionSorting = {
   hero?: Maybe<HeroSorting>
   disableMenu?: Maybe<SortOrder>
   relatedCollectionsTitle?: Maybe<SortOrder>
+  seo?: Maybe<SeoSorting>
 }
 
 export interface ShopifyMoneyV2 {
@@ -1769,6 +1777,7 @@ export interface ShopifyProduct extends Document {
   variants?: Maybe<Array<Maybe<ShopifyProductVariant>>>
   infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   related?: Maybe<Carousel>
+  seo?: Maybe<Seo>
 }
 
 export type ShopifyProductFilter = {
@@ -1788,6 +1797,7 @@ export type ShopifyProductFilter = {
   archived?: Maybe<BooleanFilter>
   sourceData?: Maybe<ShopifySourceProductFilter>
   related?: Maybe<CarouselFilter>
+  seo?: Maybe<SeoFilter>
 }
 
 export interface ShopifyProductOption {
@@ -1847,6 +1857,7 @@ export type ShopifyProductSorting = {
   archived?: Maybe<SortOrder>
   sourceData?: Maybe<ShopifySourceProductSorting>
   related?: Maybe<CarouselSorting>
+  seo?: Maybe<SeoSorting>
 }
 
 export interface ShopifyProductVariant {
@@ -2063,7 +2074,12 @@ export interface ShopifySourceProduct {
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   availableForSale?: Maybe<Scalars['Boolean']>
+  createdAt?: Maybe<Scalars['Date']>
+  publishedAt?: Maybe<Scalars['Date']>
   priceRange?: Maybe<ShopifySourceProductPriceRange>
+  presentmentPriceRanges?: Maybe<
+    ShopifySourceProductPresentmentPriceRangeConnection
+  >
   productType?: Maybe<Scalars['String']>
   tags?: Maybe<Array<Maybe<Scalars['String']>>>
   handle?: Maybe<Scalars['String']>
@@ -2104,7 +2120,12 @@ export type ShopifySourceProductFilter = {
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
   availableForSale?: Maybe<BooleanFilter>
+  createdAt?: Maybe<DateFilter>
+  publishedAt?: Maybe<DateFilter>
   priceRange?: Maybe<ShopifySourceProductPriceRangeFilter>
+  presentmentPriceRanges?: Maybe<
+    ShopifySourceProductPresentmentPriceRangeConnectionFilter
+  >
   productType?: Maybe<StringFilter>
   handle?: Maybe<StringFilter>
   description?: Maybe<StringFilter>
@@ -2158,12 +2179,73 @@ export type ShopifySourceProductOptionSorting = {
   name?: Maybe<SortOrder>
 }
 
+export interface ShopifySourceProductPresentmentPriceRangeConnection {
+  __typename: 'ShopifySourceProductPresentmentPriceRangeConnection'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  edges?: Maybe<Array<Maybe<ShopifySourceProductPriceRangeEdge>>>
+}
+
+export type ShopifySourceProductPresentmentPriceRangeConnectionFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+}
+
+export type ShopifySourceProductPresentmentPriceRangeConnectionSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+}
+
+export interface ShopifySourceProductPricePresentmentEdge {
+  __typename: 'ShopifySourceProductPricePresentmentEdge'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  cursor?: Maybe<Scalars['String']>
+  node?: Maybe<ShopifySourceProductVariantPricePair>
+}
+
+export type ShopifySourceProductPricePresentmentEdgeFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  cursor?: Maybe<StringFilter>
+  node?: Maybe<ShopifySourceProductVariantPricePairFilter>
+}
+
+export type ShopifySourceProductPricePresentmentEdgeSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  cursor?: Maybe<SortOrder>
+  node?: Maybe<ShopifySourceProductVariantPricePairSorting>
+}
+
 export interface ShopifySourceProductPriceRange {
   __typename: 'ShopifySourceProductPriceRange'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   minVariantPrice?: Maybe<ShopifyMoneyV2>
   maxVariantPrice?: Maybe<ShopifyMoneyV2>
+}
+
+export interface ShopifySourceProductPriceRangeEdge {
+  __typename: 'ShopifySourceProductPriceRangeEdge'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  cursor?: Maybe<Scalars['String']>
+  node?: Maybe<ShopifySourceProductPriceRange>
+}
+
+export type ShopifySourceProductPriceRangeEdgeFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  cursor?: Maybe<StringFilter>
+  node?: Maybe<ShopifySourceProductPriceRangeFilter>
+}
+
+export type ShopifySourceProductPriceRangeEdgeSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  cursor?: Maybe<SortOrder>
+  node?: Maybe<ShopifySourceProductPriceRangeSorting>
 }
 
 export type ShopifySourceProductPriceRangeFilter = {
@@ -2205,7 +2287,12 @@ export type ShopifySourceProductSorting = {
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
   availableForSale?: Maybe<SortOrder>
+  createdAt?: Maybe<SortOrder>
+  publishedAt?: Maybe<SortOrder>
   priceRange?: Maybe<ShopifySourceProductPriceRangeSorting>
+  presentmentPriceRanges?: Maybe<
+    ShopifySourceProductPresentmentPriceRangeConnectionSorting
+  >
   productType?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
   description?: Maybe<SortOrder>
@@ -2222,6 +2309,7 @@ export interface ShopifySourceProductVariant {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   availableForSale?: Maybe<Scalars['Boolean']>
+  currentlyNotInStock?: Maybe<Scalars['Boolean']>
   id?: Maybe<Scalars['String']>
   image?: Maybe<ShopifySourceImage>
   priceV2?: Maybe<ShopifyMoneyV2>
@@ -2260,6 +2348,7 @@ export type ShopifySourceProductVariantFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   availableForSale?: Maybe<BooleanFilter>
+  currentlyNotInStock?: Maybe<BooleanFilter>
   id?: Maybe<StringFilter>
   image?: Maybe<ShopifySourceImageFilter>
   priceV2?: Maybe<ShopifyMoneyV2Filter>
@@ -2269,6 +2358,45 @@ export type ShopifySourceProductVariantFilter = {
   title?: Maybe<StringFilter>
   weight?: Maybe<FloatFilter>
   weightUnit?: Maybe<StringFilter>
+}
+
+export interface ShopifySourceProductVariantPricePair {
+  __typename: 'ShopifySourceProductVariantPricePair'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  compareAtPrice?: Maybe<ShopifyMoneyV2>
+  price?: Maybe<ShopifyMoneyV2>
+}
+
+export type ShopifySourceProductVariantPricePairFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  compareAtPrice?: Maybe<ShopifyMoneyV2Filter>
+  price?: Maybe<ShopifyMoneyV2Filter>
+}
+
+export type ShopifySourceProductVariantPricePairSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  compareAtPrice?: Maybe<ShopifyMoneyV2Sorting>
+  price?: Maybe<ShopifyMoneyV2Sorting>
+}
+
+export interface ShopifySourceProductVariantPricePresenentmentConnection {
+  __typename: 'ShopifySourceProductVariantPricePresenentmentConnection'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  edges?: Maybe<Array<Maybe<ShopifySourceProductPricePresentmentEdge>>>
+}
+
+export type ShopifySourceProductVariantPricePresenentmentConnectionFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+}
+
+export type ShopifySourceProductVariantPricePresenentmentConnectionSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
 }
 
 export interface ShopifySourceProductVariantsConnection {
@@ -2295,6 +2423,7 @@ export type ShopifySourceProductVariantSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   availableForSale?: Maybe<SortOrder>
+  currentlyNotInStock?: Maybe<SortOrder>
   id?: Maybe<SortOrder>
   image?: Maybe<ShopifySourceImageSorting>
   priceV2?: Maybe<ShopifyMoneyV2Sorting>

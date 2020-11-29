@@ -1,4 +1,6 @@
 import * as React from 'react'
+import Head from 'next/head'
+import Link from 'next/link'
 import styled, { css } from '@xstyled/styled-components'
 import { Heading } from '../components/Text'
 
@@ -13,9 +15,20 @@ const Wrapper = styled.div`
 `
 
 export const NotFound = () => (
-  <Wrapper>
-    <Heading fontStyle="italic" level={1}>
-      Page not found
-    </Heading>
-  </Wrapper>
+  <>
+    <Head>
+      <meta name="robots" content="noindex" />
+    </Head>
+
+    <Wrapper>
+      <Heading fontStyle="italic" level={1}>
+        Page not found
+      </Heading>
+      <Heading level={3}>
+        <Link href="/">
+          <a>Return to the homepage</a>
+        </Link>
+      </Heading>
+    </Wrapper>
+  </>
 )

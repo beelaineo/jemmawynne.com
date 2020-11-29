@@ -108,6 +108,7 @@ export const moreProductsQuery = `
       title,
       tags,
       priceRange,
+      options[]{...},
       variants {
         edges[]{
           cursor,

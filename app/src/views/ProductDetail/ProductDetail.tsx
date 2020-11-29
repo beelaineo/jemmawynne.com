@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Head from 'next/head'
 import { useProductVariant, useCheckout } from 'use-shopify'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Box } from '@xstyled/styled-components'
@@ -15,7 +16,12 @@ import {
   ProductRelated,
 } from './components'
 import { useShopData } from '../../providers/ShopDataProvider'
-import { useCounter, buildMailTo, getUrlParameter } from '../../utils'
+import {
+  useCounter,
+  getVariantTitle,
+  buildMailTo,
+  getUrlParameter,
+} from '../../utils'
 import { Accordion } from '../../components/Accordion'
 import {
   Wrapper,
@@ -24,6 +30,7 @@ import {
   ProductImagesWrapper,
 } from './styled'
 import { HintModal } from './HintModal'
+import { SEO } from '../../components/SEO'
 
 const { useState } = React
 
@@ -35,7 +42,7 @@ export const ProductDetail = ({ product }: Props) => {
   /* get additional info blocks from Sanity */
   const { asPath } = useRouter()
   const { getProductInfoBlocks } = useShopData()
-  const { sourceData } = product
+  const { seo, sourceData, handle } = product
   const [hintModalOpen, setHintModalOpen] = useState(false)
   const openHintModal = () => setHintModalOpen(true)
   const closeHintModal = () => setHintModalOpen(false)
@@ -72,82 +79,107 @@ export const ProductDetail = ({ product }: Props) => {
     body: `Hello,\n\nI have some questions about your ${product.title}.\n\nhttps://www.jemmawynne.com/products/${product.handle}`,
   })
 
+  const [images] = unwindEdges(product?.sourceData?.images)
+  const defaultSeo = {
+    title: getVariantTitle(product, currentVariant),
+    image: currentVariant?.image ?? images.length ? images[0] : undefined,
+  }
+
+  if (!handle) throw new Error('No handle fetched')
+  const path = ['products', handle].join('/')
+
   return (
-    <Wrapper>
-      <Column maxWidth="xWide">
-        <ProductDetails>
-          <ProductImagesWrapper>
-            <ProductImages currentVariant={currentVariant} product={product} />
-          </ProductImagesWrapper>
-          <ProductInfoWrapper>
-            <ProductDescription
-              currentVariant={currentVariant}
-              product={product}
-            />
-            <ProductVariantSelector
-              quantity={quantity}
-              increment={increment}
-              decrement={decrement}
-              product={product}
-              currentVariant={currentVariant}
-              selectVariant={selectVariant}
-            />
-            <Box maxWidth="small" mt={5}>
-              <BuyButton
-                addLineItem={addLineItem}
-                currentVariant={currentVariant}
-                quantity={quantity}
-              />
-            </Box>
-            <Box mt={5}>
-              <Button level={3} onClick={openHintModal}>
-                Drop a hint
-              </Button>
-              <Heading
-                level={6}
-                family="sans"
-                textTransform="uppercase"
-                color="body.5"
-              >
-                <a
-                  href={inquireMailTo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Inquire
-                </a>
-              </Heading>
-            </Box>
-            <Box mt={4} pt={2} borderTop="1px solid">
-              <Column maxWidth="medium">
-                {accordions
-                  ? accordions
-                      .reduce<ProductInfoBlock[]>(
-                        (acc, current) =>
-                          current !== null ? [...acc, current] : acc,
-                        [],
-                      )
-                      .map((accordion) =>
-                        accordion && accordion._key ? (
-                          <Accordion
-                            key={accordion._key}
-                            accordion={accordion}
-                          />
-                        ) : null,
-                      )
-                  : null}
-              </Column>
-            </Box>
-          </ProductInfoWrapper>
-        </ProductDetails>
-      </Column>
-      <ProductRelated product={product} />
-      <HintModal
+    <>
+      <SEO
+        seo={seo}
+        defaultSeo={defaultSeo}
+        path={path}
+        contentType="product"
         product={product}
-        currentVariant={currentVariant}
-        open={hintModalOpen}
-        closeModal={closeHintModal}
       />
-    </Wrapper>
+
+      <Wrapper>
+        <Column maxWidth="xWide">
+          <ProductDetails>
+            <ProductImagesWrapper>
+              <ProductImages
+                currentVariant={currentVariant}
+                product={product}
+              />
+            </ProductImagesWrapper>
+            <ProductInfoWrapper>
+              <ProductDescription
+                currentVariant={currentVariant}
+                product={product}
+              />
+              <ProductVariantSelector
+                quantity={quantity}
+                increment={increment}
+                decrement={decrement}
+                product={product}
+                currentVariant={currentVariant}
+                selectVariant={selectVariant}
+              />
+              <Box maxWidth="small" mt={5}>
+                <BuyButton
+                  product={product}
+                  addLineItem={addLineItem}
+                  currentVariant={currentVariant}
+                  quantity={quantity}
+                />
+              </Box>
+              <Box mt={5}>
+                <Button level={3} onClick={openHintModal}>
+                  Drop a hint
+                </Button>
+                {!product?.sourceData?.tags?.includes('inquiry only') ? (
+                  <Heading
+                    level={6}
+                    family="sans"
+                    textTransform="uppercase"
+                    color="body.5"
+                  >
+                    <a
+                      href={inquireMailTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Inquire
+                    </a>
+                  </Heading>
+                ) : null}
+              </Box>
+              <Box mt={4} pt={2} borderTop="1px solid">
+                <Column maxWidth="medium">
+                  {accordions
+                    ? accordions
+                        .reduce<ProductInfoBlock[]>(
+                          (acc, current) =>
+                            current !== null ? [...acc, current] : acc,
+                          [],
+                        )
+                        .map((accordion) =>
+                          accordion && accordion._key ? (
+                            <Accordion
+                              key={accordion._key}
+                              accordion={accordion}
+                            />
+                          ) : null,
+                        )
+                    : null}
+                </Column>
+              </Box>
+            </ProductInfoWrapper>
+          </ProductDetails>
+        </Column>
+        <ProductRelated product={product} />
+        <HintModal
+          product={product}
+          currentVariant={currentVariant}
+          open={hintModalOpen}
+          closeModal={closeHintModal}
+        />
+      </Wrapper>
+    </>
   )
 }

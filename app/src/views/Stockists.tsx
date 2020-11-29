@@ -8,6 +8,7 @@ import {
 import { Heading } from '../components/Text'
 import { ContentBlock } from '../components/ContentBlock'
 import { TextHeader, Column } from '../components/Layout'
+import { SEO } from '../components/SEO'
 import { definitely } from '../utils'
 
 interface StockistProps {
@@ -86,14 +87,21 @@ export const Stockists = ({ stockists }: StockistsProps) => {
   const {
     content,
     us,
+    seo,
     international,
     online,
     showUs,
     showIntl,
     showOnline,
   } = stockists
+
+  const defaultSeo = {
+    title: 'Stockists',
+  }
+
   return (
     <>
+      <SEO seo={seo} defaultSeo={defaultSeo} path="stockists" />
       {definitely(content).map((c) => (
         <ContentBlock key={c._key || 'some-key'} content={c} />
       ))}
