@@ -35,5 +35,11 @@ export const collection = {
         },
       ],
     },
+    {
+      name: 'seo',
+      type: 'seo',
+      description:
+        'Custom SEO settings. By default, the collection description and image will be used.',
+    },
   ],
 }
