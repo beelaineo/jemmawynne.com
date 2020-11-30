@@ -37,7 +37,7 @@ const getRichTextBlockPreviewValues = async (props) => {
 }
 
 export const richTextBlock = {
-  title: 'Text Column',
+  title: 'Long Text',
   name: 'richTextBlock',
   type: 'object',
   fields: [
@@ -79,17 +79,16 @@ export const pageBlock = {
       type: 'colorPicker',
       title: 'Text Color',
     },
-
-    {
-      name: 'alignment',
-      type: 'position',
-      title: 'Content Alignment',
-    },
     {
       name: 'content',
       type: 'array',
       of: [{ type: 'pageText', isHighlighted: true }, { type: 'richImage' }],
       validation: (Rule) => Rule.max(3),
+    },
+    {
+      name: 'alignment',
+      type: 'position',
+      title: 'Content Alignment',
     },
   ],
   preview: {
@@ -133,6 +132,7 @@ export const page = {
       type: 'array',
       of: [
         { type: 'richTextBlock' },
+        { type: 'imageTextSection' },
         { type: 'pageBlock' },
         { type: 'hero' },
         { type: 'carousel' },
