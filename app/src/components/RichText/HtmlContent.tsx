@@ -29,7 +29,7 @@ const wrapBareText = (text?: string) =>
         .replace('<span></span>', '')
     : ''
 
-const internalUrlRegex = /^https?:\/\/(www.)?(localhost:3000|spinellikilcollin.com|spinellikilcollin.(good-idea.)?now.sh)(\/[\w|\/]+)?/
+const internalUrlRegex = /^https?:\/\/(www.)?(localhost:3000|jemmawynne.com|jemmawynne.(good-idea.)?now.sh)(\/[\w|\/]+)?/
 
 const parser = new HTMLParser()
 

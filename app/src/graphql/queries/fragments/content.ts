@@ -398,6 +398,8 @@ export const saneShopifyProductFragment = gql`
     title
     handle
     shopifyId
+    minVariantPrice
+    maxVariantPrice
     infoBlocks {
       ...ProductInfoFragment
     }

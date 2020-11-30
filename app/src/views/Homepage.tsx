@@ -34,7 +34,7 @@ export const Homepage = ({ homepage }: HomepageProps) => {
 
   const firstHero = definitely(content).find((b) => b.__typename === 'Hero')
   const defaultSeo = {
-    title: 'Spinelli Kilcollin',
+    title: 'Jemma Wynne',
     image:
       firstHero && firstHero.__typename === 'Hero'
         ? getHeroImage(firstHero)

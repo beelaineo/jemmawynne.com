@@ -18,10 +18,6 @@ import {
   HeroWrapper,
 } from './styled'
 
-interface HeroBackground {
-  theme: DefaultTheme
-}
-
 interface HeroTextProps {
   theme: DefaultTheme
   textPosition?: string | null

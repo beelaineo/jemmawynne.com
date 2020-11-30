@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Document from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from '@xstyled/styled-components'
 import Sentry from '../src/services/sentry'
 
@@ -11,7 +11,7 @@ process.on('uncaughtException', (err) => {
   Sentry.captureException(err)
 })
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
@@ -37,4 +37,18 @@ export default class MyDocument extends Document {
       sheet.seal()
     }
   }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
 }
+
+export default MyDocument

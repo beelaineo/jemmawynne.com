@@ -82,6 +82,7 @@ export const ProductDetail = ({ product }: Props) => {
   const [images] = unwindEdges(product?.sourceData?.images)
   const defaultSeo = {
     title: getVariantTitle(product, currentVariant),
+    description: product?.sourceData?.description,
     image: currentVariant?.image ?? images.length ? images[0] : undefined,
   }
 

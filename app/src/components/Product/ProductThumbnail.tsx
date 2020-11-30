@@ -80,11 +80,6 @@ export const ProductThumbnail = ({
     return matches
   }
 
-  // if (swatchOptions.length) {
-  if (product.handle === 'prive-petite-diamond-huggies') {
-    console.log(product, swatchOptions)
-  }
-
   return (
     <ProductThumb>
       <Link href="/products/[productSlug]" as={as}>

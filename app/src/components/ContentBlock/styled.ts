@@ -5,7 +5,6 @@ import {
   getFlexJustification,
   getTextAlignment,
 } from '../../theme/utils'
-import { Position } from '../../types'
 import { ImageWrapper } from '../Image/styled'
 
 interface TextWrapperProps {
@@ -221,6 +220,7 @@ export const PageBlockInner = styled.div<PageBlockInnerProps>`
     }
   `}
 `
+
 interface PageTextInnerProps {
   isAlone: boolean
 }

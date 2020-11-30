@@ -111,7 +111,7 @@ export const Announcement = () => {
                 <Heading weight={3} family="sans" mb={0} level={6}>
                   {announcement.text}
                 </Heading>
-                {announcement.cta?.link ? (
+                {announcement.cta?.link && announcement.cta?.label?.length ? (
                   <DocumentLink document={announcement.cta.link.document}>
                     <Heading
                       weight={4}
