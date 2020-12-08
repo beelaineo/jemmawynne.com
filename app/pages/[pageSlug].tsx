@@ -54,9 +54,6 @@ const pageQuery = gql`
           bodyRaw
         }
       }
-      hero {
-        ...HeroFragment
-      }
     }
   }
   ${heroFragment}

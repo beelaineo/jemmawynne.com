@@ -68,7 +68,6 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
     contentLayout,
   } = hero
 
-  console.log({ contentLayout })
   return (
     <HeroWrapper
       fullHeight={fullHeight}
