@@ -8,13 +8,10 @@ import { definitely } from '../../utils'
 const BlocksWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: center;
     padding: 0 5;
-
-    & > * + * {
-      margin-left: 5;
-    }
 
     ${theme.mediaQueries.tablet} {
       flex-direction: column;
@@ -29,11 +26,15 @@ const BlocksWrapper = styled.div`
 `
 
 const BlockWrapper = styled.div`
-  ${({ theme }) => css`
-    flex-grow: 1;
-    flex-basis: 45%;
-    min-height: 45vw;
-  `}
+  flex-grow: 1;
+  flex-basis: 30%;
+  min-height: 45vw;
+  margin-bottom: 5;
+
+  &:nth-child(3n + 2),
+  &:nth-child(3n + 3) {
+    margin-left: 5;
+  }
 `
 
 interface ImageTextSectionProps {

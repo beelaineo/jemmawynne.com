@@ -19,7 +19,7 @@ interface CollectionProps {
 
 const Collection = ({ collection }: CollectionProps) => {
   if (!collection) return <NotFound />
-  return <ProductListing collection={collection} />
+  return <ProductListing key={collection.handle} collection={collection} />
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {

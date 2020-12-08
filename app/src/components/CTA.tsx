@@ -16,6 +16,10 @@ interface WithLevel {
 const Wrapper = styled.div`
   ${({ theme }) => css`
     margin: 3 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
     ${theme.mediaQueries.tablet} {
       margin: 1 0;
     }
@@ -55,12 +59,25 @@ const Inner = styled.div<WithLevel>`
   `}
 `
 
+interface CTALinkProps {
+  cta: Cta
+  children: React.ReactNode
+}
+
+const CTALink = ({ cta, children }: CTALinkProps) => {
+  const { link } = cta
+  if (!link || !link.document) {
+    return <>{children}</>
+  }
+  return <DocumentLink document={link.document}>{children}</DocumentLink>
+}
+
 export const CTA = ({ cta, level }: CTAProps) => {
-  const { label, link } = cta
-  if (!link || !link.document) return null
+  const { label } = cta
+  if (!label) return null
   return (
     <Wrapper>
-      <DocumentLink document={link.document}>
+      <CTALink cta={cta}>
         <Inner level={level}>
           <Heading
             level={7}
@@ -72,7 +89,7 @@ export const CTA = ({ cta, level }: CTAProps) => {
             {label}
           </Heading>
         </Inner>
-      </DocumentLink>
+      </CTALink>
     </Wrapper>
   )
 }

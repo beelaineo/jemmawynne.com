@@ -2,6 +2,10 @@ export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
 }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -3107,9 +3111,7 @@ export interface StorefrontApiMutation {
    */
   checkoutAttributesUpdate?: Maybe<StorefrontApiCheckoutAttributesUpdatePayload>
   /** Updates the attributes of a checkout. */
-  checkoutAttributesUpdateV2?: Maybe<
-    StorefrontApiCheckoutAttributesUpdateV2Payload
-  >
+  checkoutAttributesUpdateV2?: Maybe<StorefrontApiCheckoutAttributesUpdateV2Payload>
   /**
    * Completes a checkout without providing payment information. You can use this
    * mutation for free items or items whose purchase price is covered by a gift card.
@@ -3119,74 +3121,50 @@ export interface StorefrontApiMutation {
    * Completes a checkout using a credit card token from Shopify's Vault.
    * @deprecated Use `checkoutCompleteWithCreditCardV2` instead
    */
-  checkoutCompleteWithCreditCard?: Maybe<
-    StorefrontApiCheckoutCompleteWithCreditCardPayload
-  >
+  checkoutCompleteWithCreditCard?: Maybe<StorefrontApiCheckoutCompleteWithCreditCardPayload>
   /**
    * Completes a checkout using a credit card token from Shopify's card vault.
    * Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you
    * need to  [_request payment processing_](https://help.shopify.com/api/guides/sales-channel-sdk/getting-started#request-payment-processing).
    */
-  checkoutCompleteWithCreditCardV2?: Maybe<
-    StorefrontApiCheckoutCompleteWithCreditCardV2Payload
-  >
+  checkoutCompleteWithCreditCardV2?: Maybe<StorefrontApiCheckoutCompleteWithCreditCardV2Payload>
   /**
    * Completes a checkout with a tokenized payment.
    * @deprecated Use `checkoutCompleteWithTokenizedPaymentV2` instead
    */
-  checkoutCompleteWithTokenizedPayment?: Maybe<
-    StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload
-  >
+  checkoutCompleteWithTokenizedPayment?: Maybe<StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload>
   /**
    * Completes a checkout with a tokenized payment.
    * @deprecated Use `checkoutCompleteWithTokenizedPaymentV3` instead
    */
-  checkoutCompleteWithTokenizedPaymentV2?: Maybe<
-    StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload
-  >
+  checkoutCompleteWithTokenizedPaymentV2?: Maybe<StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload>
   /** Completes a checkout with a tokenized payment. */
-  checkoutCompleteWithTokenizedPaymentV3?: Maybe<
-    StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload
-  >
+  checkoutCompleteWithTokenizedPaymentV3?: Maybe<StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload>
   /** Creates a new checkout. */
   checkoutCreate?: Maybe<StorefrontApiCheckoutCreatePayload>
   /**
    * Associates a customer to the checkout.
    * @deprecated Use `checkoutCustomerAssociateV2` instead
    */
-  checkoutCustomerAssociate?: Maybe<
-    StorefrontApiCheckoutCustomerAssociatePayload
-  >
+  checkoutCustomerAssociate?: Maybe<StorefrontApiCheckoutCustomerAssociatePayload>
   /** Associates a customer to the checkout. */
-  checkoutCustomerAssociateV2?: Maybe<
-    StorefrontApiCheckoutCustomerAssociateV2Payload
-  >
+  checkoutCustomerAssociateV2?: Maybe<StorefrontApiCheckoutCustomerAssociateV2Payload>
   /**
    * Disassociates the current checkout customer from the checkout.
    * @deprecated Use `checkoutCustomerDisassociateV2` instead
    */
-  checkoutCustomerDisassociate?: Maybe<
-    StorefrontApiCheckoutCustomerDisassociatePayload
-  >
+  checkoutCustomerDisassociate?: Maybe<StorefrontApiCheckoutCustomerDisassociatePayload>
   /** Disassociates the current checkout customer from the checkout. */
-  checkoutCustomerDisassociateV2?: Maybe<
-    StorefrontApiCheckoutCustomerDisassociateV2Payload
-  >
+  checkoutCustomerDisassociateV2?: Maybe<StorefrontApiCheckoutCustomerDisassociateV2Payload>
   /**
    * Applies a discount to an existing checkout using a discount code.
    * @deprecated Use `checkoutDiscountCodeApplyV2` instead
    */
-  checkoutDiscountCodeApply?: Maybe<
-    StorefrontApiCheckoutDiscountCodeApplyPayload
-  >
+  checkoutDiscountCodeApply?: Maybe<StorefrontApiCheckoutDiscountCodeApplyPayload>
   /** Applies a discount to an existing checkout using a discount code. */
-  checkoutDiscountCodeApplyV2?: Maybe<
-    StorefrontApiCheckoutDiscountCodeApplyV2Payload
-  >
+  checkoutDiscountCodeApplyV2?: Maybe<StorefrontApiCheckoutDiscountCodeApplyV2Payload>
   /** Removes the applied discount from an existing checkout. */
-  checkoutDiscountCodeRemove?: Maybe<
-    StorefrontApiCheckoutDiscountCodeRemovePayload
-  >
+  checkoutDiscountCodeRemove?: Maybe<StorefrontApiCheckoutDiscountCodeRemovePayload>
   /**
    * Updates the email on an existing checkout.
    * @deprecated Use `checkoutEmailUpdateV2` instead
@@ -3220,36 +3198,24 @@ export interface StorefrontApiMutation {
    * Updates the shipping address of an existing checkout.
    * @deprecated Use `checkoutShippingAddressUpdateV2` instead
    */
-  checkoutShippingAddressUpdate?: Maybe<
-    StorefrontApiCheckoutShippingAddressUpdatePayload
-  >
+  checkoutShippingAddressUpdate?: Maybe<StorefrontApiCheckoutShippingAddressUpdatePayload>
   /** Updates the shipping address of an existing checkout. */
-  checkoutShippingAddressUpdateV2?: Maybe<
-    StorefrontApiCheckoutShippingAddressUpdateV2Payload
-  >
+  checkoutShippingAddressUpdateV2?: Maybe<StorefrontApiCheckoutShippingAddressUpdateV2Payload>
   /** Updates the shipping lines on an existing checkout. */
-  checkoutShippingLineUpdate?: Maybe<
-    StorefrontApiCheckoutShippingLineUpdatePayload
-  >
+  checkoutShippingLineUpdate?: Maybe<StorefrontApiCheckoutShippingLineUpdatePayload>
   /**
    * Creates a customer access token.
    * The customer access token is required to modify the customer object in any way.
    */
-  customerAccessTokenCreate?: Maybe<
-    StorefrontApiCustomerAccessTokenCreatePayload
-  >
+  customerAccessTokenCreate?: Maybe<StorefrontApiCustomerAccessTokenCreatePayload>
   /**
    * Creates a customer access token using a multipass token instead of email and password.
    * A customer record is created if customer does not exist. If a customer record already
    * exists but the record is disabled, then it's enabled.
    */
-  customerAccessTokenCreateWithMultipass?: Maybe<
-    StorefrontApiCustomerAccessTokenCreateWithMultipassPayload
-  >
+  customerAccessTokenCreateWithMultipass?: Maybe<StorefrontApiCustomerAccessTokenCreateWithMultipassPayload>
   /** Permanently destroys a customer access token. */
-  customerAccessTokenDelete?: Maybe<
-    StorefrontApiCustomerAccessTokenDeletePayload
-  >
+  customerAccessTokenDelete?: Maybe<StorefrontApiCustomerAccessTokenDeletePayload>
   /**
    * Renews a customer access token.
    *
@@ -3270,9 +3236,7 @@ export interface StorefrontApiMutation {
   /** Creates a new customer. */
   customerCreate?: Maybe<StorefrontApiCustomerCreatePayload>
   /** Updates the default address of an existing customer. */
-  customerDefaultAddressUpdate?: Maybe<
-    StorefrontApiCustomerDefaultAddressUpdatePayload
-  >
+  customerDefaultAddressUpdate?: Maybe<StorefrontApiCustomerDefaultAddressUpdatePayload>
   /** Sends a reset password email to the customer, as the first step in the reset password process. */
   customerRecover?: Maybe<StorefrontApiCustomerRecoverPayload>
   /** Resets a customer’s password with a token received from `CustomerRecover`. */
@@ -4712,7 +4676,7 @@ export interface StorefrontApiShop {
    */
   productByHandle?: Maybe<StorefrontApiProduct>
   /**
-   * A comma separated list of tags that have been added to products.
+   * A list of tags that have been added to products.
    * Additional access scope required: unauthenticated_read_product_tags.
    * @deprecated Use `QueryRoot.productTags` instead.
    */

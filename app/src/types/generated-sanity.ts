@@ -2,6 +2,10 @@ export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
 }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -101,9 +105,10 @@ export type CarouselOrHeroOrImageTextSection =
   | Hero
   | ImageTextSection
 
-export type CarouselOrHeroOrPageBlockOrRichTextBlock =
+export type CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock =
   | Carousel
   | Hero
+  | ImageTextSection
   | PageBlock
   | RichTextBlock
 
@@ -352,44 +357,68 @@ export interface Hero {
   __typename: 'Hero'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  title?: Maybe<Scalars['String']>
-  bodyRaw?: Maybe<Scalars['JSON']>
-  textAlign?: Maybe<Scalars['String']>
-  textPosition?: Maybe<Scalars['String']>
-  cta?: Maybe<Cta>
-  textColor?: Maybe<Scalars['String']>
+  content?: Maybe<Array<Maybe<HeroContent>>>
   image?: Maybe<RichImage>
   mobileImage?: Maybe<RichImage>
-  textPositionMobile?: Maybe<Scalars['String']>
+  textColor?: Maybe<Scalars['String']>
   textColorMobile?: Maybe<Scalars['String']>
+  fullHeight?: Maybe<Scalars['Boolean']>
+  /** Determines the layout of multiple content blocks (desktop only) */
+  contentLayout?: Maybe<Scalars['String']>
+}
+
+export interface HeroContent {
+  __typename: 'HeroContent'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  bodyRaw?: Maybe<Scalars['JSON']>
+  cta?: Maybe<Cta>
+  align?: Maybe<Scalars['String']>
+  textPosition?: Maybe<Scalars['String']>
+  textPositionMobile?: Maybe<Scalars['String']>
+}
+
+export type HeroContentFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
+  cta?: Maybe<CtaFilter>
+  align?: Maybe<StringFilter>
+  textPosition?: Maybe<StringFilter>
+  textPositionMobile?: Maybe<StringFilter>
+}
+
+export type HeroContentSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
+  cta?: Maybe<CtaSorting>
+  align?: Maybe<SortOrder>
+  textPosition?: Maybe<SortOrder>
+  textPositionMobile?: Maybe<SortOrder>
 }
 
 export type HeroFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
-  title?: Maybe<StringFilter>
-  textAlign?: Maybe<StringFilter>
-  textPosition?: Maybe<StringFilter>
-  cta?: Maybe<CtaFilter>
-  textColor?: Maybe<StringFilter>
   image?: Maybe<RichImageFilter>
   mobileImage?: Maybe<RichImageFilter>
-  textPositionMobile?: Maybe<StringFilter>
+  textColor?: Maybe<StringFilter>
   textColorMobile?: Maybe<StringFilter>
+  fullHeight?: Maybe<BooleanFilter>
+  contentLayout?: Maybe<StringFilter>
 }
 
 export type HeroSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
-  title?: Maybe<SortOrder>
-  textAlign?: Maybe<SortOrder>
-  textPosition?: Maybe<SortOrder>
-  cta?: Maybe<CtaSorting>
-  textColor?: Maybe<SortOrder>
   image?: Maybe<RichImageSorting>
   mobileImage?: Maybe<RichImageSorting>
-  textPositionMobile?: Maybe<SortOrder>
+  textColor?: Maybe<SortOrder>
   textColorMobile?: Maybe<SortOrder>
+  fullHeight?: Maybe<SortOrder>
+  contentLayout?: Maybe<SortOrder>
 }
 
 export interface Homepage extends Document {
@@ -555,9 +584,7 @@ export interface InternalLink {
   _type?: Maybe<Scalars['String']>
   /** (optional) The title of the linked page will be used by default */
   label?: Maybe<Scalars['String']>
-  document?: Maybe<
-    PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists
-  >
+  document?: Maybe<PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists>
 }
 
 export type InternalLinkFilter = {
@@ -699,8 +726,9 @@ export interface Page extends Document {
   _key?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   slug?: Maybe<Slug>
-  hero?: Maybe<Hero>
-  body?: Maybe<Array<Maybe<CarouselOrHeroOrPageBlockOrRichTextBlock>>>
+  body?: Maybe<
+    Array<Maybe<CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock>>
+  >
   seo?: Maybe<Seo>
 }
 
@@ -709,15 +737,17 @@ export interface PageBlock {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   backgroundColor?: Maybe<Scalars['String']>
+  shiftDown?: Maybe<Scalars['Boolean']>
   textColor?: Maybe<Scalars['String']>
-  alignment?: Maybe<Scalars['String']>
   content?: Maybe<Array<Maybe<PageTextOrRichImage>>>
+  alignment?: Maybe<Scalars['String']>
 }
 
 export type PageBlockFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   backgroundColor?: Maybe<StringFilter>
+  shiftDown?: Maybe<BooleanFilter>
   textColor?: Maybe<StringFilter>
   alignment?: Maybe<StringFilter>
 }
@@ -726,6 +756,7 @@ export type PageBlockSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   backgroundColor?: Maybe<SortOrder>
+  shiftDown?: Maybe<SortOrder>
   textColor?: Maybe<SortOrder>
   alignment?: Maybe<SortOrder>
 }
@@ -741,7 +772,6 @@ export type PageFilter = {
   _key?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
   slug?: Maybe<SlugFilter>
-  hero?: Maybe<HeroFilter>
   seo?: Maybe<SeoFilter>
 }
 
@@ -788,7 +818,6 @@ export type PageSorting = {
   _key?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
   slug?: Maybe<SlugSorting>
-  hero?: Maybe<HeroSorting>
   seo?: Maybe<SeoSorting>
 }
 
@@ -2077,9 +2106,7 @@ export interface ShopifySourceProduct {
   createdAt?: Maybe<Scalars['Date']>
   publishedAt?: Maybe<Scalars['Date']>
   priceRange?: Maybe<ShopifySourceProductPriceRange>
-  presentmentPriceRanges?: Maybe<
-    ShopifySourceProductPresentmentPriceRangeConnection
-  >
+  presentmentPriceRanges?: Maybe<ShopifySourceProductPresentmentPriceRangeConnection>
   productType?: Maybe<Scalars['String']>
   tags?: Maybe<Array<Maybe<Scalars['String']>>>
   handle?: Maybe<Scalars['String']>
@@ -2123,9 +2150,7 @@ export type ShopifySourceProductFilter = {
   createdAt?: Maybe<DateFilter>
   publishedAt?: Maybe<DateFilter>
   priceRange?: Maybe<ShopifySourceProductPriceRangeFilter>
-  presentmentPriceRanges?: Maybe<
-    ShopifySourceProductPresentmentPriceRangeConnectionFilter
-  >
+  presentmentPriceRanges?: Maybe<ShopifySourceProductPresentmentPriceRangeConnectionFilter>
   productType?: Maybe<StringFilter>
   handle?: Maybe<StringFilter>
   description?: Maybe<StringFilter>
@@ -2290,9 +2315,7 @@ export type ShopifySourceProductSorting = {
   createdAt?: Maybe<SortOrder>
   publishedAt?: Maybe<SortOrder>
   priceRange?: Maybe<ShopifySourceProductPriceRangeSorting>
-  presentmentPriceRanges?: Maybe<
-    ShopifySourceProductPresentmentPriceRangeConnectionSorting
-  >
+  presentmentPriceRanges?: Maybe<ShopifySourceProductPresentmentPriceRangeConnectionSorting>
   productType?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
   description?: Maybe<SortOrder>

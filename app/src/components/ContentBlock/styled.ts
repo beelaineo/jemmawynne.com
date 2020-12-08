@@ -39,22 +39,74 @@ export const TextWrapper = styled.div<TextWrapperProps>`
 
 interface HeroWrapperProps {
   landscape?: boolean
+  announcementOpen?: boolean
+  fullHeight?: boolean | null
 }
 
 export const HeroWrapper = styled.div<HeroWrapperProps>`
-  ${({ landscape }) => css`
+  ${({ landscape, theme, announcementOpen, fullHeight }) => css`
     position: relative;
     z-index: 0;
     width: 100%;
-    height: ${landscape ? '50vw' : '450px'};
-    overflow: hidden;
+    transition: 0.3s;
+    height: ${landscape
+      ? '50vw'
+      : fullHeight
+      ? announcementOpen
+        ? `calc(100vh - ${theme.navHeight} - ${theme.announcementHeight})`
+        : `calc(100vh - ${theme.navHeight})`
+      : '450px'};
+  `}
+`
+
+interface HeroTextProps {
+  textPosition?: string | null
+  textAlign?: string | null
+  textPositionMobile?: string | null
+}
+
+export const HeroText = styled.div<HeroTextProps>`
+  ${({ theme, textPosition, textAlign, textPositionMobile }) => css`
+    padding: 6;
+    display: flex;
+    flex-grow: 1;
+    justify-content: ${getFlexJustification(textPosition)};
+    align-items: ${getFlexAlignment(textPosition)};
+    text-align: ${textAlign || getTextAlignment(textPosition)};
+
+    ${theme.mediaQueries.mobile} {
+      justify-content: ${getFlexJustification(textPositionMobile)};
+      align-items: ${getFlexAlignment(textPositionMobile)};
+      text-align: ${getTextAlignment(textPositionMobile)};
+    }
+  `}
+`
+
+interface HeroContentWrapperProps {
+  layout?: string | null
+  textColor?: string | null
+  textColorMobile?: string | null
+}
+
+export const HeroContentWrapper = styled.div<HeroContentWrapperProps>`
+  ${({ layout, textColor, textColorMobile, theme }) => css`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: ${layout === 'vertical' ? 'column' : 'row'};
+
+    color: ${getColor(textColor) || 'currentColor'};
+    ${theme.mediaQueries.mobile} {
+      color: ${getColor(textColorMobile) || 'currentColor'};
+    }
   `}
 `
 
 export const TextOuter = styled.div`
   ${({ theme }) => css`
-    min-width: 540px;
-
     ${theme.mediaQueries.mobile} {
       min-width: initial;
     }
@@ -186,19 +238,34 @@ export const BackgroundImageWrapper = styled.div`
 `
 
 interface PageBlockWrapperProps {
-  backgroundColor?: string | null
-  shiftDown?: boolean
   padTop?: boolean
   isAlone?: boolean
 }
 
 export const PageBlockWrapper = styled.div<PageBlockWrapperProps>`
-  ${({ padTop, shiftDown, isAlone, backgroundColor }) => css`
+  ${({ padTop, isAlone }) => css`
+    position: relative;
     padding: 0 6;
     padding-top: ${isAlone ? '100px' : padTop ? '150px' : 3};
     padding-bottom: ${isAlone ? '100px' : 10};
+  `}
+`
+
+interface PageBlockBackgroundProps {
+  backgroundColor?: string | null
+  shiftDown?: boolean
+}
+
+export const PageBlockBackground = styled.div<PageBlockBackgroundProps>`
+  ${({ shiftDown, backgroundColor }) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     background-color: ${getColor(backgroundColor) || 'body.0'};
-    margin-bottom: ${shiftDown ? '-170px' : '0'};
+    transform: ${shiftDown ? 'translateY(80px)' : 'none'};
   `}
 `
 

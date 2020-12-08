@@ -57,6 +57,7 @@ const getSanityImageDetails = (
   if (!image?.asset) return null
   const source = builder.image(image)
   const src = source.url()
+
   const srcSet = buildSrcSet(
     sizes.map((width) => ({
       width,

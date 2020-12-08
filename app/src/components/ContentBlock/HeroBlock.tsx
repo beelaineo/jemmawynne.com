@@ -1,61 +1,54 @@
 import * as React from 'react'
-import styled, { css, Box, DefaultTheme } from '@xstyled/styled-components'
 import { Image } from '../Image'
-import { Hero } from '../../types'
+import { Hero, HeroContent as HeroContentType } from '../../types'
 import { Heading } from '../Text'
 import { CTA } from '../CTA'
+import { useAnnouncement } from '../../providers/AnnouncementProvider'
+import { definitely } from '../../utils'
 import { RichText } from '../RichText'
-import {
-  getFlexJustification,
-  getFlexAlignment,
-  getTextAlignment,
-  getColor,
-} from '../../theme'
 import {
   TextOuter,
   TextContainer,
   HeroImageWrapper,
   HeroWrapper,
+  HeroContentWrapper,
+  HeroText,
 } from './styled'
 
-interface HeroTextProps {
-  theme: DefaultTheme
-  textPosition?: string | null
-  textAlign?: string | null
-  textColor?: string | null
-  textPositionMobile?: string | null
-  textColorMobile?: string | null
+interface HeroContentProps {
+  content?: HeroContentType | null
 }
 
-const HeroText = styled.div`
-  ${({
-    theme,
+const HeroContent = ({ content }: HeroContentProps) => {
+  if (!content) return null
+  const {
+    align,
     textPosition,
-    textAlign,
-    textColor,
     textPositionMobile,
-    textColorMobile,
-  }: HeroTextProps) => css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 6;
-    display: flex;
-    justify-content: ${getFlexJustification(textPosition)};
-    align-items: ${getFlexAlignment(textPosition)};
-    text-align: ${textAlign || getTextAlignment(textPosition)};
-    color: ${getColor(textColor) || 'currentColor'};
-
-    ${theme.mediaQueries.mobile} {
-      justify-content: ${getFlexJustification(textPositionMobile)};
-      align-items: ${getFlexAlignment(textPositionMobile)};
-      text-align: ${getTextAlignment(textPositionMobile)};
-      color: ${getColor(textColorMobile) || 'currentColor'};
-    }
-  `}
-`
+    title,
+    bodyRaw,
+    cta,
+  } = content
+  return (
+    <HeroText
+      textAlign={align}
+      textPosition={textPosition}
+      textPositionMobile={textPositionMobile}
+    >
+      <TextOuter>
+        <TextContainer>
+          {title ? (
+            <Heading mb={5} family="sans" level={5}>
+              {title}
+            </Heading>
+          ) : null}
+          <RichText body={bodyRaw} />
+          {cta ? <CTA level={2} cta={cta} /> : null}
+        </TextContainer>
+      </TextOuter>
+    </HeroText>
+  )
+}
 
 interface HeroBlockProps {
   hero?: Hero | null
@@ -64,50 +57,39 @@ interface HeroBlockProps {
 
 export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
   if (!hero) return null
+  const { open: announcementOpen } = useAnnouncement()
   const {
-    textPosition,
+    content,
     textColor,
-    bodyRaw,
     image,
-    textPositionMobile,
     textColorMobile,
-    textAlign,
     mobileImage,
-    cta,
-    title,
+    fullHeight,
+    contentLayout,
   } = hero
 
+  console.log({ contentLayout })
   return (
-    <HeroWrapper landscape={landscape}>
+    <HeroWrapper
+      fullHeight={fullHeight}
+      announcementOpen={announcementOpen}
+      landscape={landscape}
+    >
       <HeroImageWrapper>
         {image ? <Image fillContainer ratio={0.45} image={image} /> : null}
         {mobileImage ? (
           <Image fillContainer ratio={1.1} image={mobileImage || image} />
         ) : null}
       </HeroImageWrapper>
-      <HeroText
-        textAlign={textAlign}
-        textPosition={textPosition}
+      <HeroContentWrapper
         textColor={textColor}
-        textPositionMobile={textPositionMobile}
         textColorMobile={textColorMobile}
+        layout={contentLayout}
       >
-        <TextOuter>
-          <TextContainer>
-            {title ? (
-              <Heading mb={5} family="sans" level={5}>
-                {title}
-              </Heading>
-            ) : null}
-            <RichText body={bodyRaw} />
-            {cta ? (
-              <Box mt={5}>
-                <CTA level={2} cta={cta} />
-              </Box>
-            ) : null}
-          </TextContainer>
-        </TextOuter>
-      </HeroText>
+        {definitely(content).map((cb) => (
+          <HeroContent key={cb._key || 'some-key'} content={cb} />
+        ))}
+      </HeroContentWrapper>
     </HeroWrapper>
   )
 }

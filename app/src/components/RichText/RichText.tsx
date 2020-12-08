@@ -2,10 +2,26 @@ import * as React from 'react'
 import styled from '@xstyled/styled-components'
 import * as BlockContent from '@sanity/block-content-to-react'
 import { Span, Heading, P, BlockQuote, Li, Ul, Ol } from '../Text'
+import { Image } from '../Image'
 
 interface CustomSerializerConfig {
   blockWrapper?: React.ComponentType
 }
+
+const RichImageWrapper = styled.div`
+  margin: 8 0;
+  max-width: 250px;
+  img {
+    display: block;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: -48px;
+  }
+`
 
 const RichTextWrapper = styled.div`
   h1,
@@ -49,7 +65,13 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
     if (Wrapper) return <Wrapper {...props} />
 
     const style = props.node.style || 'normal'
-    // if (props.node._type === 'image') return <SanityImage image={props.node} />
+    if (/image|richImage/.test(props.node._type)) {
+      return (
+        <RichImageWrapper key={props.node._key || 'some-key'}>
+          <Image image={props.node} />
+        </RichImageWrapper>
+      )
+    }
     // if (props.node._type === 'videoEmbed') return <VideoEmbed video={props.node} />
 
     switch (style) {

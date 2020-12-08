@@ -1,6 +1,7 @@
 import styled, { css } from '@xstyled/styled-components'
 
 export const ProductThumb = styled.div`
+  width: 100%;
   position: relative;
 `
 

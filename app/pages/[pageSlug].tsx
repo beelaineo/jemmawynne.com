@@ -6,6 +6,7 @@ import { Page as PageType } from '../src/types'
 import {
   heroFragment,
   carouselFragment,
+  imageTextBlockFragment,
   pageBlockFragment,
   request,
   requestShopData,
@@ -30,6 +31,16 @@ const pageQuery = gql`
         ... on Hero {
           ...HeroFragment
         }
+        ... on ImageTextSection {
+          _key
+          __typename
+          _type
+          title
+          subtitleRaw
+          blocks {
+            ...ImageTextBlockFragment
+          }
+        }
         ... on Carousel {
           ...CarouselFragment
         }
@@ -50,6 +61,7 @@ const pageQuery = gql`
   }
   ${heroFragment}
   ${carouselFragment}
+  ${imageTextBlockFragment}
   ${pageBlockFragment}
 `
 

@@ -282,16 +282,22 @@ export const heroFragment = gql`
     __typename
     _key
     _type
-    bodyRaw
-    title
-    textPosition
-    textPositionMobile
-    textColor
-    textColorMobile
-    textAlign
-    cta {
-      ...CTAFragment
+    content {
+      __typename
+      _key
+      _type
+      title
+      bodyRaw
+      cta {
+        ...CTAFragment
+      }
+      align
+      textPosition
+      textPositionMobile
     }
+    fullHeight
+    contentLayout
+    textColor
     mobileImage {
       ...SanityRichImageFragment
     }
@@ -559,6 +565,7 @@ export const pageBlockFragment = gql`
     _key
     _type
     backgroundColor
+    shiftDown
     alignment
     content {
       ... on RichImage {
