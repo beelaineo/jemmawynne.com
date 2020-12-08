@@ -11,7 +11,7 @@
     "target": "es6",
     "sourceMap": true,
     "jsx": "preserve",
-    "lib": ["es6", "es7", "dom"],
+    "lib": ["es2020", "dom"],
     "outDir": "./dist",
     "types": ["node", "jest"],
     "allowJs": true,

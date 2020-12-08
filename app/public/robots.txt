@@ -1,3 +1,3 @@
-Sitemap: https://www.spinellikilcollin.com/api/sitemap.xml
+Sitemap: https://www.jemmawynne.com/api/sitemap.xml
 User-agent: *
 Disallow:
