@@ -1,0 +1,3 @@
+Sitemap: https://www.spinellikilcollin.com/api/sitemap.xml
+User-agent: *
+Disallow:

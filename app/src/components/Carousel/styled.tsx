@@ -11,6 +11,7 @@ export const CarouselContainer = styled.div<WithSingle>`
     height: 100%;
     width: 100%;
     flex-grow: 1;
+    overflow: hidden;
     img,
     picture {
       pointer-events: none;
@@ -30,7 +31,8 @@ export const CarouselMask = styled.div<WithSingle>`
     overflow: hidden;
 
     ${theme.mediaQueries.mobile} {
-      max-width: 100%;
+      max-width: calc(100% - (${theme.space[6]}px * 2));
+      margin: 0 auto;
     }
   `}
 `
@@ -131,10 +133,15 @@ interface ButtonWrapperProps {
 }
 
 export const ButtonPadding = styled.div`
-  position: relative;
-  top: 0;
-  width: 30%;
-  padding-bottom: 100%;
+  ${({ theme }) => css`
+    position: relative;
+    top: 0;
+    width: 30%;
+    padding-bottom: 100%;
+    ${theme.mediaQueries.mobile} {
+      width: 20px;
+    }
+  `}
 `
 
 export const ButtonWrapper = styled.div<ButtonWrapperProps>`
@@ -175,6 +182,7 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
     }
     ${theme.mediaQueries.mobile} {
       width: calc((100% - (20px * 1)) / 2);
+      justify-content: ${direction === 'next' ? 'flex-start' : 'flex-end'};
 
       button {
         width: ${theme.space[6]}px;
@@ -190,9 +198,10 @@ export const ButtonsWrapper = styled.div`
     left: ${theme.space[9]}px;
     width: calc(100% - (${theme.space[9]}px * 2));
     height: 100%;
+
     ${theme.mediaQueries.mobile} {
-      left: 0;
-      width: 100%;
+      width: calc(100% - (${theme.space[6]}px * 2));
+      left: ${theme.space[6]}px;
     }
   `}
 `

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box } from '@xstyled/styled-components'
 import { Image } from '../Image'
 import { Hero, HeroContent as HeroContentType } from '../../types'
 import { Heading } from '../Text'
@@ -43,7 +44,11 @@ const HeroContent = ({ content }: HeroContentProps) => {
             </Heading>
           ) : null}
           <RichText body={bodyRaw} />
-          {cta ? <CTA level={2} cta={cta} /> : null}
+          {cta ? (
+            <Box mt={5}>
+              <CTA level={2} cta={cta} />
+            </Box>
+          ) : null}
         </TextContainer>
       </TextOuter>
     </HeroText>

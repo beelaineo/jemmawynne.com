@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import * as BlockContent from '@sanity/block-content-to-react'
 import { Span, Heading, P, BlockQuote, Li, Ul, Ol } from '../Text'
 import { Image } from '../Image'
@@ -9,18 +9,25 @@ interface CustomSerializerConfig {
 }
 
 const RichImageWrapper = styled.div`
-  margin: 8 0;
-  max-width: 250px;
-  img {
-    display: block;
-  }
+  ${({ theme }) => css`
+    margin: 8 0;
+    max-width: 250px;
+    img {
+      display: block;
+    }
 
-  &:first-child {
-    margin-top: 0;
-  }
-  &:last-child {
-    margin-bottom: -48px;
-  }
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: -48px;
+    }
+    ${theme.mediaQueries.tablet} {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  `}
 `
 
 const RichTextWrapper = styled.div`

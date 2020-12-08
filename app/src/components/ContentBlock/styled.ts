@@ -257,7 +257,7 @@ interface PageBlockBackgroundProps {
 }
 
 export const PageBlockBackground = styled.div<PageBlockBackgroundProps>`
-  ${({ shiftDown, backgroundColor }) => css`
+  ${({ shiftDown, theme, backgroundColor }) => css`
     position: absolute;
     top: 0;
     left: 0;
@@ -266,6 +266,10 @@ export const PageBlockBackground = styled.div<PageBlockBackgroundProps>`
     z-index: -1;
     background-color: ${getColor(backgroundColor) || 'body.0'};
     transform: ${shiftDown ? 'translateY(80px)' : 'none'};
+
+    ${theme.mediaQueries.tablet} {
+      transform: none;
+    }
   `}
 `
 
@@ -274,7 +278,7 @@ interface PageBlockInnerProps {
 }
 
 export const PageBlockInner = styled.div<PageBlockInnerProps>`
-  ${({ alignment }) => css`
+  ${({ alignment, theme }) => css`
     max-width: 980px;
     margin: 0 auto;
     display: flex;
@@ -285,6 +289,10 @@ export const PageBlockInner = styled.div<PageBlockInnerProps>`
     & > * {
       flex: 1 1 0px;
     }
+
+    ${theme.mediaQueries.tablet} {
+      display: block;
+    }
   `}
 `
 
@@ -293,9 +301,12 @@ interface PageTextInnerProps {
 }
 
 export const PageText = styled.div<PageTextInnerProps>`
-  ${({ isAlone }) => css`
+  ${({ isAlone, theme }) => css`
     padding: ${isAlone ? 0 : '0 8 8'};
     margin: ${isAlone ? '0 auto' : 0};
+    ${theme.mediaQueries.tablet} {
+      padding: 3 0;
+    }
   `}
 `
 

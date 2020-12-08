@@ -14,7 +14,7 @@ const BlocksWrapper = styled.div`
     padding: 0 5;
 
     ${theme.mediaQueries.tablet} {
-      flex-direction: column;
+      display: block;
       padding: 0;
 
       & > * + * {
@@ -26,15 +26,28 @@ const BlocksWrapper = styled.div`
 `
 
 const BlockWrapper = styled.div`
-  flex-grow: 1;
-  flex-basis: 30%;
-  min-height: 45vw;
-  margin-bottom: 5;
+  ${({ theme }) => css`
+    flex-grow: 1;
+    flex-basis: 30%;
+    min-height: 45vw;
+    margin-bottom: 5;
 
-  &:nth-child(3n + 2),
-  &:nth-child(3n + 3) {
-    margin-left: 5;
-  }
+    &:nth-child(3n + 2),
+    &:nth-child(3n + 3) {
+      margin-left: 5;
+    }
+    ${theme.mediaQueries.tablet} {
+      margin-left: 0;
+      min-height: initial;
+      flex-griw: initial;
+      flex-basis: initial;
+      margin-bottom: 0;
+      &:nth-child(3n + 2),
+      &:nth-child(3n + 3) {
+        margin-left: 0;
+      }
+    }
+  `}
 `
 
 interface ImageTextSectionProps {
