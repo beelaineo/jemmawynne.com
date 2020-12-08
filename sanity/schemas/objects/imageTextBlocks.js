@@ -22,7 +22,6 @@ export const imageTextSection = {
       title: 'Content Blocks',
       type: 'array',
       of: [{ type: 'imageTextBlock' }],
-      validation: (Rule) => Rule.max(4),
     },
   ],
   preview: {

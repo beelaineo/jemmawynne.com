@@ -2,6 +2,10 @@ export const seo = {
   title: 'SEO & Accessibility',
   name: 'seo',
   type: 'object',
+  options: {
+    collapsible: true,
+    collapsed: true,
+  },
   fields: [
     {
       title: 'SEO: Page Title',

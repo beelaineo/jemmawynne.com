@@ -75,6 +75,11 @@ export const pageBlock = {
       title: 'Background Color',
     },
     {
+      name: 'shiftDown',
+      type: 'boolean',
+      title: 'Shift background color down',
+    },
+    {
       name: 'textColor',
       type: 'colorPicker',
       title: 'Text Color',
@@ -120,11 +125,6 @@ export const page = {
         source: 'title',
       },
       validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'hero',
-      title: 'Hero',
-      type: 'hero',
     },
     {
       name: 'body',

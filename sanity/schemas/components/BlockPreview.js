@@ -34,7 +34,17 @@ export class BlockPreview extends React.Component {
   }
 
   render() {
-    const { src, title, subtitles, loading } = this.state
+    const {
+      src,
+      title: mainTitle,
+      subtitles: mainSubtitles,
+      loading,
+    } = this.state
+    const st = mainSubtitles || []
+    const titles = [mainTitle, ...st].filter(Boolean)
+    const title = titles[0]
+
+    const subtitles = titles.slice(1)
     return (
       <div style={wrapperStyles}>
         {loading ? (
@@ -46,13 +56,13 @@ export class BlockPreview extends React.Component {
               <p style={titleStyles}>{title}</p>
               {subtitles && subtitles.length
                 ? subtitles.slice(0, 2).map((subtitle) => (
-                    <h3
+                    <h4
                       className="DefaultPreview_subtitle_3ARTa"
                       key={subtitle}
                       style={subtitleStyles}
                     >
                       {subtitle}
-                    </h3>
+                    </h4>
                   ))
                 : null}
             </div>
