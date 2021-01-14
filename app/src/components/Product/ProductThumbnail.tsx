@@ -14,6 +14,7 @@ import {
   getVariantBySelectedOption,
   formatMoney,
   optionMatchesVariant,
+  productIsInquiryOnly,
 } from '../../utils'
 import { ProductSwatches } from './ProductSwatches'
 import { ProductInfo, ImageWrapper, ProductThumb } from './styled'
@@ -37,6 +38,7 @@ export const ProductThumbnail = ({
   const { getProductSwatchOptions } = useShopData()
   const [variants] = unwindEdges(product?.sourceData?.variants)
   const [currentVariant, setCurrentVariant] = useState(variants[0])
+  const inquiryOnly = productIsInquiryOnly(product)
   if (!product?.sourceData) return null
   if (product.archived === true) return null
   const productImages = product?.sourceData?.images
@@ -103,7 +105,7 @@ export const ProductThumbnail = ({
             >
               {product.title}
             </Heading>
-            {hidePrice ? null : minVariantPrice &&
+            {hidePrice || inquiryOnly ? null : minVariantPrice &&
               minVariantPrice.amount &&
               maxVariantPrice &&
               maxVariantPrice.amount &&

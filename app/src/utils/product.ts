@@ -1,3 +1,4 @@
+import { unwindEdges } from '@good-idea/unwind-edges'
 import {
   ShopifySourceProductOption,
   ShopifySourceProductVariant,
@@ -97,7 +98,11 @@ export const getVariantTitle = (
   product: ShopifyProduct,
   variant: ShopifyProductVariant | ShopifySourceProductVariant,
 ): string | null | undefined => {
-  if (product?.variants?.length && product.variants.length < 2) {
+  const variantsLength =
+    product?.variants?.length ||
+    unwindEdges(product?.sourceData?.variants)[0].length
+
+  if (variantsLength < 2) {
     // If there is only one variant, its name will be "Default Title",
     // so we should return the product title instead.
     return product?.title
@@ -123,4 +128,11 @@ export const getVariantTitle = (
   if (titleByOptions?.length) return titleByOptions
 
   return product?.title
+}
+
+export const productIsInquiryOnly = (product: ShopifyProduct): boolean => {
+  return Boolean(
+    product?.sourceData?.tags?.includes('inquiry only') ||
+      product?.collections?.find((c) => c && c.handle === 'bespoke'),
+  )
 }

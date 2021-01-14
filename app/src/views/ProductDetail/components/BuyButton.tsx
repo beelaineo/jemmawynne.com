@@ -8,7 +8,7 @@ import {
 import { Button } from '../../../components/Button'
 import { Heading } from '../../../components/Text'
 import { useMenu } from '../../../providers/MenuProvider'
-import { buildMailTo } from '../../../utils'
+import { productIsInquiryOnly, buildMailTo } from '../../../utils'
 
 const { useState } = React
 
@@ -31,7 +31,7 @@ export const BuyButton = ({
 }: Props) => {
   const [loading, setLoading] = useState(false)
   const { openCart } = useMenu()
-  const inquiryOnly = product?.sourceData?.tags?.includes('inquiry only')
+  const inquiryOnly = productIsInquiryOnly(product)
   const soldOut =
     inquiryOnly !== true && currentVariant?.availableForSale === false
   const madeToOrder =

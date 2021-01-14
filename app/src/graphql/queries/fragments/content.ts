@@ -255,6 +255,10 @@ export const shopifyProductThumbnailFragment = gql`
     shopifyId
     title
     handle
+    collections {
+      __typename
+      handle
+    }
     options {
       __typename
       _key
@@ -548,14 +552,14 @@ export const carouselFragment = gql`
     collection {
       __typename
       products {
-        ...SaneShopifyProductFragment
+        ...ShopifyProductThumbnailFragment
       }
     }
     items {
       ...RichPageLinkFragment
     }
   }
-  ${saneShopifyProductFragment}
+  ${shopifyProductThumbnailFragment}
   ${richPageLinkFragment}
 `
 
