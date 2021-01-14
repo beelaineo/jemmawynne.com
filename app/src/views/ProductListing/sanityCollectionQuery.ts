@@ -38,6 +38,11 @@ export const sanityCollectionQuery = `
     maxVariantPrice,
     shopifyId,
     title,
+    "collections": collections[]->{
+      _type,
+      _key,
+      handle
+    },
     options[]{
       _key,
       _type,
@@ -93,6 +98,11 @@ export const moreProductsQuery = `
     maxVariantPrice,
     shopifyId,
     title,
+    "collections": collections[]->{
+      _type,
+      _key,
+      handle
+    },
     options[]{
       _key,
       _type,

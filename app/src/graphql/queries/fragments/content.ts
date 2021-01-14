@@ -413,6 +413,11 @@ export const saneShopifyProductFragment = gql`
     infoBlocks {
       ...ProductInfoFragment
     }
+    collections {
+      __typename
+      _key
+      handle
+    }
     sourceData {
       __typename
       handle
