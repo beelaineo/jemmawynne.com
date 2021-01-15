@@ -34,7 +34,7 @@ const BlockWrapper = styled.div`
 
     &:nth-child(3n + 2),
     &:nth-child(3n + 3) {
-      margin-left: 5;
+      margin-left: 4;
     }
     ${theme.mediaQueries.tablet} {
       margin-left: 0;

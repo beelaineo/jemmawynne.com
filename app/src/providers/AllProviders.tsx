@@ -2,8 +2,8 @@ import * as React from 'react'
 import fetch from 'isomorphic-unfetch'
 import { DocumentNode } from 'graphql'
 import { ThemeProvider } from '@xstyled/styled-components'
-import { ShopifyProvider } from 'use-shopify'
 import { defaultTheme, GlobalStyles } from '../theme'
+import { ShopifyProvider } from './ShopifyProvider'
 import { ShopDataProvider } from './ShopDataProvider'
 import { MenuProvider } from './MenuProvider'
 import { useError } from './ErrorProvider'
@@ -42,7 +42,7 @@ type ErrorHandler = (err: Error) => void
 const shopifyQuery = (handleError: ErrorHandler) => {
   return async function <Response>(
     query: string | DocumentNode,
-    variables: object,
+    variables?: Record<string, unknown>,
   ): Promise<Response> {
     const queryString =
       typeof query === 'string'

@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie'
 
+export const VIEWER_CART_TOKEN = '_shopify_cart'
+
 interface CookieConfig {
   expires?: number
   path?: string

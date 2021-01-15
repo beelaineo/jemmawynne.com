@@ -80,6 +80,12 @@ export const carousel = {
       type: 'array',
       of: [{ type: 'richPageLink' }],
     },
+    {
+      name: 'cta',
+      label: 'CTA',
+      type: 'cta',
+      description: 'A small CTA that will appear below the carousel',
+    },
   ],
   preview: {
     select: {

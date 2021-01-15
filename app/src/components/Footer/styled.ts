@@ -5,7 +5,7 @@ export const FooterWrapper = styled.footer`
     background-color: body.2;
     color: body.9;
     padding: 34px 38px;
-    margin-top: 6;
+    margin-top: calc(38px * 2);
     display: flex;
     flex-direction: column;
 
@@ -13,25 +13,24 @@ export const FooterWrapper = styled.footer`
       padding: 3;
       grid-gap: 4;
       display: grid;
+      margin-top: 38px;
       grid-template-columns: repeat(12, 1fr);
     }
   `}
 `
 
 export const Company = styled.div`
-  ${({ theme }) => css`
-    padding: 0;
-    grid-column: 1 / 5;
+  padding: 0;
+  grid-column: 1 / 5;
 
-    h4:first-of-type {
-      margin-bottom: 1.3em;
-    }
+  h4:first-of-type {
+    margin-bottom: 1.3em;
+  }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-  `}
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `
 
 export const LinkGroupsWrapper = styled.div`

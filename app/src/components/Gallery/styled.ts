@@ -56,3 +56,8 @@ export const ZoomInner = styled.div`
     }
   `}
 `
+
+export const ThumbnailButton = styled.button`
+  border: 1px solid;
+  border-color: body.5;
+`

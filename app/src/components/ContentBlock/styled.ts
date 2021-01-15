@@ -50,7 +50,7 @@ export const HeroWrapper = styled.div<HeroWrapperProps>`
     width: 100%;
     transition: 0.3s;
     height: ${landscape
-      ? '50vw'
+      ? '25vw'
       : fullHeight
       ? announcementOpen
         ? `calc(100vh - ${theme.navHeight} - ${theme.announcementHeight})`
@@ -163,7 +163,6 @@ export const Wrapper = styled.div<WrapperProps>`
     text-align: ${getTextAlignment(textAlign, 'center') || 'center'};
 
     ${theme.mediaQueries.aboveTablet} {
-      max-height: 85vh;
       height: 100%;
       & ${TextWrapper}:nth-child(2) {
         opacity: 0;
@@ -246,8 +245,8 @@ export const PageBlockWrapper = styled.div<PageBlockWrapperProps>`
   ${({ padTop, isAlone }) => css`
     position: relative;
     padding: 0 6;
-    padding-top: ${isAlone ? '100px' : padTop ? '150px' : 3};
-    padding-bottom: ${isAlone ? '100px' : 10};
+    padding-top: ${isAlone ? '100px' : padTop ? '150px' : 9};
+    padding-bottom: ${isAlone ? '100px' : 9};
   `}
 `
 
@@ -262,10 +261,10 @@ export const PageBlockBackground = styled.div<PageBlockBackgroundProps>`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: ${shiftDown ? 'calc(100% + 60px)' : '100%'};
     z-index: -1;
     background-color: ${getColor(backgroundColor) || 'body.0'};
-    transform: ${shiftDown ? 'translateY(80px)' : 'none'};
+    transform: ${shiftDown ? 'translateY(110px)' : 'none'};
 
     ${theme.mediaQueries.tablet} {
       transform: none;
@@ -319,5 +318,4 @@ export const PageTextInner = styled.div<PageTextInnerProps>`
 
 export const PageImage = styled.div`
   max-width: 740px;
-  max-height: 75vh;
 `

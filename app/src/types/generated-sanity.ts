@@ -91,6 +91,7 @@ export interface Carousel {
   /** Create a carousel from a collection. If a collection is used, items linked to below will be ignored. */
   collection?: Maybe<ShopifyCollection>
   items?: Maybe<Array<Maybe<RichPageLink>>>
+  cta?: Maybe<Cta>
 }
 
 export type CarouselFilter = {
@@ -98,6 +99,7 @@ export type CarouselFilter = {
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
   collection?: Maybe<ShopifyCollectionFilter>
+  cta?: Maybe<CtaFilter>
 }
 
 export type CarouselOrHeroOrImageTextSection =
@@ -116,6 +118,7 @@ export type CarouselSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
+  cta?: Maybe<CtaSorting>
 }
 
 export interface CollectionBlock {
@@ -1919,6 +1922,7 @@ export interface ShopifySourceCollection {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['Date']>
   handle?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   descriptionHtml?: Maybe<Scalars['String']>
@@ -1953,6 +1957,7 @@ export type ShopifySourceCollectionFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
+  updatedAt?: Maybe<DateFilter>
   handle?: Maybe<StringFilter>
   description?: Maybe<StringFilter>
   descriptionHtml?: Maybe<StringFilter>
@@ -2007,6 +2012,7 @@ export type ShopifySourceCollectionSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   title?: Maybe<SortOrder>
+  updatedAt?: Maybe<SortOrder>
   handle?: Maybe<SortOrder>
   description?: Maybe<SortOrder>
   descriptionHtml?: Maybe<SortOrder>
@@ -2105,6 +2111,7 @@ export interface ShopifySourceProduct {
   availableForSale?: Maybe<Scalars['Boolean']>
   createdAt?: Maybe<Scalars['Date']>
   publishedAt?: Maybe<Scalars['Date']>
+  updatedAt?: Maybe<Scalars['Date']>
   priceRange?: Maybe<ShopifySourceProductPriceRange>
   presentmentPriceRanges?: Maybe<ShopifySourceProductPresentmentPriceRangeConnection>
   productType?: Maybe<Scalars['String']>
@@ -2149,6 +2156,7 @@ export type ShopifySourceProductFilter = {
   availableForSale?: Maybe<BooleanFilter>
   createdAt?: Maybe<DateFilter>
   publishedAt?: Maybe<DateFilter>
+  updatedAt?: Maybe<DateFilter>
   priceRange?: Maybe<ShopifySourceProductPriceRangeFilter>
   presentmentPriceRanges?: Maybe<ShopifySourceProductPresentmentPriceRangeConnectionFilter>
   productType?: Maybe<StringFilter>
@@ -2314,6 +2322,7 @@ export type ShopifySourceProductSorting = {
   availableForSale?: Maybe<SortOrder>
   createdAt?: Maybe<SortOrder>
   publishedAt?: Maybe<SortOrder>
+  updatedAt?: Maybe<SortOrder>
   priceRange?: Maybe<ShopifySourceProductPriceRangeSorting>
   presentmentPriceRanges?: Maybe<ShopifySourceProductPresentmentPriceRangeConnectionSorting>
   productType?: Maybe<SortOrder>

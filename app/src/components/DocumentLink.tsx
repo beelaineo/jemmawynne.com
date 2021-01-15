@@ -9,7 +9,7 @@ import {
 } from '../types'
 import { getDocumentLinkUrl, getDocumentLinkLabel } from '../utils/links'
 
-interface LinkProps {
+export interface DocumentLinkProps {
   document?:
     | ShopifyProduct
     | Stockists
@@ -21,7 +21,11 @@ interface LinkProps {
   label?: string | null
 }
 
-export const DocumentLink = ({ document, children, label }: LinkProps) => {
+export const DocumentLink = ({
+  document,
+  children,
+  label,
+}: DocumentLinkProps) => {
   if (!document) return null
   const { as, href } = getDocumentLinkUrl(document)
   return (

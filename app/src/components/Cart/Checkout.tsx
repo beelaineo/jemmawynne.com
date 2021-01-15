@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { IoMdClose } from 'react-icons/io'
-import { useCheckout } from 'use-shopify'
+import { useShopify } from '../../providers/ShopifyProvider'
 import { Button } from '../../components/Button'
 import { Heading } from '../../components/Text'
 import { CartBottom, CartInner } from '../../components/Cart'
@@ -22,7 +22,7 @@ import { useMenu } from '../../providers/MenuProvider'
 
 export const Checkout = () => {
   /* State */
-  const { checkout, loading } = useCheckout()
+  const { checkout, loading } = useShopify()
   const { closeCart } = useMenu()
 
   const lineItems =

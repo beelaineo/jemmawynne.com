@@ -7,6 +7,7 @@ import {
   ZoomImageWrapper,
   ZoomInner,
   Thumbnails,
+  ThumbnailButton,
 } from './styled'
 
 const { useState, useEffect, useRef } = React
@@ -89,9 +90,12 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
       {parsedImages.length > 1 && (
         <Thumbnails data-testid="thumbnails">
           {parsedImages.map((image) => (
-            <button key={image.imageId} onClick={changeImage(image.imageId)}>
+            <ThumbnailButton
+              key={image.imageId}
+              onClick={changeImage(image.imageId)}
+            >
               <Image ratio={1} image={image} />
-            </button>
+            </ThumbnailButton>
           ))}
         </Thumbnails>
       )}

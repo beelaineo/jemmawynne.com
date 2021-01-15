@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { AiOutlineShopping, AiOutlineMenu } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import { definitely } from '../../utils'
-import { useCheckout } from 'use-shopify'
+import { useShopify } from '../../providers/ShopifyProvider'
 import { useMenu } from '../../providers/MenuProvider'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { CartSidebar, Checkout } from '../Cart'
@@ -33,7 +33,7 @@ interface NavigationProps {
 export const Navigation = ({ router }: NavigationProps) => {
   /* State from Providers */
   const { ready, menu } = useShopData()
-  const { loading, checkout } = useCheckout()
+  const { loading, checkout } = useShopify()
 
   /* State */
   const {

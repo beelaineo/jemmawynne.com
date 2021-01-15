@@ -31,7 +31,6 @@ const HeroContent = ({ content }: HeroContentProps) => {
     body,
     cta,
   } = content
-  console.log({ content })
   return (
     <HeroText
       textAlign={align}
@@ -41,7 +40,7 @@ const HeroContent = ({ content }: HeroContentProps) => {
       <TextOuter>
         <TextContainer>
           {title ? (
-            <Heading mb={5} family="sans" level={5}>
+            <Heading mb={3} family="sans" level={6}>
               {title}
             </Heading>
           ) : null}
@@ -82,9 +81,21 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
       landscape={landscape}
     >
       <HeroImageWrapper>
-        {image ? <Image fillContainer ratio={0.45} image={image} /> : null}
+        {image ? (
+          <Image
+            displayCaption={false}
+            fillContainer
+            ratio={0.45}
+            image={image}
+          />
+        ) : null}
         {mobileImage ? (
-          <Image fillContainer ratio={1.1} image={mobileImage || image} />
+          <Image
+            displayCaption={false}
+            fillContainer
+            ratio={1.1}
+            image={mobileImage || image}
+          />
         ) : null}
       </HeroImageWrapper>
       <HeroContentWrapper

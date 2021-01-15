@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { UseCheckoutValues } from 'use-shopify'
+import { UseCheckoutValues } from '../../../providers/ShopifyProvider'
 import {
   ShopifyProduct,
   StorefrontApiProductVariant,
@@ -74,7 +74,7 @@ export const BuyButton = ({
         {buttonLabel}
       </Button>
       {madeToOrder ? (
-        <Heading level={5} color="body.7">
+        <Heading mt={6} level={5} color="body.7">
           Made to Order. All of our jewelry is handmade in NYC. Please allow
           approximately 6 weeks.
         </Heading>

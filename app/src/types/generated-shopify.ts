@@ -148,6 +148,7 @@ export interface StorefrontApiArticleAuthor {
   name: Scalars['String']
 }
 
+/** An auto-generated type for paginating through multiple Articles. */
 export interface StorefrontApiArticleConnection {
   __typename: 'ArticleConnection'
   /** A list of edges. */
@@ -156,6 +157,7 @@ export interface StorefrontApiArticleConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Article and a cursor during pagination. */
 export interface StorefrontApiArticleEdge {
   __typename: 'ArticleEdge'
   /** A cursor for use in pagination. */
@@ -267,6 +269,7 @@ export type StorefrontApiBlogArticlesArgs = {
   query?: Maybe<Scalars['String']>
 }
 
+/** An auto-generated type for paginating through multiple Blogs. */
 export interface StorefrontApiBlogConnection {
   __typename: 'BlogConnection'
   /** A list of edges. */
@@ -275,6 +278,7 @@ export interface StorefrontApiBlogConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Blog and a cursor during pagination. */
 export interface StorefrontApiBlogEdge {
   __typename: 'BlogEdge'
   /** A cursor for use in pagination. */
@@ -900,6 +904,7 @@ export interface StorefrontApiCheckoutLineItem extends StorefrontApiNode {
   variant?: Maybe<StorefrontApiProductVariant>
 }
 
+/** An auto-generated type for paginating through multiple CheckoutLineItems. */
 export interface StorefrontApiCheckoutLineItemConnection {
   __typename: 'CheckoutLineItemConnection'
   /** A list of edges. */
@@ -908,6 +913,7 @@ export interface StorefrontApiCheckoutLineItemConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one CheckoutLineItem and a cursor during pagination. */
 export interface StorefrontApiCheckoutLineItemEdge {
   __typename: 'CheckoutLineItemEdge'
   /** A cursor for use in pagination. */
@@ -1102,6 +1108,7 @@ export type StorefrontApiCollectionProductsArgs = {
   sortKey?: Maybe<StorefrontApiProductCollectionSortKeys>
 }
 
+/** An auto-generated type for paginating through multiple Collections. */
 export interface StorefrontApiCollectionConnection {
   __typename: 'CollectionConnection'
   /** A list of edges. */
@@ -1110,6 +1117,7 @@ export interface StorefrontApiCollectionConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Collection and a cursor during pagination. */
 export interface StorefrontApiCollectionEdge {
   __typename: 'CollectionEdge'
   /** A cursor for use in pagination. */
@@ -1161,6 +1169,7 @@ export interface StorefrontApiCommentAuthor {
   name: Scalars['String']
 }
 
+/** An auto-generated type for paginating through multiple Comments. */
 export interface StorefrontApiCommentConnection {
   __typename: 'CommentConnection'
   /** A list of edges. */
@@ -1169,6 +1178,7 @@ export interface StorefrontApiCommentConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Comment and a cursor during pagination. */
 export interface StorefrontApiCommentEdge {
   __typename: 'CommentEdge'
   /** A cursor for use in pagination. */
@@ -1371,7 +1381,7 @@ export enum StorefrontApiCountryCode {
   Va = 'VA',
   /** Honduras. */
   Hn = 'HN',
-  /** Hong Kong SAR China. */
+  /** Hong Kong SAR. */
   Hk = 'HK',
   /** Hungary. */
   Hu = 'HU',
@@ -1433,7 +1443,7 @@ export enum StorefrontApiCountryCode {
   Lt = 'LT',
   /** Luxembourg. */
   Lu = 'LU',
-  /** Macao SAR China. */
+  /** Macao SAR. */
   Mo = 'MO',
   /** Madagascar. */
   Mg = 'MG',
@@ -2494,6 +2504,7 @@ export enum StorefrontApiDiscountApplicationAllocationMethod {
   One = 'ONE',
 }
 
+/** An auto-generated type for paginating through multiple DiscountApplications. */
 export interface StorefrontApiDiscountApplicationConnection {
   __typename: 'DiscountApplicationConnection'
   /** A list of edges. */
@@ -2502,6 +2513,7 @@ export interface StorefrontApiDiscountApplicationConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one DiscountApplication and a cursor during pagination. */
 export interface StorefrontApiDiscountApplicationEdge {
   __typename: 'DiscountApplicationEdge'
   /** A cursor for use in pagination. */
@@ -2625,6 +2637,7 @@ export interface StorefrontApiFulfillmentLineItem {
   quantity: Scalars['Int']
 }
 
+/** An auto-generated type for paginating through multiple FulfillmentLineItems. */
 export interface StorefrontApiFulfillmentLineItemConnection {
   __typename: 'FulfillmentLineItemConnection'
   /** A list of edges. */
@@ -2633,6 +2646,7 @@ export interface StorefrontApiFulfillmentLineItemConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one FulfillmentLineItem and a cursor during pagination. */
 export interface StorefrontApiFulfillmentLineItemEdge {
   __typename: 'FulfillmentLineItemEdge'
   /** A cursor for use in pagination. */
@@ -2751,6 +2765,7 @@ export type StorefrontApiImageTransformedSrcArgs = {
   preferredContentType?: Maybe<StorefrontApiImageContentType>
 }
 
+/** An auto-generated type for paginating through multiple Images. */
 export interface StorefrontApiImageConnection {
   __typename: 'ImageConnection'
   /** A list of edges. */
@@ -2769,6 +2784,7 @@ export enum StorefrontApiImageContentType {
   Webp = 'WEBP',
 }
 
+/** An auto-generated type which holds one Image and a cursor during pagination. */
 export interface StorefrontApiImageEdge {
   __typename: 'ImageEdge'
   /** A cursor for use in pagination. */
@@ -2843,6 +2859,7 @@ export type StorefrontApiMailingAddressFormattedArgs = {
   withCompany?: Maybe<Scalars['Boolean']>
 }
 
+/** An auto-generated type for paginating through multiple MailingAddresses. */
 export interface StorefrontApiMailingAddressConnection {
   __typename: 'MailingAddressConnection'
   /** A list of edges. */
@@ -2851,6 +2868,7 @@ export interface StorefrontApiMailingAddressConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one MailingAddress and a cursor during pagination. */
 export interface StorefrontApiMailingAddressEdge {
   __typename: 'MailingAddressEdge'
   /** A cursor for use in pagination. */
@@ -2915,6 +2933,7 @@ export type StorefrontApiMedia = {
   previewImage?: Maybe<StorefrontApiImage>
 }
 
+/** An auto-generated type for paginating through multiple Media. */
 export interface StorefrontApiMediaConnection {
   __typename: 'MediaConnection'
   /** A list of edges. */
@@ -2935,6 +2954,7 @@ export enum StorefrontApiMediaContentType {
   Video = 'VIDEO',
 }
 
+/** An auto-generated type which holds one Media and a cursor during pagination. */
 export interface StorefrontApiMediaEdge {
   __typename: 'MediaEdge'
   /** A cursor for use in pagination. */
@@ -2986,6 +3006,7 @@ export interface StorefrontApiMetafield extends StorefrontApiNode {
   valueType: StorefrontApiMetafieldValueType
 }
 
+/** An auto-generated type for paginating through multiple Metafields. */
 export interface StorefrontApiMetafieldConnection {
   __typename: 'MetafieldConnection'
   /** A list of edges. */
@@ -2994,6 +3015,7 @@ export interface StorefrontApiMetafieldConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Metafield and a cursor during pagination. */
 export interface StorefrontApiMetafieldEdge {
   __typename: 'MetafieldEdge'
   /** A cursor for use in pagination. */
@@ -3086,6 +3108,7 @@ export interface StorefrontApiMoneyV2 {
   currencyCode: StorefrontApiCurrencyCode
 }
 
+/** An auto-generated type for paginating through multiple MoneyV2s. */
 export interface StorefrontApiMoneyV2Connection {
   __typename: 'MoneyV2Connection'
   /** A list of edges. */
@@ -3094,6 +3117,7 @@ export interface StorefrontApiMoneyV2Connection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one MoneyV2 and a cursor during pagination. */
 export interface StorefrontApiMoneyV2Edge {
   __typename: 'MoneyV2Edge'
   /** A cursor for use in pagination. */
@@ -3514,7 +3538,7 @@ export type StorefrontApiNode = {
  */
 export interface StorefrontApiOrder extends StorefrontApiNode {
   __typename: 'Order'
-  /** Represents the reason for the order's cancellation. Returns null if the order wasn't canceled. */
+  /** The reason for the order's cancellation. Returns `null` if the order wasn't canceled. */
   cancelReason?: Maybe<StorefrontApiOrderCancelReason>
   /** The date and time when the order was canceled. Returns null if the order wasn't canceled. */
   canceledAt?: Maybe<Scalars['DateTime']>
@@ -3660,6 +3684,7 @@ export enum StorefrontApiOrderCancelReason {
   Other = 'OTHER',
 }
 
+/** An auto-generated type for paginating through multiple Orders. */
 export interface StorefrontApiOrderConnection {
   __typename: 'OrderConnection'
   /** A list of edges. */
@@ -3668,6 +3693,7 @@ export interface StorefrontApiOrderConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Order and a cursor during pagination. */
 export interface StorefrontApiOrderEdge {
   __typename: 'OrderEdge'
   /** A cursor for use in pagination. */
@@ -3737,6 +3763,7 @@ export interface StorefrontApiOrderLineItem {
   variant?: Maybe<StorefrontApiProductVariant>
 }
 
+/** An auto-generated type for paginating through multiple OrderLineItems. */
 export interface StorefrontApiOrderLineItemConnection {
   __typename: 'OrderLineItemConnection'
   /** A list of edges. */
@@ -3745,6 +3772,7 @@ export interface StorefrontApiOrderLineItemConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one OrderLineItem and a cursor during pagination. */
 export interface StorefrontApiOrderLineItemEdge {
   __typename: 'OrderLineItemEdge'
   /** A cursor for use in pagination. */
@@ -3793,6 +3821,7 @@ export interface StorefrontApiPage extends StorefrontApiNode {
   url: Scalars['URL']
 }
 
+/** An auto-generated type for paginating through multiple Pages. */
 export interface StorefrontApiPageConnection {
   __typename: 'PageConnection'
   /** A list of edges. */
@@ -3801,6 +3830,7 @@ export interface StorefrontApiPageConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Page and a cursor during pagination. */
 export interface StorefrontApiPageEdge {
   __typename: 'PageEdge'
   /** A cursor for use in pagination. */
@@ -3954,7 +3984,7 @@ export interface StorefrontApiProduct
    * A value of `null` indicates that the product is not published to the Online Store sales channel.
    */
   onlineStoreUrl?: Maybe<Scalars['URL']>
-  /** List of custom product options (maximum of 3 per product). */
+  /** List of product options. */
   options: Array<StorefrontApiProductOption>
   /** List of price ranges in the presentment currencies for this shop. */
   presentmentPriceRanges: StorefrontApiProductPriceRangeConnection
@@ -3973,7 +4003,12 @@ export interface StorefrontApiProduct
   title: Scalars['String']
   /** The total quantity of inventory in stock for this Product. */
   totalInventory?: Maybe<Scalars['Int']>
-  /** The date and time when the product was last modified. */
+  /**
+   * The date and time when the product was last modified.
+   * A product's `updatedAt` value can change for different reasons. For example, if an order
+   * is placed for a product that has inventory tracking set up, then the inventory adjustment
+   * is counted as an update.
+   */
   updatedAt: Scalars['DateTime']
   /**
    * Find a product’s variant based on its selected options.
@@ -4144,6 +4179,7 @@ export enum StorefrontApiProductCollectionSortKeys {
   Relevance = 'RELEVANCE',
 }
 
+/** An auto-generated type for paginating through multiple Products. */
 export interface StorefrontApiProductConnection {
   __typename: 'ProductConnection'
   /** A list of edges. */
@@ -4152,6 +4188,7 @@ export interface StorefrontApiProductConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one Product and a cursor during pagination. */
 export interface StorefrontApiProductEdge {
   __typename: 'ProductEdge'
   /** A cursor for use in pagination. */
@@ -4177,9 +4214,8 @@ export enum StorefrontApiProductImageSortKeys {
 }
 
 /**
- * Custom product property names like "Size", "Color", and "Material".
- * Products are based on permutations of these options.
- * A product may have a maximum of 3 options.
+ * Product property names like "Size", "Color", and "Material" that the customers can select.
+ * Variants are selected based on permutations of these options.
  * 255 characters limit each.
  */
 export interface StorefrontApiProductOption extends StorefrontApiNode {
@@ -4201,6 +4237,7 @@ export interface StorefrontApiProductPriceRange {
   minVariantPrice: StorefrontApiMoneyV2
 }
 
+/** An auto-generated type for paginating through multiple ProductPriceRanges. */
 export interface StorefrontApiProductPriceRangeConnection {
   __typename: 'ProductPriceRangeConnection'
   /** A list of edges. */
@@ -4209,6 +4246,7 @@ export interface StorefrontApiProductPriceRangeConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one ProductPriceRange and a cursor during pagination. */
 export interface StorefrontApiProductPriceRangeEdge {
   __typename: 'ProductPriceRangeEdge'
   /** A cursor for use in pagination. */
@@ -4353,6 +4391,7 @@ export type StorefrontApiProductVariantPresentmentUnitPricesArgs = {
   reverse?: Maybe<Scalars['Boolean']>
 }
 
+/** An auto-generated type for paginating through multiple ProductVariants. */
 export interface StorefrontApiProductVariantConnection {
   __typename: 'ProductVariantConnection'
   /** A list of edges. */
@@ -4361,6 +4400,7 @@ export interface StorefrontApiProductVariantConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one ProductVariant and a cursor during pagination. */
 export interface StorefrontApiProductVariantEdge {
   __typename: 'ProductVariantEdge'
   /** A cursor for use in pagination. */
@@ -4378,6 +4418,7 @@ export interface StorefrontApiProductVariantPricePair {
   price: StorefrontApiMoneyV2
 }
 
+/** An auto-generated type for paginating through multiple ProductVariantPricePairs. */
 export interface StorefrontApiProductVariantPricePairConnection {
   __typename: 'ProductVariantPricePairConnection'
   /** A list of edges. */
@@ -4386,6 +4427,7 @@ export interface StorefrontApiProductVariantPricePairConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one ProductVariantPricePair and a cursor during pagination. */
 export interface StorefrontApiProductVariantPricePairEdge {
   __typename: 'ProductVariantPricePairEdge'
   /** A cursor for use in pagination. */
@@ -4586,8 +4628,8 @@ export interface StorefrontApiScriptDiscountApplication
 }
 
 /**
- * Custom properties that a shop owner can use to define product variants.
- * Multiple options can exist. Options are represented as: option1, option2, option3, etc.
+ * Properties used by customers to select a product variant.
+ * Products can have multiple options, like different sizes or colors.
  */
 export interface StorefrontApiSelectedOption {
   __typename: 'SelectedOption'
@@ -4785,6 +4827,7 @@ export interface StorefrontApiShopPolicy extends StorefrontApiNode {
   url: Scalars['URL']
 }
 
+/** An auto-generated type for paginating through multiple Strings. */
 export interface StorefrontApiStringConnection {
   __typename: 'StringConnection'
   /** A list of edges. */
@@ -4793,6 +4836,7 @@ export interface StorefrontApiStringConnection {
   pageInfo: StorefrontApiPageInfo
 }
 
+/** An auto-generated type which holds one String and a cursor during pagination. */
 export interface StorefrontApiStringEdge {
   __typename: 'StringEdge'
   /** A cursor for use in pagination. */

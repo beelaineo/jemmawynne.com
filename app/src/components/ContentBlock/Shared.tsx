@@ -3,6 +3,7 @@ import styled, { css, DefaultTheme } from '@xstyled/styled-components'
 import { SanityRichText } from '../../types'
 import { Heading } from '../Text'
 import { RichText } from '../RichText'
+import { DocumentLinkProps, DocumentLink } from '../DocumentLink'
 
 interface SectionWrapperProps {
   type?: string
@@ -11,7 +12,7 @@ interface SectionWrapperProps {
 
 export const SectionWrapper = styled.div`
   ${({ theme, type }: SectionWrapperProps) => css`
-    padding: 4 6 6;
+    padding: 6 6 6;
 
     ${type === 'carousel'
       ? css`
@@ -28,7 +29,7 @@ export const SectionWrapper = styled.div`
 
 const SectionHeaderWrapper = styled.div`
   text-align: center;
-  margin-top: 6;
+  margin-top: 3;
   margin-bottom: 6;
 `
 const SubtitleWrapper = styled.div`
@@ -39,16 +40,25 @@ const SubtitleWrapper = styled.div`
 interface SectionHeaderProps {
   title?: null | string
   subtitle?: null | string | SanityRichText
+  linkToDocument?: DocumentLinkProps['document']
 }
 
-export const SectionHeader = ({ title, subtitle }: SectionHeaderProps) => {
+export const SectionHeader = ({
+  title,
+  subtitle,
+  linkToDocument,
+}: SectionHeaderProps) => {
   if (!title && !subtitle) return null
 
   return (
     <SectionHeaderWrapper>
       {title ? (
         <Heading level={4} family="sans" weight={4} textTransform="uppercase">
-          {title}
+          {linkToDocument ? (
+            <DocumentLink document={linkToDocument}>{title}</DocumentLink>
+          ) : (
+            title
+          )}
         </Heading>
       ) : null}
       {subtitle ? (

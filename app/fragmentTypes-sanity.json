@@ -15,7 +15,10 @@
       "PressItem",
       "SanityFileAsset"
     ],
-    "CtaOrSubMenu": ["Cta", "SubMenu"],
+    "CtaOrSubMenu": [
+      "Cta",
+      "SubMenu"
+    ],
     "PageOrPressPageOrShopifyCollectionOrShopifyProductOrStockists": [
       "Page",
       "PressPage",
@@ -35,13 +38,22 @@
       "ShopifyCollection",
       "ShopifyProduct"
     ],
-    "PageTextOrRichImage": ["PageText", "RichImage"],
+    "PageTextOrRichImage": [
+      "PageText",
+      "RichImage"
+    ],
     "CarouselOrHeroOrImageTextSection": [
       "Carousel",
       "Hero",
       "ImageTextSection"
     ],
-    "LinkGroupOrRichPageLink": ["LinkGroup", "RichPageLink"],
-    "BlockOrRichImage": ["Block", "RichImage"]
+    "LinkGroupOrRichPageLink": [
+      "LinkGroup",
+      "RichPageLink"
+    ],
+    "BlockOrRichImage": [
+      "Block",
+      "RichImage"
+    ]
   }
 }

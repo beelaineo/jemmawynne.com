@@ -556,6 +556,7 @@ export const carouselFragment = gql`
     title
     collection {
       __typename
+      handle
       products {
         ...ShopifyProductThumbnailFragment
       }
@@ -563,9 +564,13 @@ export const carouselFragment = gql`
     items {
       ...RichPageLinkFragment
     }
+    cta {
+      ...CTAFragment
+    }
   }
   ${shopifyProductThumbnailFragment}
   ${richPageLinkFragment}
+  ${ctaFragment}
 `
 
 export const pageBlockFragment = gql`

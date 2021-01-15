@@ -63,13 +63,13 @@ const transform = (node, index) => {
     case 'span':
       if (node.parent) {
         return (
-          <Span key={index} style={styles} weight={3}>
+          <Span key={index} style={styles}>
             {node.childNodes.map(transform)}
           </Span>
         )
       }
       return (
-        <P key={index} style={styles} weight={3}>
+        <P key={index} style={styles} weight={2}>
           {node.childNodes.map(transform)}
         </P>
       )

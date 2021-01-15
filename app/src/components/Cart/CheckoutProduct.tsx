@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Box } from '@xstyled/styled-components'
-import { useCheckout, CheckoutLineItem } from 'use-shopify'
+import { CheckoutLineItem as CheckoutLineItemType } from '../../providers/ShopifyProvider/types'
+import { useShopify } from '../../providers/ShopifyProvider'
 import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney } from '../../utils'
 import { Image } from '../../components/Image'
@@ -17,12 +18,12 @@ import { Button } from '../../components/Button'
 const { useState } = React
 
 interface CheckoutProductProps {
-  lineItem: StorefrontApiCheckoutLineItem | CheckoutLineItem
+  lineItem: StorefrontApiCheckoutLineItem | CheckoutLineItemType
 }
 
 export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
   const [updating, setUpdating] = useState(false)
-  const { updateLineItem } = useCheckout()
+  const { updateLineItem } = useShopify()
   const { title, variant, quantity } = lineItem
   if (!variant) return null
   const { image } = variant

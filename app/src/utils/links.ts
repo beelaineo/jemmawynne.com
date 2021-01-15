@@ -10,7 +10,7 @@ import {
   PressPage,
 } from '../types'
 
-type Document =
+export type LinkableDocument =
   | ShopifyProduct
   | ShopifyCollection
   | Page
@@ -19,7 +19,7 @@ type Document =
 
 export const getDocumentLinkImage = (
   // document?: PageOrShopifyCollectionOrShopifyProduct,
-  document?: Document | null,
+  document?: LinkableDocument | null,
 ): ShopifySourceImage | void | null => {
   if (!document) return undefined
   switch (document.__typename) {
@@ -40,7 +40,7 @@ export const getDocumentLinkImage = (
 }
 
 export const getDocumentLinkLabel = (
-  document?: Document | null,
+  document?: LinkableDocument | null,
 ): string | void => (document ? document.title ?? undefined : undefined)
 
 interface LinkInfo {
@@ -48,7 +48,7 @@ interface LinkInfo {
   as?: string
 }
 
-export const getDocumentLinkUrl = (document?: Document): LinkInfo => {
+export const getDocumentLinkUrl = (document?: LinkableDocument): LinkInfo => {
   if (!document) throw new Error('This link is missing a document')
   switch (document.__typename) {
     case 'PressPage':

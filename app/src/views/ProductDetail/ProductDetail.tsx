@@ -1,6 +1,4 @@
 import * as React from 'react'
-import Head from 'next/head'
-import { useProductVariant, useCheckout } from 'use-shopify'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { Box } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
@@ -15,11 +13,11 @@ import {
   ProductDescription,
   ProductRelated,
 } from './components'
-import { useShopData } from '../../providers/ShopDataProvider'
+import { useShopify, useShopData } from '../../providers'
 import {
   useCounter,
-  getVariantTitle,
   buildMailTo,
+  useProductVariant,
   getUrlParameter,
 } from '../../utils'
 import { Accordion } from '../../components/Accordion'
@@ -63,13 +61,13 @@ export const ProductDetail = ({ product }: Props) => {
         (v) => v && v.title === initialVariantTitle,
       )?.id ?? undefined
     : undefined
-  const {
-    currentVariant,
-    selectVariant,
-  } = useProductVariant(product.sourceData, { initialVariant })
+
+  const { currentVariant, selectVariant } = useProductVariant(product, {
+    initialVariant,
+  })
 
   /* get checkout utils */
-  const { addLineItem } = useCheckout()
+  const { addLineItem } = useShopify()
 
   if (!currentVariant) return null
 
@@ -81,7 +79,7 @@ export const ProductDetail = ({ product }: Props) => {
 
   const [images] = unwindEdges(product?.sourceData?.images)
   const defaultSeo = {
-    title: getVariantTitle(product, currentVariant),
+    title: product.title,
     description: product?.sourceData?.description,
     image: currentVariant?.image ?? images.length ? images[0] : undefined,
   }
