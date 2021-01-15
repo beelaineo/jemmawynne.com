@@ -28,8 +28,10 @@ const HeroContent = ({ content }: HeroContentProps) => {
     textPositionMobile,
     title,
     bodyRaw,
+    body,
     cta,
   } = content
+  console.log({ content })
   return (
     <HeroText
       textAlign={align}
@@ -43,7 +45,7 @@ const HeroContent = ({ content }: HeroContentProps) => {
               {title}
             </Heading>
           ) : null}
-          <RichText body={bodyRaw} />
+          <RichText body={bodyRaw || body} />
           {cta ? (
             <Box mt={5}>
               <CTA level={2} cta={cta} />

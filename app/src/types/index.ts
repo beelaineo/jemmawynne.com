@@ -1,6 +1,7 @@
 import {
   SanityImageCrop,
   SanityImageHotspot,
+  HeroContent as HeroContentType,
   Image,
   Scalars,
   Maybe,
@@ -51,4 +52,8 @@ export interface SwatchOptionValue {
 export interface SwatchOption {
   name: string
   values: SwatchOptionValue[]
+}
+
+export interface HeroContent extends HeroContentType {
+  body?: Maybe<Scalars['JSON']>
 }

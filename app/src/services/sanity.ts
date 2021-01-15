@@ -10,11 +10,13 @@ if (!SANITY_PROJECT_ID)
 if (!SANITY_DATASET)
   throw new Error('You must include a SANITY_DATASET variable')
 
+const isBrowser = typeof window !== 'undefined'
+
 export const sanityClient = createSanityClient({
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   token: SANITY_READ_TOKEN, // or leave blank to be anonymous user
-  useCdn: true, // `false` if you want to ensure fresh data
+  useCdn: isBrowser ? true : false, // `false` if you want to ensure fresh data
   useProjectHostname: true,
 })
 
