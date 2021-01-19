@@ -1,6 +1,7 @@
 export * from './seo'
 export * from './link'
 export * from './collectionBlock'
+export * from './collectionGrid'
 export * from './swatches'
 export * from './subMenu'
 export * from './cta'

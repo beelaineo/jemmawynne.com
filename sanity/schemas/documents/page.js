@@ -136,6 +136,7 @@ export const page = {
         { type: 'pageBlock' },
         { type: 'hero' },
         { type: 'carousel' },
+        { type: 'collectionGrid' },
       ],
     },
     {
