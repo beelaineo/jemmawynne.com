@@ -1,11 +1,9 @@
 import { FaParagraph } from 'react-icons/fa'
-import { GiClick } from 'react-icons/gi'
 import { blocksToPlainText } from '../utils'
 
 const getPreviewValues = ({ title, body, cta }) => {
   const fullTitle = body ? [title, blocksToPlainText(body)].join(' | ') : title
   const subtitle = cta && cta.label ? `CTA: ${cta.label}` : undefined
-  console.log({ title, body, cta })
   return {
     title: fullTitle,
     subtitle,
@@ -39,50 +37,28 @@ export const hero = {
   name: 'hero',
   title: 'Hero',
   type: 'object',
+  description: 'Hero images & content blocks',
   options: {
     collapsible: true,
     collapsed: true,
   },
-  fieldsets: [{ name: 'options', title: 'Options' }],
+  fieldsets: [
+    { name: 'content', title: 'Content Blocks' },
+    { name: 'images', title: 'Images' },
+    { name: 'colors', title: 'Colors' },
+  ],
   fields: [
     {
       name: 'content',
       type: 'array',
+      fieldset: 'content',
       of: [{ type: 'heroContent' }],
       vaildation: (Rule) => Rule.max(2),
     },
     {
-      name: 'image',
-      title: 'Background Image',
-      type: 'richImage',
-    },
-    {
-      name: 'mobileImage',
-      title: 'Background Image (mobile)',
-      type: 'richImage',
-    },
-    {
-      name: 'textColor',
-      fieldset: 'options',
-      title: 'Text Color',
-      type: 'colorPicker',
-    },
-    {
-      name: 'textColorMobile',
-      fieldset: 'options',
-      title: 'Text Color (Mobile)',
-      type: 'colorPicker',
-    },
-    {
-      name: 'fullHeight',
-      fieldset: 'options',
-      type: 'boolean',
-      title: 'Full Height',
-    },
-    {
       name: 'contentLayout',
       type: 'string',
-      fieldset: 'options',
+      fieldset: 'content',
       description:
         'Determines the layout of multiple content blocks (desktop only)',
       options: {
@@ -93,6 +69,43 @@ export const hero = {
         layout: 'radio',
         direction: 'horizontal',
       },
+    },
+
+    {
+      name: 'fullHeight',
+      fieldset: 'images',
+      type: 'boolean',
+      title: 'Display Hero at Full Height',
+      description:
+        'Enable this to expand the hero to be full-height. (Desktop only)',
+    },
+
+    {
+      name: 'image',
+      title: 'Background Image',
+      type: 'richImage',
+      fieldset: 'images',
+      description:
+        'Recommended dimensions: 1800 x 450 (normal) / 1800 x 1200 (full-height & homepage)',
+    },
+    {
+      name: 'mobileImage',
+      title: 'Background Image (mobile)',
+      type: 'richImage',
+      fieldset: 'images',
+      description: 'Recommended dimensions: 1200 x 1800',
+    },
+    {
+      name: 'textColor',
+      fieldset: 'colors',
+      title: 'Text Color',
+      type: 'colorPicker',
+    },
+    {
+      name: 'textColorMobile',
+      fieldset: 'colors',
+      title: 'Text Color (Mobile)',
+      type: 'colorPicker',
     },
   ],
   preview: {

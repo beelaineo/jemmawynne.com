@@ -1,29 +1,45 @@
 export const collection = {
-  fieldsets: [{ name: 'related', title: 'Related Menu' }],
+  fieldsets: [
+    {
+      name: 'sideMenu',
+      title: 'Side Menu',
+      description: 'Customize the side menu',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+    {
+      name: 'customContent',
+      title: 'Custom Content',
+      description: 'Insert custom content throughout the collection grid',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+  ],
   fields: [
     { name: 'sourceData', hidden: true },
     { name: 'hero', type: 'hero' },
     {
       name: 'disableMenu',
-      fieldset: 'related',
+      fieldset: 'sideMenu',
       type: 'boolean',
       title: 'Disable Side Menu',
     },
     {
-      name: 'collectionBlocks',
-      description: 'Insert blocks of content between products',
-      type: 'array',
-      of: [{ type: 'collectionBlock' }],
-    },
-    {
       name: 'relatedCollectionsTitle',
       type: 'string',
-      title: 'Related Collections menu title (optional)',
-      fieldset: 'related',
+      title: 'Custom menu title(optional)',
+      fieldset: 'sideMenu',
     },
     {
       name: 'relatedCollections',
-      fieldset: 'related',
+      title: 'Custom collections',
+      description:
+        'Create a custom list of collections to display in the side menu. Leave this list empty to use the default menu.',
+      fieldset: 'sideMenu',
       type: 'array',
       of: [
         {
@@ -35,6 +51,13 @@ export const collection = {
         },
       ],
     },
+    {
+      name: 'collectionBlocks',
+      fieldset: 'customContent',
+      type: 'array',
+      of: [{ type: 'collectionBlock' }],
+    },
+
     {
       name: 'seo',
       type: 'seo',

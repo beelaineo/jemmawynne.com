@@ -11,7 +11,7 @@ export const richImage = {
       title: 'Caption',
       type: 'string',
       options: {
-        isHighlighted: true,
+        isHighlighted: false,
       },
     },
     {
@@ -21,7 +21,7 @@ export const richImage = {
       description:
         'A short description of the image. Helps with accessibility and SEO. Defaults to the caption if not defined.',
       options: {
-        isHighlighted: true,
+        isHighlighted: false,
       },
     },
   ],
