@@ -42,3 +42,13 @@ export const getPageLinkThumbnail = async (pageLink) => {
     return getShopifyThumbnail(doc)
   return undefined
 }
+
+export const getTypeText = (doc) => {
+  if (!doc) return ''
+  if (doc._type === 'shopifyProduct') return 'Product'
+  if (doc._type === 'shopifyCollection') return 'Collection'
+  if (doc._type === 'page') return 'Page'
+  if (doc._type === 'pressPage') return 'Press Page'
+  if (doc._type === 'stockists') return 'Stockists'
+  return ''
+}

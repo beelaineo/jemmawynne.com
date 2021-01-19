@@ -15,14 +15,49 @@ export const heroContent = {
   title: 'Hero Text',
   name: 'heroContent',
   icon: FaParagraph,
+  fieldsets: [
+    {
+      name: 'options',
+      title: 'Colors & Layout',
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
   fields: [
     { name: 'title', type: 'string' },
     { name: 'body', type: 'richText' },
-    { name: 'cta', type: 'cta' },
-    { name: 'align', type: 'textAlign', title: 'Text Alignment' },
-    { title: 'Text Position', name: 'textPosition', type: 'position' },
+    {
+      name: 'cta',
+      type: 'cta',
+      options: { collapsible: true, collapsed: true },
+    },
+    {
+      name: 'align',
+      fieldset: 'options',
+      type: 'textAlign',
+      title: 'Text Alignment',
+    },
+    {
+      title: 'Text Color',
+      fieldset: 'options',
+      name: 'textColor',
+      type: 'colorPicker',
+    },
+    {
+      title: 'Text Color (mobile)',
+      fieldset: 'options',
+      name: 'textColorMobile',
+      type: 'colorPicker',
+    },
+    {
+      title: 'Text Position',
+
+      fieldset: 'options',
+      name: 'textPosition',
+      type: 'position',
+    },
     {
       name: 'textPositionMobile',
+      fieldset: 'options',
       title: 'Text Position (Mobile)',
       type: 'position',
     },
@@ -45,7 +80,6 @@ export const hero = {
   fieldsets: [
     { name: 'content', title: 'Content Blocks' },
     { name: 'images', title: 'Images' },
-    { name: 'colors', title: 'Colors' },
   ],
   fields: [
     {
@@ -70,7 +104,6 @@ export const hero = {
         direction: 'horizontal',
       },
     },
-
     {
       name: 'fullHeight',
       fieldset: 'images',
@@ -94,18 +127,6 @@ export const hero = {
       type: 'richImage',
       fieldset: 'images',
       description: 'Recommended dimensions: 1200 x 1800',
-    },
-    {
-      name: 'textColor',
-      fieldset: 'colors',
-      title: 'Text Color',
-      type: 'colorPicker',
-    },
-    {
-      name: 'textColorMobile',
-      fieldset: 'colors',
-      title: 'Text Color (Mobile)',
-      type: 'colorPicker',
     },
   ],
   preview: {

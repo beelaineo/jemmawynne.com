@@ -26,6 +26,17 @@ export const pageText = {
       type: 'richText',
     },
   ],
+  preview: {
+    select: {
+      heading: 'heading',
+      body: 'body',
+    },
+    prepare: ({ heading, body }) => {
+      const plainText = body ? blocksToPlainText(body) : undefined
+      const [title, subtitle] = [heading, plainText].filter(Boolean)
+      return { title, subtitle }
+    },
+  },
 }
 
 const getRichTextBlockPreviewValues = async (props) => {

@@ -4,17 +4,8 @@ import {
   getImageThumbnail,
   getReferencedDocument,
   getShopifyThumbnail,
+  getTypeText,
 } from '../utils'
-
-const getTypeText = (doc) => {
-  if (!doc) return ''
-  if (doc._type === 'shopifyProduct') return 'Product'
-  if (doc._type === 'shopifyCollection') return 'Collection'
-  if (doc._type === 'page') return 'Page'
-  if (doc._type === 'pressPage') return 'Press Page'
-  if (doc._type === 'stockists') return 'Stockists'
-  return ''
-}
 
 const getPreviewValues = async (values) => {
   const { document, title, image } = values

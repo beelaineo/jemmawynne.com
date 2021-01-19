@@ -44,6 +44,15 @@ export const richText = {
   of: [
     {
       type: 'block',
+      styles: [
+        { title: 'Normal', value: 'normal' },
+        { title: 'H1 (serif)', value: 'h1' },
+        { title: 'H2 (serif)', value: 'h2' },
+        { title: 'H3 (serif)', value: 'h3' },
+        { title: 'H4 (sans)', value: 'h4' },
+        { title: 'H5 (sans)', value: 'h5' },
+        { title: 'H6 (sans)', value: 'h6' },
+      ],
       marks: {
         decorators: [
           {
