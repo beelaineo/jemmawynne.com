@@ -36,12 +36,11 @@ const RichTextBlock = ({ block }: RichTextBlockProps) => {
 
 interface PageBlockProps {
   block: PageBlockType
-
-  previousBlock?: CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
+  previousBlock?: CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
 }
 
 const hasShift = (
-  block?: CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
+  block?: CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
 ): boolean => {
   if (!block) return false
   // @ts-ignore
