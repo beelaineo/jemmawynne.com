@@ -3,7 +3,7 @@ import {
   RichImage,
   Hero,
   Maybe,
-  CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
+  CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
 } from '../types'
 
 export const isValidHero = (hero?: Hero | null): boolean => {
@@ -18,7 +18,7 @@ export const getHeroImage = (hero?: Hero | null): RichImage | undefined => {
 
 export const getFirstHeroImage = (
   content?:
-    | Maybe<CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock>[]
+    | Maybe<CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock>[]
     | null,
 ): RichImage | undefined => {
   if (!content) return undefined
