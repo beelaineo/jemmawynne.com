@@ -33,6 +33,7 @@ export const TextWrapper = styled.div<TextWrapperProps>`
     ${theme.mediaQueries.tablet} {
       position: relative;
       padding: 6 3;
+      min-height: 360px;
     }
   `}
 `
@@ -67,18 +68,29 @@ interface HeroTextProps {
   textPosition?: string | null
   textAlign?: string | null
   textPositionMobile?: string | null
+  textColor?: string | null
+  textColorMobile?: string | null
 }
 
 export const HeroText = styled.div<HeroTextProps>`
-  ${({ theme, textPosition, textAlign, textPositionMobile }) => css`
+  ${({
+    theme,
+    textPosition,
+    textAlign,
+    textPositionMobile,
+    textColor,
+    textColorMobile,
+  }) => css`
     padding: 6;
     display: flex;
     flex-grow: 1;
     justify-content: ${getFlexJustification(textPosition)};
     align-items: ${getFlexAlignment(textPosition)};
     text-align: ${textAlign || getTextAlignment(textPosition)};
+    color: ${getColor(textColor)};
 
     ${theme.mediaQueries.mobile} {
+      color: ${getColor(textColorMobile)};
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
       text-align: ${getTextAlignment(textPositionMobile)};
@@ -88,12 +100,10 @@ export const HeroText = styled.div<HeroTextProps>`
 
 interface HeroContentWrapperProps {
   layout?: string | null
-  textColor?: string | null
-  textColorMobile?: string | null
 }
 
 export const HeroContentWrapper = styled.div<HeroContentWrapperProps>`
-  ${({ layout, textColor, textColorMobile, theme }) => css`
+  ${({ layout, theme }) => css`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -102,9 +112,8 @@ export const HeroContentWrapper = styled.div<HeroContentWrapperProps>`
     display: flex;
     flex-direction: ${layout === 'vertical' ? 'column' : 'row'};
 
-    color: ${getColor(textColor) || 'currentColor'};
-    ${theme.mediaQueries.mobile} {
-      color: ${getColor(textColorMobile) || 'currentColor'};
+    ${theme.mediaQueries.tablet} {
+      flex-direction: 'column';
     }
   `}
 `
@@ -234,8 +243,7 @@ export const BackgroundImageWrapper = styled.div`
         width: 100%;
         padding-bottom: 100%;
       }
-      /* height: 80vw; */
-      /* max-height: 420px; */
+      max-height: 360px;
     }
   `}
 `

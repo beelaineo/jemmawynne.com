@@ -298,10 +298,11 @@ export const heroFragment = gql`
       align
       textPosition
       textPositionMobile
+      textColor
+      textColorMobile
     }
     fullHeight
     contentLayout
-    textColor
     mobileImage {
       ...SanityRichImageFragment
     }
@@ -578,6 +579,8 @@ export const collectionGridFragment = gql`
     __typename
     _key
     _type
+    customTitle
+    customCTALabel
     collection {
       __typename
       handle

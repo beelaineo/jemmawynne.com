@@ -8,6 +8,7 @@ import styled, {
 
 interface CustomTextProps extends BoxProps {
   theme: DefaultTheme
+  className?: string
   fontSize: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
   family?: string

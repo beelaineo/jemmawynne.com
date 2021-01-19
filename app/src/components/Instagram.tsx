@@ -10,13 +10,27 @@ const Wrapper = styled.div`
     text-align: center;
     padding: 0 9;
 
+    .followUsText {
+      font-size: 1;
+    }
+
     ${theme.mediaQueries.mobile} {
       padding: 3;
+      .followUsText {
+        font-size: 4;
+      }
     }
   `}
 `
 
-const Span = styled.spanBox``
+const Span = styled.spanBox`
+  ${({ theme }) => css`
+    ${theme.mediaQueries.mobile} {
+      display: block;
+      font-size: 1;
+    }
+  `}
+`
 
 const ImagesContainer = styled.div`
   ${({ theme }) => css`
@@ -29,9 +43,10 @@ const ImagesContainer = styled.div`
     }
 
     ${theme.mediaQueries.mobile} {
-      grid-template-columns: repeat(3, 1fr);
-      & > *:nth-child(6) {
-        display: initial;
+      grid-template-columns: repeat(2, 1fr);
+
+      & > *:nth-child(n + 5) {
+        display: none;
       }
     }
   `}
@@ -44,7 +59,13 @@ export const InstagramBlock = () => {
   if (!images || !images.length) return null
   return (
     <Wrapper>
-      <Heading family="serif" weight={2} mb={4} level={1}>
+      <Heading
+        className="followUsText"
+        family="serif"
+        weight={2}
+        mb={4}
+        level={4}
+      >
         <a href={href} target="_blank" rel="noopener noreferrer">
           Follow us at <Span color="body.6">@{handle}</Span>
         </a>

@@ -4,7 +4,7 @@ import { CtaOrSubMenu } from '../../types'
 import { TabletSubMenu } from './TabletSubMenu'
 import { TabletInner, NavSection } from './styled'
 
-interface TabletNav {
+interface TabletNavProps {
   open: boolean
   ready: boolean
   menuItems: CtaOrSubMenu[]
@@ -18,7 +18,7 @@ export const TabletNav = ({
   openSubMenu,
   currentSubMenuKey,
   menuItems,
-}: TabletNav) => {
+}: TabletNavProps) => {
   const { open: announcementOpen } = useAnnouncement()
   return (
     <TabletInner announcementOpen={announcementOpen} open={open}>

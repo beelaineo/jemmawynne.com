@@ -30,7 +30,7 @@ export const NavPageLink = ({
     <NavPageLinkWrapper borders={borders} align={align} small={small}>
       <Heading
         family={small ? 'sans' : 'serif'}
-        fontWeight={2}
+        fontWeight={small ? 4 : 2}
         m={0}
         level={small ? 6 : 2}
       >

@@ -23,6 +23,9 @@ const AnnouncementWrapper = styled.div<AnnouncementWrapperProps>`
     height: ${open ? theme.announcementHeight : '0'};
     background-color: body.2;
     transition: 0.5s;
+    ${theme.mediaQueries.mobile} {
+      height: 35px;
+    }
   `}
 `
 
@@ -45,7 +48,7 @@ interface AnnouncementTextProps {
 }
 
 const AnnouncementText = styled.div`
-  ${({ active }: AnnouncementTextProps) => css`
+  ${({ active, theme }: AnnouncementTextProps) => css`
     position: absolute;
     top: 0;
     left: 0;
@@ -63,6 +66,14 @@ const AnnouncementText = styled.div`
     & > div > *,
     & > div > * > * {
       display: inline;
+    }
+
+    ${theme.mediaQueries.mobile} {
+      line-height: 0.8em;
+      h6 {
+        line-height: inherit;
+        font-size: 9px;
+      }
     }
   `}
 `

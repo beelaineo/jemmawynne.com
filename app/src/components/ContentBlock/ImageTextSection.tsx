@@ -36,10 +36,10 @@ const BlockWrapper = styled.div`
     &:nth-child(3n + 3) {
       margin-left: 4;
     }
+
     ${theme.mediaQueries.tablet} {
       margin-left: 0;
-      min-height: initial;
-      flex-griw: initial;
+      flex-grow: initial;
       flex-basis: initial;
       margin-bottom: 0;
       &:nth-child(3n + 2),

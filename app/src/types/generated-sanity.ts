@@ -162,18 +162,26 @@ export interface CollectionGrid {
   __typename: 'CollectionGrid'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
+  /** Defaults to the title of the collection */
+  customTitle?: Maybe<Scalars['String']>
   collection?: Maybe<ShopifyCollection>
+  /** Customize the CTA Label. Defaults to "Discover more" */
+  customCTALabel?: Maybe<Scalars['String']>
 }
 
 export type CollectionGridFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
+  customTitle?: Maybe<StringFilter>
   collection?: Maybe<ShopifyCollectionFilter>
+  customCTALabel?: Maybe<StringFilter>
 }
 
 export type CollectionGridSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
+  customTitle?: Maybe<SortOrder>
+  customCTALabel?: Maybe<SortOrder>
 }
 
 export interface CollectionInfo extends Document {
@@ -386,8 +394,6 @@ export interface Hero {
   fullHeight?: Maybe<Scalars['Boolean']>
   image?: Maybe<RichImage>
   mobileImage?: Maybe<RichImage>
-  textColor?: Maybe<Scalars['String']>
-  textColorMobile?: Maybe<Scalars['String']>
 }
 
 export interface HeroContent {
@@ -398,6 +404,8 @@ export interface HeroContent {
   bodyRaw?: Maybe<Scalars['JSON']>
   cta?: Maybe<Cta>
   align?: Maybe<Scalars['String']>
+  textColor?: Maybe<Scalars['String']>
+  textColorMobile?: Maybe<Scalars['String']>
   textPosition?: Maybe<Scalars['String']>
   textPositionMobile?: Maybe<Scalars['String']>
 }
@@ -408,6 +416,8 @@ export type HeroContentFilter = {
   title?: Maybe<StringFilter>
   cta?: Maybe<CtaFilter>
   align?: Maybe<StringFilter>
+  textColor?: Maybe<StringFilter>
+  textColorMobile?: Maybe<StringFilter>
   textPosition?: Maybe<StringFilter>
   textPositionMobile?: Maybe<StringFilter>
 }
@@ -418,6 +428,8 @@ export type HeroContentSorting = {
   title?: Maybe<SortOrder>
   cta?: Maybe<CtaSorting>
   align?: Maybe<SortOrder>
+  textColor?: Maybe<SortOrder>
+  textColorMobile?: Maybe<SortOrder>
   textPosition?: Maybe<SortOrder>
   textPositionMobile?: Maybe<SortOrder>
 }
@@ -429,8 +441,6 @@ export type HeroFilter = {
   fullHeight?: Maybe<BooleanFilter>
   image?: Maybe<RichImageFilter>
   mobileImage?: Maybe<RichImageFilter>
-  textColor?: Maybe<StringFilter>
-  textColorMobile?: Maybe<StringFilter>
 }
 
 export type HeroSorting = {
@@ -440,8 +450,6 @@ export type HeroSorting = {
   fullHeight?: Maybe<SortOrder>
   image?: Maybe<RichImageSorting>
   mobileImage?: Maybe<RichImageSorting>
-  textColor?: Maybe<SortOrder>
-  textColorMobile?: Maybe<SortOrder>
 }
 
 export interface Homepage extends Document {

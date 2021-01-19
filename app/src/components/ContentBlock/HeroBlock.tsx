@@ -26,6 +26,8 @@ const HeroContent = ({ content }: HeroContentProps) => {
     align,
     textPosition,
     textPositionMobile,
+    textColor,
+    textColorMobile,
     title,
     bodyRaw,
     body,
@@ -36,6 +38,8 @@ const HeroContent = ({ content }: HeroContentProps) => {
       textAlign={align}
       textPosition={textPosition}
       textPositionMobile={textPositionMobile}
+      textColor={textColor}
+      textColorMobile={textColorMobile}
     >
       <TextOuter>
         <TextContainer>
@@ -64,15 +68,7 @@ interface HeroBlockProps {
 export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
   if (!hero) return null
   const { open: announcementOpen } = useAnnouncement()
-  const {
-    content,
-    textColor,
-    image,
-    textColorMobile,
-    mobileImage,
-    fullHeight,
-    contentLayout,
-  } = hero
+  const { content, image, mobileImage, fullHeight, contentLayout } = hero
 
   return (
     <HeroWrapper
@@ -98,11 +94,7 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
           />
         ) : null}
       </HeroImageWrapper>
-      <HeroContentWrapper
-        textColor={textColor}
-        textColorMobile={textColorMobile}
-        layout={contentLayout}
-      >
+      <HeroContentWrapper layout={contentLayout}>
         {definitely(content).map((cb) => (
           <HeroContent key={cb._key || 'some-key'} content={cb} />
         ))}
