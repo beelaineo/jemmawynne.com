@@ -102,17 +102,18 @@ export type CarouselFilter = {
   cta?: Maybe<CtaFilter>
 }
 
-export type CarouselOrHeroOrImageTextSection =
+export type CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock =
   | Carousel
-  | Hero
-  | ImageTextSection
-
-export type CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock =
-  | Carousel
+  | CollectionGrid
   | Hero
   | ImageTextSection
   | PageBlock
   | RichTextBlock
+
+export type CarouselOrHeroOrImageTextSection =
+  | Carousel
+  | Hero
+  | ImageTextSection
 
 export type CarouselSorting = {
   _key?: Maybe<SortOrder>
@@ -155,6 +156,24 @@ export type CollectionBlockSorting = {
   textColor?: Maybe<SortOrder>
   backgroundImage?: Maybe<RichImageSorting>
   backgroundColor?: Maybe<SortOrder>
+}
+
+export interface CollectionGrid {
+  __typename: 'CollectionGrid'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  collection?: Maybe<ShopifyCollection>
+}
+
+export type CollectionGridFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  collection?: Maybe<ShopifyCollectionFilter>
+}
+
+export type CollectionGridSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
 }
 
 export interface CollectionInfo extends Document {
@@ -731,7 +750,9 @@ export interface Page extends Document {
   title?: Maybe<Scalars['String']>
   slug?: Maybe<Slug>
   body?: Maybe<
-    Array<Maybe<CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock>>
+    Array<
+      Maybe<CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock>
+    >
   >
   seo?: Maybe<Seo>
 }

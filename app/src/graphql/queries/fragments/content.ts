@@ -573,6 +573,23 @@ export const carouselFragment = gql`
   ${ctaFragment}
 `
 
+export const collectionGridFragment = gql`
+  fragment CollectionGridFragment on CollectionGrid {
+    __typename
+    _key
+    _type
+    collection {
+      __typename
+      handle
+      title
+      products {
+        ...ShopifyProductThumbnailFragment
+      }
+    }
+  }
+  ${shopifyProductThumbnailFragment}
+`
+
 export const pageBlockFragment = gql`
   fragment PageBlockFragment on PageBlock {
     __typename

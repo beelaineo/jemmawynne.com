@@ -2,11 +2,12 @@ import * as React from 'react'
 import {
   PageBlock as PageBlockType,
   RichTextBlock as RichTextBlockType,
-  CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
+  CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
 } from '../../types'
 import { CarouselBlock } from './CarouselBlock'
 import { ImageTextSection } from './ImageTextSection'
 import { HeroBlock } from './HeroBlock'
+import { CollectionGridBlock } from './CollectionGridBlock'
 import { Image } from '../Image'
 import { Column } from '../Layout'
 import { Heading } from '../Text'
@@ -35,6 +36,7 @@ const RichTextBlock = ({ block }: RichTextBlockProps) => {
 
 interface PageBlockProps {
   block: PageBlockType
+
   previousBlock?: CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
 }
 
@@ -90,8 +92,8 @@ export const PageBlock = ({ block, previousBlock }: PageBlockProps) => {
 }
 
 interface PageBodyBlockProps {
-  block: CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
-  previousBlock?: CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
+  block: CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
+  previousBlock?: CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock
 }
 
 export const PageBodyBlock = ({ block, previousBlock }: PageBodyBlockProps) => {
@@ -108,6 +110,8 @@ export const PageBodyBlock = ({ block, previousBlock }: PageBodyBlockProps) => {
       return <RichTextBlock block={block} />
     case 'ImageTextSection':
       return <ImageTextSection content={block} />
+    case 'CollectionGrid':
+      return <CollectionGridBlock content={block} />
     default:
       // @ts-ignore
       throw new Error(`Block type "${block.__typename}" is not valid`)

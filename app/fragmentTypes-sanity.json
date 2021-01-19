@@ -26,8 +26,9 @@
       "ShopifyProduct",
       "Stockists"
     ],
-    "CarouselOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock": [
+    "CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock": [
       "Carousel",
+      "CollectionGrid",
       "Hero",
       "ImageTextSection",
       "PageBlock",

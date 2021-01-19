@@ -6,6 +6,7 @@ import { Page as PageType } from '../src/types'
 import {
   heroFragment,
   carouselFragment,
+  collectionGridFragment,
   imageTextBlockFragment,
   pageBlockFragment,
   request,
@@ -47,6 +48,9 @@ const pageQuery = gql`
         ... on PageBlock {
           ...PageBlockFragment
         }
+        ... on CollectionGrid {
+          ...CollectionGridFragment
+        }
         ... on RichTextBlock {
           _type
           __typename
@@ -57,6 +61,7 @@ const pageQuery = gql`
     }
   }
   ${heroFragment}
+  ${collectionGridFragment}
   ${carouselFragment}
   ${imageTextBlockFragment}
   ${pageBlockFragment}
