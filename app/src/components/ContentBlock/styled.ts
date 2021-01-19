@@ -56,6 +56,10 @@ export const HeroWrapper = styled.div<HeroWrapperProps>`
         ? `calc(100vh - ${theme.navHeight} - ${theme.announcementHeight})`
         : `calc(100vh - ${theme.navHeight})`
       : '450px'};
+
+    ${theme.mediaQueries.mobile} {
+      height: 480px;
+    }
   `}
 `
 

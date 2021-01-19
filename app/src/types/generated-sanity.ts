@@ -361,13 +361,14 @@ export interface Hero {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   content?: Maybe<Array<Maybe<HeroContent>>>
+  /** Determines the layout of multiple content blocks (desktop only) */
+  contentLayout?: Maybe<Scalars['String']>
+  /** Enable this to expand the hero to be full-height. (Desktop only) */
+  fullHeight?: Maybe<Scalars['Boolean']>
   image?: Maybe<RichImage>
   mobileImage?: Maybe<RichImage>
   textColor?: Maybe<Scalars['String']>
   textColorMobile?: Maybe<Scalars['String']>
-  fullHeight?: Maybe<Scalars['Boolean']>
-  /** Determines the layout of multiple content blocks (desktop only) */
-  contentLayout?: Maybe<Scalars['String']>
 }
 
 export interface HeroContent {
@@ -405,23 +406,23 @@ export type HeroContentSorting = {
 export type HeroFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
+  contentLayout?: Maybe<StringFilter>
+  fullHeight?: Maybe<BooleanFilter>
   image?: Maybe<RichImageFilter>
   mobileImage?: Maybe<RichImageFilter>
   textColor?: Maybe<StringFilter>
   textColorMobile?: Maybe<StringFilter>
-  fullHeight?: Maybe<BooleanFilter>
-  contentLayout?: Maybe<StringFilter>
 }
 
 export type HeroSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
+  contentLayout?: Maybe<SortOrder>
+  fullHeight?: Maybe<SortOrder>
   image?: Maybe<RichImageSorting>
   mobileImage?: Maybe<RichImageSorting>
   textColor?: Maybe<SortOrder>
   textColorMobile?: Maybe<SortOrder>
-  fullHeight?: Maybe<SortOrder>
-  contentLayout?: Maybe<SortOrder>
 }
 
 export interface Homepage extends Document {
@@ -1718,9 +1719,9 @@ export interface ShopifyCollection extends Document {
   products?: Maybe<Array<Maybe<ShopifyProduct>>>
   hero?: Maybe<Hero>
   disableMenu?: Maybe<Scalars['Boolean']>
-  collectionBlocks?: Maybe<Array<Maybe<CollectionBlock>>>
   relatedCollectionsTitle?: Maybe<Scalars['String']>
   relatedCollections?: Maybe<Array<Maybe<ShopifyCollection>>>
+  collectionBlocks?: Maybe<Array<Maybe<CollectionBlock>>>
   seo?: Maybe<Seo>
 }
 
