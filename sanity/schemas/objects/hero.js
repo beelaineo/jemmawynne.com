@@ -126,7 +126,7 @@ export const hero = {
       title: 'Background Image (mobile)',
       type: 'richImage',
       fieldset: 'images',
-      description: 'Recommended dimensions: 1200 x 1800',
+      description: 'Recommended dimensions: 1200 x 1200',
     },
   ],
   preview: {

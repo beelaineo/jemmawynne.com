@@ -48,7 +48,7 @@ const getRichTextBlockPreviewValues = async (props) => {
 }
 
 export const richTextBlock = {
-  title: 'Long Text',
+  title: 'Text',
   name: 'richTextBlock',
   type: 'object',
   fields: [
@@ -56,6 +56,11 @@ export const richTextBlock = {
       name: 'body',
       title: 'Body',
       type: 'richText',
+    },
+    {
+      name: 'textAlign',
+      type: 'textAlign',
+      title: 'Text Alignment',
     },
   ],
 
@@ -86,15 +91,34 @@ export const pageBlock = {
       title: 'Background Color',
     },
     {
-      name: 'shiftDown',
-      type: 'boolean',
-      title: 'Shift background color down',
-    },
-    {
       name: 'textColor',
       type: 'colorPicker',
       title: 'Text Color',
     },
+
+    {
+      name: 'layoutOptions',
+      type: 'string',
+      title: 'Layout Options',
+      options: {
+        layout: 'radio',
+        list: [
+          {
+            title: 'Normal',
+            value: 'normal',
+          },
+          {
+            title: 'Shift background color down',
+            value: 'shiftBackgroundColorDown',
+          },
+          {
+            title: 'Shift content down (overlaps with next block)',
+            value: 'shiftContentDown',
+          },
+        ],
+      },
+    },
+
     {
       name: 'content',
       type: 'array',
