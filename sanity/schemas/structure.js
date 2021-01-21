@@ -33,7 +33,18 @@ export default () =>
         .child(
           S.documentList()
             .title('Products')
-            .filter('_type == "shopifyProduct" && archived != true'),
+            .filter('_type == "shopifyProduct" && archived != true')
+            .defaultOrdering([{ field: 'title', direction: 'asc' }])
+            .menuItems([
+              S.orderingMenuItem({
+                title: 'A-Z',
+                by: [{ field: 'title', direction: 'asc' }],
+              }),
+              S.orderingMenuItem({
+                title: 'Recently Updated',
+                by: [{ field: '_updatedAt', direction: 'desc' }],
+              }),
+            ]),
         ),
 
       S.listItem()
@@ -55,7 +66,18 @@ export default () =>
         .child(
           S.documentList()
             .title('Collections')
-            .filter('_type == "shopifyCollection" && archived != true'),
+            .filter('_type == "shopifyCollection" && archived != true')
+            .defaultOrdering([{ field: 'title', direction: 'asc' }])
+            .menuItems([
+              S.orderingMenuItem({
+                title: 'A-Z',
+                by: [{ field: 'title', direction: 'asc' }],
+              }),
+              S.orderingMenuItem({
+                title: 'Recently Updated',
+                by: [{ field: '_updatedAt', direction: 'desc' }],
+              }),
+            ]),
         ),
 
       S.listItem()
