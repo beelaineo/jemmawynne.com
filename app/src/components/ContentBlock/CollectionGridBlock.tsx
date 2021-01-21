@@ -19,7 +19,7 @@ export const CollectionGridBlock: React.FC<CollectionGridBlockProps> = ({
   if (!collection?.products) return null
   const collectionCta = {
     __typename: 'Cta' as const,
-    label: customCTALabel || 'Shop the collection',
+    label: customCTALabel || 'Discover More',
     link: {
       __typename: 'InternalLink' as const,
       document: collection,
@@ -31,7 +31,9 @@ export const CollectionGridBlock: React.FC<CollectionGridBlockProps> = ({
       <Heading textAlign="center" mb={3} family="sans" level={4}>
         {title}
       </Heading>
-      <ItemGrid items={definitely(collection.products).slice(0, 12)} />
+      <Box maxWidth="xWide" mx="auto">
+        <ItemGrid items={definitely(collection.products).slice(0, 12)} />
+      </Box>
       <Box display="flex" justifyContent="center" mt={9}>
         <CTA level={1} cta={collectionCta} />
       </Box>

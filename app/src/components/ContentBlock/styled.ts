@@ -33,7 +33,16 @@ export const TextWrapper = styled.div<TextWrapperProps>`
     ${theme.mediaQueries.tablet} {
       position: relative;
       padding: 6 3;
-      min-height: 360px;
+      min-height: ${withBackgroundImage ? 'auto' : '650px'};
+
+      div {
+        max-width: 480px;
+      }
+    }
+
+    ${theme.mediaQueries.mobile} {
+      padding: 48px;
+      min-height: ${withBackgroundImage ? 'auto' : '460px'};
     }
   `}
 `
@@ -58,8 +67,11 @@ export const HeroWrapper = styled.div<HeroWrapperProps>`
         : `calc(100vh - ${theme.navHeight})`
       : '450px'};
 
+    ${theme.mediaQueries.tablet} {
+      height: 37vw;
+    }
     ${theme.mediaQueries.mobile} {
-      height: 480px;
+      height: 280px;
     }
   `}
 `
@@ -89,11 +101,25 @@ export const HeroText = styled.div<HeroTextProps>`
     text-align: ${textAlign || getTextAlignment(textPosition)};
     color: ${getColor(textColor)};
 
+    h1 {
+      font-size: 90px;
+      margin-bottom: 0.3em;
+    }
+
+    ${theme.mediaQueries.tablet} {
+      h1 {
+        font-size: 90px;
+      }
+    }
+
     ${theme.mediaQueries.mobile} {
       color: ${getColor(textColorMobile)};
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
       text-align: ${getTextAlignment(textPositionMobile)};
+      h1 {
+        font-size: 45px;
+      }
     }
   `}
 `
@@ -224,6 +250,7 @@ export const BackgroundImageWrapper = styled.div`
     width: 100%;
     height: 100%;
     transition: 0.2s;
+    overflow: hidden;
 
     ${ImageWrapper},
     picture,
@@ -243,7 +270,11 @@ export const BackgroundImageWrapper = styled.div`
         width: 100%;
         padding-bottom: 100%;
       }
-      max-height: 360px;
+      max-height: 650px;
+    }
+
+    ${theme.mediaQueries.mobile} {
+      max-height: 460px;
     }
   `}
 `
@@ -251,32 +282,38 @@ export const BackgroundImageWrapper = styled.div`
 interface PageBlockWrapperProps {
   padTop?: boolean
   isAlone?: boolean
+  shiftContentDown?: boolean
 }
 
 export const PageBlockWrapper = styled.div<PageBlockWrapperProps>`
-  ${({ padTop, isAlone }) => css`
+  ${({ theme, shiftContentDown, padTop, isAlone }) => css`
     position: relative;
     padding: 0 6;
     padding-top: ${isAlone ? '100px' : padTop ? '150px' : 9};
     padding-bottom: ${isAlone ? '100px' : 9};
+    margin-bottom: ${shiftContentDown ? '-130px' : '0'};
+    ${theme.mediaQueries.tablet} {
+      padding-top: ${isAlone ? '100px' : padTop ? '100px' : 6};
+      padding-bottom: ${isAlone ? '100px' : 6};
+    }
   `}
 `
 
 interface PageBlockBackgroundProps {
   backgroundColor?: string | null
-  shiftDown?: boolean
+  shiftBackgroundColorDown?: boolean
 }
 
 export const PageBlockBackground = styled.div<PageBlockBackgroundProps>`
-  ${({ shiftDown, theme, backgroundColor }) => css`
+  ${({ shiftBackgroundColorDown, theme, backgroundColor }) => css`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: ${shiftDown ? 'calc(100% + 60px)' : '100%'};
+    height: ${shiftBackgroundColorDown ? 'calc(100% + 60px)' : '100%'};
     z-index: -1;
     background-color: ${getColor(backgroundColor) || 'body.0'};
-    transform: ${shiftDown ? 'translateY(110px)' : 'none'};
+    transform: ${shiftBackgroundColorDown ? 'translateY(110px)' : 'none'};
 
     ${theme.mediaQueries.tablet} {
       transform: none;
@@ -302,7 +339,19 @@ export const PageBlockInner = styled.div<PageBlockInnerProps>`
     }
 
     ${theme.mediaQueries.tablet} {
+      max-width: 740px;
       display: block;
+    }
+  `}
+`
+export const PageImage = styled.div`
+  ${({ theme }) => css`
+    max-width: 740px;
+
+    ${theme.mediaQueries.tablet} {
+      &:nth-child(n + 2) {
+        margin-top: 55px;
+      }
     }
   `}
 `
@@ -316,18 +365,20 @@ export const PageText = styled.div<PageTextInnerProps>`
     padding: ${isAlone ? 0 : '0 8 8'};
     margin: ${isAlone ? '0 auto' : 0};
     ${theme.mediaQueries.tablet} {
-      padding: 3 0;
+      padding: 9 30px 4;
+    }
+    ${theme.mediaQueries.mobile} {
+      padding: 8 4 4;
     }
   `}
 `
 
 export const PageTextInner = styled.div<PageTextInnerProps>`
-  ${({ isAlone }) => css`
+  ${({ isAlone, theme }) => css`
     max-width: ${isAlone ? '800px' : '370px'};
     margin: ${isAlone ? '0 auto' : '0'};
+    ${theme.mediaQueries.tablet} {
+      max-width: ${isAlone ? '800px' : '520px'};
+    }
   `}
-`
-
-export const PageImage = styled.div`
-  max-width: 740px;
 `

@@ -99,7 +99,7 @@ export const BurgerMenu = styled.button`
   ${({ theme }) => css`
     display: none;
     position: absolute;
-    top: 11px;
+    top: 18px;
     left: 15px;
     font-size: 21px;
 
@@ -147,7 +147,7 @@ export const NavTools = styled.div`
     top: 28px;
     right: 24px;
     ${theme.mediaQueries.tablet} {
-      top: 9px;
+      top: 16px;
       right: 15px;
     }
   `}

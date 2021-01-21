@@ -18,6 +18,8 @@ const Wrapper = styled.div`
       padding: 3;
       .followUsText {
         font-size: 4;
+        margin-bottom: 40px;
+        line-height: 1.8em;
       }
     }
   `}

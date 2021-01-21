@@ -22,13 +22,14 @@ export const ProductListingHeader = ({
     : image && description
     ? 'left'
     : 'left'
-  return isValidHero(hero) ? (
-    <HeroBlock hero={hero} landscape />
-  ) : (
-    <HeaderWrapper textAlign={{ xs: 'center', lg: textAlign }}>
-      <Heading level={1} weight={2}>
-        Shop: <Span fontStyle="italic">{title}</Span>
-      </Heading>
-    </HeaderWrapper>
+  return (
+    <>
+      {isValidHero(hero) ? <HeroBlock hero={hero} landscape /> : null}
+      <HeaderWrapper textAlign={{ xs: 'center', lg: textAlign }}>
+        <Heading level={1} weight={2}>
+          Shop: <Span fontStyle="italic">{title}</Span>
+        </Heading>
+      </HeaderWrapper>
+    </>
   )
 }

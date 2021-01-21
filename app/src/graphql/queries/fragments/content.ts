@@ -599,7 +599,7 @@ export const pageBlockFragment = gql`
     _key
     _type
     backgroundColor
-    shiftDown
+    layoutOptions
     alignment
     content {
       ... on RichImage {

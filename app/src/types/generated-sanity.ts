@@ -770,8 +770,8 @@ export interface PageBlock {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   backgroundColor?: Maybe<Scalars['String']>
-  shiftDown?: Maybe<Scalars['Boolean']>
   textColor?: Maybe<Scalars['String']>
+  layoutOptions?: Maybe<Scalars['String']>
   content?: Maybe<Array<Maybe<PageTextOrRichImage>>>
   alignment?: Maybe<Scalars['String']>
 }
@@ -780,8 +780,8 @@ export type PageBlockFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   backgroundColor?: Maybe<StringFilter>
-  shiftDown?: Maybe<BooleanFilter>
   textColor?: Maybe<StringFilter>
+  layoutOptions?: Maybe<StringFilter>
   alignment?: Maybe<StringFilter>
 }
 
@@ -789,8 +789,8 @@ export type PageBlockSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
   backgroundColor?: Maybe<SortOrder>
-  shiftDown?: Maybe<SortOrder>
   textColor?: Maybe<SortOrder>
+  layoutOptions?: Maybe<SortOrder>
   alignment?: Maybe<SortOrder>
 }
 
@@ -1146,16 +1146,19 @@ export interface RichTextBlock {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   bodyRaw?: Maybe<Scalars['JSON']>
+  textAlign?: Maybe<Scalars['String']>
 }
 
 export type RichTextBlockFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
+  textAlign?: Maybe<StringFilter>
 }
 
 export type RichTextBlockSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
+  textAlign?: Maybe<SortOrder>
 }
 
 export interface RootQuery {

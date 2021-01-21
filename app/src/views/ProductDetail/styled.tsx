@@ -34,9 +34,15 @@ export const ProductInfoWrapper = styled.div`
 `
 
 export const DescriptionWrapper = styled.div`
-  padding-right: 6;
-  max-width: 550px;
-  margin-bottom: 7;
+  ${({ theme }) => css`
+    padding-right: 6;
+    max-width: 550px;
+    margin-bottom: 7;
+    ${theme.mediaQueries.mobile} {
+      padding-right: 0;
+      max-width: initial;
+    }
+  `}
 `
 
 export const HintFieldsWrapper = styled.div`
@@ -65,8 +71,9 @@ export const SwatchWrapper = styled.div`
   ${({ theme }) => css`
     display: grid;
     grid-template-columns: 230px 1fr;
-    align-items: center;
-    ${theme.mediaQueries.mobile} {
+    align-items: start;
+
+    ${theme.mediaQueries.tablet} {
       grid-gap: 2;
       grid-template-columns: 1fr;
     }

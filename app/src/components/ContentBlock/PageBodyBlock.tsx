@@ -27,8 +27,9 @@ interface RichTextBlockProps {
 }
 
 const RichTextBlock = ({ block }: RichTextBlockProps) => {
+  const { textAlign } = block
   return (
-    <Column my={5} maxWidth="medium">
+    <Column my={5} maxWidth="medium" textAlign={textAlign}>
       <RichText body={block.bodyRaw} />
     </Column>
   )
@@ -43,8 +44,12 @@ const hasShift = (
   block?: CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
 ): boolean => {
   if (!block) return false
-  // @ts-ignore
-  if (block?.shiftDown === true) return true
+  if (
+    block.__typename === 'PageBlock' &&
+    block?.layoutOptions === 'shiftBackgroundColorDown'
+  ) {
+    return true
+  }
   if (block.__typename !== 'PageBlock') return false
   if (!block.content) return false
   return (
@@ -55,16 +60,21 @@ const hasShift = (
 
 export const PageBlock = ({ block, previousBlock }: PageBlockProps) => {
   const { alignment, backgroundColor, content } = block
-  const shiftDown = hasShift(block)
+  const shiftBackgroundColorDown = hasShift(block)
+  const shiftContentDown = Boolean(block?.layoutOptions === 'shiftContentDown')
   const padTop = hasShift(previousBlock)
   const innerBlocks = definitely(content)
   const isAlone =
     innerBlocks.length === 1 && innerBlocks[0].__typename === 'PageText'
   return (
-    <PageBlockWrapper padTop={padTop} isAlone={isAlone}>
+    <PageBlockWrapper
+      padTop={padTop}
+      isAlone={isAlone}
+      shiftContentDown={shiftContentDown}
+    >
       <PageBlockBackground
         backgroundColor={backgroundColor}
-        shiftDown={shiftDown}
+        shiftBackgroundColorDown={shiftBackgroundColorDown}
       />
       <PageBlockInner alignment={alignment}>
         {innerBlocks.map((c) =>

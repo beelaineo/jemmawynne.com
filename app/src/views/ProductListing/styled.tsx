@@ -7,7 +7,7 @@ export const CollectionsMain = styled.div<CollectionsMainProps>`
   ${({ theme, menuDisabled }) => css`
     ${menuDisabled
       ? css`
-          padding: 6;
+          padding: 0 6 6;
           max-width: 1100px;
           margin: 0 auto;
         `
@@ -15,7 +15,7 @@ export const CollectionsMain = styled.div<CollectionsMainProps>`
           display: grid;
           grid-template-columns: 250px 1fr;
           grid-column-gap: 8;
-          padding: 6;
+          padding: 0 6 6;
           position: relative;
         `}
     ${theme.mediaQueries.tablet} {

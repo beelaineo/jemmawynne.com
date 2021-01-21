@@ -56,14 +56,8 @@ const getInitialOptions = (
     ]
   }, [])
   return o
-
-  // const options = options.map(({ name, values }) => ({
-  //   name,
-  //   currentValue: definitely(values)[0],
-  // }))
-  //
-  // return options.filter((o) => o.name && o.currentValue)
 }
+
 const getNewOptions = (
   options: SelectedProductOption[],
   optionName: string,

@@ -55,6 +55,7 @@ const pageQuery = gql`
           _type
           __typename
           _key
+          textAlign
           bodyRaw
         }
       }
