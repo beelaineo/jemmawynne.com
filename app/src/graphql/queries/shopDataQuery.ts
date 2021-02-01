@@ -80,6 +80,19 @@ export const SHOP_DATA_QUERY = gql`
       necklaceBlocks {
         ...ProductInfoFragment
       }
+      blocksByCollection {
+        collections {
+          __typename
+          _key
+          _id
+          _type
+          shopifyId
+          title
+        }
+        infoBlocks {
+          ...ProductInfoFragment
+        }
+      }
       blocksByTag {
         __typename
         _key

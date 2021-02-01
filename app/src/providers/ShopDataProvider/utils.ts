@@ -1,3 +1,4 @@
+import { unwindEdges } from '@good-idea/unwind-edges'
 import {
   ShopifyProduct,
   ProductInfo,
@@ -81,6 +82,7 @@ export const createGetProductInfoBlocks = (productInfo?: ProductInfo) => (
     braceletBlocks,
     necklaceBlocks,
     blocksByTag,
+    blocksByCollection,
   } = productInfo
   const globalBlocks = sourceGlobalBlocks ? definitely(sourceGlobalBlocks) : []
   const sourceTags = product?.sourceData?.tags
@@ -116,7 +118,34 @@ export const createGetProductInfoBlocks = (productInfo?: ProductInfo) => (
       : []
     : []
 
-  const allBlocks = [...globalBlocks, ...tagBlocks, ...typeBlocks]
+  const productCollectionIds = definitely(
+    product.collections
+      ? definitely(product.collections).map((c) => c.shopifyId)
+      : unwindEdges(product?.sourceData?.collections)[0].map((c) => c.id),
+  )
+
+  const collectionBlocks = blocksByCollection
+    ? blocksByCollection
+        .filter((collectionBlock) => {
+          const collections = definitely(collectionBlock?.collections)
+          if (!collections) return false
+          return collections.some(
+            (c) => c.shopifyId && productCollectionIds.includes(c.shopifyId),
+          )
+        })
+        .reduce<ProductInfoBlock[]>((prevBlocks, cBlock) => {
+          if (!cBlock) return prevBlocks
+          return [...prevBlocks, ...definitely(cBlock.infoBlocks)]
+        }, [])
+    : []
+
+  const allBlocks = [
+    ...globalBlocks,
+    ...tagBlocks,
+    ...typeBlocks,
+    ...collectionBlocks,
+  ]
+
   const filteredBlocks = allBlocks.reduce<DefinitelyProductInfo[]>(
     (acc, block) => {
       if (!block) return acc

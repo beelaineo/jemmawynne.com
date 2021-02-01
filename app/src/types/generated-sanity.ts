@@ -990,23 +990,26 @@ export interface ProductInfo extends Document {
   tagBadgeHelpText?: Maybe<Scalars['String']>
   tagBadges?: Maybe<Array<Maybe<TagBadge>>>
   /**
-   * Use these fields to add snippets of descriptions to all or some projects. For
-   * instance, you could add a 'Shipping and Returns' block on all items, and a
-   * 'Ring Sizing Guide' block to all Rings. These blocks will be displayed in
+   * Use these fields to add accordions to all or some products. For instance, you
+   * could add a 'Shipping and Returns' block on all items, and a 'Ring Sizing
+   * Guide' block to all Rings. These blocks will be displayed in
    * accordion-dropdowns below the main product information. You can also add info
    * blocks to individual items on their page here in the CMS.
    */
   helpText?: Maybe<Scalars['String']>
   globalBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
-  /** Use these fields to add snippets of descriptions to all products of different types */
+  /** Use these fields to add accordions to products within certain collections */
+  byCollection?: Maybe<Scalars['String']>
+  blocksByCollection?: Maybe<Array<Maybe<ProductInfoBlocksByCollection>>>
+  /** Use these fields to add accordions to all products of different types */
   byTypeHelpText?: Maybe<Scalars['String']>
   ringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   earringBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   braceletBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   necklaceBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   /**
-   * Use these fields to add blocks to items with particular tags in Shopify. For
-   * instance, a "Customization" block for anything tagged with "Custom" in Shopify.
+   * Use these fields to add accordions to items with particular tags in Shopify.
+   * For instance, a "Customization" block for anything tagged with "Custom" in Shopify.
    */
   byTagHelpText?: Maybe<Scalars['String']>
   blocksByTag?: Maybe<Array<Maybe<ProductInfoBlocksByTag>>>
@@ -1025,6 +1028,24 @@ export type ProductInfoBlockFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
+}
+
+export interface ProductInfoBlocksByCollection {
+  __typename: 'ProductInfoBlocksByCollection'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  collections?: Maybe<Array<Maybe<ShopifyCollection>>>
+  infoBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
+}
+
+export type ProductInfoBlocksByCollectionFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+}
+
+export type ProductInfoBlocksByCollectionSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
 }
 
 export interface ProductInfoBlocksByTag {
@@ -1065,6 +1086,7 @@ export type ProductInfoFilter = {
   _key?: Maybe<StringFilter>
   tagBadgeHelpText?: Maybe<StringFilter>
   helpText?: Maybe<StringFilter>
+  byCollection?: Maybe<StringFilter>
   byTypeHelpText?: Maybe<StringFilter>
   byTagHelpText?: Maybe<StringFilter>
 }
@@ -1078,6 +1100,7 @@ export type ProductInfoSorting = {
   _key?: Maybe<SortOrder>
   tagBadgeHelpText?: Maybe<SortOrder>
   helpText?: Maybe<SortOrder>
+  byCollection?: Maybe<SortOrder>
   byTypeHelpText?: Maybe<SortOrder>
   byTagHelpText?: Maybe<SortOrder>
 }

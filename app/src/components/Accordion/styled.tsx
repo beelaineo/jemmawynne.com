@@ -27,6 +27,7 @@ export const PlusMinus = styled.span<PlusMinusProps>`
     width: 9px;
     height: 9px;
     margin-left: 1em;
+    margin-top: -2px;
     display: block;
     position: relative;
 
