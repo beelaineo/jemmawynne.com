@@ -40,7 +40,11 @@ export const productInfo = {
     },
     {
       name: 'globalAccordions',
-      title: 'By Type',
+      title: 'Global Accordions',
+    },
+    {
+      name: 'byCollection',
+      title: 'Accordions By Collection',
     },
     {
       name: 'byType',
@@ -71,7 +75,7 @@ export const productInfo = {
       type: 'helpText',
       fieldset: 'globalAccordions',
       description:
-        "Use these fields to add snippets of descriptions to all or some projects. For instance, you could add a 'Shipping and Returns' block on all items, and a 'Ring Sizing Guide' block to all Rings. These blocks will be displayed in accordion-dropdowns below the main product information. You can also add info blocks to individual items on their page here in the CMS.",
+        "Use these fields to add accordions to all or some products. For instance, you could add a 'Shipping and Returns' block on all items, and a 'Ring Sizing Guide' block to all Rings. These blocks will be displayed in accordion-dropdowns below the main product information. You can also add info blocks to individual items on their page here in the CMS.",
     },
     {
       name: 'globalBlocks',
@@ -82,11 +86,25 @@ export const productInfo = {
       of: [{ type: 'productInfoBlock' }],
     },
     {
+      name: 'byCollectionHelpText',
+      type: 'helpText',
+      fieldset: 'byCollection',
+      description:
+        'Use these fields to add accordions to products within certain collections',
+    },
+    {
+      name: 'blocksByCollection',
+      type: 'array',
+      of: [{ type: 'productInfoBlocksByCollection' }],
+      fieldset: 'byCollection',
+    },
+
+    {
       name: 'byTypeHelpText',
       type: 'helpText',
       fieldset: 'byType',
       description:
-        'Use these fields to add snippets of descriptions to all products of different types',
+        'Use these fields to add accordions to all products of different types',
     },
     {
       name: 'ringBlocks',
@@ -129,7 +147,7 @@ export const productInfo = {
       name: 'byTagHelpText',
       type: 'helpText',
       description:
-        'Use these fields to add blocks to items with particular tags in Shopify. For instance, a "Customization" block for anything tagged with "Custom" in Shopify.',
+        'Use these fields to add accordions to items with particular tags in Shopify. For instance, a "Customization" block for anything tagged with "Custom" in Shopify.',
       fieldset: 'byTag',
     },
     {
