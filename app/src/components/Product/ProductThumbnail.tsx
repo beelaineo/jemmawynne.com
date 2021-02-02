@@ -17,7 +17,12 @@ import {
   productIsInquiryOnly,
 } from '../../utils'
 import { ProductSwatches } from './ProductSwatches'
-import { ProductInfo, ImageWrapper, ProductThumb } from './styled'
+import {
+  ProductInfo,
+  ImageWrapper,
+  ProductThumb,
+  ProductThumbnailSwatchesWrapper,
+} from './styled'
 import { TagBadges } from './TagBadges'
 
 const { useState } = React
@@ -119,11 +124,13 @@ export const ProductThumbnail = ({
               </Heading>
             ) : null}
             {swatchOption ? (
-              <ProductSwatches
-                option={swatchOption}
-                onSwatchHover={onSwatchHover}
-                isSwatchActive={isSwatchActive}
-              />
+              <ProductThumbnailSwatchesWrapper>
+                <ProductSwatches
+                  option={swatchOption}
+                  onSwatchHover={onSwatchHover}
+                  isSwatchActive={isSwatchActive}
+                />
+              </ProductThumbnailSwatchesWrapper>
             ) : null}
           </ProductInfo>
         </a>

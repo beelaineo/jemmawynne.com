@@ -20,6 +20,12 @@ export const SwatchesWrapper = styled.div`
   justify-content: flex-start;
 `
 
+export const ProductThumbnailSwatchesWrapper = styled.div`
+  & ${SwatchesWrapper} {
+    justify-content: center;
+  }
+`
+
 interface SwatchImageWrapperProps {
   clickable: boolean
 }
