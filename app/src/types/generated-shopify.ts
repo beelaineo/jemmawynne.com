@@ -1788,8 +1788,6 @@ export enum StorefrontApiCurrencyCode {
   Bhd = 'BHD',
   /** Burundian Franc (BIF). */
   Bif = 'BIF',
-  /** Belarusian Ruble (BYR). */
-  Byr = 'BYR',
   /** Belize Dollar (BZD). */
   Bzd = 'BZD',
   /** Bermudian Dollar (BMD). */
@@ -1836,26 +1834,18 @@ export enum StorefrontApiCurrencyCode {
   Czk = 'CZK',
   /** Danish Kroner (DKK). */
   Dkk = 'DKK',
-  /** Djiboutian Franc (DJF). */
-  Djf = 'DJF',
   /** Dominican Peso (DOP). */
   Dop = 'DOP',
   /** East Caribbean Dollar (XCD). */
   Xcd = 'XCD',
   /** Egyptian Pound (EGP). */
   Egp = 'EGP',
-  /** Eritrean Nakfa (ERN). */
-  Ern = 'ERN',
   /** Ethiopian Birr (ETB). */
   Etb = 'ETB',
-  /** Falkland Islands Pounds (FKP). */
-  Fkp = 'FKP',
   /** CFP Franc (XPF). */
   Xpf = 'XPF',
   /** Fijian Dollars (FJD). */
   Fjd = 'FJD',
-  /** Gibraltar Pounds (GIP). */
-  Gip = 'GIP',
   /** Gambian Dalasi (GMD). */
   Gmd = 'GMD',
   /** Ghanaian Cedi (GHS). */
@@ -1866,8 +1856,6 @@ export enum StorefrontApiCurrencyCode {
   Gyd = 'GYD',
   /** Georgian Lari (GEL). */
   Gel = 'GEL',
-  /** Guinean Franc (GNF). */
-  Gnf = 'GNF',
   /** Haitian Gourde (HTG). */
   Htg = 'HTG',
   /** Honduran Lempira (HNL). */
@@ -1884,8 +1872,6 @@ export enum StorefrontApiCurrencyCode {
   Idr = 'IDR',
   /** Israeli New Shekel (NIS). */
   Ils = 'ILS',
-  /** Iranian Rial (IRR). */
-  Irr = 'IRR',
   /** Iraqi Dinar (IQD). */
   Iqd = 'IQD',
   /** Jamaican Dollars (JMD). */
@@ -1900,8 +1886,6 @@ export enum StorefrontApiCurrencyCode {
   Kzt = 'KZT',
   /** Kenyan Shilling (KES). */
   Kes = 'KES',
-  /** Kiribati Dollar (KID). */
-  Kid = 'KID',
   /** Kuwaiti Dinar (KWD). */
   Kwd = 'KWD',
   /** Kyrgyzstani Som (KGS). */
@@ -1916,8 +1900,6 @@ export enum StorefrontApiCurrencyCode {
   Lsl = 'LSL',
   /** Liberian Dollar (LRD). */
   Lrd = 'LRD',
-  /** Libyan Dinar (LYD). */
-  Lyd = 'LYD',
   /** Lithuanian Litai (LTL). */
   Ltl = 'LTL',
   /** Malagasy Ariary (MGA). */
@@ -1930,8 +1912,6 @@ export enum StorefrontApiCurrencyCode {
   Mwk = 'MWK',
   /** Maldivian Rufiyaa (MVR). */
   Mvr = 'MVR',
-  /** Mauritanian Ouguiya (MRU). */
-  Mru = 'MRU',
   /** Mexican Pesos (MXN). */
   Mxn = 'MXN',
   /** Malaysian Ringgits (MYR). */
@@ -1986,8 +1966,6 @@ export enum StorefrontApiCurrencyCode {
   Rwf = 'RWF',
   /** Samoan Tala (WST). */
   Wst = 'WST',
-  /** Saint Helena Pounds (SHP). */
-  Shp = 'SHP',
   /** Saudi Riyal (SAR). */
   Sar = 'SAR',
   /** Sao Tome And Principe Dobra (STD). */
@@ -1996,14 +1974,10 @@ export enum StorefrontApiCurrencyCode {
   Rsd = 'RSD',
   /** Seychellois Rupee (SCR). */
   Scr = 'SCR',
-  /** Sierra Leonean Leone (SLL). */
-  Sll = 'SLL',
   /** Singapore Dollars (SGD). */
   Sgd = 'SGD',
   /** Sudanese Pound (SDG). */
   Sdg = 'SDG',
-  /** Somali Shilling (SOS). */
-  Sos = 'SOS',
   /** Syrian Pound (SYP). */
   Syp = 'SYP',
   /** South African Rand (ZAR). */
@@ -2028,12 +2002,8 @@ export enum StorefrontApiCurrencyCode {
   Twd = 'TWD',
   /** Thai baht (THB). */
   Thb = 'THB',
-  /** Tajikistani Somoni (TJS). */
-  Tjs = 'TJS',
   /** Tanzanian Shilling (TZS). */
   Tzs = 'TZS',
-  /** Tongan Pa'anga (TOP). */
-  Top = 'TOP',
   /** Trinidad and Tobago Dollars (TTD). */
   Ttd = 'TTD',
   /** Tunisian Dinar (TND). */
@@ -2054,10 +2024,6 @@ export enum StorefrontApiCurrencyCode {
   Uzs = 'UZS',
   /** Vanuatu Vatu (VUV). */
   Vuv = 'VUV',
-  /** Venezuelan Bolivares (VEF). */
-  Vef = 'VEF',
-  /** Venezuelan Bolivares (VES). */
-  Ves = 'VES',
   /** Vietnamese đồng (VND). */
   Vnd = 'VND',
   /** West African CFA franc (XOF). */
@@ -2066,6 +2032,40 @@ export enum StorefrontApiCurrencyCode {
   Yer = 'YER',
   /** Zambian Kwacha (ZMW). */
   Zmw = 'ZMW',
+  /** Belarusian Ruble (BYR). */
+  Byr = 'BYR',
+  /** Djiboutian Franc (DJF). */
+  Djf = 'DJF',
+  /** Eritrean Nakfa (ERN). */
+  Ern = 'ERN',
+  /** Falkland Islands Pounds (FKP). */
+  Fkp = 'FKP',
+  /** Gibraltar Pounds (GIP). */
+  Gip = 'GIP',
+  /** Guinean Franc (GNF). */
+  Gnf = 'GNF',
+  /** Iranian Rial (IRR). */
+  Irr = 'IRR',
+  /** Kiribati Dollar (KID). */
+  Kid = 'KID',
+  /** Libyan Dinar (LYD). */
+  Lyd = 'LYD',
+  /** Mauritanian Ouguiya (MRU). */
+  Mru = 'MRU',
+  /** Sierra Leonean Leone (SLL). */
+  Sll = 'SLL',
+  /** Saint Helena Pounds (SHP). */
+  Shp = 'SHP',
+  /** Somali Shilling (SOS). */
+  Sos = 'SOS',
+  /** Tajikistani Somoni (TJS). */
+  Tjs = 'TJS',
+  /** Tongan Pa'anga (TOP). */
+  Top = 'TOP',
+  /** Venezuelan Bolivares (VEF). */
+  Vef = 'VEF',
+  /** Venezuelan Bolivares (VES). */
+  Ves = 'VES',
 }
 
 /**

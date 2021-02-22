@@ -234,6 +234,8 @@ export interface Cta {
   _type?: Maybe<Scalars['String']>
   label?: Maybe<Scalars['String']>
   link?: Maybe<InternalLink>
+  mailToEmail?: Maybe<Scalars['String']>
+  mailToSubject?: Maybe<Scalars['String']>
 }
 
 export type CtaFilter = {
@@ -241,6 +243,8 @@ export type CtaFilter = {
   _type?: Maybe<StringFilter>
   label?: Maybe<StringFilter>
   link?: Maybe<InternalLinkFilter>
+  mailToEmail?: Maybe<StringFilter>
+  mailToSubject?: Maybe<StringFilter>
 }
 
 export type CtaOrSubMenu = Cta | SubMenu
@@ -250,6 +254,8 @@ export type CtaSorting = {
   _type?: Maybe<SortOrder>
   label?: Maybe<SortOrder>
   link?: Maybe<InternalLinkSorting>
+  mailToEmail?: Maybe<SortOrder>
+  mailToSubject?: Maybe<SortOrder>
 }
 
 export type DateFilter = {
@@ -999,7 +1005,7 @@ export interface ProductInfo extends Document {
   helpText?: Maybe<Scalars['String']>
   globalBlocks?: Maybe<Array<Maybe<ProductInfoBlock>>>
   /** Use these fields to add accordions to products within certain collections */
-  byCollection?: Maybe<Scalars['String']>
+  byCollectionHelpText?: Maybe<Scalars['String']>
   blocksByCollection?: Maybe<Array<Maybe<ProductInfoBlocksByCollection>>>
   /** Use these fields to add accordions to all products of different types */
   byTypeHelpText?: Maybe<Scalars['String']>
@@ -1086,7 +1092,7 @@ export type ProductInfoFilter = {
   _key?: Maybe<StringFilter>
   tagBadgeHelpText?: Maybe<StringFilter>
   helpText?: Maybe<StringFilter>
-  byCollection?: Maybe<StringFilter>
+  byCollectionHelpText?: Maybe<StringFilter>
   byTypeHelpText?: Maybe<StringFilter>
   byTagHelpText?: Maybe<StringFilter>
 }
@@ -1100,7 +1106,7 @@ export type ProductInfoSorting = {
   _key?: Maybe<SortOrder>
   tagBadgeHelpText?: Maybe<SortOrder>
   helpText?: Maybe<SortOrder>
-  byCollection?: Maybe<SortOrder>
+  byCollectionHelpText?: Maybe<SortOrder>
   byTypeHelpText?: Maybe<SortOrder>
   byTagHelpText?: Maybe<SortOrder>
 }

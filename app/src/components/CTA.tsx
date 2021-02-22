@@ -65,7 +65,15 @@ interface CTALinkProps {
 }
 
 const CTALink = ({ cta, children }: CTALinkProps) => {
-  const { link } = cta
+  const { link, mailToEmail, mailToSubject } = cta
+  if (mailToEmail) {
+    const mailTo = [
+      'mailto:',
+      mailToEmail,
+      mailToSubject ? `?subject=${mailToSubject}` : '',
+    ].join('')
+    return <a href={mailTo}>{children}</a>
+  }
   if (!link || !link.document) {
     return <>{children}</>
   }

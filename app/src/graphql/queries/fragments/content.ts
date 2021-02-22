@@ -62,6 +62,8 @@ export const ctaFragment = gql`
     link {
       ...InternalLinkFragment
     }
+    mailToEmail
+    mailToSubject
   }
   ${internalLinkFragment}
 `
