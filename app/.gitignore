@@ -8,3 +8,4 @@ stats.json
 
 .now
 .vercel
+!.env.example
