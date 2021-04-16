@@ -1,5 +1,6 @@
 import { createNextWebhooks } from '@sane-shopify/server'
 import dotEnv from 'dotenv'
+import Sentry from './sentry'
 
 dotEnv.config()
 
@@ -15,6 +16,10 @@ if (!authToken) throw new Error('You must provide a sanity auth token')
 if (!shopName) throw new Error('You must provide a shopify shop name')
 if (!accessToken) throw new Error('You must provide a shopify access token')
 
+const handleError = (err: Error) => {
+  Sentry.captureException(err)
+}
+
 const config = {
   secrets: {
     sanity: {
@@ -27,6 +32,7 @@ const config = {
       accessToken,
     },
   },
+  onError: handleError,
 }
 
-export const webhooks = createNextWebhooks({ config })
+export const webhooks = createNextWebhooks(config)
