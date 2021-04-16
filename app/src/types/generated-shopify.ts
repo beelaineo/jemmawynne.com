@@ -305,17 +305,17 @@ export enum StorefrontApiBlogSortKeys {
 
 /** Card brand, such as Visa or Mastercard, which can be used for payments. */
 export enum StorefrontApiCardBrand {
-  /** Visa */
+  /** Visa. */
   Visa = 'VISA',
-  /** Mastercard */
+  /** Mastercard. */
   Mastercard = 'MASTERCARD',
-  /** Discover */
+  /** Discover. */
   Discover = 'DISCOVER',
-  /** American Express */
+  /** American Express. */
   AmericanExpress = 'AMERICAN_EXPRESS',
-  /** Diners Club */
+  /** Diners Club. */
   DinersClub = 'DINERS_CLUB',
-  /** JCB */
+  /** JCB. */
   Jcb = 'JCB',
 }
 
@@ -1211,6 +1211,8 @@ export enum StorefrontApiCountryCode {
   Am = 'AM',
   /** Aruba. */
   Aw = 'AW',
+  /** Ascension Island. */
+  Ac = 'AC',
   /** Australia. */
   Au = 'AU',
   /** Austria. */
@@ -1629,6 +1631,8 @@ export enum StorefrontApiCountryCode {
   To = 'TO',
   /** Trinidad & Tobago. */
   Tt = 'TT',
+  /** Tristan da Cunha. */
+  Ta = 'TA',
   /** Tunisia. */
   Tn = 'TN',
   /** Turkey. */
@@ -1705,7 +1709,9 @@ export type StorefrontApiCreditCardPaymentInput = {
   amount: Scalars['Money']
   /**
    * A unique client generated key used to avoid duplicate charges. When a
-   * duplicate payment is found, the original is returned instead of creating a new one.
+   * duplicate payment is found, the original is returned instead of creating a new
+   * one. For more information, refer to [Idempotent
+   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -1725,7 +1731,9 @@ export type StorefrontApiCreditCardPaymentInputV2 = {
   paymentAmount: StorefrontApiMoneyInput
   /**
    * A unique client generated key used to avoid duplicate charges. When a
-   * duplicate payment is found, the original is returned instead of creating a new one.
+   * duplicate payment is found, the original is returned instead of creating a new
+   * one. For more information, refer to [Idempotent
+   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -3884,7 +3892,11 @@ export interface StorefrontApiPayment extends StorefrontApiNode {
   errorMessage?: Maybe<Scalars['String']>
   /** Globally unique identifier. */
   id: Scalars['ID']
-  /** A client-side generated token to identify a payment and perform idempotent operations. */
+  /**
+   * A client-side generated token to identify a payment and perform idempotent operations.
+   * For more information, refer to
+   * [Idempotent requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   */
   idempotencyKey?: Maybe<Scalars['String']>
   /** The URL where the customer needs to be redirected so they can complete the 3D Secure payment flow. */
   nextActionUrl?: Maybe<Scalars['URL']>
@@ -4469,7 +4481,9 @@ export interface StorefrontApiQueryRoot {
   collections: StorefrontApiCollectionConnection
   /** Find a customer by its access token. */
   customer?: Maybe<StorefrontApiCustomer>
+  /** Returns a specific node by ID. */
   node?: Maybe<StorefrontApiNode>
+  /** Returns the list of nodes with the given IDs. */
   nodes: Array<Maybe<StorefrontApiNode>>
   /** Find a page by its handle. */
   pageByHandle?: Maybe<StorefrontApiPage>
@@ -4854,7 +4868,9 @@ export type StorefrontApiTokenizedPaymentInput = {
   amount: Scalars['Money']
   /**
    * A unique client generated key used to avoid duplicate charges. When a
-   * duplicate payment is found, the original is returned instead of creating a new one.
+   * duplicate payment is found, the original is returned instead of creating a new
+   * one. For more information, refer to [Idempotent
+   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -4878,7 +4894,9 @@ export type StorefrontApiTokenizedPaymentInputV2 = {
   paymentAmount: StorefrontApiMoneyInput
   /**
    * A unique client generated key used to avoid duplicate charges. When a
-   * duplicate payment is found, the original is returned instead of creating a new one.
+   * duplicate payment is found, the original is returned instead of creating a new
+   * one. For more information, refer to [Idempotent
+   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -4905,7 +4923,9 @@ export type StorefrontApiTokenizedPaymentInputV3 = {
   paymentAmount: StorefrontApiMoneyInput
   /**
    * A unique client generated key used to avoid duplicate charges. When a
-   * duplicate payment is found, the original is returned instead of creating a new one.
+   * duplicate payment is found, the original is returned instead of creating a new
+   * one. For more information, refer to [Idempotent
+   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -4946,18 +4966,32 @@ export interface StorefrontApiTransaction {
   test: Scalars['Boolean']
 }
 
+/** The different kinds of order transactions. */
 export enum StorefrontApiTransactionKind {
+  /** An authorization and capture performed together in a single step. */
   Sale = 'SALE',
+  /** A transfer of the money that was reserved during the authorization stage. */
   Capture = 'CAPTURE',
+  /**
+   * An amount reserved against the cardholder's funding source.
+   * Money does not change hands until the authorization is captured.
+   */
   Authorization = 'AUTHORIZATION',
+  /** An authorization for a payment taken with an EMV credit card reader. */
   EmvAuthorization = 'EMV_AUTHORIZATION',
+  /** Money returned to the customer when they have paid too much. */
   Change = 'CHANGE',
 }
 
+/** Transaction statuses describe the status of a transaction. */
 export enum StorefrontApiTransactionStatus {
+  /** The transaction is pending. */
   Pending = 'PENDING',
+  /** The transaction succeeded. */
   Success = 'SUCCESS',
+  /** The transaction failed. */
   Failure = 'FAILURE',
+  /** There was an error while processing the transaction. */
   Error = 'ERROR',
 }
 
