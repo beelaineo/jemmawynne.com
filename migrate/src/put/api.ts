@@ -8,7 +8,7 @@ require('dotenv').config({
 
 // @ts-ignore
 export const newStore = new Shopify({
-  shopName: 'jemmawynne-development',
+  shopName: 'jemma-wynne',
   apiKey: process.env.SHOPIFY_ADMIN_KEY,
   password: process.env.SHOPIFY_ADMIN_PASSWORD,
   timeout: 60000 * 5,

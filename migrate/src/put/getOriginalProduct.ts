@@ -2,7 +2,7 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 const fetch = require('node-fetch')
 
 const url = 'https://jemmawynne.myshopify.com/api/graphql'
-const devUrl = 'https://jemmawynne-development.myshopify.com/api/graphql'
+const devUrl = 'https://jemma-wynne.myshopify.com/api/graphql'
 
 const fetchCreatedProduct = async (query: string) =>
   fetch(devUrl, {
