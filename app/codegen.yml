@@ -1,8 +1,4 @@
 generates:
-  fragmentTypes-sanity.json:
-    schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
-    plugins:
-      - fragment-matcher
   src/types/generated-sanity.ts:
     schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
     plugins:
@@ -18,7 +14,7 @@ generates:
     schema:
       - https://jemma-wynne.myshopify.com/api/2020-10/graphql:
           headers:
-            X-Shopify-Storefront-Access-Token: 'f50903d30045eaffacf14aa2dc37f167'
+            X-Shopify-Storefront-Access-Token: '969193ad0bbcaf8485a301bffa9d1058'
     plugins:
       - typescript
     config:

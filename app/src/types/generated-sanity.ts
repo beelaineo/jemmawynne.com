@@ -103,12 +103,13 @@ export type CarouselFilter = {
 }
 
 export type CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock =
-  | Carousel
-  | CollectionGrid
-  | Hero
-  | ImageTextSection
-  | PageBlock
-  | RichTextBlock
+
+    | Carousel
+    | CollectionGrid
+    | Hero
+    | ImageTextSection
+    | PageBlock
+    | RichTextBlock
 
 export type CarouselOrHeroOrImageTextSection =
   | Carousel

@@ -13,6 +13,12 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
+  /** A monetary value string. Example value: `"100.57"`. */
+  Money: any
+  /** A signed decimal number, which supports arbitrary precision and is serialized as a string. Example value: `"29.99"`. */
+  Decimal: any
+  /** An ISO-8601 encoded UTC date time string. Example value: `"2019-07-03T20:47:55Z"`. */
+  DateTime: Date
   /**
    * An RFC 3986 and RFC 3987 compliant URI string.
    *
@@ -22,12 +28,6 @@ export type Scalars = {
   URL: any
   /** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
   HTML: any
-  /** An ISO-8601 encoded UTC date time string. Example value: `"2019-07-03T20:47:55Z"`. */
-  DateTime: Date
-  /** A monetary value string. Example value: `"100.57"`. */
-  Money: any
-  /** A signed decimal number, which supports arbitrary precision and is serialized as a string. Example value: `"29.99"`. */
-  Decimal: any
 }
 
 /** A version of the API. */
@@ -37,7 +37,13 @@ export interface StorefrontApiApiVersion {
   displayName: Scalars['String']
   /** The unique identifier of an ApiVersion. All supported API versions have a date-based (YYYY-MM) or `unstable` handle. */
   handle: Scalars['String']
-  /** Whether the version is supported by Shopify. */
+  /**
+   * Whether the version is actively supported by Shopify. Supported API versions
+   * are guaranteed to be stable. Unsupported API versions include unstable,
+   * release candidate, and end-of-life versions that are marked as unsupported.
+   * For more information, refer to
+   * [Versioning](https://shopify.dev/concepts/about-apis/versioning).
+   */
   supported: Scalars['Boolean']
 }
 
