@@ -1,4 +1,4 @@
-export const SHOPIFY_STOREFRONT_TOKEN = 'f50903d30045eaffacf14aa2dc37f167'
+export const SHOPIFY_STOREFRONT_TOKEN = '969193ad0bbcaf8485a301bffa9d1058'
 export const SHOPIFY_STOREFRONT_URL =
   'https://jemma-wynne.myshopify.com/api/graphql'
 export const SANITY_GRAPHQL_URL =
