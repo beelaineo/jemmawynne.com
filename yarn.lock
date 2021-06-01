@@ -2259,23 +2259,23 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@sane-shopify/sanity-plugin@^0.21.5":
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/sanity-plugin/-/sanity-plugin-0.21.5.tgz#68987023f9b8b9deb0c148911917f267445a1d89"
-  integrity sha512-AoWHy8pbjCYk3VDJ70BbRLUPiSHWRvFmRnGqLW1Ts28McvUWrQColjrxNSXyHA1shGBpmqNiU2Tve5qrwO7gAg==
+"@sane-shopify/sanity-plugin@^0.21.6":
+  version "0.21.6"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/sanity-plugin/-/sanity-plugin-0.21.6.tgz#7c5f3bd2efbe3472843144a0a944bc11cb50b4b9"
+  integrity sha512-MlCnghS4w2LeLAX41nEqYIBFgP/MZdFWVCJBJsB5BLxTMt2fiZvfIFaUYZVHcQ0tKXKYmu5/CvdYtSMd6F5Q6g==
   dependencies:
     "@good-idea/unwind-edges" "^1.5.3"
-    "@sane-shopify/sync-utils" "^0.21.5"
-    "@sane-shopify/types" "^0.21.5"
+    "@sane-shopify/sync-utils" "^0.21.6"
+    "@sane-shopify/types" "^0.21.6"
     lodash "^4.17.21"
     react-icons "^4.2.0"
 
-"@sane-shopify/server@^0.21.5":
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/server/-/server-0.21.5.tgz#b907d3acd527009461b1ac9d41f9366d5e63d1d4"
-  integrity sha512-/k6/CHyYy/mpq7wCSFA+f2Db98Lp/c5lp5BO8xxa+0AIuozJ3iTGhE3qKRjcL+rKtoA/GnRyu/s+tMjwalV78A==
+"@sane-shopify/server@^0.21.6":
+  version "0.21.6"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/server/-/server-0.21.6.tgz#4753fe568cf2835585115fd77fb3dc0e42fe1108"
+  integrity sha512-g7eh+qLb9yWkYyNk4hIS7m2ZjE3AQMCEE2wDQSIoo7pZkobPFRjfEC2PR/TMYh8H2QApi1SR03WdEQZSdLGtzA==
   dependencies:
-    "@sane-shopify/sync-utils" "^0.21.5"
+    "@sane-shopify/sync-utils" "^0.21.6"
     apollo-link "^1.2.14"
     apollo-link-http "^1.5.17"
     apollo-server-lambda "^2.23.0"
@@ -2284,14 +2284,14 @@
     node-fetch "^2.6.1"
     source-map-support "^0.5.19"
 
-"@sane-shopify/sync-utils@^0.21.5":
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/sync-utils/-/sync-utils-0.21.5.tgz#d0818c1f47c4032e860e85a5eece5580df4e471a"
-  integrity sha512-cUrmuHrFjZz+Z0YN2FFZli6YeLXBubbOAJZFKBxH2QKyv+DTd9Rxw9hsw6/dcngn0Dx2naJI4ebcOt+BwRIQqg==
+"@sane-shopify/sync-utils@^0.21.6":
+  version "0.21.6"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/sync-utils/-/sync-utils-0.21.6.tgz#ce28859ee55a36ebcd13fe6ae5ba7a7f719e8a3d"
+  integrity sha512-qGVQeF8NYImlqzR0QTWzVQG2eMT6s6DEgr/fmh7hhPtkEtuGMtbV59Ib9rzBO85Drdy1L3niThY18nnIMYPJ4A==
   dependencies:
     "@good-idea/leaky-bucket" "^3.1.2"
     "@good-idea/unwind-edges" "^1.5.3"
-    "@sane-shopify/types" "^0.21.5"
+    "@sane-shopify/types" "^0.21.6"
     cross-fetch "^3.1.4"
     debug "^4.3.1"
     deepmerge "^4.2.2"
@@ -2302,10 +2302,10 @@
     uuid "^8.3.2"
     xstate "^4.18.0"
 
-"@sane-shopify/types@^0.21.5":
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/@sane-shopify/types/-/types-0.21.5.tgz#056ac5c3f718ef143dca8c933aba65ceb58c769d"
-  integrity sha512-WqFQ5R3BuCEjnheWQXBE05wiyL/FoJ/NBFsP7qOMZsD7e34tLgLS7DOAaw2ETkMVGgD362GQUnH743kj8SbTTg==
+"@sane-shopify/types@^0.21.6":
+  version "0.21.6"
+  resolved "https://registry.yarnpkg.com/@sane-shopify/types/-/types-0.21.6.tgz#f0999d7c2ac3ce7765a44f98d47bbad095f4e103"
+  integrity sha512-mYRVdibQHc51PGZOi369UmrDql7G2urFCVeHS4LaWAEKWHxFI3nCd/Z3DhpDa/Pv9umTAyNALOwC9GQD3eeOUA==
 
 "@sanity/asset-utils@^1.1.2":
   version "1.1.5"
