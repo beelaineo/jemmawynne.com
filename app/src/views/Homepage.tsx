@@ -21,6 +21,7 @@ export const Homepage = ({ homepage }: HomepageProps) => {
     try {
       throw new Error('test error')
     } catch (error) {
+      console.error(error)
       Sentry.captureException(error)
     }
   }, [])
