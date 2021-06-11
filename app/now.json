@@ -16,7 +16,6 @@
   "build": {
     "env": {
       "SC_DISABLE_SPEEDY": "true",
-      "SENTRY_DSN": "@jw-sentry-dsn",
       "KLAVIYO_LIST_ID": "@jw-klaviyo-list-id",
       "KLAVIYO_API_KEY": "@jw-klaviyo-api-key"
     }
