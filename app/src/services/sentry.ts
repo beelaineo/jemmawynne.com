@@ -27,8 +27,6 @@ const ENV = process.env.NODE_ENV
 const FORCE = Boolean(process.env.FORCE_SENTRY)
 const DSN = process.env.SENTRY_DSN
 
-console.log({ DSN })
-
 const SentryInitializer =
   typeof window === 'undefined'
     ? NodeSentryInitializer
@@ -38,7 +36,6 @@ let Sentry: typeof SentryInitializer
 
 if (ENV === 'production' || ENV === 'staging' || FORCE) {
   if (!DSN) throw new Error('No Sentry DSN supplied')
-  console.log(DSN)
   Sentry = SentryInitializer
   Sentry.init({
     dsn: DSN,

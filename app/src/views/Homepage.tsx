@@ -17,15 +17,6 @@ interface HomepageProps {
 export const Homepage = ({ homepage }: HomepageProps) => {
   const { content, seo } = homepage
 
-  React.useEffect(() => {
-    try {
-      throw new Error('test error')
-    } catch (error) {
-      console.error(error)
-      Sentry.captureException(error)
-    }
-  }, [])
-
   const firstHero = definitely(content).find((b) => b.__typename === 'Hero')
   const defaultSeo = {
     title: 'Jemma Wynne',
