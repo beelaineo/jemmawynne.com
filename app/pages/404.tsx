@@ -1,4 +1,6 @@
 import * as React from 'react'
 import { NotFound } from '../src/views/NotFound'
 
-export default () => <NotFound />
+const NotFoundPage = () => <NotFound />
+
+export default NotFoundPage

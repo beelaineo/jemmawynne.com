@@ -18,7 +18,7 @@ interface Props {
 type AppProps = NextAppProps<Props>
 
 const tagInfo =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === 'production' || true
     ? {
         script: `
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

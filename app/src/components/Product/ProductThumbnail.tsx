@@ -114,7 +114,7 @@ export const ProductThumbnail = ({
   }
 
   return (
-    <ProductThumb>
+    <ProductThumb ref={containerRef}>
       <Link href="/products/[productSlug]" as={as}>
         <a>
           <ImageWrapper>
