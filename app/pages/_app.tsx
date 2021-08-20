@@ -79,8 +79,7 @@ class MyApp extends App<AppProps> {
               src={tagInfo.iframeSrc}
               width="0"
               height="0"
-              /* @ts-ignore */
-              style="display:none;visibility:hidden"
+              style={{ display: 'none', visibility: 'hidden' }}
             />
           </noscript>
         ) : null}

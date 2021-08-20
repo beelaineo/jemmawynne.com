@@ -29,7 +29,8 @@ const wrapBareText = (text?: string) =>
         .replace('<span></span>', '')
     : ''
 
-const internalUrlRegex = /^https?:\/\/(www.)?(localhost:3000|jemmawynne.com|jemmawynne.(good-idea.)?now.sh)(\/[\w|\/]+)?/
+const internalUrlRegex =
+  /^https?:\/\/(www.)?(localhost:3000|jemmawynne.com|jemmawynne.(good-idea.)?now.sh)(\/[\w|\/]+)?/
 
 const parser = new HTMLParser()
 
@@ -92,7 +93,7 @@ const transform = (node, index) => {
     case 'strong':
       return <strong key={index}>{node.childNodes.map(transform)}</strong>
     case 'a':
-      const href = node.attribs.href
+      const href = node?.attribs?.href
       if (!href) return null
 
       const isInternal = internalUrlRegex.test(href)
