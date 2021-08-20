@@ -1,5 +1,5 @@
 export * from './ErrorProvider'
 export * from './SearchProvider'
 export * from './ShopDataProvider'
-// export * from './CartProvider'
 export * from './ShopifyProvider'
+export * from './AnalyticsProvider'

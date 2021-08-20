@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box } from '@xstyled/styled-components'
 import { CheckoutLineItem as CheckoutLineItemType } from '../../providers/ShopifyProvider/types'
-import { useShopify } from '../../providers/ShopifyProvider'
+import { useShopify, useAnalytics } from '../../providers'
 import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney } from '../../utils'
 import { Image } from '../../components/Image'
@@ -15,13 +15,14 @@ import {
 import { definitely } from '../../utils'
 import { Button } from '../../components/Button'
 
-const { useState } = React
+const { useState, useEffect } = React
 
 interface CheckoutProductProps {
   lineItem: StorefrontApiCheckoutLineItem | CheckoutLineItemType
 }
 
 export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
+  const { sendRemoveFromCart } = useAnalytics()
   const [updating, setUpdating] = useState(false)
   const { updateLineItem } = useShopify()
   const { title, variant, quantity } = lineItem
@@ -31,6 +32,10 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
   const setQuantity = (newQuantity: number) => async () => {
     setUpdating(true)
     await updateLineItem({ id: lineItem.id, quantity: newQuantity })
+    if (newQuantity === 0) {
+      // @ts-ignore
+      sendRemoveFromCart({ product: lineItem, variant, quantity: 0 })
+    }
     setUpdating(false)
   }
 

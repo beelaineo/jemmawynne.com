@@ -4,10 +4,14 @@ import {
   ShopifyProduct,
   SwatchOption,
   SwatchOptionValue,
+  ShopifySourceProductVariant,
+  ShopifySourceImage,
 } from '../../types'
 import Link from 'next/link'
 import { unwindEdges } from '@good-idea/unwind-edges'
 import { useShopData } from '../../providers/ShopDataProvider'
+import { useAnalytics } from '../../providers/AnalyticsProvider'
+import { useInViewport } from '../../hooks'
 import { Heading } from '../Text'
 import { Image } from '../Image'
 import {
@@ -25,7 +29,7 @@ import {
 } from './styled'
 import { TagBadges } from './TagBadges'
 
-const { useState } = React
+const { useRef, useState, useEffect, useMemo } = React
 
 interface ProductThumbnailProps {
   product: ShopifyProduct
@@ -34,12 +38,27 @@ interface ProductThumbnailProps {
   displayTags?: boolean
 }
 
+const uniqueImages = (
+  variants: ShopifySourceProductVariant[],
+): ShopifySourceImage[] =>
+  variants.reduce<ShopifySourceImage[]>((acc, variant) => {
+    const { image } = variant
+    if (!image) return acc
+    if (acc.find((i) => i?.originalSrc === image.originalSrc)) {
+      return acc
+    }
+    return [...acc, image]
+  }, [])
+
 export const ProductThumbnail = ({
   image,
   hidePrice,
   displayTags,
   product,
 }: ProductThumbnailProps) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { sendProductImpression, sendProductClick } = useAnalytics()
+  const { isInViewOnce } = useInViewport(containerRef)
   const { getProductSwatchOptions } = useShopData()
   const [variants] = unwindEdges(product?.sourceData?.variants)
   const [currentVariant, setCurrentVariant] = useState(variants[0])
@@ -56,6 +75,15 @@ export const ProductThumbnail = ({
     ? productImages[0]
     : undefined
 
+  const handleClick = () => {
+    sendProductClick({ product, variant: currentVariant })
+  }
+  const allImages = useMemo(() => uniqueImages(variants), [variants])
+  useEffect(() => {
+    if (!isInViewOnce) return
+    sendProductImpression({ product, variant: currentVariant })
+  }, [isInViewOnce, currentVariant])
+
   const { minVariantPrice, maxVariantPrice } =
     product.sourceData.priceRange || {}
   const as = `/products/${product.handle}`
@@ -63,17 +91,15 @@ export const ProductThumbnail = ({
   const swatchOptions = getProductSwatchOptions(product)
   const swatchOption = swatchOptions.length ? swatchOptions[0] : undefined
 
-  const onSwatchHover = (
-    option: SwatchOption,
-    value: SwatchOptionValue,
-  ) => () => {
-    const currentSelection = {
-      name: option.name || 'foo',
-      currentValue: value.value,
+  const onSwatchHover =
+    (option: SwatchOption, value: SwatchOptionValue) => () => {
+      const currentSelection = {
+        name: option.name || 'foo',
+        currentValue: value.value,
+      }
+      const newVariant = getVariantBySelectedOption(variants, currentSelection)
+      if (newVariant) setCurrentVariant(newVariant)
     }
-    const newVariant = getVariantBySelectedOption(variants, currentSelection)
-    if (newVariant) setCurrentVariant(newVariant)
-  }
 
   const isSwatchActive = (
     option: SwatchOption,

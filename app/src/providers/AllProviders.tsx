@@ -5,6 +5,7 @@ import { ThemeProvider } from '@xstyled/styled-components'
 import { defaultTheme, GlobalStyles } from '../theme'
 import { ShopifyProvider } from './ShopifyProvider'
 import { ShopDataProvider } from './ShopDataProvider'
+import { AnalyticsProvider } from './AnalyticsProvider'
 import { MenuProvider } from './MenuProvider'
 import { useError } from './ErrorProvider'
 import { SearchProvider } from './SearchProvider'
@@ -65,17 +66,19 @@ const shopifyQuery = (handleError: ErrorHandler) => {
 export const Providers = ({ children, shopData }: Props) => {
   const { handleError } = useError()
   return (
-    <ShopifyProvider query={shopifyQuery(handleError)}>
-      <ShopDataProvider shopData={shopData}>
-        <ThemeProvider theme={defaultTheme}>
-          <GlobalStyles />
-          <AnnouncementProvider>
-            <MenuProvider>
-              <SearchProvider>{children}</SearchProvider>
-            </MenuProvider>
-          </AnnouncementProvider>
-        </ThemeProvider>
-      </ShopDataProvider>
-    </ShopifyProvider>
+    <AnalyticsProvider>
+      <ShopifyProvider query={shopifyQuery(handleError)}>
+        <ShopDataProvider shopData={shopData}>
+          <ThemeProvider theme={defaultTheme}>
+            <GlobalStyles />
+            <AnnouncementProvider>
+              <MenuProvider>
+                <SearchProvider>{children}</SearchProvider>
+              </MenuProvider>
+            </AnnouncementProvider>
+          </ThemeProvider>
+        </ShopDataProvider>
+      </ShopifyProvider>
+    </AnalyticsProvider>
   )
 }

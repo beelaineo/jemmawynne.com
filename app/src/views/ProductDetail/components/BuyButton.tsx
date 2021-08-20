@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { UseCheckoutValues } from '../../../providers/ShopifyProvider'
+import { useAnalytics, UseCheckoutValues } from '../../../providers'
 import {
   ShopifyProduct,
   StorefrontApiProductVariant,
@@ -29,6 +29,7 @@ export const BuyButton = ({
   addLineItem,
   quantity,
 }: Props) => {
+  const { sendAddToCart } = useAnalytics()
   const [loading, setLoading] = useState(false)
   const { openCart } = useMenu()
   const inquiryOnly = productIsInquiryOnly(product)
@@ -50,6 +51,8 @@ export const BuyButton = ({
       window.open(inquireMailTo, '_blank')
       return
     }
+    // @ts-ignore
+    sendAddToCart({ product, variant: currentVariant, quantity })
     setLoading(true)
     if (!currentVariant.id) {
       throw new Error('The current variant was not provided with an id')
