@@ -22,7 +22,7 @@ import { useMenu } from '../../providers/MenuProvider'
 
 export const Checkout = () => {
   /* State */
-  const { checkout, loading } = useShopify()
+  const { checkout, loading, goToCheckout } = useShopify()
   const { closeCart } = useMenu()
 
   const lineItems =
@@ -83,17 +83,9 @@ export const Checkout = () => {
           </>
         )}
       </CartInner>
-      {checkout &&
-      checkout.paymentDueV2 &&
-      checkout.webUrl &&
-      lineItems.length ? (
+      {checkout && checkout.paymentDueV2 && lineItems.length ? (
         <CartBottom>
-          <Button
-            fontWeight={4}
-            as="a"
-            href={checkout.webUrl}
-            disabled={loading}
-          >
+          <Button fontWeight={4} onClick={goToCheckout} disabled={loading}>
             Checkout
           </Button>
         </CartBottom>

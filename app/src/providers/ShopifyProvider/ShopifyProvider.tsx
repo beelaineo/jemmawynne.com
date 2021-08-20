@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { unwindEdges } from '@good-idea/unwind-edges'
 import {
   useCheckout,
   UseCheckoutValues,
@@ -6,12 +7,16 @@ import {
   UseCheckoutConfig,
 } from './useCheckout'
 import { QueryFunction } from './types'
+import { useAnalytics } from '../AnalyticsProvider'
 
-type ShopifyContextValue = UseCheckoutValues
+const domain = 'jemma-wynne.myshopify.com'
 
-export const ShopifyContext = React.createContext<
-  ShopifyContextValue | undefined
->(undefined)
+type ShopifyContextValue = UseCheckoutValues & {
+  goToCheckout: () => void
+}
+
+export const ShopifyContext =
+  React.createContext<ShopifyContextValue | undefined>(undefined)
 
 export const ShopifyConsumer = ShopifyContext.Consumer
 
@@ -43,19 +48,41 @@ export const ShopifyProvider = ({
   query,
   config: userConfig,
 }: Props) => {
+  const { sendBeginCheckout } = useAnalytics()
   const config = {
     ...defaultConfig,
     ...userConfig,
   }
-
-  const checkout = useCheckout({
+  const useCheckoutValues = useCheckout({
     queries,
     query,
     config: config.checkout ? config.checkout : undefined,
   })
 
+  const goToCheckout = () => {
+    const { checkout } = useCheckoutValues
+    if (!checkout) {
+      throw new Error('No checkout has been initiated')
+    }
+    const [lineItems] = unwindEdges(checkout.lineItems)
+    /* Send the analytics event */
+    sendBeginCheckout(
+      // @ts-ignore
+      lineItems.map((li) => ({
+        product: li.variant?.product,
+        variant: li.variant,
+        quantity: li.quantity,
+      })),
+    )
+    // @ts-ignore
+    const { protocol, pathname, search } = new URL(checkout.webUrl)
+    const redirect: string = `${protocol}//${domain}${pathname}${search}`
+    window.location.href = redirect
+  }
+
   const value = {
-    ...checkout,
+    ...useCheckoutValues,
+    goToCheckout,
   }
 
   return (

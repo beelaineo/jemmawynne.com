@@ -13,7 +13,7 @@ import {
   ProductDescription,
   ProductRelated,
 } from './components'
-import { useShopify, useShopData } from '../../providers'
+import { useAnalytics, useShopify, useShopData } from '../../providers'
 import {
   useCounter,
   buildMailTo,
@@ -30,7 +30,7 @@ import {
 import { HintModal } from './HintModal'
 import { SEO } from '../../components/SEO'
 
-const { useState } = React
+const { useState, useEffect } = React
 
 interface Props {
   product: ShopifyProduct
@@ -38,6 +38,7 @@ interface Props {
 
 export const ProductDetail = ({ product }: Props) => {
   /* get additional info blocks from Sanity */
+  const { sendProductDetailView } = useAnalytics()
   const { asPath } = useRouter()
   const { getProductInfoBlocks } = useShopData()
   const { seo, sourceData, handle } = product
@@ -86,6 +87,11 @@ export const ProductDetail = ({ product }: Props) => {
 
   if (!handle) throw new Error('No handle fetched')
   const path = ['products', handle].join('/')
+
+  useEffect(() => {
+    if (!currentVariant) throw new Error('Could not get current variant')
+    sendProductDetailView({ product, variant: currentVariant })
+  }, [currentVariant])
 
   return (
     <>
