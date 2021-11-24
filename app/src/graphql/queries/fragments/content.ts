@@ -390,6 +390,9 @@ export const productSourceVariantFragment = gql`
     priceV2 {
       ...ShopifyMoneyV2Fragment
     }
+    compareAtPriceV2 {
+      ...ShopifyMoneyV2Fragment
+    }
     requiresShipping
     selectedOptions {
       __typename
@@ -448,6 +451,7 @@ export const saneShopifyProductFragment = gql`
           }
         }
       }
+
       priceRange {
         __typename
         minVariantPrice {

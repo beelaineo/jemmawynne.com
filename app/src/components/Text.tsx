@@ -140,6 +140,20 @@ export const Label = styled.labelBox`
   letter-spacing: 0.25em;
 `
 
+export const StrikeThrough = styled.span`
+  position: relative;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    top: calc(50% + 0.075em);
+    background-color: currentColor;
+  }
+`
+
 export const TextAnchor = styled.a``
 
 export const BlockQuote = styled.blockquote``
