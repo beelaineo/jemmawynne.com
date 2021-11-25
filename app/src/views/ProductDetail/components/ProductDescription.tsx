@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { ShopifyProduct, ShopifySourceProductVariant } from '../../../types'
-import { Heading } from '../../../components/Text'
+import { Heading, StrikeThrough } from '../../../components/Text'
 import { HtmlContent } from '../../../components/RichText'
 import { formatMoney } from '../../../utils'
-import { TitleWrapper, DescriptionWrapper } from '../styled'
+import { TitleWrapper, ProductPrices, DescriptionWrapper } from '../styled'
 import { ShareButton } from './ShareButton'
 import { productIsInquiryOnly } from '../../../utils'
 
@@ -24,9 +24,18 @@ export const ProductDescription = ({
           {product.title}
         </Heading>
         {isInquiryOnly !== true && currentVariant.priceV2 ? (
-          <Heading level={1} weight={1} fontStyle="italic" color="body.5">
-            {formatMoney(currentVariant.priceV2)}
-          </Heading>
+          <ProductPrices>
+            {currentVariant.compareAtPriceV2 ? (
+              <Heading level={1} weight={1} fontStyle="italic" color="body.5">
+                <StrikeThrough>
+                  {formatMoney(currentVariant.compareAtPriceV2)}
+                </StrikeThrough>
+              </Heading>
+            ) : null}
+            <Heading level={1} weight={1} fontStyle="italic" color="body.5">
+              {formatMoney(currentVariant.priceV2)}
+            </Heading>
+          </ProductPrices>
         ) : null}
         <ShareButton product={product} />
       </TitleWrapper>

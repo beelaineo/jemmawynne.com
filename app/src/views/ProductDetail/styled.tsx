@@ -33,6 +33,14 @@ export const ProductInfoWrapper = styled.div`
   position: relative;
 `
 
+export const ProductPrices = styled.div`
+  display: flex;
+
+  > * + * {
+    margin-left: 3;
+  }
+`
+
 export const DescriptionWrapper = styled.div`
   ${({ theme }) => css`
     padding-right: 6;
