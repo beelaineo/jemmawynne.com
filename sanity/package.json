@@ -26,24 +26,24 @@
     "sync": "yarn sync:reset && yarn sync:export && yarn sync:import && yarn sync:cleanup"
   },
   "dependencies": {
-    "@sane-shopify/sanity-plugin": "^0.21.6",
-    "@sanity/base": "2.10.5",
+    "@sane-shopify/sanity-plugin": "^0.23.0",
+    "@sanity/base": "2.27.2",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/cli": "2.10.5",
-    "@sanity/components": "2.2.6",
-    "@sanity/core": "2.10.5",
-    "@sanity/default-layout": "2.10.5",
-    "@sanity/default-login": "2.10.5",
-    "@sanity/desk-tool": "2.10.5",
-    "@sanity/vision": "2.10.5",
-    "prop-types": "^15.7",
+    "@sanity/cli": "2.27.3",
+    "@sanity/components": "2.14.0",
+    "@sanity/core": "2.27.0",
+    "@sanity/default-layout": "2.27.2",
+    "@sanity/default-login": "2.27.0",
+    "@sanity/desk-tool": "2.27.3",
+    "@sanity/vision": "2.27.2",
+    "prop-types": "^15.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.2.0"
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "@good-idea/unwind-edges": "^1.5.3",
-    "ramda": "^0.27.1",
+    "ramda": "^0.28.0",
     "react-hot-loader": "^4.13.0"
   },
   "resolutions": {
