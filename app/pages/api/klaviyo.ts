@@ -22,7 +22,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.send('You must provide an email address')
   }
   const args = {
-    /* eslint-disable-next-line @typescript-eslint/camelcase */
     api_key: KLAVIYO_API_KEY,
     profiles: [{ email }],
   }

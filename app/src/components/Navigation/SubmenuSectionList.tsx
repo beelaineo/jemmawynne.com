@@ -67,7 +67,10 @@ export const SubmenuSectionList: React.FC<SubmenuSectionListProps> = ({
       </SubmenuSectionLinksWrapper>
       <SubmenuSectionListImagesWrapper>
         {links.map(({ _key, image }) => (
-          <SubmenuSectionListImageWrapper active={_key === currentLink}>
+          <SubmenuSectionListImageWrapper
+            key={_key}
+            active={_key === currentLink}
+          >
             {image ? <Image image={image} ratio={0.4} /> : null}
           </SubmenuSectionListImageWrapper>
         ))}
