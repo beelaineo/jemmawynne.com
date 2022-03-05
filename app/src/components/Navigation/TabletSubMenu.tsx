@@ -168,7 +168,18 @@ export const TabletSubMenu = ({
                         }
                       })
                     ) : (
-                      <SubmenuSectionList section={column} />
+                      <React.Fragment key={column._key || 'some-key'}>
+                        {definitely(column.links).map((linkGroupLink) =>
+                          linkGroupLink.link ? (
+                            <NavPageLink
+                              small
+                              key={linkGroupLink._key || 'some-key'}
+                              document={linkGroupLink.link.document}
+                              borders
+                            />
+                          ) : null,
+                        )}
+                      </React.Fragment>
                     )}
                   </Box>
                 </SubMenuAccordion>
