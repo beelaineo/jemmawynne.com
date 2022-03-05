@@ -10,9 +10,10 @@ export const CartSidebar = styled.div`
     position: fixed;
     right: ${props.open ? '0px' : '-510px'};
     top: 0;
+    bottom: 0;
     max-width: 500px;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: body.0;
