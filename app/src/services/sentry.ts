@@ -34,6 +34,7 @@ const SentryInitializer =
 
 let Sentry: typeof SentryInitializer
 
+// @ts-ignore
 if (ENV === 'production' || ENV === 'staging' || FORCE) {
   if (!DSN) throw new Error('No Sentry DSN supplied')
   Sentry = SentryInitializer

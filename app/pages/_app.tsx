@@ -40,6 +40,7 @@ class MyApp extends App<AppProps> {
       Sentry.captureException(error)
     })
 
+    // @ts-ignore
     super.componentDidCatch(error, errorInfo)
   }
 

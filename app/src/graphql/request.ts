@@ -1,4 +1,4 @@
-import useSWR, { responseInterface as ResponseInterface } from 'swr'
+import useSWR from 'swr'
 import { DocumentNode } from 'graphql'
 import { print } from 'graphql/language/printer'
 import { request as gqlRequest } from 'graphql-request'
@@ -6,12 +6,6 @@ import { SANITY_GRAPHQL_URL } from '../config'
 
 interface RequestOptions {
   skip?: boolean
-}
-
-interface RequestArgs<V> {
-  query: DocumentNode | string
-  variables?: V
-  options?: RequestOptions
 }
 
 type Variables = Record<string, any>
@@ -35,7 +29,7 @@ export const useRequest = <R, V extends Variables = Variables>(
 
 type LazyRequestTuple<R, V extends Variables = Variables> = [
   (v: V) => Promise<void>,
-  ResponseInterface<R | null, Error>,
+  any,
 ]
 
 export const useLazyRequest = <R, V extends Variables = Variables>(
