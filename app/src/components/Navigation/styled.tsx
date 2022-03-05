@@ -368,20 +368,15 @@ export const SubMenuContent = styled.div`
   position: relative;
 `
 
-export const SubMenuItemWrapper = styled.div`
-  flex-basis: 25%;
-  margin-bottom: -16px;
-
-  &:last-child:not(:only-child) {
-    flex-grow: 1;
-  }
-  & + & {
-    margin-left: 2;
-  }
+export const SubMenuItemWrapper = styled.div<{ type: string }>`
+  ${({ type }) => css`
+    grid-column: ${type === 'image' ? 'span 2' : 'span 3'};
+    margin-bottom: -16px;
+  `}
 `
 
 export const ImageWrapper = styled.div`
-  flex-basis: 25%;
+  grid-column: span 3;
   position: relative;
   max-height: 215px;
   overflow: hidden;
@@ -394,12 +389,8 @@ export const ImageWrapper = styled.div`
     height: 100%;
   }
 
-  & + &,
-  ${SubMenuItemWrapper} + & {
-    margin-left: 4;
-  }
   &:last-child {
-    flex-grow: 1;
+    grid-column: span 4;
 
     display: flex;
     justify-content: flex-center;
@@ -415,7 +406,7 @@ export const ImageWrapper = styled.div`
 
 export const SubMenuContentSection = styled.div`
   ${({ active }: WithActive) => css`
-    display: ${active ? 'flex' : 'none'};
+    display: ${active ? 'grid' : 'none'};
     justify-content: space-between;
     grid-template-columns: repeat(10, 1fr);
     grid-column-gap: 3;
@@ -498,6 +489,58 @@ export const Loading = styled.div`
     div:nth-child(1) {
       margin-right: 3;
       padding-top: 1px;
+    }
+  `}
+`
+
+/**
+ * SectionList
+ */
+
+export const SubmenuSectionListImagesWrapper = styled.div`
+  grid-column: span 7;
+  position: relative;
+`
+
+export const SubmenuSectionListImageWrapper = styled.div<{ active: boolean }>`
+  ${({ active }) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: pink;
+    overflow: hidden;
+    opacity: ${active ? '1' : '0'};
+    transition: opacity 0.2s;
+
+    ${ImageElementWrapper}, picture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fill: cover;
+    }
+  `}
+`
+
+export const SubmenuSectionLinksWrapper = styled.div`
+  ${({ theme }) => css`
+    grid-column: span 3;
+    ${theme.mediaQueries.tablet} {
+      width: 100%;
+    }
+  `}
+`
+
+export const SubmenuSectionListLinksWrapper = styled.div`
+  ${({ theme }) => css`
+    ${theme.mediaQueries.tablet} {
+      margin-top: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-column-gap: 10px;
     }
   `}
 `

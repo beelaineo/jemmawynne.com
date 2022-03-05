@@ -2,10 +2,12 @@ export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
 }
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> }
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>
+}
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -13,24 +15,45 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  /** A monetary value string. Example value: `"100.57"`. */
+  /** A monetary value string without a currency symbol or code. Example value: `"100.57"`. */
   Money: any
-  /** A signed decimal number, which supports arbitrary precision and is serialized as a string. Example value: `"29.99"`. */
+  /**
+   * A signed decimal number, which supports arbitrary precision and is serialized as a string.
+   *
+   * Example values: `"29.99"`, `"29.999"`.
+   *
+   */
   Decimal: any
-  /** An ISO-8601 encoded UTC date time string. Example value: `"2019-07-03T20:47:55Z"`. */
+  /**
+   * Represents an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)-encoded date and time string.
+   * For example, 3:30 pm on September 7, 2019 in the time zone of UTC (Coordinated Universal Time) is
+   * represented as `"2019-09-07T15:50:00Z`".
+   *
+   */
   DateTime: Date
   /**
-   * An RFC 3986 and RFC 3987 compliant URI string.
+   * Represents an [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) and
+   * [RFC 3987](https://datatracker.ietf.org/doc/html/rfc3987)-compliant URI string.
    *
-   * Example value: `"https://johns-apparel.myshopify.com"`.
+   * For example, `"https://johns-apparel.myshopify.com"` is a valid URL. It includes a scheme (`https`) and a host
+   * (`johns-apparel.myshopify.com`).
    *
    */
   URL: any
-  /** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
+  /**
+   * A string containing HTML code. Refer to the [HTML spec](https://html.spec.whatwg.org/#elements-3) for a
+   * complete list of HTML elements.
+   *
+   * Example value: `"<p>Grey cotton knit sweater.</p>"`.
+   *
+   */
   HTML: any
 }
 
-/** A version of the API. */
+/**
+ * A version of the API, as defined by [Shopify API versioning](https://shopify.dev/api/usage/versioning).
+ * Versions are commonly referred to by their handle (for example, `2021-10`).
+ */
 export interface StorefrontApiApiVersion {
   __typename: 'ApiVersion'
   /** The human-readable name of the version. */
@@ -42,7 +65,7 @@ export interface StorefrontApiApiVersion {
    * are guaranteed to be stable. Unsupported API versions include unstable,
    * release candidate, and end-of-life versions that are marked as unsupported.
    * For more information, refer to
-   * [Versioning](https://shopify.dev/concepts/about-apis/versioning).
+   * [Versioning](https://shopify.dev/api/usage/versioning).
    */
   supported: Scalars['Boolean']
 }
@@ -64,7 +87,7 @@ export interface StorefrontApiAppliedGiftCard extends StorefrontApiNode {
   balance: Scalars['Money']
   /** The amount left on the gift card. */
   balanceV2: StorefrontApiMoneyV2
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The last characters of the gift card. */
   lastCharacters: Scalars['String']
@@ -96,7 +119,7 @@ export interface StorefrontApiArticle extends StorefrontApiNode {
   excerptHtml?: Maybe<Scalars['HTML']>
   /** A human-friendly unique string for the Article automatically generated from its title. */
   handle: Scalars['String']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The image associated with the article. */
   image?: Maybe<StorefrontApiImage>
@@ -108,7 +131,10 @@ export interface StorefrontApiArticle extends StorefrontApiNode {
   tags: Array<Scalars['String']>
   /** The article’s name. */
   title: Scalars['String']
-  /** The url pointing to the article accessible from the web. */
+  /**
+   * The url pointing to the article accessible from the web.
+   * @deprecated Use `onlineStoreUrl` instead
+   */
   url: Scalars['URL']
 }
 
@@ -251,11 +277,16 @@ export interface StorefrontApiBlog extends StorefrontApiNode {
   authors: Array<StorefrontApiArticleAuthor>
   /** A human-friendly unique string for the Blog automatically generated from its title. */
   handle: Scalars['String']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
+  /** The blog's SEO information. */
+  seo?: Maybe<StorefrontApiSeo>
   /** The blogs’s title. */
   title: Scalars['String']
-  /** The url pointing to the blog accessible from the web. */
+  /**
+   * The url pointing to the blog accessible from the web.
+   * @deprecated Use `onlineStoreUrl` instead
+   */
   url: Scalars['URL']
 }
 
@@ -353,7 +384,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   discountApplications: StorefrontApiDiscountApplicationConnection
   /** The email attached to this checkout. */
   email?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** A list of line item objects, each one containing information about an item in the checkout. */
   lineItems: StorefrontApiCheckoutLineItemConnection
@@ -402,6 +433,8 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   taxExempt: Scalars['Boolean']
   /** Specifies if taxes are included in the line item and shipping line prices. */
   taxesIncluded: Scalars['Boolean']
+  /** The sum of all the duties applied to the line items in the checkout. */
+  totalDuties?: Maybe<StorefrontApiMoneyV2>
   /**
    * The sum of all the prices of all the items in the checkout, taxes and discounts included.
    * @deprecated Use `totalPriceV2` instead
@@ -449,7 +482,8 @@ export type StorefrontApiCheckoutAttributesUpdateInput = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
-   * Full validation of the addresses is still done at complete time.
+   * Full validation of the addresses is still done at completion time. Defaults to `false` with
+   * each operation.
    */
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
 }
@@ -459,10 +493,10 @@ export interface StorefrontApiCheckoutAttributesUpdatePayload {
   __typename: 'CheckoutAttributesUpdatePayload'
   /** The updated checkout object. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -477,7 +511,8 @@ export type StorefrontApiCheckoutAttributesUpdateV2Input = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
-   * Full validation of the addresses is still done at complete time.
+   * Full validation of the addresses is still done at completion time. Defaults to `false` with
+   * each operation.
    */
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
 }
@@ -487,10 +522,10 @@ export interface StorefrontApiCheckoutAttributesUpdateV2Payload {
   __typename: 'CheckoutAttributesUpdateV2Payload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -501,10 +536,10 @@ export interface StorefrontApiCheckoutCompleteFreePayload {
   __typename: 'CheckoutCompleteFreePayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -515,12 +550,12 @@ export interface StorefrontApiCheckoutCompleteWithCreditCardPayload {
   __typename: 'CheckoutCompleteWithCreditCardPayload'
   /** The checkout on which the payment was applied. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -531,12 +566,12 @@ export interface StorefrontApiCheckoutCompleteWithCreditCardV2Payload {
   __typename: 'CheckoutCompleteWithCreditCardV2Payload'
   /** The checkout on which the payment was applied. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -547,12 +582,12 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload {
   __typename: 'CheckoutCompleteWithTokenizedPaymentPayload'
   /** The checkout on which the payment was applied. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -563,12 +598,12 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload {
   __typename: 'CheckoutCompleteWithTokenizedPaymentV2Payload'
   /** The checkout on which the payment was applied. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -579,12 +614,12 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload {
   __typename: 'CheckoutCompleteWithTokenizedPaymentV3Payload'
   /** The checkout on which the payment was applied. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** A representation of the attempted payment. */
   payment?: Maybe<StorefrontApiPayment>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -605,13 +640,14 @@ export type StorefrontApiCheckoutCreateInput = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
    * The required attributes are city, province, and country.
-   * Full validation of addresses is still done at complete time.
+   * Full validation of addresses is still done at completion time. Defaults to `null`.
    */
   allowPartialAddresses?: Maybe<Scalars['Boolean']>
   /**
    * The three-letter currency code of one of the shop's enabled presentment currencies.
    * Including this field creates a checkout in the specified currency. By default, new
    * checkouts are created in the shop's primary currency.
+   *  This argument is deprecated: Use `country` field instead.
    */
   presentmentCurrencyCode?: Maybe<StorefrontApiCurrencyCode>
 }
@@ -621,10 +657,10 @@ export interface StorefrontApiCheckoutCreatePayload {
   __typename: 'CheckoutCreatePayload'
   /** The new checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -637,7 +673,7 @@ export interface StorefrontApiCheckoutCustomerAssociatePayload {
   checkout: StorefrontApiCheckout
   /** The associated customer object. */
   customer?: Maybe<StorefrontApiCustomer>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -646,12 +682,12 @@ export interface StorefrontApiCheckoutCustomerAssociateV2Payload {
   __typename: 'CheckoutCustomerAssociateV2Payload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /** The associated customer object. */
   customer?: Maybe<StorefrontApiCustomer>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -662,10 +698,10 @@ export interface StorefrontApiCheckoutCustomerDisassociatePayload {
   __typename: 'CheckoutCustomerDisassociatePayload'
   /** The updated checkout object. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -676,10 +712,10 @@ export interface StorefrontApiCheckoutCustomerDisassociateV2Payload {
   __typename: 'CheckoutCustomerDisassociateV2Payload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -690,10 +726,10 @@ export interface StorefrontApiCheckoutDiscountCodeApplyPayload {
   __typename: 'CheckoutDiscountCodeApplyPayload'
   /** The updated checkout object. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -704,10 +740,10 @@ export interface StorefrontApiCheckoutDiscountCodeApplyV2Payload {
   __typename: 'CheckoutDiscountCodeApplyV2Payload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -718,10 +754,10 @@ export interface StorefrontApiCheckoutDiscountCodeRemovePayload {
   __typename: 'CheckoutDiscountCodeRemovePayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -732,10 +768,10 @@ export interface StorefrontApiCheckoutEmailUpdatePayload {
   __typename: 'CheckoutEmailUpdatePayload'
   /** The checkout object with the updated email. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -746,30 +782,30 @@ export interface StorefrontApiCheckoutEmailUpdateV2Payload {
   __typename: 'CheckoutEmailUpdateV2Payload'
   /** The checkout object with the updated email. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Possible error codes that could be returned by CheckoutUserError. */
+/** Possible error codes that can be returned by `CheckoutUserError`. */
 export enum StorefrontApiCheckoutErrorCode {
-  /** Input value is blank. */
+  /** The input value is blank. */
   Blank = 'BLANK',
-  /** Input value is invalid. */
+  /** The input value is invalid. */
   Invalid = 'INVALID',
-  /** Input value is too long. */
+  /** The input value is too long. */
   TooLong = 'TOO_LONG',
-  /** Input value is not present. */
+  /** The input value needs to be blank. */
   Present = 'PRESENT',
-  /** Input value should be less than maximum allowed value. */
+  /** The input value should be less than the maximum value allowed. */
   LessThan = 'LESS_THAN',
-  /** Input value should be greater than or equal to minimum allowed value. */
+  /** The input value should be greater than or equal to the minimum value allowed. */
   GreaterThanOrEqualTo = 'GREATER_THAN_OR_EQUAL_TO',
-  /** Input value should be less or equal to maximum allowed value. */
+  /** The input value should be less than or equal to the maximum value allowed. */
   LessThanOrEqualTo = 'LESS_THAN_OR_EQUAL_TO',
   /** Checkout is already completed. */
   AlreadyCompleted = 'ALREADY_COMPLETED',
@@ -840,10 +876,10 @@ export interface StorefrontApiCheckoutGiftCardApplyPayload {
   __typename: 'CheckoutGiftCardApplyPayload'
   /** The updated checkout object. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -854,10 +890,10 @@ export interface StorefrontApiCheckoutGiftCardRemovePayload {
   __typename: 'CheckoutGiftCardRemovePayload'
   /** The updated checkout object. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -868,10 +904,10 @@ export interface StorefrontApiCheckoutGiftCardRemoveV2Payload {
   __typename: 'CheckoutGiftCardRemoveV2Payload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -882,10 +918,10 @@ export interface StorefrontApiCheckoutGiftCardsAppendPayload {
   __typename: 'CheckoutGiftCardsAppendPayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -898,7 +934,7 @@ export interface StorefrontApiCheckoutLineItem extends StorefrontApiNode {
   customAttributes: Array<StorefrontApiAttribute>
   /** The discounts that have been allocated onto the checkout line item by discount applications. */
   discountAllocations: Array<StorefrontApiDiscountAllocation>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The quantity of the line item. */
   quantity: Scalars['Int']
@@ -943,10 +979,10 @@ export interface StorefrontApiCheckoutLineItemsAddPayload {
   __typename: 'CheckoutLineItemsAddPayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -957,10 +993,10 @@ export interface StorefrontApiCheckoutLineItemsRemovePayload {
   __typename: 'CheckoutLineItemsRemovePayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -971,7 +1007,7 @@ export interface StorefrontApiCheckoutLineItemsReplacePayload {
   __typename: 'CheckoutLineItemsReplacePayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   userErrors: Array<StorefrontApiCheckoutUserError>
 }
 
@@ -980,10 +1016,10 @@ export interface StorefrontApiCheckoutLineItemsUpdatePayload {
   __typename: 'CheckoutLineItemsUpdatePayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -1006,10 +1042,10 @@ export interface StorefrontApiCheckoutShippingAddressUpdatePayload {
   __typename: 'CheckoutShippingAddressUpdatePayload'
   /** The updated checkout object. */
   checkout: StorefrontApiCheckout
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -1020,10 +1056,10 @@ export interface StorefrontApiCheckoutShippingAddressUpdateV2Payload {
   __typename: 'CheckoutShippingAddressUpdateV2Payload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -1034,10 +1070,10 @@ export interface StorefrontApiCheckoutShippingLineUpdatePayload {
   __typename: 'CheckoutShippingLineUpdatePayload'
   /** The updated checkout object. */
   checkout?: Maybe<StorefrontApiCheckout>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `checkoutUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -1047,9 +1083,9 @@ export interface StorefrontApiCheckoutShippingLineUpdatePayload {
 export interface StorefrontApiCheckoutUserError
   extends StorefrontApiDisplayableError {
   __typename: 'CheckoutUserError'
-  /** Error code to uniquely identify the error. */
+  /** The error code. */
   code?: Maybe<StorefrontApiCheckoutErrorCode>
-  /** Path to the input field which caused the error. */
+  /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>
   /** The error message. */
   message: Scalars['String']
@@ -1070,7 +1106,7 @@ export interface StorefrontApiCollection extends StorefrontApiNode {
    * Limit of 255 characters.
    */
   handle: Scalars['String']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** Image associated with the collection. */
   image?: Maybe<StorefrontApiImage>
@@ -1157,7 +1193,7 @@ export interface StorefrontApiComment extends StorefrontApiNode {
   content: Scalars['String']
   /** The content of the comment, complete with HTML formatting. */
   contentHtml: Scalars['HTML']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
 }
 
@@ -1683,6 +1719,8 @@ export enum StorefrontApiCountryCode {
   Zm = 'ZM',
   /** Zimbabwe. */
   Zw = 'ZW',
+  /** Unknown Region. */
+  Zz = 'ZZ',
 }
 
 /** Credit card information used for a payment. */
@@ -1717,7 +1755,7 @@ export type StorefrontApiCreditCardPaymentInput = {
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new
    * one. For more information, refer to [Idempotent
-   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   * requests](https://shopify.dev/api/usage/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -1739,7 +1777,7 @@ export type StorefrontApiCreditCardPaymentInputV2 = {
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new
    * one. For more information, refer to [Idempotent
-   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   * requests](https://shopify.dev/api/usage/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -1764,7 +1802,11 @@ export enum StorefrontApiCropRegion {
   Right = 'RIGHT',
 }
 
-/** Currency codes. */
+/**
+ * The three-letter currency codes that represent the world currencies used in
+ * stores. These include standard ISO 4217 codes, legacy codes,
+ * and non-standard codes.
+ */
 export enum StorefrontApiCurrencyCode {
   /** United States Dollars (USD). */
   Usd = 'USD',
@@ -2046,6 +2088,8 @@ export enum StorefrontApiCurrencyCode {
   Yer = 'YER',
   /** Zambian Kwacha (ZMW). */
   Zmw = 'ZMW',
+  /** Belarusian Ruble (BYN). */
+  Byn = 'BYN',
   /** Belarusian Ruble (BYR). */
   Byr = 'BYR',
   /** Djiboutian Franc (DJF). */
@@ -2172,10 +2216,10 @@ export interface StorefrontApiCustomerAccessTokenCreatePayload {
   __typename: 'CustomerAccessTokenCreatePayload'
   /** The newly created customer access token object. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2186,7 +2230,7 @@ export interface StorefrontApiCustomerAccessTokenCreateWithMultipassPayload {
   __typename: 'CustomerAccessTokenCreateWithMultipassPayload'
   /** An access token object associated with the customer. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
 }
 
@@ -2197,7 +2241,7 @@ export interface StorefrontApiCustomerAccessTokenDeletePayload {
   deletedAccessToken?: Maybe<Scalars['String']>
   /** ID of the destroyed customer access token. */
   deletedCustomerAccessTokenId?: Maybe<Scalars['String']>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2206,7 +2250,7 @@ export interface StorefrontApiCustomerAccessTokenRenewPayload {
   __typename: 'CustomerAccessTokenRenewPayload'
   /** The renewed customer access token object. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   userErrors: Array<StorefrontApiUserError>
 }
 
@@ -2217,7 +2261,7 @@ export interface StorefrontApiCustomerActivateByUrlPayload {
   customer?: Maybe<StorefrontApiCustomer>
   /** A new customer access token for the customer. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
 }
 
@@ -2236,10 +2280,10 @@ export interface StorefrontApiCustomerActivatePayload {
   customer?: Maybe<StorefrontApiCustomer>
   /** A newly created customer access token object for the customer. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2250,10 +2294,10 @@ export interface StorefrontApiCustomerAddressCreatePayload {
   __typename: 'CustomerAddressCreatePayload'
   /** The new customer address object. */
   customerAddress?: Maybe<StorefrontApiMailingAddress>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2262,12 +2306,12 @@ export interface StorefrontApiCustomerAddressCreatePayload {
 /** Return type for `customerAddressDelete` mutation. */
 export interface StorefrontApiCustomerAddressDeletePayload {
   __typename: 'CustomerAddressDeletePayload'
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /** ID of the deleted customer address. */
   deletedCustomerAddressId?: Maybe<Scalars['String']>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2278,16 +2322,16 @@ export interface StorefrontApiCustomerAddressUpdatePayload {
   __typename: 'CustomerAddressUpdatePayload'
   /** The customer’s updated mailing address. */
   customerAddress?: Maybe<StorefrontApiMailingAddress>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Specifies the fields required to create a new customer. */
+/** The fields required to create a new customer. */
 export type StorefrontApiCustomerCreateInput = {
   /** The customer’s first name. */
   firstName?: Maybe<Scalars['String']>
@@ -2312,10 +2356,10 @@ export interface StorefrontApiCustomerCreatePayload {
   __typename: 'CustomerCreatePayload'
   /** The created customer object. */
   customer?: Maybe<StorefrontApiCustomer>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2326,26 +2370,26 @@ export interface StorefrontApiCustomerDefaultAddressUpdatePayload {
   __typename: 'CustomerDefaultAddressUpdatePayload'
   /** The updated customer object. */
   customer?: Maybe<StorefrontApiCustomer>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Possible error codes that could be returned by CustomerUserError. */
+/** Possible error codes that can be returned by `CustomerUserError`. */
 export enum StorefrontApiCustomerErrorCode {
-  /** Input value is blank. */
+  /** The input value is blank. */
   Blank = 'BLANK',
-  /** Input value is invalid. */
+  /** The input value is invalid. */
   Invalid = 'INVALID',
-  /** Input value is already taken. */
+  /** The input value is already taken. */
   Taken = 'TAKEN',
-  /** Input value is too long. */
+  /** The input value is too long. */
   TooLong = 'TOO_LONG',
-  /** Input value is too short. */
+  /** The input value is too short. */
   TooShort = 'TOO_SHORT',
   /** Unidentified customer. */
   UnidentifiedCustomer = 'UNIDENTIFIED_CUSTOMER',
@@ -2372,10 +2416,10 @@ export enum StorefrontApiCustomerErrorCode {
 /** Return type for `customerRecover` mutation. */
 export interface StorefrontApiCustomerRecoverPayload {
   __typename: 'CustomerRecoverPayload'
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2388,10 +2432,10 @@ export interface StorefrontApiCustomerResetByUrlPayload {
   customer?: Maybe<StorefrontApiCustomer>
   /** A newly created customer access token object for the customer. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2412,10 +2456,10 @@ export interface StorefrontApiCustomerResetPayload {
   customer?: Maybe<StorefrontApiCustomer>
   /** A newly created customer access token object for the customer. */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2451,10 +2495,10 @@ export interface StorefrontApiCustomerUpdatePayload {
    * (including the one used to perform this mutation) become invalid, and a new token is generated.
    */
   customerAccessToken?: Maybe<StorefrontApiCustomerAccessToken>
-  /** List of errors that occurred executing the mutation. */
+  /** The list of errors that occurred from executing the mutation. */
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
-   * List of errors that occurred executing the mutation.
+   * The list of errors that occurred from executing the mutation.
    * @deprecated Use `customerUserErrors` instead
    */
   userErrors: Array<StorefrontApiUserError>
@@ -2464,9 +2508,9 @@ export interface StorefrontApiCustomerUpdatePayload {
 export interface StorefrontApiCustomerUserError
   extends StorefrontApiDisplayableError {
   __typename: 'CustomerUserError'
-  /** Error code to uniquely identify the error. */
+  /** The error code. */
   code?: Maybe<StorefrontApiCustomerErrorCode>
-  /** Path to the input field which caused the error. */
+  /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>
   /** The error message. */
   message: Scalars['String']
@@ -2580,7 +2624,7 @@ export interface StorefrontApiDiscountCodeApplication
 
 /** Represents an error in the input of a mutation. */
 export type StorefrontApiDisplayableError = {
-  /** Path to the input field which caused the error. */
+  /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>
   /** The error message. */
   message: Scalars['String']
@@ -2599,14 +2643,19 @@ export interface StorefrontApiDomain {
 
 /** Represents a video hosted outside of Shopify. */
 export interface StorefrontApiExternalVideo
-  extends StorefrontApiNode,
-    StorefrontApiMedia {
+  extends StorefrontApiMedia,
+    StorefrontApiNode {
   __typename: 'ExternalVideo'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** The URL. */
+  /**
+   * The URL.
+   * @deprecated Use `originUrl` instead
+   */
   embeddedUrl: Scalars['URL']
-  /** Globally unique identifier. */
+  /** The host of the external video. */
+  host: StorefrontApiMediaHost
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The media content type. */
   mediaContentType: StorefrontApiMediaContentType
@@ -2680,9 +2729,13 @@ export interface StorefrontApiFulfillmentTrackingInfo {
 
 /** Represents information about the metafields associated to the specified resource. */
 export type StorefrontApiHasMetafields = {
-  /** The metafield associated with the resource. */
+  /** Returns a metafield found by namespace and key. */
   metafield?: Maybe<StorefrontApiMetafield>
-  /** A paginated list of metafields associated with the resource. */
+  /**
+   * A paginated list of metafields associated with the resource.
+   * @deprecated The `metafields` field will be removed in the future in favor of using [aliases](https://graphql.org/learn/queries/#aliases) with the `metafield` field.
+   *
+   */
   metafields: StorefrontApiMetafieldConnection
 }
 
@@ -2707,58 +2760,20 @@ export interface StorefrontApiImage {
   __typename: 'Image'
   /** A word or phrase to share the nature or contents of an image. */
   altText?: Maybe<Scalars['String']>
+  /** The original height of the image in pixels. Returns `null` if the image is not hosted by Shopify. */
+  height?: Maybe<Scalars['Int']>
   /** A unique identifier for the image. */
   id?: Maybe<Scalars['ID']>
   /**
    * The location of the original image as a URL.
    *
    * If there are any existing transformations in the original source URL, they will remain and not be stripped.
+   * @deprecated Use `url` instead
    */
   originalSrc: Scalars['URL']
   /**
    * The location of the image as a URL.
-   * @deprecated Previously an image had a single `src` field. This could either return the original image
-   * location or a URL that contained transformations such as sizing or scale.
-   *
-   * These transformations were specified by arguments on the parent field.
-   *
-   * Now an image has two distinct URL fields: `originalSrc` and `transformedSrc`.
-   *
-   * * `originalSrc` - the original unmodified image URL
-   * * `transformedSrc` - the image URL with the specified transformations included
-   *
-   * To migrate to the new fields, image transformations should be moved from the parent field to `transformedSrc`.
-   *
-   * Before:
-   * ```graphql
-   * {
-   *   shop {
-   *     productImages(maxWidth: 200, scale: 2) {
-   *       edges {
-   *         node {
-   *           src
-   *         }
-   *       }
-   *     }
-   *   }
-   * }
-   * ```
-   *
-   * After:
-   * ```graphql
-   * {
-   *   shop {
-   *     productImages {
-   *       edges {
-   *         node {
-   *           transformedSrc(maxWidth: 200, scale: 2)
-   *         }
-   *       }
-   *     }
-   *   }
-   * }
-   * ```
-   *
+   * @deprecated Use `url` instead
    */
   src: Scalars['URL']
   /**
@@ -2766,8 +2781,11 @@ export interface StorefrontApiImage {
    *
    * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
    * Otherwise any transformations which an image type does not support will be ignored.
+   * @deprecated Use `url(transform:)` instead
    */
   transformedSrc: Scalars['URL']
+  /** The original width of the image in pixels. Returns `null` if the image is not hosted by Shopify. */
+  width?: Maybe<Scalars['Int']>
 }
 
 /** Represents an image resource. */
@@ -2839,7 +2857,7 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
   formatted: Array<Scalars['String']>
   /** A comma-separated list of the values for city, province, and country. */
   formattedArea?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The last name of the customer. */
   lastName?: Maybe<Scalars['String']>
@@ -2977,14 +2995,22 @@ export interface StorefrontApiMediaEdge {
   node: StorefrontApiMedia
 }
 
+/** Host for a Media Resource. */
+export enum StorefrontApiMediaHost {
+  /** Host for YouTube embedded videos. */
+  Youtube = 'YOUTUBE',
+  /** Host for Vimeo embedded videos. */
+  Vimeo = 'VIMEO',
+}
+
 /** Represents a Shopify hosted image. */
 export interface StorefrontApiMediaImage
-  extends StorefrontApiNode,
-    StorefrontApiMedia {
+  extends StorefrontApiMedia,
+    StorefrontApiNode {
   __typename: 'MediaImage'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The image for the media. */
   image?: Maybe<StorefrontApiImage>
@@ -3004,7 +3030,7 @@ export interface StorefrontApiMetafield extends StorefrontApiNode {
   createdAt: Scalars['DateTime']
   /** The description of a metafield. */
   description?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The key name for a metafield. */
   key: Scalars['String']
@@ -3016,7 +3042,10 @@ export interface StorefrontApiMetafield extends StorefrontApiNode {
   updatedAt: Scalars['DateTime']
   /** The value of a metafield. */
   value: Scalars['String']
-  /** Represents the metafield value type. */
+  /**
+   * Represents the metafield value type.
+   * @deprecated `valueType` is deprecated and replaced by `type` in API version 2021-07.
+   */
   valueType: StorefrontApiMetafieldValueType
 }
 
@@ -3051,16 +3080,18 @@ export enum StorefrontApiMetafieldValueType {
   Integer = 'INTEGER',
   /** A json string metafield. */
   JsonString = 'JSON_STRING',
+  /** A boolean metafield. */
+  Boolean = 'BOOLEAN',
 }
 
 /** Represents a Shopify hosted 3D model. */
 export interface StorefrontApiModel3d
-  extends StorefrontApiNode,
-    StorefrontApiMedia {
+  extends StorefrontApiMedia,
+    StorefrontApiNode {
   __typename: 'Model3d'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The media content type. */
   mediaContentType: StorefrontApiMediaContentType
@@ -3091,29 +3122,7 @@ export type StorefrontApiMoneyInput = {
   currencyCode: StorefrontApiCurrencyCode
 }
 
-/**
- * A monetary value with currency.
- *
- * To format currencies, combine this type's amount and currencyCode fields with your client's locale.
- *
- * For example, in JavaScript you could use Intl.NumberFormat:
- *
- * ```js
- * new Intl.NumberFormat(locale, {
- *   style: 'currency',
- *   currency: currencyCode
- * }).format(amount);
- * ```
- *
- * Other formatting libraries include:
- *
- * * iOS - [NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter)
- * * Android - [NumberFormat](https://developer.android.com/reference/java/text/NumberFormat.html)
- * * PHP - [NumberFormatter](http://php.net/manual/en/class.numberformatter.php)
- *
- * For a more general solution, the [Unicode CLDR number formatting database] is available with many implementations
- * (such as [TwitterCldr](https://github.com/twitter/twitter-cldr-rb)).
- */
+/** A monetary value with currency. */
 export interface StorefrontApiMoneyV2 {
   __typename: 'MoneyV2'
   /** Decimal money amount. */
@@ -3144,11 +3153,11 @@ export interface StorefrontApiMoneyV2Edge {
 export interface StorefrontApiMutation {
   __typename: 'Mutation'
   /**
-   * Updates the attributes of a checkout.
+   * Updates the attributes of a checkout if `allowPartialAddresses` is `true`.
    * @deprecated Use `checkoutAttributesUpdateV2` instead
    */
   checkoutAttributesUpdate?: Maybe<StorefrontApiCheckoutAttributesUpdatePayload>
-  /** Updates the attributes of a checkout. */
+  /** Updates the attributes of a checkout if `allowPartialAddresses` is `true`. */
   checkoutAttributesUpdateV2?: Maybe<StorefrontApiCheckoutAttributesUpdateV2Payload>
   /**
    * Completes a checkout without providing payment information. You can use this
@@ -3163,7 +3172,7 @@ export interface StorefrontApiMutation {
   /**
    * Completes a checkout using a credit card token from Shopify's card vault.
    * Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you
-   * need to  [_request payment processing_](https://help.shopify.com/api/guides/sales-channel-sdk/getting-started#request-payment-processing).
+   * need to  [_request payment processing_](https://shopify.dev/apps/channels/getting-started#request-payment-processing).
    */
   checkoutCompleteWithCreditCardV2?: Maybe<StorefrontApiCheckoutCompleteWithCreditCardV2Payload>
   /**
@@ -3539,9 +3548,14 @@ export type StorefrontApiMutationCustomerUpdateArgs = {
   customer: StorefrontApiCustomerUpdateInput
 }
 
-/** An object with an ID to support global identification. */
+/**
+ * An object with an ID field to support global identification, in accordance with the
+ * [Relay specification](https://relay.dev/graphql/objectidentification.htm#sec-Node-Interface).
+ * This interface is used by the [node](https://shopify.dev/api/admin-graphql/unstable/queries/node)
+ * and [nodes](https://shopify.dev/api/admin-graphql/unstable/queries/nodes) queries.
+ */
 export type StorefrontApiNode = {
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
 }
 
@@ -3565,6 +3579,8 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
    * taxes-included order.
    */
   currentSubtotalPrice: StorefrontApiMoneyV2
+  /** The total cost of duties for the order, including refunds. */
+  currentTotalDuties?: Maybe<StorefrontApiMoneyV2>
   /** The total amount of the order, including duties, taxes and discounts, minus amounts for line items that have been removed. */
   currentTotalPrice: StorefrontApiMoneyV2
   /** The total of all taxes applied to the order, excluding taxes for returned line items. */
@@ -3583,7 +3599,7 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
   financialStatus?: Maybe<StorefrontApiOrderFinancialStatus>
   /** The fulfillment status for the order. */
   fulfillmentStatus: StorefrontApiOrderFulfillmentStatus
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** List of the order’s line items. */
   lineItems: StorefrontApiOrderLineItemConnection
@@ -3594,6 +3610,8 @@ export interface StorefrontApiOrder extends StorefrontApiNode {
   name: Scalars['String']
   /** A unique numeric identifier for the order for use by shop owner and customer. */
   orderNumber: Scalars['Int']
+  /** The total cost of duties charged at checkout. */
+  originalTotalDuties?: Maybe<StorefrontApiMoneyV2>
   /** The total price of the order before any applied edits. */
   originalTotalPrice: StorefrontApiMoneyV2
   /** The customer's phone number for receiving SMS notifications. */
@@ -3734,22 +3752,30 @@ export enum StorefrontApiOrderFinancialStatus {
   Refunded = 'REFUNDED',
 }
 
-/** Represents the order's current fulfillment status. */
+/** Represents the order's aggregated fulfillment status for display purposes. */
 export enum StorefrontApiOrderFulfillmentStatus {
-  /** Displayed as **Unfulfilled**. */
+  /** Displayed as **Unfulfilled**. None of the items in the order have been fulfilled. */
   Unfulfilled = 'UNFULFILLED',
-  /** Displayed as **Partially fulfilled**. */
+  /** Displayed as **Partially fulfilled**. Some of the items in the order have been fulfilled. */
   PartiallyFulfilled = 'PARTIALLY_FULFILLED',
-  /** Displayed as **Fulfilled**. */
+  /** Displayed as **Fulfilled**. All of the items in the order have been fulfilled. */
   Fulfilled = 'FULFILLED',
-  /** Displayed as **Restocked**. */
+  /** Displayed as **Restocked**. All of the items in the order have been restocked. Replaced by "UNFULFILLED" status. */
   Restocked = 'RESTOCKED',
-  /** Displayed as **Pending fulfillment**. */
+  /**
+   * Displayed as **Pending fulfillment**. A request for fulfillment of some items
+   * awaits a response from the fulfillment service. Replaced by "IN_PROGRESS" status.
+   */
   PendingFulfillment = 'PENDING_FULFILLMENT',
-  /** Displayed as **Open**. */
+  /** Displayed as **Open**. None of the items in the order have been fulfilled. Replaced by "UNFULFILLED" status. */
   Open = 'OPEN',
-  /** Displayed as **In progress**. */
+  /**
+   * Displayed as **In progress**. Some of the items in the order have been
+   * fulfilled, or a request for fulfillment has been sent to the fulfillment service.
+   */
   InProgress = 'IN_PROGRESS',
+  /** Displayed as **Scheduled**. All of the unfulfilled items in this order are scheduled for fulfillment at later time. */
+  Scheduled = 'SCHEDULED',
 }
 
 /** Represents a single line in an order. There is one line item for each distinct product variant. */
@@ -3825,13 +3851,18 @@ export interface StorefrontApiPage extends StorefrontApiNode {
   createdAt: Scalars['DateTime']
   /** A human-friendly unique string for the page automatically generated from its title. */
   handle: Scalars['String']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
+  /** The page's SEO information. */
+  seo?: Maybe<StorefrontApiSeo>
   /** The title of the page. */
   title: Scalars['String']
   /** The timestamp of the latest page update. */
   updatedAt: Scalars['DateTime']
-  /** The url pointing to the page accessible from the web. */
+  /**
+   * The url pointing to the page accessible from the web.
+   * @deprecated Use `onlineStoreUrl` instead
+   */
   url: Scalars['URL']
 }
 
@@ -3853,12 +3884,15 @@ export interface StorefrontApiPageEdge {
   node: StorefrontApiPage
 }
 
-/** Information about pagination in a connection. */
+/**
+ * Returns information about pagination in a connection, in accordance with the
+ * [Relay specification](https://relay.dev/graphql/connections.htm#sec-undefined.PageInfo).
+ */
 export interface StorefrontApiPageInfo {
   __typename: 'PageInfo'
-  /** Indicates if there are more pages to fetch. */
+  /** Whether there are more pages to fetch following the current page. */
   hasNextPage: Scalars['Boolean']
-  /** Indicates if there are any pages prior to the current page. */
+  /** Whether there are any pages prior to the current page. */
   hasPreviousPage: Scalars['Boolean']
 }
 
@@ -3896,12 +3930,12 @@ export interface StorefrontApiPayment extends StorefrontApiNode {
   creditCard?: Maybe<StorefrontApiCreditCard>
   /** A message describing a processing error during asynchronous processing. */
   errorMessage?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /**
    * A client-side generated token to identify a payment and perform idempotent operations.
    * For more information, refer to
-   * [Idempotent requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   * [Idempotent requests](https://shopify.dev/api/usage/idempotent-requests).
    */
   idempotencyKey?: Maybe<Scalars['String']>
   /** The URL where the customer needs to be redirected so they can complete the 3D Secure payment flow. */
@@ -3967,8 +4001,8 @@ export type StorefrontApiPricingValue =
  * customization of another product or an extended warranty).
  */
 export interface StorefrontApiProduct
-  extends StorefrontApiNode,
-    StorefrontApiHasMetafields {
+  extends StorefrontApiHasMetafields,
+    StorefrontApiNode {
   __typename: 'Product'
   /** Indicates if at least one product variant is available for sale. */
   availableForSale: Scalars['Boolean']
@@ -3987,24 +4021,31 @@ export interface StorefrontApiProduct
    * They are used by the Liquid templating language to refer to objects.
    */
   handle: Scalars['String']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** List of images associated with the product. */
   images: StorefrontApiImageConnection
   /** The media associated with the product. */
   media: StorefrontApiMediaConnection
-  /** The metafield associated with the resource. */
+  /** Returns a metafield found by namespace and key. */
   metafield?: Maybe<StorefrontApiMetafield>
-  /** A paginated list of metafields associated with the resource. */
+  /**
+   * A paginated list of metafields associated with the resource.
+   * @deprecated The `metafields` field will be removed in the future in favor of using [aliases](https://graphql.org/learn/queries/#aliases) with the `metafield` field.
+   *
+   */
   metafields: StorefrontApiMetafieldConnection
   /**
-   * The online store URL for the product.
-   * A value of `null` indicates that the product is not published to the Online Store sales channel.
+   * The URL used for viewing the resource on the shop's Online Store. Returns
+   * `null` if the resource is currently not published to the Online Store sales channel.
    */
   onlineStoreUrl?: Maybe<Scalars['URL']>
   /** List of product options. */
   options: Array<StorefrontApiProductOption>
-  /** List of price ranges in the presentment currencies for this shop. */
+  /**
+   * List of price ranges in the presentment currencies for this shop.
+   * @deprecated Use `@inContext` instead.
+   */
   presentmentPriceRanges: StorefrontApiProductPriceRangeConnection
   /** The price range. */
   priceRange: StorefrontApiProductPriceRange
@@ -4012,6 +4053,8 @@ export interface StorefrontApiProduct
   productType: Scalars['String']
   /** The date and time when the product was published to the channel. */
   publishedAt: Scalars['DateTime']
+  /** The product's SEO information. */
+  seo: StorefrontApiSeo
   /**
    * A comma separated list of tags that have been added to the product.
    * Additional access scope required for private apps: unauthenticated_read_product_tags.
@@ -4071,16 +4114,16 @@ export type StorefrontApiProductDescriptionArgs = {
  * customization of another product or an extended warranty).
  */
 export type StorefrontApiProductImagesArgs = {
+  maxWidth?: Maybe<Scalars['Int']>
+  maxHeight?: Maybe<Scalars['Int']>
+  crop?: Maybe<StorefrontApiCropRegion>
+  scale?: Maybe<Scalars['Int']>
   first?: Maybe<Scalars['Int']>
   after?: Maybe<Scalars['String']>
   last?: Maybe<Scalars['Int']>
   before?: Maybe<Scalars['String']>
   reverse?: Maybe<Scalars['Boolean']>
   sortKey?: Maybe<StorefrontApiProductImageSortKeys>
-  maxWidth?: Maybe<Scalars['Int']>
-  maxHeight?: Maybe<Scalars['Int']>
-  crop?: Maybe<StorefrontApiCropRegion>
-  scale?: Maybe<Scalars['Int']>
 }
 
 /**
@@ -4095,6 +4138,7 @@ export type StorefrontApiProductMediaArgs = {
   last?: Maybe<Scalars['Int']>
   before?: Maybe<Scalars['String']>
   reverse?: Maybe<Scalars['Boolean']>
+  sortKey?: Maybe<StorefrontApiProductMediaSortKeys>
 }
 
 /**
@@ -4231,6 +4275,20 @@ export enum StorefrontApiProductImageSortKeys {
   Relevance = 'RELEVANCE',
 }
 
+/** The set of valid sort keys for the ProductMedia query. */
+export enum StorefrontApiProductMediaSortKeys {
+  /** Sort by the `position` value. */
+  Position = 'POSITION',
+  /** Sort by the `id` value. */
+  Id = 'ID',
+  /**
+   * During a search (i.e. when the `query` parameter has been specified on the connection) this sorts the
+   * results by relevance to the search term(s). When no search query is specified, this sort key is not
+   * deterministic and should not be used.
+   */
+  Relevance = 'RELEVANCE',
+}
+
 /**
  * Product property names like "Size", "Color", and "Material" that the customers can select.
  * Variants are selected based on permutations of these options.
@@ -4238,7 +4296,7 @@ export enum StorefrontApiProductImageSortKeys {
  */
 export interface StorefrontApiProductOption extends StorefrontApiNode {
   __typename: 'ProductOption'
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The product option’s name. */
   name: Scalars['String']
@@ -4301,8 +4359,8 @@ export enum StorefrontApiProductSortKeys {
 
 /** A product variant represents a different version of a product, such as differing sizes or differing colors. */
 export interface StorefrontApiProductVariant
-  extends StorefrontApiNode,
-    StorefrontApiHasMetafields {
+  extends StorefrontApiHasMetafields,
+    StorefrontApiNode {
   __typename: 'ProductVariant'
   /**
    * Indicates if the product variant is in stock.
@@ -4324,17 +4382,27 @@ export interface StorefrontApiProductVariant
   compareAtPriceV2?: Maybe<StorefrontApiMoneyV2>
   /** Whether a product is out of stock but still available for purchase (used for backorders). */
   currentlyNotInStock: Scalars['Boolean']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** Image associated with the product variant. This field falls back to the product image if no image is available. */
   image?: Maybe<StorefrontApiImage>
-  /** The metafield associated with the resource. */
+  /** Returns a metafield found by namespace and key. */
   metafield?: Maybe<StorefrontApiMetafield>
-  /** A paginated list of metafields associated with the resource. */
+  /**
+   * A paginated list of metafields associated with the resource.
+   * @deprecated The `metafields` field will be removed in the future in favor of using [aliases](https://graphql.org/learn/queries/#aliases) with the `metafield` field.
+   *
+   */
   metafields: StorefrontApiMetafieldConnection
-  /** List of prices and compare-at prices in the presentment currencies for this shop. */
+  /**
+   * List of prices and compare-at prices in the presentment currencies for this shop.
+   * @deprecated Use `@inContext` instead.
+   */
   presentmentPrices: StorefrontApiProductVariantPricePairConnection
-  /** List of unit prices in the presentment currencies for this shop. */
+  /**
+   * List of unit prices in the presentment currencies for this shop.
+   * @deprecated Use `@inContext` instead.
+   */
   presentmentUnitPrices: StorefrontApiMoneyV2Connection
   /**
    * The product variant’s price.
@@ -4477,11 +4545,17 @@ export interface StorefrontApiQueryRoot {
   __typename: 'QueryRoot'
   /** List of the shop's articles. */
   articles: StorefrontApiArticleConnection
-  /** Find a blog by its handle. */
+  /**
+   * Find a blog by its handle.
+   * @deprecated Use `blog` instead
+   */
   blogByHandle?: Maybe<StorefrontApiBlog>
   /** List of the shop's blogs. */
   blogs: StorefrontApiBlogConnection
-  /** Find a collection by its handle. */
+  /**
+   * Find a collection by its handle.
+   * @deprecated Use `collection` instead
+   */
   collectionByHandle?: Maybe<StorefrontApiCollection>
   /** List of the shop’s collections. */
   collections: StorefrontApiCollectionConnection
@@ -4491,11 +4565,17 @@ export interface StorefrontApiQueryRoot {
   node?: Maybe<StorefrontApiNode>
   /** Returns the list of nodes with the given IDs. */
   nodes: Array<Maybe<StorefrontApiNode>>
-  /** Find a page by its handle. */
+  /**
+   * Find a page by its handle.
+   * @deprecated Use `page` instead
+   */
   pageByHandle?: Maybe<StorefrontApiPage>
   /** List of the shop's pages. */
   pages: StorefrontApiPageConnection
-  /** Find a product by its handle. */
+  /**
+   * Find a product by its handle.
+   * @deprecated Use `product` instead
+   */
   productByHandle?: Maybe<StorefrontApiProduct>
   /**
    * Find recommended products related to a given `product_id`.
@@ -4839,7 +4919,7 @@ export interface StorefrontApiShopPolicy extends StorefrontApiNode {
   body: Scalars['String']
   /** Policy’s handle. */
   handle: Scalars['String']
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** Policy’s title. */
   title: Scalars['String']
@@ -4847,7 +4927,7 @@ export interface StorefrontApiShopPolicy extends StorefrontApiNode {
   url: Scalars['URL']
 }
 
-/** An auto-generated type for paginating through multiple Strings. */
+/** An auto-generated type for paginating through a list of Strings. */
 export interface StorefrontApiStringConnection {
   __typename: 'StringConnection'
   /** A list of edges. */
@@ -4876,7 +4956,7 @@ export type StorefrontApiTokenizedPaymentInput = {
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new
    * one. For more information, refer to [Idempotent
-   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   * requests](https://shopify.dev/api/usage/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -4902,7 +4982,7 @@ export type StorefrontApiTokenizedPaymentInputV2 = {
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new
    * one. For more information, refer to [Idempotent
-   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   * requests](https://shopify.dev/api/usage/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -4931,7 +5011,7 @@ export type StorefrontApiTokenizedPaymentInputV3 = {
    * A unique client generated key used to avoid duplicate charges. When a
    * duplicate payment is found, the original is returned instead of creating a new
    * one. For more information, refer to [Idempotent
-   * requests](https://shopify.dev/concepts/about-apis/idempotent-requests).
+   * requests](https://shopify.dev/api/usage/idempotent-requests).
    */
   idempotencyKey: Scalars['String']
   /** The billing address for the payment. */
@@ -5057,7 +5137,7 @@ export enum StorefrontApiUnitPriceMeasurementMeasuredUnit {
 /** Represents an error in the input of a mutation. */
 export interface StorefrontApiUserError extends StorefrontApiDisplayableError {
   __typename: 'UserError'
-  /** Path to the input field which caused the error. */
+  /** The path to the input field that caused the error. */
   field?: Maybe<Array<Scalars['String']>>
   /** The error message. */
   message: Scalars['String']
@@ -5065,12 +5145,12 @@ export interface StorefrontApiUserError extends StorefrontApiDisplayableError {
 
 /** Represents a Shopify hosted video. */
 export interface StorefrontApiVideo
-  extends StorefrontApiNode,
-    StorefrontApiMedia {
+  extends StorefrontApiMedia,
+    StorefrontApiNode {
   __typename: 'Video'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** Globally unique identifier. */
+  /** A globally-unique identifier. */
   id: Scalars['ID']
   /** The media content type. */
   mediaContentType: StorefrontApiMediaContentType

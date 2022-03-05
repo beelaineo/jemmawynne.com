@@ -1,61 +1,20 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
-import {
-  RichPageLink as RichPageLinkType,
-  SubMenu as SubMenuType,
-} from '../../types'
+import { SubMenu as SubMenuType } from '../../types'
 import {
   SubMenuWrapper,
   SubMenuTitle,
   SubMenuTitles,
   SubMenuContent,
   SubMenuContentSection,
-  SubMenuItemWrapper,
   ImageWrapper,
-  ImageLinkWrapper,
 } from './styled'
-import { LinkGroup } from '../../components/LinkGroup'
 import { Image } from '../../components/Image'
-import { DocumentLink } from '../../components/DocumentLink'
 import { Heading } from '../../components/Text'
-import { getDocumentLinkImage } from '../../utils/links'
+import { SubmenuSection } from './SubmenuSection'
+import { SubmenuSectionList } from './SubmenuSectionList'
 import { definitely } from '../../utils'
 
 const { useState } = React
-
-interface ImageLinkProps {
-  link: RichPageLinkType
-}
-
-export const ImageLink = ({ link }: ImageLinkProps) => {
-  const { image: customImage, hoverImage } = link
-  const image = customImage ?? getDocumentLinkImage(link.document)
-  const linkTitle = link.title || link?.document?.title || null
-
-  return (
-    <ImageLinkWrapper>
-      <DocumentLink document={link.document}>
-        <Image
-          displayCaption={false}
-          hoverImage={hoverImage}
-          image={image}
-          ratio={1}
-        />
-        <Box mt={2} textAlign="center">
-          <Heading
-            family="sans"
-            weight={4}
-            textAlign="center"
-            level={7}
-            textTransform="uppercase"
-          >
-            {linkTitle}
-          </Heading>
-        </Box>
-      </DocumentLink>
-    </ImageLinkWrapper>
-  )
-}
 
 interface SubMenuProps {
   submenu: SubMenuType
@@ -93,28 +52,21 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
         )}
       </SubMenuTitles>
       <SubMenuContent>
-        {columns.map((column) =>
-          column ? (
-            <SubMenuContentSection
-              active={column._key === activeSection}
-              key={column._key || 'some-key'}
-              aria-hidden={!(column._key === activeSection)}
-            >
-              {definitely(column.links).map((link) =>
-                link.__typename === 'RichPageLink' &&
-                // @ts-ignore
-                link?.document?.archived !== true ? (
-                  <SubMenuItemWrapper key={link._key || 'some-key'}>
-                    <ImageLink link={link} />
-                  </SubMenuItemWrapper>
-                ) : link.__typename === 'LinkGroup' ? (
-                  <SubMenuItemWrapper key={link._key || 'some-key'}>
-                    <LinkGroup linkGroup={link} />
-                  </SubMenuItemWrapper>
-                ) : null,
-              )}
-              {column.images
-                ? column.images.map((image, index) =>
+        {definitely(columns).map((column) => (
+          <SubMenuContentSection
+            active={column._key === activeSection}
+            key={column._key || 'some-key'}
+            aria-hidden={!(column._key === activeSection)}
+          >
+            {column.__typename === 'SubmenuSection' ? (
+              <SubmenuSection section={column} />
+            ) : column.__typename === 'SubmenuSectionList' ? (
+              <SubmenuSectionList section={column} />
+            ) : null}
+            {
+              // TODO: Deprecate
+              'images' in column
+                ? definitely(column.images).map((image, index) =>
                     image ? (
                       <ImageWrapper key={image._key || 'some-key'}>
                         <Image
@@ -128,12 +80,11 @@ export const SubMenu = ({ submenu, active }: SubMenuProps) => {
                       </ImageWrapper>
                     ) : null,
                   )
-                : null}
-            </SubMenuContentSection>
-          ) : null,
-        )}
+                : null
+            }
+          </SubMenuContentSection>
+        ))}
       </SubMenuContent>
     </SubMenuWrapper>
   )
-  return null
 }

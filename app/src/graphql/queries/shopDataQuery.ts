@@ -30,27 +30,43 @@ export const SHOP_DATA_QUERY = gql`
           _type
           title
           columns {
-            __typename
-            _key
-            title
-            links {
-              ... on RichPageLink {
-                __typename
-                ...RichPageLinkFragment
-              }
-              ... on LinkGroup {
-                __typename
+            ... on SubmenuSectionList {
+              __typename
+              _key
+              title
+              links {
                 _key
-                _type
-                title
-                links {
+                link {
                   ...InternalLinkFragment
+                }
+                image {
+                  ...SanityRichImageFragment
                 }
               }
             }
+            ... on SubmenuSection {
+              __typename
+              _key
+              title
+              links {
+                ... on RichPageLink {
+                  __typename
+                  ...RichPageLinkFragment
+                }
+                ... on LinkGroup {
+                  __typename
+                  _key
+                  _type
+                  title
+                  links {
+                    ...InternalLinkFragment
+                  }
+                }
+              }
 
-            images {
-              ...SanityRichImageFragment
+              images {
+                ...SanityRichImageFragment
+              }
             }
           }
         }
