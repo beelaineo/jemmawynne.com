@@ -7,9 +7,8 @@ export interface CheckoutLineItemsAddInput {
   lineItems: CheckoutLineItemInput[]
 }
 
-export type CheckoutLineItemsAddResponse = CheckoutResponse<
-  'checkoutLineItemsAdd'
->
+export type CheckoutLineItemsAddResponse =
+  CheckoutResponse<'checkoutLineItemsAdd'>
 
 export const CHECKOUT_LINE_ITEMS_ADD = gql`
   mutation CheckoutLineItemsAdd(

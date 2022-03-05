@@ -30,7 +30,7 @@ type FB_VIEW_CONTENT = {
 }
 
 export const reportFBViewContent = (product: ShopifyProduct): void => {
-  let content_ids: string[] = []
+  const content_ids: string[] = []
   let contentName
   let template: FB_VIEW_CONTENT
   const hash = getLocationSearchHash(window.location.search)
@@ -44,8 +44,8 @@ export const reportFBViewContent = (product: ShopifyProduct): void => {
       contents: content_ids,
     }
 
-    let variants = product.variants
-    let variant = variants?.find((v) => {
+    const variants = product.variants
+    const variant = variants?.find((v) => {
       return v?.shopifyVariantID === hash
     })
 

@@ -12,7 +12,7 @@ export type MaybeAll<T> = {
 
 export type QueryFunction = <
   ExpectedResult,
-  Variables extends Record<string, any>
+  Variables extends Record<string, any>,
 >(
   query: string | DocumentNode,
   variables: Variables,

@@ -70,14 +70,13 @@ const initialState: State = {
 export const useSwipeReducer = (element: HTMLElement | null) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const startSwipe = (initialPosition: number) => (
-    e: React.MouseEvent | React.TouchEvent,
-  ) => {
-    if (!element) return
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-    const target = e.target
-    dispatch({ type: START, initialPosition, touchStart: clientX, target })
-  }
+  const startSwipe =
+    (initialPosition: number) => (e: React.MouseEvent | React.TouchEvent) => {
+      if (!element) return
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+      const target = e.target
+      dispatch({ type: START, initialPosition, touchStart: clientX, target })
+    }
   const setSwipeDiff = (diff: number) => dispatch({ type: SET_DIFF, diff })
   const endSwipe = () => dispatch({ type: END })
 

@@ -18,8 +18,9 @@ interface AnalyticsContextValue {
   sendBeginCheckout: (products: SelectedProduct | SelectedProduct[]) => void
 }
 
-const AnalyticsContext =
-  React.createContext<AnalyticsContextValue | undefined>(undefined)
+const AnalyticsContext = React.createContext<AnalyticsContextValue | undefined>(
+  undefined,
+)
 
 export const AnalyticsConsumer = AnalyticsContext.Consumer
 

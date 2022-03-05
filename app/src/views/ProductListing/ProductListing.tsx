@@ -34,8 +34,10 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
   const bottomRef = useRef<HTMLDivElement>(null)
   const [fetchMoreResults, setFetchMoreResults] = useState<ShopifyProduct[]>([])
   const { isInView } = useInViewport(bottomRef, '500px 0px')
-  const { state: fetchMoreState, query: fetchMoreQuery } =
-    useSanityQuery<ShopifyCollection, PaginationArgs>()
+  const { state: fetchMoreState, query: fetchMoreQuery } = useSanityQuery<
+    ShopifyCollection,
+    PaginationArgs
+  >()
 
   const [fetchComplete, setFetchComplete] = useState(
     definitely(collection.products).length < PAGE_SIZE,

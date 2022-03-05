@@ -92,8 +92,8 @@ export const CarouselInner = ({
     if (!outerRef.current) return
     const containerWidth = outerRef.current.getBoundingClientRect().right
 
-    const lastSlideRight = slides[slides.length - 1].ref.getBoundingClientRect()
-      .right
+    const lastSlideRight =
+      slides[slides.length - 1].ref.getBoundingClientRect().right
     if (lastSlideRight < containerWidth) return
 
     const newSlide = slides.findIndex(
