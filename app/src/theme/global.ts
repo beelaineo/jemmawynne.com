@@ -9,6 +9,10 @@ export const GlobalStyles = createGlobalStyle`
 		box-sizing: border-box;
 	}
 
+  button {
+    color: inherit;
+  }
+
   html, body, #__next, main {
     height: 100%;
   }
