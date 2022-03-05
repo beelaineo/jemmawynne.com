@@ -123,7 +123,7 @@ export const submenuSectionListItem = {
 }
 
 export const submenuSectionList = {
-  title: 'Submenu Section (list)',
+  title: 'List Submenu',
   name: 'submenuSectionList',
   type: 'object',
   fields: [
@@ -145,7 +145,7 @@ export const submenuSectionList = {
 }
 
 export const submenuSection = {
-  title: 'Submenu Section (large links)',
+  title: 'Cards Submenu',
   name: 'submenuSection',
   type: 'object',
   fields: [
