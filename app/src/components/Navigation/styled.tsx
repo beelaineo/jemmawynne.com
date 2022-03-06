@@ -509,7 +509,6 @@ export const SubmenuSectionListImageWrapper = styled.div<{ active: boolean }>`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: pink;
     overflow: hidden;
     opacity: ${active ? '1' : '0'};
     transition: opacity 0.2s;
