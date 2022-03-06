@@ -30,8 +30,6 @@ export const SubmenuSectionList: React.FC<SubmenuSectionListProps> = ({
 
   const handleHover = (key: string) => () => setCurrentLink(key)
 
-  const image = links.find((l) => l._key === currentLink)?.image
-  console.log({ links, currentLink, image })
   return (
     <>
       <SubmenuSectionLinksWrapper>

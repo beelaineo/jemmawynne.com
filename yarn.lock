@@ -4048,34 +4048,34 @@
   dependencies:
     tslib "^2.3.0"
 
-"@xstyled/core@^3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@xstyled/core/-/core-3.5.1.tgz#a5af87a272a9f8fc7422a4d5c45a566779031d09"
-  integrity sha512-pUFgEii1NMEuIKwAujS1/5zuRnq655/YSLcQ8A/mD6IqWM2YxG3dXTPBa0bavJbUA1RSDKEVPDALhLC50dipQQ==
+"@xstyled/core@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@xstyled/core/-/core-2.5.0.tgz#03a2b066261d4a160a3ba489b49c833ab17c86c3"
+  integrity sha512-hxWJUpkPK6buyLd2XB6hjTIN2Vc5QjYW4E4y8Ekqq2kezCIFpdumbI/8oHCxfARBPzQW7son/b8cAZDhXjsIsg==
   dependencies:
-    "@xstyled/system" "^3.5.1"
+    "@xstyled/system" "^2.5.0"
 
-"@xstyled/styled-components@^3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@xstyled/styled-components/-/styled-components-3.5.1.tgz#0c0f1f50cb66bff76193489b8570fa375436e322"
-  integrity sha512-siSBEjddGqIRMKNt25LMRHwfV89RbVWdop8zzspNds1BCNeP0P53DKEauflHTC/XozYOR7NnvhUukWF7jeRSRg==
+"@xstyled/styled-components@^2.4.1":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@xstyled/styled-components/-/styled-components-2.5.0.tgz#aa035313d5f7bfb7c375343c33f28cc5026942d8"
+  integrity sha512-5b3qCZtlQAQmU3TQZUGgOhmrWc/K3GTTm08rbj7Vr12a1PdfqEUDyq7fGZo+H3TXFcOqMbOZKF22DYUK5trrNA==
   dependencies:
-    "@xstyled/core" "^3.5.1"
-    "@xstyled/system" "^3.5.1"
-    "@xstyled/util" "^3.5.1"
+    "@xstyled/core" "^2.5.0"
+    "@xstyled/system" "^2.5.0"
+    "@xstyled/util" "^2.2.3"
 
-"@xstyled/system@^3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@xstyled/system/-/system-3.5.1.tgz#7c788c3e44750e768b9f49b34458198c6fc04f3e"
-  integrity sha512-dsYsHaSu4cm/45M0MQz+ju3Nxpp3glGW1xxSfUsN2NIYKuBWnncY+ZoheWETG4kSnOL8Clv2W8v2dyhBHgp/MA==
+"@xstyled/system@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@xstyled/system/-/system-2.5.0.tgz#0bfec246e7e8151bef1e4b6cad494ffc552ae27e"
+  integrity sha512-BbPjO2Ui2qmnfxmkenRLadVrOvzPZ1F6+ADoYDATfFyOD8juZ2+GTpRrdawma52g5k/Qk0yzAzekuUtgmKV6qg==
   dependencies:
-    "@xstyled/util" "^3.5.1"
-    csstype "^3.0.8"
+    "@xstyled/util" "^2.2.3"
+    csstype "^3.0.7"
 
-"@xstyled/util@^3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@xstyled/util/-/util-3.5.1.tgz#ab8118652b28bb86bbdaf14fa04b4e61905ff86b"
-  integrity sha512-Pf3/t+Xkp+2kKN+vfzBEeyIlO2M1HSOGgb47apgntcqTxYiVms/GrXR4ROKUoMtcLscY9+6xduA+7febPehY1g==
+"@xstyled/util@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@xstyled/util/-/util-2.2.3.tgz#d1e094e8dfc0b7bfaf80d7fcbbedb3efda4501ca"
+  integrity sha512-hOtlkeCBJlmvo4eHdNAgv2gJE3djXr1oOdmpBJj1knge0hIZj6kdWpTBp0h/Uzs/8xQndbUdewdfq2cRlHcIZA==
 
 "@zeit/next-source-maps@^0.0.3":
   version "0.0.3"
@@ -6731,7 +6731,7 @@ cssstyle@^2.3.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^3.0.2, csstype@^3.0.8:
+csstype@^3.0.2, csstype@^3.0.7:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.11.tgz#d66700c5eacfac1940deb4e3ee5642792d85cd33"
   integrity sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==
@@ -7256,9 +7256,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.30, electron-to-chromium@^1.4.71:
-  version "1.4.75"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.75.tgz#d1ad9bb46f2f1bf432118c2be21d27ffeae82fdd"
-  integrity sha512-LxgUNeu3BVU7sXaKjUDD9xivocQLxFtq6wgERrutdY/yIOps3ODOZExK1jg8DTEg4U8TUCb5MLGeWFOYuxjF3Q==
+  version "1.4.76"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.76.tgz#a0494baedaf51094b1c172999919becd9975a934"
+  integrity sha512-3Vftv7cenJtQb+k00McEBZ2vVmZ/x+HEF7pcZONZIkOsESqAqVuACmBxMv0JhzX7u0YltU0vSqRqgBSTAhFUjA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"

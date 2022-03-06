@@ -57,7 +57,7 @@
 		"@sentry/browser": "^6.18.1",
 		"@sentry/integrations": "^6.18.1",
 		"@sentry/node": "^6.18.1",
-		"@xstyled/styled-components": "^3.5.1",
+		"@xstyled/styled-components": "^2.4.1",
 		"@zeit/next-source-maps": "^0.0.3",
 		"debug": "^4.3.3",
 		"formik": "^2.2.9",
