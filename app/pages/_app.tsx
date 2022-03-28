@@ -51,6 +51,10 @@ class MyApp extends App<AppProps> {
     return (
       <>
         <Head>
+          <meta
+            name="google-site-verification"
+            content="FMybvh787T8f4wVXecF7CnvRImZuCMWgeKKO-dOsuQE"
+          />
           {tagInfo ? (
             <Script
               /* Tag Manager */
