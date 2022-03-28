@@ -19,8 +19,10 @@ export interface UseCounterValues {
   isMax: boolean
 }
 
-const minMax = (min: number, max: number) => (input: number): number =>
-  Math.min(Math.max(input, min), max)
+const minMax =
+  (min: number, max: number) =>
+  (input: number): number =>
+    Math.min(Math.max(input, min), max)
 
 export const useCounter = (
   initialCount: number = 0,

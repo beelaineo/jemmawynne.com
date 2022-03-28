@@ -1,6 +1,7 @@
 import * as React from 'react'
 import App, { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
+import Script from 'next/script'
 import { SearchPane } from '../src/components/Search'
 import { Navigation } from '../src/components/Navigation'
 import { Footer } from '../src/components/Footer'
@@ -40,6 +41,7 @@ class MyApp extends App<AppProps> {
       Sentry.captureException(error)
     })
 
+    // @ts-ignore
     super.componentDidCatch(error, errorInfo)
   }
 
@@ -49,10 +51,14 @@ class MyApp extends App<AppProps> {
     return (
       <>
         <Head>
-          <link rel="stylesheet" href="/static/fonts/fonts.css" />
+          <meta
+            name="google-site-verification"
+            content="FMybvh787T8f4wVXecF7CnvRImZuCMWgeKKO-dOsuQE"
+          />
           {tagInfo ? (
-            <script
+            <Script
               /* Tag Manager */
+              id="tagManager"
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 __html: tagInfo.script,

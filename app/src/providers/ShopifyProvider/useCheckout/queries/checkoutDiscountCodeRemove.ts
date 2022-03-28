@@ -6,9 +6,8 @@ export interface CheckoutDiscountCodeRemoveInput {
   checkoutId: string
 }
 
-export type CheckoutDiscountCodeRemoveResponse = CheckoutResponse<
-  'checkoutDiscountCodeRemove'
->
+export type CheckoutDiscountCodeRemoveResponse =
+  CheckoutResponse<'checkoutDiscountCodeRemove'>
 
 export const CHECKOUT_DISCOUNT_CODE_REMOVE = gql`
   mutation CheckoutDiscountCodeRemove($checkoutId: ID!) {

@@ -1,4 +1,4 @@
-import { DefaultTheme } from '@xstyled/styled-components'
+import { DefaultTheme } from 'styled-components'
 
 /* generated at: https://www.colorbox.io/#steps=7#hue_start=281#hue_end=271#hue_curve=easeInQuad#sat_start=22#sat_end=0#sat_curve=easeOutQuart#sat_rate=130#lum_start=12#lum_end=100#lum_curve=easeInCubic#minor_steps_map=0 */
 const grays = [
@@ -34,6 +34,7 @@ export const defaultTheme: DefaultTheme = {
    *   padding-top, padding-right, padding-bottom, padding-left, grid-gap,
    *   grid-column-gap, grid-row-gap
    */
+
   space: [
     0, // 0
     3, // 1

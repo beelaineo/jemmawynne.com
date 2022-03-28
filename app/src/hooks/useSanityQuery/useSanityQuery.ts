@@ -67,7 +67,7 @@ type Variables = { [key: string]: any }
 
 export const useSanityQuery = <
   R extends Document,
-  V extends Variables = Variables
+  V extends Variables = Variables,
 >() => {
   const { handleError } = useError()
   const [sanityClient, setSanityClient] = useState<SanityClient | null>(null)
@@ -99,7 +99,11 @@ export const useSanityQuery = <
       // @ts-ignore
       return r
     } catch (err) {
-      handleError(err)
+      const error =
+        err instanceof Error
+          ? err
+          : new Error('There was an error making this request')
+      handleError(error)
       // @ts-ignore
       return []
     }

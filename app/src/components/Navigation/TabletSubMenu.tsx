@@ -10,6 +10,7 @@ import {
   NavHeaderWrapper,
   PlusWrapper,
 } from './styled'
+import { SubmenuSectionList } from './SubmenuSectionList'
 
 const { useState } = React
 
@@ -136,35 +137,50 @@ export const TabletSubMenu = ({
                   indent
                 >
                   <Box mb={4}>
-                    {definitely(column.links).map((link) => {
-                      switch (link.__typename) {
-                        case 'RichPageLink':
-                          return (
+                    {column.__typename === 'SubmenuSection' ? (
+                      definitely(column.links).map((link) => {
+                        switch (link.__typename) {
+                          case 'RichPageLink':
+                            return (
+                              <NavPageLink
+                                small
+                                key={link._key || 'some-key'}
+                                document={link.document}
+                                borders
+                              />
+                            )
+                          case 'LinkGroup':
+                            return (
+                              <React.Fragment key={link._key || 'some-key'}>
+                                {definitely(link.links).map((linkGroupLink) => (
+                                  <NavPageLink
+                                    small
+                                    key={linkGroupLink._key || 'some-key'}
+                                    document={linkGroupLink.document}
+                                    borders
+                                  />
+                                ))}
+                              </React.Fragment>
+                            )
+
+                          default:
+                            return null
+                        }
+                      })
+                    ) : (
+                      <React.Fragment key={column._key || 'some-key'}>
+                        {definitely(column.links).map((linkGroupLink) =>
+                          linkGroupLink.link ? (
                             <NavPageLink
                               small
-                              key={link._key || 'some-key'}
-                              document={link.document}
+                              key={linkGroupLink._key || 'some-key'}
+                              document={linkGroupLink.link.document}
                               borders
                             />
-                          )
-                        case 'LinkGroup':
-                          return (
-                            <React.Fragment key={link._key || 'some-key'}>
-                              {definitely(link.links).map((linkGroupLink) => (
-                                <NavPageLink
-                                  small
-                                  key={linkGroupLink._key || 'some-key'}
-                                  document={linkGroupLink.document}
-                                  borders
-                                />
-                              ))}
-                            </React.Fragment>
-                          )
-
-                        default:
-                          return null
-                      }
-                    })}
+                          ) : null,
+                        )}
+                      </React.Fragment>
+                    )}
                   </Box>
                 </SubMenuAccordion>
               )

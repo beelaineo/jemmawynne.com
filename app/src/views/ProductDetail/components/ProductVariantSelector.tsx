@@ -97,12 +97,10 @@ const OptionSelector = ({
     return value.value === currentValue
   }
 
-  const handleSwatchClick = (
-    option: SwatchOption,
-    value: SwatchOptionValue,
-  ) => () => {
-    changeOption(value.value)
-  }
+  const handleSwatchClick =
+    (option: SwatchOption, value: SwatchOptionValue) => () => {
+      changeOption(value.value)
+    }
 
   return (
     <ProductOptionWrapper key={option.name}>

@@ -34,7 +34,11 @@ export const PressItem = ({ pressItem }: PressItemProps) => {
     if (!link?.url) return <>{children}</>
     const { url, newTab } = link
     return (
-      <a href={link.url} target={newTab !== false ? '_blank' : undefined}>
+      <a
+        href={link.url}
+        target={newTab !== false ? '_blank' : undefined}
+        rel="noreferrer"
+      >
         {children}
       </a>
     )

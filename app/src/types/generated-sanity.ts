@@ -2,10 +2,12 @@ export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
 }
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> }
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>
+}
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -1116,31 +1118,31 @@ export interface RichImage {
   __typename: 'RichImage'
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
-  caption?: Maybe<Scalars['String']>
-  /** A short description of the image. Helps with accessibility and SEO. Defaults to the caption if not defined. */
-  altText?: Maybe<Scalars['String']>
   asset?: Maybe<SanityImageAsset>
   hotspot?: Maybe<SanityImageHotspot>
   crop?: Maybe<SanityImageCrop>
+  caption?: Maybe<Scalars['String']>
+  /** A short description of the image. Helps with accessibility and SEO. Defaults to the caption if not defined. */
+  altText?: Maybe<Scalars['String']>
 }
 
 export type RichImageFilter = {
   _key?: Maybe<StringFilter>
   _type?: Maybe<StringFilter>
-  caption?: Maybe<StringFilter>
-  altText?: Maybe<StringFilter>
   asset?: Maybe<SanityImageAssetFilter>
   hotspot?: Maybe<SanityImageHotspotFilter>
   crop?: Maybe<SanityImageCropFilter>
+  caption?: Maybe<StringFilter>
+  altText?: Maybe<StringFilter>
 }
 
 export type RichImageSorting = {
   _key?: Maybe<SortOrder>
   _type?: Maybe<SortOrder>
-  caption?: Maybe<SortOrder>
-  altText?: Maybe<SortOrder>
   hotspot?: Maybe<SanityImageHotspotSorting>
   crop?: Maybe<SanityImageCropSorting>
+  caption?: Maybe<SortOrder>
+  altText?: Maybe<SortOrder>
 }
 
 export interface RichPageLink {
@@ -1201,8 +1203,8 @@ export interface RootQuery {
   CollectionInfo?: Maybe<CollectionInfo>
   SiteSettings?: Maybe<SiteSettings>
   Stockists?: Maybe<Stockists>
-  PressPage?: Maybe<PressPage>
   PressItem?: Maybe<PressItem>
+  PressPage?: Maybe<PressPage>
   ShopifyProduct?: Maybe<ShopifyProduct>
   ShopifyCollection?: Maybe<ShopifyCollection>
   SanityImageAsset?: Maybe<SanityImageAsset>
@@ -1214,8 +1216,8 @@ export interface RootQuery {
   allCollectionInfo: Array<CollectionInfo>
   allSiteSettings: Array<SiteSettings>
   allStockists: Array<Stockists>
-  allPressPage: Array<PressPage>
   allPressItem: Array<PressItem>
+  allPressPage: Array<PressPage>
   allShopifyProduct: Array<ShopifyProduct>
   allShopifyCollection: Array<ShopifyCollection>
   allSanityImageAsset: Array<SanityImageAsset>
@@ -1254,11 +1256,11 @@ export type RootQueryStockistsArgs = {
   id: Scalars['ID']
 }
 
-export type RootQueryPressPageArgs = {
+export type RootQueryPressItemArgs = {
   id: Scalars['ID']
 }
 
-export type RootQueryPressItemArgs = {
+export type RootQueryPressPageArgs = {
   id: Scalars['ID']
 }
 
@@ -1327,16 +1329,16 @@ export type RootQueryAllStockistsArgs = {
   offset?: Maybe<Scalars['Int']>
 }
 
-export type RootQueryAllPressPageArgs = {
-  where?: Maybe<PressPageFilter>
-  sort?: Maybe<Array<PressPageSorting>>
+export type RootQueryAllPressItemArgs = {
+  where?: Maybe<PressItemFilter>
+  sort?: Maybe<Array<PressItemSorting>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
 }
 
-export type RootQueryAllPressItemArgs = {
-  where?: Maybe<PressItemFilter>
-  sort?: Maybe<Array<PressItemSorting>>
+export type RootQueryAllPressPageArgs = {
+  where?: Maybe<PressPageFilter>
+  sort?: Maybe<Array<PressPageSorting>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
 }
@@ -1494,6 +1496,7 @@ export interface SanityImageAsset extends Document {
   mimeType?: Maybe<Scalars['String']>
   size?: Maybe<Scalars['Float']>
   assetId?: Maybe<Scalars['String']>
+  uploadId?: Maybe<Scalars['String']>
   path?: Maybe<Scalars['String']>
   url?: Maybe<Scalars['String']>
   metadata?: Maybe<SanityImageMetadata>
@@ -1519,6 +1522,7 @@ export type SanityImageAssetFilter = {
   mimeType?: Maybe<StringFilter>
   size?: Maybe<FloatFilter>
   assetId?: Maybe<StringFilter>
+  uploadId?: Maybe<StringFilter>
   path?: Maybe<StringFilter>
   url?: Maybe<StringFilter>
   metadata?: Maybe<SanityImageMetadataFilter>
@@ -1542,6 +1546,7 @@ export type SanityImageAssetSorting = {
   mimeType?: Maybe<SortOrder>
   size?: Maybe<SortOrder>
   assetId?: Maybe<SortOrder>
+  uploadId?: Maybe<SortOrder>
   path?: Maybe<SortOrder>
   url?: Maybe<SortOrder>
   metadata?: Maybe<SanityImageMetadataSorting>
@@ -1637,6 +1642,7 @@ export interface SanityImageMetadata {
   dimensions?: Maybe<SanityImageDimensions>
   palette?: Maybe<SanityImagePalette>
   lqip?: Maybe<Scalars['String']>
+  blurHash?: Maybe<Scalars['String']>
   hasAlpha?: Maybe<Scalars['Boolean']>
   isOpaque?: Maybe<Scalars['Boolean']>
 }
@@ -1648,6 +1654,7 @@ export type SanityImageMetadataFilter = {
   dimensions?: Maybe<SanityImageDimensionsFilter>
   palette?: Maybe<SanityImagePaletteFilter>
   lqip?: Maybe<StringFilter>
+  blurHash?: Maybe<StringFilter>
   hasAlpha?: Maybe<BooleanFilter>
   isOpaque?: Maybe<BooleanFilter>
 }
@@ -1659,6 +1666,7 @@ export type SanityImageMetadataSorting = {
   dimensions?: Maybe<SanityImageDimensionsSorting>
   palette?: Maybe<SanityImagePaletteSorting>
   lqip?: Maybe<SortOrder>
+  blurHash?: Maybe<SortOrder>
   hasAlpha?: Maybe<SortOrder>
   isOpaque?: Maybe<SortOrder>
 }
@@ -2739,7 +2747,7 @@ export interface SubMenu {
   _key?: Maybe<Scalars['String']>
   _type?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
-  columns?: Maybe<Array<Maybe<SubmenuSection>>>
+  columns?: Maybe<Array<Maybe<SubmenuSectionOrSubmenuSectionList>>>
 }
 
 export type SubMenuFilter = {
@@ -2762,6 +2770,52 @@ export type SubmenuSectionFilter = {
   _type?: Maybe<StringFilter>
   title?: Maybe<StringFilter>
 }
+
+export interface SubmenuSectionList {
+  __typename: 'SubmenuSectionList'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  links?: Maybe<Array<Maybe<SubmenuSectionListItem>>>
+}
+
+export type SubmenuSectionListFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  title?: Maybe<StringFilter>
+}
+
+export interface SubmenuSectionListItem {
+  __typename: 'SubmenuSectionListItem'
+  _key?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  link?: Maybe<InternalLink>
+  image?: Maybe<RichImage>
+}
+
+export type SubmenuSectionListItemFilter = {
+  _key?: Maybe<StringFilter>
+  _type?: Maybe<StringFilter>
+  link?: Maybe<InternalLinkFilter>
+  image?: Maybe<RichImageFilter>
+}
+
+export type SubmenuSectionListItemSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  link?: Maybe<InternalLinkSorting>
+  image?: Maybe<RichImageSorting>
+}
+
+export type SubmenuSectionListSorting = {
+  _key?: Maybe<SortOrder>
+  _type?: Maybe<SortOrder>
+  title?: Maybe<SortOrder>
+}
+
+export type SubmenuSectionOrSubmenuSectionList =
+  | SubmenuSection
+  | SubmenuSectionList
 
 export type SubmenuSectionSorting = {
   _key?: Maybe<SortOrder>

@@ -45,8 +45,8 @@ export function arrayify<T>(i: T | T[]): T[] {
 }
 
 export const getIdFromBase64 = (data: string): string => {
-  let id,
-    indentifier = 'gid://'
+  let id
+  const indentifier = 'gid://'
   const buffer = Buffer.from(decodeURIComponent(data), 'base64')
   const frag = buffer.toString('utf-8').split(indentifier)
   if (frag.length >= 2) {

@@ -15,8 +15,9 @@ type ShopifyContextValue = UseCheckoutValues & {
   goToCheckout: () => void
 }
 
-export const ShopifyContext =
-  React.createContext<ShopifyContextValue | undefined>(undefined)
+export const ShopifyContext = React.createContext<
+  ShopifyContextValue | undefined
+>(undefined)
 
 export const ShopifyConsumer = ShopifyContext.Consumer
 

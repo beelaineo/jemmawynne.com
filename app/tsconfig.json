@@ -10,9 +10,15 @@
     "target": "es6",
     "sourceMap": true,
     "jsx": "preserve",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "outDir": "./dist",
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,9 +26,13 @@
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "incremental": true
   },
-  "include": ["./src", "./pages"],
+  "include": [
+    "./src",
+    "./pages"
+  ],
   "exclude": [
     "node_modules",
     "../node_modules",

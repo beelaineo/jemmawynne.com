@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { groupBy, prop } from 'ramda'
-import { IoIosListBox } from 'react-icons/io'
+import { BsFileImage } from 'react-icons/bs'
+import { IoIosListBox, IoWarningOutline } from 'react-icons/io'
 import { BlockPreview } from '../components/BlockPreview'
 import { getReferencedDocument, getShopifyThumbnail } from '../utils'
 
@@ -56,6 +57,7 @@ export const MenuLink = {
 export const linkGroup = {
   title: 'Link Group',
   name: 'linkGroup',
+  description: 'Deprecated',
   type: 'object',
   fields: [
     {
@@ -80,17 +82,70 @@ export const linkGroup = {
     },
     prepare: ({ title, links }) => {
       return {
-        title,
-        subtitle: links.length
-          ? `🔗 ${links.length} link${links.length === 1 ? '' : 's'}`
-          : undefined,
+        title: 'Link Group',
+        subtitle: '⚠️  Deprecated',
       }
     },
   },
 }
 
+export const submenuSectionListItem = {
+  title: 'Menu Link + Image',
+  name: 'submenuSectionListItem',
+  type: 'object',
+  fields: [
+    {
+      name: 'link',
+      title: 'Linked page',
+      type: 'internalLink',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'image',
+      title: 'Highlight Image',
+      type: 'richImage',
+      validation: (Rule) => Rule.required(),
+    },
+  ],
+  preview: {
+    select: {
+      title: 'link.document.title',
+      altTitle: 'link.label',
+      media: 'image',
+    },
+    prepare: ({ title, altTitle, media }) => {
+      return {
+        title: altTitle || title,
+        media,
+      }
+    },
+  },
+}
+
+export const submenuSectionList = {
+  title: 'List Submenu',
+  name: 'submenuSectionList',
+  type: 'object',
+  fields: [
+    {
+      title: 'Title',
+      name: 'title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      title: 'Links',
+      name: 'links',
+      type: 'array',
+      of: [{ type: 'submenuSectionListItem' }],
+      validation: (Rule) => Rule.required().min(1),
+    },
+  ],
+  icon: IoIosListBox,
+}
+
 export const submenuSection = {
-  title: 'Submenu Section',
+  title: 'Cards Submenu',
   name: 'submenuSection',
   type: 'object',
   fields: [
@@ -105,14 +160,18 @@ export const submenuSection = {
       name: 'links',
       type: 'array',
       of: [{ type: 'richPageLink' }, { type: 'linkGroup' }],
+      validation: (Rule) => Rule.required().min(1),
     },
     {
       title: 'Images',
+      description:
+        'Deprecated: use images in Page links or in Submenu Section (list)',
       name: 'images',
       type: 'array',
       of: [{ type: 'richImage' }],
     },
   ],
+  icon: BsFileImage,
 }
 
 export const subMenu = {
@@ -131,8 +190,7 @@ export const subMenu = {
       title: 'Submenu Sections',
       name: 'columns',
       type: 'array',
-      of: [{ type: 'submenuSection' }],
-      // of: [{ type: 'linkGroup' }, { type: 'richPageLink' }],
+      of: [{ type: 'submenuSection' }, { type: 'submenuSectionList' }],
     },
   ],
   preview: {

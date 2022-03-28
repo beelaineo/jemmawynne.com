@@ -59,12 +59,8 @@ export const Gallery = ({ images, currentImageId }: GalleryProps) => {
 
   const watchZoom = (e: any) => {
     if (!wrapperRef.current) return
-    const {
-      top,
-      left,
-      width,
-      height,
-    } = wrapperRef.current.getBoundingClientRect()
+    const { top, left, width, height } =
+      wrapperRef.current.getBoundingClientRect()
     const { clientX, clientY } = e
     const xAmount = (clientX - left) / width
     const yAmount = (clientY - top) / height
