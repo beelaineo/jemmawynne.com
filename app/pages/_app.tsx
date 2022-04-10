@@ -55,17 +55,18 @@ class MyApp extends App<AppProps> {
             name="google-site-verification"
             content="FMybvh787T8f4wVXecF7CnvRImZuCMWgeKKO-dOsuQE"
           />
-          {tagInfo ? (
-            <Script
-              /* Tag Manager */
-              id="tagManager"
-              type="text/javascript"
-              dangerouslySetInnerHTML={{
-                __html: tagInfo.script,
-              }}
-            />
-          ) : null}
         </Head>
+        {tagInfo ? (
+          <Script
+            /* Tag Manager */
+            id="tagManager"
+            type="text/javascript"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: tagInfo.script,
+            }}
+          />
+        ) : null}
         <ErrorProvider error={error}>
           <Providers shopData={shopData}>
             <main id="main">

@@ -34,6 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   }).then(async (r) => {
     const data = await r.json()
+    console.log({ data })
     if (r.status !== 200) {
       Sentry.configureScope((scope) => {
         scope.setExtra('status', r.status)
@@ -47,6 +48,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       data,
     }
   })
+
+  console.log({ statusCode, data, KLAVIYO_LIST_ID })
 
   res.statusCode = statusCode
   res.json({ statusCode, message: 'success' })
