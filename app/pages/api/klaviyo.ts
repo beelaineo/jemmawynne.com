@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import Debug from 'debug'
 import dotEnv from 'dotenv'
 import fetch from 'isomorphic-unfetch'
 import Sentry from '../../src/services/sentry'
+
+const log = Debug('api:klaviyo')
 
 dotEnv.config()
 
@@ -34,7 +37,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   }).then(async (r) => {
     const data = await r.json()
-    console.log({ data })
     if (r.status !== 200) {
       Sentry.configureScope((scope) => {
         scope.setExtra('status', r.status)
@@ -49,7 +51,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   })
 
-  console.log({ statusCode, data, KLAVIYO_LIST_ID })
+  log('email signup:', {
+    email,
+    statusCode,
+    data,
+  })
 
   res.statusCode = statusCode
   res.json({ statusCode, message: 'success' })
