@@ -2,6 +2,7 @@ import * as React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from '@xstyled/styled-components'
 import Sentry from '../src/services/sentry'
+import { tagInfo } from '../src/services/tagManager'
 
 process.on('unhandledRejection', (err) => {
   Sentry.captureException(err)
@@ -48,6 +49,17 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
+        {tagInfo ? (
+          <noscript>
+            <iframe
+              src={tagInfo.iframeSrc}
+              width="0"
+              height="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        ) : null}
+
       </Html>
     )
   }
