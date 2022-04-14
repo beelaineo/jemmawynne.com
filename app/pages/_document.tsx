@@ -46,20 +46,19 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
         </Head>
         <body>
+          {tagInfo ? (
+            <noscript>
+              <iframe
+                src={tagInfo.iframeSrc}
+                width="0"
+                height="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+              />
+            </noscript>
+          ) : null}
           <Main />
           <NextScript />
         </body>
-        {tagInfo ? (
-          <noscript>
-            <iframe
-              src={tagInfo.iframeSrc}
-              width="0"
-              height="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        ) : null}
-
       </Html>
     )
   }
