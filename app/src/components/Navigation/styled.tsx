@@ -512,14 +512,15 @@ export const SubmenuSectionListImageWrapper = styled.div<{ active: boolean }>`
     overflow: hidden;
     opacity: ${active ? '1' : '0'};
     transition: opacity 0.2s;
+    transition-delay: ${active ? '0s' : '0.2s'};
 
-    ${ImageElementWrapper}, picture {
+    picture {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fill: cover;
+      object-fit: cover;
     }
   `}
 `

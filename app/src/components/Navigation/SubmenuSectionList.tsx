@@ -19,7 +19,6 @@ const { useState } = React
 export const SubmenuSectionList: React.FC<SubmenuSectionListProps> = ({
   section,
 }) => {
-  const { title } = section
   const links = definitely(section.links)
   const firstLink = links ? links[0] : null
   const firstLinkKey = firstLink ? firstLink._key : null
@@ -33,10 +32,6 @@ export const SubmenuSectionList: React.FC<SubmenuSectionListProps> = ({
   return (
     <>
       <SubmenuSectionLinksWrapper>
-        <Heading family="sans" color="body.6" weight={3} level={6}>
-          {title}
-        </Heading>
-
         <SubmenuSectionLinksWrapper>
           {links.map((menuLink) =>
             menuLink &&

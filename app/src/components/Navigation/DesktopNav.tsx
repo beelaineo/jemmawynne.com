@@ -70,7 +70,6 @@ export const DesktopNav = ({
                   </NavHeader>
                 </NavHeaderWrapper>
               )
-              return 'CTA'
             default:
               throw new Error(
                 // @ts-ignore
