@@ -50,8 +50,11 @@ export const richText = {
         { title: 'H2 (serif)', value: 'h2' },
         { title: 'H3 (serif)', value: 'h3' },
         { title: 'H4 (sans)', value: 'h4' },
+        { title: 'H4 (serif)', value: 'h4_serif' },
         { title: 'H5 (sans)', value: 'h5' },
+        { title: 'H5 (serif)', value: 'h5_serif' },
         { title: 'H6 (sans)', value: 'h6' },
+        { title: 'H6 (serif)', value: 'h6_serif' },
       ],
       marks: {
         decorators: [
