@@ -39,9 +39,9 @@ const getPageInfo = async (
     const pathMatch = dir.match(/(.*)\/\[(.*)\]/)
     if (!pathMatch) return
     const [_, uri, paramName] = pathMatch
-    const module = moduleMap.get(paramName)
-    if (!module || !module.getStaticPaths) return
-    const { paths } = await module.getStaticPaths()
+    const myModule = moduleMap.get(paramName)
+    if (!myModule || !myModule.getStaticPaths) return
+    const { paths } = await myModule.getStaticPaths()
     const pages = paths.map((path) => ({
       url: [uri, path.params[paramName]].join('/'),
       lastmod: path.params.updatedAt,
