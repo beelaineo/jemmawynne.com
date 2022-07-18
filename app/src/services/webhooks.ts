@@ -1,14 +1,21 @@
 import { createNextWebhooks } from '@sane-shopify/server'
 import dotEnv from 'dotenv'
 import Sentry from './sentry'
+import { config } from '../config'
 
-dotEnv.config()
+const {
+  SANITY_PROJECT_ID,
+  SANITY_DATASET,
+  SANITY_AUTH_TOKEN,
+  SHOPIFY_SHOP_NAME,
+  SHOPIFY_STOREFRONT_TOKEN,
+} = config
 
-const projectId = process.env.SANITY_PROJECT_ID
-const dataset = process.env.SANITY_DATASET
-const authToken = process.env.SANITY_AUTH_TOKEN
-const shopName = process.env.SHOPIFY_SHOP_NAME
-const accessToken = process.env.SHOPIFY_STOREFRONT_TOKEN
+const projectId = SANITY_PROJECT_ID
+const dataset = SANITY_DATASET
+const authToken = SANITY_AUTH_TOKEN
+const shopName = SHOPIFY_SHOP_NAME
+const accessToken = SHOPIFY_STOREFRONT_TOKEN
 
 if (!projectId) throw new Error('You must provide a sanity project ID')
 if (!dataset) throw new Error('You must provide a sanity dataset')
@@ -20,7 +27,7 @@ const handleError = (err: Error) => {
   Sentry.captureException(err)
 }
 
-const config = {
+const webhooksConfig = {
   secrets: {
     sanity: {
       projectId,
@@ -35,4 +42,4 @@ const config = {
   onError: handleError,
 }
 
-export const webhooks = createNextWebhooks(config)
+export const webhooks = createNextWebhooks(webhooksConfig)

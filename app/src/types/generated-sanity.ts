@@ -485,8 +485,11 @@ export interface Hero {
   contentLayout?: Maybe<Scalars['String']>
   /** Enable this to expand the hero to be full-height. (Desktop only) */
   fullHeight?: Maybe<Scalars['Boolean']>
+  heroStyle?: Maybe<Scalars['String']>
   image?: Maybe<RichImage>
+  image_secondary?: Maybe<RichImage>
   mobileImage?: Maybe<RichImage>
+  mobileImage_secondary?: Maybe<RichImage>
 }
 
 export interface HeroContent {
@@ -1474,8 +1477,11 @@ export type HeroSorting = {
   _type?: InputMaybe<SortOrder>
   contentLayout?: InputMaybe<SortOrder>
   fullHeight?: InputMaybe<SortOrder>
+  heroStyle?: InputMaybe<SortOrder>
   image?: InputMaybe<RichImageSorting>
+  image_secondary?: InputMaybe<RichImageSorting>
   mobileImage?: InputMaybe<RichImageSorting>
+  mobileImage_secondary?: InputMaybe<RichImageSorting>
 }
 
 export type PressPageFilter = {
@@ -1497,8 +1503,11 @@ export type HeroFilter = {
   _type?: InputMaybe<StringFilter>
   contentLayout?: InputMaybe<StringFilter>
   fullHeight?: InputMaybe<BooleanFilter>
+  heroStyle?: InputMaybe<StringFilter>
   image?: InputMaybe<RichImageFilter>
+  image_secondary?: InputMaybe<RichImageFilter>
   mobileImage?: InputMaybe<RichImageFilter>
+  mobileImage_secondary?: InputMaybe<RichImageFilter>
 }
 
 export type ProductInfoSorting = {

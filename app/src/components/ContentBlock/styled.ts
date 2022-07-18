@@ -126,10 +126,11 @@ export const HeroText = styled.div<HeroTextProps>`
 
 interface HeroContentWrapperProps {
   layout?: string | null
+  heroStyle?: string | null
 }
 
 export const HeroContentWrapper = styled.div<HeroContentWrapperProps>`
-  ${({ layout, theme }) => css`
+  ${({ layout, heroStyle, theme }) => css`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -165,8 +166,12 @@ export const TextContainer = styled.div`
   `}
 `
 
-export const HeroImageWrapper = styled.div`
-  ${({ theme }) => css`
+interface HeroImageWrapperProps {
+  heroStyle?: string | null
+}
+
+export const HeroImageWrapper = styled.div<HeroImageWrapperProps>`
+  ${({ theme, heroStyle }) => css`
     position: absolute;
     top: 0;
     left: 0;

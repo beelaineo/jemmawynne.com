@@ -2,7 +2,9 @@ import useSWR from 'swr'
 import { DocumentNode } from 'graphql'
 import { print } from 'graphql/language/printer'
 import { request as gqlRequest } from 'graphql-request'
-import { SANITY_GRAPHQL_URL } from '../config'
+import { config } from '../config'
+
+const { SANITY_GRAPHQL_URL } = config
 
 interface RequestOptions {
   skip?: boolean

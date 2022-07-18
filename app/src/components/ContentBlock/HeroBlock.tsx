@@ -68,22 +68,49 @@ interface HeroBlockProps {
 export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
   if (!hero) return null
   const { open: announcementOpen } = useAnnouncement()
-  const { content, image, mobileImage, fullHeight, contentLayout } = hero
-
+  const {
+    content,
+    image,
+    image_secondary,
+    mobileImage,
+    mobileImage_secondary,
+    fullHeight,
+    contentLayout,
+    heroStyle,
+  } = hero
+  // heroStyle == default, one-two, two-one
+  console.log('heroStyle', heroStyle)
   return (
     <HeroWrapper
       fullHeight={fullHeight}
       announcementOpen={announcementOpen}
       landscape={landscape}
     >
-      <HeroImageWrapper>
-        {image ? (
+      <HeroImageWrapper heroStyle={heroStyle}>
+        {image && !(heroStyle === 'one-two' || heroStyle === 'two-one') ? (
           <Image
             displayCaption={false}
             fillContainer
             ratio={0.45}
             image={image}
           />
+        ) : image &&
+          image_secondary &&
+          (heroStyle === 'one-two' || heroStyle === 'two-one') ? (
+          <>
+            <Image
+              displayCaption={false}
+              fillContainer
+              ratio={0.45}
+              image={image}
+            />
+            <Image
+              displayCaption={false}
+              fillContainer
+              ratio={0.45}
+              image={image_secondary}
+            />
+          </>
         ) : null}
         {mobileImage ? (
           <Image
@@ -94,7 +121,7 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
           />
         ) : null}
       </HeroImageWrapper>
-      <HeroContentWrapper layout={contentLayout}>
+      <HeroContentWrapper layout={contentLayout} heroStyle={heroStyle}>
         {definitely(content).map((cb) => (
           <HeroContent key={cb._key || 'some-key'} content={cb} />
         ))}

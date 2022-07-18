@@ -1,6 +1,8 @@
 import { getIdFromBase64 } from './parsing'
 import { ShopifyProduct } from '../types'
-import { FB_PRDOUCT_CATALOG_ID } from '../config'
+import { config } from '../config'
+
+const { FB_PRODUCT_CATALOG_ID } = config
 
 export const pageview = () => {
   // window.fbq('track', 'PageView')
@@ -40,7 +42,7 @@ export const reportFBViewContent = (product: ShopifyProduct): void => {
 
     template = {
       content_type: 'product',
-      product_catalog_id: `${FB_PRDOUCT_CATALOG_ID}`,
+      product_catalog_id: `${FB_PRODUCT_CATALOG_ID}`,
       contents: content_ids,
     }
 

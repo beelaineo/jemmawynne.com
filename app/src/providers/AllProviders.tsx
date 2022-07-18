@@ -10,9 +10,10 @@ import { MenuProvider } from './MenuProvider'
 import { useError } from './ErrorProvider'
 import { SearchProvider } from './SearchProvider'
 import { AnnouncementProvider } from './AnnouncementProvider'
-import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
+import { config } from '../config'
 import { ShopDataResponse } from '../graphql'
 
+const { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } = config
 /**
  * App
  *
