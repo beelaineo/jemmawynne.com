@@ -16,8 +16,8 @@
   "build": {
     "env": {
       "SC_DISABLE_SPEEDY": "true",
-      "KLAVIYO_LIST_ID": "@jw-klaviyo-list-id",
-      "KLAVIYO_API_KEY": "@jw-klaviyo-api-key"
+      "KLAVIYO_LIST_ID": "KLAVIYO_LIST_ID",
+      "KLAVIYO_API_KEY": "KLAVIYO_API_KEY"
     }
   }
 }
