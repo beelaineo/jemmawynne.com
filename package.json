@@ -46,9 +46,9 @@
 		}
 	},
 	"resolutions": {
-    "graphql": "^15.5.1",
+		"graphql": "^15.5.1",
 		"@types/react": "17.0.2",
 		"@types/react-dom": "17.0.2"
 	},
-	"dependencies": {}
+	"packageManager": "yarn@3.2.1"
 }
