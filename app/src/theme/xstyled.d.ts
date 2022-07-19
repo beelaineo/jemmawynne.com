@@ -5,7 +5,7 @@ declare module '@xstyled/styled-components' {
     ThemedStyledFunction,
     DefaultTheme,
     FlattenSimpleInterpolation,
-  } from 'styled-components'
+  } from '@xstyled/styled-components'
   export * from 'styled-components'
 
   interface Breakpoints {

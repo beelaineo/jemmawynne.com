@@ -36,7 +36,7 @@ const getCustomTextStyles = ({
   text-decoration: ${textDecoration};
 `
 
-const createTextBase = (as: any) => styled(as)`
+const createTextBase = (as: any) => styled.div`
   ${(props: CustomTextProps) => css`
     ${getCustomTextStyles(props)}
     line-height: 1.4em;
