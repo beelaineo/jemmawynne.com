@@ -5696,42 +5696,43 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xstyled/core@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@xstyled/core@npm:2.5.0"
+"@xstyled/core@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@xstyled/core@npm:3.6.0"
   dependencies:
-    "@xstyled/system": ^2.5.0
-  checksum: 8724234a67f7217704e2e61a7f37aea0e813260826867b704188b5fab6f4f8bbb643851bfdb4e183d31f1adf7280d4a6fff0c109a06412d174307b30f55965ee
+    "@xstyled/system": ^3.6.0
+    "@xstyled/util": ^3.5.1
+  checksum: 74b7689d389348a65e1539d29bcc8bc51c4103a11c6fb6664f334da5cd1405d7fb60389dd6426316d0985edc68e950b330327c634ec4b0765f6f7f81f9b6dfb5
   languageName: node
   linkType: hard
 
-"@xstyled/styled-components@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@xstyled/styled-components@npm:2.5.0"
+"@xstyled/styled-components@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@xstyled/styled-components@npm:3.6.0"
   dependencies:
-    "@xstyled/core": ^2.5.0
-    "@xstyled/system": ^2.5.0
-    "@xstyled/util": ^2.2.3
+    "@xstyled/core": ^3.6.0
+    "@xstyled/system": ^3.6.0
+    "@xstyled/util": ^3.5.1
   peerDependencies:
     styled-components: ^4.0.0 || ^5.0.0
-  checksum: fd8c1efe7e796b7423728de3808aee7916d3ce5e5b53fc9d80f41740a47a94c9e79a80d754fb8bff58d4644f7e09399a375b1e49e9a7d0643ad02f311e44bc22
+  checksum: ced49a25b5bbc5300897add3327d9fdc17d5ddfdd7d7ebd42f6ca9bc51015c0a3764c3f60a08b6e02634394da215166999b4adacef4e81305d30a1f8052481cb
   languageName: node
   linkType: hard
 
-"@xstyled/system@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@xstyled/system@npm:2.5.0"
+"@xstyled/system@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@xstyled/system@npm:3.6.0"
   dependencies:
-    "@xstyled/util": ^2.2.3
-    csstype: ^3.0.7
-  checksum: e27a12b7b9e097edd4f7e7657a6b845b9037287dcfe509fbafee580b48f3ae7abd1e1c8f2b57f5310a9fcd8c3821e9fc0b990936fb341e23beacb7ed5165a2e2
+    "@xstyled/util": ^3.5.1
+    csstype: ^3.0.8
+  checksum: 9e76d66089bf178362c7e9afddb393d6abf21a9d87820214a21750a430c40c725db32ba237485cc5aa32cee6c1b65d89a306b0100a645ad3a080ea25ccb35252
   languageName: node
   linkType: hard
 
-"@xstyled/util@npm:^2.2.3":
-  version: 2.2.3
-  resolution: "@xstyled/util@npm:2.2.3"
-  checksum: 9c290f979dc35b1e6892c6a309910c46709a672eca863ba53f13c853233539db4e618638b8213ff1b5c5cdb1ba673c7962782687e65f8ecb1ba18e0d889431fe
+"@xstyled/util@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "@xstyled/util@npm:3.5.1"
+  checksum: 6584e64a3152b72d077339351f85f70494c24131dd4ab515138cb7972b7aa6e088119bc2871e2be8cdfe9eb5b8e6c9baaca4f22f03273e3ef825213992e85244
   languageName: node
   linkType: hard
 
@@ -9299,7 +9300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2, csstype@npm:^3.0.7":
+"csstype@npm:^3.0.2, csstype@npm:^3.0.8":
   version: 3.1.0
   resolution: "csstype@npm:3.1.0"
   checksum: 644e986cefab86525f0b674a06889cfdbb1f117e5b7d1ce0fc55b0423ecc58807a1ea42ecc75c4f18999d14fc42d1d255f84662a45003a52bb5840e977eb2ffd
@@ -14287,7 +14288,7 @@ __metadata:
     "@types/zeit__next-source-maps": ^0.0.2
     "@typescript-eslint/eslint-plugin": ^5.30.7
     "@typescript-eslint/parser": ^5.30.7
-    "@xstyled/styled-components": ^2.5.0
+    "@xstyled/styled-components": ^3.6.0
     "@zeit/next-source-maps": ^0.0.3
     babel-plugin-inline-react-svg: ^2.0.1
     babel-plugin-styled-components: 2.0.7
