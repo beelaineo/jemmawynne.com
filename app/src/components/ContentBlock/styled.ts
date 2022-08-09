@@ -82,6 +82,7 @@ interface HeroTextProps {
   textPositionMobile?: string | null
   textColor?: string | null
   textColorMobile?: string | null
+  heroStyle?: string
 }
 
 export const HeroText = styled.div<HeroTextProps>`
@@ -92,14 +93,33 @@ export const HeroText = styled.div<HeroTextProps>`
     textPositionMobile,
     textColor,
     textColorMobile,
+    heroStyle,
   }) => css`
-    padding: 6;
-    display: flex;
+    padding: ${heroStyle == 'default' ? 6 : 0};
+    display: ${heroStyle == 'default' ? 'flex' : 'grid'};
     flex-grow: 1;
     justify-content: ${getFlexJustification(textPosition)};
     align-items: ${getFlexAlignment(textPosition)};
     text-align: ${textAlign || getTextAlignment(textPosition)};
     color: ${getColor(textColor)};
+
+    grid-template-columns: ${heroStyle == 'one-two' ? '2fr 3fr' : '3fr 2fr'};
+
+    ${heroStyle == 'one-two'
+      ? css`
+          & > div:first-child {
+            position: relative;
+            left: 50%;
+          }
+        `
+      : heroStyle == 'two-one'
+      ? css`
+          & > div:first-child {
+            position: relative;
+            left: 50%;
+          }
+        `
+      : null}
 
     h1 {
       font-size: 90px;
@@ -178,18 +198,31 @@ export const HeroImageWrapper = styled.div<HeroImageWrapperProps>`
     width: 100%;
     height: 100%;
 
-    & > div:nth-of-type(2) {
-      display: none;
-    }
+    ${heroStyle != 'one-two' && heroStyle != 'two-one'
+      ? css`
+          & > div:nth-of-type(2) {
+            display: none;
+          }
 
-    ${theme.mediaQueries.mobile} {
-      & > div:nth-of-type(1) {
-        display: none;
-      }
-      & > div:last-child {
-        display: block;
-      }
-    }
+          ${theme.mediaQueries.mobile} {
+            & > div:nth-of-type(1) {
+              display: none;
+            }
+            & > div:last-child {
+              display: block;
+            }
+          }
+        `
+      : heroStyle == 'one-two'
+      ? css`
+          display: inherit;
+          & > div > div:last-child {
+            order: -1;
+          }
+        `
+      : css`
+          display: inherit;
+        `}
   `}
 `
 

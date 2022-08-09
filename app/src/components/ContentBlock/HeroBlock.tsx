@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { x } from '@xstyled/styled-components'
-import { Image } from '../Image'
+import { Image, HeroImage } from '../Image'
 import { Hero, HeroContent as HeroContentType } from '../../types'
 import { Heading } from '../Text'
 import { CTA } from '../CTA'
@@ -18,9 +18,10 @@ import {
 
 interface HeroContentProps {
   content?: HeroContentType | null
+  heroStyle?: string
 }
 
-const HeroContent = ({ content }: HeroContentProps) => {
+const HeroContent = ({ content, heroStyle }: HeroContentProps) => {
   if (!content) return null
   const {
     align,
@@ -40,6 +41,7 @@ const HeroContent = ({ content }: HeroContentProps) => {
       textPositionMobile={textPositionMobile}
       textColor={textColor}
       textColorMobile={textColorMobile}
+      heroStyle={heroStyle}
     >
       <TextOuter>
         <TextContainer>
@@ -76,10 +78,8 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
     mobileImage_secondary,
     fullHeight,
     contentLayout,
-    heroStyle,
   } = hero
-  // heroStyle == default, one-two, two-one
-  console.log('heroStyle', heroStyle)
+  const heroStyle = hero?.heroStyle || 'default'
   return (
     <HeroWrapper
       fullHeight={fullHeight}
@@ -87,31 +87,26 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
       landscape={landscape}
     >
       <HeroImageWrapper heroStyle={heroStyle}>
-        {image && !(heroStyle === 'one-two' || heroStyle === 'two-one') ? (
+        {image &&
+        image_secondary &&
+        (heroStyle == 'one-two' || heroStyle == 'two-one') ? (
+          <x.div
+            position={'relative'}
+            display="grid"
+            gridTemplateColumns={heroStyle == 'one-two' ? '2fr 3fr' : '3fr 2fr'}
+            h="100%"
+          >
+            <HeroImage ratio={0.45} image={image} />
+            <HeroImage ratio={0.45} image={image_secondary} />
+          </x.div>
+        ) : (
           <Image
             displayCaption={false}
             fillContainer
             ratio={0.45}
             image={image}
           />
-        ) : image &&
-          image_secondary &&
-          (heroStyle === 'one-two' || heroStyle === 'two-one') ? (
-          <>
-            <Image
-              displayCaption={false}
-              fillContainer
-              ratio={0.45}
-              image={image}
-            />
-            <Image
-              displayCaption={false}
-              fillContainer
-              ratio={0.45}
-              image={image_secondary}
-            />
-          </>
-        ) : null}
+        )}
         {mobileImage ? (
           <Image
             displayCaption={false}
@@ -123,7 +118,11 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
       </HeroImageWrapper>
       <HeroContentWrapper layout={contentLayout} heroStyle={heroStyle}>
         {definitely(content).map((cb) => (
-          <HeroContent key={cb._key || 'some-key'} content={cb} />
+          <HeroContent
+            key={cb._key || 'some-key'}
+            content={cb}
+            heroStyle={heroStyle}
+          />
         ))}
       </HeroContentWrapper>
     </HeroWrapper>

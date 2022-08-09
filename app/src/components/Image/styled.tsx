@@ -44,6 +44,23 @@ export const ImageWrapper = styled.div<WithFill>`
   `}
 `
 
+export const HeroImageWrapper = styled.div<WithFill>`
+  ${({ fillContainer }) => css`
+    overflow: hidden;
+    ${fillContainer
+      ? css`
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        `
+      : css`
+          position: relative;
+        `}
+  `}
+`
+
 export const HoverImageWrapper = styled.div`
   position: absolute;
 

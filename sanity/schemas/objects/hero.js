@@ -87,12 +87,13 @@ export const hero = {
       type: 'array',
       fieldset: 'content',
       of: [{ type: 'heroContent' }],
-      vaildation: (Rule) => Rule.max(2),
+      validation: (Rule) => Rule.max(2),
     },
     {
       name: 'heroStyle',
       type: 'string',
       title: 'Hero Template Style',
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
           { title: 'Default', value: 'default' },

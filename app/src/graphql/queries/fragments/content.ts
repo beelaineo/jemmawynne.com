@@ -312,6 +312,12 @@ export const heroFragment = gql`
     image {
       ...SanityRichImageFragment
     }
+    image_secondary {
+      ...SanityRichImageFragment
+    }
+    mobileImage_secondary {
+      ...SanityRichImageFragment
+    }
   }
   ${sanityRichImageFragment}
   ${ctaFragment}
