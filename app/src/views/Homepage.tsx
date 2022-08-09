@@ -5,7 +5,6 @@ import { InstagramBlock } from '../components/Instagram'
 import { SEO } from '../components/SEO'
 import { Homepage as HomepageType } from '../types'
 import { getHeroImage, definitely } from '../utils'
-import Sentry from '../services/sentry'
 
 const HomepageWrapper = styled.div``
 
