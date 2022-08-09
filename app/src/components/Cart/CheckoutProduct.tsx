@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { CheckoutLineItem as CheckoutLineItemType } from '../../providers/ShopifyProvider/types'
 import { useShopify, useAnalytics } from '../../providers'
 import { StorefrontApiCheckoutLineItem } from '../../types'
@@ -46,7 +46,7 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
         <Heading level={3} my={0} fontSize="18px" weight={2}>
           {title}
         </Heading>
-        <Box my={3}>
+        <x.div my={3}>
           {definitely(variant.selectedOptions).map((option) =>
             option.value !== 'Default Title' ? (
               <Heading
@@ -56,14 +56,11 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
                 family="sans"
                 weight={3}
               >
-                {option.name}:{' '}
-                <Box as="span" color="body.7">
-                  {option.value}
-                </Box>
+                {option.name}: <x.span color="body.7">{option.value}</x.span>
               </Heading>
             ) : null,
           )}
-        </Box>
+        </x.div>
         <Heading level={5} weight={2} fontStyle="italic">
           {formatMoney(variant.priceV2)}
         </Heading>

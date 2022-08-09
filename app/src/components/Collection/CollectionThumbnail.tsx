@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import Link from 'next/link'
 import { ShopifyCollection, RichImage } from '../../types'
 import { Image } from '../Image'
@@ -30,7 +30,7 @@ export const CollectionThumbnail = ({
       <Link href={to}>
         <a>
           <Image image={image || sourceData.image} ratio={1} />
-          <Box mt={3}>
+          <x.div mt={3}>
             <Heading
               mb={3}
               weight={3}
@@ -40,7 +40,7 @@ export const CollectionThumbnail = ({
             >
               {collection.title}
             </Heading>
-          </Box>
+          </x.div>
         </a>
       </Link>
     </CollectionThumb>

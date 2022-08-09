@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
 import { Heading } from '../../components/Text'
 import { ProductInfoBlock, ShopifyProduct } from '../../types'
@@ -125,15 +125,15 @@ export const ProductDetail = ({ product }: Props) => {
                 currentVariant={currentVariant}
                 selectVariant={selectVariant}
               />
-              <Box maxWidth="small" mt={5}>
+              <x.div maxWidth="small" mt={5}>
                 <BuyButton
                   product={product}
                   addLineItem={addLineItem}
                   currentVariant={currentVariant}
                   quantity={quantity}
                 />
-              </Box>
-              <Box mt={5}>
+              </x.div>
+              <x.div mt={5}>
                 <Button level={3} onClick={openHintModal}>
                   Drop a hint
                 </Button>
@@ -153,8 +153,8 @@ export const ProductDetail = ({ product }: Props) => {
                     </a>
                   </Heading>
                 ) : null}
-              </Box>
-              <Box mt={4} pt={2} borderTop="1px solid">
+              </x.div>
+              <x.div mt={4} pt={2} borderTop="1px solid">
                 <Column maxWidth="medium">
                   {accordions
                     ? accordions
@@ -173,7 +173,7 @@ export const ProductDetail = ({ product }: Props) => {
                         )
                     : null}
                 </Column>
-              </Box>
+              </x.div>
             </ProductInfoWrapper>
           </ProductDetails>
         </Column>

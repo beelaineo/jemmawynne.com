@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import Link from 'next/link'
 import HTMLParser from 'html-parser-lite'
 import { getLinkFromHref } from '../../utils'
@@ -112,9 +112,9 @@ const transform = (node, index) => {
       )
     case 'div':
       return (
-        <Box key={index} family="serif">
+        <x.div key={index} fontFamily="serif">
           {node.childNodes.map(transform)}
-        </Box>
+        </x.div>
       )
     case 'meta':
       return null
@@ -123,9 +123,9 @@ const transform = (node, index) => {
     default:
       console.warn('Did not parse node:', node)
       return (
-        <Box key={index} family="serif">
+        <x.div key={index} fontFamily="serif">
           {node.childNodes.map(transform)}
-        </Box>
+        </x.div>
       )
   }
 }

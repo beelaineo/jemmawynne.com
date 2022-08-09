@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { Carousel as CarouselType } from '../../types'
 import { SectionHeader, SectionWrapper } from './Shared'
 import { CollectionCarousel, ItemsCarousel } from '../Carousel'
@@ -31,9 +31,9 @@ export const CarouselBlock = ({ content }: CarouselBlockProps) => {
         ) : null}
       </div>
       {cta ? (
-        <Box mt={8} mb={5} mx="auto">
+        <x.div mt={8} mb={5} mx="auto">
           <CTA cta={cta} level={2} />
-        </Box>
+        </x.div>
       ) : null}
     </SectionWrapper>
   )
