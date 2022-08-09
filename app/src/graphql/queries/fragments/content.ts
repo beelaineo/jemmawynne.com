@@ -303,6 +303,7 @@ export const heroFragment = gql`
       textColor
       textColorMobile
     }
+    heroStyle
     fullHeight
     contentLayout
     mobileImage {
