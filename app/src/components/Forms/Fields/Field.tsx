@@ -43,7 +43,7 @@ export interface FieldProps {
 }
 
 export const Field = (fieldProps: FieldProps) => {
-  const { label, required, type, helpText, children } = fieldProps
+  const { label, name, required, type, helpText, children } = fieldProps
   if (fieldProps.type === 'hidden') {
     return (
       <FormikField name={fieldProps.name}>

@@ -4,7 +4,6 @@ import { x } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
 import { Heading } from '../../components/Text'
 import { ProductInfoBlock, ShopifyProduct } from '../../types'
-import { Column } from '../../components/Layout'
 import { Button } from '../../components/Button'
 import {
   ProductVariantSelector,
@@ -104,7 +103,7 @@ export const ProductDetail = ({ product }: Props) => {
       />
 
       <Wrapper>
-        <Column maxWidth="xWide">
+        <x.div maxWidth="xWide">
           <ProductDetails>
             <ProductImagesWrapper>
               <ProductImages
@@ -155,7 +154,7 @@ export const ProductDetail = ({ product }: Props) => {
                 ) : null}
               </x.div>
               <x.div mt={4} pt={2} borderTop="1px solid">
-                <Column maxWidth="medium">
+                <x.div maxWidth="medium">
                   {accordions
                     ? accordions
                         .reduce<ProductInfoBlock[]>(
@@ -172,11 +171,11 @@ export const ProductDetail = ({ product }: Props) => {
                           ) : null,
                         )
                     : null}
-                </Column>
+                </x.div>
               </x.div>
             </ProductInfoWrapper>
           </ProductDetails>
-        </Column>
+        </x.div>
         <ProductRelated product={product} />
         <HintModal
           product={product}

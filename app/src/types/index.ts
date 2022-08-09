@@ -1,3 +1,10 @@
+// @ts-ignore
+// eslint-disable-next-line import/export
+export * from './generated-sanity'
+// @ts-ignore
+// eslint-disable-next-line import/export
+export * from './generated-shopify'
+
 import {
   SanityImageCrop,
   SanityImageHotspot,
@@ -6,11 +13,6 @@ import {
   Scalars,
   Maybe,
 } from './generated-sanity'
-// eslint-disable-next-line import/export
-import * as generatedSanity from './generated-sanity'
-import * as generatedShopify from './generated-shopify'
-
-export default { ...generatedShopify, ...generatedSanity }
 
 /**
  * Used for images returned from a raw JSON (rich text) object

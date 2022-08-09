@@ -150,7 +150,7 @@ interface LabelProps {
   children: string
 }
 
-export const Label = styled.labelBox`
+export const Label = styled.label`
   margin-bottom: 0;
   font-size: 5;
   letter-spacing: 0.25em;

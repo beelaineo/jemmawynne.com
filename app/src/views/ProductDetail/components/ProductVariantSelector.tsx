@@ -23,6 +23,7 @@ import {
   definitely,
 } from '../../../utils'
 import { ProductSwatches } from '../../../components/Product'
+import { x } from '@xstyled/styled-components'
 
 const { useState } = React
 
@@ -107,7 +108,9 @@ const OptionSelector = ({
       {validSwatchOption ? (
         <SwatchWrapper>
           <SwatchLabelWrapper>
-            <Label
+            <x.label
+              mb={0}
+              letterSpacing="0.25em"
               fontSize={6}
               fontWeight={4}
               mr={2}
@@ -117,7 +120,7 @@ const OptionSelector = ({
               key={option.name}
             >
               {option.name}:
-            </Label>
+            </x.label>
 
             <Heading
               family="sans"
@@ -138,18 +141,19 @@ const OptionSelector = ({
         </SwatchWrapper>
       ) : (
         <SelectWrapper>
-          <Label
+          <x.label
+            mb={0}
+            letterSpacing="0.25em"
             fontSize={6}
             fontWeight={4}
             mr={2}
-            mb={0}
             color="body.5"
             textTransform="uppercase"
             htmlFor={option.name}
             key={option.name}
           >
             {option.name}:
-          </Label>
+          </x.label>
 
           <Select
             onChange={handleSelectChange}

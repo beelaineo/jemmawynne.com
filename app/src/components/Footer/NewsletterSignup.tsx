@@ -1,8 +1,8 @@
 import React, { SyntheticEvent } from 'react'
 import { MdArrowForward } from 'react-icons/md'
-import { Column } from '../../components/Layout'
 import { Heading, Input } from '../../components/Text'
 import { MailerInput, MailerWrapper, InputWrapper, Message } from './styled'
+import { x } from '@xstyled/styled-components'
 
 const { useState } = React
 
@@ -40,7 +40,7 @@ export const NewsletterSignup = () => {
 
   return (
     <MailerWrapper>
-      <Column maxWidth="small">
+      <x.div maxWidth="small" my={0} mx={'auto'}>
         <MailerInput onSubmit={handleSubmit}>
           <InputWrapper
             visible={state === READY || state === PENDING}
@@ -68,7 +68,7 @@ export const NewsletterSignup = () => {
             </Heading>
           </Message>
         </MailerInput>
-      </Column>
+      </x.div>
     </MailerWrapper>
   )
 }

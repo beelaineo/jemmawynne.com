@@ -6,7 +6,7 @@ interface ColumnProps {
   center?: boolean
 }
 
-export const Column = styled.divBox`
+export const Column = styled.div`
   margin: 0 auto;
 `
 

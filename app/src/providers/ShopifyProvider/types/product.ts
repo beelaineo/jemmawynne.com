@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { Paginated } from '@good-idea/unwind-edges'
 import { Collection } from './collection'
 import { ShopifyImage } from './media'

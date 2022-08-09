@@ -115,8 +115,8 @@ interface WithReady {
   align?: string
 }
 
-export const NavSection = styled.div`
-  ${({ theme, ready }: WithReady) => css`
+export const NavSection = styled.div<WithReady>`
+  ${({ theme, ready }) => css`
     transition: 0.3s;
     flex-grow: 1;
     display: flex;
@@ -176,20 +176,22 @@ interface CartButtonProps {
 }
 
 export const CartCount = styled.span`
-  font-size: 6;
-  font-weight: 3;
-  width: 18px;
-  height: 18px;
-  font-family: sans;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid currentColor;
-  background-color: body.0;
-  position: absolute;
-  top: -4px;
-  right: -11px;
+  ${({ theme }) => css`
+    font-size: 6;
+    font-weight: 3;
+    width: 18px;
+    height: 18px;
+    font-family: sans;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid currentColor;
+    background-color: body.0;
+    position: absolute;
+    top: -4px;
+    right: -11px;
+  `}
 `
 
 export const CartButton = styled.button`
@@ -323,8 +325,8 @@ interface WithOpen {
   open: boolean
 }
 
-export const SubmenuPane = styled.div`
-  ${({ theme, open }: WithOpen) => css`
+export const SubmenuPane = styled.div<WithOpen>`
+  ${({ theme, open }) => css`
     opacity: ${open ? 1 : 0};
     pointer-events: ${open ? 'initial' : 'none'};
     position: absolute;
@@ -440,8 +442,8 @@ export const SubMenuTitle = styled.div`
   `}
 `
 
-export const SubMenuColumns = styled.div`
-  ${({ theme, active }: WithActive) => css`
+export const SubMenuColumns = styled.div<WithActive>`
+  ${({ theme, active }) => css`
     display: ${active ? 'grid' : 'none'};
     margin: 0 auto;
     max-width: xxWide;
