@@ -6,6 +6,11 @@ import {
   Scalars,
   Maybe,
 } from './generated-sanity'
+// eslint-disable-next-line import/export
+import * as generatedSanity from './generated-sanity'
+import * as generatedShopify from './generated-shopify'
+
+export default { ...generatedShopify, ...generatedSanity }
 
 /**
  * Used for images returned from a raw JSON (rich text) object
@@ -22,9 +27,6 @@ export interface SanityRawImage {
   hotspot: SanityImageHotspot
   altText?: string
 }
-export * from './generated-shopify'
-// @ts-ignore
-export * from './generated-sanity'
 
 export type SanityRichText = Scalars['JSON']
 

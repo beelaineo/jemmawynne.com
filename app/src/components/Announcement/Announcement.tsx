@@ -47,8 +47,8 @@ interface AnnouncementTextProps {
   active: boolean
 }
 
-const AnnouncementText = styled.div`
-  ${({ active, theme }: AnnouncementTextProps) => css`
+const AnnouncementText = styled.div<AnnouncementTextProps>`
+  ${({ active, theme }) => css`
     position: absolute;
     top: 0;
     left: 0;
