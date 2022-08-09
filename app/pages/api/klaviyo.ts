@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Debug from 'debug'
 import fetch from 'isomorphic-unfetch'
-import Sentry from '../../src/services/sentry'
+import { Sentry } from '../../src/services/sentry'
 import { config } from '../../src/config'
 
 const { KLAVIYO_LIST_ID, KLAVIYO_API_KEY } = config

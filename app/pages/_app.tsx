@@ -7,7 +7,6 @@ import { Footer } from '../src/components/Footer'
 import { Announcement } from '../src/components/Announcement'
 import { Providers } from '../src/providers/AllProviders'
 import { ErrorProvider, ErrorDisplay } from '../src/providers/ErrorProvider'
-// import Sentry from '../src/services/sentry'
 import { tagInfo } from '../src/services/tagManager'
 
 interface AppProps {

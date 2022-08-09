@@ -2,7 +2,7 @@ import * as React from 'react'
 import { SetErrorArgs } from './reducer'
 
 const isSanityConnectionError = (message: string): boolean =>
-  message.includes('Network error') && message.includes('caazz4uw.apicdn')
+  message.includes('Network error') && message.includes('caazz4uw')
 
 export const parseError = (error: Error): SetErrorArgs => {
   if (isSanityConnectionError(error.message)) {

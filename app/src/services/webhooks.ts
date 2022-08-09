@@ -1,6 +1,6 @@
 import { createNextWebhooks } from '@sane-shopify/server'
 import dotEnv from 'dotenv'
-import Sentry from './sentry'
+import { Sentry } from './sentry'
 import { config } from '../config'
 
 const {

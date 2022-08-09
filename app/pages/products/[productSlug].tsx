@@ -10,6 +10,7 @@ import {
 } from '../../src/graphql'
 import { NotFound, ProductDetail } from '../../src/views'
 import { definitely } from '../../src/utils'
+import { Sentry } from '../../src/services/sentry'
 
 interface ProductProps {
   product?: ShopifyProduct
@@ -58,23 +59,28 @@ interface ProductResponse {
  */
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { params } = ctx
-  if (!params) return { props: { product: undefined } }
-  const variables = { handle: params.productSlug }
+  try {
+    const { params } = ctx
+    if (!params) return { props: { product: undefined } }
+    const variables = { handle: params.productSlug }
 
-  const [response, shopData] = await Promise.all([
-    request<ProductResponse>(productQuery, variables),
-    requestShopData(),
-  ])
-  const products = response?.allShopifyProduct
+    const [response, shopData] = await Promise.all([
+      request<ProductResponse>(productQuery, variables),
+      requestShopData(),
+    ])
+    const products = response?.allShopifyProduct
 
-  const product = products && products.length ? products[0] : null
-  return {
-    props: {
-      product,
-      shopData,
-    },
-    revalidate: 60,
+    const product = products && products.length ? products[0] : null
+    return {
+      props: {
+        product,
+        shopData,
+      },
+      revalidate: 60,
+    }
+  } catch (e) {
+    Sentry.captureException(e)
+    return { props: {}, revalidate: 1 }
   }
 }
 
@@ -95,18 +101,23 @@ const pageHandlesQuery = gql`
 `
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const result = await request<ProductResponse>(pageHandlesQuery)
-  const products = definitely(result?.allShopifyProduct)
-  products.forEach((product) => {
-    if (!product?.shopifyId) throw new Error('Sorry')
-  })
-  const paths = products.map((product) => ({
-    params: { productSlug: product.handle ? product.handle : undefined },
-  }))
+  try {
+    const result = await request<ProductResponse>(pageHandlesQuery)
+    const products = definitely(result?.allShopifyProduct)
+    products.forEach((product) => {
+      if (!product?.shopifyId) throw new Error('Sorry')
+    })
+    const paths = products.map((product) => ({
+      params: { productSlug: product.handle ? product.handle : undefined },
+    }))
 
-  return {
-    paths: paths,
-    fallback: true,
+    return {
+      paths: paths,
+      fallback: true,
+    }
+  } catch (e) {
+    Sentry.captureException(e)
+    return { paths: [], fallback: true }
   }
 }
 

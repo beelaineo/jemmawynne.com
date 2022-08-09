@@ -8,7 +8,7 @@ import Document, {
 } from 'next/document'
 // import Script from 'next/script'
 import { ServerStyleSheet } from '@xstyled/styled-components'
-import Sentry from '../src/services/sentry'
+import { Sentry } from '../src/services/sentry'
 import { tagInfo } from '../src/services/tagManager'
 
 process.on('unhandledRejection', (err) => {
