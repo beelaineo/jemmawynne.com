@@ -103,7 +103,7 @@ export const HeroText = styled.div<HeroTextProps>`
     text-align: ${textAlign || getTextAlignment(textPosition)};
     color: ${getColor(textColor)};
 
-    grid-template-columns: ${heroStyle == 'one-two' ? '2fr 3fr' : '3fr 2fr'};
+    grid-template-columns: ${heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr'};
 
     ${heroStyle == 'one-two'
       ? css`

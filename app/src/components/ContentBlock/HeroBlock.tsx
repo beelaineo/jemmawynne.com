@@ -93,7 +93,7 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
           <x.div
             position={'relative'}
             display="grid"
-            gridTemplateColumns={heroStyle == 'one-two' ? '2fr 3fr' : '3fr 2fr'}
+            gridTemplateColumns={heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr'}
             h="100%"
           >
             <HeroImage ratio={0.45} image={image} />
