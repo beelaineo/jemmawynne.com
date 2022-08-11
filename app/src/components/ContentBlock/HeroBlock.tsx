@@ -45,7 +45,7 @@ const HeroContent = ({ content, heroStyle, view }: HeroContentProps) => {
       heroStyle={heroStyle}
       view={view}
     >
-      <TextOuter id={view}>
+      <TextOuter>
         <TextContainer>
           {title ? (
             <Heading mb={3} family="sans" level={6}>
@@ -89,7 +89,7 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
       landscape={landscape}
       heroStyle={heroStyle}
     >
-      <HeroImageWrapper heroStyle={heroStyle} id="imagewrapper">
+      <HeroImageWrapper heroStyle={heroStyle}>
         {image &&
         image_secondary &&
         (heroStyle == 'one-two' || heroStyle == 'two-one') ? (
