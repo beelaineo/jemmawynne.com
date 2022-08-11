@@ -98,9 +98,9 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
             display="grid"
             gridTemplateColumns={{
               _: '1fr',
-              sm: heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr',
+              md: heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr',
             }}
-            gridTemplateRows={{ _: '4fr 1fr', sm: 'unset' }}
+            gridTemplateRows={{ _: '4fr 1fr', md: 'unset' }}
             h="100%"
           >
             <HeroImage ratio={0.45} image={image} />

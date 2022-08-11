@@ -3,11 +3,13 @@ import styled, { x, css, DefaultTheme } from '@xstyled/styled-components'
 import { SystemProps } from '@xstyled/system'
 
 export interface DefaultBreakpoints {
+  _: any
   xs: any
   sm: any
   md: any
   lg: any
   xl: any
+  '2xl': any
 }
 
 type BreakpointName = keyof DefaultBreakpoints

@@ -75,11 +75,13 @@ interface AppTheme extends ITheme, XStyledDefaultTheme {
   }
 
   breakpoints?: {
+    _?: number
     xs: number
     sm: number
     md: number
     lg: number
     xl: number
+    '2xl': number
   }
 }
 

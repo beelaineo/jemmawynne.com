@@ -135,20 +135,22 @@ export const defaultTheme: Theme = {
   },
 
   breakpoints: {
+    _: 0,
     xs: 0,
     sm: 576,
     md: 650,
     lg: 900,
     xl: 1200,
+    '2xl': 1536,
   },
 
   screens: {
     _: 0,
     xs: 0,
-    sm: 650,
-    md: 768,
-    lg: 1024,
-    xl: 1280,
+    sm: 576,
+    md: 650,
+    lg: 900,
+    xl: 1200,
     '2xl': 1536,
   },
 

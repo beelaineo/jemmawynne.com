@@ -25,7 +25,7 @@ export const ProductListingHeader = ({
   return (
     <>
       {isValidHero(hero) ? <HeroBlock hero={hero} landscape /> : null}
-      <HeaderWrapper textAlign={{ xs: 'center', lg: textAlign }}>
+      <HeaderWrapper textAlign={textAlign}>
         <Heading level={1} weight={2}>
           Shop: <Span fontStyle="italic">{title}</Span>
         </Heading>
