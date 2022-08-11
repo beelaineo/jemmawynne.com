@@ -51,10 +51,11 @@ interface HeroWrapperProps {
   landscape?: boolean
   announcementOpen?: boolean
   fullHeight?: boolean | null
+  heroStyle?: string
 }
 
 export const HeroWrapper = styled.div<HeroWrapperProps>`
-  ${({ landscape, theme, announcementOpen, fullHeight }) => css`
+  ${({ landscape, theme, announcementOpen, fullHeight, heroStyle }) => css`
     position: relative;
     z-index: 0;
     width: 100%;
@@ -71,7 +72,11 @@ export const HeroWrapper = styled.div<HeroWrapperProps>`
       height: 37vw;
     }
     ${theme.mediaQueries.mobile} {
-      height: 280px;
+      height: ${heroStyle == 'one-two' || heroStyle == 'two-one'
+        ? announcementOpen
+          ? `calc(100vh - ${theme.navHeight} - ${theme.announcementHeight})`
+          : `calc(100vh - ${theme.navHeight})`
+        : '280px'};
     }
   `}
 `
@@ -83,6 +88,7 @@ interface HeroTextProps {
   textColor?: string | null
   textColorMobile?: string | null
   heroStyle?: string
+  view?: string
 }
 
 export const HeroText = styled.div<HeroTextProps>`
@@ -94,31 +100,44 @@ export const HeroText = styled.div<HeroTextProps>`
     textColor,
     textColorMobile,
     heroStyle,
+    view,
   }) => css`
-    padding: ${heroStyle == 'default' ? 6 : 0};
-    display: ${heroStyle == 'default' ? 'flex' : 'grid'};
+    padding: ${heroStyle == 'default' ? 6 : ['6 0']};
+    display: ${view == 'flexMobile'
+      ? 'none'
+      : heroStyle == 'default'
+      ? 'flex'
+      : 'grid'};
     flex-grow: 1;
     justify-content: ${getFlexJustification(textPosition)};
     align-items: ${getFlexAlignment(textPosition)};
     text-align: ${textAlign || getTextAlignment(textPosition)};
     color: ${getColor(textColor)};
 
-    grid-template-columns: ${heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr'};
+    grid-template-columns: ${view == 'flexMobile'
+      ? '1fr'
+      : heroStyle == 'one-two'
+      ? '1fr 2fr'
+      : '2fr 1fr'};
 
-    ${heroStyle == 'one-two'
+    ${heroStyle == 'one-two' && view != 'flexMobile'
       ? css`
           & > div:first-child {
             position: relative;
             left: 50%;
           }
         `
-      : heroStyle == 'two-one'
+      : heroStyle == 'two-one' && view != 'flexMobile'
       ? css`
           & > div:first-child {
             position: relative;
             left: 50%;
           }
         `
+      : view != 'flexMobile'
+      ? css`
+
+      }`
       : null}
 
     h1 {
@@ -133,6 +152,11 @@ export const HeroText = styled.div<HeroTextProps>`
     }
 
     ${theme.mediaQueries.mobile} {
+      display: ${view == 'flexMobile'
+        ? 'grid'
+        : heroStyle == 'default'
+        ? 'flex'
+        : 'none'};
       color: ${getColor(textColorMobile)};
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
@@ -140,6 +164,14 @@ export const HeroText = styled.div<HeroTextProps>`
       h1 {
         font-size: 45px;
       }
+      ${view == 'flexMobile'
+        ? css`
+            & > div {
+              max-width: 350px;
+              justify-self: center;
+            }
+          `
+        : null}
     }
   `}
 `

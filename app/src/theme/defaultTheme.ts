@@ -142,6 +142,16 @@ export const defaultTheme: Theme = {
     xl: 1200,
   },
 
+  screens: {
+    _: 0,
+    xs: 0,
+    sm: 650,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536,
+  },
+
   mediaQueries: {
     mobile: '@media screen and (max-width: 650px)',
     aboveMobile: '@media screen and (min-width: 651px)',

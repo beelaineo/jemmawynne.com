@@ -19,9 +19,10 @@ import {
 interface HeroContentProps {
   content?: HeroContentType | null
   heroStyle?: string
+  view?: string
 }
 
-const HeroContent = ({ content, heroStyle }: HeroContentProps) => {
+const HeroContent = ({ content, heroStyle, view }: HeroContentProps) => {
   if (!content) return null
   const {
     align,
@@ -42,8 +43,9 @@ const HeroContent = ({ content, heroStyle }: HeroContentProps) => {
       textColor={textColor}
       textColorMobile={textColorMobile}
       heroStyle={heroStyle}
+      view={view}
     >
-      <TextOuter>
+      <TextOuter id={view}>
         <TextContainer>
           {title ? (
             <Heading mb={3} family="sans" level={6}>
@@ -85,19 +87,34 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
       fullHeight={fullHeight}
       announcementOpen={announcementOpen}
       landscape={landscape}
+      heroStyle={heroStyle}
     >
-      <HeroImageWrapper heroStyle={heroStyle}>
+      <HeroImageWrapper heroStyle={heroStyle} id="imagewrapper">
         {image &&
         image_secondary &&
         (heroStyle == 'one-two' || heroStyle == 'two-one') ? (
           <x.div
             position={'relative'}
             display="grid"
-            gridTemplateColumns={heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr'}
+            gridTemplateColumns={{
+              _: '1fr',
+              sm: heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr',
+            }}
+            gridTemplateRows={{ _: '4fr 1fr', sm: 'unset' }}
             h="100%"
           >
             <HeroImage ratio={0.45} image={image} />
             <HeroImage ratio={0.45} image={image_secondary} />
+            {heroStyle == 'one-two' || heroStyle == 'two-one'
+              ? definitely(content).map((cb) => (
+                  <HeroContent
+                    key={cb._key || 'some-key'}
+                    content={cb}
+                    heroStyle={heroStyle}
+                    view={'flexMobile'}
+                  />
+                ))
+              : null}
           </x.div>
         ) : (
           <Image
