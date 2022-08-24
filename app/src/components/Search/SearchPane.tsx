@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
-import { Column } from '../Layout'
 import { Heading } from '../Text'
 import { ItemGrid } from '../ItemGrid'
 import { Button } from '../Button'
@@ -16,6 +15,7 @@ import {
   Wrapper,
 } from './styled'
 import { Footer } from '../Footer'
+import { x } from '@xstyled/styled-components'
 
 const { useEffect } = React
 
@@ -73,9 +73,9 @@ export const SearchPane = () => {
         </CloseButton>
 
         <SearchHeader>
-          <Column maxWidth="medium">
+          <x.div maxWidth="medium" my={0} mx={'auto'}>
             <SearchInput />
-          </Column>
+          </x.div>
         </SearchHeader>
         {searchResults === undefined ? null : (
           <Results>

@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { unwindEdges } from '@good-idea/unwind-edges'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
 import { Heading } from '../../components/Text'
 import { ProductInfoBlock, ShopifyProduct } from '../../types'
-import { Column } from '../../components/Layout'
 import { Button } from '../../components/Button'
 import {
   ProductVariantSelector,
@@ -104,7 +103,7 @@ export const ProductDetail = ({ product }: Props) => {
       />
 
       <Wrapper>
-        <Column maxWidth="xWide">
+        <x.div maxWidth="xWide">
           <ProductDetails>
             <ProductImagesWrapper>
               <ProductImages
@@ -125,15 +124,15 @@ export const ProductDetail = ({ product }: Props) => {
                 currentVariant={currentVariant}
                 selectVariant={selectVariant}
               />
-              <Box maxWidth="small" mt={5}>
+              <x.div maxWidth="small" mt={5}>
                 <BuyButton
                   product={product}
                   addLineItem={addLineItem}
                   currentVariant={currentVariant}
                   quantity={quantity}
                 />
-              </Box>
-              <Box mt={5}>
+              </x.div>
+              <x.div mt={5}>
                 <Button level={3} onClick={openHintModal}>
                   Drop a hint
                 </Button>
@@ -153,9 +152,9 @@ export const ProductDetail = ({ product }: Props) => {
                     </a>
                   </Heading>
                 ) : null}
-              </Box>
-              <Box mt={4} pt={2} borderTop="1px solid">
-                <Column maxWidth="medium">
+              </x.div>
+              <x.div mt={4} pt={2} borderTop="1px solid">
+                <x.div maxWidth="medium">
                   {accordions
                     ? accordions
                         .reduce<ProductInfoBlock[]>(
@@ -172,11 +171,11 @@ export const ProductDetail = ({ product }: Props) => {
                           ) : null,
                         )
                     : null}
-                </Column>
-              </Box>
+                </x.div>
+              </x.div>
             </ProductInfoWrapper>
           </ProductDetails>
-        </Column>
+        </x.div>
         <ProductRelated product={product} />
         <HintModal
           product={product}

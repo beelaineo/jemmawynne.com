@@ -10,8 +10,8 @@ interface SectionWrapperProps {
   theme: DefaultTheme
 }
 
-export const SectionWrapper = styled.div`
-  ${({ theme, type }: SectionWrapperProps) => css`
+export const SectionWrapper = styled.div<SectionWrapperProps>`
+  ${({ theme, type }) => css`
     padding: 6 6 6;
 
     ${type === 'carousel'

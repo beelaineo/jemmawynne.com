@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { Cta, ImageTextBlock as ImageTextBlockType } from '../../types'
 import { Image } from '../Image'
 import { Heading } from '../Text'
@@ -75,9 +75,9 @@ export const ImageTextBlock = ({ block }: ImageTextBlockProps) => {
                 </RichTextWrapper>
               ) : null}
               {cta ? (
-                <Box mt={headerFont === 'serif' ? 3 : 5}>
+                <x.div mt={headerFont === 'serif' ? 3 : 5}>
                   <CTA level={2} cta={cta} />
-                </Box>
+                </x.div>
               ) : null}
             </div>
           </TextWrapper>

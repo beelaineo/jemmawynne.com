@@ -6,6 +6,7 @@ import {
   FaPinterest,
 } from 'react-icons/fa'
 import Link from 'next/link'
+import Image from 'next/image'
 import Logo from '../../assets/Logo_Large_Black.svg'
 import { Heading } from '../../components/Text'
 import { RichText } from '../../components/RichText'
@@ -15,7 +16,7 @@ import { FooterLinkGroup } from './FooterLinkGroup'
 import { TabletLinks } from './TabletLinks'
 import { definitely } from '../../utils'
 import {
-  Socials,
+  SocialsWrapper,
   FooterWrapper,
   Company,
   LinkGroupsWrapper,
@@ -24,8 +25,44 @@ import {
   FooterBottom,
   FooterMain,
 } from './styled'
+import { x, defaultTheme } from '@xstyled/styled-components'
 
 const currentYear = new Date().getFullYear()
+
+const Socials = () => {
+  return (
+    <SocialsWrapper>
+      <a
+        href="https://www.facebook.com/Jemma-Wynne-279690269614/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaFacebookF />
+      </a>
+      <a
+        href="https://twitter.com/JEMMAWYNNE"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaTwitter />
+      </a>
+      <a
+        href="https://www.pinterest.com/jemmawynne/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaPinterest />
+      </a>
+      <a
+        href="https://www.instagram.com/jemmawynne/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaInstagram />
+      </a>
+    </SocialsWrapper>
+  )
+}
 
 export const Footer = () => {
   const { siteSettings } = useShopData()
@@ -33,41 +70,12 @@ export const Footer = () => {
   const { aboutRaw, linkGroups } = siteSettings
   return (
     <FooterWrapper>
-      <Socials>
-        <a
-          href="https://www.facebook.com/Jemma-Wynne-279690269614/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaFacebookF />
-        </a>
-        <a
-          href="https://twitter.com/JEMMAWYNNE"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaTwitter />
-        </a>
-        <a
-          href="https://www.pinterest.com/jemmawynne/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaPinterest />
-        </a>
-        <a
-          href="https://www.instagram.com/jemmawynne/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaInstagram />
-        </a>
-      </Socials>
+      <Socials />
       <NewsletterSignup />
       <FooterMain>
         <Company>
           <LogoWrapper>
-            <Logo />
+            <Image src="/static/JW-wordmark-white.png" height={30} width={65} />
           </LogoWrapper>
           <RichText body={aboutRaw} />
         </Company>
@@ -84,17 +92,17 @@ export const Footer = () => {
       <TabletLinks linkGroups={definitely(linkGroups)} />
 
       <FooterBottom>
-        <Heading color="body.5" pt="5px" level={5}>
+        <Heading color="body.4" pt="5px" level={5}>
           <Link href="/[pageSlug]" as="/terms-and-conditions">
             <a>Terms & Conditions</a>
           </Link>
         </Heading>
-        <Heading color="body.5" pt="5px" level={5}>
+        <Heading color="body.4" pt="5px" level={5}>
           <Link href="/[pageSlug]" as="/privacy-policy">
             <a>Privacy Policy</a>
           </Link>
         </Heading>
-        <Heading color="body.5" pt="5px" level={5}>
+        <Heading color="body.4" pt="5px" level={5}>
           © {currentYear} Jemma Wynne
         </Heading>
       </FooterBottom>

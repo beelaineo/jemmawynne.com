@@ -1,15 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Debug from 'debug'
-import dotEnv from 'dotenv'
 import fetch from 'isomorphic-unfetch'
-import Sentry from '../../src/services/sentry'
+import { Sentry } from '../../src/services/sentry'
+import { config } from '../../src/config'
+
+const { KLAVIYO_LIST_ID, KLAVIYO_API_KEY } = config
 
 const log = Debug('api:klaviyo')
-
-dotEnv.config()
-
-const KLAVIYO_LIST_ID = process.env.KLAVIYO_LIST_ID
-const KLAVIYO_API_KEY = process.env.KLAVIYO_API_KEY
 
 const SUBSCRIBE_ENDPOINT = `https://a.klaviyo.com/api/v2/list/${KLAVIYO_LIST_ID}/subscribe`
 

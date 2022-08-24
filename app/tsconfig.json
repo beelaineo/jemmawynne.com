@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "noImplicitAny": false,
+    "strictNullChecks": true,
     "module": "esnext",
     "moduleResolution": "node",
     "removeComments": true,
@@ -36,6 +37,7 @@
   "exclude": [
     "node_modules",
     "../node_modules",
+    "../node_modules/**/*",
     "**/*.spec.ts",
     "**/*.test.ts",
     "**/__tests__/*",

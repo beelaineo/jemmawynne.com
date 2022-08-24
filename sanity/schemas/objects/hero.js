@@ -87,7 +87,21 @@ export const hero = {
       type: 'array',
       fieldset: 'content',
       of: [{ type: 'heroContent' }],
-      vaildation: (Rule) => Rule.max(2),
+      validation: (Rule) => Rule.max(2),
+    },
+    {
+      name: 'heroStyle',
+      type: 'string',
+      title: 'Hero Template Style',
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          { title: 'Default', value: 'default' },
+          { title: 'Double (1:2 / Left)', value: 'one-two' },
+          { title: 'Double (2:1 / Right)', value: 'two-one' },
+        ],
+        layout: 'radio',
+      },
     },
     {
       name: 'contentLayout',
@@ -97,7 +111,7 @@ export const hero = {
         'Determines the layout of multiple content blocks (desktop only)',
       options: {
         list: [
-          { title: 'Horiztional', value: 'horizontal' },
+          { title: 'Horizontal', value: 'horizontal' },
           { title: 'Vertical', value: 'vertical' },
         ],
         layout: 'radio',
@@ -112,7 +126,6 @@ export const hero = {
       description:
         'Enable this to expand the hero to be full-height. (Desktop only)',
     },
-
     {
       name: 'image',
       title: 'Background Image',
@@ -128,7 +141,28 @@ export const hero = {
       fieldset: 'images',
       description: 'Recommended dimensions: 1200 x 1200',
     },
+    {
+      name: 'image_secondary',
+      title: 'Background Image (secondary)',
+      type: 'richImage',
+      fieldset: 'images',
+      hidden: ({ parent }) =>
+        parent?.heroStyle && parent?.heroStyle === 'default',
+      description: 'Recommended dimensions: 1200 x 1200',
+    },
+    {
+      name: 'mobileImage_secondary',
+      title: 'Background Image (mobile, secondary)',
+      type: 'richImage',
+      fieldset: 'images',
+      hidden: ({ parent }) =>
+        parent?.heroStyle && parent?.heroStyle === 'default',
+      description: 'Recommended dimensions: 1200 x 1200',
+    },
   ],
+  initialValue: {
+    heroStyle: 'default',
+  },
   preview: {
     select: {
       content: 'content',

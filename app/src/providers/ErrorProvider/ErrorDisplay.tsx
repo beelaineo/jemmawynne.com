@@ -45,19 +45,21 @@ const LogoWrapper = styled.div`
 `
 
 const Wrapper = styled.div`
-  width: 100%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.3);
-  padding: 6;
-  text-align: center;
-  background-color: body.1;
-  position: relative;
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => css`
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 6;
+    text-align: center;
+    background-color: ${theme.colors.body[1]};
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `}
 `
 
 interface ErrorPageProps {

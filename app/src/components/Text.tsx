@@ -1,15 +1,33 @@
 import * as React from 'react'
-import styled, {
-  css,
-  DefaultTheme,
-  Box,
-  BoxProps,
-} from '@xstyled/styled-components'
+import styled, { x, css, DefaultTheme } from '@xstyled/styled-components'
+import { SystemProps } from '@xstyled/system'
+
+export interface DefaultBreakpoints {
+  _: any
+  xs: any
+  sm: any
+  md: any
+  lg: any
+  xl: any
+  '2xl': any
+}
+
+type BreakpointName = keyof DefaultBreakpoints
+
+type BreakpointObject<ArgType> = {
+  [Key in BreakpointName]?: ArgType
+}
+
+type WithBreakpointArgs<Props> = {
+  [Key in keyof Props]?: Props[Key] | BreakpointObject<Props[Key]>
+}
+
+type BoxProps = WithBreakpointArgs<SystemProps>
 
 interface CustomTextProps extends BoxProps {
   theme: DefaultTheme
   className?: string
-  fontSize: 1 | 2 | 3 | 4 | 5 | 6 | 7
+  fontSize?: 1 | 2 | 3 | 4 | 5 | 6 | 7
   fontStyle?: string
   family?: string
   weight?: number
@@ -36,7 +54,7 @@ const getCustomTextStyles = ({
   text-decoration: ${textDecoration};
 `
 
-const createTextBase = (as: any) => styled(as)`
+const createTextBase = (as: any) => styled.div`
   ${(props: CustomTextProps) => css`
     ${getCustomTextStyles(props)}
     line-height: 1.4em;
@@ -60,7 +78,7 @@ const createTextBase = (as: any) => styled(as)`
   `}
 `
 
-const TextBase = createTextBase(Box)
+const TextBase = createTextBase(x.div)
 
 interface HeadingProps
   extends Omit<CustomTextProps, 'fontSize' | 'theme'>,
@@ -134,7 +152,7 @@ interface LabelProps {
   children: string
 }
 
-export const Label = styled.labelBox`
+export const Label = styled.label`
   margin-bottom: 0;
   font-size: 5;
   letter-spacing: 0.25em;
@@ -202,20 +220,22 @@ export const Span = styled(createTextBase(SpanBase))`
 `
 
 export const Input = styled.input`
-  border: 1px solid;
-  border-color: body.4;
-  font-family: serif;
-  font-size: 4;
-  width: 100%;
-  height: 32px;
-  padding: 0 3;
-  letter-spacing: 0.06em;
-
-  &:focus {
-    border-color: body.6;
-  }
-
-  &::placeholder {
+  ${({ theme }) => css`
+    border: 1px solid;
+    border-color: ${theme.colors.body[4]};
+    font-family: serif;
+    font-size: 4;
+    width: 100%;
+    height: 32px;
+    padding: 0 3;
     letter-spacing: 0.06em;
-  }
+
+    &:focus {
+      border-color: ${theme.colors.body[6]};
+    }
+
+    &::placeholder {
+      letter-spacing: 0.06em;
+    }
+  `}
 `

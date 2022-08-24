@@ -1,14 +1,15 @@
 import createSanityClient from '@sanity/client'
 import { withTypenames } from '../utils'
+import { config } from '../config'
 
-const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID
-const SANITY_DATASET = process.env.SANITY_DATASET
-const SANITY_READ_TOKEN = process.env.SANITY_READ_TOKEN
+const { SANITY_PROJECT_ID, SANITY_DATASET, SANITY_READ_TOKEN } = config
 
 if (!SANITY_PROJECT_ID)
   throw new Error('You must include a SANITY_PROJECT_ID variable')
 if (!SANITY_DATASET)
   throw new Error('You must include a SANITY_DATASET variable')
+if (!SANITY_READ_TOKEN)
+  throw new Error('You must include a SANITY_READ_TOKEN variable')
 
 const isBrowser = typeof window !== 'undefined'
 

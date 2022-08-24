@@ -1,9 +1,11 @@
 import * as NodeSentryInitializer from '@sentry/node'
 import * as BrowserSentryInitializer from '@sentry/browser'
+import type { Scope } from '@sentry/browser'
 import path from 'path'
 import { RewriteFrames } from '@sentry/integrations'
 import Debug from 'debug'
 import { Severity } from '@sentry/node'
+import { config } from '../config'
 
 /** Some Sentry setup for sourcemaps */
 // This allows TypeScript to detect our global value
@@ -23,23 +25,23 @@ global.__rootdir__ = rootdir
 
 const debug = Debug('dev:sentry')
 
-const ENV = process.env.NODE_ENV
+const ENV = process.env.NODE_ENV as 'production' | 'development' | 'staging'
 const FORCE = Boolean(process.env.FORCE_SENTRY)
-const DSN = process.env.SENTRY_DSN
+
+const { SENTRY_DSN } = config
 
 const SentryInitializer =
   typeof window === 'undefined'
     ? NodeSentryInitializer
     : BrowserSentryInitializer
 
-let Sentry: typeof SentryInitializer
+export let Sentry: typeof SentryInitializer
 
-// @ts-ignore
 if (ENV === 'production' || ENV === 'staging' || FORCE) {
-  if (!DSN) throw new Error('No Sentry DSN supplied')
+  if (!SENTRY_DSN) throw new Error('No Sentry DSN supplied')
   Sentry = SentryInitializer
   Sentry.init({
-    dsn: DSN,
+    dsn: SENTRY_DSN,
     environment: ENV,
     integrations: [
       new RewriteFrames({
@@ -48,6 +50,7 @@ if (ENV === 'production' || ENV === 'staging' || FORCE) {
     ],
   })
 } else {
+  debug('Mocking local sentry')
   const noop = () => undefined
   Sentry = {
     // @ts-ignore
@@ -57,8 +60,12 @@ if (ENV === 'production' || ENV === 'staging' || FORCE) {
     parsers: {
       parseRequest: noop,
     },
-    configureScope: () => undefined,
-    captureException: (e: any) => {
+    setContext: (name: string, ctx: any) => {
+      debug('Set context:')
+      debug({ [name]: ctx })
+    },
+    configureScope: (callback: (scope: Scope) => void) => undefined,
+    captureException: (e: Error) => {
       debug('Captured exception:')
       debug(e)
       const randomId = Math.random().toString().replace('0.', '')
@@ -71,5 +78,3 @@ if (ENV === 'production' || ENV === 'staging' || FORCE) {
     },
   }
 }
-
-export default Sentry

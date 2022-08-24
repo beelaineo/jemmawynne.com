@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { CollectionGrid as CollectionGridType } from '../../types'
 import { definitely } from '../../utils'
 import { Heading } from '../Text'
@@ -31,12 +31,12 @@ export const CollectionGridBlock: React.FC<CollectionGridBlockProps> = ({
       <Heading textAlign="center" mb={3} family="sans" level={4}>
         {title}
       </Heading>
-      <Box maxWidth="xWide" mx="auto">
+      <x.div maxWidth="xWide" mx="auto">
         <ItemGrid items={definitely(collection.products).slice(0, 12)} />
-      </Box>
-      <Box display="flex" justifyContent="center" mt={9}>
+      </x.div>
+      <x.div display="flex" justifyContent="center" mt={9}>
         <CTA level={1} cta={collectionCta} />
-      </Box>
+      </x.div>
     </SectionWrapper>
   )
 }

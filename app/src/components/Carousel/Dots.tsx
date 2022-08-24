@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
-import { Column } from '../Layout'
 
 interface DotsProps {
   currentSlide: number

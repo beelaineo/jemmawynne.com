@@ -1,10 +1,5 @@
 import * as React from 'react'
-import {
-  ErrorMessage,
-  Field as FormikField,
-  FieldProps as FormikFieldProps,
-  FieldValidator,
-} from 'formik'
+import { ErrorMessage, Field as FormikField } from 'formik'
 import { Heading } from '../../Text'
 import { Checkbox } from './Checkbox'
 import { Radio } from './Radio'
@@ -24,9 +19,10 @@ export interface Option {
   disabled?: boolean
 }
 
-export type WithFormik<T> = T & {
-  formik: FormikFieldProps
-}
+export type FieldValidator = (
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  value: any,
+) => string | void | Promise<string | void>
 
 export interface FieldProps {
   label?: string | React.ReactNode
@@ -47,7 +43,7 @@ export interface FieldProps {
 }
 
 export const Field = (fieldProps: FieldProps) => {
-  const { label, required, type, helpText, children } = fieldProps
+  const { label, name, required, type, helpText, children } = fieldProps
   if (fieldProps.type === 'hidden') {
     return (
       <FormikField name={fieldProps.name}>

@@ -3,13 +3,13 @@ import {
   PageBlock as PageBlockType,
   RichTextBlock as RichTextBlockType,
   CarouselOrCollectionGridOrHeroOrImageTextSectionOrPageBlockOrRichTextBlock,
+  Maybe,
 } from '../../types'
 import { CarouselBlock } from './CarouselBlock'
 import { ImageTextSection } from './ImageTextSection'
 import { HeroBlock } from './HeroBlock'
 import { CollectionGridBlock } from './CollectionGridBlock'
 import { Image } from '../Image'
-import { Column } from '../Layout'
 import { Heading } from '../Text'
 import { RichText } from '../RichText'
 import { definitely } from '../../utils'
@@ -21,15 +21,28 @@ import {
   PageBlockWrapper,
   PageText,
 } from './styled'
+import styled, { css } from '@xstyled/styled-components'
 
 interface RichTextBlockProps {
   block: RichTextBlockType
 }
 
+interface ColumnProps {
+  textAlign?: Maybe<string> | null
+}
+
+const Column = styled.div<ColumnProps>`
+  ${({ textAlign }) => css`
+    margin: 5 auto;
+    max-width: medium;
+    text-align: ${textAlign ? textAlign : 'left'};
+  `}
+`
+
 const RichTextBlock = ({ block }: RichTextBlockProps) => {
   const { textAlign } = block
   return (
-    <Column my={5} maxWidth="medium" textAlign={textAlign}>
+    <Column textAlign={textAlign}>
       <RichText body={block.bodyRaw} />
     </Column>
   )

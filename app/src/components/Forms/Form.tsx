@@ -1,12 +1,19 @@
 import * as React from 'react'
 import styled, { css } from '@xstyled/styled-components'
-import { Formik, FormikConfig, FormikValues } from 'formik'
+// eslint-disable-next-line import/named
+import { Formik, FormikValues } from 'formik'
 import { FormWrapper } from './styled'
 import { Heading } from '../Text'
 
 interface FormElementProps {
   isSubmitting: boolean
   disabled?: boolean
+}
+
+export interface FormikConfig<Values> {
+  initialValues: Values
+  validate?: (props: Values) => void
+  validateOnChange?: boolean
 }
 
 const FormElement = styled.form`
@@ -25,9 +32,9 @@ interface FormProps<FormValues extends FormikValues>
   description?: string
   children: React.ReactNode
   disabled?: boolean
-  // onSubmit: (values: FormValues) => void
-  // initialValues: FormValues
-  // validationSchema?: FormikValues['validationSchema']
+  onSubmit: (values: FormValues) => void
+  initialValues: FormValues
+  validationSchema?: FormikValues['validationSchema']
 }
 
 interface BaseValues {

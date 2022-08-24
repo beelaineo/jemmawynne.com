@@ -7,13 +7,25 @@
     "projectId": "caazz4uw",
     "dataset": "production"
   },
-  "env": {
-    "development": {
+  "__experimental_spaces": [
+    {
+      "name": "production",
+      "title": "Production",
+      "default": true,
       "api": {
+        "projectId": "caazz4uw",
+        "dataset": "production"
+      }
+    },
+    {
+      "name": "staging",
+      "title": "Staging",
+      "api": {
+        "projectId": "caazz4uw",
         "dataset": "staging"
       }
     }
-  },
+  ],
   "plugins": [
     "@sanity/base",
     "@sanity/components",

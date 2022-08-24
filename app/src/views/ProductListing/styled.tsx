@@ -40,13 +40,25 @@ export const CollectionsMenu = styled.div`
 `
 
 export const Hr = styled.hr`
-  border: 0;
-  border-bottom: 1px solid currentColor;
-  color: body.8;
-  box-shadow: none;
-  margin: 0;
+  ${({ theme }) => css`
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    color: ${theme.colors.body[8]};
+    box-shadow: none;
+    margin: 0;
+  `}
 `
+interface WithTextAlign {
+  textAlign?: string
+}
 
-export const HeaderWrapper = styled.divBox`
-  padding: 6 6 3;
+export const HeaderWrapper = styled.div<WithTextAlign>`
+  ${({ theme, textAlign }) => css`
+    padding: 6 6 3;
+    text-align: center;
+
+    ${theme.mediaQueries.aboveTablet} {
+      text-align: ${textAlign};
+    }
+  `}
 `

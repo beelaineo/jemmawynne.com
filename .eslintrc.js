@@ -4,12 +4,17 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
+    'plugin:prettier/recommended',
+    'plugin:import/typescript',
+    'plugin:import/recommended',
   ],
   parserOptions: {
     sourceType: 'module',
   },
   rules: {
     'no-unused-vars': 'off',
+    'import/no-unresolved': [2, { ignore: ['^(all|part):'] }],
+    'import/export': 0,
     'react/prop-types': 'off',
     'react/display-name': 'off',
     '@typescript-eslint/no-empty-interface': 'warn',

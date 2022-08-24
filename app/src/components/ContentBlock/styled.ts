@@ -51,10 +51,11 @@ interface HeroWrapperProps {
   landscape?: boolean
   announcementOpen?: boolean
   fullHeight?: boolean | null
+  heroStyle?: string
 }
 
 export const HeroWrapper = styled.div<HeroWrapperProps>`
-  ${({ landscape, theme, announcementOpen, fullHeight }) => css`
+  ${({ landscape, theme, announcementOpen, fullHeight, heroStyle }) => css`
     position: relative;
     z-index: 0;
     width: 100%;
@@ -71,7 +72,11 @@ export const HeroWrapper = styled.div<HeroWrapperProps>`
       height: 37vw;
     }
     ${theme.mediaQueries.mobile} {
-      height: 280px;
+      height: ${heroStyle == 'one-two' || heroStyle == 'two-one'
+        ? announcementOpen
+          ? `calc(100vh - ${theme.navHeight} - ${theme.announcementHeight})`
+          : `calc(100vh - ${theme.navHeight})`
+        : '280px'};
     }
   `}
 `
@@ -82,6 +87,8 @@ interface HeroTextProps {
   textPositionMobile?: string | null
   textColor?: string | null
   textColorMobile?: string | null
+  heroStyle?: string
+  view?: string
 }
 
 export const HeroText = styled.div<HeroTextProps>`
@@ -92,14 +99,46 @@ export const HeroText = styled.div<HeroTextProps>`
     textPositionMobile,
     textColor,
     textColorMobile,
+    heroStyle,
+    view,
   }) => css`
-    padding: 6;
-    display: flex;
+    padding: ${heroStyle == 'default' ? 6 : ['6 0']};
+    display: ${view == 'flexMobile'
+      ? 'none'
+      : heroStyle == 'default'
+      ? 'flex'
+      : 'grid'};
     flex-grow: 1;
     justify-content: ${getFlexJustification(textPosition)};
     align-items: ${getFlexAlignment(textPosition)};
     text-align: ${textAlign || getTextAlignment(textPosition)};
     color: ${getColor(textColor)};
+
+    grid-template-columns: ${view == 'flexMobile'
+      ? '1fr'
+      : heroStyle == 'one-two'
+      ? '1fr 2fr'
+      : '2fr 1fr'};
+
+    ${heroStyle == 'one-two' && view != 'flexMobile'
+      ? css`
+          & > div:first-child {
+            position: relative;
+            left: 50%;
+          }
+        `
+      : heroStyle == 'two-one' && view != 'flexMobile'
+      ? css`
+          & > div:first-child {
+            position: relative;
+            left: 50%;
+          }
+        `
+      : view != 'flexMobile'
+      ? css`
+
+      }`
+      : null}
 
     h1 {
       font-size: 90px;
@@ -113,6 +152,11 @@ export const HeroText = styled.div<HeroTextProps>`
     }
 
     ${theme.mediaQueries.mobile} {
+      display: ${view == 'flexMobile'
+        ? 'grid'
+        : heroStyle == 'default'
+        ? 'flex'
+        : 'none'};
       color: ${getColor(textColorMobile)};
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
@@ -120,16 +164,25 @@ export const HeroText = styled.div<HeroTextProps>`
       h1 {
         font-size: 45px;
       }
+      ${view == 'flexMobile'
+        ? css`
+            & > div {
+              max-width: 350px;
+              justify-self: center;
+            }
+          `
+        : null}
     }
   `}
 `
 
 interface HeroContentWrapperProps {
   layout?: string | null
+  heroStyle?: string | null
 }
 
 export const HeroContentWrapper = styled.div<HeroContentWrapperProps>`
-  ${({ layout, theme }) => css`
+  ${({ layout, heroStyle, theme }) => css`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -165,26 +218,43 @@ export const TextContainer = styled.div`
   `}
 `
 
-export const HeroImageWrapper = styled.div`
-  ${({ theme }) => css`
+interface HeroImageWrapperProps {
+  heroStyle?: string | null
+}
+
+export const HeroImageWrapper = styled.div<HeroImageWrapperProps>`
+  ${({ theme, heroStyle }) => css`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 
-    & > div:nth-of-type(2) {
-      display: none;
-    }
+    ${heroStyle != 'one-two' && heroStyle != 'two-one'
+      ? css`
+          & > div:nth-of-type(2) {
+            display: none;
+          }
 
-    ${theme.mediaQueries.mobile} {
-      & > div:nth-of-type(1) {
-        display: none;
-      }
-      & > div:last-child {
-        display: block;
-      }
-    }
+          ${theme.mediaQueries.mobile} {
+            & > div:nth-of-type(1) {
+              display: none;
+            }
+            & > div:last-child {
+              display: block;
+            }
+          }
+        `
+      : heroStyle == 'one-two'
+      ? css`
+          display: inherit;
+          & > div > div:last-child {
+            order: -1;
+          }
+        `
+      : css`
+          display: inherit;
+        `}
   `}
 `
 

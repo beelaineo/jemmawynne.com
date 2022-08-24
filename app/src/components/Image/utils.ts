@@ -6,9 +6,9 @@ import {
   RichImage,
   ShopifySourceImage,
 } from '../../types'
+import { config } from '../../config'
 
-const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID
-const SANITY_DATASET = process.env.SANITY_DATASET
+const { SANITY_PROJECT_ID, SANITY_DATASET } = config
 
 if (!SANITY_PROJECT_ID)
   throw new Error('You must include a SANITY_PROJECT_ID variable')

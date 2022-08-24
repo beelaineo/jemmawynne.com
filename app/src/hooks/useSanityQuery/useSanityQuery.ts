@@ -78,8 +78,8 @@ export const useSanityQuery = <
 
   const fetchOrGetClient = async (): Promise<SanityClient> => {
     if (sanityClient) return sanityClient
-    const module = await import('../../services/sanity')
-    const client = module.sanityClient
+    const sanityModule = await import('../../services/sanity')
+    const client = sanityModule.sanityClient
     setSanityClient(client)
     return client
   }

@@ -11,6 +11,7 @@ import {
 import { Homepage as HomepageType } from '../src/types'
 import { Homepage as HomepageView } from '../src/views/Homepage'
 import { NotFound } from '../src/views/NotFound'
+import { Sentry } from '../src/services/sentry'
 
 interface HomepageResponse {
   Homepage: HomepageType
@@ -51,9 +52,13 @@ interface HomepageProps {
 }
 
 export const Homepage = ({ homepage }: HomepageProps) => {
-  if (!homepage) return <NotFound />
-
-  return <HomepageView homepage={homepage} />
+  try {
+    if (!homepage) return <NotFound />
+    return <HomepageView homepage={homepage} />
+  } catch (e) {
+    Sentry.captureException(e)
+    return <NotFound />
+  }
 }
 
 export const getStaticProps: GetStaticProps = async () => {

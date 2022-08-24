@@ -1,3 +1,10 @@
+// @ts-ignore
+// eslint-disable-next-line import/export
+export * from './generated-sanity'
+// @ts-ignore
+// eslint-disable-next-line import/export
+export * from './generated-shopify'
+
 import {
   SanityImageCrop,
   SanityImageHotspot,
@@ -22,9 +29,6 @@ export interface SanityRawImage {
   hotspot: SanityImageHotspot
   altText?: string
 }
-export * from './generated-shopify'
-// @ts-ignore
-export * from './generated-sanity'
 
 export type SanityRichText = Scalars['JSON']
 

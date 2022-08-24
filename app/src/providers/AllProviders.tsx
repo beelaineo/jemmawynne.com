@@ -7,12 +7,13 @@ import { ShopifyProvider } from './ShopifyProvider'
 import { ShopDataProvider } from './ShopDataProvider'
 import { AnalyticsProvider } from './AnalyticsProvider'
 import { MenuProvider } from './MenuProvider'
-import { useError } from './ErrorProvider'
+import { useError, ErrorDisplay, ErrorProvider } from './ErrorProvider'
 import { SearchProvider } from './SearchProvider'
 import { AnnouncementProvider } from './AnnouncementProvider'
-import { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } from '../config'
+import { config } from '../config'
 import { ShopDataResponse } from '../graphql'
 
+const { SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN } = config
 /**
  * App
  *
@@ -66,19 +67,21 @@ const shopifyQuery = (handleError: ErrorHandler) => {
 export const Providers = ({ children, shopData }: Props) => {
   const { handleError } = useError()
   return (
-    <AnalyticsProvider>
-      <ShopifyProvider query={shopifyQuery(handleError)}>
-        <ShopDataProvider shopData={shopData}>
-          <ThemeProvider theme={defaultTheme}>
-            <GlobalStyles />
-            <AnnouncementProvider>
-              <MenuProvider>
-                <SearchProvider>{children}</SearchProvider>
-              </MenuProvider>
-            </AnnouncementProvider>
-          </ThemeProvider>
-        </ShopDataProvider>
-      </ShopifyProvider>
-    </AnalyticsProvider>
+    <ErrorProvider>
+      <AnalyticsProvider>
+        <ShopifyProvider query={shopifyQuery(handleError)}>
+          <ShopDataProvider shopData={shopData}>
+            <ThemeProvider theme={defaultTheme}>
+              <GlobalStyles />
+              <AnnouncementProvider>
+                <MenuProvider>
+                  <SearchProvider>{children}</SearchProvider>
+                </MenuProvider>
+              </AnnouncementProvider>
+            </ThemeProvider>
+          </ShopDataProvider>
+        </ShopifyProvider>
+      </AnalyticsProvider>
+    </ErrorProvider>
   )
 }

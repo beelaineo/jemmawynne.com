@@ -43,19 +43,14 @@ interface SlidesContainerProps {
   theme: DefaultTheme
 }
 
-export const SlidesContainer = styled.div.attrs<SlidesContainerProps>(
-  (props) => ({
-    style: {
-      transform: `translateX(${props.left}px)`,
-    },
-  }),
-)`
-  ${({ theme, isSwiping }: SlidesContainerProps) => css`
+export const SlidesContainer = styled.div<SlidesContainerProps>`
+  ${({ theme, left, isSwiping }) => css`
     position: relative;
     height: 100%;
     width: 100%;
     top: 0;
     white-space: nowrap;
+    transform: translateX(${left}px);
     transition: ${isSwiping ? 0 : '0.4s cubic-bezier(0.57, 0.06, 0.05, 0.95)'};
 
     & > * {
@@ -74,8 +69,8 @@ interface WithColumnCount {
   single?: boolean
 }
 
-export const SlideContainer = styled.div`
-  ${({ theme, columnCount, single }: WithColumnCount) => css`
+export const SlideContainer = styled.div<WithColumnCount>`
+  ${({ theme, columnCount, single }) => css`
     height: 100%;
     text-align: center;
     margin-right: 5;

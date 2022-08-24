@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Heading } from '../../components/Text'
-import { Column } from '../../components/Layout'
 import { PressItem as PressItemType, PressPage } from '../../types'
 import { PressItemsContainer } from './styled'
 import { PressItem } from './PressItem'
 import { definitely } from '../../utils'
 import { SEO } from '../../components/SEO'
+import { x } from '@xstyled/styled-components'
 
 interface PressViewProps {
   pressPage: PressPage
@@ -20,7 +20,7 @@ export const PressView = ({ pressPage, pressItems }: PressViewProps) => {
   return (
     <>
       <SEO seo={seo} defaultSeo={defaultSeo} path="press" />
-      <Column py={5} maxWidth="wide">
+      <x.div py={5} maxWidth="wide">
         <Heading fontWeight={1} textAlign="center" level={1}>
           {pressPage.title || 'Press'}
         </Heading>
@@ -29,7 +29,7 @@ export const PressView = ({ pressPage, pressItems }: PressViewProps) => {
             <PressItem key={pi._id || 'some-key'} pressItem={pi} />
           ))}
         </PressItemsContainer>
-      </Column>
+      </x.div>
     </>
   )
 }

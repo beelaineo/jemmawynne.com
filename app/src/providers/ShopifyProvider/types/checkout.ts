@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { Paginated } from '@good-idea/unwind-edges'
 import { MailingAddress } from './customer'
 import { Variant } from './product'

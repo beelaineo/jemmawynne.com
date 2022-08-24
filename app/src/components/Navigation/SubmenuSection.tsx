@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import {
   SubmenuSection as SubmenuSectionType,
   RichPageLink as RichPageLinkType,
@@ -30,7 +30,7 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
           image={image}
           ratio={1}
         />
-        <Box mt={2} textAlign="center">
+        <x.div mt={2} textAlign="center">
           <Heading
             family="sans"
             weight={4}
@@ -40,7 +40,7 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
           >
             {linkTitle}
           </Heading>
-        </Box>
+        </x.div>
       </DocumentLink>
     </ImageLinkWrapper>
   )

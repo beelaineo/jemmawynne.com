@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { CtaOrSubMenu, InternalLink } from '../../types'
 import { DocumentLink } from '../../components/DocumentLink'
 import { Heading } from '../../components/Text'
@@ -117,7 +117,7 @@ export const TabletSubMenu = ({
           title={menuItem.title}
           borders
         >
-          <Box mt={5}>
+          <x.div mt={5}>
             {definitely(menuItem.columns).map((column) => {
               if (!column.title) {
                 throw new Error('Menu subcolumn was not provided with a title')
@@ -136,7 +136,7 @@ export const TabletSubMenu = ({
                   title={column.title}
                   indent
                 >
-                  <Box mb={4}>
+                  <x.div mb={4}>
                     {column.__typename === 'SubmenuSection' ? (
                       definitely(column.links).map((link) => {
                         switch (link.__typename) {
@@ -181,11 +181,11 @@ export const TabletSubMenu = ({
                         )}
                       </React.Fragment>
                     )}
-                  </Box>
+                  </x.div>
                 </SubMenuAccordion>
               )
             })}
-          </Box>
+          </x.div>
         </SubMenuAccordion>
       )
     case 'Cta':

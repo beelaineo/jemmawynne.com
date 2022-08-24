@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css, Box } from '@xstyled/styled-components'
+import styled, { css, x } from '@xstyled/styled-components'
 import {
   Maybe,
   Stockist as StockistType,
@@ -7,7 +7,7 @@ import {
 } from '../types'
 import { Heading } from '../components/Text'
 import { ContentBlock } from '../components/ContentBlock'
-import { TextHeader, Column } from '../components/Layout'
+import { TextHeader } from '../components/Layout'
 import { SEO } from '../components/SEO'
 import { definitely } from '../utils'
 
@@ -105,13 +105,13 @@ export const Stockists = ({ stockists }: StockistsProps) => {
       {definitely(content).map((c) => (
         <ContentBlock key={c._key || 'some-key'} content={c} />
       ))}
-      <Box pb={7}>
+      <x.div pb={7}>
         <TextHeader>
           <Heading weight={1} level={1}>
             Where to Buy
           </Heading>
         </TextHeader>
-        <Column maxWidth="wide">
+        <x.div maxWidth="wide" my={0} mx={'auto'}>
           {us && us.length && showUs ? (
             <SectionWrapper>
               <Heading level={1} fontWeight={1} textAlign="center">
@@ -136,8 +136,8 @@ export const Stockists = ({ stockists }: StockistsProps) => {
               <StockistList stockists={online} />
             </SectionWrapper>
           ) : null}
-        </Column>
-      </Box>
+        </x.div>
+      </x.div>
     </>
   )
 }
