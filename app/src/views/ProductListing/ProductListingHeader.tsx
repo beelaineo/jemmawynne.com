@@ -4,6 +4,7 @@ import { Span, Heading } from '../../components/Text'
 import { HeaderWrapper } from './styled'
 import { HeroBlock } from '../../components/ContentBlock'
 import { isValidHero } from '../../utils'
+import { x } from '@xstyled/styled-components'
 
 interface ProductListingHeaderProps {
   collection: ShopifyCollection
@@ -27,7 +28,7 @@ export const ProductListingHeader = ({
       {isValidHero(hero) ? <HeroBlock hero={hero} landscape /> : null}
       <HeaderWrapper textAlign={textAlign}>
         <Heading level={1} weight={2}>
-          Shop: <Span fontStyle="italic">{title}</Span>
+          Shop: <x.span fontStyle="italic">{title}</x.span>
         </Heading>
       </HeaderWrapper>
     </>

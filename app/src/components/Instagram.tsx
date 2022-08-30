@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { css } from '@xstyled/styled-components'
+import styled, { css, x } from '@xstyled/styled-components'
 import { Heading } from './Text'
 import { Image } from './Image'
 import { useShopData } from '../providers/ShopDataProvider'
@@ -69,7 +69,7 @@ export const InstagramBlock = () => {
         level={4}
       >
         <a href={href} target="_blank" rel="noopener noreferrer">
-          Follow us at <Span color="body.6">@{handle}</Span>
+          Follow us at <x.span color="body.6">@{handle}</x.span>
         </a>
       </Heading>
       <ImagesContainer>
