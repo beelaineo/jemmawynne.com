@@ -4,10 +4,10 @@ interface WithUpdating {
   updating: boolean
 }
 export const Wrapper = styled.div<WithUpdating>`
-  ${({ updating }) => css`
+  ${({ theme, updating }) => css`
     display: grid;
     grid-template-columns: 110px 1fr;
-    grid-column-gap: 3;
+    grid-column-gap: ${theme.space[3]}px;
     opacity: ${updating ? 0.5 : 1};
     pointer-events: ${updating ? 'none' : 'inherit'};
   `}
@@ -69,8 +69,10 @@ export const CartMessage = styled.div`
 `
 
 export const TitleWrapper = styled.div`
-  height: 45px;
-  background-color: body.2;
+  ${({ theme }) => css`
+    height: 45px;
+    background-color: ${theme.colors.body[2]};
+  `}
 `
 
 export const LineItemsWrapper = styled.div`
@@ -81,11 +83,11 @@ export const LineItemsWrapper = styled.div`
     padding: 6 0;
     display: grid;
     grid-template-columns: 1;
-    grid-gap: 6;
+    grid-gap: ${theme.space[6]}px;
 
     ${theme.mediaQueries.mobile} {
       padding: 5 0;
-      grid-gap: 5;
+      grid-gap: ${theme.space[5]}px;
     }
   `}
 `

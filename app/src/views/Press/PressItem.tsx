@@ -52,7 +52,7 @@ export const PressItem = ({ pressItem }: PressItemProps) => {
             image={image}
             sizes="(max-width: 600px) 90vw, 500px"
           />
-          <Heading fontWeight={1} mt={3} mb={subtitle ? 0 : 2} level={3}>
+          <Heading weight={1} mt={3} mb={subtitle ? 0 : 2} level={3}>
             {title}
           </Heading>
           {subtitle ? (

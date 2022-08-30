@@ -31,22 +31,24 @@ const RichImageWrapper = styled.div`
 `
 
 const RichTextWrapper = styled.div`
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin-top: 2.5em;
-    margin-bottom: 1em;
-    &:first-child {
-      margin-top: 0;
+  ${({ theme }) => css`
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 2.5em;
+      margin-bottom: 1em;
+      &:first-child {
+        margin-top: 0;
+      }
     }
-  }
-  a {
-    text-decoration: underline;
-    color: body.7;
-  }
+    a {
+      text-decoration: underline;
+      color: inherit;
+    }
+  `}
 `
 
 /* eslint-disable react/display-name */
@@ -57,11 +59,11 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
     return <Ul {...props} />
   },
   marks: {
-    thin: ({ children }) => <Span fontWeight={100}>{children}</Span>,
-    light: ({ children }) => <Span fontWeight={200}>{children}</Span>,
-    book: ({ children }) => <Span fontWeight={300}>{children}</Span>,
-    regular: ({ children }) => <Span fontWeight={400}>{children}</Span>,
-    bold: ({ children }) => <Span fontWeight={700}>{children}</Span>,
+    thin: ({ children }) => <Span weight={100}>{children}</Span>,
+    light: ({ children }) => <Span weight={200}>{children}</Span>,
+    book: ({ children }) => <Span weight={300}>{children}</Span>,
+    regular: ({ children }) => <Span weight={400}>{children}</Span>,
+    bold: ({ children }) => <Span weight={700}>{children}</Span>,
   },
 
   listItem: (props) => <Li {...props} />,
@@ -83,17 +85,18 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
 
     switch (style) {
       case 'ul':
+        console.log('Ul props', props)
         return <Ul {...props} />
       case 'ol':
         return <Ol {...props} />
       case 'li':
         return <Li family="serif" {...props} />
       case 'h1':
-        return <Heading level={1} fontWeight={1} {...props} />
+        return <Heading level={1} weight={1} {...props} />
       case 'h2':
-        return <Heading level={2} fontWeight={1} {...props} />
+        return <Heading level={2} weight={1} {...props} />
       case 'h3':
-        return <Heading level={3} fontWeight={1} {...props} />
+        return <Heading level={3} weight={1} {...props} />
       case 'h4':
         return <Heading level={4} family="sans" {...props} />
       case 'h5':

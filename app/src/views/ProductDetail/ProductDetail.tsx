@@ -103,7 +103,7 @@ export const ProductDetail = ({ product }: Props) => {
       />
 
       <Wrapper>
-        <x.div maxWidth="xWide">
+        <x.div maxWidth="xWide" mx={'auto'}>
           <ProductDetails>
             <ProductImagesWrapper>
               <ProductImages

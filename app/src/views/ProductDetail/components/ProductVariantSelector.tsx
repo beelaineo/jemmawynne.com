@@ -122,16 +122,16 @@ const OptionSelector = ({
               {option.name}:
             </x.label>
 
-            <Heading
-              family="sans"
+            <x.h6
+              fontFamily="sans"
               mr={2}
               my={0}
-              level={6}
               fontWeight={4}
               textTransform="uppercase"
+              letterSpacing="0.25em"
             >
               {currentValue}
-            </Heading>
+            </x.h6>
           </SwatchLabelWrapper>
           <ProductSwatches
             option={validSwatchOption}

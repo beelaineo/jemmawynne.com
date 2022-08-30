@@ -14,7 +14,7 @@ export const CollectionsMain = styled.div<CollectionsMainProps>`
       : css`
           display: grid;
           grid-template-columns: 250px 1fr;
-          grid-column-gap: 8;
+          grid-column-gap: ${theme.space[8]}px;
           padding: 0 6 6;
           position: relative;
         `}

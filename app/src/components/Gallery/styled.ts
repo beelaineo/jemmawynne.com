@@ -30,9 +30,11 @@ export const MainImageWrapper = styled.div`
 `
 
 export const Thumbnails = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: ${theme.space[2]}px;
+  `}
 `
 
 interface ZoomInnerProps {

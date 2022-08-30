@@ -86,6 +86,6 @@ export const StyledSearchInput = styled(Input)`
   border: none;
   text-align: center;
   border-bottom: 1px solid;
-  border-color: body.4;
+  border-color: 4;
   margin-bottom: 6;
 `

@@ -114,7 +114,7 @@ export const Stockists = ({ stockists }: StockistsProps) => {
         <x.div maxWidth="wide" my={0} mx={'auto'}>
           {us && us.length && showUs ? (
             <SectionWrapper>
-              <Heading level={1} fontWeight={1} textAlign="center">
+              <Heading level={1} weight={1} align="center">
                 United States
               </Heading>
               <StockistList stockists={us} />
@@ -122,7 +122,7 @@ export const Stockists = ({ stockists }: StockistsProps) => {
           ) : null}
           {international && international.length && showIntl ? (
             <SectionWrapper>
-              <Heading level={1} fontWeight={1} textAlign="center">
+              <Heading level={1} weight={1} align="center">
                 International
               </Heading>
               <StockistList stockists={international} />
@@ -130,7 +130,7 @@ export const Stockists = ({ stockists }: StockistsProps) => {
           ) : null}
           {online && online.length && showOnline ? (
             <SectionWrapper>
-              <Heading level={1} fontWeight={1} textAlign="center">
+              <Heading level={1} weight={1} align="center">
                 Online
               </Heading>
               <StockistList stockists={online} />

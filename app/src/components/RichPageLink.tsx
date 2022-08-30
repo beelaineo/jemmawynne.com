@@ -17,7 +17,7 @@ interface SubtitleProps {
   children: React.ReactNode
 }
 
-const Subtitle = (props: any) => <Heading level={5} fontWeight={2} {...props} />
+const Subtitle = (props: any) => <Heading level={5} weight={2} {...props} />
 
 export const RichPageLink = ({ link, label }: RichPageLinkProps) => {
   const { image: customImage, hoverImage, captionRaw } = link

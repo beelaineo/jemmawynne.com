@@ -12,6 +12,7 @@ import { definitely } from '../../utils'
 import { moreProductsQuery } from './sanityCollectionQuery'
 import { SEO } from '../../components/SEO'
 import { getHeroImage } from '../../utils'
+import { x } from '@xstyled/styled-components'
 
 const { useRef, useState, useEffect } = React
 
@@ -135,16 +136,20 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
               <Hr />
               {definitely(relatedCollections).map((rc) =>
                 rc.archived !== true ? (
-                  <Heading
+                  <x.h6
                     key={rc.handle || 'some-key'}
                     mt={5}
-                    level={7}
-                    weight={4}
-                    family="sans"
+                    mb={'0.5em'}
+                    fontWeight={4}
+                    letterSpacing={'0.25em'}
+                    lineHeight={'1.4em'}
+                    fontFamily="sans"
+                    fontSize={6}
                     color="body.6"
+                    textTransform={'uppercase'}
                   >
                     <DocumentLink document={rc}>{rc.title}</DocumentLink>
-                  </Heading>
+                  </x.h6>
                 ) : null,
               )}
             </CollectionsMenu>

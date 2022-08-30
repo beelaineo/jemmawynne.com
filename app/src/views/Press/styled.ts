@@ -30,7 +30,7 @@ export const PressItemsContainer = styled.div`
     display: grid;
     padding: 6 0;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 3;
+    grid-gap: ${theme.space[3]}px;
 
     ${theme.mediaQueries.tablet} {
       grid-template-columns: 1fr 1fr;

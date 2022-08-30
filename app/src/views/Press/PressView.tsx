@@ -20,8 +20,8 @@ export const PressView = ({ pressPage, pressItems }: PressViewProps) => {
   return (
     <>
       <SEO seo={seo} defaultSeo={defaultSeo} path="press" />
-      <x.div py={5} maxWidth="wide">
-        <Heading fontWeight={1} textAlign="center" level={1}>
+      <x.div py={5} maxWidth="wide" mx={'auto'}>
+        <Heading weight={1} align="center" level={1}>
           {pressPage.title || 'Press'}
         </Heading>
         <PressItemsContainer>

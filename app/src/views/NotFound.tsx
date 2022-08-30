@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: calc(100vh - ${theme.navHeight} - 80px);
     background-color: body.2;
@@ -21,10 +22,10 @@ export const NotFound = () => (
     </Head>
 
     <Wrapper>
-      <Heading fontStyle="italic" level={1}>
+      <Heading fontStyle="italic" level={1} weight={2}>
         Page not found
       </Heading>
-      <Heading level={3}>
+      <Heading level={3} weight={1}>
         <Link href="/">
           <a>Return to the homepage</a>
         </Link>

@@ -12,7 +12,7 @@ export const Select = styled.select`
   font-weight: 4;
   appearance: none;
   letter-spacing: 0.25em;
-  color: body.9;
+  color: 9;
   font-size: 6;
   text-transform: uppercase;
 

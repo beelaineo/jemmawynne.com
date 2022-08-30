@@ -26,8 +26,13 @@ export const TextWrapper = styled.div<TextWrapperProps>`
     background-color: transparent;
 
     div {
-      margin: 0 auto;
       max-width: 320px;
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 24px;
+      }
     }
 
     ${theme.mediaQueries.tablet} {

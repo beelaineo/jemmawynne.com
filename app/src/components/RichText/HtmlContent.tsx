@@ -70,24 +70,35 @@ const transform = (node, index) => {
         )
       }
       return (
-        <P key={index} style={styles} weight={2}>
+        <x.p
+          key={index}
+          style={styles}
+          fontFamily={'body'}
+          fontWeight={2}
+          letterSpacing={'0.025em'}
+        >
           {node.childNodes.map(transform)}
-        </P>
+        </x.p>
       )
     case 'ul':
       return (
-        <Ul family="serif" key={index}>
+        <x.ul
+          fontWeight="200"
+          fontFamily="serif"
+          lineHeight={'1.4em'}
+          key={index}
+        >
           {node.childNodes.map(transform)}
-        </Ul>
+        </x.ul>
       )
     case 'ol':
       return (
-        <Ol family="serif" key={index}>
+        <x.ol fontFamily="serif" key={index}>
           {node.childNodes.map(transform)}
-        </Ol>
+        </x.ol>
       )
     case 'li':
-      return <Li key={index}>{node.childNodes.map(transform)}</Li>
+      return <x.li key={index}>{node.childNodes.map(transform)}</x.li>
     case 'em':
       return <em key={index}>{node.childNodes.map(transform)}</em>
     case 'strong':
@@ -138,5 +149,6 @@ export const HtmlContent = ({ html }: HtmlContentProps) => {
   if (!html) return null
   const parsed = parser.parse(wrapBareText(html))
   const transformed = transform(parsed, 'root')
-  return <div>{transformed}</div>
+  console.log('html', html)
+  return <x.div>{transformed}</x.div>
 }

@@ -31,6 +31,7 @@ interface CustomTextProps extends BoxProps {
   fontStyle?: string
   family?: string
   weight?: number
+  align?: string
   color?: string
   htmlFor?: string
   level?: number
@@ -44,18 +45,20 @@ const getCustomTextStyles = ({
   fontStyle,
   textDecoration,
   weight,
+  align,
 }: CustomTextProps) => css`
   font-family: ${family};
   font-weight: ${weight};
   font-style: ${fontStyle};
   color: ${color};
+  text-align: ${align};
   letter-spacing: ${family === 'sans' ? '0.25em' : '0.025em'};
   text-transform: ${family === 'sans' ? 'uppercase' : 'none'};
   text-decoration: ${textDecoration};
 `
 
-const createTextBase = (as: any) => styled.div`
-  ${(props: CustomTextProps) => css`
+const createTextBase = (as: any) => styled.div<CustomTextProps>`
+  ${(props) => css`
     ${getCustomTextStyles(props)}
     line-height: 1.4em;
     margin: 2 0 0.5em;
@@ -78,7 +81,7 @@ const createTextBase = (as: any) => styled.div`
   `}
 `
 
-const TextBase = createTextBase(x.div)
+const TextBase = createTextBase('div')
 
 interface HeadingProps
   extends Omit<CustomTextProps, 'fontSize' | 'theme'>,
@@ -88,6 +91,7 @@ interface HeadingProps
   fontStyle?: string
   family?: string
   weight?: number
+  align?: string
   color?: string
   htmlFor?: string
   as?: any
@@ -100,6 +104,7 @@ export const Heading = ({
   children,
   level,
   weight,
+  align,
   as,
   htmlFor,
   ...rest
@@ -111,6 +116,7 @@ export const Heading = ({
       as={tag}
       level={level}
       weight={weight || 4}
+      align={align || 'inherit'}
       htmlFor={htmlFor}
       {...rest}
     >
@@ -208,7 +214,7 @@ export const Li = styled(createTextBase('li'))`
   margin: 0;
 `
 
-const SpanBase = styled.spanBox``
+const SpanBase = styled.span``
 
 export const Span = styled(createTextBase(SpanBase))`
   font-size: inherit;

@@ -406,12 +406,12 @@ export const ImageWrapper = styled.div`
   }
 `
 
-export const SubMenuContentSection = styled.div`
-  ${({ active }: WithActive) => css`
+export const SubMenuContentSection = styled.div<WithActive>`
+  ${({ active, theme }) => css`
     display: ${active ? 'grid' : 'none'};
     justify-content: space-between;
     grid-template-columns: repeat(10, 1fr);
-    grid-column-gap: 3;
+    grid-column-gap: ${theme.space[3]}px;
     top: 0;
     left: 0;
     width: 100%;
@@ -449,17 +449,17 @@ export const SubMenuColumns = styled.div<WithActive>`
     max-width: xxWide;
     grid-template-columns: repeat(5, 1fr);
     padding: 3 5 5;
-    grid-column-gap: 3;
+    grid-column-gap: ${theme.space[3]}px;
 
     ${theme.mediaQueries.tablet} {
       grid-template-columns: 1fr;
-      grid-row-gap: 3;
+      grid-row-gap: ${theme.space[3]}px;
       justify-items: flex-start;
 
       > a {
         display: grid;
         grid-template-columns: 20vw 1fr;
-        grid-column-gap: 3;
+        grid-column-gap: ${theme.space[3]}px;
       }
     }
   `}

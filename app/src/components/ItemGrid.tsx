@@ -19,8 +19,8 @@ const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-evenly;
-    grid-column-gap: 6;
-    grid-row-gap: 6;
+    grid-column-gap: ${theme.space[6]}px;
+    grid-row-gap: ${theme.space[6]}px;
     grid-auto-flow: dense;
     > a {
       text-decoration: none;
@@ -33,7 +33,7 @@ const Grid = styled.div`
     ${theme.mediaQueries.mobile} {
       padding: 4;
       padding: 3;
-      grid-gap: 3;
+      grid-gap: ${theme.space[3]}px;
     }
   `}
 `

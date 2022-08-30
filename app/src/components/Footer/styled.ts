@@ -11,7 +11,7 @@ export const FooterWrapper = styled.footer`
 
     ${theme.mediaQueries.tablet} {
       padding: 3;
-      grid-gap: 4;
+      grid-gap: ${theme.space[4]}px;
       display: grid;
       margin-top: 38px;
       grid-template-columns: repeat(12, 1fr);
@@ -82,7 +82,7 @@ export const FooterMain = styled.div`
     max-width: 1100px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-gap: 5;
+    grid-gap: ${theme.space[5]}px;
     margin-bottom: 5;
 
     p {
@@ -146,7 +146,7 @@ export const FooterLinks = styled.div`
   ${({ theme }) => css`
     display: grid;
     grid-template-columns: 400px 1fr 1fr 1fr;
-    grid-column-gap: 6;
+    grid-column-gap: ${theme.space[6]}px;
     margin: 5 auto;
     padding: 0 3;
     max-width: 1200px;
