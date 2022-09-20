@@ -389,6 +389,9 @@ export const ImageWrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    & > div {
+      height: 100%;
+    }
   }
 
   &:nth-child(2) {
@@ -523,6 +526,7 @@ export const SubmenuSectionListImageWrapper = styled.div<{ active: boolean }>`
     picture {
       position: absolute;
       top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 100%;
