@@ -354,7 +354,7 @@ interface WithActive {
 
 export const SubMenuWrapper = styled.div`
   padding: 0 3;
-  max-width: 1100px;
+  max-width: 1440px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -389,10 +389,17 @@ export const ImageWrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    & > div {
+      height: 100%;
+    }
+  }
+
+  &:nth-child(2) {
+    grid-column: span 4;
   }
 
   &:last-child {
-    grid-column: span 4;
+    grid-column: span 5;
 
     display: flex;
     justify-content: flex-center;
@@ -410,7 +417,7 @@ export const SubMenuContentSection = styled.div<WithActive>`
   ${({ active, theme }) => css`
     display: ${active ? 'grid' : 'none'};
     justify-content: space-between;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-column-gap: ${theme.space[3]}px;
     top: 0;
     left: 0;
@@ -500,7 +507,7 @@ export const Loading = styled.div`
  */
 
 export const SubmenuSectionListImagesWrapper = styled.div`
-  grid-column: span 7;
+  grid-column: span 9;
   position: relative;
 `
 
@@ -519,6 +526,7 @@ export const SubmenuSectionListImageWrapper = styled.div<{ active: boolean }>`
     picture {
       position: absolute;
       top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 100%;
