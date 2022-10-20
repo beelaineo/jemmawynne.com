@@ -5,12 +5,12 @@ import { config } from '../config'
 const { FB_PRODUCT_CATALOG_ID } = config
 
 export const pageview = () => {
-  // window.fbq('track', 'PageView')
+  window.fbq('track', 'PageView')
 }
 
 // https://developers.facebook.com/docs/facebook-pixel/advanced/
 export const event = (name, options = {}) => {
-  // window.fbq('track', name, options)
+  window.fbq('track', name, options)
 }
 
 export const viewContent = (options = {}) => {

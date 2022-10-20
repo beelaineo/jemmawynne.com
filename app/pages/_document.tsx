@@ -54,6 +54,10 @@ export default class MyDocument extends Document {
             name="google-site-verification"
             content="FMybvh787T8f4wVXecF7CnvRImZuCMWgeKKO-dOsuQE"
           />
+          <meta
+            name="google-site-verification"
+            content="cwOphr0z13vVE-WtaLnlIMb8stPghrQ6iJKXAQt5vb4"
+          />
         </Head>
         <body>
           {tagInfo ? (
