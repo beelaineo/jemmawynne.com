@@ -78,8 +78,8 @@ export const BuyButton = ({
       </Button>
       {madeToOrder ? (
         <Heading mt={6} level={5} color="body.7">
-          Made to Order. All of our jewelry is handmade in NYC. Please allow
-          approximately 6 weeks.
+          All of our jewelry is handmade in NYC. If an item is not in stock,
+          please allow approximately 6-8 weeks to produce your order.
         </Heading>
       ) : null}
     </>
