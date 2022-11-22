@@ -7,13 +7,20 @@ export const announcement = {
       name: 'text',
       title: 'Text',
       type: 'string',
+      hidden: true,
     },
+    { name: 'body', title: 'Text', type: 'array', of: [{ type: 'block' }] },
     {
       name: 'cta',
       title: 'CTA',
       type: 'cta',
     },
   ],
+  preview: {
+    select: {
+      title: 'body',
+    },
+  },
 }
 
 export const banner = {
