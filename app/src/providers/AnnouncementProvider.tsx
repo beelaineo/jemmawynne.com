@@ -45,7 +45,7 @@ export const AnnouncementProvider = ({ children }: AnnouncementProps) => {
     if (dismissed) return
     const timeout = setTimeout(() => {
       setOpen(true)
-    }, 5000)
+    }, 1000)
     return () => clearTimeout(timeout)
   }, [])
 
