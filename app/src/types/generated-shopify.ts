@@ -19,6 +19,7 @@ export type Scalars = {
   DateTime: Date
   Decimal: any
   HTML: any
+  JSON: { [key: string]: any }
   Money: any
   URL: any
 }
@@ -43,14 +44,14 @@ export interface StorefrontApiAppliedGiftCard extends StorefrontApiNode {
   __typename: 'AppliedGiftCard'
   /**
    * The amount that was taken from the gift card by applying it.
-   * @deprecated Use `amountUsedV2` instead
+   * @deprecated Use `amountUsedV2` instead.
    */
   amountUsed: Scalars['Money']
   /** The amount that was taken from the gift card by applying it. */
   amountUsedV2: StorefrontApiMoneyV2
   /**
    * The amount left on the gift card.
-   * @deprecated Use `balanceV2` instead
+   * @deprecated Use `balanceV2` instead.
    */
   balance: Scalars['Money']
   /** The amount left on the gift card. */
@@ -71,7 +72,7 @@ export interface StorefrontApiArticle
   __typename: 'Article'
   /**
    * The article's author.
-   * @deprecated Use `authorV2` instead
+   * @deprecated Use `authorV2` instead.
    */
   author: StorefrontApiArticleAuthor
   /** The article's author. */
@@ -117,7 +118,7 @@ export interface StorefrontApiArticle
   title: Scalars['String']
   /**
    * The url pointing to the article accessible from the web.
-   * @deprecated Use `onlineStoreUrl` instead
+   * @deprecated Use `onlineStoreUrl` instead.
    */
   url: Scalars['URL']
 }
@@ -311,7 +312,7 @@ export interface StorefrontApiBlog
   title: Scalars['String']
   /**
    * The url pointing to the blog accessible from the web.
-   * @deprecated Use `onlineStoreUrl` instead
+   * @deprecated Use `onlineStoreUrl` instead.
    */
   url: Scalars['URL']
 }
@@ -404,7 +405,13 @@ export enum StorefrontApiCardBrand {
   Visa = 'VISA',
 }
 
-/** A cart represents the merchandise that a buyer intends to purchase, and the estimated cost associated with the cart. To learn how to interact with a cart during a customer's session, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
+/**
+ * A cart represents the merchandise that a buyer intends to purchase,
+ * and the estimated cost associated with the cart. Learn how to
+ * [interact with a cart](https://shopify.dev/custom-storefronts/internationalization/international-pricing)
+ * during a customer's session.
+ *
+ */
 export interface StorefrontApiCart extends StorefrontApiNode {
   __typename: 'Cart'
   /** The attributes associated with the cart. Attributes are represented as key-value pairs. */
@@ -421,8 +428,12 @@ export interface StorefrontApiCart extends StorefrontApiNode {
    */
   discountCodes: Array<StorefrontApiCartDiscountCode>
   /**
-   * The estimated costs that the buyer will pay at checkout. The estimated costs are subject to change and changes will be reflected at checkout. The `estimatedCost` field uses the `buyerIdentity` field to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).
-   * @deprecated Use `cost` instead
+   * The estimated costs that the buyer will pay at checkout.
+   * The estimated costs are subject to change and changes will be reflected at checkout.
+   * The `estimatedCost` field uses the `buyerIdentity` field to determine
+   * [international pricing](https://shopify.dev/custom-storefronts/internationalization/international-pricing).
+   *
+   * @deprecated Use `cost` instead.
    */
   estimatedCost: StorefrontApiCartEstimatedCost
   /** A globally-unique identifier. */
@@ -435,7 +446,13 @@ export interface StorefrontApiCart extends StorefrontApiNode {
   updatedAt: Scalars['DateTime']
 }
 
-/** A cart represents the merchandise that a buyer intends to purchase, and the estimated cost associated with the cart. To learn how to interact with a cart during a customer's session, refer to [Manage a cart with the Storefront API](https://shopify.dev/api/examples/cart). */
+/**
+ * A cart represents the merchandise that a buyer intends to purchase,
+ * and the estimated cost associated with the cart. Learn how to
+ * [interact with a cart](https://shopify.dev/custom-storefronts/internationalization/international-pricing)
+ * during a customer's session.
+ *
+ */
 export type StorefrontApiCartLinesArgs = {
   after?: InputMaybe<Scalars['String']>
   before?: InputMaybe<Scalars['String']>
@@ -479,7 +496,7 @@ export interface StorefrontApiCartBuyerIdentity {
 /**
  * Specifies the input fields to update the buyer information associated with a cart.
  * Buyer identity is used to determine
- * [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout)
+ * [international pricing](https://shopify.dev/custom-storefronts/internationalization/international-pricing)
  * and should match the customer's shipping address.
  *
  */
@@ -562,8 +579,10 @@ export enum StorefrontApiCartErrorCode {
 
 /**
  * The estimated costs that the buyer will pay at checkout.
- * It uses [`CartBuyerIdentity`](https://shopify.dev/api/storefront/reference/cart/cartbuyeridentity) to determine
- * [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-cart).
+ * The estimated cost uses
+ * [`CartBuyerIdentity`](https://shopify.dev/api/storefront/reference/cart/cartbuyeridentity)
+ * to determine
+ * [international pricing](https://shopify.dev/custom-storefronts/internationalization/international-pricing).
  *
  */
 export interface StorefrontApiCartEstimatedCost {
@@ -582,7 +601,12 @@ export interface StorefrontApiCartEstimatedCost {
 export type StorefrontApiCartInput = {
   /** An array of key-value pairs that contains additional information about the cart. */
   attributes?: InputMaybe<Array<StorefrontApiAttributeInput>>
-  /** The customer associated with the cart. Used to determine [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout). Buyer identity should match the customer's shipping address. */
+  /**
+   * The customer associated with the cart. Used to determine [international pricing]
+   * (https://shopify.dev/custom-storefronts/internationalization/international-pricing).
+   * Buyer identity should match the customer's shipping address.
+   *
+   */
   buyerIdentity?: InputMaybe<StorefrontApiCartBuyerIdentityInput>
   /**
    * The case-insensitive discount codes that the customer added at checkout.
@@ -604,7 +628,7 @@ export interface StorefrontApiCartLine extends StorefrontApiNode {
   discountAllocations: Array<StorefrontApiCartDiscountAllocation>
   /**
    * The estimated cost of the merchandise that the buyer will pay for at checkout. The estimated costs are subject to change and changes will be reflected at checkout.
-   * @deprecated Use `cost` instead
+   * @deprecated Use `cost` instead.
    */
   estimatedCost: StorefrontApiCartLineEstimatedCost
   /** A globally-unique identifier. */
@@ -769,7 +793,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   orderStatusUrl?: Maybe<Scalars['URL']>
   /**
    * The amount left to be paid. This is equal to the cost of the line items, taxes and shipping minus discounts and gift cards.
-   * @deprecated Use `paymentDueV2` instead
+   * @deprecated Use `paymentDueV2` instead.
    */
   paymentDue: Scalars['Money']
   /** The amount left to be paid. This is equal to the cost of the line items, duties, taxes, and shipping, minus discounts and gift cards. */
@@ -795,7 +819,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   shippingLine?: Maybe<StorefrontApiShippingRate>
   /**
    * Price of the checkout before shipping and taxes.
-   * @deprecated Use `subtotalPriceV2` instead
+   * @deprecated Use `subtotalPriceV2` instead.
    */
   subtotalPrice: Scalars['Money']
   /** The price at checkout before duties, shipping, and taxes. */
@@ -808,14 +832,14 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   totalDuties?: Maybe<StorefrontApiMoneyV2>
   /**
    * The sum of all the prices of all the items in the checkout, taxes and discounts included.
-   * @deprecated Use `totalPriceV2` instead
+   * @deprecated Use `totalPriceV2` instead.
    */
   totalPrice: Scalars['Money']
   /** The sum of all the prices of all the items in the checkout, including duties, taxes, and discounts. */
   totalPriceV2: StorefrontApiMoneyV2
   /**
    * The sum of all the taxes applied to the line items and shipping lines in the checkout.
-   * @deprecated Use `totalTaxV2` instead
+   * @deprecated Use `totalTaxV2` instead.
    */
   totalTax: Scalars['Money']
   /** The sum of all the taxes applied to the line items and shipping lines in the checkout. */
@@ -869,7 +893,7 @@ export interface StorefrontApiCheckoutAttributesUpdatePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -899,7 +923,7 @@ export interface StorefrontApiCheckoutAttributesUpdateV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -931,7 +955,7 @@ export interface StorefrontApiCheckoutCompleteFreePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -947,7 +971,7 @@ export interface StorefrontApiCheckoutCompleteWithCreditCardPayload {
   payment?: Maybe<StorefrontApiPayment>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -963,7 +987,7 @@ export interface StorefrontApiCheckoutCompleteWithCreditCardV2Payload {
   payment?: Maybe<StorefrontApiPayment>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -979,7 +1003,7 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload {
   payment?: Maybe<StorefrontApiPayment>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -995,7 +1019,7 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload {
   payment?: Maybe<StorefrontApiPayment>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1011,7 +1035,7 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload {
   payment?: Maybe<StorefrontApiPayment>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1039,7 +1063,7 @@ export type StorefrontApiCheckoutCreateInput = {
    * The three-letter currency code of one of the shop's enabled presentment currencies.
    * Including this field creates a checkout in the specified currency. By default, new
    * checkouts are created in the shop's primary currency.
-   *  This argument is deprecated: Use `country` field instead.
+   *  This argument is deprecated: Use the `buyerIdentity.countryCode` field instead.
    */
   presentmentCurrencyCode?: InputMaybe<StorefrontApiCurrencyCode>
   /** The shipping address to where the line items will be shipped. */
@@ -1057,7 +1081,7 @@ export interface StorefrontApiCheckoutCreatePayload {
   queueToken?: Maybe<Scalars['String']>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1084,7 +1108,7 @@ export interface StorefrontApiCheckoutCustomerAssociateV2Payload {
   customer?: Maybe<StorefrontApiCustomer>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1098,7 +1122,7 @@ export interface StorefrontApiCheckoutCustomerDisassociatePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1112,7 +1136,7 @@ export interface StorefrontApiCheckoutCustomerDisassociateV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1126,7 +1150,7 @@ export interface StorefrontApiCheckoutDiscountCodeApplyPayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1140,7 +1164,7 @@ export interface StorefrontApiCheckoutDiscountCodeApplyV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1154,7 +1178,7 @@ export interface StorefrontApiCheckoutDiscountCodeRemovePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1168,7 +1192,7 @@ export interface StorefrontApiCheckoutEmailUpdatePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1182,7 +1206,7 @@ export interface StorefrontApiCheckoutEmailUpdateV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1257,6 +1281,8 @@ export enum StorefrontApiCheckoutErrorCode {
   LineItemNotFound = 'LINE_ITEM_NOT_FOUND',
   /** Checkout is locked. */
   Locked = 'LOCKED',
+  /** Maximum number of discount codes limit reached. */
+  MaximumDiscountCodeLimitReached = 'MAXIMUM_DISCOUNT_CODE_LIMIT_REACHED',
   /** Missing payment input. */
   MissingPaymentInput = 'MISSING_PAYMENT_INPUT',
   /** Not enough in stock. */
@@ -1286,7 +1312,7 @@ export interface StorefrontApiCheckoutGiftCardApplyPayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1300,7 +1326,7 @@ export interface StorefrontApiCheckoutGiftCardRemovePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1314,7 +1340,7 @@ export interface StorefrontApiCheckoutGiftCardRemoveV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1328,7 +1354,7 @@ export interface StorefrontApiCheckoutGiftCardsAppendPayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1407,7 +1433,7 @@ export interface StorefrontApiCheckoutLineItemsAddPayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1421,7 +1447,7 @@ export interface StorefrontApiCheckoutLineItemsRemovePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1444,7 +1470,7 @@ export interface StorefrontApiCheckoutLineItemsUpdatePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1458,7 +1484,7 @@ export interface StorefrontApiCheckoutShippingAddressUpdatePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1472,7 +1498,7 @@ export interface StorefrontApiCheckoutShippingAddressUpdateV2Payload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1486,7 +1512,7 @@ export interface StorefrontApiCheckoutShippingLineUpdatePayload {
   checkoutUserErrors: Array<StorefrontApiCheckoutUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `checkoutUserErrors` instead
+   * @deprecated Use `checkoutUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -1574,6 +1600,7 @@ export type StorefrontApiCollectionMetafieldsArgs = {
 export type StorefrontApiCollectionProductsArgs = {
   after?: InputMaybe<Scalars['String']>
   before?: InputMaybe<Scalars['String']>
+  filters?: InputMaybe<Array<StorefrontApiProductFilter>>
   first?: InputMaybe<Scalars['Int']>
   last?: InputMaybe<Scalars['Int']>
   reverse?: InputMaybe<Scalars['Boolean']>
@@ -2708,7 +2735,7 @@ export interface StorefrontApiCustomerAccessTokenCreatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2772,7 +2799,7 @@ export interface StorefrontApiCustomerActivatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2786,7 +2813,7 @@ export interface StorefrontApiCustomerAddressCreatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2800,7 +2827,7 @@ export interface StorefrontApiCustomerAddressDeletePayload {
   deletedCustomerAddressId?: Maybe<Scalars['String']>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2814,7 +2841,7 @@ export interface StorefrontApiCustomerAddressUpdatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2849,7 +2876,7 @@ export interface StorefrontApiCustomerCreatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2863,7 +2890,7 @@ export interface StorefrontApiCustomerDefaultAddressUpdatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2909,7 +2936,7 @@ export interface StorefrontApiCustomerRecoverPayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2925,7 +2952,7 @@ export interface StorefrontApiCustomerResetByUrlPayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2949,7 +2976,7 @@ export interface StorefrontApiCustomerResetPayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -2990,7 +3017,7 @@ export interface StorefrontApiCustomerUpdatePayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
   /**
    * The list of errors that occurred from executing the mutation.
-   * @deprecated Use `customerUserErrors` instead
+   * @deprecated Use `customerUserErrors` instead.
    */
   userErrors: Array<StorefrontApiUserError>
 }
@@ -3161,7 +3188,7 @@ export interface StorefrontApiExternalVideo
   alt?: Maybe<Scalars['String']>
   /**
    * The URL.
-   * @deprecated Use `originUrl` instead
+   * @deprecated Use `originUrl` instead.
    */
   embeddedUrl: Scalars['URL']
   /** The host of the external video. */
@@ -3172,6 +3199,51 @@ export interface StorefrontApiExternalVideo
   mediaContentType: StorefrontApiMediaContentType
   /** The preview image for the media. */
   previewImage?: Maybe<StorefrontApiImage>
+}
+
+/** A filter that is supported on the parent field. */
+export interface StorefrontApiFilter {
+  __typename: 'Filter'
+  /** A unique identifier. */
+  id: Scalars['String']
+  /** A human-friendly string for this filter. */
+  label: Scalars['String']
+  /** An enumeration that denotes the type of data this filter represents. */
+  type: StorefrontApiFilterType
+  /** The list of values for this filter. */
+  values: Array<StorefrontApiFilterValue>
+}
+
+/**
+ * The type of data that the filter group represents.
+ *
+ * For more information, refer to [Filter products in a collection with the Storefront API]
+ * (https://shopify.dev/custom-storefronts/products-collections/filter-products).
+ *
+ */
+export enum StorefrontApiFilterType {
+  /** A list of selectable values. */
+  List = 'LIST',
+  /** A range of prices. */
+  PriceRange = 'PRICE_RANGE',
+}
+
+/** A selectable value within a filter. */
+export interface StorefrontApiFilterValue {
+  __typename: 'FilterValue'
+  /** The number of results that match this filter value. */
+  count: Scalars['Int']
+  /** A unique identifier. */
+  id: Scalars['String']
+  /**
+   * An input object that can be used to filter by this value on the parent field.
+   *
+   * The value is provided as a helper for building dynamic filtering UI. For example, if you have a list of selected `FilterValue` objects, you can combine their respective `input` values to use in a subsequent query.
+   *
+   */
+  input: Scalars['JSON']
+  /** A human-friendly string for this filter value. */
+  label: Scalars['String']
 }
 
 /** Represents a single fulfillment in an order. */
@@ -3295,12 +3367,12 @@ export interface StorefrontApiImage {
    *
    * If there are any existing transformations in the original source URL, they will remain and not be stripped.
    *
-   * @deprecated Use `url` instead
+   * @deprecated Use `url` instead.
    */
   originalSrc: Scalars['URL']
   /**
    * The location of the image as a URL.
-   * @deprecated Use `url` instead
+   * @deprecated Use `url` instead.
    */
   src: Scalars['URL']
   /**
@@ -3312,6 +3384,17 @@ export interface StorefrontApiImage {
    * @deprecated Use `url(transform:)` instead
    */
   transformedSrc: Scalars['URL']
+  /**
+   * The location of the image as a URL.
+   *
+   * If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+   *
+   * All transformation options are considered "best-effort". Any transformation that the original image type doesn't support will be ignored.
+   *
+   * If you need multiple variations of the same image, then you can use [GraphQL aliases](https://graphql.org/learn/queries/#aliases).
+   *
+   */
+  url: Scalars['URL']
   /** The original width of the image in pixels. Returns `null` if the image is not hosted by Shopify. */
   width?: Maybe<Scalars['Int']>
 }
@@ -3323,6 +3406,11 @@ export type StorefrontApiImageTransformedSrcArgs = {
   maxWidth?: InputMaybe<Scalars['Int']>
   preferredContentType?: InputMaybe<StorefrontApiImageContentType>
   scale?: InputMaybe<Scalars['Int']>
+}
+
+/** Represents an image resource. */
+export type StorefrontApiImageUrlArgs = {
+  transform?: InputMaybe<StorefrontApiImageTransformInput>
 }
 
 /**
@@ -3357,6 +3445,45 @@ export interface StorefrontApiImageEdge {
   cursor: Scalars['String']
   /** The item at the end of ImageEdge. */
   node: StorefrontApiImage
+}
+
+/**
+ * The available options for transforming an image.
+ *
+ * All transformation options are considered best effort. Any transformation that the original image type doesn't support will be ignored.
+ *
+ */
+export type StorefrontApiImageTransformInput = {
+  /**
+   * The region of the image to remain after cropping.
+   * Must be used in conjunction with the `maxWidth` and/or `maxHeight` fields, where the `maxWidth` and `maxHeight` aren't equal.
+   * The `crop` argument should coincide with the smaller value. A smaller `maxWidth` indicates a `LEFT` or `RIGHT` crop, while
+   * a smaller `maxHeight` indicates a `TOP` or `BOTTOM` crop. For example, `{ maxWidth: 5, maxHeight: 10, crop: LEFT }` will result
+   * in an image with a width of 5 and height of 10, where the right side of the image is removed.
+   *
+   */
+  crop?: InputMaybe<StorefrontApiCropRegion>
+  /**
+   * Image height in pixels between 1 and 5760.
+   *
+   */
+  maxHeight?: InputMaybe<Scalars['Int']>
+  /**
+   * Image width in pixels between 1 and 5760.
+   *
+   */
+  maxWidth?: InputMaybe<Scalars['Int']>
+  /**
+   * Convert the source image into the preferred content type.
+   * Supported conversions: `.svg` to `.png`, any file type to `.jpg`, and any file type to `.webp`.
+   *
+   */
+  preferredContentType?: InputMaybe<StorefrontApiImageContentType>
+  /**
+   * Image size multiplier for high-resolution retina displays. Must be within 1..3.
+   *
+   */
+  scale?: InputMaybe<Scalars['Int']>
 }
 
 /** Information about the localized experiences configured for the shop. */
@@ -3480,7 +3607,7 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
    *
    * For example, US.
    *
-   * @deprecated Use `countryCodeV2` instead
+   * @deprecated Use `countryCodeV2` instead.
    */
   countryCode?: Maybe<Scalars['String']>
   /**
@@ -3714,6 +3841,8 @@ export interface StorefrontApiMetafield extends StorefrontApiNode {
   namespace: Scalars['String']
   /** The parent object that the metafield belongs to. */
   parentResource: StorefrontApiMetafieldParentResource
+  /** Returns a reference object if the metafield definition's type is a resource reference. */
+  reference?: Maybe<StorefrontApiMetafieldReference>
   /**
    * The type name of the metafield.
    * See the list of [supported types](https://shopify.dev/apps/metafields/definitions/types).
@@ -3755,6 +3884,25 @@ export interface StorefrontApiMetafieldEdge {
   node: StorefrontApiMetafield
 }
 
+/**
+ * A filter used to view a subset of products in a collection matching a specific metafield value.
+ *
+ * Only the following metafield types are currently supported:
+ * - `number_integer`
+ * - `number_decimal`
+ * - `single_line_text_field`
+ * - `boolean` as of 2022-04.
+ *
+ */
+export type StorefrontApiMetafieldFilter = {
+  /** The key of the metafield to filter on. */
+  key: Scalars['String']
+  /** The namespace of the metafield to filter on. */
+  namespace: Scalars['String']
+  /** The value of the metafield. */
+  value: Scalars['String']
+}
+
 /** A resource that the metafield belongs to. */
 export type StorefrontApiMetafieldParentResource =
   | StorefrontApiArticle
@@ -3766,6 +3914,16 @@ export type StorefrontApiMetafieldParentResource =
   | StorefrontApiProduct
   | StorefrontApiProductVariant
   | StorefrontApiShop
+
+/**
+ * Returns the resource which is being referred to by a metafield.
+ *
+ */
+export type StorefrontApiMetafieldReference =
+  | StorefrontApiMediaImage
+  | StorefrontApiPage
+  | StorefrontApiProduct
+  | StorefrontApiProductVariant
 
 /** Metafield value types. */
 export enum StorefrontApiMetafieldValueType {
@@ -3861,7 +4019,7 @@ export interface StorefrontApiMutation {
   /**
    * Updates customer information associated with a cart.
    * Buyer identity is used to determine
-   * [international pricing](https://shopify.dev/api/examples/international-pricing#create-a-checkout)
+   * [international pricing](https://shopify.dev/custom-storefronts/internationalization/international-pricing)
    * and should match the customer's shipping address.
    *
    */
@@ -3880,7 +4038,7 @@ export interface StorefrontApiMutation {
   cartNoteUpdate?: Maybe<StorefrontApiCartNoteUpdatePayload>
   /**
    * Updates the attributes of a checkout if `allowPartialAddresses` is `true`.
-   * @deprecated Use `checkoutAttributesUpdateV2` instead
+   * @deprecated Use `checkoutAttributesUpdateV2` instead.
    */
   checkoutAttributesUpdate?: Maybe<StorefrontApiCheckoutAttributesUpdatePayload>
   /** Updates the attributes of a checkout if `allowPartialAddresses` is `true`. */
@@ -3889,19 +4047,19 @@ export interface StorefrontApiMutation {
   checkoutCompleteFree?: Maybe<StorefrontApiCheckoutCompleteFreePayload>
   /**
    * Completes a checkout using a credit card token from Shopify's Vault.
-   * @deprecated Use `checkoutCompleteWithCreditCardV2` instead
+   * @deprecated Use `checkoutCompleteWithCreditCardV2` instead.
    */
   checkoutCompleteWithCreditCard?: Maybe<StorefrontApiCheckoutCompleteWithCreditCardPayload>
   /** Completes a checkout using a credit card token from Shopify's card vault. Before you can complete checkouts using CheckoutCompleteWithCreditCardV2, you need to  [_request payment processing_](https://shopify.dev/apps/channels/getting-started#request-payment-processing). */
   checkoutCompleteWithCreditCardV2?: Maybe<StorefrontApiCheckoutCompleteWithCreditCardV2Payload>
   /**
    * Completes a checkout with a tokenized payment.
-   * @deprecated Use `checkoutCompleteWithTokenizedPaymentV2` instead
+   * @deprecated Use `checkoutCompleteWithTokenizedPaymentV2` instead.
    */
   checkoutCompleteWithTokenizedPayment?: Maybe<StorefrontApiCheckoutCompleteWithTokenizedPaymentPayload>
   /**
    * Completes a checkout with a tokenized payment.
-   * @deprecated Use `checkoutCompleteWithTokenizedPaymentV3` instead
+   * @deprecated Use `checkoutCompleteWithTokenizedPaymentV3` instead.
    */
   checkoutCompleteWithTokenizedPaymentV2?: Maybe<StorefrontApiCheckoutCompleteWithTokenizedPaymentV2Payload>
   /** Completes a checkout with a tokenized payment. */
@@ -3910,21 +4068,21 @@ export interface StorefrontApiMutation {
   checkoutCreate?: Maybe<StorefrontApiCheckoutCreatePayload>
   /**
    * Associates a customer to the checkout.
-   * @deprecated Use `checkoutCustomerAssociateV2` instead
+   * @deprecated Use `checkoutCustomerAssociateV2` instead.
    */
   checkoutCustomerAssociate?: Maybe<StorefrontApiCheckoutCustomerAssociatePayload>
   /** Associates a customer to the checkout. */
   checkoutCustomerAssociateV2?: Maybe<StorefrontApiCheckoutCustomerAssociateV2Payload>
   /**
    * Disassociates the current checkout customer from the checkout.
-   * @deprecated Use `checkoutCustomerDisassociateV2` instead
+   * @deprecated Use `checkoutCustomerDisassociateV2` instead.
    */
   checkoutCustomerDisassociate?: Maybe<StorefrontApiCheckoutCustomerDisassociatePayload>
   /** Disassociates the current checkout customer from the checkout. */
   checkoutCustomerDisassociateV2?: Maybe<StorefrontApiCheckoutCustomerDisassociateV2Payload>
   /**
    * Applies a discount to an existing checkout using a discount code.
-   * @deprecated Use `checkoutDiscountCodeApplyV2` instead
+   * @deprecated Use `checkoutDiscountCodeApplyV2` instead.
    */
   checkoutDiscountCodeApply?: Maybe<StorefrontApiCheckoutDiscountCodeApplyPayload>
   /** Applies a discount to an existing checkout using a discount code. */
@@ -3933,19 +4091,19 @@ export interface StorefrontApiMutation {
   checkoutDiscountCodeRemove?: Maybe<StorefrontApiCheckoutDiscountCodeRemovePayload>
   /**
    * Updates the email on an existing checkout.
-   * @deprecated Use `checkoutEmailUpdateV2` instead
+   * @deprecated Use `checkoutEmailUpdateV2` instead.
    */
   checkoutEmailUpdate?: Maybe<StorefrontApiCheckoutEmailUpdatePayload>
   /** Updates the email on an existing checkout. */
   checkoutEmailUpdateV2?: Maybe<StorefrontApiCheckoutEmailUpdateV2Payload>
   /**
    * Applies a gift card to an existing checkout using a gift card code. This will replace all currently applied gift cards.
-   * @deprecated Use `checkoutGiftCardsAppend` instead
+   * @deprecated Use `checkoutGiftCardsAppend` instead.
    */
   checkoutGiftCardApply?: Maybe<StorefrontApiCheckoutGiftCardApplyPayload>
   /**
    * Removes an applied gift card from the checkout.
-   * @deprecated Use `checkoutGiftCardRemoveV2` instead
+   * @deprecated Use `checkoutGiftCardRemoveV2` instead.
    */
   checkoutGiftCardRemove?: Maybe<StorefrontApiCheckoutGiftCardRemovePayload>
   /** Removes an applied gift card from the checkout. */
@@ -3962,7 +4120,7 @@ export interface StorefrontApiMutation {
   checkoutLineItemsUpdate?: Maybe<StorefrontApiCheckoutLineItemsUpdatePayload>
   /**
    * Updates the shipping address of an existing checkout.
-   * @deprecated Use `checkoutShippingAddressUpdateV2` instead
+   * @deprecated Use `checkoutShippingAddressUpdateV2` instead.
    */
   checkoutShippingAddressUpdate?: Maybe<StorefrontApiCheckoutShippingAddressUpdatePayload>
   /** Updates the shipping address of an existing checkout. */
@@ -4007,11 +4165,30 @@ export interface StorefrontApiMutation {
   customerCreate?: Maybe<StorefrontApiCustomerCreatePayload>
   /** Updates the default address of an existing customer. */
   customerDefaultAddressUpdate?: Maybe<StorefrontApiCustomerDefaultAddressUpdatePayload>
-  /** Sends a reset password email to the customer, as the first step in the reset password process. */
+  /**
+   * Sends a reset password email to the customer. The reset password
+   * email contains a reset password URL and token that you can pass to
+   * the [`customerResetByUrl`](https://shopify.dev/api/storefront/latest/mutations/customerResetByUrl) or
+   * [`customerReset`](https://shopify.dev/api/storefront/latest/mutations/customerReset) mutation to reset the
+   * customer password.
+   *
+   * This mutation is throttled by IP. With authenticated access,
+   * you can provide a [`Shopify-Storefront-Buyer-IP`](https://shopify.dev/api/usage/authentication#optional-ip-header) instead of the request IP.
+   *
+   * Make sure that the value provided to `Shopify-Storefront-Buyer-IP` is trusted. Unthrottled access to this
+   * mutation presents a security risk.
+   *
+   */
   customerRecover?: Maybe<StorefrontApiCustomerRecoverPayload>
-  /** Resets a customer’s password with a token received from `CustomerRecover`. */
+  /**
+   * "Resets a customer’s password with the token received from a reset password email. You can send a reset password email with the [`customerRecover`](https://shopify.dev/api/storefront/latest/mutations/customerRecover) mutation."
+   *
+   */
   customerReset?: Maybe<StorefrontApiCustomerResetPayload>
-  /** Resets a customer’s password with the reset password url received from `CustomerRecover`. */
+  /**
+   * "Resets a customer’s password with the reset password URL received from a reset password email. You can send a reset password email with the [`customerRecover`](https://shopify.dev/api/storefront/latest/mutations/customerRecover) mutation."
+   *
+   */
   customerResetByUrl?: Maybe<StorefrontApiCustomerResetByUrlPayload>
   /** Updates an existing customer. */
   customerUpdate?: Maybe<StorefrontApiCustomerUpdatePayload>
@@ -4414,7 +4591,7 @@ export interface StorefrontApiOrder
   statusUrl: Scalars['URL']
   /**
    * Price of the order before shipping and taxes.
-   * @deprecated Use `subtotalPriceV2` instead
+   * @deprecated Use `subtotalPriceV2` instead.
    */
   subtotalPrice?: Maybe<Scalars['Money']>
   /** Price of the order before duties, shipping and taxes. */
@@ -4423,28 +4600,28 @@ export interface StorefrontApiOrder
   successfulFulfillments?: Maybe<Array<StorefrontApiFulfillment>>
   /**
    * The sum of all the prices of all the items in the order, taxes and discounts included (must be positive).
-   * @deprecated Use `totalPriceV2` instead
+   * @deprecated Use `totalPriceV2` instead.
    */
   totalPrice: Scalars['Money']
   /** The sum of all the prices of all the items in the order, duties, taxes and discounts included (must be positive). */
   totalPriceV2: StorefrontApiMoneyV2
   /**
    * The total amount that has been refunded.
-   * @deprecated Use `totalRefundedV2` instead
+   * @deprecated Use `totalRefundedV2` instead.
    */
   totalRefunded: Scalars['Money']
   /** The total amount that has been refunded. */
   totalRefundedV2: StorefrontApiMoneyV2
   /**
    * The total cost of shipping.
-   * @deprecated Use `totalShippingPriceV2` instead
+   * @deprecated Use `totalShippingPriceV2` instead.
    */
   totalShippingPrice: Scalars['Money']
   /** The total cost of shipping. */
   totalShippingPriceV2: StorefrontApiMoneyV2
   /**
    * The total cost of taxes.
-   * @deprecated Use `totalTaxV2` instead
+   * @deprecated Use `totalTaxV2` instead.
    */
   totalTax?: Maybe<Scalars['Money']>
   /** The total cost of taxes. */
@@ -4663,7 +4840,7 @@ export interface StorefrontApiPage
   updatedAt: Scalars['DateTime']
   /**
    * The url pointing to the page accessible from the web.
-   * @deprecated Use `onlineStoreUrl` instead
+   * @deprecated Use `onlineStoreUrl` instead.
    */
   url: Scalars['URL']
 }
@@ -4742,7 +4919,7 @@ export interface StorefrontApiPayment extends StorefrontApiNode {
   __typename: 'Payment'
   /**
    * The amount of the payment.
-   * @deprecated Use `amountV2` instead
+   * @deprecated Use `amountV2` instead.
    */
   amount: Scalars['Money']
   /** The amount of the payment. */
@@ -4807,6 +4984,14 @@ export enum StorefrontApiPaymentTokenType {
   Vault = 'VAULT',
 }
 
+/** A filter used to view a subset of products in a collection matching a specific price range. */
+export type StorefrontApiPriceRangeFilter = {
+  /** The maximum price in the range. Empty indicates no max price. */
+  max?: InputMaybe<Scalars['Float']>
+  /** The minimum price in the range. Defaults to zero. */
+  min?: InputMaybe<Scalars['Float']>
+}
+
 /** The value of the percentage pricing object. */
 export interface StorefrontApiPricingPercentageValue {
   __typename: 'PricingPercentageValue'
@@ -4840,6 +5025,13 @@ export interface StorefrontApiProduct
   description: Scalars['String']
   /** The description of the product, complete with HTML formatting. */
   descriptionHtml: Scalars['HTML']
+  /**
+   * The featured image for the product.
+   *
+   * This field is functionally equivalent to `images(first: 1)`.
+   *
+   */
+  featuredImage?: Maybe<StorefrontApiImage>
   /**
    * A human-friendly unique string for the Product automatically generated from its title.
    * They are used by the Liquid templating language to refer to objects.
@@ -5070,6 +5262,8 @@ export interface StorefrontApiProductConnection {
   __typename: 'ProductConnection'
   /** A list of edges. */
   edges: Array<StorefrontApiProductEdge>
+  /** A list of available filters. */
+  filters: Array<StorefrontApiFilter>
   /** Information to aid in pagination. */
   pageInfo: StorefrontApiPageInfo
 }
@@ -5084,6 +5278,24 @@ export interface StorefrontApiProductEdge {
   cursor: Scalars['String']
   /** The item at the end of ProductEdge. */
   node: StorefrontApiProduct
+}
+
+/** A filter used to view a subset of products in a collection. */
+export type StorefrontApiProductFilter = {
+  /** Filter on if the product is available for sale. */
+  available?: InputMaybe<Scalars['Boolean']>
+  /** A range of prices to filter with-in. */
+  price?: InputMaybe<StorefrontApiPriceRangeFilter>
+  /** A product metafield to filter on. */
+  productMetafield?: InputMaybe<StorefrontApiMetafieldFilter>
+  /** The product type to filter on. */
+  productType?: InputMaybe<Scalars['String']>
+  /** The product vendor to filter on. */
+  productVendor?: InputMaybe<Scalars['String']>
+  /** A variant metafield to filter on. */
+  variantMetafield?: InputMaybe<StorefrontApiMetafieldFilter>
+  /** A variant option to filter on. */
+  variantOption?: InputMaybe<StorefrontApiVariantOptionFilter>
 }
 
 /** The set of valid sort keys for the ProductImage query. */
@@ -5198,14 +5410,16 @@ export interface StorefrontApiProductVariant
   __typename: 'ProductVariant'
   /**
    * Indicates if the product variant is in stock.
-   * @deprecated Use `availableForSale` instead
+   * @deprecated Use `availableForSale` instead.
    */
   available?: Maybe<Scalars['Boolean']>
   /** Indicates if the product variant is available for sale. */
   availableForSale: Scalars['Boolean']
+  /** The barcode (for example, ISBN, UPC, or GTIN) associated with the variant. */
+  barcode?: Maybe<Scalars['String']>
   /**
    * The compare at price of the variant. This can be used to mark a variant as on sale, when `compareAtPrice` is higher than `price`.
-   * @deprecated Use `compareAtPriceV2` instead
+   * @deprecated Use `compareAtPriceV2` instead.
    */
   compareAtPrice?: Maybe<Scalars['Money']>
   /** The compare at price of the variant. This can be used to mark a variant as on sale, when `compareAtPriceV2` is higher than `priceV2`. */
@@ -5239,7 +5453,7 @@ export interface StorefrontApiProductVariant
   presentmentUnitPrices: StorefrontApiMoneyV2Connection
   /**
    * The product variant’s price.
-   * @deprecated Use `priceV2` instead
+   * @deprecated Use `priceV2` instead.
    */
   price: Scalars['Money']
   /** The product variant’s price. */
@@ -5419,18 +5633,22 @@ export interface StorefrontApiQueryRoot {
   blog?: Maybe<StorefrontApiBlog>
   /**
    * Find a blog by its handle.
-   * @deprecated Use `blog` instead
+   * @deprecated Use `blog` instead.
    */
   blogByHandle?: Maybe<StorefrontApiBlog>
   /** List of the shop's blogs. */
   blogs: StorefrontApiBlogConnection
-  /** Find a cart by its ID. */
+  /**
+   * Retrieve a cart by its ID. For more information, refer to
+   * [Manage a cart with the Storefront API](https://shopify.dev/custom-storefronts/cart/manage).
+   *
+   */
   cart?: Maybe<StorefrontApiCart>
   /** Fetch a specific `Collection` by one of its unique attributes. */
   collection?: Maybe<StorefrontApiCollection>
   /**
    * Find a collection by its handle.
-   * @deprecated Use `collection` instead
+   * @deprecated Use `collection` instead.
    */
   collectionByHandle?: Maybe<StorefrontApiCollection>
   /** List of the shop’s collections. */
@@ -5454,7 +5672,7 @@ export interface StorefrontApiQueryRoot {
   page?: Maybe<StorefrontApiPage>
   /**
    * Find a page by its handle.
-   * @deprecated Use `page` instead
+   * @deprecated Use `page` instead.
    */
   pageByHandle?: Maybe<StorefrontApiPage>
   /** List of the shop's pages. */
@@ -5463,7 +5681,7 @@ export interface StorefrontApiQueryRoot {
   product?: Maybe<StorefrontApiProduct>
   /**
    * Find a product by its handle.
-   * @deprecated Use `product` instead
+   * @deprecated Use `product` instead.
    */
   productByHandle?: Maybe<StorefrontApiProduct>
   /**
@@ -5655,7 +5873,7 @@ export interface StorefrontApiScriptDiscountApplication
   allocationMethod: StorefrontApiDiscountApplicationAllocationMethod
   /**
    * The description of the application as defined by the Script.
-   * @deprecated Use `title` instead
+   * @deprecated Use `title` instead.
    */
   description: Scalars['String']
   /** Which lines of targetType that the discount is allocated over. */
@@ -5836,7 +6054,11 @@ export interface StorefrontApiSellingPlanGroupEdge {
   node: StorefrontApiSellingPlanGroup
 }
 
-/** Represents an option on a selling plan group that's available in the drop-down list in the storefront. */
+/**
+ * Represents an option on a selling plan group that's available in the drop-down list in the storefront.
+ *
+ * Individual selling plans contribute their options to the associated selling plan group. For example, a selling plan group might have an option called `option1: Delivery every`. One selling plan in that group could contribute `option1: 2 weeks` with the pricing for that option, and another selling plan could contribute `option1: 4 weeks`, with different pricing.
+ */
 export interface StorefrontApiSellingPlanGroupOption {
   __typename: 'SellingPlanGroupOption'
   /** The name of the option. For example, 'Delivery every'. */
@@ -5883,7 +6105,7 @@ export interface StorefrontApiShippingRate {
   handle: Scalars['String']
   /**
    * Price of this shipping rate.
-   * @deprecated Use `priceV2` instead
+   * @deprecated Use `priceV2` instead.
    */
   price: Scalars['Money']
   /** Price of this shipping rate. */
@@ -5917,7 +6139,7 @@ export interface StorefrontApiShop extends StorefrontApiHasMetafields {
   collections: StorefrontApiCollectionConnection
   /**
    * The three-letter code for the currency that the shop accepts.
-   * @deprecated Use `paymentSettings` instead
+   * @deprecated Use `paymentSettings` instead.
    */
   currencyCode: StorefrontApiCurrencyCode
   /** A description of the shop. */
@@ -5936,7 +6158,7 @@ export interface StorefrontApiShop extends StorefrontApiHasMetafields {
   name: Scalars['String']
   /** Settings related to payments. */
   paymentSettings: StorefrontApiPaymentSettings
-  /** The shop’s primary domain. */
+  /** The primary domain of the shop’s Online Store. */
   primaryDomain: StorefrontApiDomain
   /** The shop’s privacy policy. */
   privacyPolicy?: Maybe<StorefrontApiShopPolicy>
@@ -5970,9 +6192,11 @@ export interface StorefrontApiShop extends StorefrontApiHasMetafields {
   shipsToCountries: Array<StorefrontApiCountryCode>
   /**
    * The shop’s Shopify Payments account id.
-   * @deprecated Use `paymentSettings` instead
+   * @deprecated Use `paymentSettings` instead.
    */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>
+  /** The shop’s subscription policy. */
+  subscriptionPolicy?: Maybe<StorefrontApiShopPolicyWithDefault>
   /** The shop’s terms of service. */
   termsOfService?: Maybe<StorefrontApiShopPolicy>
 }
@@ -6067,6 +6291,26 @@ export interface StorefrontApiShopPolicy extends StorefrontApiNode {
   /** A globally-unique identifier. */
   id: Scalars['ID']
   /** Policy’s title. */
+  title: Scalars['String']
+  /** Public URL to the policy. */
+  url: Scalars['URL']
+}
+
+/**
+ * A policy for the store that comes with a default value, such as a subscription policy.
+ * If the merchant hasn't configured a policy for their store, then the policy will return the default value.
+ * Otherwise, the policy will return the merchant-configured value.
+ *
+ */
+export interface StorefrontApiShopPolicyWithDefault {
+  __typename: 'ShopPolicyWithDefault'
+  /** The text of the policy. Maximum size: 64KB. */
+  body: Scalars['String']
+  /** The handle of the policy. */
+  handle: Scalars['String']
+  /** The unique identifier of the policy. A default policy doesn't have an ID. */
+  id?: Maybe<Scalars['ID']>
+  /** The title of the policy. */
   title: Scalars['String']
   /** Public URL to the policy. */
   url: Scalars['URL']
@@ -6206,7 +6450,7 @@ export interface StorefrontApiTransaction {
   __typename: 'Transaction'
   /**
    * The amount of money that the transaction was for.
-   * @deprecated Use `amountV2` instead
+   * @deprecated Use `amountV2` instead.
    */
   amount: Scalars['Money']
   /** The amount of money that the transaction was for. */
@@ -6215,7 +6459,7 @@ export interface StorefrontApiTransaction {
   kind: StorefrontApiTransactionKind
   /**
    * The status of the transaction.
-   * @deprecated Use `statusV2` instead
+   * @deprecated Use `statusV2` instead.
    */
   status: StorefrontApiTransactionStatus
   /** The status of the transaction. */
@@ -6325,6 +6569,14 @@ export interface StorefrontApiUserError extends StorefrontApiDisplayableError {
   field?: Maybe<Array<Scalars['String']>>
   /** The error message. */
   message: Scalars['String']
+}
+
+/** A filter used to view a subset of products in a collection matching a specific variant option. */
+export type StorefrontApiVariantOptionFilter = {
+  /** The name of the variant option to filter on. */
+  name: Scalars['String']
+  /** The value of the variant option to filter on. */
+  value: Scalars['String']
 }
 
 /** Represents a Shopify hosted video. */

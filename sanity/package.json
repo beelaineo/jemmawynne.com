@@ -27,25 +27,25 @@
   },
   "dependencies": {
     "@sane-shopify/sanity-plugin": "^0.23.0",
-    "@sanity/base": "2.30.4",
+    "@sanity/base": "2.35.2",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/cli": "2.30.3",
+    "@sanity/cli": "2.35.0",
     "@sanity/components": "2.14.0",
-    "@sanity/core": "2.30.3",
-    "@sanity/default-layout": "2.30.4",
-    "@sanity/default-login": "2.30.4",
-    "@sanity/desk-tool": "2.30.4",
-    "@sanity/vision": "2.30.4",
+    "@sanity/core": "2.35.0",
+    "@sanity/default-layout": "2.35.2",
+    "@sanity/default-login": "2.35.2",
+    "@sanity/desk-tool": "2.35.2",
+    "@sanity/vision": "2.35.2",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.4.0",
-    "styled-components": "^5.3.5"
+    "react-icons": "^4.7.1",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@good-idea/unwind-edges": "^1.5.3",
     "ramda": "^0.28.0",
-    "react-hot-loader": "^4.13.0"
+    "react-hot-loader": "^4.13.1"
   },
   "resolutions": {
     "@sanity/base": "^0.140.12",

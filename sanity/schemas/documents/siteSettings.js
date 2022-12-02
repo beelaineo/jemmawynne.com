@@ -14,6 +14,11 @@ export const announcement = {
       type: 'cta',
     },
   ],
+  preview: {
+    select: {
+      title: 'body',
+    },
+  },
 }
 
 export const banner = {
