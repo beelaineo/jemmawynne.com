@@ -1,6 +1,6 @@
 generates:
   src/types/generated-sanity.ts:
-    schema: https://caazz4uw.api.sanity.io/v1/graphql/staging/default
+    schema: https://caazz4uw.api.sanity.io/v1/graphql/production/default
     plugins:
       - typescript
     config:

@@ -1225,6 +1225,8 @@ export enum StorefrontApiCheckoutErrorCode {
   CustomerAlreadyUsedOncePerCustomerDiscountNotice = 'CUSTOMER_ALREADY_USED_ONCE_PER_CUSTOMER_DISCOUNT_NOTICE',
   /** Discount already applied. */
   DiscountAlreadyApplied = 'DISCOUNT_ALREADY_APPLIED',
+  /** Discount code isn't working right now. Please contact us for help. */
+  DiscountCodeApplicationFailed = 'DISCOUNT_CODE_APPLICATION_FAILED',
   /** Discount disabled. */
   DiscountDisabled = 'DISCOUNT_DISABLED',
   /** Discount expired. */
@@ -4888,6 +4890,7 @@ export interface StorefrontApiPageEdge {
 /**
  * Returns information about pagination in a connection, in accordance with the
  * [Relay specification](https://relay.dev/graphql/connections.htm#sec-undefined.PageInfo).
+ * For more information, please read our [GraphQL Pagination Usage Guide](https://shopify.dev/api/usage/pagination-graphql).
  *
  */
 export interface StorefrontApiPageInfo {

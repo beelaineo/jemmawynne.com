@@ -225,6 +225,31 @@ export type CollectionInfoSorting = {
   helpText?: InputMaybe<SortOrder>
 }
 
+export interface CrossDatasetReference {
+  __typename: 'CrossDatasetReference'
+  _dataset?: Maybe<Scalars['String']>
+  _key?: Maybe<Scalars['String']>
+  _ref?: Maybe<Scalars['String']>
+  _type?: Maybe<Scalars['String']>
+  _weak?: Maybe<Scalars['Boolean']>
+}
+
+export type CrossDatasetReferenceFilter = {
+  _dataset?: InputMaybe<StringFilter>
+  _key?: InputMaybe<StringFilter>
+  _ref?: InputMaybe<StringFilter>
+  _type?: InputMaybe<StringFilter>
+  _weak?: InputMaybe<BooleanFilter>
+}
+
+export type CrossDatasetReferenceSorting = {
+  _dataset?: InputMaybe<SortOrder>
+  _key?: InputMaybe<SortOrder>
+  _ref?: InputMaybe<SortOrder>
+  _type?: InputMaybe<SortOrder>
+  _weak?: InputMaybe<SortOrder>
+}
+
 export interface Cta {
   __typename: 'Cta'
   _key?: Maybe<Scalars['String']>
