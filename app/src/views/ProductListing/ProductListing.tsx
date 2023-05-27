@@ -130,7 +130,14 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
         {disableMenu !== true ? (
           <div>
             <CollectionsMenu>
-              <Heading mb={4} level={7} weight={4} family="sans" color="body.8">
+              <Heading
+                mb={4}
+                level={7}
+                weight={4}
+                family="sans"
+                // @ts-ignore
+                color="body.8"
+              >
                 {relatedCollectionsTitle || 'Collections'}
               </Heading>
               <Hr />
@@ -145,6 +152,7 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
                     lineHeight={'1.4em'}
                     fontFamily="sans"
                     fontSize={6}
+                    // @ts-ignore
                     color="body.6"
                     textTransform={'uppercase'}
                   >
@@ -164,6 +172,7 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
               my={8}
               textAlign="center"
               fontStyle="italic"
+              // @ts-ignore
               color="body.7"
             >
               Loading more products...

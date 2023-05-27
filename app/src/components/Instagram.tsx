@@ -69,7 +69,13 @@ export const InstagramBlock = () => {
         level={4}
       >
         <a href={href} target="_blank" rel="noopener noreferrer">
-          Follow us at <x.span color="body.6">@{handle}</x.span>
+          Follow us at{' '}
+          <x.span
+            // @ts-ignore
+            color="body.6"
+          >
+            @{handle}
+          </x.span>
         </a>
       </Heading>
       <ImagesContainer>

@@ -31,7 +31,14 @@ export const LinkGroup = ({ linkGroup }: LinkGroupProps) => {
   const { title, links } = linkGroup
   return (
     <LinkGroupWrapper>
-      <Heading family="sans" color="body.6" weight={3} level={6}>
+      {/* // @ts-ignore */}
+      <Heading
+        family="sans"
+        // @ts-ignore
+        color="body.6"
+        weight={3}
+        level={6}
+      >
         {title}
       </Heading>
       <LinksWrapper>

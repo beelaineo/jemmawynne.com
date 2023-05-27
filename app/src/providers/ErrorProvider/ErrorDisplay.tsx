@@ -78,6 +78,7 @@ export const ErrorDisplay = () => {
           <Logo />
         </LogoWrapper>
         <Heading
+          // @ts-ignore
           color="body.6"
           family="sans"
           weight={2}

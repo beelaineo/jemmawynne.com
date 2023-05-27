@@ -56,11 +56,23 @@ export const PressItem = ({ pressItem }: PressItemProps) => {
             {title}
           </Heading>
           {subtitle ? (
-            <Heading mt={0} mb={0} level={4} color="body.6">
+            <Heading
+              mt={0}
+              mb={0}
+              level={4}
+              // @ts-ignore
+              color="body.6"
+            >
               {subtitle}
             </Heading>
           ) : null}
-          <Heading mt={2} fontStyle="italic" level={5} color="body.6">
+          <Heading
+            mt={2}
+            fontStyle="italic"
+            level={5}
+            // @ts-ignore
+            color="body.6"
+          >
             {dateString}
           </Heading>
           {link && link.url ? (

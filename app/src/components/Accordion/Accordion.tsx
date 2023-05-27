@@ -20,6 +20,7 @@ export const Accordion = ({ accordion }: AccordionProps) => {
       <ToggleButton onClick={toggleOpen}>
         <Heading
           level={6}
+          // @ts-ignore
           color="body.5"
           my={0}
           textTransform="uppercase"

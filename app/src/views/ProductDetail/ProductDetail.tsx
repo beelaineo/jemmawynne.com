@@ -141,6 +141,7 @@ export const ProductDetail = ({ product }: Props) => {
                     level={6}
                     family="sans"
                     textTransform="uppercase"
+                    // @ts-ignore
                     color="body.5"
                   >
                     <a

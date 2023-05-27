@@ -53,12 +53,20 @@ export function Form<FormValues extends FormikValues>({
   return (
     <FormWrapper>
       {title ? (
-        <Heading level={2} color="primaryMain">
+        <Heading
+          level={2}
+          // @ts-ignore
+          color="primaryMain"
+        >
           {title}
         </Heading>
       ) : null}
       {description ? (
-        <Heading level={4} color="offset.1">
+        <Heading
+          level={4}
+          // @ts-ignore
+          color="offset.1"
+        >
           {description}
         </Heading>
       ) : null}

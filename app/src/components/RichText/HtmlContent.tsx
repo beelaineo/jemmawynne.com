@@ -3,7 +3,7 @@ import { x } from '@xstyled/styled-components'
 import Link from 'next/link'
 import HTMLParser from 'html-parser-lite'
 import { getLinkFromHref } from '../../utils'
-import { Heading, P, Ol, Ul, Li, Span } from '../Text'
+import { Heading, Span } from '../Text'
 import { decodeHTML } from './utils'
 
 function cssToObj(css?: string): Record<string, string> {

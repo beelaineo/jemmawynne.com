@@ -26,13 +26,25 @@ export const ProductDescription = ({
         {isInquiryOnly !== true && currentVariant.priceV2 ? (
           <ProductPrices>
             {currentVariant.compareAtPriceV2 ? (
-              <Heading level={1} weight={1} fontStyle="italic" color="body.5">
+              <Heading
+                level={1}
+                weight={1}
+                fontStyle="italic"
+                // @ts-ignore
+                color="body.5"
+              >
                 <StrikeThrough>
                   {formatMoney(currentVariant.compareAtPriceV2)}
                 </StrikeThrough>
               </Heading>
             ) : null}
-            <Heading level={1} weight={1} fontStyle="italic" color="body.5">
+            <Heading
+              level={1}
+              weight={1}
+              fontStyle="italic"
+              // @ts-ignore
+              color="body.5"
+            >
               {formatMoney(currentVariant.priceV2)}
             </Heading>
           </ProductPrices>

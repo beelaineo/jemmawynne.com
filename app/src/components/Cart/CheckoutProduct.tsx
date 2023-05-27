@@ -52,11 +52,18 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
               <Heading
                 key={option.name}
                 level={7}
+                // @ts-ignore
                 color="body.5"
                 family="sans"
                 weight={3}
               >
-                {option.name}: <x.span color="body.7">{option.value}</x.span>
+                {option.name}:{' '}
+                <x.span
+                  // @ts-ignore
+                  color="body.7"
+                >
+                  {option.value}
+                </x.span>
               </Heading>
             ) : null,
           )}
@@ -65,7 +72,13 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
           {formatMoney(variant.priceV2)}
         </Heading>
         <QuantitySelectorCart>
-          <Heading family="sans" level={6} color="body.7" weight={3}>
+          <Heading
+            family="sans"
+            level={6}
+            // @ts-ignore
+            color="body.7"
+            weight={3}
+          >
             <QuantityButton type="button" onClick={setQuantity(quantity - 1)}>
               &#8722;
             </QuantityButton>

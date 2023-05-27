@@ -1,5 +1,12 @@
 import * as React from 'react'
-import styled, { x, css, DefaultTheme } from '@xstyled/styled-components'
+import styled, {
+  x,
+  css,
+  DefaultTheme,
+  SystemProp,
+  Color,
+  Theme,
+} from '@xstyled/styled-components'
 import { SystemProps } from '@xstyled/system'
 
 export interface DefaultBreakpoints {
@@ -32,7 +39,10 @@ interface CustomTextProps extends BoxProps {
   family?: string
   weight?: number
   align?: string
-  color?: string
+  color?:
+    | SystemProp<Color<Theme>, Theme>
+    | BreakpointObject<SystemProp<Color<Theme>, Theme> | undefined>
+    | undefined
   htmlFor?: string
   level?: number
   textDecoration?: string
@@ -92,7 +102,10 @@ interface HeadingProps
   family?: string
   weight?: number
   align?: string
-  color?: string
+  color?:
+    | SystemProp<Color<Theme>, Theme>
+    | BreakpointObject<SystemProp<Color<Theme>, Theme> | undefined>
+    | undefined
   htmlFor?: string
   as?: any
   textDecoration?: string
@@ -138,6 +151,7 @@ export const P = ({ children, color, family, weight, htmlFor }: PProps) => {
       fontSize={4}
       family={family}
       weight={weight || 2}
+      // @ts-ignore
       color={color}
       htmlFor={htmlFor}
       lineHeight="1.4em"

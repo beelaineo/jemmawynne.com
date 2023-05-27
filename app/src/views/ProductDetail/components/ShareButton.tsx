@@ -23,7 +23,14 @@ const ShareLink = ({ button }: ShareLinkProps) => {
   const ariaLabel = `Share on ${button.label}`
 
   return (
-    <Heading m={0} level={5} family="sans" color="body.5" textAlign="center">
+    <Heading
+      m={0}
+      level={5}
+      family="sans"
+      // @ts-ignore
+      color="body.5"
+      textAlign="center"
+    >
       <a
         href={button.href}
         aria-label={ariaLabel}

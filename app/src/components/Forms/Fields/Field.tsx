@@ -81,7 +81,13 @@ export const Field = (fieldProps: FieldProps) => {
         {children ? children : renderInner()}
       </FieldWrapper>
       {helpText ? (
-        <Heading level={4} mt={1} weight={1} color="body.3">
+        <Heading
+          level={4}
+          mt={1}
+          weight={1}
+          // @ts-ignore
+          color="body.3"
+        >
           {helpText}
         </Heading>
       ) : null}

@@ -114,6 +114,7 @@ const OptionSelector = ({
               fontSize={6}
               fontWeight={4}
               mr={2}
+              // @ts-ignore
               color="body.5"
               textTransform="uppercase"
               htmlFor={option.name}
@@ -147,6 +148,7 @@ const OptionSelector = ({
             fontSize={6}
             fontWeight={4}
             mr={2}
+            // @ts-ignore
             color="body.5"
             textTransform="uppercase"
             htmlFor={option.name}
