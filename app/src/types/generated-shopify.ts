@@ -56,7 +56,7 @@ export interface StorefrontApiAppliedGiftCard extends StorefrontApiNode {
   balance: Scalars['Money']
   /** The amount left on the gift card. */
   balanceV2: StorefrontApiMoneyV2
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The last characters of the gift card. */
   lastCharacters: Scalars['String']
@@ -94,7 +94,7 @@ export interface StorefrontApiArticle
    *
    */
   handle: Scalars['String']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The image associated with the article. */
   image?: Maybe<StorefrontApiImage>
@@ -236,7 +236,7 @@ export interface StorefrontApiAttribute {
   value?: Maybe<Scalars['String']>
 }
 
-/** Specifies the input fields required for an attribute. */
+/** The input fields for an attribute. */
 export type StorefrontApiAttributeInput = {
   /** Key or name of the attribute. */
   key: Scalars['String']
@@ -294,7 +294,7 @@ export interface StorefrontApiBlog
    *
    */
   handle: Scalars['String']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** Returns a metafield found by namespace and key. */
   metafield?: Maybe<StorefrontApiMetafield>
@@ -436,7 +436,7 @@ export interface StorefrontApiCart extends StorefrontApiNode {
    * @deprecated Use `cost` instead.
    */
   estimatedCost: StorefrontApiCartEstimatedCost
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** A list of lines containing information about the items the customer intends to purchase. */
   lines: StorefrontApiCartLineConnection
@@ -597,7 +597,7 @@ export interface StorefrontApiCartEstimatedCost {
   totalTaxAmount?: Maybe<StorefrontApiMoneyV2>
 }
 
-/** Specifies the input fields to create a cart. */
+/** The input fields to create a cart. */
 export type StorefrontApiCartInput = {
   /** An array of key-value pairs that contains additional information about the cart. */
   attributes?: InputMaybe<Array<StorefrontApiAttributeInput>>
@@ -631,7 +631,7 @@ export interface StorefrontApiCartLine extends StorefrontApiNode {
    * @deprecated Use `cost` instead.
    */
   estimatedCost: StorefrontApiCartLineEstimatedCost
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The merchandise that the buyer intends to purchase. */
   merchandise: StorefrontApiMerchandise
@@ -674,29 +674,29 @@ export interface StorefrontApiCartLineEstimatedCost {
   totalAmount: StorefrontApiMoneyV2
 }
 
-/** Specifies the input fields to create a merchandise line on a cart. */
+/** The input fields to create a merchandise line on a cart. */
 export type StorefrontApiCartLineInput = {
   /** An array of key-value pairs that contains additional information about the merchandise line. */
   attributes?: InputMaybe<Array<StorefrontApiAttributeInput>>
-  /** The identifier of the merchandise that the buyer intends to purchase. */
+  /** The ID of the merchandise that the buyer intends to purchase. */
   merchandiseId: Scalars['ID']
   /** The quantity of the merchandise. */
   quantity?: InputMaybe<Scalars['Int']>
-  /** The identifier of the selling plan that the merchandise is being purchased with. */
+  /** The ID of the selling plan that the merchandise is being purchased with. */
   sellingPlanId?: InputMaybe<Scalars['ID']>
 }
 
-/** Specifies the input fields to update a line item on a cart. */
+/** The input fields to update a line item on a cart. */
 export type StorefrontApiCartLineUpdateInput = {
   /** An array of key-value pairs that contains additional information about the merchandise line. */
   attributes?: InputMaybe<Array<StorefrontApiAttributeInput>>
-  /** The identifier of the merchandise line. */
+  /** The ID of the merchandise line. */
   id: Scalars['ID']
-  /** The identifier of the merchandise for the line item. */
+  /** The ID of the merchandise for the line item. */
   merchandiseId?: InputMaybe<Scalars['ID']>
   /** The quantity of the line item. */
   quantity?: InputMaybe<Scalars['Int']>
-  /** The identifier of the selling plan that the merchandise is being purchased with. */
+  /** The ID of the selling plan that the merchandise is being purchased with. */
   sellingPlanId?: InputMaybe<Scalars['ID']>
 }
 
@@ -779,7 +779,7 @@ export interface StorefrontApiCheckout extends StorefrontApiNode {
   discountApplications: StorefrontApiDiscountApplicationConnection
   /** The email attached to this checkout. */
   email?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** A list of line item objects, each one containing information about an item in the checkout. */
   lineItems: StorefrontApiCheckoutLineItemConnection
@@ -868,7 +868,7 @@ export type StorefrontApiCheckoutLineItemsArgs = {
   reverse?: InputMaybe<Scalars['Boolean']>
 }
 
-/** Specifies the fields required to update a checkout's attributes. */
+/** The input fields required to update a checkout's attributes. */
 export type StorefrontApiCheckoutAttributesUpdateInput = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
@@ -898,7 +898,7 @@ export interface StorefrontApiCheckoutAttributesUpdatePayload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Specifies the fields required to update a checkout's attributes. */
+/** The input fields required to update a checkout's attributes. */
 export type StorefrontApiCheckoutAttributesUpdateV2Input = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
@@ -935,7 +935,7 @@ export interface StorefrontApiCheckoutBuyerIdentity {
   countryCode?: Maybe<StorefrontApiCountryCode>
 }
 
-/** Specifies the identity of the customer associated with the checkout. */
+/** The input fields for the identity of the customer associated with the checkout. */
 export type StorefrontApiCheckoutBuyerIdentityInput = {
   /**
    * The country code of one of the shop's
@@ -1040,7 +1040,7 @@ export interface StorefrontApiCheckoutCompleteWithTokenizedPaymentV3Payload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Specifies the fields required to create a checkout. */
+/** The input fields required to create a checkout. */
 export type StorefrontApiCheckoutCreateInput = {
   /**
    * Allows setting partial addresses on a Checkout, skipping the full validation of attributes.
@@ -1368,7 +1368,7 @@ export interface StorefrontApiCheckoutLineItem extends StorefrontApiNode {
   customAttributes: Array<StorefrontApiAttribute>
   /** The discounts that have been allocated onto the checkout line item by discount applications. */
   discountAllocations: Array<StorefrontApiDiscountAllocation>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The quantity of the line item. */
   quantity: Scalars['Int']
@@ -1404,25 +1404,25 @@ export interface StorefrontApiCheckoutLineItemEdge {
   node: StorefrontApiCheckoutLineItem
 }
 
-/** Specifies the input fields to create a line item on a checkout. */
+/** The input fields to create a line item on a checkout. */
 export type StorefrontApiCheckoutLineItemInput = {
   /** Extra information in the form of an array of Key-Value pairs about the line item. */
   customAttributes?: InputMaybe<Array<StorefrontApiAttributeInput>>
   /** The quantity of the line item. */
   quantity: Scalars['Int']
-  /** The identifier of the product variant for the line item. */
+  /** The ID of the product variant for the line item. */
   variantId: Scalars['ID']
 }
 
-/** Specifies the input fields to update a line item on the checkout. */
+/** The input fields to update a line item on the checkout. */
 export type StorefrontApiCheckoutLineItemUpdateInput = {
   /** Extra information in the form of an array of Key-Value pairs about the line item. */
   customAttributes?: InputMaybe<Array<StorefrontApiAttributeInput>>
-  /** The identifier of the line item. */
+  /** The ID of the line item. */
   id?: InputMaybe<Scalars['ID']>
   /** The quantity of the line item. */
   quantity?: InputMaybe<Scalars['Int']>
-  /** The variant identifier of the line item. */
+  /** The variant ID of the line item. */
   variantId?: InputMaybe<Scalars['ID']>
 }
 
@@ -1547,7 +1547,7 @@ export interface StorefrontApiCollection
    *
    */
   handle: Scalars['String']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** Image associated with the collection. */
   image?: Maybe<StorefrontApiImage>
@@ -1658,7 +1658,7 @@ export interface StorefrontApiComment extends StorefrontApiNode {
   content: Scalars['String']
   /** The content of the comment, complete with HTML formatting. */
   contentHtml: Scalars['HTML']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
 }
 
@@ -2647,7 +2647,7 @@ export interface StorefrontApiCustomer extends StorefrontApiHasMetafields {
   email?: Maybe<Scalars['String']>
   /** The customer’s first name. */
   firstName?: Maybe<Scalars['String']>
-  /** A unique identifier for the customer. */
+  /** A unique ID for the customer. */
   id: Scalars['ID']
   /** The customer's most recently updated, incomplete checkout. */
   lastIncompleteCheckout?: Maybe<StorefrontApiCheckout>
@@ -2720,7 +2720,7 @@ export interface StorefrontApiCustomerAccessToken {
   expiresAt: Scalars['DateTime']
 }
 
-/** Specifies the input fields required to create a customer access token. */
+/** The input fields required to create a customer access token. */
 export type StorefrontApiCustomerAccessTokenCreateInput = {
   /** The email associated to the customer. */
   email: Scalars['String']
@@ -2782,7 +2782,7 @@ export interface StorefrontApiCustomerActivateByUrlPayload {
   customerUserErrors: Array<StorefrontApiCustomerUserError>
 }
 
-/** Specifies the input fields required to activate a customer. */
+/** The input fields to activate a customer. */
 export type StorefrontApiCustomerActivateInput = {
   /** The activation token required to activate the customer. */
   activationToken: Scalars['String']
@@ -2848,7 +2848,7 @@ export interface StorefrontApiCustomerAddressUpdatePayload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** The fields required to create a new customer. */
+/** The input fields to create a new customer. */
 export type StorefrontApiCustomerCreateInput = {
   /** Indicates whether the customer has consented to be sent marketing material via email. */
   acceptsMarketing?: InputMaybe<Scalars['Boolean']>
@@ -2959,7 +2959,7 @@ export interface StorefrontApiCustomerResetByUrlPayload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Specifies the fields required to reset a customer’s password. */
+/** The input fields to reset a customer's password. */
 export type StorefrontApiCustomerResetInput = {
   /** New password that will be set as part of the reset password process. */
   password: Scalars['String']
@@ -2983,7 +2983,7 @@ export interface StorefrontApiCustomerResetPayload {
   userErrors: Array<StorefrontApiUserError>
 }
 
-/** Specifies the fields required to update the Customer information. */
+/** The input fields to update the Customer information. */
 export type StorefrontApiCustomerUpdateInput = {
   /** Indicates whether the customer has consented to be sent marketing material via email. */
   acceptsMarketing?: InputMaybe<Scalars['Boolean']>
@@ -3195,7 +3195,7 @@ export interface StorefrontApiExternalVideo
   embeddedUrl: Scalars['URL']
   /** The host of the external video. */
   host: StorefrontApiMediaHost
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The media content type. */
   mediaContentType: StorefrontApiMediaContentType
@@ -3319,7 +3319,7 @@ export interface StorefrontApiFulfillmentTrackingInfo {
   url?: Maybe<Scalars['URL']>
 }
 
-/** Used to specify a geographical location. */
+/** The input fields used to specify a geographical location. */
 export type StorefrontApiGeoCoordinateInput = {
   /** The coordinate's latitude value. */
   latitude: Scalars['Float']
@@ -3362,7 +3362,7 @@ export interface StorefrontApiImage {
   altText?: Maybe<Scalars['String']>
   /** The original height of the image in pixels. Returns `null` if the image is not hosted by Shopify. */
   height?: Maybe<Scalars['Int']>
-  /** A unique identifier for the image. */
+  /** A unique ID for the image. */
   id?: Maybe<Scalars['ID']>
   /**
    * The location of the original image as a URL.
@@ -3502,7 +3502,7 @@ export interface StorefrontApiLocation extends StorefrontApiNode {
   __typename: 'Location'
   /** The address of the location. */
   address: StorefrontApiLocationAddress
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The name of the location. */
   name: Scalars['String']
@@ -3625,7 +3625,7 @@ export interface StorefrontApiMailingAddress extends StorefrontApiNode {
   formatted: Array<Scalars['String']>
   /** A comma-separated list of the values for city, province, and country. */
   formattedArea?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The last name of the customer. */
   lastName?: Maybe<Scalars['String']>
@@ -3688,7 +3688,7 @@ export interface StorefrontApiMailingAddressEdge {
   node: StorefrontApiMailingAddress
 }
 
-/** Specifies the fields accepted to create or update a mailing address. */
+/** The input fields to create or update a mailing address. */
 export type StorefrontApiMailingAddressInput = {
   /**
    * The first line of the address. Typically the street address or PO Box number.
@@ -3811,7 +3811,7 @@ export interface StorefrontApiMediaImage
   __typename: 'MediaImage'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The image for the media. */
   image?: Maybe<StorefrontApiImage>
@@ -3835,25 +3835,25 @@ export interface StorefrontApiMetafield extends StorefrontApiNode {
   createdAt: Scalars['DateTime']
   /** The description of a metafield. */
   description?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
-  /** The key name for a metafield. */
+  /** The unique identifier for the metafield within its namespace. */
   key: Scalars['String']
-  /** The namespace for a metafield. */
+  /** The container for a group of metafields that the metafield is associated with. */
   namespace: Scalars['String']
-  /** The parent object that the metafield belongs to. */
+  /** The type of resource that the metafield is attached to. */
   parentResource: StorefrontApiMetafieldParentResource
-  /** Returns a reference object if the metafield definition's type is a resource reference. */
+  /** Returns a reference object if the metafield's type is a resource reference. */
   reference?: Maybe<StorefrontApiMetafieldReference>
   /**
    * The type name of the metafield.
-   * See the list of [supported types](https://shopify.dev/apps/metafields/definitions/types).
+   * Refer to the list of [supported types](https://shopify.dev/apps/metafields/definitions/types).
    *
    */
   type: Scalars['String']
-  /** The date and time when the storefront metafield was updated. */
+  /** The date and time when the metafield was last updated. */
   updatedAt: Scalars['DateTime']
-  /** The value of a metafield. */
+  /** The data stored in the metafield. Always stored as a string, regardless of the metafield's type. */
   value: Scalars['String']
   /**
    * Represents the metafield value type.
@@ -3946,7 +3946,7 @@ export interface StorefrontApiModel3d
   __typename: 'Model3d'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The media content type. */
   mediaContentType: StorefrontApiMediaContentType
@@ -3969,7 +3969,7 @@ export interface StorefrontApiModel3dSource {
   url: Scalars['String']
 }
 
-/** Specifies the fields for a monetary value with currency. */
+/** The input fields for a monetary value with currency. */
 export type StorefrontApiMoneyInput = {
   /** Decimal money amount. */
   amount: Scalars['Decimal']
@@ -4506,7 +4506,7 @@ export type StorefrontApiMutationCustomerUpdateArgs = {
  *
  */
 export type StorefrontApiNode = {
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
 }
 
@@ -4549,7 +4549,7 @@ export interface StorefrontApiOrder
   financialStatus?: Maybe<StorefrontApiOrderFinancialStatus>
   /** The fulfillment status for the order. */
   fulfillmentStatus: StorefrontApiOrderFulfillmentStatus
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** List of the order’s line items. */
   lineItems: StorefrontApiOrderLineItemConnection
@@ -4822,7 +4822,7 @@ export interface StorefrontApiPage
   createdAt: Scalars['DateTime']
   /** A human-friendly unique string for the page automatically generated from its title. */
   handle: Scalars['String']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** Returns a metafield found by namespace and key. */
   metafield?: Maybe<StorefrontApiMetafield>
@@ -4935,7 +4935,7 @@ export interface StorefrontApiPayment extends StorefrontApiNode {
   creditCard?: Maybe<StorefrontApiCreditCard>
   /** A message describing a processing error during asynchronous processing. */
   errorMessage?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /**
    * A client-side generated token to identify a payment and perform idempotent operations.
@@ -4967,7 +4967,7 @@ export interface StorefrontApiPaymentSettings {
   currencyCode: StorefrontApiCurrencyCode
   /** A list of enabled currencies (ISO 4217 format) that the shop accepts. Merchants can enable currencies from their Shopify Payments settings in the Shopify admin. */
   enabledPresentmentCurrencies: Array<StorefrontApiCurrencyCode>
-  /** The shop’s Shopify Payments account id. */
+  /** The shop’s Shopify Payments account ID. */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>
   /** List of the digital wallets which the shop supports. */
   supportedDigitalWallets: Array<StorefrontApiDigitalWallet>
@@ -4987,7 +4987,10 @@ export enum StorefrontApiPaymentTokenType {
   Vault = 'VAULT',
 }
 
-/** A filter used to view a subset of products in a collection matching a specific price range. */
+/**
+ * The input fields for a filter used to view a subset of products in a collection matching a specific price range.
+ *
+ */
 export type StorefrontApiPriceRangeFilter = {
   /** The maximum price in the range. Empty indicates no max price. */
   max?: InputMaybe<Scalars['Float']>
@@ -5041,7 +5044,7 @@ export interface StorefrontApiProduct
    *
    */
   handle: Scalars['String']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** List of images associated with the product. */
   images: StorefrontApiImageConnection
@@ -5283,7 +5286,12 @@ export interface StorefrontApiProductEdge {
   node: StorefrontApiProduct
 }
 
-/** A filter used to view a subset of products in a collection. */
+/**
+ * The input fields for a filter used to view a subset of products in a collection.
+ * By default, the `available` and `price` filters are enabled. Filters are customized with the Shopify Search & Discovery app.
+ * Learn more about [customizing storefront filtering](https://help.shopify.com/manual/online-store/themes/customizing-themes/storefront-filters).
+ *
+ */
 export type StorefrontApiProductFilter = {
   /** Filter on if the product is available for sale. */
   available?: InputMaybe<Scalars['Boolean']>
@@ -5339,7 +5347,7 @@ export enum StorefrontApiProductMediaSortKeys {
  */
 export interface StorefrontApiProductOption extends StorefrontApiNode {
   __typename: 'ProductOption'
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The product option’s name. */
   name: Scalars['String']
@@ -5429,7 +5437,7 @@ export interface StorefrontApiProductVariant
   compareAtPriceV2?: Maybe<StorefrontApiMoneyV2>
   /** Whether a product is out of stock but still available for purchase (used for backorders). */
   currentlyNotInStock: Scalars['Boolean']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /**
    * Image associated with the product variant. This field falls back to the product image if no image is available.
@@ -5656,7 +5664,11 @@ export interface StorefrontApiQueryRoot {
   collectionByHandle?: Maybe<StorefrontApiCollection>
   /** List of the shop’s collections. */
   collections: StorefrontApiCollectionConnection
-  /** Find a customer by its access token. */
+  /**
+   * The customer associated with the given access token. Tokens are obtained by using the
+   * [`customerAccessTokenCreate` mutation](https://shopify.dev/docs/api/storefront/latest/mutations/customerAccessTokenCreate).
+   *
+   */
   customer?: Maybe<StorefrontApiCustomer>
   /** Returns the localized experiences configured for the shop. */
   localization: StorefrontApiLocalization
@@ -5902,7 +5914,7 @@ export interface StorefrontApiSelectedOption {
   value: Scalars['String']
 }
 
-/** Specifies the input fields required for a selected option. */
+/** The input fields required for a selected option. */
 export type StorefrontApiSelectedOptionInput = {
   /** The product option’s name. */
   name: Scalars['String']
@@ -5915,7 +5927,7 @@ export interface StorefrontApiSellingPlan {
   __typename: 'SellingPlan'
   /** The description of the selling plan. */
   description?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The name of the selling plan. For example, '6 weeks of prepaid granola, delivered weekly'. */
   name: Scalars['String']
@@ -6194,7 +6206,7 @@ export interface StorefrontApiShop extends StorefrontApiHasMetafields {
   /** Countries that the shop ships to. */
   shipsToCountries: Array<StorefrontApiCountryCode>
   /**
-   * The shop’s Shopify Payments account id.
+   * The shop’s Shopify Payments account ID.
    * @deprecated Use `paymentSettings` instead.
    */
   shopifyPaymentsAccountId?: Maybe<Scalars['String']>
@@ -6291,7 +6303,7 @@ export interface StorefrontApiShopPolicy extends StorefrontApiNode {
   body: Scalars['String']
   /** Policy’s handle. */
   handle: Scalars['String']
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** Policy’s title. */
   title: Scalars['String']
@@ -6311,7 +6323,7 @@ export interface StorefrontApiShopPolicyWithDefault {
   body: Scalars['String']
   /** The handle of the policy. */
   handle: Scalars['String']
-  /** The unique identifier of the policy. A default policy doesn't have an ID. */
+  /** The unique ID of the policy. A default policy doesn't have an ID. */
   id?: Maybe<Scalars['ID']>
   /** The title of the policy. */
   title: Scalars['String']
@@ -6574,7 +6586,10 @@ export interface StorefrontApiUserError extends StorefrontApiDisplayableError {
   message: Scalars['String']
 }
 
-/** A filter used to view a subset of products in a collection matching a specific variant option. */
+/**
+ * The input fields for a filter used to view a subset of products in a collection matching a specific variant option.
+ *
+ */
 export type StorefrontApiVariantOptionFilter = {
   /** The name of the variant option to filter on. */
   name: Scalars['String']
@@ -6589,7 +6604,7 @@ export interface StorefrontApiVideo
   __typename: 'Video'
   /** A word or phrase to share the nature or contents of a media. */
   alt?: Maybe<Scalars['String']>
-  /** A globally-unique identifier. */
+  /** A globally-unique ID. */
   id: Scalars['ID']
   /** The media content type. */
   mediaContentType: StorefrontApiMediaContentType
