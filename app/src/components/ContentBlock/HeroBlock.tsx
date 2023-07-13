@@ -13,6 +13,7 @@ import {
   HeroImageWrapper,
   HeroWrapper,
   HeroContentWrapper,
+  HeroContentWrapperMobile,
   HeroText,
 } from './styled'
 
@@ -83,65 +84,78 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
   } = hero
   const heroStyle = hero?.heroStyle || 'default'
   return (
-    <HeroWrapper
-      fullHeight={fullHeight}
-      announcementOpen={announcementOpen}
-      landscape={landscape}
-      heroStyle={heroStyle}
-    >
-      <HeroImageWrapper heroStyle={heroStyle}>
-        {image &&
-        image_secondary &&
-        (heroStyle == 'one-two' || heroStyle == 'two-one') ? (
-          <x.div
-            position={'relative'}
-            display="grid"
-            gridTemplateColumns={{
-              _: '1fr',
-              md: heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr',
-            }}
-            gridTemplateRows={{ _: '4fr 1fr', md: 'unset' }}
-            h="100%"
-          >
-            <HeroImage ratio={0.45} image={image} />
-            <HeroImage ratio={0.45} image={image_secondary} />
-            {heroStyle == 'one-two' || heroStyle == 'two-one'
-              ? definitely(content).map((cb) => (
-                  <HeroContent
-                    key={cb._key || 'some-key'}
-                    content={cb}
-                    heroStyle={heroStyle}
-                    view={'flexMobile'}
-                  />
-                ))
-              : null}
-          </x.div>
-        ) : (
-          <Image
-            displayCaption={false}
-            fillContainer
-            ratio={0.45}
-            image={image}
-          />
-        )}
-        {mobileImage ? (
-          <Image
-            displayCaption={false}
-            fillContainer
-            ratio={1.1}
-            image={mobileImage || image}
-          />
-        ) : null}
-      </HeroImageWrapper>
-      <HeroContentWrapper layout={contentLayout} heroStyle={heroStyle}>
-        {definitely(content).map((cb) => (
-          <HeroContent
-            key={cb._key || 'some-key'}
-            content={cb}
-            heroStyle={heroStyle}
-          />
-        ))}
-      </HeroContentWrapper>
-    </HeroWrapper>
+    <>
+      <HeroWrapper
+        fullHeight={fullHeight}
+        announcementOpen={announcementOpen}
+        landscape={landscape}
+        heroStyle={heroStyle}
+      >
+        <HeroImageWrapper heroStyle={heroStyle}>
+          {image &&
+          image_secondary &&
+          (heroStyle == 'one-two' || heroStyle == 'two-one') ? (
+            <x.div
+              position={'relative'}
+              display="grid"
+              gridTemplateColumns={{
+                _: '1fr',
+                md: heroStyle == 'one-two' ? '1fr 2fr' : '2fr 1fr',
+              }}
+              gridTemplateRows={{ _: '4fr 1fr', md: 'unset' }}
+              h="100%"
+            >
+              <HeroImage ratio={0.45} image={image} />
+              <HeroImage ratio={0.45} image={image_secondary} />
+              {heroStyle == 'one-two' || heroStyle == 'two-one'
+                ? definitely(content).map((cb) => (
+                    <HeroContent
+                      key={cb._key || 'some-key'}
+                      content={cb}
+                      heroStyle={heroStyle}
+                      view={'flexMobile'}
+                    />
+                  ))
+                : null}
+            </x.div>
+          ) : (
+            <Image
+              displayCaption={false}
+              fillContainer
+              ratio={0.45}
+              image={image}
+            />
+          )}
+          {mobileImage ? (
+            <Image
+              displayCaption={false}
+              fillContainer
+              ratio={1.1}
+              image={mobileImage || image}
+            />
+          ) : null}
+        </HeroImageWrapper>
+        <HeroContentWrapper layout={contentLayout} heroStyle={heroStyle}>
+          {definitely(content).map((cb) => (
+            <HeroContent
+              key={cb._key || 'some-key'}
+              content={cb}
+              heroStyle={heroStyle}
+            />
+          ))}
+        </HeroContentWrapper>
+      </HeroWrapper>
+      {heroStyle == 'default' ? (
+        <HeroContentWrapperMobile layout={contentLayout} heroStyle={heroStyle}>
+          {definitely(content).map((cb) => (
+            <HeroContent
+              key={cb._key || 'some-key'}
+              content={cb}
+              heroStyle={heroStyle}
+            />
+          ))}
+        </HeroContentWrapperMobile>
+      ) : null}
+    </>
   )
 }

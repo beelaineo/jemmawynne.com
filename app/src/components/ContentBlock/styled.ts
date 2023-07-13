@@ -81,7 +81,7 @@ export const HeroWrapper = styled.div<HeroWrapperProps>`
         ? announcementOpen
           ? `calc(100vh - ${theme.navHeight} - ${theme.announcementHeight})`
           : `calc(100vh - ${theme.navHeight})`
-        : '280px'};
+        : '320px'};
     }
   `}
 `
@@ -165,7 +165,9 @@ export const HeroText = styled.div<HeroTextProps>`
       color: ${getColor(textColorMobile)};
       justify-content: ${getFlexJustification(textPositionMobile)};
       align-items: ${getFlexAlignment(textPositionMobile)};
-      text-align: ${getTextAlignment(textPositionMobile)};
+      text-align: ${heroStyle == 'default'
+        ? 'center'
+        : getTextAlignment(textPositionMobile, 'center')};
       h1 {
         font-size: 45px;
       }
@@ -198,6 +200,24 @@ export const HeroContentWrapper = styled.div<HeroContentWrapperProps>`
 
     ${theme.mediaQueries.tablet} {
       flex-direction: 'column';
+    }
+
+    ${theme.mediaQueries.mobile} {
+      display: ${heroStyle == 'default' ? `none` : `flex`};
+    }
+  `}
+`
+
+interface HeroContentWrapperMobileProps {
+  layout?: string | null
+  heroStyle?: string | null
+}
+
+export const HeroContentWrapperMobile = styled.div<HeroContentWrapperMobileProps>`
+  ${({ layout, heroStyle, theme }) => css`
+    display: none;
+    ${theme.mediaQueries.mobile} {
+      display: block;
     }
   `}
 `
