@@ -48,7 +48,7 @@ interface ImageUrls {
   srcSet: string
 }
 
-const defaultSizes = [100, 300, 600, 800, 1200, 1600]
+const defaultSizes = [100, 300, 600, 800, 1200, 1600, 1920, 2400, 3600, 4400]
 
 const getSanityImageDetails = (
   image: SanityRawImage | RichImage,
