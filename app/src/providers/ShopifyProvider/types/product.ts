@@ -19,6 +19,7 @@ export interface Variant {
   selectedOptions?: SelectedOption[]
   weight?: number
   weightUnit?: string
+  compareAtPriceV2?: MoneyV2
 }
 
 interface ProductPriceRange {

@@ -68,6 +68,8 @@ export const sanityCollectionQuery = `
             image,
             title,
             selectedOptions,
+            compareAtPriceV2,
+            priceV2,
           },
         },
       },
@@ -81,6 +83,7 @@ export const sanityCollectionQuery = `
     body,
     ...
   },
+  disableMenu,
 }
 `
 
@@ -128,6 +131,8 @@ export const moreProductsQuery = `
             image,
             title,
             selectedOptions,
+            compareAtPriceV2,
+            priceV2,
           },
         },
       },

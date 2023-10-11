@@ -119,6 +119,8 @@ export const ProductListing = ({ collection }: ProductListingProps) => {
       getHeroImage(hero) || collection?.sourceData?.image || firstProductImage,
   }
 
+  console.log('menuDisabled?', disableMenu)
+
   return (
     <>
       <SEO seo={seo} defaultSeo={defaultSeo} path={path} />
