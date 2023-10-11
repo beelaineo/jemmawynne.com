@@ -14,6 +14,12 @@ export const ProductInfo = styled.div`
   text-align: center;
 `
 
+export const ProductPrice = styled.div`
+  display: flex;
+  justify-content: center;
+  column-gap: 2;
+`
+
 export const SwatchesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;

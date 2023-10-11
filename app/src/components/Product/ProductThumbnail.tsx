@@ -12,7 +12,7 @@ import { unwindEdges } from '@good-idea/unwind-edges'
 import { useShopData } from '../../providers/ShopDataProvider'
 import { useAnalytics } from '../../providers/AnalyticsProvider'
 import { useInViewport } from '../../hooks'
-import { Heading } from '../Text'
+import { Heading, StrikeThrough } from '../Text'
 import { Image } from '../Image'
 import {
   getVariantBySelectedOption,
@@ -26,6 +26,7 @@ import {
   ImageWrapper,
   ProductThumb,
   ProductThumbnailSwatchesWrapper,
+  ProductPrice,
 } from './styled'
 import { TagBadges } from './TagBadges'
 
@@ -62,6 +63,10 @@ export const ProductThumbnail = ({
   const { getProductSwatchOptions } = useShopData()
   const [variants] = unwindEdges(product?.sourceData?.variants)
   const [currentVariant, setCurrentVariant] = useState(variants[0])
+  const [price, setPrice] = useState(variants[0].priceV2)
+  const [compareAtPrice, setCompareAtPrice] = useState(
+    variants[0].compareAtPriceV2,
+  )
   const inquiryOnly = productIsInquiryOnly(product)
   if (!product?.sourceData) return null
   if (product.archived === true) return null
@@ -113,6 +118,11 @@ export const ProductThumbnail = ({
     return matches
   }
 
+  useEffect(() => {
+    setPrice(currentVariant.priceV2)
+    setCompareAtPrice(currentVariant.compareAtPriceV2)
+  }, [currentVariant])
+
   return (
     <ProductThumb ref={containerRef}>
       <Link href="/products/[productSlug]" as={as}>
@@ -136,31 +146,31 @@ export const ProductThumbnail = ({
             >
               {product.title}
             </Heading>
-            {hidePrice || inquiryOnly ? null : minVariantPrice &&
-              minVariantPrice.amount &&
-              maxVariantPrice &&
-              maxVariantPrice.amount &&
-              minVariantPrice.amount !== maxVariantPrice.amount ? (
-              <Heading
-                mt={2}
-                // @ts-ignore
-                color="body.6"
-                level={5}
-                fontStyle="italic"
-              >
-                {formatMoney(minVariantPrice)} - {formatMoney(maxVariantPrice)}
-              </Heading>
-            ) : maxVariantPrice ? (
-              <Heading
-                mt={2}
-                // @ts-ignore
-                color="body.6"
-                level={5}
-                fontStyle="italic"
-              >
-                {formatMoney(maxVariantPrice)}
-              </Heading>
-            ) : null}
+            <ProductPrice>
+              {hidePrice || inquiryOnly ? null : compareAtPrice &&
+                compareAtPrice.amount ? (
+                <Heading
+                  mt={2}
+                  // @ts-ignore
+                  color="body.6"
+                  level={5}
+                  fontStyle="italic"
+                >
+                  <StrikeThrough>{formatMoney(compareAtPrice)}</StrikeThrough>
+                </Heading>
+              ) : null}
+              {hidePrice || inquiryOnly ? null : price && price.amount ? (
+                <Heading
+                  mt={2}
+                  // @ts-ignore
+                  color="body.6"
+                  level={5}
+                  fontStyle="italic"
+                >
+                  {formatMoney(price)}
+                </Heading>
+              ) : null}
+            </ProductPrice>
             {swatchOption ? (
               <ProductThumbnailSwatchesWrapper>
                 <ProductSwatches

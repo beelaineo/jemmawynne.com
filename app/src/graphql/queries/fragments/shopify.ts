@@ -255,7 +255,9 @@ export const checkoutFragment = gql`
     shippingLine {
       __typename
       handle
-      price
+      price {
+        ...MoneyV2Fragment
+      }
       title
     }
     email

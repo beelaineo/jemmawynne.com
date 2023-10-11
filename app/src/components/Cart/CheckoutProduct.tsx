@@ -5,7 +5,7 @@ import { useShopify, useAnalytics } from '../../providers'
 import { StorefrontApiCheckoutLineItem } from '../../types'
 import { formatMoney } from '../../utils'
 import { Image } from '../../components/Image'
-import { Heading } from '../../components/Text'
+import { Heading, Span, StrikeThrough } from '../../components/Text'
 import {
   QuantitySelectorCart,
   QuantityButton,
@@ -69,6 +69,14 @@ export const CheckoutProduct = ({ lineItem }: CheckoutProductProps) => {
           )}
         </x.div>
         <Heading level={5} weight={2} fontStyle="italic">
+          {variant.compareAtPriceV2 && variant.compareAtPriceV2.amount > 0 ? (
+            <Span color="body.6">
+              <StrikeThrough>
+                {formatMoney(variant.compareAtPriceV2)}
+              </StrikeThrough>
+              <span> </span>
+            </Span>
+          ) : null}
           {formatMoney(variant.priceV2)}
         </Heading>
         <QuantitySelectorCart>
