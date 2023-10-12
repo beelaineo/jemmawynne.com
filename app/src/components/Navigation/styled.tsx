@@ -364,6 +364,7 @@ export const SubMenuTitles = styled.div``
 
 export const ImageLinkWrapper = styled.div`
   grid-column: span 2;
+  cursor: pointer;
 `
 
 export const SubMenuContent = styled.div`

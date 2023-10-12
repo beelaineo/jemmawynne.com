@@ -149,6 +149,5 @@ export const HtmlContent = ({ html }: HtmlContentProps) => {
   if (!html) return null
   const parsed = parser.parse(wrapBareText(html))
   const transformed = transform(parsed, 'root')
-  console.log('html', html)
   return <x.div>{transformed}</x.div>
 }

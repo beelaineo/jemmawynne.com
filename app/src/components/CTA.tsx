@@ -34,6 +34,7 @@ const Inner = styled.div<WithLevel>`
     color: inherit;
     text-decoration: none;
     position: relative;
+    cursor: pointer;
 
     ${level === undefined || level === 1
       ? css`
