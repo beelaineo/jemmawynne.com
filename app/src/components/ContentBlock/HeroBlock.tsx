@@ -91,7 +91,7 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
         landscape={landscape}
         heroStyle={heroStyle}
       >
-        <HeroImageWrapper heroStyle={heroStyle}>
+        <HeroImageWrapper heroStyle={heroStyle} id="desktop-hero-image">
           {image &&
           image_secondary &&
           (heroStyle == 'one-two' || heroStyle == 'two-one') ? (
@@ -146,7 +146,11 @@ export const HeroBlock = ({ hero, landscape }: HeroBlockProps) => {
         </HeroContentWrapper>
       </HeroWrapper>
       {heroStyle == 'default' ? (
-        <HeroContentWrapperMobile layout={contentLayout} heroStyle={heroStyle}>
+        <HeroContentWrapperMobile
+          layout={contentLayout}
+          heroStyle={heroStyle}
+          id="mobile-hero-image"
+        >
           {definitely(content).map((cb) => (
             <HeroContent
               key={cb._key || 'some-key'}

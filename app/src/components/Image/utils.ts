@@ -33,6 +33,8 @@ export interface ImageDetails {
   srcSetWebp?: string | null
   caption?: string
   ratio?: number
+  width?: number
+  height?: number
 }
 
 interface ImageWidth {
@@ -70,7 +72,7 @@ const getSanityImageDetails = (
       src: source
         //
         .width(width)
-        .format('webp')
+        .auto('format')
         .url(),
     })),
   )
@@ -84,8 +86,18 @@ const getSanityImageDetails = (
       ? image.asset?.metadata?.dimensions?.aspectRatio ?? undefined
       : undefined
 
+  const width =
+    image.__typename === 'RichImage'
+      ? image.asset?.metadata?.dimensions?.width ?? undefined
+      : undefined
+
+  const height =
+    image.__typename === 'RichImage'
+      ? image.asset?.metadata?.dimensions?.height ?? undefined
+      : undefined
+
   const ratio = aspectRatio ? 1 / aspectRatio : undefined
-  return { src, srcSet, srcSetWebp, altText, caption, ratio }
+  return { src, srcSet, srcSetWebp, altText, caption, ratio, width, height }
 }
 
 const widths = [100, 300, 800, 1200, 1600]

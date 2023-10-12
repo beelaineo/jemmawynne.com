@@ -1,5 +1,5 @@
 import * as React from 'react'
-import NextLink from 'next/link'
+import Link from 'next/link'
 import {
   ShopifyProduct,
   ShopifyCollection,
@@ -27,10 +27,10 @@ export const DocumentLink = ({
   label,
 }: DocumentLinkProps) => {
   if (!document) return null
-  const { as, href } = getDocumentLinkUrl(document)
+  const { href, as } = getDocumentLinkUrl(document)
   return (
-    <NextLink as={as} href={href}>
-      <a>{children || label || getDocumentLinkLabel(document) || null}</a>
-    </NextLink>
+    <Link as={as} href={href}>
+      {children || label || getDocumentLinkLabel(document) || null}
+    </Link>
   )
 }

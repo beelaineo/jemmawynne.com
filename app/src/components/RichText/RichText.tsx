@@ -85,7 +85,6 @@ const serializers = ({ blockWrapper: Wrapper }: CustomSerializerConfig) => ({
 
     switch (style) {
       case 'ul':
-        console.log('Ul props', props)
         return <Ul {...props} />
       case 'ol':
         return <Ol {...props} />

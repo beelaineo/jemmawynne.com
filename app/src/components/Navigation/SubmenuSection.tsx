@@ -20,27 +20,28 @@ export const ImageLink = ({ link }: ImageLinkProps) => {
   const { image: customImage, hoverImage } = link
   const image = customImage ?? getDocumentLinkImage(link.document)
   const linkTitle = link.title || link?.document?.title || null
-
   return (
     <ImageLinkWrapper>
       <DocumentLink document={link.document}>
-        <Image
-          displayCaption={false}
-          hoverImage={hoverImage}
-          image={image}
-          ratio={1}
-        />
-        <x.div mt={2} textAlign="center">
-          <Heading
-            family="sans"
-            weight={4}
-            textAlign="center"
-            level={7}
-            textTransform="uppercase"
-          >
-            {linkTitle}
-          </Heading>
-        </x.div>
+        <div>
+          <Image
+            displayCaption={false}
+            hoverImage={hoverImage}
+            image={image}
+            ratio={1}
+          />
+          <x.div mt={2} textAlign="center">
+            <Heading
+              family="sans"
+              weight={4}
+              textAlign="center"
+              level={7}
+              textTransform="uppercase"
+            >
+              {linkTitle}
+            </Heading>
+          </x.div>
+        </div>
       </DocumentLink>
     </ImageLinkWrapper>
   )

@@ -75,7 +75,7 @@ export const Image = ({
   objectFit,
   displayCaption,
 }: ImageProps) => {
-  const sizes = customSizes || '100vw'
+  const sizes = customSizes || '120vw'
   const [loaded, setLoaded] = React.useState(false)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const imageRef = React.useRef<HTMLImageElement>(null)
@@ -89,6 +89,8 @@ export const Image = ({
     altText: cmsAltText,
     srcSet,
     srcSetWebp,
+    width,
+    height,
   } = imageDetails || {}
 
   const ratio = customRatio || cmsRatio
@@ -133,6 +135,8 @@ export const Image = ({
               alt={altText || ''}
               ref={imageRef}
               onLoad={handleOnLoad}
+              width={width}
+              height={height}
             />
             {hoverDetails && hoverDetails.src ? (
               <HoverImage
